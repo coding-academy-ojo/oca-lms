@@ -16,7 +16,6 @@ class CreateTrainersTable extends Migration
         Schema::create('trainers', function (Blueprint $table) {
             $table->id();
         $table->unsignedBigInteger('user_id'); // Add this line
-        // Other columns...
         $table->timestamps();
 
         $table->foreign('user_id')->references('id')->on('users');
