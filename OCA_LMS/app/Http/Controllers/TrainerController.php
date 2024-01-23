@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Trainer;
 use Illuminate\Http\Request;
-
+use app\User;
 class TrainerController extends Controller
 {
     /**
@@ -14,7 +14,7 @@ class TrainerController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**

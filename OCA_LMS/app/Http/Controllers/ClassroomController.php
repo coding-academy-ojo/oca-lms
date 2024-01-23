@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Classroom;
 use Illuminate\Http\Request;
-
+use App\user;
 class ClassroomController extends Controller
 {
     /**
@@ -14,7 +14,9 @@ class ClassroomController extends Controller
      */
     public function index()
     {
-        //
+        // $data = user::all(); // Replace YourModel with the actual model name
+
+        // return view('trainer.index', compact('data'));
     }
 
     /**
