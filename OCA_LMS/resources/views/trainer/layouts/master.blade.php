@@ -25,12 +25,19 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form method="POST" action="">
+                        @csrf
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Class name (required)" required>
+                            <input type="text" name="description" class="form-control" placeholder="Class name (required)" required>
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Section">
+                            <select class="form-control" name="subject">
+                               
+                                    <option value="">Reem</option>
+                                    <option value="">Rawan</option>
+                                    <option value="">Malak</option>
+                                    
+                            </select>
                         </div>
                         <div class="mb-3">
                             <input type="text" class="form-control" placeholder="Subject">
@@ -38,12 +45,13 @@
                         <div class="mb-3">
                             <input type="text" class="form-control" placeholder="Room">
                         </div>
+                        <div class="modal-footer d-flex gap-2 justify-content-end">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Create</button>
-                </div>
+                
             </div>
         </div>
     </div>

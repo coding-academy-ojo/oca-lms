@@ -23,15 +23,14 @@
 -->
 <section class="wizard-section mt-5">
         <div class="form-wizard">
-
+            {{-- @if(session('error'))
+    <div class="alert alert-danger alert-dismissable fade show text-center">
+        <button class="close" data-dismiss="alert" aria-label="Close">×</button>
+        {{session('error')}}
+    </div>
+@endif --}}
             <form method="POST" action="{{ route('login') }}">
                 @csrf
-                @if(session('error'))
-                <div class="alert alert-danger alert-dismissable fade show text-center">
-                    <button class="close " data-dismiss="alert" aria-label="Close">×</button>
-                    {{session('error')}}
-                </div>
-            @endif
                 <div class="d-flex align-items-center flex-column">
                     <div class="form-group col-lg-6 col-md-7 mb-4">
                         <h1>Sign in</h1>

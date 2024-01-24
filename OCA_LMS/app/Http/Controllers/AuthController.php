@@ -23,11 +23,11 @@ class AuthController extends Controller
     {
         switch ($role) {
             case 'manager':
-                return '/home';
+                return '/classrooms';
             case 'super_manager':
                 return '/home';
             case 'trainer':
-                return '/trainer-home';
+                return '/classrooms';
             case 'trainee':
                 return '/home';
             default:
@@ -54,7 +54,9 @@ class AuthController extends Controller
 
             return redirect()->intended($redirectPath)->with('success', 'Welcome ' . $user->name);
         } else {
-            return redirect()->route('login')->with('error', 'Invalid credentials. Please try again.')->withInput();
+            return redirect()->back()
+            ->withErrors(['password' => 'The provided credentials do not match our records.'])
+            ->withInput($request->except('password'));
         }
     }
 

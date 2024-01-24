@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 
 use App\Classroom;
 use Illuminate\Http\Request;
 use App\user;
+use App\Trainee;
+
 class ClassroomController extends Controller
 {
     /**
@@ -14,11 +17,11 @@ class ClassroomController extends Controller
      */
     public function index()
     {
-        // $data = user::all(); // Replace YourModel with the actual model name
 
-        // return view('trainer.index', compact('data'));
+    
+        return view('trainer.index');
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -37,8 +40,11 @@ class ClassroomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+    
+        return redirect('/classrooms');
     }
+    
 
     /**
      * Display the specified resource.

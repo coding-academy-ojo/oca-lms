@@ -10,49 +10,57 @@
             <div class="card" style="width: 18rem;">
                 <img class="card-img-top" src="https://www.gstatic.com/classroom/themes/img_bookclub.jpg" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <h5 class="card-title">Laravel Class</h5>
+                    <p class="card-text py-4"> Reem</p>
+                    <a href="#" class="btn btn-primary">View Class</a>
                 </div>
             </div>
             <div class="card" style="width: 18rem;">
                 <img class="card-img-top" src="https://www.gstatic.com/classroom/themes/img_bookclub.jpg" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <h5 class="card-title">CSS Class</h5>
+                    <p class="card-text py-4"> Rawan</p>
+                    <a href="#" class="btn btn-primary">View Class</a>
                 </div>
             </div>
             <div class="card" style="width: 18rem;">
                 <img class="card-img-top" src="https://www.gstatic.com/classroom/themes/img_bookclub.jpg" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <h5 class="card-title">JS Class</h5>
+                    <p class="card-text py-4"> Reem</p>
+                    <a href="#" class="btn btn-primary">View Class</a>
                 </div>
             </div>
             <div class="card" style="width: 18rem;">
                 <img class="card-img-top" src="https://www.gstatic.com/classroom/themes/img_bookclub.jpg" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <h5 class="card-title">JS Advance Class</h5>
+                    <p class="card-text py-4"> Rawan</p>
+                    <a href="#" class="btn btn-primary">View Class</a>
                 </div>
             </div>
             <div class="card" style="width: 18rem;">
                 <img class="card-img-top" src="https://www.gstatic.com/classroom/themes/img_bookclub.jpg" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <h5 class="card-title">HTML Class</h5>
+                    <p class="card-text py-4"> Rawan</p>
+                    <a href="#" class="btn btn-primary">View Class</a>
                 </div>
             </div>
             <div class="card" style="width: 18rem;">
                 <img class="card-img-top" src="https://www.gstatic.com/classroom/themes/img_bookclub.jpg" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <h5 class="card-title">PHP Class</h5>
+                    <p class="card-text py-4"> Rawan</p>
+                    <a href="#" class="btn btn-primary">View Class</a>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="https://www.gstatic.com/classroom/themes/img_bookclub.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">React Class</h5>
+                    <p class="card-text py-4"> Rawan</p>
+                    <a href="#" class="btn btn-primary">View Class</a>
                 </div>
             </div>
         </div>

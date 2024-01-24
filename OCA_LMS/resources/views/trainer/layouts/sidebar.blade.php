@@ -22,10 +22,10 @@
             </li>
             <div class="collapse" id="teachingSubMenu">
                 <li class="list-group-item">
-                    Submenu Item 1
+                    JS Class
                 </li>
                 <li class="list-group-item">
-                    Submenu Item 2
+                    PHP Class
                 </li>
             </div>
             <!-- To review -->
@@ -39,11 +39,10 @@
             </li>
             <div class="collapse" id="enrolledSubMenu">
                 <li class="list-group-item">
-                    Submenu Item 1
+                    CSS Class
                 </li>
                 <li class="list-group-item">
-                    Submenu Item 2
-                </li>
+Laravel Class                </li>
             </div>
             <!-- To-do -->
             <li class="list-group-item">
