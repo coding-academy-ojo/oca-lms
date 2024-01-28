@@ -18,10 +18,10 @@ class Trainer extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function classrooms()
-    {
-        return $this->hasMany('App\Classroom', 'trainer_id');
-    }
+    // public function classrooms()
+    // {
+    //     return $this->hasMany('App\Classroom', 'trainer_id');
+    // }
 
     public function projects()
     {

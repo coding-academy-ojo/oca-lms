@@ -73,6 +73,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Announcement', 'user_id');
     }
 
+    public function trainedClassrooms()
+    {
+        return $this->belongsToMany('App\Classroom', 'classroom_trainer');
+    }
+
     /**
      * The attributes that are mass assignable.
      *

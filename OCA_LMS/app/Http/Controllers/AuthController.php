@@ -25,11 +25,11 @@ class AuthController extends Controller
             case 'manager':
                 return '/classrooms';
             case 'super_manager':
-                return '/home';
+                return '/classrooms';
             case 'trainer':
                 return '/classrooms';
             case 'trainee':
-                return '/home';
+                return '/classrooms';
             default:
                 return '/';
         }

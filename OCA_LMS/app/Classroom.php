@@ -25,15 +25,19 @@ class Classroom extends Model
         return $this->belongsTo('App\Trainer', 'trainer_id');
     }
 
-    public function trainees()
-    {
-        return $this->hasMany('App\Trainee', 'classroom_id');
-    }
+    // public function trainees()
+    // {
+    //     return $this->hasMany('App\Trainee', 'classroom_id');
+    // }
 
     public function projects()
     {
         return $this->hasMany('App\Project', 'classroom_id');
     }
 
+    public function trainers()
+    {
+        return $this->belongsToMany('App\User', 'classroom_trainer');
+    }
     // Add any additional relations you need
 }
