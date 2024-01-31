@@ -22,8 +22,6 @@ class CreateUsersTable extends Migration
             $table->string('photo')->nullable();
             $table->text('CV')->nullable();
             $table->text('bio')->nullable();
-            $table->unsignedBigInteger('academy_id');
-            $table->foreign('academy_id')->references('id')->on('academies');
             $table->timestamps();
         });
     }

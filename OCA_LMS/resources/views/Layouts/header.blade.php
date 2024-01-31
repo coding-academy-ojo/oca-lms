@@ -1,14 +1,18 @@
-<footer class="bg-dark text-light py-3 mt-5">
+
+<header class="bg-dark text-light py-3">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-3">
-                <!-- Your footer logo goes here -->
-                <img src="{{ asset('assets/img/orange.png') }}" alt="Footer Logo" class="img-fluid">
+                <!-- Your logo goes here -->
+                <img src="{{ asset('assets/img/orange.png') }}" alt="Logo" class="img-fluid">
             </div>
             <div class="col-md-9">
                 <nav class="navbar navbar-expand-lg navbar-dark">
                     <div class="container-fluid">
-                        <div class="collapse navbar-collapse" id="navbarNavFooter">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
                                     <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="/">Home</a>
@@ -29,4 +33,4 @@
             </div>
         </div>
     </div>
-</footer>
+</header>

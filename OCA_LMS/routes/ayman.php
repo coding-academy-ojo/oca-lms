@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ClassroomController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,24 +14,14 @@ use App\Http\Controllers\ClassroomController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/test', function () {
+    return view('test');
+});
+
+Route::get('/test2', function () {
+    return view('test2');
 });
 
 Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
-
-
-// Route::get('/home', function () {
-//     return view('home');
-// });
-// Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login'); 
-// Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
-// Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-
-
-
-// classrome resource route
-
-// Route::resource('classrooms', 'ClassroomController');
