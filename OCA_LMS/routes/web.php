@@ -35,3 +35,14 @@ Route::get('/welcome', function () {
 // classrome resource route
 
 // Route::resource('classrooms', 'ClassroomController');
+
+//Rawan Abuseini route
+
+// announcements routes
+// Route::get('/announcements', [AnnouncementController::class, 'index']);
+// Route::post('/announcements', [AnnouncementController::class, 'store'])-> name('store');
+// Route::delete('/{announcement:id}', [AnnouncementController::class, 'destroy'])-> name('destroy');
+
+Route::get('/announcements', function () {
+    return view('Pages/announcements');
+})->name('announcements');
