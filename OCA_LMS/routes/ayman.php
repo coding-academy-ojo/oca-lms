@@ -22,6 +22,39 @@ Route::get('/test2', function () {
     return view('test2');
 });
 
+
+
+
+
+
+Route::get('/project', function () {
+    return view('project.project');
+});
+Route::get('/AddProject', function () {
+    return view('project.AddProject');
+});
+Route::get('/AddProjectSkills', function () {
+    return view('project.AddProjectSkills');
+});
+Route::get('/ProjectBrief', function () {
+    return view('project.ProjectBrief');
+});
+Route::get('/AddSubmitiom', function () {
+    return view('project.AddSubmitiom');
+});
+Route::get('/ProjectSubmitiom', function () {
+    return view('project.ProjectSubmitiom');
+});
+Route::get('/ProjectFeedback', function () {
+    return view('project.ProjectFeedback');
+});
+
+
+
+
+
+
+
 Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');

@@ -23,15 +23,15 @@ Route::get('/welcome', function () {
 })->name('welcome');
 
 
-// Route::get('/home', function () {
-//     return view('home');
-// });
-// Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login'); 
-// Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
-// Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/home', function () {
+    return view('home');
+});
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login'); 
+Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 
 // classrome resource route
 
-// Route::resource('classrooms', 'ClassroomController');
+Route::resource('classrooms', 'ClassroomController');
