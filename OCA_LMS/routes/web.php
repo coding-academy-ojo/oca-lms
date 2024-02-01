@@ -21,7 +21,15 @@ Route::get('/', function () {
 Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
-
+Route::get('/create-mat', function () {
+    return view('Pages/create_material');
+});
+Route::get('/edit_ass', function () {
+    return view('Pages/edit_assignment');
+});
+Route::get('/assignment', function () {
+    return view('Pages/view_assignment');
+});
 
 Route::get('/home', function () {
     return view('home');
@@ -34,4 +42,15 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // classrome resource route
 
-Route::resource('classrooms', 'ClassroomController');
+// Route::resource('classrooms', 'ClassroomController');
+
+//Rawan Abuseini route
+
+// announcements routes
+// Route::get('/announcements', [AnnouncementController::class, 'index']);
+// Route::post('/announcements', [AnnouncementController::class, 'store'])-> name('store');
+// Route::delete('/{announcement:id}', [AnnouncementController::class, 'destroy'])-> name('destroy');
+
+Route::get('/announcements', function () {
+    return view('Pages/announcements');
+})->name('announcements');
