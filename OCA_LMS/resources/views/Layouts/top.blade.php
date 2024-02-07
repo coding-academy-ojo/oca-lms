@@ -25,8 +25,8 @@
     <!-- style files -->
     <link rel="stylesheet" href="/assets/style_files/ayman.css">
     <link rel="stylesheet" href="/assets/style_files/rawan.css">
+    <link rel="stylesheet" href="/assets/style_files/sujoud.css">
     <!-- style files -->
-
 
 
 </head>
