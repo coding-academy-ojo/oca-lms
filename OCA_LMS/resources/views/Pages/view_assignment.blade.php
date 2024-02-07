@@ -1,18 +1,16 @@
 @extends('Layouts.app')
+@section('title')
+View Assignments
+@endsection
 @section('content')
-    <section class="innerImage classRoom">
-        <img src="{{ asset('assets/img/img_bookclub.jpg') }}" alt="">
-        <div class="pageTitle">
-            <h2> Classroom</h2>
-        </div>
-    </section>
+
     @include('layouts.innerNav')
     <section class="inner-bred my-3">
         <div class="container">
             <ol class="breadcrumb m-3">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href=""> Class</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href=""> Material </a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="#"> Class</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="#"> Assignments </a></li>
             </ol>
         </div>
     </section>
@@ -30,7 +28,7 @@
 
     <div class="m-auto" style="width: 50%">
         <div class="my-5">
-            <a href="" class="btn btn-primary rounded-pill m-auto" style="width: 90px; height:50px">Create</a>
+            <a href="{{route('create_assignment')}}" class="btn btn-primary rounded-pill m-auto" style="width: 90px; height:50px">Create</a>
         </div>
 
         <div class="task-container">
@@ -45,7 +43,7 @@
                 <div class="clickable-icon" data-bs-toggle="dropdown" data-target="#optionsModal">
                     <span class="material-symbols-outlined mt-2 me-2" >more_vert</span>
                     <ul class="dropdown-menu dropdown-menu-end rounded-2">
-                        <li><a class="dropdown-item" href="#">Edit</a></li>
+                        <li><a class="dropdown-item" href="{{route('edit_assignment')}}">Edit</a></li>
                         <li>
                             <form action="" method="">
                                 @csrf
@@ -62,7 +60,7 @@
                 Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code>
                 class. This is the second item's accordion body. Let's imagine this being filled with some actual content.
                 <p class="border-top border-light mt-3 pt-3"><a
-                        class="link-offset-2 link-underline link-underline-opacity-0" href="submit_assignment">View assignment</a></p>
+                        class="link-offset-2 link-underline link-underline-opacity-0" href="{{route('submit_assignment')}}">View assignment</a></p>
             </div>
 
             <div class="d-flex justify-content-between border-bottom border-light border-1 task"
@@ -76,7 +74,7 @@
                 <div class="clickable-icon " data-bs-toggle="dropdown" data-target="#optionsModal">
                     <span class="material-symbols-outlined mt-2 me-2">more_vert</span>
                     <ul class="dropdown-menu dropdown-menu-end rounded-2">
-                        <li><a class="dropdown-item" href="#">Edit</a></li>
+                        <li><a class="dropdown-item" href="{{route('edit_assignment')}}">Edit</a></li>
                         <li>
                             <form action="" method="">
                                 @csrf
@@ -93,7 +91,7 @@
                 Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code>
                 class. This is the second item's accordion body. Let's imagine this being filled with some actual content.
                 <p class="border-top border-light mt-3 pt-3"><a
-                        class="link-offset-2 link-underline link-underline-opacity-0" href="#">View assignment</a></p>
+                        class="link-offset-2 link-underline link-underline-opacity-0" href="{{route('submit_assignment')}}">View assignment</a></p>
             </div>
             <div class="d-flex justify-content-between border-bottom border-light border-1 task"
                 style="height: 50px; cursor: pointer;" onclick="toggleTaskDetails(this)">
@@ -106,7 +104,7 @@
                 <div class="clickable-icon " data-bs-toggle="dropdown" data-target="#optionsModal">
                     <span class="material-symbols-outlined mt-2 me-2">more_vert</span>
                     <ul class="dropdown-menu dropdown-menu-end rounded-2">
-                        <li><a class="dropdown-item" href="#">Edit</a></li>
+                        <li><a class="dropdown-item" href="{{route('edit_assignment')}}">Edit</a></li>
                         <li>
                             <form action="" method="">
                                 @csrf
@@ -123,7 +121,7 @@
                 Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code>
                 class. This is the second item's accordion body. Let's imagine this being filled with some actual content.
                 <p class="border-top border-light mt-3 pt-3"><a
-                        class="link-offset-2 link-underline link-underline-opacity-0" href="#">View assignment</a></p>
+                        class="link-offset-2 link-underline link-underline-opacity-0" href="{{route('submit_assignment')}}">View assignment</a></p>
             </div>
         </div>
     </div>

@@ -29,19 +29,19 @@ Route::get('/test2', function () {
 
 Route::get('/topics', function () {
     return view('topics.topics');
-});
+})->name('topics');
 Route::get('/createTopics', function () {
     return view('topics.createTopics');
-});
+})->name('createTopics');
 Route::get('/editTopics', function () {
     return view('topics.editTopics');
-});
+})->name('editTopics');
 
 
 
 Route::get('/profile', function () {
     return view('profile.profile');
-});
+})->name('profile');
 
 
 

@@ -1,16 +1,14 @@
 <!-- resources/views/pages/announcements.blade.php -->
 @extends('Layouts.app')
+@section('title')
+Announcements
+@endsection
+
 @section('content')
 {{-- =========================================================== --}}
 {{-- =================== Breadcrumb Section ==================== --}}
 {{-- =========================================================== --}}
-<section class="innerImage classRoom">
-    <img src="{{ asset('assets/img/img_bookclub.jpg') }}" alt="">
-    <div class="pageTitle">
-        <h2> Classroom</h2>
-    </div>
 
-</section>
 @include('layouts.innerNav')
 <section class="inner-bred my-3">
     <div class="container">

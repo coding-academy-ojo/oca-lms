@@ -1,15 +1,12 @@
 @extends('layouts.app')
+@section('title')
+Create project
+@endsection
 @section('content')
 {{-- =========================================================== --}}
 {{-- =================== Breadcrumb Section ==================== --}}
 {{-- =========================================================== --}}
-<section class="innerImage classRoom">
-    <img src="{{ asset('assets/img/img_bookclub.jpg') }}" alt="">
-    <div class="pageTitle">
-        <h2>Create project</h2>
-    </div>
 
-</section>
 @include('layouts.innerNav')
 <section class="inner-bred">
     <div class="container">
@@ -78,7 +75,7 @@
                 </div>
 
                 <!-- Submit Button -->
-                <button type="submit" class="btn btn-primary rounded-pill">Next step</button>
+                <button  class="btn btn-primary rounded-pill"><a style="text-decoration: none" href="{{route('createProjectSkills')}}">Next step</a></button>
             </form>
         
 

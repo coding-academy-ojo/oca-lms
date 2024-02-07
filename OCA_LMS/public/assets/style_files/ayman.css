@@ -1,4 +1,5 @@
 /* {{-- ========================= Start style code ========================== --}} */
+
 * {
     margin: 0px;
     padding: 0px;
@@ -69,6 +70,7 @@ footer img {
 
 
 /* {{-- ======== Start Projects style==== --}} */
+
 .projectCard .card .innerCard {
     padding: 1rem;
 }
@@ -97,7 +99,10 @@ footer img {
     padding: 2px;
 }
 
+
 /* {{-- ======== End Projects style==== --}} */
+
+
 /* {{-- ======== Start Create Project style==== --}} */
 
 .addpro form {
@@ -133,9 +138,12 @@ footer img {
     resize: none;
 }
 
+
 /* {{-- ======== End Create Project style==== --}} */
 
+
 /* {{-- ======== Start Topics style==== --}} */
+
 .topicBt {
     display: flex;
     justify-content: center;
@@ -153,17 +161,20 @@ footer img {
 }
 
 .topicBt a:hover {
-
     color: orange;
 }
 
+
 /* {{-- ======== End Topics style==== --}} */
+
+
 /* {{-- ======== Start profile style==== --}} */
+
 body {
-    margin-top: 20px;
+    /* margin-top: 20px; */
     color: #1a202c;
     text-align: left;
-    background-color: #e2e8f0;
+    /* background-color: #e2e8f0; */
 }
 
 .main-body {
@@ -220,17 +231,14 @@ body {
     box-shadow: none !important;
 }
 
+
 /* {{-- ======== End profile style==== --}} */
-
-
-
-
-
-
 
 
 /* {{-- ========================= End style code ========================== --}} */
 
+
 /* {{-- ========================= Start responsive code ========================== --}} */
+
 
 /* {{-- ========================= End responsive code ========================== --}} */

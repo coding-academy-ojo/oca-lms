@@ -1,25 +1,14 @@
 @extends('layouts.app')
+@section('title')
+Create Topic
+@endsection
 @section('content')
 {{-- =========================================================== --}}
 {{-- =================== Breadcrumb Section ==================== --}}
 {{-- =========================================================== --}}
-<section class="innerImage classRoom">
-    <img src="{{ asset('assets/img/img_bookclub.jpg') }}" alt="">
-    <div class="pageTitle">
-        <h2>Topics</h2>
-    </div>
 
-</section>
 @include('layouts.innerNav')
-<section class="inner-bred">
-    <div class="container">
-        <ul class="thm-breadcrumb">
-            <li><a href="">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
-            <li><a href="">Create Topics</a></li>
 
-        </ul>
-    </div>
-</section>
 
 {{-- =========================================================== --}}
 {{-- =================== Breadcrumb Section ==================== --}}

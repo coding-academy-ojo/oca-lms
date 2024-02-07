@@ -1,15 +1,12 @@
 @extends('layouts.app')
+@section('title')
+Create Project Skills
+@endsection
 @section('content')
 {{-- =========================================================== --}}
 {{-- =================== Breadcrumb Section ==================== --}}
 {{-- =========================================================== --}}
-<section class="innerImage classRoom">
-    <img src="{{ asset('assets/img/img_bookclub.jpg') }}" alt="">
-    <div class="pageTitle">
-        <h2>Create Project Skills</h2>
-    </div>
 
-</section>
 @include('layouts.innerNav')
 <section class="inner-bred">
     <div class="container">

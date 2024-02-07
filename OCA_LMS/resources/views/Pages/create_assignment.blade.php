@@ -1,11 +1,9 @@
 @extends('Layouts.app')
+@section('title')
+Add Assignment
+@endsection
 @section('content')
-    <section class="innerImage classRoom">
-        <img src="{{ asset('assets/img/img_bookclub.jpg') }}" alt="">
-        <div class="pageTitle">
-            <h2> Classroom</h2>
-        </div>
-    </section>
+
     @include('layouts.innerNav')
     <section class="inner-bred my-3">
         <div class="container">

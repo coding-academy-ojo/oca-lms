@@ -1,16 +1,12 @@
 @extends('layouts.app')
+@section('title')
+Projects
+@endsection
 @section('content')
 {{-- =========================================================== --}}
 {{-- =================== Breadcrumb Section ==================== --}}
 {{-- =========================================================== --}}
-<section class="innerImage classRoom">
-    <img src="{{ asset('assets/img/img_bookclub.jpg') }}" alt="">
 
-    <div class="pageTitle">
-        <h2> Projects</h2>
-    </div>
-
-</section>
 
 @include('layouts.innerNav')
 
@@ -31,7 +27,7 @@
     <div class="container">
         
         <div class="col-md-2 ms-auto mb-3">
-            <a href="">Create project</a>
+            <a href="{{route('createProject')}}">Create project</a>
         </div>
 
         <div class="projectCard">

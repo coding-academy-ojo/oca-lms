@@ -1,16 +1,12 @@
 @extends('layouts.app')
+@section('title')
+Topics
+@endsection
 @section('content')
 {{-- =========================================================== --}}
 {{-- =================== Breadcrumb Section ==================== --}}
 {{-- =========================================================== --}}
-<section class="innerImage classRoom">
-    <img src="{{ asset('assets/img/img_bookclub.jpg') }}" alt="">
 
-    <div class="pageTitle">
-        <h2> Projects</h2>
-    </div>
-
-</section>
 @include('layouts.innerNav')
 <section class="inner-bred">
 
@@ -29,7 +25,7 @@
     <div class="container">
 
         <div class="col-md-2 ms-auto mb-3">
-            <a href="">Create Topics</a>
+            <a href="{{route('createTopics')}}">Create Topics</a>
         </div>
 
         <div class="projectCard">
@@ -45,7 +41,7 @@
                                 <h4 class="text-center">UI/UX</h4>
                             </a>
                             <div class="topicBt">
-                               <a href="">Edit</a>
+                               <a href="{{route('editTopics')}}">Edit</a>
                                <a href="">Delete</a>
                             </div>
                         </div>
@@ -64,7 +60,7 @@
                                 <h4 class="text-center">HTML & CSS</h4>
                             </a>
                             <div class="topicBt">
-                               <a href="">Edit</a>
+                               <a href="{{route('editTopics')}}">Edit</a>
                                <a href="">Delete</a>
                             </div>
                         </div>
@@ -83,7 +79,7 @@
                                 <h4 class="text-center">JS</h4>
                             </a>
                             <div class="topicBt">
-                               <a href="">Edit</a>
+                               <a href="{{route('editTopics')}}">Edit</a>
                                <a href="">Delete</a>
                             </div>
                         </div>
@@ -102,7 +98,7 @@
                                 <h4 class="text-center">SQL</h4>
                             </a>
                             <div class="topicBt">
-                               <a href="">Edit</a>
+                               <a href="{{route('editTopics')}}">Edit</a>
                                <a href="">Delete</a>
                             </div>
                         </div>
@@ -121,7 +117,7 @@
                                 <h4 class="text-center">OOP</h4>
                             </a>
                             <div class="topicBt">
-                               <a href="">Edit</a>
+                               <a href="{{route('editTopics')}}">Edit</a>
                                <a href="">Delete</a>
                             </div>
                         </div>

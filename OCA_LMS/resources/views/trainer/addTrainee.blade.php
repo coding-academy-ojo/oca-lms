@@ -1,16 +1,13 @@
 <!-- resources/views/pages/announcements.blade.php -->
 @extends('layouts.app')
+@section('title')
+Add Trainee
+@endsection
 @section('content')
 {{-- =========================================================== --}}
 {{-- =================== Breadcrumb Section ==================== --}}
 {{-- =========================================================== --}}
-<section class="innerImage classRoom">
-    <img src="{{ asset('assets/img/img_bookclub.jpg') }}" alt="">
-    <div class="pageTitle">
-        <h2> Zarqa C4 </h2>
-    </div>
 
-</section>
 
 @include('layouts.innerNav')
 <section class="inner-bred my-5 ">

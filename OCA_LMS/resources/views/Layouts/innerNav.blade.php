@@ -1,63 +1,29 @@
-<div class="card text-center">
-    <div class="card-header bg-white">
-        <ul class="nav nav-pills card-header-pills justify-content-center">
-            <li class="nav-item">
-                <a class="nav-link " href="./announcements">Announcements</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Roadmap</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./addTrainee">Invite Trainees</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Assignments</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Material</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Project</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Attendance</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./traineesProgress">Progress</a>
-            </li>
-        </ul>
-    </div>
-</div>
+<div class="d-flex justify-content-center mt-4">
+    <ul class="nav nav-pills py-2">
+        <li class="nav-item ">
+            <a class="nav-link active " href="{{route('view_material')}}">Materials</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link  " href="{{route('announcements')}}">Announcements</a>
+        </li>
 
-<!-- <div class="container-fluid">
-    <div class="card text-center">
-        <div class="card-header bg-dark">
-            <ul class="nav nav-pills card-header-pills justify-content-center">
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">📢 Announcements</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">🗺 Roadmap</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">👥 People</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">📚 Assignments</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">📦 Material</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">🚀 Project</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">📅 Attendance</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">📊 Class Progress</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div> -->
+        <li class="nav-item ">
+            <a class="nav-link " href="{{route('assignment')}} ">Assignments</a>
+        </li>
+        {{-- <li class="nav-item ">
+            <a class="nav-link " href="# ">Materials</a>
+        </li> --}}
+        <li class="nav-item ">
+            <a class="nav-link " href="{{route('topics')}}">Topics</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link " href="{{route('project')}}">Projects</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link " href="{{route('attendance')}}">Attendance</a>
+        </li>
+        <li class=" nav-item ">
+            <a class="nav-link" href="{{route('traineesProgress')}}">Trainee Progress</a>
+        </li>
+    </ul>
+</div>

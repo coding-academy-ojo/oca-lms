@@ -23,13 +23,13 @@ class AuthController extends Controller
     {
         switch ($role) {
             case 'manager':
-                return '/classrooms';
+                return '/Academeies';
             case 'super_manager':
-                return '/classrooms';
+                return '/Academeies';
             case 'trainer':
-                return '/classrooms';
+                return '/Academeies';
             case 'trainee':
-                return '/classrooms';
+                return '/Academeies';
             default:
                 return '/';
         }

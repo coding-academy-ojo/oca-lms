@@ -19,18 +19,8 @@
 
                 <li class="nav-item">
                     <button class="nav-link" data-bs-toggle="offcanvas" data-bs-target="#createAcademyOffcanvas" aria-controls="createAcademyOffcanvas">
-                        Add Academy
+                        Create Academy
                     </button>
-                </li>
-                
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('addTrainee')}}">Add Trainee </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('profile')}}">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('logout') }}">Logout</a>
                 </li>
             </ul>
 
@@ -46,7 +36,32 @@
     </div>
 </div>
 
+<div class="d-flex justify-content-center mt-4">
+    <ul class="nav nav-pills py-2">
+        <li class="nav-item">
+            <a class="nav-link  " href="#">Announcements</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link active " href="{{route('Academeies')}}">Academeies</a>
+        </li>
 
+        <li class="nav-item ">
+            <a class="nav-link " href="# ">Assignments</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link " href="# ">Material</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link " href="# ">Project</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link " href="{{route('attendance')}}">Attendance</a>
+        </li>
+        <li class=" nav-item ">
+            <a class="nav-link" href="3">Trainee Progress</a>
+        </li>
+    </ul>
+</div>
 
   <!-- Offcanvas Component for Create Academy -->
   <div class="offcanvas offcanvas-end" id="createAcademyOffcanvas" aria-labelledby="createAcademyOffcanvasLabel">
