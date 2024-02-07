@@ -14,7 +14,7 @@ class AssignmentController extends Controller
      */
     public function index()
     {
-        //
+       //
     }
 
     /**
@@ -24,7 +24,7 @@ class AssignmentController extends Controller
      */
     public function create()
     {
-        //
+      //
     }
 
     /**
@@ -57,7 +57,7 @@ class AssignmentController extends Controller
      */
     public function edit(Assignment $assignment)
     {
-        //
+//
     }
 
     /**
@@ -78,8 +78,10 @@ class AssignmentController extends Controller
      * @param  \App\Assignment  $assignment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Assignment $assignment)
-    {
-        //
-    }
+
+     public function destroy(Assignment $assignment)
+{
+    //
+}
+   
 }
