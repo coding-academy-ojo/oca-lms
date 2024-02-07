@@ -27,26 +27,20 @@ Route::get('/test2', function () {
 
 
 
-Route::get('/project', function () {
-    return view('project.project');
+Route::get('/topics', function () {
+    return view('topics.topics');
 });
-Route::get('/AddProject', function () {
-    return view('project.AddProject');
+Route::get('/createTopics', function () {
+    return view('topics.createTopics');
 });
-Route::get('/AddProjectSkills', function () {
-    return view('project.AddProjectSkills');
+Route::get('/editTopics', function () {
+    return view('topics.editTopics');
 });
-Route::get('/ProjectBrief', function () {
-    return view('project.ProjectBrief');
-});
-Route::get('/AddSubmitiom', function () {
-    return view('project.AddSubmitiom');
-});
-Route::get('/ProjectSubmitiom', function () {
-    return view('project.ProjectSubmitiom');
-});
-Route::get('/ProjectFeedback', function () {
-    return view('project.ProjectFeedback');
+
+
+
+Route::get('/profile', function () {
+    return view('profile.profile');
 });
 
 

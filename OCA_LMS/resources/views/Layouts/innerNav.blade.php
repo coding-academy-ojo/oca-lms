@@ -1,6 +1,6 @@
 <div class="card text-center">
     <div class="card-header bg-white">
-        <ul class="nav nav-pills card-header-pills">
+        <ul class="nav nav-pills card-header-pills justify-content-center">
             <li class="nav-item">
                 <a class="nav-link" href="#">Announcements</a>
             </li>
