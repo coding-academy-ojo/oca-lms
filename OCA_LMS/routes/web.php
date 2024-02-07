@@ -46,3 +46,4 @@ Route::get('/welcome', function () {
 Route::get('/announcements', function () {
     return view('Pages/announcements');
 })->name('announcements');
+
