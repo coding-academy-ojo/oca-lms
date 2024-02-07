@@ -1,4 +1,4 @@
-<!-- <div class="card text-center">
+<div class="card text-center">
     <div class="card-header bg-white">
         <ul class="nav nav-pills card-header-pills">
             <li class="nav-item">
@@ -27,9 +27,9 @@
             </li>
         </ul>
     </div>
-</div> -->
+</div>
 
-<div class="container-fluid">
+<!-- <div class="container-fluid">
     <div class="card text-center">
         <div class="card-header bg-dark">
             <ul class="nav nav-pills card-header-pills justify-content-center">
@@ -60,4 +60,4 @@
             </ul>
         </div>
     </div>
-</div>
+</div> -->
