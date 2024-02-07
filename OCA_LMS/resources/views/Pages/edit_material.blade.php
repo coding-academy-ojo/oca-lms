@@ -1,26 +1,22 @@
-@extends('trainer.layouts.master')
-@section('trainerHome')
-<nav class="navbar  navbar-expand-lg  supra"
-aria-label="Supra navigation - With an additional languages navbar example">
-<div class="container-xxl">
-    <ul class="navbar-nav me-auto mx-5 px-3">
-        <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Stream</a>
-        </li>
-        <li class="nav-item"><a href="#" class="nav-link">Classwork</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">People</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Marks</a></li>
-
-    </ul>
-</div>
-</nav>
-    <div class="container">
-        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+@extends('Layouts.app')
+@section('content')
+    <section class="innerImage classRoom">
+        <img src="{{ asset('assets/img/img_bookclub.jpg') }}" alt="">
+        <div class="pageTitle">
+            <h2> Classroom</h2>
+        </div>
+    </section>
+    @include('layouts.innerNav')
+    <section class="inner-bred my-3">
+        <div class="container">
             <ol class="breadcrumb m-3">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Class</li>
-                <li class="breadcrumb-item active" aria-current="page">Material </li>
+                <li class="breadcrumb-item active" aria-current="page"><a href=""> Class</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href=""> Material </a></li>
             </ol>
-        </nav>
+        </div>
+    </section>
+    <div class="container">
         <div class="page-wrapper">
             <div class="content container-fluid">
                 <div class="page-header">
@@ -71,7 +67,7 @@ aria-label="Supra navigation - With an additional languages navbar example">
                                                 <div class="invalid-feedback">This field is required</div>
                                             </div>
                                         </div>
-                                    
+
                                         <div class="col-12 mt-3">
                                             <button type="submit" class="btn btn-primary">Submit</button>
                                         </div>
