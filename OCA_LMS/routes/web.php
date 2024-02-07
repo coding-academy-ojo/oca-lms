@@ -21,15 +21,6 @@ Route::get('/', function () {
 Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
-Route::get('/create-mat', function () {
-    return view('Pages/create_material');
-});
-Route::get('/edit_ass', function () {
-    return view('Pages/edit_assignment');
-});
-Route::get('/assignment', function () {
-    return view('Pages/view_assignment');
-});
 
 // Route::get('/home', function () {
 //     return view('home');
@@ -37,7 +28,6 @@ Route::get('/assignment', function () {
 // Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login'); 
 // Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 // Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-
 
 
 // classrome resource route
