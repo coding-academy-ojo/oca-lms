@@ -44,10 +44,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/announcements', function () {
     return view('Pages/announcements');
 })->name('announcements');
-// <<<<<<< HEAD
-// =======
 
-// >>>>>>> dc628028ef59da7ac47e71fe6b4531c8ded17694
 Route::get('/Academeies', function () {
     return view('supermaneger.index');
 })->name('Academeies');
