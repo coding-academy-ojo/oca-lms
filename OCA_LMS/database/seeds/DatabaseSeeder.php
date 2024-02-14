@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(AcademiesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
-        $this->call(TrainersTableSeeder::class);
+        // $this->call(TrainersTableSeeder::class);
         // $this->call(UserSeeder::class);
         $this->command->info('Database seeded successfully!');
 

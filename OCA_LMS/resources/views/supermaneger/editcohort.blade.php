@@ -18,7 +18,7 @@ Edit Cohort
     <h2>Edit Cohort</h2>
     <form>
         @csrf
-        <!-- Placeholder for method directive @method('PUT') if needed for static form -->
+         @method('PUT')
 
         <div class="mb-3">
             <label for="cohortName" class="form-label">Cohort Name</label>
