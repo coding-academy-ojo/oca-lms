@@ -19,11 +19,7 @@ class CreateClassroomsTable extends Migration
             $table->text('description');
             $table->string('picture');
             $table->unsignedBigInteger('academy_id');
-            $table->unsignedBigInteger('manager_id');
-            // $table->unsignedBigInteger('trainer_id');
             $table->foreign('academy_id')->references('id')->on('academies');
-            $table->foreign('manager_id')->references('id')->on('users');
-            // $table->foreign('trainer_id')->references('user_id')->on('trainers');
             $table->timestamps();
         });
     }

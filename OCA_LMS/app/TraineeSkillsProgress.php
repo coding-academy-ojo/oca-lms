@@ -4,14 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProjectFeedback extends Model
+class TraineeSkillsProgress extends Model
 {
-    protected $fillable = ['trainer_id', 'trainee_id', 'project_id', 'feedback'];
-
-    public function trainer()
-    {
-        return $this->belongsTo(User::class, 'trainer_id');
-    }
+    protected $fillable = ['trainee_id', 'project_id', 'skill_id', 'level_id', 'achieved'];
 
     public function trainee()
     {
@@ -21,5 +16,10 @@ class ProjectFeedback extends Model
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    public function skillLevel()
+    {
+        return $this->belongsTo(SkillLevel::class, 'skill_id', 'level_id');
     }
 }

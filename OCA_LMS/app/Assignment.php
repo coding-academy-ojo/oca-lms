@@ -7,17 +7,31 @@ use Illuminate\Database\Eloquent\Model;
 class Assignment extends Model
 {
     protected $fillable = [
-        'name', 'submission_date', 'attached_file', 'is_late', 'topic_id'
+        'name', 'due_date', 'attached_file','topic_id'
     ];
 
     public function topic()
     {
-        return $this->belongsTo('App\Topic');
+        return $this->belongsTo(Topic::class);
     }
 
-    public function responses()
+    // Relationship with AssignmentSubmissions
+    public function assignmentSubmissions()
     {
-        return $this->hasMany('App\AssignmentSubmission', 'assignment_id');
+        return $this->hasMany(AssignmentSubmission::class);
+    }
+
+    // Relationship with AssignmentFeedbacks through AssignmentSubmissions for Trainees
+    public function assignmentFeedbacks()
+    {
+        return $this->hasManyThrough(
+            AssignmentFeedback::class,
+            AssignmentSubmission::class,
+            'assignment_id',
+            'assignment_submission_id',
+            'id',
+            'id'
+        );
     }
 
     // Add any additional relations you need

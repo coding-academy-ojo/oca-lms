@@ -17,12 +17,12 @@ class CreateProjectsTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->date('start_date');
-            $table->date('delivery_date');
+            $table->date('start_date')->nullable();
+            $table->date('delivery_date')->nullable();
+            $table->string('image')->nullable();
             $table->unsignedBigInteger('classroom_id');
-            $table->unsignedBigInteger('trainer_id');
+            $table->foreignId('trainer_id')->constrained('users')->nullable();
             $table->foreign('classroom_id')->references('id')->on('classrooms');
-            $table->foreign('trainer_id')->references('user_id')->on('trainers');
             $table->timestamps();
         });
     }

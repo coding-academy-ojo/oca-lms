@@ -7,18 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class Academy extends Model
 {
     protected $fillable = [
-        'name', 'director', 'super_director', 'city',
+        'name', 'photo', 'city'
     ];
 
     public function users()
     {
-        return $this->hasMany('App\User', 'academy_id');
+        return $this->belongsToMany(User::class, 'user_academy', 'academy_id', 'user_id');
     }
 
     public function classrooms()
     {
-        return $this->hasMany('App\Classroom', 'academy_id');
+        return $this->hasMany(Classroom::class);
     }
 
-    // Add any additional relations you need
 }

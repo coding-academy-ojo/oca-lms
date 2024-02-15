@@ -15,16 +15,15 @@ class Project extends Model
         return $this->belongsTo('App\Classroom');
     }
 
-    public function trainer()
-    {
-        return $this->belongsTo('App\Trainer');
-    }
-
     public function skills()
     {
-        return $this->belongsToMany('App\Skill', 'project_skills', 'project_id', 'skill_id')
-            ->withPivot('level');
+        return $this->belongsToMany(Skill::class, 'project_skills')->withPivot('level_id');
     }
+
+    public function trainer()
+   {
+    return $this->belongsTo(User::class, 'trainer_id');
+   }
 
     public function submissions()
     {

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTraineesTable extends Migration
+class CreateUserAcademyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateTraineesTable extends Migration
      */
     public function up()
     {
-        Schema::create('trainees', function (Blueprint $table) {
+        Schema::create('user_academy', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('classroom_id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('classroom_id')->references('id')->on('classrooms');
+            $table->unsignedBigInteger('academy_id');
             $table->timestamps();
+    
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('academy_id')->references('id')->on('academies')->onDelete('cascade');
         });
     }
 
@@ -30,6 +31,6 @@ class CreateTraineesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trainees');
+        Schema::dropIfExists('user_academy');
     }
 }

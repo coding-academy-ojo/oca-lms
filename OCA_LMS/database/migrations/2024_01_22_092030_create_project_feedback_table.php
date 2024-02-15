@@ -15,15 +15,13 @@ class CreateProjectFeedbackTable extends Migration
     {
         Schema::create('project_feedback', function (Blueprint $table) {
             $table->id();
+           
+            $table->foreignId('trainer_id')->constrained('users')->where('role', 'trainer'); 
+            $table->foreignId('trainee_id')->constrained('users')->where('role', 'trainee'); 
             $table->unsignedBigInteger('project_id');
-            $table->unsignedBigInteger('trainee_id');
-            $table->unsignedBigInteger('trainer_id');
             $table->text('feedback');
-            $table->boolean('is_project_passed');
-            $table->foreign('project_id')->references('id')->on('projects');
-            $table->foreign('trainee_id')->references('user_id')->on('trainees');
-            $table->foreign('trainer_id')->references('user_id')->on('trainers');
             $table->timestamps();
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
         });
     }
 

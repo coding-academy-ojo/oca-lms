@@ -10,15 +10,13 @@ class ProjectSubmission extends Model
         'project_id', 'trainee_id', 'link', 'text_submission'
     ];
 
-    public function project()
-    {
-        return $this->belongsTo('App\Project');
-    }
-
     public function trainee()
     {
-        return $this->belongsTo('App\Trainee', 'trainee_id');
+        return $this->belongsTo(User::class, 'trainee_id');
     }
- 
-    // Add any additional relations you need
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
 }

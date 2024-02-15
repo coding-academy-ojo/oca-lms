@@ -15,12 +15,11 @@ class CreateAbsencesTable extends Migration
     {
         Schema::create('absences', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('trainee_id');
             $table->enum('type', ['late', 'absent', 'leaving']);
-            $table->date('date');
+            $table->date('date')->now();
             $table->text('reason');
             $table->integer('duration');
-            $table->foreign('trainee_id')->references('user_id')->on('trainees');
+            $table->foreignId('trainee_id')->constrained('users')->where('role', 'trainee'); 
             $table->timestamps();
         });
     }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Classroom extends Model
 {
     protected $fillable = [
-        'description', 'picture', 'academy_id', 'manager_id', 'trainer_id',
+        'name', 'description', 'picture', 'academy_id'
     ];
 
     public function academy()
@@ -15,29 +15,20 @@ class Classroom extends Model
         return $this->belongsTo('App\Academy');
     }
 
-    public function manager()
+    public function users()
     {
-        return $this->belongsTo('App\User', 'manager_id');
+        return $this->belongsToMany(User::class, 'user_classroom', 'classroom_id', 'user_id');
     }
-
-    public function trainer()
-    {
-        return $this->belongsTo('App\Trainer', 'trainer_id');
-    }
-
-    // public function trainees()
-    // {
-    //     return $this->hasMany('App\Trainee', 'classroom_id');
-    // }
 
     public function projects()
     {
         return $this->hasMany('App\Project', 'classroom_id');
     }
 
-    public function trainers()
+    public function topics()
     {
-        return $this->belongsToMany('App\User', 'classroom_trainer');
+        return $this->hasMany(Topic::class);
     }
+   
     // Add any additional relations you need
 }
