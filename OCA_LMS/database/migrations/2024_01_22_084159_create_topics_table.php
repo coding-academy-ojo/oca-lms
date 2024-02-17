@@ -18,8 +18,8 @@ class CreateTopicsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('photo')->nullable();
-            $table->unsignedBigInteger('classroom_id');
-            $table->foreign('classroom_id')->references('id')->on('classrooms');
+            $table->unsignedBigInteger('cohort_id');
+            $table->foreign('cohort_id')->references('id')->on('cohorts');
             $table->timestamps();
         });
     }
