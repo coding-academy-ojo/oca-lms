@@ -13,35 +13,31 @@ class User extends Authenticatable
         'name', 'email', 'password', 'role', 'photo', 'CV', 'bio', 'academy_id'
     ];
 
-    public function academy()
+    public function academies()
     {
-        return $this->belongsTo('App\Academy');
-    }
-
-    public function trainee()
-    {
-        return $this->hasOne('App\Trainee', 'user_id');
-    }
-
-    public function trainer()
-    {
-        return $this->hasOne('App\Trainer', 'user_id');
+        return $this->belongsToMany(Academy::class, 'user_academy', 'user_id', 'academy_id');
     }
 
     public function classrooms()
     {
-        return $this->hasMany('App\Classroom', 'manager_id');
+        return $this->belongsToMany(Classroom::class, 'user_classroom', 'user_id', 'classroom_id');
     }
 
-    public function managedClassrooms()
+// 
+    public function assignmentSubmissions()
     {
-        return $this->hasMany('App\Classroom', 'manager_id');
+        return $this->hasMany(AssignmentSubmission::class, 'trainee_id');
     }
 
-    public function responses()
+    public function assignmentFeedbacks()
     {
-        return $this->hasMany('App\AssignmentSubmission', 'trainee_id');
+        return $this->hasManyThrough(AssignmentFeedback::class, AssignmentSubmission::class, 'trainee_id', 'assignment_submission_id');
     }
+    
+    // public function assignmentFeedbacks()
+    // {
+    //     return $this->hasMany(AssignmentFeedback::class, 'trainer_id');
+    // }
 
     public function projectSubmissions()
     {
@@ -51,11 +47,6 @@ class User extends Authenticatable
     public function projectFeedback()
     {
         return $this->hasMany('App\ProjectFeedback', 'trainee_id');
-    }
-
-    public function assignmentFeedback()
-    {
-        return $this->hasMany('App\AssignmentFeedback', 'trainer_id');
     }
 
     public function notifications()
@@ -73,10 +64,6 @@ class User extends Authenticatable
         return $this->hasMany('App\Announcement', 'user_id');
     }
 
-    public function trainedClassrooms()
-    {
-        return $this->belongsToMany('App\Classroom', 'classroom_trainer');
-    }
 
     /**
      * The attributes that are mass assignable.

@@ -17,10 +17,12 @@ class CreateProjectSkillsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('skill_id');
-            $table->enum('level', ['first', 'second', 'third']);
+            $table->unsignedBigInteger('level_id');
+            $table->timestamps();
+            
             $table->foreign('project_id')->references('id')->on('projects');
             $table->foreign('skill_id')->references('id')->on('skills');
-            $table->timestamps();
+            $table->foreign('level_id')->references('id')->on('levels');
         });
     }
 
@@ -31,6 +33,6 @@ class CreateProjectSkillsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_skills');
+        Schema::dropIfExists('project_skills_levels');
     }
 }

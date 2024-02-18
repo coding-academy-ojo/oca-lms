@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Topic extends Model
 {
     protected $fillable = [
-        'name',
+        'name', 'description', 'photo', 'classroom_id'
     ];
 
     public function materials()
@@ -20,10 +20,10 @@ class Topic extends Model
         return $this->hasMany('App\Assignment', 'topic_id');
     }
 
-    public function projects()
-    {
-        return $this->hasManyThrough('App\Project', 'App\Classroom', 'topic_id', 'classroom_id');
-    }
+    // public function projects()
+    // {
+    //     return $this->hasManyThrough('App\Project', 'App\Classroom', 'topic_id', 'classroom_id');
+    // }
 
     // Add any additional relations you need
 }

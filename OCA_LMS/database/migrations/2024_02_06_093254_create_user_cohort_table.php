@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClassroomTrainerTable extends Migration
+class CreateUserCohortTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateClassroomTrainerTable extends Migration
      */
     public function up()
     {
-        Schema::create('classroom_trainer', function (Blueprint $table) {
+        Schema::create('user_cohort', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('classroom_id');
+            $table->unsignedBigInteger('cohort_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('classroom_id')->references('id')->on('classrooms')->onDelete('cascade');
+            $table->foreign('cohort_id')->references('id')->on('cohorts')->onDelete('cascade');
         });
     }
 
@@ -31,6 +31,6 @@ class CreateClassroomTrainerTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('classroom_trainer');
+        Schema::dropIfExists('user_cohort');
     }
 }

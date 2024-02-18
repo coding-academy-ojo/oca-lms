@@ -15,9 +15,12 @@ class CreateNotificationsTable extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
             $table->text('content');
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            
+            $table->unsignedBigInteger('cohort_id');
+            $table->foreign('cohort_id')->references('id')->on('cohorts')->onDelete('cascade');
             $table->timestamps();
         });
     }
