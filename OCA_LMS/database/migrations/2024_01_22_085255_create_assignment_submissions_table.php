@@ -11,17 +11,18 @@ class CreateAssignmentSubmissionsTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
-        Schema::create('assignment_submissions', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('assignment_id')->constrained();
-            $table->foreignId('trainee_id')->constrained('trainees', 'user_id');
-            $table->string('attached_file');
-            $table->timestamps();
-        });
-        
-    }
+
+public function up()
+{
+    Schema::create('assignment_submissions', function (Blueprint $table) {
+        $table->id();
+        $table->boolean('is_late')->default(0);
+        $table->foreignId('assignment_id')->constrained('assignments');
+        $table->foreignId('trainee_id')->constrained('users')->where('role', 'trainee'); 
+        $table->string('attached_file');
+        $table->timestamps();
+    });
+}
 
     /**
      * Reverse the migrations.

@@ -6,8 +6,8 @@
             </a>
         </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-    </button>
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse align-items-end" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
@@ -22,7 +22,7 @@
                         Add Academy
                     </button>
                 </li>
-                
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('addTrainee')}}">Add Trainee </a>
                 </li>
@@ -47,9 +47,8 @@
 </div>
 
 
-
-  <!-- Offcanvas Component for Create Academy -->
-  <div class="offcanvas offcanvas-end" id="createAcademyOffcanvas" aria-labelledby="createAcademyOffcanvasLabel">
+<!-- Offcanvas Component for Create Academy -->
+<div class="offcanvas offcanvas-end" id="createAcademyOffcanvas" aria-labelledby="createAcademyOffcanvasLabel">
     <div class="offcanvas-header">
         <h5 id="createAcademyOffcanvasLabel">Create Academy</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>

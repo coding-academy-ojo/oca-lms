@@ -6,24 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProjectFeedback extends Model
 {
-    protected $fillable = [
-        'project_id', 'trainee_id', 'trainer_id', 'feedback', 'is_project_passed'
-    ];
+    protected $fillable = ['trainer_id', 'trainee_id', 'project_id', 'feedback'];
 
-    public function project()
+    public function trainer()
     {
-        return $this->belongsTo('App\Project');
+        return $this->belongsTo(User::class, 'trainer_id');
     }
 
     public function trainee()
     {
-        return $this->belongsTo('App\Trainee', 'trainee_id');
+        return $this->belongsTo(User::class, 'trainee_id');
     }
 
-    public function trainer()
+    public function project()
     {
-        return $this->belongsTo('App\Trainer', 'trainer_id');
+        return $this->belongsTo(Project::class);
     }
-
-    // Add any additional relations you need
 }

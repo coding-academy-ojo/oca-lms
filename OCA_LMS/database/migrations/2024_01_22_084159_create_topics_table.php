@@ -16,6 +16,10 @@ class CreateTopicsTable extends Migration
         Schema::create('topics', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->text('description');
+            $table->string('photo')->nullable();
+            $table->unsignedBigInteger('cohort_id');
+            $table->foreign('cohort_id')->references('id')->on('cohorts');
             $table->timestamps();
         });
     }

@@ -10,15 +10,16 @@ class AssignmentFeedback extends Model
         'response_id', 'trainer_id', 'feedback'
     ];
 
-    public function response()
+    public function assignmentSubmission()
     {
-        return $this->belongsTo('App\AssignmentSubmission', 'response_id');
+        return $this->belongsTo(AssignmentSubmission::class, 'assignment_submission_id');
     }
 
     public function trainer()
     {
-        return $this->belongsTo('App\Trainer');
+        return $this->belongsTo(User::class, 'trainer_id');
     }
 
     // Add any additional relations you need
+
 }

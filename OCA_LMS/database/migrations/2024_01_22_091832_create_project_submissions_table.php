@@ -14,13 +14,14 @@ class CreateProjectSubmissionsTable extends Migration
     public function up()
     {
         Schema::create('project_submissions', function (Blueprint $table) {
-            $table->foreignId('project_id')->constrained();
-            $table->foreignId('trainee_id')->constrained('trainees', 'user_id');
-            $table->string('link');
-            $table->text('text_submission');
+            $table->id();
+            $table->unsignedBigInteger('trainee_id');
+            $table->unsignedBigInteger('project_id');
+            $table->string('submission_link');
             $table->timestamps();
-        
-            $table->primary(['project_id', 'trainee_id']);
+
+            $table->foreign('trainee_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
         });
         
     }
