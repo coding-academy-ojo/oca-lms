@@ -24,45 +24,54 @@ Profile
 {{-- =========================================================== --}}
 <div class="innerPage  mt-3">
     <div class="container">
-        <div class="col-md-2 ms-auto mb-3">
-            <a href="/addSkillsFramework">Add skills Framework</a>
-            &nbsp;
-        </div>
-        <div class="col-md-2 ms-auto mb-3">
-            
-            <a href="/editSkillsFramework">Edit skills Framework</a>
-        </div>
+
         <div class="skillsFramework">
+            <div class="actionbtn">
+                <div class="col-md-2 ms-auto mb-3">
+                    <a href="/addSkillsFramework">Add skills Framework</a>
+                    &nbsp;
+                </div>
+                <div class="col-md-2 ms-auto mb-3">
 
-            <div class="tab">
-                <button class="tablinks active" onclick="openCity(event, 'London')">Create mock-ups for an application</button>
-                <button class="tablinks" onclick="openCity(event, 'Paris')">Create static and adaptive web user interfaces</button>
-                <button class="tablinks" onclick="openCity(event, 'Tokyo')">Develop a dynamic web user interface</button>
+                    <a href="/editSkillsFramework">Edit skills Framework</a>
+                </div>
             </div>
 
-            <div id="London" class="tabcontent" style="display: block;">
-                <h3>Assessment criteria 1</h3>
-                <p>Using a specified mock-up tool, reproduce a mock-up created on the same tool. Describe the elements of the style guide used and the planned security features. Formalize the interface links using the example provided as inspiration. Be capable of demonstrating that the mock-up adapts to mobile devices. Be capable of explaining the reasons for choosing ergonomics for a positive user experience..</p>
-            </div>
+            <div class="row">
+                <div class="col-sm-3 mb-3">
 
-            <div id="Paris" class="tabcontent">
-                <h3>Assessment criteria 2</h3>
-                <p>From an expression of need (mock-up) and an existing static user interface:
+                    <div class="tab">
+                        <button class="tablinks active" onclick="openCity(event, 'London')">Create mock-ups for an application</button>
+                        <button class="tablinks" onclick="openCity(event, 'Paris')">Create static and adaptive web user interfaces</button>
+                        <button class="tablinks" onclick="openCity(event, 'Tokyo')">Develop a dynamic web user interface</button>
+                    </div>
+                </div>
+                <div class="col-sm-9 mb-3">
+                    <div id="London" class="tabcontent" style="display: block;">
+                        <h3>Assessment criteria 1</h3>
+                        <p>Using a specified mock-up tool, reproduce a mock-up created on the same tool. Describe the elements of the style guide used and the planned security features. Formalize the interface links using the example provided as inspiration. Be capable of demonstrating that the mock-up adapts to mobile devices. Be capable of explaining the reasons for choosing ergonomics for a positive user experience..</p>
+                    </div>
 
-                    - I adapt the interface content (change the text, etc.)
+                    <div id="Paris" class="tabcontent">
+                        <h3>Assessment criteria 2</h3>
+                        <p>From an expression of need (mock-up) and an existing static user interface:
 
-                    - I make minor changes to the structure of the interface (I add a title, a paragraph, etc.)
+                            - I adapt the interface content (change the text, etc.)
 
-                    - I adapt the formatting of the interface (change the color of a title, change the font, etc.)
-            </div>
+                            - I make minor changes to the structure of the interface (I add a title, a paragraph, etc.)
 
-            <div id="Tokyo" class="tabcontent">
-                <h3>Assessment criteria 3</h3>
-                <p>From an expression of need and an existing dynamic page, I make minor changes to the page:
+                            - I adapt the formatting of the interface (change the color of a title, change the font, etc.)
+                    </div>
 
-                    - in terms of the interface content, its structure or its formatting,
+                    <div id="Tokyo" class="tabcontent">
+                        <h3>Assessment criteria 3</h3>
+                        <p>From an expression of need and an existing dynamic page, I make minor changes to the page:
 
-                    - in terms of the client-side processes (input field validation, etc.).
+                            - in terms of the interface content, its structure or its formatting,
+
+                            - in terms of the client-side processes (input field validation, etc.).
+                    </div>
+                </div>
             </div>
         </div>
     </div>

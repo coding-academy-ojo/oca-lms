@@ -14,53 +14,53 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::get('/test', function () {
-    return view('test');
-});
+// Route::get('/test', function () {
+//     return view('test');
+// });
 
-Route::get('/test2', function () {
-    return view('test2');
-});
-
-
+// Route::get('/test2', function () {
+//     return view('test2');
+// });
 
 
 
 
-Route::get('/topics', function () {
-    return view('topics.topics');
-})->name('topics');
-Route::get('/createTopics', function () {
-    return view('topics.createTopics');
-})->name('createTopics');
-Route::get('/editTopics', function () {
-    return view('topics.editTopics');
-})->name('editTopics');
+
+
+// Route::get('/topics', function () {
+//     return view('topics.topics');
+// })->name('topics');
+// Route::get('/createTopics', function () {
+//     return view('topics.createTopics');
+// })->name('createTopics');
+// Route::get('/editTopics', function () {
+//     return view('topics.editTopics');
+// })->name('editTopics');
 
 
 
-Route::get('/profile', function () {
-    return view('profile.profile');
-})->name('profile');
+// Route::get('/profile', function () {
+//     return view('profile.profile');
+// })->name('profile');
 
-Route::get('/editProfile', function () {
-    return view('profile.editProfile');
-})->name('editProfile');
+// Route::get('/editProfile', function () {
+//     return view('profile.editProfile');
+// })->name('editProfile');
 
 
 
-Route::get('/skillsFramework', function () {
-    return view('skillsFramework.skillsFramework');
-});
-Route::get('/addSkillsLevel', function () {
-    return view('skillsFramework.addSkillsLevel');
-});
-Route::get('/addSkillsFramework', function () {
-    return view('skillsFramework.addSkillsFramework');
-});
-Route::get('/editSkillsLevel', function () {
-    return view('skillsFramework.editSkillsLevel');
-});
-Route::get('/editSkillsFramework', function () {
-    return view('skillsFramework.editSkillsFramework');
-});
+// Route::get('/skillsFramework', function () {
+//     return view('skillsFramework.skillsFramework');
+// });
+// Route::get('/addSkillsLevel', function () {
+//     return view('skillsFramework.addSkillsLevel');
+// });
+// Route::get('/addSkillsFramework', function () {
+//     return view('skillsFramework.addSkillsFramework');
+// });
+// Route::get('/editSkillsLevel', function () {
+//     return view('skillsFramework.editSkillsLevel');
+// });
+// Route::get('/editSkillsFramework', function () {
+//     return view('skillsFramework.editSkillsFramework');
+// });
