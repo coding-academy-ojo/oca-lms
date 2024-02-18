@@ -99,3 +99,7 @@ Route::get('/submit_assignment', function () {
 Route::get('/view_material', function () {
     return view('Pages/view_material');
 })->name('view_material');
+
+Route::get('/assignment/allfeedback', function () {
+    return view('Pages/allAssignmentfeddback');
+})->name('allAssignmentfeddback');

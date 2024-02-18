@@ -1,6 +1,6 @@
 @extends('Layouts.app')
 @section('title')
-Add Assignment
+ Create Assignment
 @endsection
 @section('content')
 
@@ -16,18 +16,14 @@ Add Assignment
             </nav>
         </div>
     </section>
-    <style>
-        .expand {
-            max-width: 200px;
-        }
 
+    <style>
         .custom-dropdown {
             position: relative;
             display: inline-block;
         }
 
         .dropdown-button {
-            /* padding: 10px; */
             cursor: pointer;
         }
 
@@ -54,10 +50,6 @@ Add Assignment
             background-color: #ddd;
         }
 
-        .dropdown-contentt {
-            background-color: orange;
-        }
-
         .dropdown-content input {
             margin-right: 5px;
         }
@@ -65,6 +57,62 @@ Add Assignment
         .show {
             display: block;
         }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        .input-sizer {
+            display: inline-grid;
+            vertical-align: top;
+            align-items: center;
+            position: relative;
+            border: solid 1px;
+
+            &.stacked {
+                padding: .5em;
+                align-items: stretch;
+
+                &::after,
+                input,
+                textarea {
+                    grid-area: 2 / 1;
+                }
+            }
+
+            &::after,
+            input,
+            textarea {
+                width: auto;
+                min-width: 1em;
+                grid-area: 1 / 2;
+                font: inherit;
+                padding: 0.25em;
+                margin: 0;
+                resize: none;
+                background: none;
+                appearance: none;
+                border: none;
+            }
+
+
+            &::after {
+                content: attr(data-value) ' ';
+                visibility: hidden;
+                white-space: pre-wrap;
+            }
+
+
+
+            textarea:focus,
+            input:focus {
+                outline: none;
+            }
+        }
+
+
     </style>
     <div class="container">
         <div class="page-wrapper">
@@ -72,7 +120,7 @@ Add Assignment
                 <div class="page-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h3 class="page-title">Add Assignment</h3>
+                            <h3 class="page-title text-primary">create Assignment</h3>
                         </div>
                     </div>
                 </div>
@@ -84,7 +132,7 @@ Add Assignment
                                     novalidate>
                                     @csrf
                                     <div class="row">
-                                        <div class="col-12 col-sm-6">
+                                        <div class="col-12 ">
                                             <div class="form-group">
                                                 <label class="my-2">Title</label>
                                                 <input type="text" class="form-control" name="title" required>
@@ -105,13 +153,6 @@ Add Assignment
                                         </div>
                                         <div class="col-12 col-sm-6">
                                             <div class="form-group">
-                                                <label class="my-2">Description</label>
-                                                <input type="text" class="form-control" name="description" required>
-                                                <div class="invalid-feedback">This feild is required</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-sm-6">
-                                            <div class="form-group">
                                                 <label class="my-2">Date</label>
                                                 <div>
                                                     <input type="date" class="form-control" name="birthday"
@@ -128,39 +169,48 @@ Add Assignment
                                             </div>
                                         </div>
                                         <div class="col-12 col-sm-6">
-                                            {{-- <label class="my-2">Students</label>
-                                            <div class="dropdown ">
-                                                <button class="btn btn-secondary dropdown-toggle form-control" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                  Dropdown button
-                                                </button> --}}
-                                            {{-- <div class="form-check dropdown-menu">
-                                                <input class="form-check-input " type="checkbox" value="" id="flexCheckDefault">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                  Rawan
-                                                </label>
-                                              </div> --}}
-                                            {{-- <ul class="dropdown-menu" style="">
-                                                  <li class=""><input class="form-check-input  " type="checkbox" value="" id="flexCheckDefault">Action</li>
-                                                  <li><input class="form-check-input  " type="checkbox" value="" id="flexCheckDefault">Action</li>
-                                                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                                </ul>
-                                              </div> --}}
                                             <div class="form-group">
                                                 <label class="my-2">Students</label>
                                                 <div class="dropdown-button form-control" onclick="toggleDropdown()">Select
                                                     Student</div>
                                                 <div class="dropdown-content" id="dropdownContent">
                                                     <label>
-                                                        <input type="checkbox" value="Option 1"> Rawan
+                                                        <input class="form-check-input" type="checkbox" value="Option 3" onclick="selectAll()">All trainee
                                                     </label>
                                                     <label>
-                                                        <input type="checkbox" value="Option 2"> Reem
+                                                        <input class="form-check-input" type="checkbox" value="Option 1"> Rawan
                                                     </label>
                                                     <label>
-                                                        <input type="checkbox" value="Option 3"> Rand
+                                                        <input class="form-check-input" type="checkbox" value="Option 2"> Reem
+                                                    </label>
+                                                    <label>
+                                                        <input class="form-check-input" type="checkbox" value="Option 3"> Rand
+                                                    </label>
+                                                    <label>
+                                                        <input class="form-check-input" type="checkbox" value="Option 3"> Rand
+                                                    </label>
+                                                    <label>
+                                                        <input class="form-check-input" type="checkbox" value="Option 3"> Rand
+                                                    </label>
+                                                    <label>
+                                                        <input class="form-check-input" type="checkbox" value="Option 3"> Rand
+                                                    </label>
+                                                    <label>
+                                                        <input class="form-check-input" type="checkbox" value="Option 3"> Rand
+                                                    </label>
+                                                    <label>
+                                                        <input class="form-check-input" type="checkbox" value="Option 3"> Rand
                                                     </label>
                                                 </div>
-
+                                            </div>
+                                        </div>
+                                        <div class="col-12 ">
+                                            <div class="form-group">
+                                                <label class="my-2 ">Description</label>
+                                                <label class="input-sizer stacked col-12 form-control border border-light">
+                                                    <textarea oninput="this.parentNode.dataset.value = this.value" rows="2" id="myTextarea"></textarea>
+                                                </label>
+                                                <div class="invalid-feedback">This feild is required</div>
                                             </div>
                                         </div>
                                         <div class="col-12 mt-3">
@@ -168,7 +218,6 @@ Add Assignment
                                         </div>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>
@@ -182,6 +231,19 @@ Add Assignment
         var dropdownContent = document.getElementById("dropdownContent");
         dropdownContent.classList.toggle("show");
     }
+    function selectAll() {
+        var checkboxes = document.querySelectorAll('#dropdownContent input[type="checkbox"]');
+        var allTraineeCheckbox = checkboxes[0];
+        if (allTraineeCheckbox.checked) {
+            for (var i = 1; i < checkboxes.length; i++) {
+                checkboxes[i].checked = true;
+            }
+        } else {
+            for (var i = 1; i < checkboxes.length; i++) {
+                checkboxes[i].checked = false;
+            }
+        }
+    }
 
     // Close the dropdown if the user clicks outside of it
     window.onclick = function(event) {
@@ -190,4 +252,5 @@ Add Assignment
             dropdownContent.classList.remove('show');
         }
     }
+
 </script>

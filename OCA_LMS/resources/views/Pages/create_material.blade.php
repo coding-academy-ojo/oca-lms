@@ -1,9 +1,8 @@
 @extends('Layouts.app')
 @section('title')
-Add Material
+Create Material
 @endsection
 @section('content')
-
     @include('layouts.innerNav')
     <section class="inner-bred my-3">
         <div class="container">
@@ -20,7 +19,7 @@ Add Material
                 <div class="page-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h3 class="page-title">Add Material </h3>
+                            <h3 class="page-title text-primary">Create Material </h3>
                         </div>
                     </div>
                 </div>

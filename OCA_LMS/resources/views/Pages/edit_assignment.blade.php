@@ -72,7 +72,7 @@ Edit Assignment
                 <div class="page-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h3 class="page-title">Edit Assignment</h3>
+                            <h3 class="page-title text-primary">Edit Assignment</h3>
                         </div>
                     </div>
                 </div>
@@ -128,23 +128,6 @@ Edit Assignment
                                             </div>
                                         </div>
                                         <div class="col-12 col-sm-6">
-                                            {{-- <label class="my-2">Students</label>
-                                            <div class="dropdown ">
-                                                <button class="btn btn-secondary dropdown-toggle form-control" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                  Dropdown button
-                                                </button> --}}
-                                            {{-- <div class="form-check dropdown-menu">
-                                                <input class="form-check-input " type="checkbox" value="" id="flexCheckDefault">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                  Rawan
-                                                </label>
-                                              </div> --}}
-                                            {{-- <ul class="dropdown-menu" style="">
-                                                  <li class=""><input class="form-check-input  " type="checkbox" value="" id="flexCheckDefault">Action</li>
-                                                  <li><input class="form-check-input  " type="checkbox" value="" id="flexCheckDefault">Action</li>
-                                                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                                </ul>
-                                              </div> --}}
                                             <div class="form-group">
                                                 <label class="my-2">Students</label>
                                                 <div class="dropdown-button form-control" onclick="toggleDropdown()">Select

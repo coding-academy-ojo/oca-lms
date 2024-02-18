@@ -3,7 +3,6 @@
 Edit Material
 @endsection
 @section('content')
-
     @include('layouts.innerNav')
     <section class="inner-bred my-3">
         <div class="container">
@@ -20,7 +19,7 @@ Edit Material
                 <div class="page-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h3 class="page-title">Edit Material </h3>
+                            <h3 class="page-title text-primary">Edit Material </h3>
                         </div>
                     </div>
                 </div>
@@ -71,7 +70,6 @@ Edit Material
                                         </div>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>

@@ -24,6 +24,7 @@
     
     <!-- Fontawsome Rawan Link -->
     <script src="https://kit.fontawesome.com/900375e939.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
 
     <!-- style files -->
     <link rel="stylesheet" href="/assets/style_files/ayman.css">
