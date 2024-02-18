@@ -43,8 +43,24 @@ Route::get('/profile', function () {
     return view('profile.profile');
 })->name('profile');
 
+Route::get('/editProfile', function () {
+    return view('profile.editProfile');
+})->name('editProfile');
 
 
 
-
-
+Route::get('/skillsFramework', function () {
+    return view('skillsFramework.skillsFramework');
+});
+Route::get('/addSkillsLevel', function () {
+    return view('skillsFramework.addSkillsLevel');
+});
+Route::get('/addSkillsFramework', function () {
+    return view('skillsFramework.addSkillsFramework');
+});
+Route::get('/editSkillsLevel', function () {
+    return view('skillsFramework.editSkillsLevel');
+});
+Route::get('/editSkillsFramework', function () {
+    return view('skillsFramework.editSkillsFramework');
+});

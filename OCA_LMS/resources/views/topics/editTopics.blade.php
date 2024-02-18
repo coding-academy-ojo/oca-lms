@@ -23,7 +23,7 @@ Edit Topic
 {{-- =========================================================== --}}
 {{-- =================== Breadcrumb Section ==================== --}}
 {{-- =========================================================== --}}
-<div class="innerPage  py-1 mt-5">
+<div class="innerPage  mt-3">
     <div class="container">
         <div class="addpro">
             <h1 class="text-center mb-4">Edit Topic </h1>

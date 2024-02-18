@@ -21,7 +21,7 @@ Topics
 {{-- =========================================================== --}}
 {{-- =================== Breadcrumb Section ==================== --}}
 {{-- =========================================================== --}}
-<div class="innerPage  py-1 mt-5">
+<div class="innerPage   mt-3">
     <div class="container">
 
         <div class="col-md-2 ms-auto mb-3">
