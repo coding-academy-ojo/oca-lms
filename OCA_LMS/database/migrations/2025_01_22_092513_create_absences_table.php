@@ -13,7 +13,7 @@ class CreateAbsencesTable extends Migration
      */
     public function up()
     {
-        Schema::create('c', function (Blueprint $table) {
+        Schema::create('absences', function (Blueprint $table) {
             $table->id();
             $table->enum('absences_type', ['late', 'absent', 'leaving']);
             $table->date('absences_date')->useCurrent();
