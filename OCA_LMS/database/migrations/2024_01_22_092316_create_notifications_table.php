@@ -17,7 +17,7 @@ class CreateNotificationsTable extends Migration
             $table->id();
             $table->text('content');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('user_id')->references('id')->on('users');
             
             $table->unsignedBigInteger('cohort_id');
             $table->foreign('cohort_id')->references('id')->on('cohorts')->onDelete('cascade');

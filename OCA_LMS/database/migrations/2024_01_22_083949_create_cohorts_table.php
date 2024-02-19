@@ -15,9 +15,11 @@ class CreateCohortsTable extends Migration
     {
         Schema::create('cohorts', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description');
-            $table->string('picture');
+            $table->string('cohort_name');
+            $table->text('cohort_description');
+            $table->text('cohort_start_date');
+            $table->text('cohort_end_date');
+            $table->text('cohort_donor');
             $table->unsignedBigInteger('academy_id');
             $table->foreign('academy_id')->references('id')->on('academies');
             $table->timestamps();

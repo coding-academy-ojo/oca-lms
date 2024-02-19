@@ -22,7 +22,7 @@ class CreateTraineeSkillsProgressTable extends Migration
             $table->boolean('achieved');
             $table->timestamps();
 
-            $table->foreign('trainee_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('trainee_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->foreign('skill_id')->references('id')->on('skills')->onDelete('cascade');
             $table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade');

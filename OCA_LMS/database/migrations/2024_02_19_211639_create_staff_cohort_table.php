@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAbsencesTable extends Migration
+class CreateStaffCohortTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateAbsencesTable extends Migration
      */
     public function up()
     {
-        Schema::create('absences', function (Blueprint $table) {
+        Schema::create('staff_cohort', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['late', 'absent', 'leaving']);
-            $table->date('date')->now();
-            $table->text('reason');
-            $table->integer('duration');
-            $table->foreignId('trainee_id')->constrained('users')->where('role', 'trainee'); 
+            $table->foreignId('staff_id')->constrained()->onDelete('cascade');
+            $table->foreignId('cohort_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateAbsencesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('absences');
+        Schema::dropIfExists('staff_cohort');
     }
 }

@@ -14,11 +14,15 @@ class CreateStaffTable extends Migration
     public function up()
     {
         Schema::create('staff', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->primary();
-            $table->text('cv')->nullable();
-            $table->text('bio')->nullable();
-            $table->string('personal_img')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->id();
+
+            $table->string('staff_name');
+            $table->string('staff_email')->unique();
+            $table->string('staff_password');
+            $table->enum('role', ['manager', 'super_manager', 'trainer']);
+            $table->text('staff_cv')->nullable();
+            $table->text('staff_bio')->nullable();
+            $table->string('staff_personal_img')->nullable();
         });
     }
 

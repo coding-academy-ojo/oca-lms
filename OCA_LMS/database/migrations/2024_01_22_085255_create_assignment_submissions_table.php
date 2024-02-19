@@ -18,7 +18,7 @@ public function up()
         $table->id();
         $table->boolean('is_late')->default(0);
         $table->foreignId('assignment_id')->constrained('assignments');
-        $table->foreignId('trainee_id')->constrained('users')->where('role', 'trainee'); 
+        // $table->foreignId('trainee_id')->constrained('users')->where('role', 'trainee'); 
         $table->string('attached_file');
         $table->timestamps();
     });

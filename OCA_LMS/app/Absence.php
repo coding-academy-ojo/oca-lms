@@ -6,14 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Absence extends Model
 {
-    protected $fillable = [
-        'trainee_id', 'type', 'date', 'reason', 'duration'
-    ];
-
-    public function trainee()
-    {
-        return $this->belongsTo('App\Trainee');
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+    public function student() {
+        return $this->belongsTo(Student::class);
     }
 
-    // Add any additional relations you need
 }

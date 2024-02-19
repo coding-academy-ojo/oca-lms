@@ -21,7 +21,7 @@ class CreateProjectsTable extends Migration
             $table->date('delivery_date')->nullable();
             $table->string('image')->nullable();
             $table->unsignedBigInteger('cohort_id');
-            $table->foreignId('trainer_id')->constrained('users')->nullable();
+            // $table->foreignId('trainer_id')->constrained('users')->nullable();
             $table->foreign('cohort_id')->references('id')->on('cohorts');
             $table->timestamps();
         });

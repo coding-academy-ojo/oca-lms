@@ -14,8 +14,9 @@ class CreateStudentTable extends Migration
     public function up()
     {
         Schema::create('students', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->primary();
-            $table->unsignedBigInteger('training_id')->nullable();
+            $table->id();
+            $table->string('email')->unique();
+            $table->string('password');
             $table->string('is_newsletter')->nullable();
             $table->string('provider_id')->nullable();
             $table->string('email_verification')->nullable();
@@ -63,10 +64,13 @@ class CreateStudentTable extends Migration
             $table->string('id_img')->nullable();
             $table->string('personal_img')->nullable();
             $table->string('vaccination_img')->nullable();
+            $table->string('eligible_to_move')->nullable();
+            $table->string('github_link')->nullable();
+            $table->string('linkedin_link')->nullable();
+            $table->foreignId('academy_id')->constrained()->onDelete('cascade');
+            $table->foreignId('cohort_id')->constrained()->onDelete('cascade');
             $table->timestamps();
-        
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        });
+            });
         
     }
 

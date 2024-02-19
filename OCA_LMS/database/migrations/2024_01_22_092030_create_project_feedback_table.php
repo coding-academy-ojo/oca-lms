@@ -16,8 +16,8 @@ class CreateProjectFeedbackTable extends Migration
         Schema::create('project_feedback', function (Blueprint $table) {
             $table->id();
            
-            $table->foreignId('trainer_id')->constrained('users')->where('role', 'trainer'); 
-            $table->foreignId('trainee_id')->constrained('users')->where('role', 'trainee'); 
+            // $table->foreignId('trainer_id')->constrained('users')->where('role', 'trainer'); 
+            // $table->foreignId('trainee_id')->constrained('users')->where('role', 'trainee'); 
             $table->unsignedBigInteger('project_id');
             $table->text('feedback');
             $table->timestamps();
