@@ -48,10 +48,31 @@ Profile
                 </div>
                 <div class="col-sm-9 mb-3">
                     <div id="London" class="tabcontent" style="display: block;">
-                        <h3>Assessment criteria 1</h3>
-                        <p>Using a specified mock-up tool, reproduce a mock-up created on the same tool. Describe the elements of the style guide used and the planned security features. Formalize the interface links using the example provided as inspiration. Be capable of demonstrating that the mock-up adapts to mobile devices. Be capable of explaining the reasons for choosing ergonomics for a positive user experience..</p>
-                    </div>
+                        <div class="row">
+                            <div class="actionbtn ">
+                                <div class="col-md-3 ms-auto mb-3">
+                                    <a href="/addSkillsFramework">Add level</a>
+                                    &nbsp;
+                                </div>
+                                <div class="col-md-3 ms-auto mb-3">
+                                    <a href="/editSkillsFramework">Edit level</a>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 mb-3">
+                                <h3 class="text-center">level 1 (imitate) </h3>
+                                <p>Using a specified mock-up tool, reproduce a mock-up created on the same tool. Describe the elements of the style guide used and the planned security features. Formalize the interface links using the example provided as inspiration. Be capable of demonstrating that the mock-up adapts to mobile devices. Be capable of explaining the reasons for choosing ergonomics for a positive user experience..</p>
+                            </div>
+                            <div class="col-sm-4 mb-3">
+                                <h3>level 2 (adapt) </h3>
+                                <p>Using a specified mock-up tool, reproduce a mock-up created on the same tool. Describe the elements of the style guide used and the planned security features. Formalize the interface links using the example provided as inspiration. Be capable of demonstrating that the mock-up adapts to mobile devices. Be capable of explaining the reasons for choosing ergonomics for a positive user experience..</p>
+                            </div>
+                            <div class="col-sm-4 mb-3">
+                                <h3>level 3 (transpose) </h3>
+                                <p>Using a specified mock-up tool, reproduce a mock-up created on the same tool. Describe the elements of the style guide used and the planned security features. Formalize the interface links using the example provided as inspiration. Be capable of demonstrating that the mock-up adapts to mobile devices. Be capable of explaining the reasons for choosing ergonomics for a positive user experience..</p>
+                            </div>
+                        </div>
 
+                    </div>
                     <div id="Paris" class="tabcontent">
                         <h3>Assessment criteria 2</h3>
                         <p>From an expression of need (mock-up) and an existing static user interface:
