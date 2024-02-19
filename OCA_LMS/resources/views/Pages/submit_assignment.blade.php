@@ -17,7 +17,7 @@ Submit Assignment
     </section>
     <div class="contanier">
         <div class="col-10 m-auto">
-        <h2 class="col-12 m-auto">PHP assignment</h2>
+        <h2 class="col-12 m-auto">Create Database</h2>
         <div class="col-12 m-auto mt-3">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</div>
             <div class="mt-3">
               <b>Deadline: 12/Feb/2024</b> 
@@ -25,15 +25,7 @@ Submit Assignment
         <form method="" action="" enctype="multipart/form-data" class="needs-validation"
         novalidate>
         @csrf
-        {{-- <div class="col-12 col-sm-6">
-            <div class="form-group">
-                <label class="my-2">Assignment File</label>
-                <input type="file" class="form-control" name="image" required>
-                <div class="invalid-feedback">This field is required</div>
-            </div>
-        </div> --}}
         <div class="input-group my-3">
-            {{-- <label class="my-2">Submit your Assignment</label> --}}
             <input type="text" class="form-control" placeholder="submit your assignment" aria-label="Recipient's username" aria-describedby="button-addon2">
             <button class="btn btn-primary" type="button" id="button-addon2">Submit</button>
           </div>

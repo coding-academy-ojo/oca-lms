@@ -17,19 +17,14 @@
             <li><a href="">test</a></li>
 
         </ul>
-    </div>
-       
-       
+    </div> 
 </section>
 
 {{-- =========================================================== --}}
 {{-- =================== Breadcrumb Section ==================== --}}
 {{-- =========================================================== --}}
 
-
-
-
-<div class="innerPage  py-1 mt-5">
+<div class="innerPage   mt-5">
     <div class="container">
         <h1>
             Test Content

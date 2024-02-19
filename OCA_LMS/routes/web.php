@@ -86,7 +86,6 @@ Route::get('/create-material', function () {
     return view('Pages/create_material');
 })->name('create-material');
 
-
 Route::get('/edit-material', function () {
     return view('Pages/edit_material');
 })->name('edit-material');
@@ -95,64 +94,76 @@ Route::get('/create_assignment', function () {
     return view('Pages/create_assignment');
 })->name('create_assignment');
 
-
 Route::get('/edit_assignment', function () {
     return view('Pages/edit_assignment');
 })->name('edit_assignment');
-
 
 Route::get('/assignment', function () {
     return view('Pages/view_assignment');
 })->name('assignment');
 
-
 Route::get('/submit_assignment', function () {
     return view('Pages/submit_assignment');
 })->name('submit_assignment');
-
 
 Route::get('/view_material', function () {
     return view('Pages/view_material');
 })->name('view_material');
 
+Route::get('/assignment/allfeedback', function () {
+    return view('Pages/allAssignmentfeddback');
+})->name('allAssignmentfeddback');
 
 ///////////////////////////////////
 // ayman
 
+Route::get('/test', function () {
+    return view('test');
+});
 
-// Route::get('/test', function () {
-//     return view('test');
-// });
-
-// Route::get('/test2', function () {
-//     return view('test2');
-// });
-
-
-// Route::get('/topics', function () {
-//     return view('topics.topics');
-// })->name('topics');
-// Route::get('/createTopics', function () {
-//     return view('topics.createTopics');
-// })->name('createTopics');
-// Route::get('/editTopics', function () {
-//     return view('topics.editTopics');
-// })->name('editTopics');
-
-
-// Route::get('/profile', function () {
-//     return view('profile.profile');
-// })->name('profile');
+Route::get('/test2', function () {
+    return view('test2');
+});
 
 
 
+Route::get('/topics', function () {
+    return view('topics.topics');
+})->name('topics');
+Route::get('/createTopics', function () {
+    return view('topics.createTopics');
+})->name('createTopics');
+Route::get('/editTopics', function () {
+    return view('topics.editTopics');
+})->name('editTopics');
 
 
 
+Route::get('/profile', function () {
+    return view('profile.profile');
+})->name('profile');
 
-// Route::get('/welcome', function () {
-//     return view('welcome');
-// })->name('welcome');
+Route::get('/editProfile', function () {
+    return view('profile.editProfile');
+})->name('editProfile');
+
+
+
+Route::get('/skillsFramework', function () {
+    return view('skillsFramework.skillsFramework');
+});
+Route::get('/addSkillsLevel', function () {
+    return view('skillsFramework.addSkillsLevel');
+});
+Route::get('/addSkillsFramework', function () {
+    return view('skillsFramework.addSkillsFramework');
+});
+Route::get('/editSkillsLevel', function () {
+    return view('skillsFramework.editSkillsLevel');
+});
+Route::get('/editSkillsFramework', function () {
+    return view('skillsFramework.editSkillsFramework');
+});
 
 
 

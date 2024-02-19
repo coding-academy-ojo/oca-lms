@@ -1,23 +1,26 @@
 @extends('layouts.app')
 @section('title')
-Create Topic
+Profile
 @endsection
+
 @section('content')
-{{-- =========================================================== --}}
-{{-- =================== Breadcrumb Section ==================== --}}
-{{-- =========================================================== --}}
-
 @include('layouts.innerNav')
-
+<section class="inner-bred">
+    <div class="container">
+        <ul class="thm-breadcrumb">
+            <li><a href="">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
+            <li><a href="">Skills Framework</a></li>
+        </ul>
+    </div>
+</section>
 
 {{-- =========================================================== --}}
 {{-- =================== Breadcrumb Section ==================== --}}
 {{-- =========================================================== --}}
 
-
-<div class="innerPage   mt-3">
+<div class="innerPage  mt-3">
     <div class="container">
-        <div class="addpro">
+    <div class="addpro">
             <h1 class="text-center mb-4">Create New Topic </h1>
             <form>
                 <!-- Title -->
@@ -39,25 +42,7 @@ Create Topic
 
 
         </div>
-
-
-
-
     </div>
 </div>
-
-<script>
-    document.addEventListener('input', function(e) {
-        if (e.target.tagName.toLowerCase() === 'textarea' && e.target.classList.contains('auto-resize')) {
-            autoResizeTextarea(e.target);
-        }
-    });
-
-    function autoResizeTextarea(textarea) {
-        textarea.style.height = 'auto';
-        textarea.style.height = (textarea.scrollHeight + 2) + 'px'; // 2px offset to prevent scrollbar flickering
-    }
-</script>
-
 
 @endsection
