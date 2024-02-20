@@ -17,7 +17,7 @@ class CreateTopicsTable extends Migration
             $table->id();
             $table->string('topic_name');
             $table->unsignedBigInteger('technology_id');
-            $table->foreign('technology_id')->references('id')->on('technologies')->onDelete('cascade');
+            $table->foreign('technology_id')->references('id')->on('technologies')->onDelete('cascade');    
             $table->timestamps();
             $table->softDeletes();
         });

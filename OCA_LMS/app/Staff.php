@@ -3,12 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Staff extends Model
+class Staff extends Authenticatable
 {
-    
+    use Notifiable;
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
+    protected $table = 'staff';
        // Staff belongs to many Academies
        public function academies() {
         return $this->belongsToMany(Academy::class, 'academy_staff');
@@ -17,5 +20,10 @@ class Staff extends Model
     // Staff belongs to many Cohorts
     public function cohorts() {
         return $this->belongsToMany(Cohort::class, 'staff_cohort');
+    }
+
+    public function getAuthPassword()
+    {
+        return $this->staff_password;
     }
 }
