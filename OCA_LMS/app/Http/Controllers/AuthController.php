@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\User;
+use App\Staff;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\hash;
 
 
 class AuthController extends Controller
@@ -28,37 +27,39 @@ class AuthController extends Controller
                 return '/Academeies';
             case 'trainer':
                 return '/Academeies';
-            case 'trainee':
-                return '/Academeies';
+    
             default:
                 return '/';
         }
     }
 // Handle the login attempt
-    public function login(Request $request)
-    {
-        // Validation rules
-        $request->validate([
-            'email' => 'required|email|exists:users,email',
-            'password' => 'required',
-        ]);
+  
+public function login(Request $request)
+{
+    $request->validate([
+        'staff_email' => 'required|email|exists:staff,staff_email',
+        'password' => 'required',
+    ]);
 
-        // Attempt to log in the user
-        $credentials = $request->only('email', 'password');
+    $credentials = [
+        'staff_email' => $request->input('staff_email'),
+        'password' => $request->input('password'),
+    ];
 
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
+    // Use the 'staff' guard to attempt the login
+    if (Auth::guard('staff')->attempt($credentials)) {
+        $staff = Auth::guard('staff')->user();
 
-            // Redirect based on the user's role
-            $redirectPath = $this->redirectToRoleDashboard($user->role);
+        $redirectPath = $this->redirectToRoleDashboard($staff->role);
 
-            return redirect()->intended($redirectPath)->with('success', 'Welcome ' . $user->name);
-        } else {
-            return redirect()->back()
+        return redirect()->intended($redirectPath)->with('success', 'Welcome ' . $staff->staff_name);
+    } else {
+        return redirect()->back()
             ->withErrors(['password' => 'The provided credentials do not match our records.'])
             ->withInput($request->except('password'));
-        }
     }
+}
+
 
     
 
