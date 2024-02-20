@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Assignment extends Model
 {
-    protected $fillable = [
-        'name', 'due_date', 'attached_file','topic_id'
-    ];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+
 
     public function topic()
     {
         return $this->belongsTo(Topic::class);
     }
+
 
     // Relationship with AssignmentSubmissions
     public function assignmentSubmissions()
@@ -32,6 +32,14 @@ class Assignment extends Model
             'id',
             'id'
         );
+    }
+
+    public function student() {
+        return $this->belongsToMany(Student::class, 'assignment_student');
+    }
+
+    public function cohort() {
+        return $this->belongsTo(Cohort::class);
     }
 
     // Add any additional relations you need

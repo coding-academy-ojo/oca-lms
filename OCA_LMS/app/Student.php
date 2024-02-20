@@ -21,4 +21,8 @@ class Student extends Model
     public function cohort() {
         return $this->belongsTo(Cohort::class);
     }
+
+    public function assignment() {
+        return $this->belongsToMany(Assignment::class, 'assignment_student');
+    }
 }

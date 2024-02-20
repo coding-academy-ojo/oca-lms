@@ -15,14 +15,20 @@ class CreateAssignmentsTable extends Migration
     {
         Schema::create('assignments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->date('due_date');
-            $table->string('attached_file');
+            $table->string('assignment_name');
+            $table->text('assignment_description')->nullable();
+            $table->enum('assignment_level', ['easy', 'medium ', 'advance ']);
+            $table->date('assignment_due_date');
+            $table->string('assignment_attached_file')->nullable();
             $table->unsignedBigInteger('topic_id');
-            $table->foreign('topic_id')->references('id')->on('topics');
+            $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade');
+            $table->unsignedBigInteger('cohort_id');
+            $table->foreign('cohort_id')->references('id')->on('cohorts')->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
+
 
     /**
      * Reverse the migrations.
