@@ -18,8 +18,8 @@ class CreateAssignmentsTable extends Migration
             $table->string('name');
             $table->date('due_date');
             $table->string('attached_file');
-            $table->unsignedBigInteger('topic_id');
-            $table->foreign('topic_id')->references('id')->on('topics');
+            // $table->unsignedBigInteger('topic_id');
+            // $table->foreign('topic_id')->references('id')->on('topics');
             $table->timestamps();
         });
     }
