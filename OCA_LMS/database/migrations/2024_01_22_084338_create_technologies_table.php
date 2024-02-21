@@ -16,11 +16,11 @@ class CreateTechnologiesTable extends Migration
         Schema::create('technologies', function (Blueprint $table) {
             $table->id();
             $table->foreignId('technology_category_id')->constrained()->onDelete('cascade');
-            $table->string('name');
-            $table->text('description');
-            $table->text('resources');
-            $table->text('training_period');
-            $table->string('photo')->nullable();
+            $table->string('technologies_name');
+            $table->text('technologies_description');
+            $table->text('technologies_resources');
+            $table->text('technologies_trainingPeriod');
+            $table->string('technologies_photo')->nullable();
             $table->timestamps();
         });
     }

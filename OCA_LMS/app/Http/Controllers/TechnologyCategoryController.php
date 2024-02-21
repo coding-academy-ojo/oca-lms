@@ -14,7 +14,8 @@ class TechnologyCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = TechnologyCategory::all();
+        return view('technology.technologies', compact('categories'));
     }
 
     /**
@@ -44,9 +45,10 @@ class TechnologyCategoryController extends Controller
      * @param  \App\TechnologyCategory  $technologyCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(TechnologyCategory $technologyCategory)
+    public function show(TechnologyCategory $category)
     {
-        //
+        $technologies = $category->technologies;
+        return view('technology.Technology', compact('category', 'technologies'));
     }
 
     /**

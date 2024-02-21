@@ -5,6 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\SkillLevelController;
+use App\Http\Controllers\TechnologyCategoryController;
+use App\Http\Controllers\TechnologyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -136,9 +138,9 @@ Route::get('/topics', function () {
 Route::get('/createTopics', function () {
     return view('topics.createTopics');
 })->name('createTopics');
-Route::get('/editTopics', function () {
-    return view('topics.editTopics');
-})->name('editTopics');
+// Route::get('/editTopics', function () {
+//     return view('topics.editTopics');
+// })->name('editTopics');
 
 
 
@@ -192,6 +194,25 @@ Route::put('/skills/{id}/update', [SkillController::class, 'update'])->name('upd
 // Route::get('editSkillsLevel/{level}/edit', [SkillLevelController::class, 'edit'])->name('editSkillLevel');
 Route::get('editSkillsLevel/{skill}/edit', 'SkillLevelController@edit')->name('editSkillLevel');
 Route::put('/updateSkillLevel/{level}/update', 'SkillLevelController@update')->name('updateSkillLevel');
+
+
+
+
+
+Route::get('/categories', [TechnologyCategoryController::class, 'index'])->name('categories.index');
+
+// View technologies within a specific category
+Route::get('/categories/{category}', [TechnologyCategoryController::class, 'show'])->name('categories.show');
+
+
+// View technology details
+Route::get('/technologies/{technology}', [TechnologyController::class, 'show'])->name('technology.show');
+Route::get('/technologies/create/{category}', [TechnologyController::class, 'create'])->name('technology.create');
+Route::post('/technologies', [TechnologyController::class, 'store'])->name('technology.store');
+Route::get('/technology/{technology}', [TechnologyController::class, 'showInfo'])->name('technology.showInfo');
+
+Route::get('/technologies/{technology}/edit', [TechnologyController::class, 'edit'])->name('technology.edit');
+Route::put('/technologies/{technology}/update', [TechnologyController::class, 'update'])->name('technology.update');
 
 
 
