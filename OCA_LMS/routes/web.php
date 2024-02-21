@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssignmentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassroomController;
@@ -91,16 +92,13 @@ Route::get('/edit-material', function () {
 })->name('edit-material');
 
 Route::get('/create_assignment', function () {
-    return view('Pages/create_assignment');
+    return view('Assignment/create_assignment');
 })->name('create_assignment');
 
 Route::get('/edit_assignment', function () {
     return view('Pages/edit_assignment');
 })->name('edit_assignment');
 
-Route::get('/assignment', function () {
-    return view('Pages/view_assignment');
-})->name('assignment');
 
 Route::get('/submit_assignment', function () {
     return view('Pages/submit_assignment');
@@ -113,6 +111,22 @@ Route::get('/view_material', function () {
 Route::get('/assignment/allfeedback', function () {
     return view('Pages/allAssignmentfeddback');
 })->name('allAssignmentfeddback');
+
+Route::get('/Assignments', [AssignmentController::class, 'index'])->name('assignments');
+Route::get('/Assignment/create', [AssignmentController::class ,'create'])->name('assignment.create');
+Route::post('/asssignment/store', [AssignmentController::class ,'store'])->name('assignment.store');
+Route::get('/assignments/{assignment}', [AssignmentController::class ,'show'])->name('assignment.show');
+Route::get('/assignment/{assignment}/edit', [AssignmentController::class ,'edit'])->name('assignment.edit');
+Route::put('/assignment/{assignment}', [AssignmentController::class ,'update'])->name('assignment.update');
+
+
+
+
+
+
+
+
+
 
 ///////////////////////////////////
 // ayman

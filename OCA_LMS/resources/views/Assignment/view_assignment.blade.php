@@ -26,22 +26,24 @@
     <div class="container">
         <div class="m-auto col-8" >
             <div class="my-5">
-                <a href="{{ route('create_assignment') }}" class="btn btn-primary m-auto"
+                <a href="{{ route('assignment.create') }}" class="btn btn-primary m-auto"
                     style="width: 90px; height:50px">Create</a>
             </div>
             <div class="assignment-container">
+                @foreach ($assignments as $assignment)
+                <a class="dropdown-item" href="{{ route('assignment.edit', $assignment->id) }}">Edit</a>
                 <div class="d-flex justify-content-between border-bottom border-light border-1 task"
                     style="height: 50px; cursor: pointer;" onclick="toggleassignmentDetails(this)">
                     <div class="d-flex">
                         <div class="icon m-2">
                             <span class="material-symbols-outlined">assignment</span>
                         </div>
-                        <div class="text m-2 pt-1">Crete database</div>
+                        <div class="text m-2 pt-1">{{ $assignment->assignment_name}}</div>
                     </div>
                     <div class="clickable-icon" data-bs-toggle="dropdown" data-target="#optionsModal">
                         <span class="material-symbols-outlined mt-2 me-2">more_vert</span>
                         <ul class="dropdown-menu dropdown-menu-end rounded-2">
-                            <li><a class="dropdown-item" href="{{ route('edit_assignment') }}">Edit</a></li>
+                            <li><a class="dropdown-item" href="{{ route('assignment.edit', $assignment->id) }}">Edit</a></li>
                             <li>
                                 <form action="" method="">
                                     @csrf
@@ -53,19 +55,14 @@
                     </div>
                 </div>
                 <div class="assignment-details border border-top-0 border-light pt-3 px-3" style="display: none;">
-                    Placeholder content for this accordion, which is intended to demonstrate the
-                    <code>.accordion-flush</code>
-                    class. This is the second item's accordion body. Let's imagine this being filled with some actual
-                    content.
-                    Placeholder content for this accordion, which is intended to demonstrate the
-                    <code>.accordion-flush</code>
-                    class. This is the second item's accordion body. Let's imagine this being filled with some actual
-                    content.
+                    {{ $assignment->assignment_description }}
                     <p class="border-top border-light mt-3 pt-3"><a
                             class="link-offset-2 link-underline link-underline-opacity-0"
-                            href="{{ route('submit_assignment') }}">View assignment</a></p>
+                            href="{{ route('assignment.show', $assignment->id) }}">View assignment</a></p>
                 </div>
-                <div class="d-flex justify-content-between border-bottom border-light border-1 task"
+                @endforeach
+
+                {{-- <div class="d-flex justify-content-between border-bottom border-light border-1 task"
                     style="height: 50px; cursor: pointer;" onclick="toggleassignmentDetails(this)">
                     <div class="d-flex">
                         <div class="icon m-2">
@@ -99,8 +96,8 @@
                     <p class="border-top border-light mt-3 pt-3"><a
                             class="link-offset-2 link-underline link-underline-opacity-0"
                             href="{{ route('submit_assignment') }}">View assignment</a></p>
-                </div>
-                <div class="d-flex justify-content-between border-bottom border-light border-1 task"
+                </div> --}}
+                {{-- <div class="d-flex justify-content-between border-bottom border-light border-1 task"
                     style="height: 50px; cursor: pointer;" onclick="toggleassignmentDetails(this)">
                     <div class="d-flex">
                         <div class="icon m-2">
@@ -134,7 +131,7 @@
                     <p class="border-top border-light mt-3 pt-3"><a
                             class="link-offset-2 link-underline link-underline-opacity-0"
                             href="{{ route('submit_assignment') }}">View assignment</a></p>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

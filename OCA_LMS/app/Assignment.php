@@ -42,5 +42,6 @@ class Assignment extends Model
         return $this->belongsTo(Cohort::class);
     }
 
+
     // Add any additional relations you need
 }

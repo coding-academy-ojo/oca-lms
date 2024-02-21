@@ -17,10 +17,10 @@ Submit Assignment
     </section>
     <div class="contanier">
         <div class="col-10 m-auto">
-        <h2 class="col-12 m-auto">Create Database</h2>
-        <div class="col-12 m-auto mt-3">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</div>
+        <h2 class="col-12 m-auto">{{ $assignment->assignment_name }}</h2>
+        <div class="col-12 m-auto mt-3">{{ $assignment->assignment_description}}</div>
             <div class="mt-3">
-              <b>Deadline: 12/Feb/2024</b> 
+              <b>Deadline: {{ $assignment->assignment_due_date }}</b> 
             </div>
         <form method="" action="" enctype="multipart/form-data" class="needs-validation"
         novalidate>
