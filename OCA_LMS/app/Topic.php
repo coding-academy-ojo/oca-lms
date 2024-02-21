@@ -6,18 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Topic extends Model
 {
-    protected $fillable = [
-        'name', 'description', 'photo', 'classroom_id'
-    ];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    public function materials()
-    {
-        return $this->hasMany('App\Material', 'topic_id');
-    }
 
     public function assignments()
     {
         return $this->hasMany('App\Assignment', 'topic_id');
+    }
+
+    public function technology()
+    {
+        return $this->belongsTo(Technology::class);
     }
 
     // public function projects()

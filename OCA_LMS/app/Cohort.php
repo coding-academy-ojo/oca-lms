@@ -22,4 +22,14 @@ class Cohort extends Model
     public function staff() {
         return $this->belongsToMany(Staff::class, 'staff_cohort');
     }
+
+    public function assignment()
+    {
+        return $this->hasMany(Assignment::class);
+    }
+
+    public function projects()
+    {
+        return $this->hasMany('App\Project', 'cohort_id');
+    }
 }

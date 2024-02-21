@@ -19,7 +19,6 @@ class CreateSkillLevelsTable extends Migration
             $table->unsignedBigInteger('level_id');
             $table->text('description');
             $table->timestamps();
-
             $table->foreign('skill_id')->references('id')->on('skills')->onDelete('cascade');
             $table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade');
             $table->unique(['skill_id', 'level_id']);

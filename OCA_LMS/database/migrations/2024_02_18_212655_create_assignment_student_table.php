@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjectSubmissionsTable extends Migration
+class CreateAssignmentStudentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,14 @@ class CreateProjectSubmissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_submissions', function (Blueprint $table) {
+        Schema::create('assignment_student', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('assignment_id');
             $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('project_id');
-            $table->string('submission_link');
             $table->timestamps();
-
+            $table->foreign('assignment_id')->references('id')->on('assignments')->onDelete('cascade');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
-            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
         });
-
     }
 
     /**
@@ -33,6 +30,6 @@ class CreateProjectSubmissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_submissions');
+        Schema::dropIfExists('assignment_student');
     }
 }
