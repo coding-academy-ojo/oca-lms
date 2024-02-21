@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Skill;
+use App\SkillLevel;
 use Illuminate\Http\Request;
 
 class SkillController extends Controller
@@ -14,7 +15,13 @@ class SkillController extends Controller
      */
     public function index()
     {
-        //
+        // Fetch skills
+        $skills = Skill::all();
+
+        // Fetch skill levels
+        $skillLevels = SkillLevel::all();
+
+        return view('skillsFramework.skillsFramework', compact('skills', 'skillLevels'));
     }
 
     /**
@@ -24,7 +31,7 @@ class SkillController extends Controller
      */
     public function create()
     {
-        //
+        return view('skillsFramework.addSkillsFramework');
     }
 
     /**
@@ -35,7 +42,16 @@ class SkillController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        // Create Skill
+        Skill::create([
+            'skills_name' => $request->name,
+        ]);
+
+        return redirect()->route('skillsFramework')->with('success', 'Skill Framework created successfully!');
     }
 
     /**
@@ -55,9 +71,13 @@ class SkillController extends Controller
      * @param  \App\Skill  $skill
      * @return \Illuminate\Http\Response
      */
-    public function edit(Skill $skill)
+    public function edit($id)
     {
-        //
+
+
+        $skill = Skill::findOrFail($id);
+        // dd($skill);
+        return view('skillsFramework.editSkillsFramework', compact('skill'));
     }
 
     /**
@@ -67,9 +87,23 @@ class SkillController extends Controller
      * @param  \App\Skill  $skill
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Skill $skill)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'skills_name' => 'required|string|max:255', 
+        ]);
+
+        // Find the skill by ID
+        $skill = Skill::findOrFail($id);
+
+        // Update the skill name
+        $skill->skills_name = $request->input('skills_name'); // Assuming 'skills_name' is the input field name
+
+        // Save the updated skill
+        $skill->save();
+
+        // Redirect back to the edit page with a success message
+        return redirect()->route('skillsFramework', ['id' => $skill->id])->with('success', 'Skill updated successfully.');
     }
 
     /**
@@ -82,4 +116,6 @@ class SkillController extends Controller
     {
         //
     }
+
+    
 }

@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(SkillsSeeder::class);
         $this->call(LevelsSeeder::class);
+        $this->call(SkillLevelsSeeder::class);
 
         // $this->call(UserSeeder::class);
         $this->command->info('Database seeded successfully!');

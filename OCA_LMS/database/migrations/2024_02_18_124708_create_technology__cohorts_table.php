@@ -21,8 +21,8 @@ class CreateTechnologyCohortsTable extends Migration
             $table->text('end_date');
             $table->timestamps();
 
-            $table->foreign('technology_id')->references('id')->on('technologies')->onDelete('cascade');
-            $table->foreign('cohort_id')->references('id')->on('cohorts')->onDelete('cascade');
+            // $table->foreign('technology_id')->references('id')->on('technologies')->onDelete('cascade');
+            // $table->foreign('cohort_id')->references('id')->on('cohorts')->onDelete('cascade');
         });
     }
 

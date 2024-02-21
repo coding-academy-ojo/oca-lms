@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\SkillController;
+use App\Http\Controllers\SkillLevelController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -152,9 +155,9 @@ Route::get('/editProfile', function () {
 Route::get('/skillsFramework', function () {
     return view('skillsFramework.skillsFramework');
 });
-Route::get('/addSkillsLevel', function () {
-    return view('skillsFramework.addSkillsLevel');
-});
+// Route::get('/addSkillsLevel', function () {
+//     return view('skillsFramework.addSkillsLevel');
+// });
 Route::get('/addSkillsFramework', function () {
     return view('skillsFramework.addSkillsFramework');
 });
@@ -164,6 +167,33 @@ Route::get('/editSkillsLevel', function () {
 Route::get('/editSkillsFramework', function () {
     return view('skillsFramework.editSkillsFramework');
 });
+
+
+
+
+// View skills
+Route::get('/skills', [SkillController::class, 'index'])->name('skillsFramework');
+
+// Add skill - Show form
+Route::get('/skills/add', [SkillController::class, 'create'])->name('createskillsFramework');
+
+// Store new skill
+Route::post('/skills/add', [SkillController::class, 'store'])->name('addskillsFramework');
+
+
+// Edit skill - Show form
+Route::get('/skills/{skill}/edit', [SkillController::class, 'edit'])->name('editSkill');
+
+// Update skill
+Route::put('/skills/{id}/update', [SkillController::class, 'update'])->name('updateSkill');
+
+
+
+// Route::get('editSkillsLevel/{level}/edit', [SkillLevelController::class, 'edit'])->name('editSkillLevel');
+Route::get('editSkillsLevel/{skill}/edit', 'SkillLevelController@edit')->name('editSkillLevel');
+Route::put('/updateSkillLevel/{level}/update', 'SkillLevelController@update')->name('updateSkillLevel');
+
+
 
 
 

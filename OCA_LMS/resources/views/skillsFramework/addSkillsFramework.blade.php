@@ -17,30 +17,21 @@ Profile
 {{-- =========================================================== --}}
 {{-- =================== Breadcrumb Section ==================== --}}
 {{-- =========================================================== --}}
-
-<div class="innerPage  mt-3">
+<div class="innerPage mt-3">
     <div class="container">
-    <div class="addpro">
-            <h1 class="text-center mb-4">Create New Topic </h1>
-            <form>
+        <div class="addpro">
+            <h1 class="text-center mb-4">Create New Skill Framework </h1>
+            <form method="post" action="{{ route('addskillsFramework') }}">
+                @csrf
                 <!-- Title -->
                 <div class="mb-4">
                     <label for="title" class="form-label">Title <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control rounded-pill" id="title" name="title" placeholder="Enter the title" required>
-                </div>
-                
-                <!-- Context -->
-                <div class="mb-3">
-                    <label for="image" class="form-label">Upload Image</label>
-                    <input type="file" class="form-control" id="image" name="image">
+                    <input type="text" class="form-control rounded-pill" id="name" name="name" placeholder="Enter the title" required>
                 </div>
 
                 <!-- Submit Button -->
                 <button type="submit" class="btn btn-primary rounded-pill">Submit</button>
             </form>
-
-
-
         </div>
     </div>
 </div>

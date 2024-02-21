@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class Level extends Model
 {
 
-    protected $fillable = ['name'];
+    protected $fillable = ['levels_name'];
 
     /**
      * Get the skill_levels for the level.

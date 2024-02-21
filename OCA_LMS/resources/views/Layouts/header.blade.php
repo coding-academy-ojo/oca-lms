@@ -27,11 +27,15 @@
                     <a class="nav-link" href="{{route('addTrainee')}}">Add Trainee </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{route('skillsFramework')}}">Skills Framework</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{route('profile')}}">Profile</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('logout') }}">Logout</a>
                 </li>
+                
             </ul>
 
         </div>

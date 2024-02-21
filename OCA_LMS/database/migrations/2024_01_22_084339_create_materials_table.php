@@ -19,7 +19,7 @@ class CreateMaterialsTable extends Migration
             $table->string('attached_file');
             $table->string('resources');
             $table->unsignedBigInteger('topic_id');
-            $table->foreign('topic_id')->references('id')->on('topics');
+            // $table->foreign('topic_id')->references('id')->on('topics');
             $table->timestamps();
         });
     }

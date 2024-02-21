@@ -15,6 +15,7 @@ class CreateTechnologiesTable extends Migration
     {
         Schema::create('technologies', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('technology_category_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->text('description');
             $table->text('resources');
