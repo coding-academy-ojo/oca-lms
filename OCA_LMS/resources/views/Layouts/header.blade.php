@@ -14,15 +14,17 @@
                     <a class="nav-link " aria-current="page" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{route('Academeies')}}">Academeies</a>
+                    <a class="nav-link active" href="{{route('academies')}}">Academies</a>
                 </li>
-
-                <li class="nav-item">
-                    <button class="nav-link" data-bs-toggle="offcanvas" data-bs-target="#createAcademyOffcanvas" aria-controls="createAcademyOffcanvas">
-                        Add Academy
-                    </button>
-                </li>
-
+                @auth('staff')
+                @if(Auth::guard('staff')->user()->role === 'super_manager')
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="offcanvas" data-bs-target="#createAcademyOffcanvas" aria-controls="createAcademyOffcanvas">
+                            Add Academy
+                        </button>
+                    </li>
+                @endif
+                @endauth
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('addTrainee')}}">Add Trainee </a>
                 </li>
@@ -47,28 +49,3 @@
 </div>
 
 
-<!-- Offcanvas Component for Create Academy -->
-<div class="offcanvas offcanvas-end" id="createAcademyOffcanvas" aria-labelledby="createAcademyOffcanvasLabel">
-    <div class="offcanvas-header">
-        <h5 id="createAcademyOffcanvasLabel">Create Academy</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        <form>
-            <div class="mb-3">
-                <label for="academyName" class="form-label">Academy Name</label>
-                <input type="text" class="form-control" id="academyName" placeholder="Enter academy name">
-            </div>
-            <div class="mb-3">
-                <label for="academyManager" class="form-label">Academy Manager</label>
-                <input type="text" class="form-control" id="academyManager" placeholder="Enter academy manager's name">
-            </div>
-            <div class="mb-3">
-                <label for="academyDescription" class="form-label">Description</label>
-                <textarea class="form-control" id="academyDescription" rows="3" placeholder="Enter academy description"></textarea>
-            </div>
-            <!-- Add any additional fields as needed -->
-            <button type="submit" class="btn btn-primary">Create</button>
-        </form>
-    </div>
-</div>

@@ -9,7 +9,7 @@ Edit Cohort
 
 <nav style="padding: 50px 50px 0;" aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{route('academyview')}}">Cohorts</a></li>
+        <li class="breadcrumb-item"><a href="#">Cohorts</a></li>
         <li class="breadcrumb-item active" aria-current="page">Edit Cohort</li>
     </ol>
 </nav>
