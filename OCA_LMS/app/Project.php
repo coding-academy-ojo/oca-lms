@@ -10,9 +10,9 @@ class Project extends Model
         'name', 'description', 'start_date', 'delivery_date', 'cohort_id', 'staff_id'
     ];
 
-    public function classroom()
+    public function cohort()
     {
-        return $this->belongsTo('App\Classroom');
+        return $this->belongsTo('App\Cohort');
     }
 
     public function skills()
