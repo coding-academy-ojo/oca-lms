@@ -12,11 +12,18 @@ class Staff extends Authenticatable
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $table = 'staff';
-       // Staff belongs to many Academies
-       public function academies() {
-        return $this->belongsToMany(Academy::class, 'academy_staff');
-    }
+/**
+ * The academies that belong to the staff.
+ *
+ * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+ */
+public function academies() {
+    return $this->belongsToMany(Academy::class, 'academy_staff');
+}
 
+/**
+ * @method static \Illuminate\Database\Eloquent\Relations\BelongsToMany academies()
+ */
     // Staff belongs to many Cohorts
     public function cohorts() {
         return $this->belongsToMany(Cohort::class, 'staff_cohort');

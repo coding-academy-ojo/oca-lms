@@ -8,6 +8,8 @@ use App\Http\Controllers\SkillLevelController;
 use App\Http\Controllers\TechnologyCategoryController;
 use App\Http\Controllers\TechnologyController;
 use App\Http\Controllers\TechnologyCohortController;
+use App\Http\Controllers\AcademyController;
+use App\Http\Controllers\CohortController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,10 +33,14 @@ Route::get('/welcome', function () {
 Route::get('/home', function () {
     return view('home');
 });
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login'); 
+
+// staff login
+Route::get('/login',  [AuthController::class, 'showLoginForm'])->name('login'); 
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-
+// students login
+Route::get('/login/student', 'AuthController@showStudentLoginForm')->name('student.login.form');
+Route::post('/login/student', 'AuthController@studentLogin')->name('student.login');
 
 // classrome resource route
 
@@ -51,19 +57,29 @@ Route::get('/announcements', function () {
     return view('Pages/announcements');
 })->name('announcements');
 
-// Academeies
-Route::get('/Academeies', function () {
-    return view('supermaneger.index');
-})->name('Academeies');
-Route::get('/Academeies/edit', function () {
-    return view('supermaneger.editacademy');
-})->name('editacademy');
-Route::get('/Academeies/view', function () {
-    return view('supermaneger.academy');
-})->name('academyview');
-Route::get('/academeies/edit-cohort', function () {
-    return view('supermaneger.editcohort');
-})->name('cohortedit');
+
+
+
+
+//START Academeies  gruop routes ///////
+Route::get('/academies', [AcademyController::class, 'index'])->name('academies');
+Route::get('/academies/{academy}/edit', [AcademyController::class, 'edit'])->name('editacademy');
+Route::put('/academies/{academy}', [AcademyController::class, 'update'])->name('academies.update');
+Route::post('/academies', [AcademyController::class, 'store'])->name('academies.store');
+Route::get('/academies/{academy}', [AcademyController::class, 'show'])->name('academies.show');
+//END  Academeies  gruop routes ///////
+
+
+// start cohort
+
+Route::get('/cohorts/{academyId?}', [CohortController::class, 'index'])->name('academyview');
+Route::get('/cohorts/{cohort}/edit', [CohortController::class, 'edit'])->name('cohortedit');
+
+
+
+
+
+
 
 // attendance
 Route::get('/attendance', function () {

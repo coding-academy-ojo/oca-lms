@@ -1,12 +1,16 @@
 <?php
 
+
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Student extends Model
+class Student extends Authenticatable
 {
-    protected $guarded = ['id', 'created_at', 'updated_at'];
+    use Notifiable;
 
     public function absences() {
         return $this->hasMany(Absence::class);
