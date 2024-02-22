@@ -21,7 +21,7 @@ class Skill extends Model
     public function levels()
    {
     return $this->belongsToMany(Level::class, 'project_skills')->withPivot('level_id');
-   } 
+   }
 
     /**
      * Get the project_skills for the skill.
