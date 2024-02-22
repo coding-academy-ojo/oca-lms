@@ -15,15 +15,15 @@ class CreateProjectSubmissionsTable extends Migration
     {
         Schema::create('project_submissions', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('trainee_id');
+            $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('project_id');
             $table->string('submission_link');
             $table->timestamps();
 
-            // $table->foreign('trainee_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
         });
-        
+
     }
 
     /**

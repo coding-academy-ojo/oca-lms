@@ -25,4 +25,16 @@ class Student extends Model
     public function assignment() {
         return $this->belongsToMany(Assignment::class, 'assignment_student');
     }
+
+    public function projectSubmissions()
+    {
+        return $this->hasMany('App\ProjectSubmission', 'student_id');
+    }
+
+    public function projectFeedback()
+    {
+        return $this->hasMany('App\ProjectFeedback', 'student_id');
+    }
+
+
 }

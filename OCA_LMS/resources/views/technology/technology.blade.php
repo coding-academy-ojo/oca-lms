@@ -21,7 +21,46 @@ Topics
 {{-- =========================================================== --}}
 {{-- =================== Breadcrumb Section ==================== --}}
 {{-- =========================================================== --}}
-<div class="innerPage   mt-3">
+<div class="innerPage mt-3">
+    <div class="container">
+        <div class="col-md-2 ms-auto mb-3">
+            <a href="{{ route('technology.create', ['category' => $category->id]) }}">Create technology</a>
+        </div>
+        <div class="projectCard">
+            <div class="row">
+                @foreach ($technologies as $technology)
+                <div class="col-sm-3 mb-3">
+                    <div class="card">
+                        <a href="{{ route('technology.showInfo', ['technology' => $technology]) }}">
+                            <img src="{{ asset('assets/img/' . $technology->technologies_photo) }}" alt="">
+                        </a>
+                        <div class="innerCard">
+                            <a href="{{ route('technology.showInfo', ['technology' => $technology]) }}">
+                                <h4 class="text-center">{{ $technology->technologies_name }}</h4>
+                            </a>
+                            <!-- <form method="POST" action="{{ route('technology.addToCohort', ['technology' => $technology]) }}">
+                                @csrf
+                                <button type="submit">Add to Cohort</button>
+                            </form> -->
+                            <form method="POST" action="{{ route('technology.addToCohort', ['technology' => $technology]) }}">
+                                @csrf
+                                <input type="hidden" name="cohort_id" value="{{ $technology->technology_category_id }}">
+                                <button type="submit">Add to Cohort</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- <div class="innerPage   mt-3">
     <div class="container">
 
         <div class="col-md-2 ms-auto mb-3">
@@ -40,10 +79,6 @@ Topics
                             <a href="{{ route('technology.showInfo', ['technology' => $technology]) }}">
                                 <h4 class="text-center">{{ $technology->technologies_name }}</h4>
                             </a>
-                            <!-- <div class="topicBt">
-                                <a href="{{ route('technology.showInfo', ['technology' => $technology]) }}">view</a>
-                                <a href="#">Delete</a>
-                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -51,5 +86,5 @@ Topics
             </div>
         </div>
     </div>
-</div>
+</div> -->
 @endsection

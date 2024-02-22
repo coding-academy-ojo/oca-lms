@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Technology_Cohort extends Model
 {
-    protected $fillable = ['name'];
-    
-    public function technologies()
-    {
-        return $this->hasMany(Technology::class);
-    }
+    protected $fillable = [
+        'technology_id',
+        'cohort_id',
+    ];
+
+  
 }

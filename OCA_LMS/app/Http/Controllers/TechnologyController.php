@@ -151,6 +151,9 @@ class TechnologyController extends Controller
     public function destroy(Technology $technology)
     {
         $technology->delete();
-        return redirect()->route('technologies.index')->with('success', 'Technology deleted successfully');
+        return redirect()->route('categories.show', ['category' =>$technology->technology_category_id]);
+        // return redirect()->route('categories.show', ['category' => $validatedData['technology_category_id']]);
+
+
     }
 }

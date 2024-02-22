@@ -28,11 +28,11 @@ Topics
                 @foreach ($categories as $category)
                 <div class="col-sm-4 mb-3">
                     <div class="card">
-                        <a href="{{ route('categories.show', $category) }}">
+                        <a href="{{ route('rodmap.show', $category) }}">
                             <img src="{{ asset('assets/img/project.jpg') }}" alt="">
                         </a>
                         <div class="innerCard">
-                            <a href="{{ route('categories.show', $category) }}">
+                            <a href="{{ route('rodmap.show', $category) }}">
                                 <h4 class="text-center">{{ $category->Categories_name }}</h4>
                             </a>
                         </div>

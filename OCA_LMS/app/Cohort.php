@@ -27,4 +27,14 @@ class Cohort extends Model
     {
         return $this->hasMany(Assignment::class);
     }
+
+    public function projects()
+    {
+        return $this->hasMany('App\Project', 'cohort_id');
+    }
+
+    public function cohorts()
+    {
+        return $this->belongsToMany(Cohort::class, 'technology_cohort')->withPivot('start_date', 'end_date');
+    }
 }

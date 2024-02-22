@@ -14,9 +14,20 @@ class TechnologyCategoryController extends Controller
      */
     public function index()
     {
+       
         $categories = TechnologyCategory::all();
         return view('technology.technologies', compact('categories'));
     }
+
+
+    public function indexCohort()
+    {
+       
+        $categories = TechnologyCategory::all();
+        return view('technology.rodmap', compact('categories'));
+    }
+
+ 
 
     /**
      * Show the form for creating a new resource.
@@ -47,6 +58,7 @@ class TechnologyCategoryController extends Controller
      */
     public function show(TechnologyCategory $category)
     {
+        // dd(1);
         $technologies = $category->technologies;
         return view('technology.Technology', compact('category', 'technologies'));
     }

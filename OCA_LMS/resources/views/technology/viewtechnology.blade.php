@@ -32,6 +32,7 @@ Edit Topic
                             @csrf
                             @method('DELETE')
                             <button type="submit">Delete</button>
+                            <input type="submit" value="Delete">
                         </form>
                     </div>
                     @if ($technology->technologies_photo)
