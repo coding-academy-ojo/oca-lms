@@ -83,8 +83,10 @@ Route::get('/academies/show/view-cohort', [CohortController::class, 'cohortView'
 
 
 
-
-
+// trainee progress details
+Route::get('/cohort/progress-details', function () {
+    return view('trainer.trainee-progress-details');
+})->name('trainee-progress-details');
 // attendance
 Route::get('/attendance', function () {
     return view('supermaneger.attendance');
