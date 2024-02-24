@@ -46,7 +46,7 @@
                         <form action="{{ route('assignment.destroy', $assignment->id) }}" method="post">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="border border-0 m-auto bg"
+                            <button type="submit" class="border border-0 m-auto bg-white"
                             onclick="return confirm('Are you sure you want to delete this assignment')">
                             <i class="fa-solid fa-trash" style="color: #FF7900;"></i>
                         </button>

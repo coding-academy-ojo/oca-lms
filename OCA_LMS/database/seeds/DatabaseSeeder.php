@@ -1,6 +1,7 @@
 <?php
 
 use App\Academy;
+use App\Assignment;
 use App\Cohort;
 use App\Student;
 use App\Technology;
@@ -25,6 +26,9 @@ class DatabaseSeeder extends Seeder
         $this->call(AcademyStaffTableSeeder::class,);
         $this->call(CohortsTableSeeder::class);
         $this->call(StudentsTableSeeder::class);
+        $this->call(TopicSeeder::class);
+        $this->call(AssignmentSeeder::class);
+
         $this->command->info('Database seeded successfully!');
 
     }
