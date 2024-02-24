@@ -36,7 +36,7 @@ Cohort 1
         <div class="col-lg-6 mb-4">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h4 class="mb-0 text-primary">Donor Information</h4>
+                    <h3 class="mb-0 text-primary">Donor Information</h3>
                     <div class="my-3">
                         <h5 class="card-title">Cohort 1</h5>
                         <p class="card-text">A brief description about the cohort and its objectives.</p>
@@ -53,7 +53,7 @@ Cohort 1
         <div class="col-lg-6 mb-4">
             <div class="card shadow-sm">
                 <div style="height: 380px" class="card-body">
-                    <h4 class="text-primary">Given Technologies</h4>
+                    <h3 class="text-primary">Students Attendance Report</h3>
                     <canvas id="totalSummaryChart"></canvas>
                 </div>
             </div>
@@ -64,7 +64,7 @@ Cohort 1
         <div class="col-12">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h4 class="text-primary">Technologies Overview</h3>
+                    <h3 class="text-primary">Technologies Overview</h3>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
