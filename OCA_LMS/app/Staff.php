@@ -22,6 +22,16 @@ class Staff extends Authenticatable
         return $this->belongsToMany(Cohort::class, 'staff_cohort');
     }
 
+    public function projectFeedback()
+    {
+        return $this->hasMany('App\ProjectFeedback', 'staff_id');
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class, 'staff_id');
+    }
+    
     public function getAuthPassword()
     {
         return $this->staff_password;

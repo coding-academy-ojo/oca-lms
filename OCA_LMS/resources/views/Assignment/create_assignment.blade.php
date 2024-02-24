@@ -187,26 +187,14 @@
                                                     Student</div>
                                                 <div class="dropdown-content" id="dropdownContent">
                                                     <label>
-                                                        <input class="form-check-input" type="checkbox" value="Option 3" onclick="selectAll()">All trainee
+                                                        <input class="form-check-input" type="checkbox"  name="students[]" value="" onclick="selectAll()">All students
                                                     </label>
+                                                    @foreach($students as $student)
                                                     <label>
-                                                        <input class="form-check-input" type="checkbox" value="Option 1"> Rawan
+                                                        <input class="form-check-input" type="checkbox"  name="students[]" value="{{ $student->id }}">{{ $student->en_first_name }} {{ $student->en_second_name }}  
                                                     </label>
-                                                    <label>
-                                                        <input class="form-check-input" type="checkbox" value="Option 2"> Reem
-                                                    </label>
-                                                    <label>
-                                                        <input class="form-check-input" type="checkbox" value="Option 3"> Rand
-                                                    </label>
-                                                    <label>
-                                                        <input class="form-check-input" type="checkbox" value="Option 3"> Rand
-                                                    </label>
-                                                    <label>
-                                                        <input class="form-check-input" type="checkbox" value="Option 3"> Rand
-                                                    </label>
-                                                    <label>
-                                                        <input class="form-check-input" type="checkbox" value="Option 3"> Rand
-                                                    </label>                    
+                                                @endforeach
+                             
                                                 </div>
                                             </div>
                                         </div>

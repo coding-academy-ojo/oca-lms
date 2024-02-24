@@ -1,5 +1,9 @@
 <?php
 
+use App\Academy;
+use App\Cohort;
+use App\Student;
+use App\Technology;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,13 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
-        // $this->call(UserSeeder::class);
         $this->call(SkillsSeeder::class);
         $this->call(LevelsSeeder::class);
         $this->call(StaffTableSeeder::class);
-
-        // $this->call(UserSeeder::class);
         $this->command->info('Database seeded successfully!');
 
     }

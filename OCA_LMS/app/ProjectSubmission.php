@@ -7,16 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 class ProjectSubmission extends Model
 {
     protected $fillable = [
-        'project_id', 'trainee_id', 'link', 'text_submission'
+        'project_id', 'student_id', 'link', 'text_submission'
     ];
 
-    public function trainee()
+    public function student()
     {
-        return $this->belongsTo(User::class, 'trainee_id');
+        return $this->belongsTo(Student::class, 'student_id');
     }
 
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    public function feedback()
+    {
+        return $this->hasMany(ProjectFeedback::class, 'submission_id');
     }
 }

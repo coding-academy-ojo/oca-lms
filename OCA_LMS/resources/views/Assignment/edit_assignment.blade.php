@@ -151,7 +151,7 @@ Edit Assignment
                                         <div class="form-group">
                                             <label class="my-2">Topics</label>
                                             <select class="form-select" id="class" name="topic" required>
-                                                <option value="">{{ $assignment->topic->topic_name}}</option>
+                                                <option value="{{ $assignment->topic_id}}">{{ $assignment->topic->topic_name}}</option>
                                                 @foreach($topics as $topic)
                                                 <option value="{{ $topic->id }}">{{ $topic->topic_name }} - {{ $topic->technology->name }}</option>
                                             @endforeach
@@ -173,7 +173,7 @@ Edit Assignment
                                         <div class="form-group">
                                             <label class="my-2">Level</label>
                                             <select class="form-select" id="class" name="level" required>
-                                                <option value="">{{ $assignment->assignment_level }}</option>
+                                                <option value="{{ $assignment->assignment_level }}">{{ $assignment->assignment_level }}</option>
                                                 <option value="easy">Easy</option>
                                                 <option value="medium">Medium</option>
                                                 <option value="advance">Advance</option>
@@ -184,7 +184,7 @@ Edit Assignment
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
                                             <label class="my-2">Assignment File</label>
-                                            <input type="file" class="form-control" name="assignment_file" required>
+                                            <input type="file" class="form-control" name="assignment_file" value="{{ $assignment->assignment_attached_file}}" required>
                                             <div class="invalid-feedback">This field is required</div>
                                         </div>
                                     </div>

@@ -31,4 +31,9 @@ class Level extends Model
     {
         return $this->hasMany(TraineeSkillsProgress::class);
     }
+
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class, 'project_skills')->withPivot('level_id');
+    }
 }

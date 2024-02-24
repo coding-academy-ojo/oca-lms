@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Assignment;
+use App\Assignment_Student;
+use App\Student;
 use App\Topic;
 use Illuminate\Http\Request;
 
@@ -15,9 +17,8 @@ class AssignmentController extends Controller
      */
     public function index()
     {
-        $assignments=Assignment::all(); 
-        return view('Assignment.view_assignment',compact('assignments'));
-
+        $assignments = Assignment::all();
+        return view('Assignment.view_assignment', compact('assignments'));
     }
 
     /**
@@ -27,8 +28,9 @@ class AssignmentController extends Controller
      */
     public function create()
     {
-        $topics=Topic::all();
-        return view('Assignment.create_assignment',compact('topics'));
+        $topics = Topic::all();
+        $students = Student::all();
+        return view('Assignment.create_assignment', compact('topics', 'students'));
     }
 
     /**
@@ -39,7 +41,7 @@ class AssignmentController extends Controller
      */
     public function store(Request $request)
     {
-        $assignment= new Assignment;
+        $assignment = new Assignment;
         $assignment->assignment_name = $request->input('name');
         $assignment->assignment_level = $request->input('level');
         $assignment->assignment_due_date = $request->input('due_date');
@@ -47,19 +49,28 @@ class AssignmentController extends Controller
         $assignment->topic_id = $request->input('topic');
         $assignment->cohort_id = "1";
         $assignment->assignment_description = $request->input('description');
+        if ($request->hasFile('assignment_file')) {
+            $file = $request->file('assignment_file');
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $file->move('assignments_files', $fileName);
+            $assignment->assignment_attached_file = $fileName;
+        }
+
         $assignment->save();
 
-        return redirect()->route('assignments')->with('success', 'Assignment create successfully');
+        // Store assignment-student relationships
+        $assignment = Assignment::findOrFail($assignment->id); // Assuming you want to retrieve the assignment by ID
 
-        // $request->validate([
-        //     'name' => 'required',
-        //     'detail' => 'required',
-        // ]);
-  
-        // Assignment::create($request->all());
+        if ($request->has('students')) {
+            $studentIds = $request->input('students');
 
- 
+            // Attach students to the assignment
+            $assignment->student()->attach($studentIds);
+        }
+
+        return redirect()->route('assignments')->with('success', 'Assignment created successfully');
     }
+
 
     /**
      * Display the specified resource.
@@ -82,9 +93,16 @@ class AssignmentController extends Controller
      */
     public function edit($id)
     {
-        $topics=Topic::all();
+        $topics = Topic::all();
+        $students = Student::all();
         $assignment = Assignment::find($id);
-        return view('Assignment.edit_assignment',compact('topics','assignment'));
+        // $selectedStudentIds = [];
+
+        // if ($assignment->students) {
+        //     $selectedStudentIds = $assignment->students->pluck('id')->toArray();
+        // }
+
+        return view('Assignment.edit_assignment', compact('topics', 'assignment', 'students'));
     }
 
     /**
@@ -96,29 +114,30 @@ class AssignmentController extends Controller
      */
     public function update(Request $request, Assignment $assignment)
     {
-        // $assignment->assignment_name = $request->input('name');
-        // $assignment->assignment_level = $request->input('level');
-        // $assignment->assignment_due_date = $request->input('due_date');
-        // $assignment->assignment_attached_file = $request->input('assignment_file');
-        // $assignment->topic_id = $request->input('topic');
-        // $assignment->cohort_id = "1";
-        // $assignment->assignment_description = $request->input('description');
-        // $assignment->update();
+        $assignment->assignment_name = $request->input('name');
+        $assignment->assignment_level = $request->input('level');
+        $assignment->assignment_due_date = $request->input('due_date');
+        $assignment->assignment_attached_file = $request->input('assignment_file');
+        $assignment->topic_id = $request->input('topic');
+        $assignment->cohort_id = "1";
+        $assignment->assignment_description = $request->input('description');
+        if ($request->hasFile('assignment_file')) {
+            $file = $request->file('assignment_file');
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $file->move('assignments_files', $fileName);
+            $assignment->assignment_attached_file = $fileName;
+        }
+        if ($request->has('students')) {
+            $studentIds = $request->input('students');
 
-        // return redirect()->route('assignments')->with('success', 'Assignment create successfully');
+            // Attach students to the assignment
+            $assignment->student()->attach($studentIds);
+        }
 
-        $request->validate([
-            'name' => 'required|string',
-            'level' => 'required|in:easy,medium,advance',
-            'due_date' => 'required|date',
-            // 'assignment_file' => 'nullable|mimes:pdf',
-            'topic' => 'required|exists:topics,id',
-            // 'description' => 'nullable|string',
-        ]);
-  
-        $assignment->update($request->all());
+        $assignment->update();
+
+
         return redirect()->route('assignments')->with('success', 'Assignment create successfully');
-
     }
 
     /**
@@ -128,9 +147,24 @@ class AssignmentController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function destroy(Assignment $assignment)
-{
-    //
-}
-   
+    public function destroy($id)
+    {
+        $assignment = Assignment::find($id);
+        $assignment->delete();
+        return redirect()->route('assignments')
+            ->with('success', 'assignment$assignment deleted successfully');
+    }
+
+    public function downloads($filename = null)
+    {
+        if ($filename === null) {
+            return redirect()->back()->with('error', 'File not specified.');
+        }
+        $path = public_path('assignments_files/' . $filename);
+
+        if (file_exists($path)) {
+            return response()->download($path);
+        }
+        return redirect()->back()->with('error', 'File not found.');
+    }
 }

@@ -4,6 +4,8 @@ use App\Http\Controllers\AssignmentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\TopicController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -111,13 +113,28 @@ Route::get('/view_material', function () {
 Route::get('/assignment/allfeedback', function () {
     return view('Pages/allAssignmentfeddback');
 })->name('allAssignmentfeddback');
-
+//Assignment Route
 Route::get('/Assignments', [AssignmentController::class, 'index'])->name('assignments');
 Route::get('/Assignment/create', [AssignmentController::class ,'create'])->name('assignment.create');
 Route::post('/asssignment/store', [AssignmentController::class ,'store'])->name('assignment.store');
 Route::get('/assignments/{assignment}', [AssignmentController::class ,'show'])->name('assignment.show');
 Route::get('/assignment/{assignment}/edit', [AssignmentController::class ,'edit'])->name('assignment.edit');
 Route::put('/assignment/{assignment}', [AssignmentController::class ,'update'])->name('assignment.update');
+Route::delete('/assignment/{assignment}', [AssignmentController::class ,'destroy'])->name('assignment.destroy');
+Route::get('/download/{filename}', [AssignmentController::class, 'downloads'])->name('download');
+
+
+
+//Topic route 
+Route::get('/Topic/create', [TopicController::class ,'create'])->name('topic.create');
+Route::post('/topic/store', [TopicController::class ,'store'])->name('topic.store');
+Route::get('/topic/{topic}/edit', [TopicController::class ,'edit'])->name('topic.edit');
+Route::put('/topic/{topic}', [TopicController::class ,'update'])->name('topic.update');
+Route::delete('/topic/{topic}', [TopicController::class ,'destroy'])->name('topic.destroy');
+
+
+
+
 
 
 
