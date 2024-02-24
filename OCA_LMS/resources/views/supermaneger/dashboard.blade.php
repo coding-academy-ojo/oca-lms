@@ -91,16 +91,16 @@
 
         <div class="dashboard-cards">
             <div class="dashboard-card">
-                <h3>Sum of Total Enrolled</h3>
+                <h3>Total Students Enrolled</h3>
                 <p>689</p>
             </div>
             <div class="dashboard-card">
-                <h3>Sum of Total Graduates</h3>
+                <h3>Total Students Graduates</h3>
                 <p>551</p>
             </div>
             <div class="dashboard-card">
-                <h3>Sum of Total in Employment</h3>
-                <p>419</p>
+                <h3>Number of Academies</h3>
+                <p>6</p>
             </div>
         </div>
         <div class="chart-row">

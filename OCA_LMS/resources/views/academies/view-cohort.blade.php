@@ -39,11 +39,11 @@ Cohort 1
                     <h3 class="mb-0 text-primary">Donor Information</h3>
                     <div class="my-3">
                         <h5 class="card-title">Cohort 1</h5>
-                        <p class="card-text">A brief description about the cohort and its objectives.</p>
+                        <p class="card-text">This cohort aims to empower participants through intensive training in web development, focusing on both front-end and back-end technologies. With a curriculum designed to foster practical skills and real-world problem-solving abilities, our goal is to prepare students for successful careers in the tech industry.</p>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">Start Date: <strong>05 May 2024</strong></li>
-                            <li class="list-group-item">End Date: <strong>05 May 2024</strong></li>
-                            <li class="list-group-item">Donor: <strong>Simplon</strong></li>
+                            <li class="list-group-item">End Date: <strong>18 Sep 2024</strong></li>
+                            <li class="list-group-item">Donor: <strong>EU</strong></li>
                         </ul>
                     </div>
                 </div>
@@ -53,7 +53,7 @@ Cohort 1
         <div class="col-lg-6 mb-4">
             <div class="card shadow-sm">
                 <div style="height: 380px" class="card-body">
-                    <h3 class="text-primary">Students Attendance Report</h3>
+                    <h3 class="text-primary">Weekly Attendance Report</h3>
                     <canvas id="totalSummaryChart"></canvas>
                 </div>
             </div>
@@ -108,53 +108,114 @@ Cohort 1
             </div>
         </div>
     </div>
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h3 class="text-primary">Weekly Projects Overview</h3>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Week</th>
+                                <th scope="col">Project Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Assigned To</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Week 1</td>
+                                <td>Portfolio Website</td>
+                                <td>Design and develop a personal portfolio website.</td>
+                                <td>Group 1</td>
+                                <td>
+                                    <div style="width: 100%; background-color: #ddd;">
+                                        <div style="height: 20px; width: 50%; background-color: #4CAF50;"></div>
+                                    </div>
+                                    In Progress
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Week 2</td>
+                                <td>Blog Platform</td>
+                                <td>Develop a simple blog platform using Laravel.</td>
+                                <td>Group 2</td>
+                                <td>
+                                    <div style="width: 100%; background-color: #ddd;">
+                                        <div style="height: 20px; width: 0%; background-color: #f44336;"></div>
+                                    </div>
+                                    Not Started
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Week 3</td>
+                                <td>E-commerce Site</td>
+                                <td>Build a basic e-commerce site with a shopping cart.</td>
+                                <td>Group 3</td>
+                                <td>
+                                    <div style="width: 100%; background-color: #ddd;">
+                                        <div style="height: 20px; width: 100%; background-color: #4CAF50;"></div>
+                                    </div>
+                                    Finished
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
+</div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
+<script>
+document.addEventListener('DOMContentLoaded', function() {
 
     var ctx3 = document.getElementById('totalSummaryChart').getContext('2d');
     var totalSummaryChart = new Chart(ctx3, {
-        type: 'line',
+        type: 'bar', // Change to 'bar' for a bar chart
         data: {
-            labels: ['Remaining Enrolled', 'Remaining Graduates', 'Employed Graduates'],
+            labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], // Days of the week
             datasets: [{
-                label: 'Summary',
-                data: [689 - 551, 551 - 419, 419], 
-                backgroundColor: [
-                    '#e66c37',
-                    '#eb895f',
-                    '#ad5129'
-                ],
-               
+                label: 'Attendance',
+                data: [30, 28, 32, 31, 29], // Example attendance data
+                backgroundColor: '#e66c37', // Blue, semi-transparent
+                borderColor: '#e66c37', // Blue, solid
+                borderWidth: 1
+            }, {
+                label: 'Absence',
+                data: [], // To be calculated
+                backgroundColor: '#f3a17a', // Red, semi-transparent
+                borderColor: '#f3a17a', // Red, solid
                 borderWidth: 1
             }]
         },
         options: {
             responsive: true,
-
-            cutout: '60%',
             maintainAspectRatio: false,
-            plugins: {
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            var label = context.label || '';
-                            if (label) {
-                                label += ': ';
-                            }
-                            var total = context.dataset.data.reduce((previousValue, currentValue) => previousValue + currentValue, 0);
-                            var currentValue = context.dataset.data[context.dataIndex];
-                            var percentage = ((currentValue / total) * 100).toFixed(2);
-                            label += currentValue + ' (' + percentage + '%)';
-                            return label;
-                        }
-                    }
+            scales: {
+                x: {
+                    stacked: true, // Enable stacked bars
+                },
+                y: {
+                    stacked: true, // Enable stacked bars
+                    beginAtZero: true, // Start the y-axis at 0
                 }
             }
         }
     });
+
+    // Calculate absence data based on attendance data
+    totalSummaryChart.data.datasets[1].data = totalSummaryChart.data.datasets[0].data.map(attendance => 32 - attendance);
+    totalSummaryChart.update(); // Update the chart to reflect new data
 });
 </script>
+
 @endsection
