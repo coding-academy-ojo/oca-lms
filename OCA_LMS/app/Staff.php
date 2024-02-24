@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use App\StaffCohort;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,11 +12,18 @@ class Staff extends Authenticatable
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $table = 'staff';
-       // Staff belongs to many Academies
-       public function academies() {
-        return $this->belongsToMany(Academy::class, 'academy_staff');
-    }
+/**
+ * The academies that belong to the staff.
+ *
+ * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+ */
+public function academies() {
+    return $this->belongsToMany(Academy::class, 'academy_staff');
+}
 
+/**
+ * @method static \Illuminate\Database\Eloquent\Relations\BelongsToMany academies()
+ */
     // Staff belongs to many Cohorts
     public function cohorts() {
         return $this->belongsToMany(Cohort::class, 'staff_cohort');
@@ -36,4 +43,9 @@ class Staff extends Authenticatable
     {
         return $this->staff_password;
     }
+
+    // public function staffCohorts()
+    // {
+    //     return $this->hasMany(StaffCohort::class);
+    // }
 }

@@ -66,18 +66,24 @@
     <body>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+        <div class="top-right links">
+            @auth('web') <!-- Assuming 'web' guard is for staff -->
+                <a href="{{ url('/home') }}">Home</a>
+            @else
+                @if (Route::has('login'))
+                    <a href="{{ route('login') }}">Staff Login</a>
+                @endif
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
+                @if (Route::has('student.login.form')) <!-- Check if student login route exists -->
+                    <a href="{{ route('student.login.form') }}">Student Login</a>
+                @endif
+
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}">Register</a>
+                @endif
+            @endauth
+        </div>
+    @endif
 
             <div class="content">
                 <div class="title m-b-md">

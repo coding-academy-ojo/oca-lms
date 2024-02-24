@@ -25,4 +25,12 @@ class Academy extends Model
     public function cohorts() {
         return $this->hasMany(Cohort::class);
     }
+
+
+
+    // function to get only the manegers
+    public function managers() {
+        return $this->belongsToMany(Staff::class, 'academy_staff')->where('role', 'manager');
+    }
+
 }

@@ -1,9 +1,15 @@
 <?php
 
+use App\Http\Controllers\AcademyController;
 use App\Http\Controllers\AssignmentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\CohortController;
+use App\Http\Controllers\TechnologyCategoryController;
+use App\Http\Controllers\TechnologyCohortController;
+use App\Http\Controllers\TechnologyController;
+use App\Http\Controllers\SkillController;
 use App\Http\Controllers\TopicController;
 
 /*
@@ -28,10 +34,14 @@ Route::get('/welcome', function () {
 Route::get('/home', function () {
     return view('home');
 });
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login'); 
+
+// staff login
+Route::get('/login',  [AuthController::class, 'showLoginForm'])->name('login'); 
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-
+// students login
+Route::get('/login/student', 'AuthController@showStudentLoginForm')->name('student.login.form');
+Route::post('/login/student', 'AuthController@studentLogin')->name('student.login');
 
 // classrome resource route
 
@@ -48,19 +58,29 @@ Route::get('/announcements', function () {
     return view('Pages/announcements');
 })->name('announcements');
 
-// Academeies
-Route::get('/Academeies', function () {
-    return view('supermaneger.index');
-})->name('Academeies');
-Route::get('/Academeies/edit', function () {
-    return view('supermaneger.editacademy');
-})->name('editacademy');
-Route::get('/Academeies/view', function () {
-    return view('supermaneger.academy');
-})->name('academyview');
-Route::get('/academeies/edit-cohort', function () {
-    return view('supermaneger.editcohort');
-})->name('cohortedit');
+
+
+
+
+//START Academeies  gruop routes ///////
+Route::get('/academies', [AcademyController::class, 'index'])->name('academies');
+Route::get('/academies/{academy}/edit', [AcademyController::class, 'edit'])->name('editacademy');
+Route::put('/academies/{academy}', [AcademyController::class, 'update'])->name('academies.update');
+Route::post('/academies', [AcademyController::class, 'store'])->name('academies.store');
+Route::get('/academies/{academy}', [AcademyController::class, 'show'])->name('academies.show');
+//END  Academeies  gruop routes ///////
+
+
+// start cohort
+
+Route::get('/cohorts/{academyId?}', [CohortController::class, 'index'])->name('academyview');
+Route::get('/cohorts/{cohort}/edit', [CohortController::class, 'edit'])->name('cohortedit');
+
+
+
+
+
+
 
 // attendance
 Route::get('/attendance', function () {
@@ -164,9 +184,9 @@ Route::get('/topics', function () {
 Route::get('/createTopics', function () {
     return view('topics.createTopics');
 })->name('createTopics');
-Route::get('/editTopics', function () {
-    return view('topics.editTopics');
-})->name('editTopics');
+// Route::get('/editTopics', function () {
+//     return view('topics.editTopics');
+// })->name('editTopics');
 
 
 
@@ -183,9 +203,9 @@ Route::get('/editProfile', function () {
 Route::get('/skillsFramework', function () {
     return view('skillsFramework.skillsFramework');
 });
-Route::get('/addSkillsLevel', function () {
-    return view('skillsFramework.addSkillsLevel');
-});
+// Route::get('/addSkillsLevel', function () {
+//     return view('skillsFramework.addSkillsLevel');
+// });
 Route::get('/addSkillsFramework', function () {
     return view('skillsFramework.addSkillsFramework');
 });
@@ -195,6 +215,57 @@ Route::get('/editSkillsLevel', function () {
 Route::get('/editSkillsFramework', function () {
     return view('skillsFramework.editSkillsFramework');
 });
+
+
+
+
+// View skills
+Route::get('/skills', [SkillController::class, 'index'])->name('skillsFramework');
+
+// Add skill - Show form
+Route::get('/skills/add', [SkillController::class, 'create'])->name('createskillsFramework');
+
+// Store new skill
+Route::post('/skills/add', [SkillController::class, 'store'])->name('addskillsFramework');
+
+
+// Edit skill - Show form
+Route::get('/skills/{skill}/edit', [SkillController::class, 'edit'])->name('editSkill');
+
+// Update skill
+Route::put('/skills/{id}/update', [SkillController::class, 'update'])->name('updateSkill');
+
+
+
+// Route::get('editSkillsLevel/{level}/edit', [SkillLevelController::class, 'edit'])->name('editSkillLevel');
+Route::get('editSkillsLevel/{skill}/edit', 'SkillLevelController@edit')->name('editSkillLevel');
+Route::put('/updateSkillLevel/{level}/update', 'SkillLevelController@update')->name('updateSkillLevel');
+
+
+
+
+
+Route::get('/categories', [TechnologyCategoryController::class, 'index'])->name('categories.index');
+
+// View technologies within a specific category
+Route::get('/categories/{category}', [TechnologyCategoryController::class, 'show'])->name('categories.show');
+
+
+// View technology details
+Route::get('/technologies/{technology}', [TechnologyController::class, 'show'])->name('technology.show');
+Route::get('/technologies/create/{category}', [TechnologyController::class, 'create'])->name('technology.create');
+Route::post('/technologies', [TechnologyController::class, 'store'])->name('technology.store');
+Route::get('/technology/{technology}', [TechnologyController::class, 'showInfo'])->name('technology.showInfo');
+
+Route::get('/technologies/{technology}/edit', [TechnologyController::class, 'edit'])->name('technology.edit');
+Route::put('/technologies/{technology}/update', [TechnologyController::class, 'update'])->name('technology.update');
+
+Route::delete('/technologies/{technology}', [TechnologyController::class, 'destroy'])->name('technology.destroy');
+Route::post('/technologies/{technology}/addToCohort', [TechnologyCohortController::class, 'addToCohort'])->name('technology.addToCohort');
+
+
+Route::get('/rodmap', [TechnologyCategoryController::class, 'indexCohort'])->name('categories.indexCohort');
+Route::get('/rodmap/{category}', [TechnologyCohortController::class, 'show'])->name('rodmap.show');
 
 
 

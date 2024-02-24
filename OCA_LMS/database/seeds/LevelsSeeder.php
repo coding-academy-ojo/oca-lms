@@ -13,9 +13,9 @@ class LevelsSeeder extends Seeder
     public function run()
     {
         DB::table('levels')->insert([
-            ['name' => 'Imitate'],
-            ['name' => 'Adapt'],
-            ['name' => 'Transpose'],
+            ['levels_name' => 'Imitate'],
+            ['levels_name' => 'Adapt'],
+            ['levels_name' => 'Transpose'],
             // Add more levels as needed
         ]);
     }

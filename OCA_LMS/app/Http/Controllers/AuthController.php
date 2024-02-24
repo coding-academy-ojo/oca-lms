@@ -22,11 +22,11 @@ class AuthController extends Controller
     {
         switch ($role) {
             case 'manager':
-                return '/Academeies';
+                return '/academies';
             case 'super_manager':
-                return '/Academeies';
+                return '/academies';
             case 'trainer':
-                return '/Academeies';
+                return '/academies';
     
             default:
                 return '/';
@@ -71,6 +71,36 @@ public function login(Request $request)
         return redirect('/login')->with('success', 'You have been logged out.');
     }
     
-    
+
+
+
+    // student login 
+
+    public function showStudentLoginForm()
+{
+
+    if(!empty(Auth::check())){
+        return redirect('/home');
+    }
+    return view('auth.student-login');
+}
+public function studentLogin(Request $request)
+{
+    $request->validate([
+        'email' => 'required|email|exists:students,email',
+        'password' => 'required',
+    ]);
+
+    $credentials = $request->only('email', 'password');
+
+
+    if (Auth::guard('students')->attempt($credentials)) {
+        $student = Auth::guard('students')->user();
+        return redirect('/academies'); // Redirect to the '/academies' route upon successful login
+    } else {
+        return back()->withErrors(['email' => 'The provided credentials do not match our records.'])->withInput($request->except('password'));
+    }
+
+}
     
 }
