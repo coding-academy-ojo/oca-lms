@@ -11,6 +11,7 @@ use App\Http\Controllers\TechnologyCohortController;
 use App\Http\Controllers\TechnologyController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\TopicController;
+use App\Http\Controllers\SuperManagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,7 +77,9 @@ Route::get('/academies/{academy}', [AcademyController::class, 'show'])->name('ac
 Route::get('/cohorts/{academyId?}', [CohortController::class, 'index'])->name('academyview');
 Route::get('/cohorts/{cohort}/edit', [CohortController::class, 'edit'])->name('cohortedit');
 
-
+// super maneger 
+Route::get('/supermanager-dashboard', [SuperManagerController::class, 'index'])->name('supermanager-dashboard');
+Route::get('/academies/show/view-cohort', [CohortController::class, 'cohortView'])->name('view-cohort');
 
 
 

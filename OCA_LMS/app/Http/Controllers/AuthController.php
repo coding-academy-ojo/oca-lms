@@ -24,7 +24,7 @@ class AuthController extends Controller
             case 'manager':
                 return '/academies';
             case 'super_manager':
-                return '/academies';
+                return '/supermanager-dashboard';
             case 'trainer':
                 return '/academies';
     

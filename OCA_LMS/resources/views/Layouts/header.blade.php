@@ -10,9 +10,13 @@
         </button>
         <div class="collapse navbar-collapse align-items-end" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                @auth('staff')
+                @if(Auth::guard('staff')->user()->role === 'super_manager')
                 <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="#">Home</a>
+                    <a class="nav-link " aria-current="page" href="{{route('supermanager-dashboard')}}">Home</a>
                 </li>
+                @endif
+                @endauth
                 <li class="nav-item">
                     <a class="nav-link active" href="{{route('academies')}}">Academies</a>
                 </li>
