@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Technology extends Model
 {
+
     // use HasFactory;
 
     protected $fillable = [
@@ -31,5 +32,10 @@ class Technology extends Model
     public function technologyCohorts()
     {
         return $this->hasMany(Technology_Cohort::class);
+    }
+
+    public function topics()
+    {
+        return $this->hasMany(Topic::class, 'technologycohort_id');
     }
 }

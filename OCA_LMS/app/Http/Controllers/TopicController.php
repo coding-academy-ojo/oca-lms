@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Technology;
 use App\Topic;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class TopicController extends Controller
      */
     public function index()
     {
-        //
+        $topics=Topic::all(); 
+        return view('Assignment.view_assignment',compact('topics'));
     }
 
     /**
@@ -24,7 +26,8 @@ class TopicController extends Controller
      */
     public function create()
     {
-        //
+        $technologies=Technology::all(); 
+        return view('Pages.create_topic',compact('technologies'));
     }
 
     /**
@@ -35,7 +38,12 @@ class TopicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $topic= new Topic();
+        $topic->topic_name = $request->input('topic_name');
+        $topic->technology_id = $request->input('technology_id');
+        $topic->save();
+
+        return redirect()->route('assignments')->with('success', 'Assignment create successfully');
     }
 
     /**
@@ -55,9 +63,11 @@ class TopicController extends Controller
      * @param  \App\Topic  $topic
      * @return \Illuminate\Http\Response
      */
-    public function edit(Topic $topic)
+    public function edit($id)
     {
-        //
+        $technologies=Technology::all();
+        $topic = Topic::find($id);
+        return view('Pages.edit_topic',compact('topic','technologies'));
     }
 
     /**
@@ -67,9 +77,15 @@ class TopicController extends Controller
      * @param  \App\Topic  $topic
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Topic $topic)
+    public function update(Request $request, $id)
     {
-        //
+        $topic = Topic::find($id);
+        $topic->topic_name = $request->input('topic_name');
+        $topic->technology_id = $request->input('technology_id');
+        $topic->update();
+
+        return redirect()->route('assignments')->with('success', 'Assignment create successfully');
+
     }
 
     /**
@@ -78,8 +94,11 @@ class TopicController extends Controller
      * @param  \App\Topic  $topic
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Topic $topic)
+    public function destroy($id)
     {
-        //
+        $topic = Topic::find($id);
+        $topic->delete();
+        return redirect()->route('assignments')
+            ->with('success', 'assignment$assignment deleted successfully');
     }
 }

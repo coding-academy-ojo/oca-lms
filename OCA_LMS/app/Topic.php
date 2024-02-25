@@ -3,11 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Topic extends Model
 {
     protected $guarded = ['id', 'created_at', 'updated_at'];
-
+    use SoftDeletes;
 
     public function assignments()
     {

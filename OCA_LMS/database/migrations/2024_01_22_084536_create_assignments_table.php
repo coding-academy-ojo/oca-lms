@@ -17,7 +17,7 @@ class CreateAssignmentsTable extends Migration
             $table->id();
             $table->string('assignment_name');
             $table->text('assignment_description')->nullable();
-            $table->enum('assignment_level', ['easy', 'medium ', 'advance ']);
+            $table->enum('assignment_level', ['easy', 'medium', 'advance']);
             $table->date('assignment_due_date');
             $table->string('assignment_attached_file')->nullable();
             $table->unsignedBigInteger('topic_id');

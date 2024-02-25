@@ -24,8 +24,9 @@ class CohortController extends Controller
         if ($user instanceof Staff) {
             // Staff user (manager, trainer, or super manager)
             if ($user->role == 'super_manager') {
-                // Super Manager can view all cohorts and edit them
-                $cohorts = Cohort::with('academy')->get();
+                $cohorts = Cohort::with('academy')->whereHas('academy', function ($query) use ($academyId) {
+                    $query->where('id', $academyId);
+                })->get();
                 $canEditCohort = true;
             } else {
                 // Managers can only view cohorts of academies they are assigned to
@@ -82,9 +83,13 @@ class CohortController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        return view('academies.view-cohort');
+    }
+    public function cohortView()
+    {
+        return view('academies.view-cohort');
     }
 
     /**
@@ -120,4 +125,6 @@ class CohortController extends Controller
     {
         //
     }
+
+
 }

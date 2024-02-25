@@ -1,9 +1,9 @@
 @extends('Layouts.app')
 @section('title')
-Edit Assignment
+ Create Assignment
 @endsection
 @section('content')
- 
+
     @include('layouts.innerNav')
     <section class="inner-bred my-3">
         <div class="container">
@@ -16,18 +16,14 @@ Edit Assignment
             </nav>
         </div>
     </section>
-    <style>
-        .expand {
-            max-width: 200px;
-        }
 
+    <style>
         .custom-dropdown {
             position: relative;
             display: inline-block;
         }
 
         .dropdown-button {
-            /* padding: 10px; */
             cursor: pointer;
         }
 
@@ -54,10 +50,6 @@ Edit Assignment
             background-color: #ddd;
         }
 
-        .dropdown-contentt {
-            background-color: orange;
-        }
-
         .dropdown-content input {
             margin-right: 5px;
         }
@@ -65,6 +57,62 @@ Edit Assignment
         .show {
             display: block;
         }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        .input-sizer {
+            display: inline-grid;
+            vertical-align: top;
+            align-items: center;
+            position: relative;
+            border: solid 1px;
+
+            &.stacked {
+                padding: .5em;
+                align-items: stretch;
+
+                &::after,
+                input,
+                textarea {
+                    grid-area: 2 / 1;
+                }
+            }
+
+            &::after,
+            input,
+            textarea {
+                width: auto;
+                min-width: 1em;
+                grid-area: 1 / 2;
+                font: inherit;
+                padding: 0.25em;
+                margin: 0;
+                resize: none;
+                background: none;
+                appearance: none;
+                border: none;
+            }
+
+
+            &::after {
+                content: attr(data-value) ' ';
+                visibility: hidden;
+                white-space: pre-wrap;
+            }
+
+
+
+            textarea:focus,
+            input:focus {
+                outline: none;
+            }
+        }
+
+
     </style>
     <div class="container">
         <div class="page-wrapper">
@@ -72,7 +120,7 @@ Edit Assignment
                 <div class="page-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h3 class="page-title text-primary">Edit Assignment</h3>
+                            <h3 class="page-title text-primary">create Assignment</h3>
                         </div>
                     </div>
                 </div>
@@ -80,41 +128,34 @@ Edit Assignment
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-body">
-                                <form method="" action="" enctype="multipart/form-data" class="needs-validation"
+                                <form method="post" action="{{ route('assignment.store') }}" enctype="multipart/form-data" class="needs-validation"
                                     novalidate>
                                     @csrf
                                     <div class="row">
                                         <div class="col-12 col-sm-6">
                                             <div class="form-group">
                                                 <label class="my-2">Title</label>
-                                                <input type="text" class="form-control" name="title" value="php task" required>
+                                                <input type="text" class="form-control" name="name" required>
                                                 <div class="invalid-feedback">This feild is required</div>
                                             </div>
                                         </div>
                                         <div class="col-12 col-sm-6">
                                             <div class="form-group">
                                                 <label class="my-2">Topics</label>
-                                                <select class="form-select" id="class" name="topic"  required>
+                                                <select class="form-select" id="class" name="topic" required>
                                                     <option value="">Select topic</option>
-                                                    <option value="">HTML</option>
-                                                    <option value="">CSS</option>
-                                                    <option value="">PHP</option>
+                                                    @foreach($topics as $topic)
+                                                    <option value="{{ $topic->id }}">{{ $topic->topic_name }} - {{ $topic->technology->name }}</option>
+                                                @endforeach
                                                 </select>
                                                 <div class="invalid-feedback">This field is required</div>
                                             </div>
                                         </div>
                                         <div class="col-12 col-sm-6">
                                             <div class="form-group">
-                                                <label class="my-2">Description</label>
-                                                <input type="text" class="form-control" name="description" value="create DB" required>
-                                                <div class="invalid-feedback">This feild is required</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-sm-6">
-                                            <div class="form-group">
                                                 <label class="my-2">Date</label>
                                                 <div>
-                                                    <input type="date" class="form-control" name="birthday"
+                                                    <input type="date" class="form-control" name="due_date"
                                                         min="{{ date('Y-m-d') }}" required>
                                                     <div class="invalid-feedback">This field is required</div>
                                                 </div>
@@ -122,8 +163,20 @@ Edit Assignment
                                         </div>
                                         <div class="col-12 col-sm-6">
                                             <div class="form-group">
+                                                <label class="my-2">Level</label>
+                                                <select class="form-select" id="class" name="level" required>
+                                                    <option value="">Select topic</option>
+                                                    <option value="easy">Easy</option>
+                                                    <option value="medium">Medium</option>
+                                                    <option value="advance">Advance</option>
+                                                </select>
+                                                <div class="invalid-feedback">This field is required</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
                                                 <label class="my-2">Assignment File</label>
-                                                <input type="file" class="form-control" name="image" required>
+                                                <input type="file" class="form-control" name="assignment_file" required>
                                                 <div class="invalid-feedback">This field is required</div>
                                             </div>
                                         </div>
@@ -134,16 +187,24 @@ Edit Assignment
                                                     Student</div>
                                                 <div class="dropdown-content" id="dropdownContent">
                                                     <label>
-                                                        <input type="checkbox" value="Option 1"> Rawan
+                                                        <input class="form-check-input" type="checkbox"  name="students[]" value="" onclick="selectAll()">All students
                                                     </label>
+                                                    @foreach($students as $student)
                                                     <label>
-                                                        <input type="checkbox" value="Option 2"> Reem
+                                                        <input class="form-check-input" type="checkbox"  name="students[]" value="{{ $student->id }}">{{ $student->en_first_name }} {{ $student->en_second_name }}  
                                                     </label>
-                                                    <label>
-                                                        <input type="checkbox" value="Option 3"> Rand
-                                                    </label>
+                                                @endforeach
+                             
                                                 </div>
-
+                                            </div>
+                                        </div>
+                                        <div class="col-12 ">
+                                            <div class="form-group">
+                                                <label class="my-2 ">Description</label>
+                                                <label class="input-sizer stacked col-12 form-control border border-light">
+                                                    <textarea oninput="this.parentNode.dataset.value = this.value" rows="2" id="myTextarea" name="description"></textarea>
+                                                </label>
+                                                <div class="invalid-feedback">This feild is required</div>
                                             </div>
                                         </div>
                                         <div class="col-12 mt-3">
@@ -151,7 +212,6 @@ Edit Assignment
                                         </div>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>
@@ -165,6 +225,19 @@ Edit Assignment
         var dropdownContent = document.getElementById("dropdownContent");
         dropdownContent.classList.toggle("show");
     }
+    function selectAll() {
+        var checkboxes = document.querySelectorAll('#dropdownContent input[type="checkbox"]');
+        var allTraineeCheckbox = checkboxes[0];
+        if (allTraineeCheckbox.checked) {
+            for (var i = 1; i < checkboxes.length; i++) {
+                checkboxes[i].checked = true;
+            }
+        } else {
+            for (var i = 1; i < checkboxes.length; i++) {
+                checkboxes[i].checked = false;
+            }
+        }
+    }
 
     // Close the dropdown if the user clicks outside of it
     window.onclick = function(event) {
@@ -173,4 +246,5 @@ Edit Assignment
             dropdownContent.classList.remove('show');
         }
     }
+
 </script>

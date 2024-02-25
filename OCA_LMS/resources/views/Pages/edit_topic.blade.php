@@ -1,6 +1,6 @@
 @extends('Layouts.app')
 @section('title')
-Create Material
+    Edit Topic
 @endsection
 @section('content')
     @include('layouts.innerNav')
@@ -9,7 +9,7 @@ Create Material
             <ol class="breadcrumb m-3">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><a href=""> Class</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href=""> Material </a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href=""> Topic </a></li>
             </ol>
         </div>
     </section>
@@ -19,7 +19,7 @@ Create Material
                 <div class="page-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h3 class="page-title text-primary">Create Material </h3>
+                            <h3 class="page-title text-primary">Edit Topic </h3>
                         </div>
                     </div>
                 </div>
@@ -27,40 +27,29 @@ Create Material
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-body">
-                                <form method="" action="" enctype="multipart/form-data" class="needs-validation"
-                                    novalidate>
+                                <form method="post" action="{{ route('topic.update', $topic->id) }}"
+                                    enctype="multipart/form-data" class="needs-validation" novalidate>
                                     @csrf
+                                    @method('PUT')
                                     <div class="row">
                                         <div class="col-12 col-sm-6">
                                             <div class="form-group">
                                                 <label class="my-2">Title</label>
-                                                <input type="text" class="form-control" name="title" required>
+                                                <input type="text" class="form-control" name="topic_name"
+                                                    value="{{ $topic->topic_name }}" required>
                                                 <div class="invalid-feedback">This feild is required</div>
                                             </div>
                                         </div>
                                         <div class="col-12 col-sm-6">
                                             <div class="form-group">
-                                                <label class="my-2">Topics</label>
-                                                <select class="form-select" id="class" name="topic" required>
-                                                    <option value="">Select topic</option>
-                                                    <option value="">HTML</option>
-                                                    <option value="">CSS</option>
-                                                    <option value="">PHP</option>
+                                                <label class="my-2">Technology</label>
+                                                <select class="form-select" id="class" name="technology_id" required>
+                                                    <option value="{{ $topic->technology_id}}">{{ $topic->technology->name }}</option>
+                                                    @foreach ($technologies as $technology)
+                                                        <option value="{{ $technology->id }}">{{ $technology->name }}
+                                                        </option>
+                                                    @endforeach
                                                 </select>
-                                                <div class="invalid-feedback">This field is required</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-sm-6">
-                                            <div class="form-group">
-                                                <label class="my-2">Resources Links</label>
-                                                <input type="text" class="form-control" name="description" required>
-                                                <div class="invalid-feedback">This feild is required</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-sm-6">
-                                            <div class="form-group">
-                                                <label class="my-2">Assignment File</label>
-                                                <input type="file" class="form-control" name="image" required>
                                                 <div class="invalid-feedback">This field is required</div>
                                             </div>
                                         </div>
