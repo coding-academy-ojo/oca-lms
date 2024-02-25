@@ -30,6 +30,5 @@ class DatabaseSeeder extends Seeder
         $this->call(AssignmentSeeder::class);
 
         $this->command->info('Database seeded successfully!');
-
     }
 }

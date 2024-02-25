@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Topics
+Roadmap
 @endsection
 @section('content')
 {{-- =========================================================== --}}
@@ -13,7 +13,7 @@ Topics
     <div class="container">
         <ul class="thm-breadcrumb">
             <li><a href="">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
-            <li><a href="">Categories</a></li>
+            <li><a href="">Roadmap</a></li>
         </ul>
     </div>
 </section>

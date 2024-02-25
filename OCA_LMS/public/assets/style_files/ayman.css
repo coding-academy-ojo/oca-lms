@@ -269,7 +269,11 @@ body {
     height: 100%;
 }
 
-
+.actionbtn {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
 
 /* {{-- ======== start skillsFramework style==== --}} */
 

@@ -15,18 +15,21 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description');
-            $table->date('start_date')->nullable();
-            $table->date('delivery_date')->nullable();
-            $table->string('image')->nullable();
+            $table->string('project_name');
+            $table->text('project_description');
+            $table->date('project_start_date')->nullable();
+            $table->date('project_delivery_date')->nullable();
+            $table->string('project_image')->nullable();
+            $table->string('project_deliverable')->nullable();
+            $table->string('project_resources')->nullable();
+            $table->string('project_assessment_methods')->nullable();
             $table->unsignedBigInteger('cohort_id');
             $table->foreignId('staff_id')->constrained('staff')->nullable();
             $table->foreign('cohort_id')->references('id')->on('cohorts');
             $table->timestamps();
         });
     }
-    
+
 
     /**
      * Reverse the migrations.

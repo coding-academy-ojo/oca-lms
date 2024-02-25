@@ -94,7 +94,7 @@ class TechnologyCohortController extends Controller
             ->get();
 
         // Pass the data to the view
-        return view('technology.Technology', compact('technologies', 'category', 'cohortId'));
+        return view('technology.TechnologyCohort', compact('technologies', 'category', 'cohortId'));
     }
 
     /**

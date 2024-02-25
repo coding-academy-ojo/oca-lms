@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Profile
+Skills Framework
 @endsection
 
 
@@ -25,12 +25,9 @@ Profile
 
 <div class="innerPage mt-3">
     <div class="container">
-        <div class="skillsFramework">
+        <div class="skillsFramework" style="    text-align: justify;">
             <div class="actionbtn">
-                <div class="col-md-2 ms-auto mb-3">
-                    <a href="{{ route('createskillsFramework') }}">Add skills</a>
-                    &nbsp;
-                </div>
+                <a class=" btn btn-primary mb-3" href="{{ route('createskillsFramework') }}">Add skills</a>
             </div>
 
             <div class="row">
@@ -46,12 +43,12 @@ Profile
                     <div id="sk{{ $skill->id }}" class="tabcontent" @if($loop->first) style="display: block;" @endif>
                         <div class="row">
                             <div class="actionbtn">
-                                <div class="col-md-3 ms-auto mb-3">
-                                    <a href="{{ route('editSkill', ['skill' => $skill->id]) }}">Edit Skill</a>
+                                <div class=" ms-auto mb-3">
+                                    <a class=" btn btn-primary m-auto" href="{{ route('editSkill', ['skill' => $skill->id]) }}">Edit Skill</a>
                                 </div>
                                 <div class="actionbtn">
-                                    <div class="col-md-3 ms-auto mb-3">
-                                        <a href="{{ route('editSkillLevel', ['skill' => $skill->id]) }}">Edit all levels</a>
+                                    <div class=" ms-auto mb-3">
+                                        <a class=" btn btn-primary m-auto" href="{{ route('editSkillLevel', ['skill' => $skill->id]) }}">Edit all levels</a>
                                     </div>
                                 </div>
                             </div>
