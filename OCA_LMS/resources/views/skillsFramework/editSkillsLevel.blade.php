@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Profile
+Skills Framework
 @endsection
 
 @section('content')
@@ -9,7 +9,7 @@ Profile
     <div class="container">
         <ul class="thm-breadcrumb">
             <li><a href="">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
-            <li><a href="">Skills Framework</a></li>
+            <li><a href=""> Edit Skills Levels</a></li>
         </ul>
     </div>
 </section>
@@ -29,7 +29,7 @@ Profile
                 @method('PUT')
                 <!-- Title -->
                 <div class="mb-4">
-                    <label for="title" class="form-label">level {{$skillLevel->id}} description <span class="text-danger">*</span></label>
+                    <label for="title" class="form-label">level {{$skillLevel->name}} description <span class="text-danger">*</span></label>
                     <textarea class="form-control" id="1" rows="3" placeholder="Enter your skills" name="level" require>{{ $skillLevel->skillLevels_description }}</textarea>
 
                     <!-- <input type="text" class="form-control rounded-pill" id="title" name="level 1 description" placeholder="level 1 description" required> -->

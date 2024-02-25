@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Edit Topic
+Technology
 @endsection
 @section('content')
 {{-- =========================================================== --}}
@@ -23,21 +23,27 @@ Edit Topic
 {{-- =========================================================== --}}
 <div class="innerPage  mt-3">
     <div class="container">
-        <div class="addpro">
+        <div class="">
             <div>
                 <div>
-                    <div class="topicBt">
-                        <a href="{{ route('technology.edit', ['technology' => $technology]) }}">edit</a>
+                    <div class="vt" style="display: flex;
+    justify-content: flex-end;
+    gap: 1rem;">
+
                         <form method="POST" action="{{ route('technology.destroy', ['technology' => $technology]) }}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit">Delete</button>
-                            <input type="submit" value="Delete">
+                            <a href="{{ route('technology.edit', ['technology' => $technology]) }}" class=" btn btn-primary m-auto">edit</a>
+                            <button class=" btn btn-primary m-auto" type="submit">Delete</button>
+
                         </form>
                     </div>
                     @if ($technology->technologies_photo)
                     <!-- <img src="{{ asset('images/' . $technology->technologies_photo) }}" alt="Technology Image"> -->
-                    <img src="{{ asset('assets/img/' . $technology->technologies_photo) }}" alt="Technology Image">
+                    <img style="    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    margin: 2rem 0px;" src="{{ asset('assets/img/' . $technology->technologies_photo) }}" alt="Technology Image">
 
                     @else
                     <p>No image uploaded</p>

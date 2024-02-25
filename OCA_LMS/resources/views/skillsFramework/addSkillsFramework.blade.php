@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Profile
+Skills Framework
 @endsection
 
 @section('content')
@@ -9,7 +9,7 @@ Profile
     <div class="container">
         <ul class="thm-breadcrumb">
             <li><a href="">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
-            <li><a href="">Skills Framework</a></li>
+            <li><a href="">Create Skills Framework</a></li>
         </ul>
     </div>
 </section>

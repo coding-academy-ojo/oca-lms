@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Edit Topic
+Edit Technology
 @endsection
 @section('content')
 {{-- =========================================================== --}}
@@ -12,7 +12,7 @@ Edit Topic
     <div class="container">
         <ul class="thm-breadcrumb">
             <li><a href="">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
-            <li><a href="">Edit Topics</a></li>
+            <li><a href="">Edit Technology</a></li>
 
         </ul>
     </div>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Topics
+Technology Categories
 @endsection
 @section('content')
 {{-- =========================================================== --}}

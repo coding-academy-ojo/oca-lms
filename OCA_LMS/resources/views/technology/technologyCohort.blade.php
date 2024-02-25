@@ -34,20 +34,14 @@ Technologies
                         <a href="{{ route('technology.showInfo', ['technology' => $technology]) }}">
                             <img src="{{ asset('assets/img/' . $technology->technologies_photo) }}" alt="">
                         </a>
-                        <div class="innerCard">
+                        <div class="innerCard" style="gap: 1rem;
+    display: flex;
+    flex-direction: column;">
                             <a href="{{ route('technology.showInfo', ['technology' => $technology]) }}">
                                 <h4 class="text-center">{{ $technology->technologies_name }}</h4>
                             </a>
-                            <!-- <form method="POST" action="{{ route('technology.addToCohort', ['technology' => $technology]) }}">
-                                @csrf
-                                <button type="submit">Add to Cohort</button>
-                            </form> -->
-                            <form style="display: flex;" method="POST" action="{{ route('technology.addToCohort', ['technology' => $technology]) }}">
-                                @csrf
-                                <input type="hidden" name="cohort_id" value="{{ $technology->technology_category_id }}">
-                                <button class=" btn btn-primary m-auto" type="submit">Add to Cohort</button>
-                                <a class=" btn btn-primary m-auto" href="{{ route('technology.showInfo', ['technology' => $technology]) }}">view</a>
-                            </form>
+                           
+                            <a class=" btn btn-primary m-auto" href="{{ route('technology.showInfo', ['technology' => $technology]) }}">view</a>
 
                         </div>
                     </div>
