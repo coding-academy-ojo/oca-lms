@@ -1,15 +1,17 @@
 <?php
 
+use App\Http\Controllers\AcademyController;
+use App\Http\Controllers\AssignmentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassroomController;
-use App\Http\Controllers\SkillController;
-use App\Http\Controllers\SkillLevelController;
-use App\Http\Controllers\TechnologyCategoryController;
-use App\Http\Controllers\TechnologyController;
-use App\Http\Controllers\TechnologyCohortController;
-use App\Http\Controllers\AcademyController;
 use App\Http\Controllers\CohortController;
+use App\Http\Controllers\TechnologyCategoryController;
+use App\Http\Controllers\TechnologyCohortController;
+use App\Http\Controllers\TechnologyController;
+use App\Http\Controllers\SkillController;
+use App\Http\Controllers\TopicController;
+use App\Http\Controllers\SuperManagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,12 +77,16 @@ Route::get('/academies/{academy}', [AcademyController::class, 'show'])->name('ac
 Route::get('/cohorts/{academyId?}', [CohortController::class, 'index'])->name('academyview');
 Route::get('/cohorts/{cohort}/edit', [CohortController::class, 'edit'])->name('cohortedit');
 
+// super maneger 
+Route::get('/supermanager-dashboard', [SuperManagerController::class, 'index'])->name('supermanager-dashboard');
+Route::get('/academies/show/view-cohort', [CohortController::class, 'cohortView'])->name('view-cohort');
 
 
 
-
-
-
+// trainee progress details
+Route::get('/cohort/progress-details', function () {
+    return view('trainer.trainee-progress-details');
+})->name('trainee-progress-details');
 // attendance
 Route::get('/attendance', function () {
     return view('supermaneger.attendance');
@@ -113,16 +119,13 @@ Route::get('/edit-material', function () {
 })->name('edit-material');
 
 Route::get('/create_assignment', function () {
-    return view('Pages/create_assignment');
+    return view('Assignment/create_assignment');
 })->name('create_assignment');
 
 Route::get('/edit_assignment', function () {
     return view('Pages/edit_assignment');
 })->name('edit_assignment');
 
-Route::get('/assignment', function () {
-    return view('Pages/view_assignment');
-})->name('assignment');
 
 Route::get('/submit_assignment', function () {
     return view('Pages/submit_assignment');
@@ -135,6 +138,37 @@ Route::get('/view_material', function () {
 Route::get('/assignment/allfeedback', function () {
     return view('Pages/allAssignmentfeddback');
 })->name('allAssignmentfeddback');
+//Assignment Route
+Route::get('/Assignments', [AssignmentController::class, 'index'])->name('assignments');
+Route::get('/Assignment/create', [AssignmentController::class ,'create'])->name('assignment.create');
+Route::post('/asssignment/store', [AssignmentController::class ,'store'])->name('assignment.store');
+Route::get('/assignments/{assignment}', [AssignmentController::class ,'show'])->name('assignment.show');
+Route::get('/assignment/{assignment}/edit', [AssignmentController::class ,'edit'])->name('assignment.edit');
+Route::put('/assignment/{assignment}', [AssignmentController::class ,'update'])->name('assignment.update');
+Route::delete('/assignment/{assignment}', [AssignmentController::class ,'destroy'])->name('assignment.destroy');
+Route::get('/download/{filename}', [AssignmentController::class, 'downloads'])->name('download');
+
+
+
+//Topic route 
+Route::get('/Topic/create', [TopicController::class ,'create'])->name('topic.create');
+Route::post('/topic/store', [TopicController::class ,'store'])->name('topic.store');
+Route::get('/topic/{topic}/edit', [TopicController::class ,'edit'])->name('topic.edit');
+Route::put('/topic/{topic}', [TopicController::class ,'update'])->name('topic.update');
+Route::delete('/topic/{topic}', [TopicController::class ,'destroy'])->name('topic.destroy');
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ///////////////////////////////////
 // ayman

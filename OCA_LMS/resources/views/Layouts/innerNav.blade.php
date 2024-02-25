@@ -41,7 +41,7 @@
                     <a class="nav-link" href="{{ route('announcements') }}">Announcements</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('assignment') }}">Assignments</a>
+                    <a class="nav-link" href="{{ route('assignments') }}">Assignments</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('topics') }}">Topics</a>

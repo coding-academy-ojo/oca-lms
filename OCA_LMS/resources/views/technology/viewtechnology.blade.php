@@ -45,15 +45,16 @@ Technology
     object-fit: cover;
     margin: 2rem 0px;" src="{{ asset('assets/img/' . $technology->technologies_photo) }}" alt="Technology Image">
 
+
                     @else
                     <p>No image uploaded</p>
                     @endif
                     <h1>{{ $technology->technologies_name }}</h1>
                     <p>Description: {{ $technology->technologies_description }}</p>
-                    <p>Resources: {{ $technology->technologies_resources }}</p>
+                    <p>Resources:<a href="{{ $technology->technologies_resources }}"> {{ $technology->technologies_resources }}</a></p>
                     <p>Training Period: {{ $technology->technologies_trainingPeriod }}</p>
                     <!-- Add more details as needed -->
-                    <p>Category: {{ $technology->technology_category_id }}</p>
+                    <!-- <p>Category: {{ $technology->technology_category_id }}</p> -->
                     <!-- If you have an image, you can display it like this -->
 
                 </div>

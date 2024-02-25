@@ -1,5 +1,10 @@
 <?php
 
+use App\Academy;
+use App\Assignment;
+use App\Cohort;
+use App\Student;
+use App\Technology;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,7 +16,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
         $this->call(SkillsSeeder::class);
         $this->call(LevelsSeeder::class);
         $this->call(StaffTableSeeder::class);
@@ -22,6 +26,9 @@ class DatabaseSeeder extends Seeder
         $this->call(AcademyStaffTableSeeder::class,);
         $this->call(CohortsTableSeeder::class);
         $this->call(StudentsTableSeeder::class);
+        $this->call(TopicSeeder::class);
+        $this->call(AssignmentSeeder::class);
+
         $this->command->info('Database seeded successfully!');
 
     }

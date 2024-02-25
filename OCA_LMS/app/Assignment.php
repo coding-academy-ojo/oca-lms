@@ -3,10 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Assignment extends Model
 {
     protected $guarded = ['id', 'created_at', 'updated_at'];
+    use SoftDeletes;
+
 
 
     public function topic()
@@ -41,6 +44,7 @@ class Assignment extends Model
     public function cohort() {
         return $this->belongsTo(Cohort::class);
     }
+
 
     // Add any additional relations you need
 }

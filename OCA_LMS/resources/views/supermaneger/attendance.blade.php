@@ -133,15 +133,15 @@
                                 <td>2</td>
                                 <td>Trainee 2</td>
                                 <td class="status-cell">
-                                    <span class="status-text">Late</span>
+                                    <span class="status-text">Attended</span>
                                     <select class="form-select form-select-sm status-select d-none">
-                                        <option value="Attended">Attended</option>
+                                        <option value="Attended" selected>Attended</option>
                                         <option value="Absent">Absent</option>
-                                        <option value="Late" selected>Late</option>
+                                        <option value="Late" >Late</option>
                                     </select>
                                 </td>
                                 <td class="reason-cell">
-                                    <span class="reason-text">Traffic</span>
+                                    <span class="reason-text">-</span>
                                     <input type="text" class="form-control form-control-sm reason-input d-none"
                                         value="Traffic">
                                 </td>
@@ -163,15 +163,15 @@
                                 <td>3</td>
                                 <td>Trainee 3</td>
                                 <td class="status-cell">
-                                    <span class="status-text">Absent</span>
+                                    <span class="status-text">Attended</span>
                                     <select class="form-select form-select-sm status-select d-none">
-                                        <option value="Attended">Attended</option>
-                                        <option value="Absent" selected>Absent</option>
+                                        <option value="Attended" selected>Attended</option>
+                                        <option value="Absent" >Absent</option>
                                         <option value="Late">Late</option>
                                     </select>
                                 </td>
                                 <td class="reason-cell">
-                                    <span class="reason-text">Sick</span>
+                                    <span class="reason-text">-</span>
                                     <input type="text" class="form-control form-control-sm reason-input d-none"
                                         value="Sick">
                                 </td>

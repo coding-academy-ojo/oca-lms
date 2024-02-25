@@ -24,7 +24,10 @@ Edit Cohort
             <label for="cohortName" class="form-label">Cohort Name</label>
             <input type="text" class="form-control" id="cohortName" name="name" placeholder="Cohort Name Here">
         </div>
-
+        <div class="mb-3">
+            <label for="cohortDonor" class="form-label">Cohort Donor</label>
+            <input type="text" class="form-control" id="cohortDonor" name="cohort_donor" placeholder="Cohort Donor Name" value="Simplon">
+        </div>
         <div class="mb-3">
             <label for="startDate" class="form-label">Start Date</label>
             <input type="date" class="form-control" id="startDate" name="start_date">
