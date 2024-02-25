@@ -6,17 +6,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\CohortController;
-<<<<<<< HEAD
 use App\Http\Controllers\ProjectController;
 
-=======
 use App\Http\Controllers\TechnologyCategoryController;
 use App\Http\Controllers\TechnologyCohortController;
 use App\Http\Controllers\TechnologyController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\SuperManagerController;
->>>>>>> dd79eadf4531f9d114a35562bd3d3ae454f44060
 
 /*
 |--------------------------------------------------------------------------
@@ -82,7 +79,7 @@ Route::get('/academies/{academy}', [AcademyController::class, 'show'])->name('ac
 Route::get('/cohorts/{academyId?}', [CohortController::class, 'index'])->name('academyview');
 Route::get('/cohorts/{cohort}/edit', [CohortController::class, 'edit'])->name('cohortedit');
 
-// super maneger 
+// super maneger
 Route::get('/supermanager-dashboard', [SuperManagerController::class, 'index'])->name('supermanager-dashboard');
 Route::get('/academies/show/view-cohort', [CohortController::class, 'cohortView'])->name('view-cohort');
 
@@ -155,20 +152,12 @@ Route::get('/download/{filename}', [AssignmentController::class, 'downloads'])->
 
 
 
-//Topic route 
+//Topic route
 Route::get('/Topic/create', [TopicController::class ,'create'])->name('topic.create');
 Route::post('/topic/store', [TopicController::class ,'store'])->name('topic.store');
 Route::get('/topic/{topic}/edit', [TopicController::class ,'edit'])->name('topic.edit');
 Route::put('/topic/{topic}', [TopicController::class ,'update'])->name('topic.update');
 Route::delete('/topic/{topic}', [TopicController::class ,'destroy'])->name('topic.destroy');
-
-
-
-
-
-
-
-
 
 
 
