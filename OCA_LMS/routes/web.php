@@ -6,17 +6,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\CohortController;
-<<<<<<< HEAD
 use App\Http\Controllers\ProjectController;
-
-=======
 use App\Http\Controllers\TechnologyCategoryController;
 use App\Http\Controllers\TechnologyCohortController;
 use App\Http\Controllers\TechnologyController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\SuperManagerController;
->>>>>>> dd79eadf4531f9d114a35562bd3d3ae454f44060
 
 /*
 |--------------------------------------------------------------------------
