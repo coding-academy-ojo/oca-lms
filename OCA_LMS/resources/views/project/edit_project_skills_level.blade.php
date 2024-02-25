@@ -34,7 +34,7 @@ Topics
                 <div class="mb-3">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="skills[]" value="{{ $skill->id }}" id="{{ 'skill_' . $skill->id }}" @if(in_array($skill->id, $selectedSkills ?? [])) checked @endif>
-                        <label class="form-check-label" for="{{ 'skill_' . $skill->id }}">{{ $skill->name }}</label>
+                        <label class="form-check-label" for="{{ 'skill_' . $skill->id }}">{{ $skill->skills_name }}</label>
                     </div>
 
                     <select class="form-select mt-2" name="levels[]">
@@ -42,10 +42,10 @@ Topics
                         @foreach($levels as $level)
                             @php
                                 $selectedLevel = $project->skills->where('id', $skill->id)->first()->pivot->level_id ?? null;
-                                $description = $descriptions->where('skill_id', $skill->id)->where('level_id', $level->id)->first()->description ?? '';
+                                $description = $descriptions->where('skill_id', $skill->id)->where('level_id', $level->id)->first()->skillLevels_description ?? '';
                             @endphp
                             <option value="{{ $level->id }}" @if($level->id == $selectedLevel) selected @endif data-description="{{ $description }}">
-                                {{ $level->name }} - " {{ $description }} "
+                                {{ $level->levels_name }} - " {{ $description }} "
                             </option>
                         @endforeach
                     </select>

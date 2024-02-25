@@ -77,11 +77,11 @@ Topics
                         <div class="card">
                             <div class="innerCard">
                                 <a href="{{ route('project_brief', ['id' => $project->id]) }}">
-                                    <img style="height: 250px; width: 100%;" src="{{ asset('images/' . $project->image) }}" alt="{{ $project->name }}">
+                                    <img style="height: 250px; width: 100%;" src="{{ asset('images/' . $project->project_image) }}" alt="{{ $project->project_name }}">
                                 </a>
                                 <div class="container mt-2">
                                     <a href="{{ route('project_brief', ['id' => $project->id]) }}">
-                                        <h4>{{ $project->name }}</h4>
+                                        <h4>{{ $project->project_name }}</h4>
                                     </a>
                                     <div class="createdby">
                                         <div class="personInfo" style="display: flex; align-items: center;">
@@ -89,8 +89,8 @@ Topics
                                             <p style="margin: 0;"><strong>{{ $project->staff->staff_name }}</strong></p>
                                         </div>
                                         <div style="margin-top: 10px; margin-left: 20px;">
-                                            <p style="font-size: 12px; color: #444;">Start Date: {{ $project->start_date }}</p>
-                                            <p style="font-size: 12px; color: #444;">Delivery Date: {{ $project->delivery_date }}</p>
+                                            <p style="font-size: 12px; color: #444;">Start Date: {{ $project->project_start_date }}</p>
+                                            <p style="font-size: 12px; color: #444;">Delivery Date: {{ $project->project_delivery_date }}</p>
                                         </div>
                                     </div>
                                 </div>

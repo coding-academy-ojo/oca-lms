@@ -15,7 +15,6 @@ use App\ProjectFeedback;
 use App\Student; // Import the Student model
 use App\Staff; // Import the Staff model
 
-
 class ProjectController extends Controller
 {
     public function showAllProjects()
@@ -41,35 +40,47 @@ class ProjectController extends Controller
 
     }
 
-    public function addProject(Request $request)
-    {
-        // Validate the request
 
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'image' => 'required',
-            'start_date' => 'required|date',
-            'delivery_date' => 'required|date|after:start_date',
-        ]);
+public function addProject(Request $request)
+{
+    // Validate the request
+    $request->validate([
+        'project_name' => 'required',
+        'project_description' => 'required',
+        // 'project_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'project_image' => 'required',
+        'project_start_date' => 'required|date',
+        'project_delivery_date' => 'required|date|after:project_start_date',
+        'cohort_id' => 'required',
+        'project_deliverable' => 'nullable',
+        'project_resources' => 'nullable',
+        'project_assessment_methods' => 'nullable',
+    ]);
 
-         // Save the project details
-         $project = new Project;
-         $project->name = $request->input('name');
-         $project->description = $request->input('description');
-         $project->cohort_id = Auth::user()->cohorts->pluck('id')->first(); // Updated from classroom_id to cohort_id
-         $project->staff_id = auth()->user()->id;
-         $project->start_date = $request->input('start_date');
-         $project->delivery_date = $request->input('delivery_date');
+    // Save the project details
+    $project = new Project;
+    $project->project_name = $request->input('project_name');
+    $project->project_description = $request->input('project_description');
+    $project->cohort_id = $request->input('cohort_id'); // Update cohort_id directly
+    $project->staff_id = auth()->user()->id;
+    $project->project_start_date = $request->input('project_start_date');
+    $project->project_delivery_date = $request->input('project_delivery_date');
+    $project->project_deliverable = $request->input('project_deliverable');
+    $project->project_resources = $request->input('project_resources');
+    $project->project_assessment_methods = $request->input('project_assessment_methods');
 
-        // Handle image upload (assuming you have a column 'image' in your 'projects' table)
-        $imageName = time().'.'.$request->image->extension();
-        $request->image->move(public_path('images'), $imageName);
-        $project->image = $imageName;
-
-        $project->save();
-        return redirect()->route('add_project_skills_level', ['project_id' => $project->id]);
+    // Handle image upload
+    if ($request->hasFile('project_image')) {
+        $imageName = time().'.'.$request->project_image->extension();
+        $request->project_image->move(public_path('images'), $imageName);
+        $project->project_image = $imageName;
     }
+
+    $project->save();
+    return redirect()->route('add_project_skills_level', ['project_id' => $project->id]);
+}
+
+
 
     public function showAddProjectSkillsLevelForm($project_id)
     {
@@ -138,33 +149,41 @@ class ProjectController extends Controller
 
 
     public function updateProject(Request $request, $id)
-    {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'start_date' => 'required|date',
-            'delivery_date' => 'required|date|after:start_date',
-            'cohort_id' => 'required|exists:cohorts,id', // Updated from classroom_id to cohort_id
-        ]);
+{
+    $request->validate([
+        'project_name' => 'required',
+        'project_description' => 'required',
+        // 'project_image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'project_image' => 'required',
+        'project_start_date' => 'required|date',
+        'project_delivery_date' => 'required|date|after:start_date',
+        'cohort_id' => 'required|exists:cohorts,id',
+        'project_deliverable' => 'nullable',
+        'project_resources' => 'nullable',
+        'project_assessment_methods' => 'nullable',
+    ]);
 
-        $project = Project::findOrFail($id);
-        $project->name = $request->input('name');
-        $project->description = $request->input('description');
-        $project->cohort_id = $request->input('cohort_id'); // Updated from classroom_id to cohort_id
-        $project->start_date = $request->input('start_date');
-        $project->delivery_date = $request->input('delivery_date');
+    $project = Project::findOrFail($id);
+    $project->project_name = $request->input('project_name');
+    $project->project_description = $request->input('project_description');
+    $project->cohort_id = $request->input('cohort_id');
+    $project->project_start_date = $request->input('project_start_date');
+    $project->project_delivery_date = $request->input('project_delivery_date');
+    $project->project_deliverable = $request->input('project_deliverable');
+    $project->project_resources = $request->input('project_resources');
+    $project->project_assessment_methods = $request->input('project_assessment_methods');
 
-        if ($request->hasFile('image')) {
-            $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('images'), $imageName);
-            $project->image = $imageName;
-        }
-
-        $project->save();
-
-        return redirect()->route('project_brief', ['id' => $id]);
+    if ($request->hasFile('project_image')) {
+        $imageName = time().'.'.$request->project_image->extension();
+        $request->project_image->move(public_path('images'), $imageName);
+        $project->project_image = $imageName;
     }
+
+    $project->save();
+
+    return redirect()->route('project_brief', ['id' => $id]);
+}
+
 
 
     public function editProjectSkillsLevel($id)

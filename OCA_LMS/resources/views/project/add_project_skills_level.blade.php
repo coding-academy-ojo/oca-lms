@@ -35,18 +35,18 @@ Topics
             @foreach($skills as $skill)
                 <div class="mb-3">
                     <input type="checkbox" id="{{ 'skill_' . $skill->id }}" name="skills[]" value="{{ $skill->id }}">
-                    <label for="{{ 'skill_' . $skill->id }}">{{ $skill->name }}</label>
+                    <label for="{{ 'skill_' . $skill->id }}">{{ $skill->skills_name }}</label>
 
                     <select class="form-select" name="levels[]">
                         <option value="" selected disabled>Select Level</option>
                         @foreach($levels as $level)
                             @php
-                                $description = $descriptions->where('skill_id', $skill->id)->where('level_id', $level->id)->first()->description ?? '';
+                                $description = $descriptions->where('skill_id', $skill->id)->where('level_id', $level->id)->first()->skillLevels_description ?? '';
                                 // Limit description to 25 characters
                                  $description = substr($description, 0, 140);
                             @endphp
                             <option value="{{ $level->id }}" data-description="{{ $description }}">
-                                {{ $level->name }} -  " {{ $description }} "
+                                {{ $level->levels_name }} -  " {{ $description }} "
                             </option>
                         @endforeach
                     </select>

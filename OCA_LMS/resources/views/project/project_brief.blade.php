@@ -45,7 +45,6 @@ Topics
                     type="button" id="editOptionsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     Option
                 </button>
-
                 <ul class="dropdown-menu" aria-labelledby="editOptionsDropdown">
                     @if(Auth::user()->role == 'trainer')
                     <li><a class="dropdown-item" href="{{ route('edit_project', ['id' => $project->id]) }}">Edit
@@ -95,17 +94,20 @@ Topics
 
 
 
-        <div class="mb-3 mt-3">
-            <img src="{{ asset('images/' . $project->image) }}" alt="Project Image" class="img-fluid"
+        {{-- <div class="mb-3 mt-3">
+            <img src="{{ asset('images/' . $project->project_image) }}" alt="Project Image" class="img-fluid"
                 style="height: 400px; width: 100%;">
         </div>
 
 
         <div>
-            <p><strong>Project Name:</strong> {{ $project->name }}</p>
-            <p><strong>Start Date:</strong> {{ $project->start_date }}</p>
-            <p><strong>Delivery Date:</strong> {{ $project->delivery_date }}</p>
-            <p><strong>Project Description:</strong> {{ $project->description }}</p>
+            <p><strong>Project Name</strong> {{ $project->project_name }}</p>
+            <p><strong>Project context</strong> {{ $project->project_description }}</p>
+            <p><strong>Deliverable:</strong> {{ $project->project_deliverable }}</p>
+            <p><strong>Resources:</strong> {{ $project->project_resources }}</p>
+            <p><strong>Assessment Methods:</strong> {{ $project->project_assessment_methods }}</p>
+            <p><strong>Start Date:</strong> {{ $project->project_start_date }}</p>
+            <p><strong>Delivery Date:</strong> {{ $project->project_delivery_date }}</p>
             <p><strong>Cohort:</strong> {{ $project->cohort->cohort_name }}</p>
             @if($project->staff)
                 <p><strong>Trainer:</strong> {{ $project->staff->staff_name }}</p>
@@ -118,19 +120,130 @@ Topics
             <ul>
                 @foreach($skills as $skill)
                 <li class="mt-1">
-                    - {{ $skill->name }} - Levels {{ $skill->pivot->level_id }}:
+                    - {{ $skill->skills_name }} - Levels {{ $skill->pivot->level_id }}:
                     @foreach($levels as $level)
                     @if($level->id == $skill->pivot->level_id)
-                    <span style="color:#f16e00">"{{ $level->name }}"</span>
+                    <span style="color:#f16e00">"{{ $level->levels_name }}"</span>
                     @endif
                     @endforeach
                 </li>
                 @endforeach
             </ul>
+        </div> --}}
+
+
+
+
+        {{-- <div class="card mb-3">
+            <img src="{{ asset('images/' . $project->project_image) }}" alt="Project Image" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">{{ $project->project_name }}</h5>
+                @if($project->staff)
+                    <p class="card-text"><strong>Trainer:</strong> {{ $project->staff->staff_name }}</p>
+                @else
+                    <p class="card-text"><strong>Trainer:</strong> Not Assigned</p>
+                @endif
+            </div>
+        </div> --}}
+
+
+        <div class="card mb-3 mt-3">
+            <img src="{{ asset('images/' . $project->project_image) }}" alt="Project Image" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">{{ $project->project_name }}</h5>
+                @if($project->staff)
+                    <div class="d-flex align-items-center">
+                        <img src="{{ asset('images/' . $project->staff->staff_personal_img) }}" alt="Trainer Image" class="avatar me-3" style="height: 50px; width: 50px; border-radius: 50%;">
+                        <p class="card-text"><strong> {{ $project->staff->staff_name }}</strong></p>
+                    </div>
+                @else
+                    <p class="card-text"><strong>Trainer:</strong> Not Assigned</p>
+                @endif
+                <p class="card-text mx-4"><small class="text-muted mx-4">Created: {{ $project->created_at->format('Y-m-d') }}</small></p>
+            </div>
+        </div>
+
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Project Context</h5>
+                <p class="card-text">{{ $project->project_description }}</p>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Deliverable</h5>
+                <p class="card-text">{{ $project->project_deliverable }}</p>
+            </div>
+        </div>
+
+        {{-- <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Resources</h5>
+                <p class="card-text">{{ $project->project_resources }}</p>
+            </div>
+        </div> --}}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Resources</h5>
+                @if($project->project_resources)
+                    <p class="card-text">
+                        <i class="fa-solid fa-link"></i>
+                        <a href="{{ $project->project_resources }}" target="_blank" rel="noopener noreferrer">{{ $project->project_resources }}</a>
+                    </p>
+                @else
+                    <p class="card-text">No Resources Available</p>
+                @endif
+            </div>
+        </div>
+
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Assessment Methods</h5>
+                <p class="card-text">{{ $project->project_assessment_methods }}</p>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Time Constraint </h5>
+                <p class="card-text"><strong>Start Date:</strong> {{ $project->project_start_date }}</p>
+                <p class="card-text"><strong>Delivery Date:</strong> {{ $project->project_delivery_date }}</p>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Cohort Information</h5>
+                <p class="card-text"><strong>Cohort:</strong> {{ $project->cohort->cohort_name }}</p>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Target Skills</h5>
+                <ul class="list-group">
+                    @foreach($skills as $skill)
+                        <li class="list-group-item">
+                            - {{ $skill->skills_name }} - Levels {{ $skill->pivot->level_id }}:
+                            @foreach($levels as $level)
+                                @if($level->id == $skill->pivot->level_id)
+                                    <span style="color:#f16e00">"{{ $level->levels_name }}"</span>
+                                @endif
+                            @endforeach
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
 
 
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
 @endsection
