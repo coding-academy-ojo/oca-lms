@@ -53,7 +53,7 @@
         </div>
     </div>
 </nav>
-<div class="bg-dark text-white text-center py-5" style="background-image: url('{{ asset('assets/img/img_bookclub.jpg') }}'); background-size: cover; background-position: center;">
+<div class="bg-dark text-white text-center py-5" style="background-image: url('{{ asset('assets/img/img_bookclub.jpg') }}'); background-size:cover; background-position: center;">
     <div class=" container">
         <h1 class="display-3">
             @yield('title')
