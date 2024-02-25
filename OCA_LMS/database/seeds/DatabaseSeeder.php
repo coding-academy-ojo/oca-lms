@@ -26,12 +26,9 @@ class DatabaseSeeder extends Seeder
         $this->call(AcademyStaffTableSeeder::class,);
         $this->call(CohortsTableSeeder::class);
         $this->call(StudentsTableSeeder::class);
-<<<<<<< HEAD
-=======
         $this->call(TopicSeeder::class);
         $this->call(AssignmentSeeder::class);
 
->>>>>>> dd79eadf4531f9d114a35562bd3d3ae454f44060
         $this->command->info('Database seeded successfully!');
     }
 }

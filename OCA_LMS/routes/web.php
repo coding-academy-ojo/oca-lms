@@ -78,7 +78,7 @@ Route::get('/academies/{academy}', [AcademyController::class, 'show'])->name('ac
 Route::get('/cohorts/{academyId?}', [CohortController::class, 'index'])->name('academyview');
 Route::get('/cohorts/{cohort}/edit', [CohortController::class, 'edit'])->name('cohortedit');
 
-// super maneger 
+// super maneger
 Route::get('/supermanager-dashboard', [SuperManagerController::class, 'index'])->name('supermanager-dashboard');
 Route::get('/academies/show/view-cohort', [CohortController::class, 'cohortView'])->name('view-cohort');
 
@@ -151,20 +151,12 @@ Route::get('/download/{filename}', [AssignmentController::class, 'downloads'])->
 
 
 
-//Topic route 
+//Topic route
 Route::get('/Topic/create', [TopicController::class ,'create'])->name('topic.create');
 Route::post('/topic/store', [TopicController::class ,'store'])->name('topic.store');
 Route::get('/topic/{topic}/edit', [TopicController::class ,'edit'])->name('topic.edit');
 Route::put('/topic/{topic}', [TopicController::class ,'update'])->name('topic.update');
 Route::delete('/topic/{topic}', [TopicController::class ,'destroy'])->name('topic.destroy');
-
-
-
-
-
-
-
-
 
 
 

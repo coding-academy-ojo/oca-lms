@@ -13,10 +13,10 @@
                     <a class="nav-link" href="{{ route('assignments') }}">Assignments</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('topics') }}">Topics</a>
+                    <a class="nav-link" href="{{ route('show_all_projects') }}">Projects</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('show_all_projects') }}">Projects</a>
+                    <a class="nav-link" href="{{route('categories.indexCohort')}}">Roadmap</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('attendance') }}">Attendance</a>
@@ -25,7 +25,7 @@
                     <a class="nav-link" href="{{ route('absence') }}">Absence</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('traineesProgress') }}">Trainee Progress</a>
+                    <a class="nav-link" href="{{ route('traineesProgress') }}">Progress</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('staff') }}">Staff</a>
