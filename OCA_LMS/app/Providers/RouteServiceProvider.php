@@ -70,9 +70,6 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace)
             ->group(base_path('routes/rawan.php'));
 
-            Route::middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/sujoud.php'));
     }
 
     /**

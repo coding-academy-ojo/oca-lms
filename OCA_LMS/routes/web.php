@@ -6,12 +6,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\CohortController;
+<<<<<<< HEAD
+use App\Http\Controllers\ProjectController;
+
+=======
 use App\Http\Controllers\TechnologyCategoryController;
 use App\Http\Controllers\TechnologyCohortController;
 use App\Http\Controllers\TechnologyController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\SuperManagerController;
+>>>>>>> dd79eadf4531f9d114a35562bd3d3ae454f44060
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +42,7 @@ Route::get('/home', function () {
 });
 
 // staff login
-Route::get('/login',  [AuthController::class, 'showLoginForm'])->name('login'); 
+Route::get('/login',  [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 // students login
@@ -275,7 +280,7 @@ Route::get('/rodmap/{category}', [TechnologyCohortController::class, 'show'])->n
 
 
 // //////////////////////////////////////
-// // rawan 
+// // rawan
 
 // // Add Trainee route
 
@@ -291,20 +296,45 @@ Route::get('/rodmap/{category}', [TechnologyCohortController::class, 'show'])->n
 
 
 
-// ///////////////////////////////////////
-// // sojoud 
+////////////////////////////////////////////////////////////////////////////////
+
+//  ************************ Sujoud Mohammad *******************************
+
+// view all project
+Route::get('/projects', [ProjectController::class, 'showAllProjects'])->name('show_all_projects');
+
+// Add Project
+Route::get('/add_project', [ProjectController::class, 'showAddProjectForm'])->name('show_add_project_form');
+Route::post('/add_project', [ProjectController::class, 'addProject'])->name('add_project');
+
+// Add Project Skills Level
+Route::get('/add_project_skills_level/{project_id}', [ProjectController::class, 'showAddProjectSkillsLevelForm'])->name('add_project_skills_level');
+Route::post('/add_project_skills_level', [ProjectController::class, 'processProjectSkillsLevelForm'])->name('process_project_skills_level_form');
+
+// Project Brief
+Route::get('/project_brief/{id}', [ProjectController::class, 'showProjectBrief'])->name('project_brief');
+
+// Edit Project
+Route::get('/edit_project/{id}', [ProjectController::class, 'editProject'])->name('edit_project');
+Route::put('/update_project/{id}', [ProjectController::class, 'updateProject'])->name('update_project');
+
+// Edit Project Skills Level
+Route::get('/edit_project_skills_level/{id}', [ProjectController::class, 'editProjectSkillsLevel'])->name('edit_project_skills_level');
+Route::put('/update_project_skills_level/{id}', [ProjectController::class, 'updateProjectSkillsLevel'])->name('update_project_skills_level');
+
+// // Show modal
+// Route::get('/add_project_submission_modal/{project_id}', 'ProjectController@showAddProjectSubmissionModal')->name('show_add_project_submission_modal');
+
+// // Process form submission
+// Route::post('/process_project_submission/{project_id}', 'ProjectController@processProjectSubmission')->name('process_project_submission');
+
+// Route::get('/view_project_submissions/{project_id}', 'ProjectController@viewProjectSubmissions')->name('view_project_submissions');
+
+// Route::post('/process_feedback/{submission_id}', 'ProjectController@processFeedback')->name('process_feedback');
+
+// Route::get('/view_submissions_feedback/{project_id}', 'ProjectController@viewSubmissionsAndFeedback')->name('view_submissions_feedback');
 
 
-
-// Route::get('/project', function () {
-//     return view('project.project');
-// })->name('project');
-// Route::get('/createProject', function () {
-//     return view('project.createProject');
-// })->name('createProject');
-// Route::get('/createProjectSkills', function () {
-//     return view('project.createProjectSkills');
-// })->name('createProjectSkills');
 
 
 
