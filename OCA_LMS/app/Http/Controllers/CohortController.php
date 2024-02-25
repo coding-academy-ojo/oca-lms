@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Student;
 use App\Staff;
+use Session;
 
 class CohortController extends Controller
 {
@@ -19,7 +20,7 @@ class CohortController extends Controller
         $user = Auth::guard('staff')->user() ?? Auth::guard('students')->user();
 
         $cohorts = collect();
-        $canEditCohort = false; // Default to false
+        $canEditCohort = false; 
 
         if ($user instanceof Staff) {
             // Staff user (manager, trainer, or super manager)
@@ -44,7 +45,7 @@ class CohortController extends Controller
             // Student user
             $studentAcademyId = $user->academy_id;
             if ($studentAcademyId != $academyId) {
-                // If the student's academy does not match the requested academy, redirect with an error message
+                // If the student's academy does not match the requested academy
                 return redirect()->route('academies.index')->with('error', 'You are not enrolled in this academy.');
             }
 
@@ -83,14 +84,15 @@ class CohortController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($cohortId)
     {
-        return view('academies.view-cohort');
+        $cohort = Cohort::findOrFail($cohortId); 
+        
+        session(['cohort_ID' => $cohortId]);
+        // dd(session('cohort_ID'));
+        return view('academies.view-cohort', compact('cohort'));
     }
-    public function cohortView()
-    {
-        return view('academies.view-cohort');
-    }
+ 
 
     /**
      * Show the form for editing the specified resource.
