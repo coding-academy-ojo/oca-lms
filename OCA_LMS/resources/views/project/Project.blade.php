@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Topics
+All Projects
 @endsection
 @section('content')
 {{-- =========================================================== --}}

@@ -7,7 +7,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\CohortController;
 use App\Http\Controllers\ProjectController;
+<<<<<<< HEAD
 
+=======
+>>>>>>> cbbfa3e59956a5d025b3d2b9f42b55fc491552c7
 use App\Http\Controllers\TechnologyCategoryController;
 use App\Http\Controllers\TechnologyCohortController;
 use App\Http\Controllers\TechnologyController;
