@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Project Brief 
+Project Brief
 @endsection
 @section('content')
 {{-- =========================================================== --}}
@@ -148,7 +148,7 @@ Project Brief
 
 
         <div class="card mb-3 mt-3">
-            <img src="{{ asset('images/' . $project->project_image) }}" alt="Project Image" class="card-img-top">
+            <img style="height: 400px; width: 100%;" src="{{ asset('images/' . $project->project_image) }}" alt="Project Image" class="card-img-top">
             <div class="card-body">
                 <h5 class="card-title">{{ $project->project_name }}</h5>
                 @if($project->staff)
