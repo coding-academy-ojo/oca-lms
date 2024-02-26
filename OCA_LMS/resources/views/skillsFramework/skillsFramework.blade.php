@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Skills Framework
+Skills Framework (Competence)
 @endsection
 
 

@@ -80,7 +80,7 @@ Route::get('/cohorts/{cohort}/edit', [CohortController::class, 'edit'])->name('c
 
 // super maneger
 Route::get('/supermanager-dashboard', [SuperManagerController::class, 'index'])->name('supermanager-dashboard');
-Route::get('/academies/show/view-cohort', [CohortController::class, 'cohortView'])->name('view-cohort');
+Route::get('/cohorts/view-cohort/{cohort}', [CohortController::class, 'show'])->name('view-cohort');
 
 
 
