@@ -153,7 +153,7 @@ Edit Assignment
                                             <select class="form-select" id="class" name="topic" required>
                                                 <option value="{{ $assignment->topic_id}}">{{ $assignment->topic->topic_name}}</option>
                                                 @foreach($topics as $topic)
-                                                <option value="{{ $topic->id }}">{{ $topic->topic_name }} - {{ $topic->technology->name }}</option>
+                                                <option value="{{ $topic->id }}">{{ $topic->topic_name }} - {{ $topic->technology->technologies_name }}</option>
                                             @endforeach
                                             </select>
                                             <div class="invalid-feedback">This field is required</div>
@@ -184,7 +184,7 @@ Edit Assignment
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
                                             <label class="my-2">Assignment File</label>
-                                            <input type="file" class="form-control" name="assignment_file" value="{{ $assignment->assignment_attached_file}}" required>
+                                            <input type="file" class="form-control" name="assignment_file" value="{{ $assignment->assignment_attached_file}}" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" onchange="validateFile(this)">
                                             <div class="invalid-feedback">This field is required</div>
                                         </div>
                                     </div>
@@ -260,4 +260,40 @@ Edit Assignment
             dropdownContent.classList.remove('show');
         }
     }
+
+    /////////////////////////
+    function validateFile(input) {
+        const file = input.files[0];
+        const validExtensions = ['.pdf', '.doc', '.docx', '.jpg', '.jpeg', '.png'];
+        const maxFileSize = 5 * 1024 * 1024; // 5MB
+
+        if (file) {
+            const fileName = file.name;
+            const fileSize = file.size;
+            const fileExtension = fileName.substring(fileName.lastIndexOf('.')).toLowerCase();
+
+            if (!validExtensions.includes(fileExtension) || fileSize > maxFileSize) {
+                input.setCustomValidity('Invalid file type or size (PDF, Word, or Image only, max 5MB).');
+            } else {
+                input.setCustomValidity('');
+            }
+        } else {
+            // If no file is selected, clear any existing validation message
+            input.setCustomValidity('');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var forms = document.getElementsByClassName('needs-validation');
+        var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });  
+
+    });
 </script>

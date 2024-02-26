@@ -64,7 +64,7 @@ class AssignmentController extends Controller
         if ($request->has('students')) {
             $studentIds = $request->input('students');
 
-            // Attach students to the assignment
+            // Assign students to the assignment
             $assignment->student()->attach($studentIds);
         }
 
@@ -130,13 +130,11 @@ class AssignmentController extends Controller
         if ($request->has('students')) {
             $studentIds = $request->input('students');
 
-            // Attach students to the assignment
+            // assign students to the assignment
             $assignment->student()->attach($studentIds);
         }
 
         $assignment->update();
-
-
         return redirect()->route('assignments')->with('success', 'Assignment create successfully');
     }
 

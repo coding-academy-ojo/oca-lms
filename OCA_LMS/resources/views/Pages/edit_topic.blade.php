@@ -44,7 +44,7 @@
                                             <div class="form-group">
                                                 <label class="my-2">Technology</label>
                                                 <select class="form-select" id="class" name="technology_id" required>
-                                                    <option value="{{ $topic->technology_id}}">{{ $topic->technology->name }}</option>
+                                                    <option value="{{ $topic->technology_id}}">{{ $topic->technology->technologies_name }}</option>
                                                     @foreach ($technologies as $technology)
                                                         <option value="{{ $technology->id }}">{{ $technology->name }}
                                                         </option>

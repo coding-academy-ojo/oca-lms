@@ -39,9 +39,6 @@
                     <a class="nav-link" href="{{route('categories.index')}}">Technology category</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('categories.indexCohort')}}">Roadmap</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="{{route('profile')}}">Profile</a>
                 </li>
                 <li class="nav-item">

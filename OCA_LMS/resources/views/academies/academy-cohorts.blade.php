@@ -22,7 +22,7 @@ No Cohorts Available
             <p class="card-text py-2">Academy: {{ $cohort->academy->academy_name }}</p>
 
             <div class="d-flex g-1 justify-content-end gap-2">
-                <a href="{{route('view-cohort')}}" class="btn btn-secondary">View</a>
+                <a href="{{ route('view-cohort', $cohort->id) }}" class="btn btn-secondary">View</a>
                 @auth('staff')
                 @if(Auth::guard('staff')->user()->role === 'super_manager')
                 <a href="{{ route('cohortedit', $cohort->id) }}" class="btn btn-primary">Edit</a>

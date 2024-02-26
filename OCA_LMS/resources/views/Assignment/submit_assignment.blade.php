@@ -28,14 +28,14 @@
             <div class="mt-3">
                 <b>Deadline: {{ $assignment->assignment_due_date }}</b>
             </div>
-            <form method="" action="" enctype="multipart/form-data" class="needs-validation" novalidate>
+            {{-- <form method="" action="" enctype="multipart/form-data" class="needs-validation" novalidate>
                 @csrf
                 <div class="input-group my-3">
                     <input type="text" class="form-control" placeholder="submit your assignment"
                         aria-label="Recipient's username" aria-describedby="button-addon2">
                     <button class="btn btn-primary" type="button" id="button-addon2">Submit</button>
                 </div>
-            </form>
+            </form> --}}
         </div>
     </div>
 @endsection

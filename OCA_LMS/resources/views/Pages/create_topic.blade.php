@@ -44,7 +44,7 @@ Create Topic
                                                 <select class="form-select" id="class" name="technology_id" required>
                                                     <option value="">Select topic</option>
                                                     @foreach($technologies as $technology)
-                                                    <option value="{{ $technology->id }}">{{ $technology->name }}</option>
+                                                    <option value="{{ $technology->id }}">{{ $technology->technologies_name }}</option>
                                                     @endforeach
                                                 </select>
                                                 <div class="invalid-feedback">This field is required</div>
