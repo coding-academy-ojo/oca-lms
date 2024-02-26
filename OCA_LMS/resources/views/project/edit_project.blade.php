@@ -85,7 +85,7 @@ Edit Project
         </div>
         <!-- End of New Fields -->
 
-    <div class="mb-3">
+    {{-- <div class="mb-3">
         <label for="cohort_id" class="form-label">Choose Cohort</label>
         <select class="form-select" id="cohort_id" name="cohort_id" required>
             @foreach($cohorts as $cohort)
@@ -94,7 +94,7 @@ Edit Project
             </option>
             @endforeach
         </select>
-    </div>
+    </div> --}}
 
     <button type="submit" class="btn btn-primary">Update Project</button>
 </form>

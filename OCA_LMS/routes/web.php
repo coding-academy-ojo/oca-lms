@@ -311,16 +311,16 @@ Route::get('/edit_project_skills_level/{id}', [ProjectController::class, 'editPr
 Route::put('/update_project_skills_level/{id}', [ProjectController::class, 'updateProjectSkillsLevel'])->name('update_project_skills_level');
 
 // // Show modal
-// Route::get('/add_project_submission_modal/{project_id}', 'ProjectController@showAddProjectSubmissionModal')->name('show_add_project_submission_modal');
+Route::get('/add_project_submission_modal/{project_id}', 'ProjectController@showAddProjectSubmissionModal')->name('show_add_project_submission_modal');
 
 // // Process form submission
-// Route::post('/process_project_submission/{project_id}', 'ProjectController@processProjectSubmission')->name('process_project_submission');
+Route::post('/process_project_submission/{project_id}', 'ProjectController@processProjectSubmission')->name('process_project_submission');
 
-// Route::get('/view_project_submissions/{project_id}', 'ProjectController@viewProjectSubmissions')->name('view_project_submissions');
+Route::get('/view_project_submissions/{project_id}', 'ProjectController@viewProjectSubmissions')->name('view_project_submissions');
 
-// Route::post('/process_feedback/{submission_id}', 'ProjectController@processFeedback')->name('process_feedback');
+Route::post('/process_feedback/{submission_id}', 'ProjectController@processFeedback')->name('process_feedback');
 
-// Route::get('/view_submissions_feedback/{project_id}', 'ProjectController@viewSubmissionsAndFeedback')->name('view_submissions_feedback');
+Route::get('/view_submissions_feedback/{project_id}', 'ProjectController@viewSubmissionsAndFeedback')->name('view_submissions_feedback');
 
 
 

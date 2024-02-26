@@ -17,19 +17,29 @@ use App\Staff; // Import the Staff model
 
 class ProjectController extends Controller
 {
-    public function showAllProjects()
-    {
-        $userCohorts = Auth::user()->cohorts->pluck('id')->toArray(); // Updated from classrooms to cohorts
+    // public function showAllProjects()
+    // {
+    //     $userCohorts = Auth::user()->cohorts->pluck('id')->toArray(); // Updated from classrooms to cohorts
+    //     $projects = Project::whereIn('cohort_id', $userCohorts)->get();
+    //     return view('project.project', compact('projects'));
+    // }
 
-        $projects = Project::whereIn('cohort_id', $userCohorts)->get();
+        public function showAllProjects()
+    {
+        // Check if the cohort_id is stored in the session for students and staff
+        session(['cohort_ID' => 1]);
+        $cohortId = session('cohort_ID');
+        // Retrieve projects based on the cohort_id
+        $projects = Project::where('cohort_id', $cohortId)->get();
+        // Pass the projects to the view
         return view('project.project', compact('projects'));
     }
+
 
     public function showAddProjectForm()
     {
         // Fetch available cohorts
         $cohorts = Cohort::all(); // Updated from Classroom to Cohort
-
         // Fetch skills and levels for the form
         $skills = Skill::all();
         $levels = Level::all();
@@ -41,45 +51,47 @@ class ProjectController extends Controller
     }
 
 
-public function addProject(Request $request)
-{
-    // Validate the request
-    $request->validate([
-        'project_name' => 'required',
-        'project_description' => 'required',
-        // 'project_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'project_image' => 'required',
-        'project_start_date' => 'required|date',
-        'project_delivery_date' => 'required|date|after:project_start_date',
-        'cohort_id' => 'required',
-        'project_deliverable' => 'nullable',
-        'project_resources' => 'nullable',
-        'project_assessment_methods' => 'nullable',
-    ]);
+    public function addProject(Request $request)
+    {
+        // Validate the request
+        $request->validate([
+            'project_name' => 'required',
+            'project_description' => 'required',
+            // 'project_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'project_image' => 'required',
+            'project_start_date' => 'required|date',
+            'project_delivery_date' => 'required|date|after:project_start_date',
+            // 'cohort_id' => 'required',
+            'project_deliverable' => 'nullable',
+            'project_resources' => 'nullable',
+            'project_assessment_methods' => 'nullable',
+        ]);
 
-    // Save the project details
-    $project = new Project;
-    $project->project_name = $request->input('project_name');
-    $project->project_description = $request->input('project_description');
-    $project->cohort_id = $request->input('cohort_id'); // Update cohort_id directly
-    $project->staff_id = auth()->user()->id;
-    $project->project_start_date = $request->input('project_start_date');
-    $project->project_delivery_date = $request->input('project_delivery_date');
-    $project->project_deliverable = $request->input('project_deliverable');
-    $project->project_resources = $request->input('project_resources');
-    $project->project_assessment_methods = $request->input('project_assessment_methods');
+        // Save the project details
+        $project = new Project;
+        $project->project_name = $request->input('project_name');
+        $project->project_description = $request->input('project_description');
+        // $project->cohort_id = $request->input('cohort_id'); // Update cohort_id directly
 
-    // Handle image upload
-    if ($request->hasFile('project_image')) {
-        $imageName = time().'.'.$request->project_image->extension();
-        $request->project_image->move(public_path('images'), $imageName);
-        $project->project_image = $imageName;
+        // Get cohort_id from the session and update it directly
+        $project->cohort_id = session('cohort_ID');
+        $project->staff_id = auth()->user()->id;
+        $project->project_start_date = $request->input('project_start_date');
+        $project->project_delivery_date = $request->input('project_delivery_date');
+        $project->project_deliverable = $request->input('project_deliverable');
+        $project->project_resources = $request->input('project_resources');
+        $project->project_assessment_methods = $request->input('project_assessment_methods');
+
+        // Handle image upload
+        if ($request->hasFile('project_image')) {
+            $imageName = time().'.'.$request->project_image->extension();
+            $request->project_image->move(public_path('images'), $imageName);
+            $project->project_image = $imageName;
+        }
+
+        $project->save();
+        return redirect()->route('add_project_skills_level', ['project_id' => $project->id]);
     }
-
-    $project->save();
-    return redirect()->route('add_project_skills_level', ['project_id' => $project->id]);
-}
-
 
 
     public function showAddProjectSkillsLevelForm($project_id)
@@ -157,7 +169,7 @@ public function addProject(Request $request)
         'project_image' => 'required',
         'project_start_date' => 'required|date',
         'project_delivery_date' => 'required|date|after:start_date',
-        'cohort_id' => 'required|exists:cohorts,id',
+        // 'cohort_id' => 'required|exists:cohorts,id',
         'project_deliverable' => 'nullable',
         'project_resources' => 'nullable',
         'project_assessment_methods' => 'nullable',
@@ -166,7 +178,7 @@ public function addProject(Request $request)
     $project = Project::findOrFail($id);
     $project->project_name = $request->input('project_name');
     $project->project_description = $request->input('project_description');
-    $project->cohort_id = $request->input('cohort_id');
+    $project->cohort_id = session('cohort_ID');
     $project->project_start_date = $request->input('project_start_date');
     $project->project_delivery_date = $request->input('project_delivery_date');
     $project->project_deliverable = $request->input('project_deliverable');
@@ -183,8 +195,6 @@ public function addProject(Request $request)
 
     return redirect()->route('project_brief', ['id' => $id]);
 }
-
-
 
     public function editProjectSkillsLevel($id)
 {
@@ -259,70 +269,71 @@ public function showEditProjectSkillsLevelForm($projectId)
     return view('project.edit_project_skills_level', compact('project', 'skills', 'levels', 'selectedSkills', 'selectedLevels'));
 }
 
-// public function showAddProjectSubmissionModal($project_id)
-// {
-//     $project = Project::findOrFail($project_id);
+public function showAddProjectSubmissionModal($project_id)
+{
+    $project = Project::findOrFail($project_id);
 
-//     // Check if the logged-in user is a trainee
-//     if (Auth::user()->role == 'trainee') {
-//         // Load the modal content for trainees
-//         return view('project.add_project_submission_modal_trainee', compact('project'));
-//     }
+    // // Check if the logged-in user is a trainee
+    // if (Auth::user()->role == 'trainee') {
+    //     // Load the modal content for trainees
+    //     return view('project.add_project_submission_modal_trainee', compact('project'));
+    // }
 
-//     // Load the default modal content for other roles
-//     return view('project.add_project_submission_modal', compact('project'));
-// }
-
-
-// public function processProjectSubmission(Request $request, $project_id)
-// {
-//     // Validate the request
-//     $request->validate([
-//         'submission_link' => 'required|url',
-//     ]);
-
-//     // Save the project submission
-//     $submission = new ProjectSubmission;
-//     $submission->trainee_id = Auth::user()->id;
-//     $submission->project_id = $project_id;
-//     $submission->submission_link = $request->input('submission_link');
-//     $submission->save();
-
-//     return redirect()->route('project_brief', ['id' => $project_id])->with('success', 'Project submission added successfully');
-// }
+    // Load the default modal content for other roles
+    return view('project.add_project_submission_modal', compact('project'));
+}
 
 
-// public function viewProjectSubmissions($project_id)
-// {
-//     $project = Project::findOrFail($project_id);
-//     $cohort = $project->cohort; // Updated from Classroom to Cohort
+public function processProjectSubmission(Request $request, $project_id)
+{
+    // Validate the request
+    $request->validate([
+        'submission_link' => 'required|url',
+    ]);
 
-//     // Fetch all submissions for the project
-//     $submissions = ProjectSubmission::where('project_id', $project_id)->get();
+    // Save the project submission
+    $submission = new ProjectSubmission;
+    // $submission->trainee_id = Auth::user()->id;
+    $submission->student_id = Auth::guard('students')->user()->id;
+    $submission->project_id = $project_id;
+    $submission->submission_link = $request->input('submission_link');
+    $submission->save();
 
-//     return view('project.view_project_submissions', compact('project', 'cohort', 'submissions'));
-// }
+    return redirect()->route('project_brief', ['id' => $project_id])->with('success', 'Project submission added successfully');
+}
 
 
-// public function processFeedback(Request $request, $submission_id)
-// {
-//     // Validate the request
-//     $request->validate([
-//         'feedback' => 'required',
-//     ]);
+public function viewProjectSubmissions($project_id)
+{
+    $project = Project::findOrFail($project_id);
+    $cohort = $project->cohort; // Updated from Classroom to Cohort
 
-//     // Save the feedback
-//     $submission = ProjectSubmission::findOrFail($submission_id);
-//     $feedback = new ProjectFeedback;
-//     $feedback->trainer_id = Auth::user()->id;
-//     $feedback->trainee_id = $submission->trainee_id;
-//     $feedback->project_id = $submission->project_id;
-//     $feedback->submission_id = $submission->id; // Set submission_id
-//     $feedback->feedback = $request->input('feedback');
-//     $feedback->save();
+    // Fetch all submissions for the project
+    $submissions = ProjectSubmission::where('project_id', $project_id)->get();
 
-//     return redirect()->route('view_project_submissions', ['project_id' => $submission->project_id])->with('success', 'Feedback saved successfully');
-// }
+    return view('project.view_project_submissions', compact('project', 'cohort', 'submissions'));
+}
+
+
+public function processFeedback(Request $request, $submission_id)
+{
+    // Validate the request
+    $request->validate([
+        'feedback' => 'required',
+    ]);
+
+    // Save the feedback
+    $submission = ProjectSubmission::findOrFail($submission_id);
+    $feedback = new ProjectFeedback;
+    $feedback->staff_id = Auth::guard('staff')->user()->id;
+    $feedback->student_id = $submission->student_id;
+    $feedback->project_id = $submission->project_id;
+    $feedback->submission_id = $submission->id; // Set submission_id
+    $feedback->feedback = $request->input('feedback');
+    $feedback->save();
+
+    return redirect()->route('view_project_submissions', ['project_id' => $submission->project_id])->with('success', 'Feedback saved successfully');
+}
 
 
 
@@ -331,7 +342,6 @@ public function viewSubmissionsAndFeedback($project_id)
     // Fetch project details
     $project = Project::findOrFail($project_id);
 
-    // Check if the logged-in user is the trainee associated with this project
         // Fetch submissions and feedback for the project
         $submissionsAndFeedback = $project->submissionsAndFeedback();
         return view('project.view_submissions_feedback', compact('project', 'submissionsAndFeedback'));

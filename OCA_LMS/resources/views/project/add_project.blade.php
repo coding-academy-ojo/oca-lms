@@ -58,11 +58,11 @@ Create Project
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="project_start_date" class="form-label">Start Date</label>
-                <input type="date" class="form-control" id="project_start_date" name="project_start_date" required>
+                <input min="{{ date('Y-m-d') }}" type="date" class="form-control" id="project_start_date" name="project_start_date" required>
             </div>
             <div class="col-md-6 mb-3">
                 <label for="project_delivery_date" class="form-label">Delivery Date</label>
-                <input type="date" class="form-control" id="project_delivery_date" name="project_delivery_date" required>
+                <input  min="{{ date('Y-m-d') }}" type="date" class="form-control" id="project_delivery_date" name="project_delivery_date" required>
             </div>
         </div>
 
@@ -82,7 +82,7 @@ Create Project
             <input type="text" class="form-control" id="project_assessment_methods" name="project_assessment_methods">
         </div>
 
-        <div class="mb-3">
+        {{-- <div class="mb-3">
             <label for="cohort_id" class="form-label">Choose Cohort</label>
             <select class="form-select" id="cohort_id" name="cohort_id">
                 @foreach($cohorts as $cohort)
@@ -91,7 +91,8 @@ Create Project
                     @endif
                 @endforeach
             </select>
-        </div>
+        </div> --}}
+        
         <button type="submit" class="btn btn-primary">Next</button>
     </form>
 

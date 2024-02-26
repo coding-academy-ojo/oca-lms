@@ -48,10 +48,10 @@ class Project extends Model
                 'project_submissions.created_at as submission_created_at',
                 'project_feedback.feedback',
                 'project_feedback.created_at as feedback_created_at',
-                'students.name as student_name',
-                'students.photo as student_photo',
-                'staff.name as staff_name',
-                'staff.photo as staff_photo'
+                'students.en_first_name as student_name',
+                'students.personal_img as student_photo',
+                'staff.staff_name as staff_name',
+                'staff.staff_personal_img as staff_photo'
             )
             ->get();
     }

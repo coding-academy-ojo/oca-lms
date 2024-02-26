@@ -25,14 +25,14 @@ All Projects
 <div class="innerPage mt-3">
     <div class="container">
 
-        @if(Auth::user()->role == 'trainer')
+        @if(Auth::guard('staff')->check() && Auth::guard('staff')->user()->role === 'trainer')
         <div class="col-md-2 ms-auto mb-3">
             <form action="{{ route('show_add_project_form') }}" method="GET">
                 <button type="submit" class="btn btn-primary">Add Project</button>
             </form>
         </div>
         @endif
-
+        
             {{-- <div class="row">
                 @foreach($projects as $project)
 
