@@ -39,7 +39,7 @@
                     <a class="nav-link" href="{{route('categories.index')}}">Technology category</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('profile')}}">Profile</a>
+                    <a class="nav-link" href="{{route('profile.index')}}">Profile</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('logout') }}">Logout</a>

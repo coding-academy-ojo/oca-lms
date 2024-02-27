@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Auth;
 
 class TechnologyCohortController extends Controller
 {
-    
     /**
      * Display a listing of the resource.
      *
@@ -94,7 +93,7 @@ class TechnologyCohortController extends Controller
             ->get();
 
         // Pass the data to the view
-        return view('technology.TechnologyCohort', compact('technologies', 'category', 'cohortId'));
+        return view('technology.Technology', compact('technologies', 'category', 'cohortId'));
     }
 
     /**

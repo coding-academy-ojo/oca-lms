@@ -3,8 +3,6 @@
 Profile
 @endsection
 
-
-
 @section('content')
 @include('layouts.innerNav')
 <section class="inner-bred">
@@ -22,7 +20,7 @@ Profile
 {{-- =========================================================== --}}
 {{-- =================== Breadcrumb Section ==================== --}}
 {{-- =========================================================== --}}
-<div class="innerPage  mt-3">
+<!-- <div class="innerPage  mt-3">
     <div class="container">
         <div class="main-body">
             <div class="col-md-2 ms-auto mb-3">
@@ -141,5 +139,72 @@ Profile
             </div>
         </div>
     </div>
+</div> -->
+
+<div class="innerPage mt-3">
+    <div class="container">
+        <div class="main-body">
+            <div class="col-md-2 ms-auto mb-3">
+                <a href="{{ route('profile.edit') }}">Edit Profile</a>
+                &nbsp;
+                <a href="{{ route('editProfile') }}">Reset Password</a>
+            </div>
+            <div class="row gutters-sm">
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                                <div class="mt-3">
+                                    <h4>{{ $user->staff_name ?? $user->en_first_name }}</h4>
+                                    <p class="text-secondary mb-1">{{ $user->role ?? 'Student' }}</p>
+                                    <!-- You can adjust the below line to display the appropriate location -->
+                                    <p class="text-muted font-size-sm">{{ $user->location ?? 'Location' }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-3">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0">Email</h6>
+                                <span class="text-secondary">{{ $user->staff_email ?? $user->email }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0">Phone Number</h6>
+                                <span class="text-secondary">{{ $user->mobile ?? 'N/A' }}</span>
+                            </li>
+                            <!-- Add more user information fields here -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Bio</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ $user->staff_bio ?? $user->about }}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Education</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ $user->education ?? 'N/A' }}
+                                </div>
+                            </div>
+                            <!-- Add more user information fields here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
 @endsection

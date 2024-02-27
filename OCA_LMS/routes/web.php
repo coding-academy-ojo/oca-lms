@@ -13,6 +13,7 @@ use App\Http\Controllers\TechnologyController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\SuperManagerController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -188,9 +189,9 @@ Route::get('/createTopics', function () {
 
 
 
-Route::get('/profile', function () {
-    return view('profile.profile');
-})->name('profile');
+// Route::get('/profile', function () {
+//     return view('profile.profile');
+// })->name('profile');
 
 Route::get('/editProfile', function () {
     return view('profile.editProfile');
@@ -265,6 +266,10 @@ Route::post('/technologies/{technology}/addToCohort', [TechnologyCohortControlle
 Route::get('/rodmap', [TechnologyCategoryController::class, 'indexCohort'])->name('categories.indexCohort');
 Route::get('/rodmap/{category}', [TechnologyCohortController::class, 'show'])->name('rodmap.show');
 
+
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+Route::get('/edit-profile', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::post('/update-profile', [ProfileController::class, 'update'])->name('profile.update');
 
 
 // //////////////////////////////////////

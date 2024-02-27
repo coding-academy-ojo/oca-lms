@@ -23,9 +23,12 @@ Technologies
 {{-- =========================================================== --}}
 <div class="innerPage mt-3">
     <div class="container">
+        @if(Auth::guard('staff')->check() && Auth::guard('staff')->user()->role === 'trainer')
         <div class="col-md-2 ms-auto mb-3">
             <a href="{{ route('technology.create', ['category' => $category->id]) }}" class=" btn btn-primary m-auto">Create technology</a>
         </div>
+        @endif
+
         <div class="projectCard">
             <div class="row">
                 @foreach ($technologies as $technology)
@@ -34,7 +37,9 @@ Technologies
                         <a href="{{ route('technology.showInfo', ['technology' => $technology]) }}">
                             <img src="{{ asset('assets/img/' . $technology->technologies_photo) }}" alt="">
                         </a>
-                        <div class="innerCard">
+                        <div class="innerCard" style="gap: 1rem;
+    display: flex;
+    flex-direction: column;">
                             <a href="{{ route('technology.showInfo', ['technology' => $technology]) }}">
                                 <h4 class="text-center">{{ $technology->technologies_name }}</h4>
                             </a>
@@ -42,12 +47,18 @@ Technologies
                                 @csrf
                                 <button type="submit">Add to Cohort</button>
                             </form> -->
+                            @if(Auth::guard('staff')->check() && Auth::guard('staff')->user()->role === 'trainer')
                             <form style="display: flex;" method="POST" action="{{ route('technology.addToCohort', ['technology' => $technology]) }}">
                                 @csrf
                                 <input type="hidden" name="cohort_id" value="{{ $technology->technology_category_id }}">
                                 <button class=" btn btn-primary m-auto" type="submit">Add to Cohort</button>
                                 <a class=" btn btn-primary m-auto" href="{{ route('technology.showInfo', ['technology' => $technology]) }}">view</a>
                             </form>
+                            @else
+                            <a class=" btn btn-primary m-auto" href="{{ route('technology.showInfo', ['technology' => $technology]) }}">view</a>
+
+                            @endif
+
 
                         </div>
                     </div>
