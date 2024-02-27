@@ -7,7 +7,7 @@
                     <a class="nav-link active" href="{{ route('view_material') }}">Materials</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('announcements') }}">Announcements</a>
+                    <a class="nav-link" href="{{ route('Announcements') }}">Announcements</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('assignments') }}">Assignments</a>

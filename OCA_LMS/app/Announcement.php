@@ -3,18 +3,22 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Announcement extends Model
 {
     protected $fillable = [
-        'content', 'date', 'user_id'
+        'content', 'date', 'staff_id'
     ];
 
-    public function user()
+    public function staff()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\staff');
+        
     }
 
-    // Add any additional relations you need
+
+    use SoftDeletes;
 
 }

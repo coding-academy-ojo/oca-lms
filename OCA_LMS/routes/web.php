@@ -13,6 +13,7 @@ use App\Http\Controllers\TechnologyController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\SuperManagerController;
+use App\Http\Controllers\AnnouncementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,16 +50,16 @@ Route::post('/login/student', 'AuthController@studentLogin')->name('student.logi
 
 // Route::resource('classrooms', 'ClassroomController');
 
+
+
 //Rawan Abuseini route
 
 // announcements routes
-// Route::get('/announcements', [AnnouncementController::class, 'index']);
-// Route::post('/announcements', [AnnouncementController::class, 'store'])-> name('store');
-// Route::delete('/{announcement:id}', [AnnouncementController::class, 'destroy'])-> name('destroy');
-
-Route::get('/announcements', function () {
-    return view('Pages/announcements');
-})->name('announcements');
+Route::get('/announcements', [AnnouncementController::class, 'index'])-> name('Announcements');
+Route::post('/announcements', [AnnouncementController::class, 'store'])-> name('announcements.store');
+Route::put('/announcements/{id}', [AnnouncementController::class, 'update'])->name('announcements.update');
+Route::delete('/{announcement:id}', [AnnouncementController::class, 'destroy'])-> name('destroy');
+////////////////////////////////////////////////
 
 
 
