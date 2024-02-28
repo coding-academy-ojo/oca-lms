@@ -24,6 +24,7 @@
         }
     </style>
     <div class="container">
+        
         <div class="m-auto col-8" >
             @if  (auth()->check() && auth()->user()->role == "trainer")
             <div class="my-5">
@@ -58,30 +59,9 @@
                         </form>
                     </div>
                     @endif
-
-                    {{-- <div class="clickable-icon" data-bs-toggle="dropdown" data-target="#optionsModal">
-                        <span class="material-symbols-outlined mt-2 me-2">more_vert</span>
-                        <ul class="dropdown-menu dropdown-menu-end rounded-2">
-                            <li><a class="dropdown-item" href="{{ route('assignment.edit', $assignment->id) }}">Edit</a></li>
-                            <li>
-                                <form action="{{ route('assignment.destroy', $assignment->id) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="dropdown-item">Delete</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </div> --}}
                 </div>
                 @endforeach
             </div>
         </div>
     </div>
-    {{-- <script>
-        function toggleassignmentDetails(assignment) {
-            const details = assignment.nextElementSibling;
-            details.style.display = details.style.display === 'none' ? 'block' : 'none';
-            // details.style.border = "1px solid #ccc";  
-        }
-    </script> --}}
 @endsection

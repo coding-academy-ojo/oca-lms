@@ -29,10 +29,15 @@ class StudentsTableSeeder extends Seeder
                 'is_email_verified' => $faker->boolean,
                 'mobile' => $faker->phoneNumber,
                 'academy_id' => $academyId,
+                'en_first_name' => $faker->name,
+                'en_second_name' => $faker->name,
+                'en_third_name' => $faker->name,
+                'en_last_name' => $faker->name,
                 'cohort_id' => $cohortId,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
         }
+        
     }
 }

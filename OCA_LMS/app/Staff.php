@@ -11,7 +11,7 @@ class Staff extends Authenticatable
 {
     use Notifiable;
     protected $fillable = [
-        'staff_name', 'staff_email', 'staff_password', 'role', 'staff_cv', 'staff_bio', 'staff_personal_img'
+        'staff_name', 'staff_email', 'staff_password', 'role', 'taff_Phone', 'staff_cv', 'staff_bio', 'staff_personal_img'
     ];
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
@@ -51,8 +51,8 @@ class Staff extends Authenticatable
         return $this->staff_password;
     }
 
-    // public function staffCohorts()
-    // {
-    //     return $this->hasMany(StaffCohort::class);
-    // }
+    public function announcements()
+    {
+        return $this->hasMany(Announcement::class);
+    }
 }

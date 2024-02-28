@@ -14,6 +14,7 @@ use App\Http\Controllers\SkillController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\SuperManagerController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AnnouncementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,16 +51,16 @@ Route::post('/login/student', 'AuthController@studentLogin')->name('student.logi
 
 // Route::resource('classrooms', 'ClassroomController');
 
+
+
 //Rawan Abuseini route
 
 // announcements routes
-// Route::get('/announcements', [AnnouncementController::class, 'index']);
-// Route::post('/announcements', [AnnouncementController::class, 'store'])-> name('store');
-// Route::delete('/{announcement:id}', [AnnouncementController::class, 'destroy'])-> name('destroy');
-
-Route::get('/announcements', function () {
-    return view('Pages/announcements');
-})->name('announcements');
+Route::get('/announcements', [AnnouncementController::class, 'index'])-> name('Announcements');
+Route::post('/announcements', [AnnouncementController::class, 'store'])-> name('announcements.store');
+Route::put('/announcements/{id}', [AnnouncementController::class, 'update'])->name('announcements.update');
+Route::delete('/{announcement:id}', [AnnouncementController::class, 'destroy'])-> name('destroy');
+////////////////////////////////////////////////
 
 
 
@@ -81,7 +82,7 @@ Route::get('/cohorts/{cohort}/edit', [CohortController::class, 'edit'])->name('c
 
 // super maneger
 Route::get('/supermanager-dashboard', [SuperManagerController::class, 'index'])->name('supermanager-dashboard');
-Route::get('/academies/show/view-cohort', [CohortController::class, 'cohortView'])->name('view-cohort');
+Route::get('/cohorts/view-cohort/{cohort}', [CohortController::class, 'show'])->name('view-cohort');
 
 
 
@@ -202,9 +203,9 @@ Route::get('/editProfile', function () {
 Route::get('/skillsFramework', function () {
     return view('skillsFramework.skillsFramework');
 });
-// Route::get('/addSkillsLevel', function () {
-//     return view('skillsFramework.addSkillsLevel');
-// });
+Route::get('/addSkillsLevel', function () {
+    return view('skillsFramework.addSkillsLevel');
+});
 Route::get('/addSkillsFramework', function () {
     return view('skillsFramework.addSkillsFramework');
 });
@@ -220,17 +221,12 @@ Route::get('/editSkillsFramework', function () {
 
 // View skills
 Route::get('/skills', [SkillController::class, 'index'])->name('skillsFramework');
-
 // Add skill - Show form
 Route::get('/skills/add', [SkillController::class, 'create'])->name('createskillsFramework');
-
 // Store new skill
 Route::post('/skills/add', [SkillController::class, 'store'])->name('addskillsFramework');
-
-
 // Edit skill - Show form
 Route::get('/skills/{skill}/edit', [SkillController::class, 'edit'])->name('editSkill');
-
 // Update skill
 Route::put('/skills/{id}/update', [SkillController::class, 'update'])->name('updateSkill');
 
@@ -245,7 +241,6 @@ Route::put('/updateSkillLevel/{level}/update', 'SkillLevelController@update')->n
 
 
 Route::get('/categories', [TechnologyCategoryController::class, 'index'])->name('categories.index');
-
 // View technologies within a specific category
 Route::get('/categories/{category}', [TechnologyCategoryController::class, 'show'])->name('categories.show');
 
@@ -258,7 +253,6 @@ Route::get('/technology/{technology}', [TechnologyController::class, 'showInfo']
 
 Route::get('/technologies/{technology}/edit', [TechnologyController::class, 'edit'])->name('technology.edit');
 Route::put('/technologies/{technology}/update', [TechnologyController::class, 'update'])->name('technology.update');
-
 Route::delete('/technologies/{technology}', [TechnologyController::class, 'destroy'])->name('technology.destroy');
 Route::post('/technologies/{technology}/addToCohort', [TechnologyCohortController::class, 'addToCohort'])->name('technology.addToCohort');
 
@@ -271,6 +265,8 @@ Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index
 Route::get('/edit-profile', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::post('/update-profile', [ProfileController::class, 'update'])->name('profile.update');
 
+Route::get('/reset-password', [ProfileController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [ProfileController::class, 'resetPassword'])->name('password.update');
 
 // //////////////////////////////////////
 // // rawan

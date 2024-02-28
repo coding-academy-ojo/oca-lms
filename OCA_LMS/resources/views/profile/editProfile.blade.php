@@ -266,35 +266,75 @@ Profile
 
             <!-- Display success message -->
             @if (session('success'))
-            <div class="alert alert-success">
+            <div class="alert alert-success" role="alert">
               {{ session('success') }}
             </div>
             @endif
 
-            <!-- Name input -->
-            <div class="form-group">
-              <label for="staff_name">{{ __('Name') }}</label>
-              <input id="staff_name" type="text" class="form-control" name="staff_name" value="{{ old('staff_name', $user->staff_name) }}" required autocomplete="staff_name" autofocus>
+            <!-- Name inputs -->
+            @if(Auth::guard('students')->check())
+            <div class="form-group mb-3">
+              <label for="en_first_name">{{ __('First Name') }}</label>
+              <input id="en_first_name" type="text" class="form-control @error('en_first_name') is-invalid @enderror" name="en_first_name" value="{{ old('en_first_name', $user->en_first_name) }}" required autocomplete="en_first_name" autofocus>
+              @error('en_first_name')
+              <span class="invalid-feedback" role="alert">{{ $message }}</span>
+              @enderror
             </div>
 
+            <div class="form-group mb-3">
+              <label for="en_second_name">{{ __('Second Name') }}</label>
+              <input id="en_second_name" type="text" class="form-control @error('en_second_name') is-invalid @enderror" name="en_second_name" value="{{ old('en_second_name', $user->en_second_name) }}" autocomplete="en_second_name">
+              @error('en_second_name')
+              <span class="invalid-feedback" role="alert">{{ $message }}</span>
+              @enderror
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="en_third_name">{{ __('Third Name') }}</label>
+              <input id="en_third_name" type="text" class="form-control @error('en_third_name') is-invalid @enderror" name="en_third_name" value="{{ old('en_third_name', $user->en_third_name) }}" autocomplete="en_third_name">
+              @error('en_third_name')
+              <span class="invalid-feedback" role="alert">{{ $message }}</span>
+              @enderror
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="en_last_name">{{ __('Last Name') }}</label>
+              <input id="en_last_name" type="text" class="form-control @error('en_last_name') is-invalid @enderror" name="en_last_name" value="{{ old('en_last_name', $user->en_last_name) }}" required autocomplete="en_last_name">
+              @error('en_last_name')
+              <span class="invalid-feedback" role="alert">{{ $message }}</span>
+              @enderror
+            </div>
+            @else
+            <div class="form-group mb-3">
+              <label for="staff_name">{{ __('Name') }}</label>
+              <input id="staff_name" type="text" class="form-control @error('staff_name') is-invalid @enderror" name="staff_name" value="{{ old('staff_name', $user->staff_name) }}" required autocomplete="staff_name" autofocus>
+              @error('staff_name')
+              <span class="invalid-feedback" role="alert">{{ $message }}</span>
+              @enderror
+            </div>
+            @endif
+
             <!-- Email input -->
-            <div class="form-group">
+            <div class="form-group mb-3">
               <label for="email">{{ __('Email') }}</label>
-              <input id="email" type="email" class="form-control" name="email" value="{{ old('email', $user->staff_email ?? $user->email) }}" required autocomplete="email">
+              <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', $user->staff_email ?? $user->email) }}" required autocomplete="email">
+              @error('email')
+              <span class="invalid-feedback" role="alert">{{ $message }}</span>
+              @enderror
             </div>
 
             <!-- Add more fields as needed -->
 
             <!-- Submit button -->
-            <div class="form-group mb-0">
-              <button type="submit" class="btn btn-primary">
-                {{ __('Update Profile') }}
-              </button>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">{{ __('Update Profile') }}</button>
             </div>
           </form>
+
         </div>
       </div>
     </div>
   </div>
 </div>
+
 @endsection
