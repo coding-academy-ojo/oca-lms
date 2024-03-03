@@ -59,6 +59,13 @@ Route::get('/announcements', [AnnouncementController::class, 'index'])-> name('A
 Route::post('/announcements', [AnnouncementController::class, 'store'])-> name('announcements.store');
 Route::put('/announcements/{id}', [AnnouncementController::class, 'update'])->name('announcements.update');
 Route::delete('/{announcement:id}', [AnnouncementController::class, 'destroy'])-> name('destroy');
+
+// Add Trainee route
+
+Route::get('/addTrainee', function () {
+    return view('trainer/addTrainee');
+})->name('addTrainee');
+
 ////////////////////////////////////////////////
 
 

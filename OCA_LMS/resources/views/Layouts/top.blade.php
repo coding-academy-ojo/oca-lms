@@ -39,6 +39,9 @@
     <link rel="stylesheet" href="/assets/style_files/sujoud.css">
     <!-- style files -->
 
+<!-- Charts CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Charts CDN -->
 </head>
 
 <body>

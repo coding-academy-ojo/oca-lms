@@ -14,7 +14,7 @@ class Announcement extends Model
 
     public function staff()
     {
-        return $this->belongsTo('App\staff');
+        return $this->belongsTo(Staff::class);
         
     }
 
