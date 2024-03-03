@@ -14,8 +14,8 @@
   </head>
   
   <script src="{{asset('assets/boosted/dist/js/boosted.bundle.min.js')}}"></script>
-  <body>
   <script src="https://cdn.jsdelivr.net/npm/boosted@5.3.2/dist/js/boosted.bundle.min.js"></script>
+  <body>
  
     <!-- sidebar offcanvas -->
   @include('trainer.layouts.sidebar')
