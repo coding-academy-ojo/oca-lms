@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\AssignmentSubmission;
+use App\Assignment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Assignment;
+use App\AssignmentSubmission;
 use App\Student;
 
-class AssignmentSubmissionController extends Controller
+class StudentAssignment extends Controller
 {
-    /**
+   /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -50,12 +50,13 @@ class AssignmentSubmissionController extends Controller
         $assignment_submision->student_id = $studentId;
         $assignment_submision->save();
         return redirect()->route('student.assignments')->with('success', 'Assignment submited successfully');
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\AssignmentSubmission  $assignmentSubmission
+     * @param  \App\Notification  $notification
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -68,10 +69,10 @@ class AssignmentSubmissionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\AssignmentSubmission  $assignmentSubmission
+     * @param  \App\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function edit(AssignmentSubmission $assignmentSubmission)
+    public function edit($id)
     {
         //
     }
@@ -80,10 +81,10 @@ class AssignmentSubmissionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\AssignmentSubmission  $assignmentSubmission
+     * @param  \App\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AssignmentSubmission $assignmentSubmission)
+    public function update(Request $request)
     {
         //
     }
@@ -91,10 +92,10 @@ class AssignmentSubmissionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\AssignmentSubmission  $assignmentSubmission
+     * @param  \App\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AssignmentSubmission $assignmentSubmission)
+    public function destroy($id)
     {
         //
     }

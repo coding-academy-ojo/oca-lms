@@ -1,6 +1,6 @@
 @extends('Layouts.app')
 @section('title')
-    View Assignment
+    Submit Assignment
 @endsection
 @section('content')
     @include('layouts.innerNav')
@@ -28,6 +28,16 @@
             <div class="mt-3">
                 <b>Deadline: {{ $assignment->assignment_due_date }}</b>
             </div>
+            <form method="post" action="{{ route('Student.assignment.store') }}" enctype="multipart/form-data" class="needs-validation"
+            novalidate>
+            @csrf
+            <div class="input-group my-3 ">
+                <input type="text" class="form-control" name="Assignment_submission" placeholder="submit your work" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <button class="btn btn-primary" type="submit" id="button-addon2">Submit</button>
+              </div>
+            {{-- <input type="text" name="Assignment_submission" placeholder="sbmiot your work"> --}}
+            <input type="hidden" name="Assignment_ID" value="{{ $assignment->id }}">
+            </form>
         </div>
     </div>
 @endsection

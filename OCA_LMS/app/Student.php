@@ -26,8 +26,9 @@ class Student extends Authenticatable
         return $this->belongsTo(Cohort::class);
     }
 
-    public function assignment() {
-        return $this->belongsToMany(Assignment::class, 'assignment_student');
+    public function assignment()
+    {
+        return $this->belongsToMany(Assignment::class, 'assignment_student', 'student_id', 'assignment_id');
     }
 
     public function projectSubmissions()
@@ -38,6 +39,12 @@ class Student extends Authenticatable
     public function projectFeedback()
     {
         return $this->hasMany('App\ProjectFeedback', 'student_id');
+    }
+
+    
+    public function assignmentsubmision()
+    {
+        return $this->hasMany(AssignmentSubmission::class);
     }
 
 

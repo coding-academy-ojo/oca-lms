@@ -20,6 +20,8 @@ class CreateAssignmentStudentTable extends Migration
             $table->timestamps();
             $table->foreign('assignment_id')->references('id')->on('assignments')->onDelete('cascade');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+            $table->softDeletes();
+
         });
     }
 
