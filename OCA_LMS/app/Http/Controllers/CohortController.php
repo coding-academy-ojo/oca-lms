@@ -51,11 +51,11 @@ class CohortController extends Controller
 
             // Retrieve the cohorts based on the student's academy
             $cohorts = Cohort::where('academy_id', $studentAcademyId)->with('academy')->get();
-           
+
         }
         return view('academies.academy-cohorts', compact('cohorts', 'canEditCohort'));
     }
-    
+
 
     /**
      * Show the form for creating a new resource.

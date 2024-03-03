@@ -37,8 +37,9 @@ class Assignment extends Model
         );
     }
 
-    public function student() {
-        return $this->belongsToMany(Student::class, 'assignment_student');
+    public function student()
+    {
+        return $this->belongsToMany(Student::class, 'assignment_student', 'assignment_id', 'student_id');
     }
 
     public function cohort() {

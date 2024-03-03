@@ -20,9 +20,9 @@ class AssignmentSubmission extends Model
         return $this->hasOne(AssignmentFeedback::class, 'assignment_submission_id');
     }
      // Relationship with User (Trainee)
-     public function trainee()
+     public function student()
      {
-         return $this->belongsTo(User::class, 'trainee_id');
+         return $this->belongsTo(Student::class);
      }
  
 
