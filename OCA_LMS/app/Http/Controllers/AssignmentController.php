@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Assignment;
-use App\Assignment_Student;
 use App\Student;
 use App\Topic;
 use Illuminate\Http\Request;
@@ -17,7 +16,8 @@ class AssignmentController extends Controller
      */
     public function index()
     {
-        $assignments = Assignment::all();
+        $cohortID=session('cohort_ID');
+        $assignments = Assignment::where('cohort_id',$cohortID)->get();
         return view('Assignment.view_assignment', compact('assignments'));
     }
 
@@ -28,8 +28,9 @@ class AssignmentController extends Controller
      */
     public function create()
     {
+        $cohortID=session('cohort_ID');
         $topics = Topic::all();
-        $students = Student::all();
+        $students = Student::where('cohort_id',$cohortID)->get();
         return view('Assignment.create_assignment', compact('topics', 'students'));
     }
 
@@ -41,13 +42,14 @@ class AssignmentController extends Controller
      */
     public function store(Request $request)
     {
+        $cohortID=session('cohort_ID');
         $assignment = new Assignment;
         $assignment->assignment_name = $request->input('name');
         $assignment->assignment_level = $request->input('level');
         $assignment->assignment_due_date = $request->input('due_date');
         $assignment->assignment_attached_file = $request->input('assignment_file');
         $assignment->topic_id = $request->input('topic');
-        $assignment->cohort_id = "1";
+        $assignment->cohort_id = $cohortID;
         $assignment->assignment_description = $request->input('description');
         if ($request->hasFile('assignment_file')) {
             $file = $request->file('assignment_file');
@@ -66,6 +68,7 @@ class AssignmentController extends Controller
 
             // Assign students to the assignment
             $assignment->student()->attach($studentIds);
+            
         }
 
         return redirect()->route('assignments')->with('success', 'Assignment created successfully');
@@ -93,16 +96,16 @@ class AssignmentController extends Controller
      */
     public function edit($id)
     {
+        $cohortID=session('cohort_ID');
         $topics = Topic::all();
-        $students = Student::all();
+        $Allstudents = Student::where('cohort_id',$cohortID)->get();
         $assignment = Assignment::find($id);
-        // $selectedStudentIds = [];
-
-        // if ($assignment->students) {
-        //     $selectedStudentIds = $assignment->students->pluck('id')->toArray();
-        // }
-
-        return view('Assignment.edit_assignment', compact('topics', 'assignment', 'students'));
+        // Retrieve all assignments related to the student
+        $students = $assignment->student;
+        $assignmentStudents = $Allstudents->reject(function ($student) use ($assignment) {
+            return $assignment->student->contains('id', $student->id);
+        });
+        return view('Assignment.edit_assignment', compact('topics', 'assignment', 'students','assignmentStudents'));
     }
 
     /**
@@ -114,12 +117,13 @@ class AssignmentController extends Controller
      */
     public function update(Request $request, Assignment $assignment)
     {
+        $cohortID=session('cohort_ID');
         $assignment->assignment_name = $request->input('name');
         $assignment->assignment_level = $request->input('level');
         $assignment->assignment_due_date = $request->input('due_date');
         $assignment->assignment_attached_file = $request->input('assignment_file');
         $assignment->topic_id = $request->input('topic');
-        $assignment->cohort_id = "1";
+        $assignment->cohort_id =  $cohortID;
         $assignment->assignment_description = $request->input('description');
         if ($request->hasFile('assignment_file')) {
             $file = $request->file('assignment_file');
@@ -135,7 +139,7 @@ class AssignmentController extends Controller
         }
 
         $assignment->update();
-        return redirect()->route('assignments')->with('success', 'Assignment create successfully');
+        return redirect()->route('assignments')->with('success', 'Assignment updated successfully');
     }
 
     /**
@@ -150,7 +154,7 @@ class AssignmentController extends Controller
         $assignment = Assignment::find($id);
         $assignment->delete();
         return redirect()->route('assignments')
-            ->with('success', 'assignment$assignment deleted successfully');
+            ->with('success', 'assignment deleted successfully');
     }
 
     public function downloads($filename = null)
@@ -164,5 +168,11 @@ class AssignmentController extends Controller
             return response()->download($path);
         }
         return redirect()->back()->with('error', 'File not found.');
+    }
+
+    public function removeStudent(Assignment $assignment, Student $student)
+    {
+        $assignment->student()->detach($student->id);
+        return redirect()->back()->with('success', 'Student removed from assignment successfully');
     }
 }

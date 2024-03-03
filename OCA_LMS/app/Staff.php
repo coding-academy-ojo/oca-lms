@@ -44,8 +44,8 @@ public function academies() {
         return $this->staff_password;
     }
 
-    // public function staffCohorts()
-    // {
-    //     return $this->hasMany(StaffCohort::class);
-    // }
+    public function announcements()
+    {
+        return $this->hasMany(Announcement::class);
+    }
 }

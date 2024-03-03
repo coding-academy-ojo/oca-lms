@@ -4,209 +4,124 @@
 @section('title', 'Student Progress Overview')
 
 @section('content')
-<style>
-    .progress-container {
-        width: 100%; /* Ensures each progress bar container spans the full width of its cell */
-    }
-    .progress {
-        height: 20px; /* Optional: Adjusts the height of the progress bars */
-    }
-</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/orange-boosted/dist/css/orangeboosted.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<!-- Projects Progress Section -->
 <div class="container my-4">
-    <h2 class="mb-4 text-primary">Student Progress Overview</h2>
+    <h2 class="mb-4">Projects Progress</h2>
+    <canvas id="projectsProgressChart"></canvas>
+</div>
 
-    {{-- Projects Progress --}}
-    <div class="mb-5">
-        <h3 class="text-primary">Projects Progress</h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Student</th>
-                    <th>Project Progress</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Student A</td>
-                    <td>
-                        <div class="progress-container">
-                            <div class="progress">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Student B</td>
-                    <td>
-                        <div class="progress-container">
-                            <div class="progress">
-                                <div class="progress-bar bg-warning" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
-                            </div>
-                        </div>
-                       
-                    </td>
-                </tr>
-                <tr>
-                    <td>Student C</td>
-                    <td>
-                        <div class="progress-container">
-                            <div class="progress">
-                                <div class="progress-bar bg-info" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
-                            </div>
-                        </div>
+<script>
+const projectsProgressData = {
+    labels: ['Student A', 'Student B', 'Student C'],
+    datasets: [
+        {
+            label: 'Assigned Projects',
+            data: [10, 8, 12],
+            backgroundColor: 'orange'
+        },
+        {
+            label: 'Done Projects',
+            data: [7, 6, 9],
+            backgroundColor: 'green'
+        },
+        {
+            label: 'Late Projects',
+            data: [1, 2, 1],
+            backgroundColor: 'red'
+        }
+    ]
+};
 
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+const ctxProjects = document.getElementById('projectsProgressChart').getContext('2d');
+const projectsProgressChart = new Chart(ctxProjects, {
+    type: 'bar',
+    data: projectsProgressData,
+    options: {
+        scales: {
+            x: {
+                stacked: true
+            },
+            y: {
+                stacked: true
+            }
+        }
+    }
+});
+</script>
+<!-- Trainees Attendance Section -->
+<div class="container my-4">
+    <h2 class="mb-4">Trainees Attendance</h2>
+    <canvas id="attendanceChart"></canvas>
+</div>
+
+<script>
+const attendanceData = {
+    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+    datasets: [{
+        label: 'Attendance Rate',
+        data: [75, 80, 90, 85],
+        fill: false,
+        borderColor: 'blue',
+        tension: 0.1
+    }]
+};
+
+const ctxAttendance = document.getElementById('attendanceChart').getContext('2d');
+const attendanceChart = new Chart(ctxAttendance, {
+    type: 'line',
+    data: attendanceData,
+});
+</script>
+<!-- Tasks Progress Section -->
+<div class="container my-4">
+    <h2 class="mb-4">Tasks Progress</h2>
+    <canvas id="tasksProgressChart"></canvas>
+</div>
+
+<script>
+const tasksProgressData = {
+    labels: ['Student A', 'Student B', 'Student C'],
+    datasets: [
+        {
+            label: 'Grouped Tasks',
+            data: [15, 10, 20],
+            backgroundColor: 'purple'
+        },
+        {
+            label: 'Single Tasks',
+            data: [20, 25, 15],
+            backgroundColor: 'grey'
+        }
+    ]
+};
+
+const ctxTasks = document.getElementById('tasksProgressChart').getContext('2d');
+const tasksProgressChart = new Chart(ctxTasks, {
+    type: 'bar',
+    data: tasksProgressData,
+});
+</script>
+<!-- Masterpiece Progress Section -->
+<div class="container my-4">
+    <h2 class="mb-4">Masterpiece Progress</h2>
+    <div id="masterpieceProgress">
+        <!-- Student A Progress -->
+        <h3>Student A</h3>
+        <label for="htmlProgressA">HTML Progress</label>
+        <div class="progress mb-2">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div>
+        </div>
+        <label for="backendProgressA">Backend Progress</label>
+        <div class="progress mb-2">
+            <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+        </div>
+
+        <!-- Repeat for other students -->
     </div>
-
-    {{-- Masterpiece Progress --}}
-{{-- Masterpiece Progress --}}
-<div class="mb-5">
-    <h3 class="text-primary">Masterpiece Progress</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Student</th>
-                <th>Masterpiece Progress</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Student A</td>
-                <td>
-                    <div class="progress-container">
-                        <div class="progress">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>Student B</td>
-                <td>
-
-                    <div class="progress-container">
-                        <div class="progress">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>Student C</td>
-                <td>
-
-
-                    <div class="progress-container">
-                        <div class="progress">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">95%</div>
-                        </div>
-                    </div>
-
-           
-                </td>
-            </tr>
-        </tbody>
-    </table>
 </div>
 
-<div class="mb-5">
-    <h3 class="text-primary">Tasks Progress</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Student</th>
-                <th>Task Progress</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Student A</td>
-                <td>
-                 
-                    <div class="progress-container">
-                        <div class="progress">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
-                        </div>
-                    </div>
-                
-                </td>
-            </tr>
-            <tr>
-                <td>Student B</td>
-                <td>
-                    <div class="progress-container">
-                        <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">60%</div>
-                        </div>
-                    </div>
-             
-                </td>
-            </tr>
-            <tr>
-                <td>Student C</td>
-                <td>
-
-                    <div class="progress-container">
-                        <div class="progress">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
-                        </div>
-                    </div>
-               
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-<div class="mb-5">
-    <h3 class="text-primary">Attendance Progress</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Student</th>
-                <th>Attendance Progress</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Student A</td>
-                <td>
-                    <div class="progress-container">
-                        <div class="progress">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">95%</div>
-                        </div>
-                    </div>
-              
-                </td>
-            </tr>
-            <tr>
-                <td>Student B</td>
-                <td>
-                    <div class="progress-container">
-
-                    <div class="progress">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div>
-                    </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>Student C</td>
-                <td>
-                    <div class="progress-container">
-
-                    <div class="progress">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
-                    </div>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-</div>
 @endsection

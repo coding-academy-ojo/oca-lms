@@ -1,9 +1,8 @@
 @extends('Layouts.app')
 @section('title')
-Edit Assignment
+    Edit Assignment
 @endsection
 @section('content')
- 
     @include('layouts.innerNav')
     <section class="inner-bred my-3">
         <div class="container">
@@ -119,7 +118,6 @@ Edit Assignment
                 outline: none;
             }
         }
-
     </style>
     <div class="container">
         <div class="page-wrapper">
@@ -135,110 +133,120 @@ Edit Assignment
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-body">
-                                <form method="post" action="{{ route('assignment.update', $assignment->id) }}" enctype="multipart/form-data" class="needs-validation"
-                                novalidate>
-                                @csrf
-                                @method('PUT')
-                                <div class="row">
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label class="my-2">Title</label>
-                                            <input type="text" class="form-control" name="name" value="{{ $assignment->assignment_name}}" required>
-                                            <div class="invalid-feedback">This feild is required</div>
+                                <form method="post" action="{{ route('assignment.update', $assignment->id) }}"
+                                    enctype="multipart/form-data" class="needs-validation" novalidate>
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="row">
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label class="my-2">Title</label>
+                                                <input type="text" class="form-control" name="name"
+                                                    value="{{ $assignment->assignment_name }}" required>
+                                                <div class="invalid-feedback">This feild is required</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label class="my-2">Topics</label>
-                                            <select class="form-select" id="class" name="topic" required>
-                                                <option value="{{ $assignment->topic_id}}">{{ $assignment->topic->topic_name}}</option>
-                                                @foreach($topics as $topic)
-                                                <option value="{{ $topic->id }}">{{ $topic->topic_name }} - {{ $topic->technology->technologies_name }}</option>
-                                            @endforeach
-                                            </select>
-                                            <div class="invalid-feedback">This field is required</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label class="my-2">Date</label>
-                                            <div>
-                                                <input type="date" class="form-control" name="due_date"
-                                                    min="{{ date('Y-m-d') }}" value="{{ $assignment->assignment_due_date }}" required>
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label class="my-2">Topics</label>
+                                                <select class="form-select" id="class" name="topic" required>
+                                                    <option value="{{ $assignment->topic_id }}">
+                                                        {{ $assignment->topic->topic_name }}</option>
+                                                    @foreach ($topics as $topic)
+                                                        <option value="{{ $topic->id }}">{{ $topic->topic_name }} -
+                                                            {{ $topic->technology->technologies_name }}</option>
+                                                    @endforeach
+                                                </select>
                                                 <div class="invalid-feedback">This field is required</div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label class="my-2">Level</label>
-                                            <select class="form-select" id="class" name="level" required>
-                                                <option value="{{ $assignment->assignment_level }}">{{ $assignment->assignment_level }}</option>
-                                                <option value="easy">Easy</option>
-                                                <option value="medium">Medium</option>
-                                                <option value="advance">Advance</option>
-                                            </select>
-                                            <div class="invalid-feedback">This field is required</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label class="my-2">Assignment File</label>
-                                            <input type="file" class="form-control" name="assignment_file" value="{{ $assignment->assignment_attached_file}}" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" onchange="validateFile(this)">
-                                            <div class="invalid-feedback">This field is required</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label class="my-2">Students</label>
-                                            <div class="dropdown-button form-control" onclick="toggleDropdown()">Select
-                                                Student</div>
-                                            <div class="dropdown-content" id="dropdownContent">
-                                                <label>
-                                                    <input class="form-check-input" type="checkbox" value="Option 3" onclick="selectAll()">All trainee
-                                                </label>
-                                                <label>
-                                                    <input class="form-check-input" type="checkbox" value="Option 1"> Rawan
-                                                </label>
-                                                <label>
-                                                    <input class="form-check-input" type="checkbox" value="Option 2"> Reem
-                                                </label>
-                                                <label>
-                                                    <input class="form-check-input" type="checkbox" value="Option 3"> Rand
-                                                </label>
-                                                <label>
-                                                    <input class="form-check-input" type="checkbox" value="Option 3"> Rand
-                                                </label>
-                                                <label>
-                                                    <input class="form-check-input" type="checkbox" value="Option 3"> Rand
-                                                </label>
-                                                <label>
-                                                    <input class="form-check-input" type="checkbox" value="Option 3"> Rand
-                                                </label>
-                                                <label>
-                                                    <input class="form-check-input" type="checkbox" value="Option 3"> Rand
-                                                </label>
-                                                <label>
-                                                    <input class="form-check-input" type="checkbox" value="Option 3"> Rand
-                                                </label>
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label class="my-2">Date</label>
+                                                <div>
+                                                    <input type="date" class="form-control" name="due_date"
+                                                        min="{{ date('Y-m-d') }}"
+                                                        value="{{ $assignment->assignment_due_date }}" required>
+                                                    <div class="invalid-feedback">This field is required</div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12 ">
-                                        <div class="form-group">
-                                            <label class="my-2 ">Description</label>
-                                            <label class="input-sizer stacked col-12 form-control border border-light" >
-                                                <textarea  oninput="this.parentNode.dataset.value = this.value " rows="2" id="myTextarea" name="description" > {{ $assignment->assignment_description}} </textarea>
-                                            </label>
-                                            <div class="invalid-feedback">This feild is required</div>
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label class="my-2">Level</label>
+                                                <select class="form-select" id="class" name="level" required>
+                                                    <option value="{{ $assignment->assignment_level }}">
+                                                        {{ $assignment->assignment_level }}</option>
+                                                    <option value="easy">Easy</option>
+                                                    <option value="medium">Medium</option>
+                                                    <option value="advance">Advance</option>
+                                                </select>
+                                                <div class="invalid-feedback">This field is required</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label class="my-2">Assignment File</label>
+                                                <input type="file" class="form-control" name="assignment_file"
+                                                    value="{{ $assignment->assignment_attached_file }}"
+                                                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" onchange="validateFile(this)">
+                                                <div class="invalid-feedback">This field is required</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label class="my-2">Students</label>
+                                                <div class="dropdown-button form-control" onclick="toggleDropdown()">Select
+                                                    Student</div>
+                                                <div class="dropdown-content" id="dropdownContent">
+                                                    <label>
+                                                        <input class="form-check-input" type="checkbox" name="students[]"
+                                                            value="" onclick="selectAll()">All students
+                                                    </label>
+                                                    @foreach ($assignmentStudents as $student)
+                                                        <label>
+                                                            <input class="form-check-input" type="checkbox"
+                                                                name="students[]"
+                                                                value="{{ $student->id }}">{{ $student->en_first_name }}
+                                                            {{ $student->en_second_name }}
+                                                        </label>
+                                                    @endforeach
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 ">
+                                            <div class="form-group">
+                                                <label class="my-2 ">Description</label>
+                                                <label class="input-sizer stacked col-12 form-control border border-light">
+                                                    <textarea oninput="this.parentNode.dataset.value = this.value " rows="2" id="myTextarea" name="description"> {{ $assignment->assignment_description }} </textarea>
+                                                </label>
+                                                <div class="invalid-feedback">This feild is required</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mt-3">
+                                            <button type="submit" class="btn btn-primary">Update</button>
                                         </div>
                                     </div>
-                                    <div class="col-12 mt-3">
-                                        <button type="submit" class="btn btn-primary">Update</button>
-                                    </div>
+                                </form>
+                                <div class="col-12 ">
+                                    @foreach ($students as $Student)
+                                        <div class="d-flex">
+                                            <div class="">{{ $Student->en_first_name }}</div>
+                                            <div>
+                                                <form action="{{ route('assignment.removeStudent', ['assignment' => $assignment->id, 'student' => $Student->id]) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="border border-0 m-auto bg-white"
+                                                        onclick="return confirm('Are you sure you want to delete this student')">
+                                                        <i class="fa-solid fa-trash" style="color: #FF7900;"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
-                            </form>
-
                             </div>
                         </div>
                     </div>
@@ -293,7 +301,7 @@ Edit Assignment
                 }
                 form.classList.add('was-validated');
             }, false);
-        });  
+        });
 
     });
 </script>
