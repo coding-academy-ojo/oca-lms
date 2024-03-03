@@ -13,7 +13,7 @@ All Projects
     <div class="container">
         <ul class="thm-breadcrumb">
             <li><a href="">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
-            {{-- <li><a href="">{{ $category->Categories_name }}</a></li> --}}
+            <li><a style="color:#F16E00"href="/projects">Project</a></li>
         </ul>
     </div>
 </section>
@@ -25,7 +25,7 @@ All Projects
 <div class="innerPage mt-3">
     <div class="container">
 
-        @if(Auth::user()->role == 'trainer')
+        @if(Auth::guard('staff')->check() && Auth::guard('staff')->user()->role === 'trainer')
         <div class="col-md-2 ms-auto mb-3">
             <form action="{{ route('show_add_project_form') }}" method="GET">
                 <button type="submit" class="btn btn-primary">Add Project</button>

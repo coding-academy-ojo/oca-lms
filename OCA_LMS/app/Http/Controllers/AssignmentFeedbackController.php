@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AssignmentFeedback;
+use App\AssignmentSubmission;
 use Illuminate\Http\Request;
 
 class AssignmentFeedbackController extends Controller
@@ -14,7 +15,14 @@ class AssignmentFeedbackController extends Controller
      */
     public function index()
     {
-        //
+        $cohortID = session('cohort_ID');
+    
+        // Assuming you have a relationship between Cohort and Assignment
+        $assignments = AssignmentSubmission::whereHas('assignment', function ($query) use ($cohortID) {
+            $query->where('cohort_id', $cohortID);
+        })->get();
+        return view('Assignment.allAssignmentfeddback', compact('assignments'));
+
     }
 
     /**
@@ -44,10 +52,13 @@ class AssignmentFeedbackController extends Controller
      * @param  \App\AssignmentFeedback  $assignmentFeedback
      * @return \Illuminate\Http\Response
      */
-    public function show(AssignmentFeedback $assignmentFeedback)
+    public function show($id)
     {
-        //
+        $assignments = AssignmentSubmission::where('assignment_id',$id)->get();
+
+        return view('Assignment.allAssignmentfeddback', compact('assignments'));
     }
+    
 
     /**
      * Show the form for editing the specified resource.

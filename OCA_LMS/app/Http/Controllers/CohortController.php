@@ -53,7 +53,7 @@ class CohortController extends Controller
         // dd($academyId);
         return view('academies.academy-cohorts', compact('cohorts', 'canEditCohort','pass_academy_id'));
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
