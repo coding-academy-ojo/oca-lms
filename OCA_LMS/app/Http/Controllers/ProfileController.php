@@ -78,6 +78,7 @@ class ProfileController extends Controller
         return view('profile.resetPassword', compact('user'));
     }
 
+
     // public function resetPassword(Request $request)
     // {
     //     dd($request);
@@ -98,6 +99,8 @@ class ProfileController extends Controller
 
     //     return redirect()->back()->with('success', 'Password updated successfully');
     // }
+
+
 
     // public function resetPassword(Request $request)
     // {
@@ -122,6 +125,7 @@ class ProfileController extends Controller
     //     return redirect()->back()->with('success', 'Password updated successfully');
     // }
 
+    
     public function resetPassword(Request $request)
     {
 
