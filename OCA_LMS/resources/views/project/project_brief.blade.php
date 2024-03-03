@@ -13,7 +13,8 @@ Project Brief
     <div class="container">
         <ul class="thm-breadcrumb">
             <li><a href="">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
-            {{-- <li><a href="">{{ $category->Categories_name }}</a></li> --}}
+            <li><a href="/projects">Project</a><span><i class="fa-solid fa-chevron-right"></i></span></li>
+            <li><a style="color:#F16E00">Project Brief</a></li>
         </ul>
     </div>
 </section>
@@ -34,7 +35,9 @@ Project Brief
             </ul>
         </div>
         @endif
-
+        @php
+        // dd(Auth::guard('students')->user()->id);
+        @endphp
         <div class="d-flex justify-content-between align-items-center">
             <h2 style="color: #F16E00">Project Brief</h2>
 
@@ -60,9 +63,9 @@ Project Brief
                     @endif
 
                     @if(Auth::guard('students')->user())
-                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                            data-bs-target="#addSubmissionModal">Add Project Submissions</a></li>
-                    <li><a class="dropdown-item" href="{{ route('view_submissions_feedback', ['project_id' => $project->id]) }}">View Conversation</a></li>
+                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#addSubmissionModal">Add Project Submissions</a></li>
+                    {{-- <li><a class="dropdown-item" href="{{ route('view_submissions_feedback', ['project_id' => $project->id]) }}">View Conversation</a></li> --}}
+                    <li><a class="dropdown-item" href="{{ route('view_submissions_feedback', ['project_id' => $project->id, 'student_id' => Auth::guard('students')->user()->id]) }}">View Conversation</a></li>
                     @endif
                 </ul>
 

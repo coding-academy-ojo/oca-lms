@@ -13,7 +13,7 @@ All Projects
     <div class="container">
         <ul class="thm-breadcrumb">
             <li><a href="">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
-            {{-- <li><a href="">{{ $category->Categories_name }}</a></li> --}}
+            <li><a style="color:#F16E00"href="/projects">Project</a></li>
         </ul>
     </div>
 </section>
@@ -32,7 +32,7 @@ All Projects
             </form>
         </div>
         @endif
-        
+
             {{-- <div class="row">
                 @foreach($projects as $project)
 

@@ -13,7 +13,8 @@ Create Project
     <div class="container">
         <ul class="thm-breadcrumb">
             <li><a href="">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
-            {{-- <li><a href="">{{ $category->Categories_name }}</a></li> --}}
+            <li><a href="/projects">Project</a><span><i class="fa-solid fa-chevron-right"></i></span></li>
+            <li><a style="color:#F16E00"href="">Add Project</a></li>
         </ul>
     </div>
 </section>
@@ -82,17 +83,6 @@ Create Project
             <input type="text" class="form-control" id="project_assessment_methods" name="project_assessment_methods">
         </div>
 
-        {{-- <div class="mb-3">
-            <label for="cohort_id" class="form-label">Choose Cohort</label>
-            <select class="form-select" id="cohort_id" name="cohort_id">
-                @foreach($cohorts as $cohort)
-                    @if(Auth::user()->cohorts->contains($cohort))
-                        <option value="{{ $cohort->id }}">{{ $cohort->cohort_name }}</option>
-                    @endif
-                @endforeach
-            </select>
-        </div> --}}
-        
         <button type="submit" class="btn btn-primary">Next</button>
     </form>
 

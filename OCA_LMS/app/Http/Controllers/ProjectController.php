@@ -17,17 +17,11 @@ use App\Staff; // Import the Staff model
 
 class ProjectController extends Controller
 {
-    // public function showAllProjects()
-    // {
-    //     $userCohorts = Auth::user()->cohorts->pluck('id')->toArray(); // Updated from classrooms to cohorts
-    //     $projects = Project::whereIn('cohort_id', $userCohorts)->get();
-    //     return view('project.project', compact('projects'));
-    // }
 
         public function showAllProjects()
     {
         // Check if the cohort_id is stored in the session for students and staff
-        session(['cohort_ID' => 1]);
+        // session(['cohort_ID' => 1]);
         $cohortId = session('cohort_ID');
         // Retrieve projects based on the cohort_id
         $projects = Project::where('cohort_id', $cohortId)->get();
@@ -272,14 +266,6 @@ public function showEditProjectSkillsLevelForm($projectId)
 public function showAddProjectSubmissionModal($project_id)
 {
     $project = Project::findOrFail($project_id);
-
-    // // Check if the logged-in user is a trainee
-    // if (Auth::user()->role == 'trainee') {
-    //     // Load the modal content for trainees
-    //     return view('project.add_project_submission_modal_trainee', compact('project'));
-    // }
-
-    // Load the default modal content for other roles
     return view('project.add_project_submission_modal', compact('project'));
 }
 
@@ -303,16 +289,36 @@ public function processProjectSubmission(Request $request, $project_id)
 }
 
 
-public function viewProjectSubmissions($project_id)
+// public function viewProjectSubmissions($project_id)
+// {
+//     $project = Project::findOrFail($project_id);
+//     $cohort = $project->cohort; // Updated from Classroom to Cohort
+
+//     // Fetch all submissions for the project
+//     $submissions = ProjectSubmission::where('project_id', $project_id)->get();
+//     return view('project.view_project_submissions', compact('project', 'cohort', 'submissions'));
+// }
+public function viewProjectSubmissions(Request $request, $project_id)
 {
     $project = Project::findOrFail($project_id);
-    $cohort = $project->cohort; // Updated from Classroom to Cohort
+    $cohort = $project->cohort;
 
     // Fetch all submissions for the project
-    $submissions = ProjectSubmission::where('project_id', $project_id)->get();
+    $submissionsQuery = ProjectSubmission::where('project_id', $project_id);
 
-    return view('project.view_project_submissions', compact('project', 'cohort', 'submissions'));
+    // Handle search
+    $search = $request->input('search');
+    if ($search) {
+        $submissionsQuery->whereHas('student', function ($query) use ($search) {
+            $query->where('en_first_name', 'LIKE', "%{$search}%");
+        });
+    }
+
+    $submissions = $submissionsQuery->get();
+
+    return view('project.view_project_submissions', compact('project', 'cohort', 'submissions', 'search'));
 }
+
 
 
 public function processFeedback(Request $request, $submission_id)
@@ -335,17 +341,25 @@ public function processFeedback(Request $request, $submission_id)
     return redirect()->route('view_project_submissions', ['project_id' => $submission->project_id])->with('success', 'Feedback saved successfully');
 }
 
-
-
-public function viewSubmissionsAndFeedback($project_id)
+    public function viewSubmissionsAndFeedback($project_id)
 {
+
     // Fetch project details
     $project = Project::findOrFail($project_id);
 
-        // Fetch submissions and feedback for the project
-        $submissionsAndFeedback = $project->submissionsAndFeedback();
-        return view('project.view_submissions_feedback', compact('project', 'submissionsAndFeedback'));
-        // Redirect to an unauthorized page or show an error message
+    // Fetch the logged-in student or staff
+    $user = Auth::guard('students')->check() ? Auth::guard('students')->user() : Auth::guard('staff')->user();
+
+    // Fetch submissions and feedback for the project and the logged-in user
+    // $submissionsAndFeedback = $project->submissionsAndFeedback($user->id);
+
+    $submissionIdForConversation = request('submission_id');
+    $studentIdForConversation = request('student_id');
+    $submissionsAndFeedback = $project->submissionsAndFeedback($project->id, $studentIdForConversation);
+    $conversation = $submissionIdForConversation ? ProjectSubmission::where('project_id', $project->id)->where('student_id', $studentIdForConversation)->first()->conversation : null;
+
+    return view('project.view_submissions_feedback', compact('project', 'submissionsAndFeedback', 'user', 'conversation'));
 }
+
 
 }

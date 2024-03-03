@@ -13,7 +13,8 @@ Edit Project
     <div class="container">
         <ul class="thm-breadcrumb">
             <li><a href="">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
-            {{-- <li><a href="">{{ $category->Categories_name }}</a></li> --}}
+            <li><a href="/projects">Project</a><span><i class="fa-solid fa-chevron-right"></i></span></li>
+            <li><a style="color:#F16E00"href="">Edit Project</a></li>
         </ul>
     </div>
 </section>
@@ -84,17 +85,6 @@ Edit Project
             <input type="text" class="form-control" id="project_assessment_methods" name="project_assessment_methods" value="{{ old('project_assessment_methods', $project->project_assessment_methods) }}">
         </div>
         <!-- End of New Fields -->
-
-    {{-- <div class="mb-3">
-        <label for="cohort_id" class="form-label">Choose Cohort</label>
-        <select class="form-select" id="cohort_id" name="cohort_id" required>
-            @foreach($cohorts as $cohort)
-            <option value="{{ $cohort->id }}" {{ old('cohort_id', $project->cohort_id) == $cohort->id ? 'selected' : '' }}>
-                {{ $cohort->cohort_name }}
-            </option>
-            @endforeach
-        </select>
-    </div> --}}
 
     <button type="submit" class="btn btn-primary">Update Project</button>
 </form>
