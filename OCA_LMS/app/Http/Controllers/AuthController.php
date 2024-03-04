@@ -26,10 +26,10 @@ class AuthController extends Controller
             case 'super_manager':
                 return '/supermanager-dashboard';
             case 'trainer':
-                return '/academies';
+                return '/cohorts';
     
             default:
-                return '/';
+                return '/cohorts';
         }
     }
 // Handle the login attempt

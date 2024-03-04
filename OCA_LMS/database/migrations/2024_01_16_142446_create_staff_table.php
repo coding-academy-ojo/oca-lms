@@ -22,6 +22,7 @@ class CreateStaffTable extends Migration
             $table->text('staff_cv')->nullable();
             $table->text('staff_bio')->nullable();
             $table->string('staff_personal_img')->nullable();
+            $table->timestamps();
         });
     }
 
