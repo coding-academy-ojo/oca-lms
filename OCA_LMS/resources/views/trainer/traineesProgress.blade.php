@@ -97,7 +97,7 @@ Trainees Progress
     new Chart(attendanceCtx, {
         type: 'line',
         data: {
-            labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'August'],
+            labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
             datasets: [{
                 label: 'Trainee attendance status',
                 data: [14, 16, 7, 8, 5, 4, 9, 15],
