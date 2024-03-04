@@ -31,6 +31,8 @@ class DatabaseSeeder extends Seeder
         $this->call(AssignmentSeeder::class);
         $this->call(AnnouncementSeeder::class);
         $this->call(TechnologyCohortSeeder::class);        $this->call(AbsencesTableSeeder::class);
+        $this->call(ProjectSeeder::class);
+
 
         $this->command->info('Database seeded successfully!');
     }
