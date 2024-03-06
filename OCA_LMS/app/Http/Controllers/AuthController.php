@@ -96,7 +96,7 @@ public function studentLogin(Request $request)
 
     if (Auth::guard('students')->attempt($credentials)) {
         $student = Auth::guard('students')->user();
-        return redirect('/academies'); // Redirect to the '/academies' route upon successful login
+        return redirect('/cohorts'); 
     } else {
         return back()->withErrors(['email' => 'The provided credentials do not match our records.'])->withInput($request->except('password'));
     }
