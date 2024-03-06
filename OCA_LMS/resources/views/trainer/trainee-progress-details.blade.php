@@ -107,7 +107,7 @@
 
     <!-- Masterpiece Progress Section -->
     <div class="container my-4">
-        <h2 class="mb-4">Student Progress</h2>
+        <h2 class="mb-4">Masterpiece Progress</h2>
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
@@ -123,7 +123,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Masterpiece</td>
+                                <td>Wireframe & Mockup</td>
                                 <td>
                                     <div class="progress" style="background: rgba(127, 99, 244, .1)">
                                         <div class="progress-bar bg-primary" style="width: 70%;" role="progressbar"><span
@@ -132,7 +132,7 @@
                                     </div>
                                 </td>
                                 <td>Apr 20,2018</td>
-                                <td><span class="badge bg-primary">70%</span></td>
+                                <td><span class="badge bg-primary">75%</span></td>
                                 </td>
                                 <td>
                                     <span>
@@ -145,7 +145,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>HTML</td>
+                                <td></td>
                                 <td>
                                     <div class="progress" style="background: rgba(76, 175, 80, .1)">
                                         <div class="progress-bar bg-success" style="width: 70%;" role="progressbar"><span
