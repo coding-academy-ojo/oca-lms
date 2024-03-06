@@ -4,7 +4,6 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Faker\Factory as Faker;
-use App\Student;
 
 class StudentsTableSeeder extends Seeder
 {
@@ -16,23 +15,22 @@ class StudentsTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $academies = DB::table('academies')->pluck('id');
-        $cohorts = DB::table('cohorts')->pluck('id');
 
         foreach (range(1, 10) as $index) {
-            $academyId = $faker->randomElement($academies);
-            $cohortId = $faker->randomElement($cohorts);
+            $academyId = DB::table('academies')->inRandomOrder()->first()->id;
+            
+            $cohortId = DB::table('cohorts')->where('academy_id', $academyId)->inRandomOrder()->first()->id;
 
             DB::table('students')->insert([
                 'email' => $faker->unique()->safeEmail,
-                'password' => Hash::make('password'), // Default password for all users
+                'password' => Hash::make('password'),
                 'is_newsletter' => $faker->boolean,
                 'provider_id' => $faker->randomNumber(),
                 'email_verification' => $faker->boolean,
                 'is_email_verified' => $faker->boolean,
                 'mobile' => $faker->phoneNumber,
-                'en_first_name' => $faker->firstName, // Generate a first name
-                'en_last_name' => $faker->lastName, // Generate a last name
+                'en_first_name' => $faker->firstName, 
+                'en_last_name' => $faker->lastName, 
                 'academy_id' => $academyId,
                 'cohort_id' => $cohortId,
                 'created_at' => now(),
