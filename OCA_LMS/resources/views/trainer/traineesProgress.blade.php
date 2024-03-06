@@ -1,8 +1,4 @@
-@extends('layouts.app')
-@section('title')
-    Trainees Progress
-@endsection
-@section('content')
+
     @include('layouts.innerNav')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -462,7 +458,55 @@ if (document.getElementById('barChart_3')) {
         }
     });
 }
+>>>>>>> abefbacf6eaf7c562abf505085ac3ea8fef8247c
 
+    // Chart for trainee progress on assignments
+    const assignmentsCtx = document.getElementById('AssignmentsProgressChart');
+    new Chart(assignmentsCtx, {
+        type: 'bar',
+        data: {
+            labels: ['HTML', 'CSS', 'JS', 'React', 'NodeJs', 'PostgreSQL', 'MongoDB', 'Wordpress'],
+            datasets: [{
+                label: 'Percentage of Trainee Progress on assignments',
+                data: [14, 16, 7, 8, 5, 4, 9, 15],
+                borderWidth: 1,
+                borderColor: '#36C10EB',
+                backgroundColor: '#ff7900'
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Chart for trainee attendance status
+    const attendanceCtx = document.getElementById('AttendanceChart');
+    
+    new Chart(attendanceCtx, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            datasets: [{
+                label: 'Trainee attendance status',
+                data: [14, 16, 7, 8, 5, 4, 9, 15],
+                borderWidth: 1,
+                borderColor: '#36C10EB',
+                backgroundColor: '#ff7900'
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 
 
 });

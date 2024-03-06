@@ -55,6 +55,11 @@ Announcements
 
 
             <div class=" d-flex justify-content-between align-items-center">
+                
+                <a class="mx-2 editIcon" id="editIcon" href="#">
+                    <i class="fa-solid fa-pen-to-square" style="color: #FF7900;"></i>
+                </a>
+
                 <form action="{{route('destroy', $announcement-> id)}}" method="POST">
                     @csrf
                     @method('delete')
@@ -62,9 +67,7 @@ Announcements
                         <i class="fa-solid fa-trash" style="color: #FF7900;"></i>
                     </button>
                 </form>
-                <a class="mx-2 editIcon" id="editIcon" href="#">
-                    <i class="fa-solid fa-pen-to-square" style="color: #FF7900;"></i>
-                </a>
+                
             </div>
             @endif
         </div>
