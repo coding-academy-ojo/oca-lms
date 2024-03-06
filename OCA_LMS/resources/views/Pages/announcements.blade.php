@@ -29,7 +29,7 @@ Announcements
             <form action="{{route('announcements.store')}}" method="POST">
                 @csrf
                 <div class="input-group">
-                    <input type="text" name="content" class="form-control  rounded-1 needs-validation" novalidate
+                    <input type="text" name="content" class="form-control  rounded-1 needs-validation" required
                         placeholder="Announce to your class" aria-label="Recipient's username"
                         aria-describedby="button-addon2">
                     <button class="btn btn-primary" type="submit" primary id="button-addon2">Post</button>
@@ -41,13 +41,13 @@ Announcements
     <!-- All announcements will appeare here based on newest date and time  -->
     @if ($announcements)
     @foreach($announcements as $announcement)
-    <div class="card col-10 m-auto my-4">
-        <div class="card-header d-flex justify-content-between align-items-center">
+    <div class="card col-10 m-auto my-4" >
+        <div class="card-header d-flex justify-content-between align-items-center" style= "background-color: #FDF0E5; color:black">
 
             <div>
                 <img class="img-fluid announcement-card-custom-image" src="https://placehold.co/400x400/white/FFF"
                     alt="">
-                <span class="mx-2"> {{$announcement->staff->staff_name}}</span>
+                <span class="mx-2" style= "text-color: black;"> {{$announcement->staff->staff_name}}</span>
 
             </div>
 
@@ -74,7 +74,7 @@ Announcements
         
         <div class="card-body contentDiv d-flex justify-content-between">
             <div class="col-10"><p class="card-text">{{ $announcement->content }}</p> </div>
-           <div class="col-2"> <span class="mx-2"> {{$announcement->created_at}}</span></div>
+           <div class="col-2"> <span class="mx-2 text-break" > {{$announcement->created_at->format('Y-m-d H:i')}}</span></div>
         </div>
         <div class="card-body editDiv" style="display: none;">
             <form action="{{ route('announcements.update', $announcement->id) }}" method="POST" id="updateForm">
