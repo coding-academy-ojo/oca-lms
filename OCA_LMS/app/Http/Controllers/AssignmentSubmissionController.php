@@ -6,6 +6,7 @@ use App\AssignmentSubmission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Assignment;
+use App\AssignmentFeedback;
 use App\Student;
 
 class AssignmentSubmissionController extends Controller
@@ -19,7 +20,7 @@ class AssignmentSubmissionController extends Controller
     {
         $studentId = Auth::id();
         $student = Student::find($studentId);
-         // Retrieve all assignments related to the student
+        // Retrieve all assignments related to the current student 
         $assignments = $student->assignment;
         
         return view('Assignment.Student_assignment.assignment_show', compact('assignments'));
@@ -48,8 +49,10 @@ class AssignmentSubmissionController extends Controller
         $assignment_submision->attached_file = $request->input('Assignment_submission');
         $assignment_submision->assignment_id = $request->input('Assignment_ID');
         $assignment_submision->student_id = $studentId;
+        $assignment_submision->created_at =now();
+
         $assignment_submision->save();
-        return redirect()->route('student.assignments')->with('success', 'Assignment submited successfully');
+        return redirect()->back()->with('success', 'Assignment submited successfully');
     }
 
     /**
@@ -58,12 +61,21 @@ class AssignmentSubmissionController extends Controller
      * @param  \App\AssignmentSubmission  $assignmentSubmission
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $assignment = Assignment::find($id);
 
-        return view('Assignment.Student_assignment.StudentAssignmentSubmissions', compact('assignment'));
-    }
+     //to view assignment individual and submit the solution 
+     public function show($id)
+     {
+         $studentId = Auth::id();
+         $assignment = Assignment::find($id);
+         $assignment_submissions = AssignmentSubmission::where('assignment_id', $id)
+             ->where('student_id', $studentId)
+             ->get();
+        $assignmnet_feedback= AssignmentFeedback::where('assignment_id', $id)->get();
+     
+         return view('Assignment.Student_assignment.StudentAssignmentSubmissions', compact('assignment', 'assignment_submissions','assignmnet_feedback'));
+     }
+
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -85,7 +97,13 @@ class AssignmentSubmissionController extends Controller
      */
     public function update(Request $request, AssignmentSubmission $assignmentSubmission)
     {
-        //
+        $staffId = Auth::id();
+        $assignmentSubmission = AssignmentSubmission::findOrFail($request->input('Assignment_submission_ID'));
+        $assignmentSubmission->feedback = $request->input('Assignment_feedback');
+        $assignmentSubmission->staff_id  = $staffId;
+        $assignmentSubmission->updated_at =now();
+        $assignmentSubmission->update();
+        return redirect()->back()->with('success', 'Assignment submited successfully');
     }
 
     /**

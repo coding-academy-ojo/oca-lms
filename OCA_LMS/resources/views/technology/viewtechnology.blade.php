@@ -58,7 +58,10 @@ Technology
                     <!-- Add more details as needed -->
                     <!-- <p>Category: {{ $technology->technology_category_id }}</p> -->
                     <!-- If you have an image, you can display it like this -->
-
+                    <p>Topics:</p>
+                    @foreach ($Topics as $topic)
+                        <span class="mx-4">{{ $topic->topic_name }}</span>
+                    @endforeach
                 </div>
 
             </div>

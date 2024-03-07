@@ -17,12 +17,14 @@ class CreateAssignmentFeedbackTable extends Migration
         Schema::create('assignment_feedback', function (Blueprint $table) {
             $table->id();
             $table->foreignId('assignment_submission_id')->constrained('assignment_submissions');
-            // $table->foreignId('trainer_id')->constrained('users')->where('role', 'trainer'); 
+            $table->unsignedBigInteger('staff_id');
+            $table->foreign('staff_id')->references('id')->on('staff')->onDelete('cascade');
             $table->text('feedback');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
-    
+
 
     /**
      * Reverse the migrations.

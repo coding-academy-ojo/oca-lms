@@ -26,6 +26,8 @@ class StudentsTableSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'is_newsletter' => $faker->boolean,
                 'provider_id' => $faker->randomNumber(),
+                'en_first_name' =>$faker->firstName(),
+                'en_second_name' =>$faker->firstName(),
                 'email_verification' => $faker->boolean,
                 'is_email_verified' => $faker->boolean,
                 'mobile' => $faker->phoneNumber,
