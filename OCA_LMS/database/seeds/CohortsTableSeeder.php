@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+
 class CohortsTableSeeder extends Seeder
 {
     /**
@@ -11,25 +12,24 @@ class CohortsTableSeeder extends Seeder
      */
     public function run()
     {
-        $cohorts = [
-            [
-                'cohort_name' => 'Cohort 1',
-                'cohort_description' => 'Description of Cohort 1',
-                'cohort_start_date' => '2024-02-01',
-                'cohort_end_date' => '2024-06-30',
-                'cohort_donor' => 'Donor 1',
-                'academy_id' => 1, // Replace with the actual ID of the associated academy
-            ],
-            [
-                'cohort_name' => 'Cohort 2',
-                'cohort_description' => 'Description of Cohort 2',
-                'cohort_start_date' => '2024-03-01',
-                'cohort_end_date' => '2024-07-31',
-                'cohort_donor' => 'Donor 2',
-                'academy_id' => 2, // Replace with the actual ID of the associated academy
-            ],
-        ];
+        // Retrieve all academies
+        $academies = DB::table('academies')->get();
 
+        $cohorts = [];
+        foreach ($academies as $academy) {
+            for ($i = 1; $i <= 3; $i++) {
+                $cohorts[] = [
+                    'cohort_name' => 'Cohort ' . $i . ' for ' . $academy->academy_name,
+                    'cohort_description' => 'Description for Cohort ' . $i . ' of ' . $academy->academy_name,
+                    'cohort_start_date' => date('Y-m-d', strtotime("2024-01-01 +$i months")),
+                    'cohort_end_date' => date('Y-m-d', strtotime("2024-06-01 +$i months")),
+                    'cohort_donor' => 'Donor ' . $i,
+                    'academy_id' => $academy->id,
+                ];
+            }
+        }
+
+        // Insert cohorts into the database
         DB::table('cohorts')->insert($cohorts);
     }
 }

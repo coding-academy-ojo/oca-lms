@@ -28,7 +28,6 @@
                 <label for="academyLocation" class="form-label required">Academy Location</label>
                 <input type="text" class="form-control required" id="academyLocation" name="academy_location" placeholder="Enter academy location" required>
             </div>
-            <!-- Add any additional fields as needed -->
             <button type="submit" class="btn btn-primary">Create</button>
         </form>
     </div>

@@ -79,7 +79,7 @@ Amman Cohort 1
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th scope="row">1</th>
+                                    <th scope="row">1</th>++
                                     <td>React</td>
                                     <td>A JavaScript library for building user interfaces.</td>
                                     <td>Official Docs, Tutorials</td>
@@ -266,9 +266,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 borderWidth: 1
             }, {
                 label: 'Absence',
-                data: [], // To be calculated
-                backgroundColor: '#f3a17a', // Red, semi-transparent
-                borderColor: '#f3a17a', // Red, solid
+                data: [], 
+                backgroundColor: '#f3a17a',
+                borderColor: '#f3a17a', 
                 borderWidth: 1
             }]
         },
@@ -277,17 +277,16 @@ document.addEventListener('DOMContentLoaded', function() {
             maintainAspectRatio: false,
             scales: {
                 x: {
-                    stacked: true, // Enable stacked bars
+                    stacked: true, 
                 },
                 y: {
-                    stacked: true, // Enable stacked bars
-                    beginAtZero: true, // Start the y-axis at 0
+                    stacked: true,
+                    beginAtZero: true, 
                 }
             }
         }
     });
 
-    // Calculate absence data based on attendance data
     totalSummaryChart.data.datasets[1].data = totalSummaryChart.data.datasets[0].data.map(attendance => 32 - attendance);
     totalSummaryChart.update(); // Update the chart to reflect new data
 });

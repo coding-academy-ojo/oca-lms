@@ -93,16 +93,35 @@ class StaffController extends Controller
     public function update(Request $request, $id)
     {
         $staff = Staff::findOrFail($id);
-    
+        
         if ($staff->role === 'manager' && $request->has('academies')) {
+            foreach ($request->academies as $academyId) {
+                $otherManager = Staff::where('role', 'manager')
+                                      ->whereExists(function ($query) use ($academyId) {
+                                          $query->select('academy_id')
+                                                ->from('academy_staff')
+                                                ->whereRaw('academy_staff.staff_id = staff.id')
+                                                ->where('academy_id', $academyId);
+                                      })
+                                      ->where('id', '!=', $staff->id)
+                                      ->first();
+                if ($otherManager) {
+                    $otherManager->academies()->detach($academyId);
+                }
+            }
             $staff->academies()->sync($request->academies);
-        } elseif ($staff->role === 'trainer' && $request->has('academy')) {
+        } 
+        elseif ($staff->role === 'trainer' && $request->has('academy')) {
             $staff->academies()->sync($request->academy ? [$request->academy] : []);
-        } else {
+        } 
+        else {
             $staff->academies()->detach();
         }    
+        
         return redirect()->route('staff.index')->with('success', 'Staff academies updated successfully.');
     }
+    
+    
     
 
     /**

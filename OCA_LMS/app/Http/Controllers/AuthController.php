@@ -12,7 +12,7 @@ class AuthController extends Controller
     public function showLoginForm()
     {
         if(!empty(Auth::check())){
-            return redirect('/home');
+            return redirect('/');
         }
         return view('auth.login');
     }
@@ -52,7 +52,7 @@ public function login(Request $request)
 
         $redirectPath = $this->redirectToRoleDashboard($staff->role);
 
-        return redirect()->intended($redirectPath)->with('success', 'Welcome ' . $staff->staff_name);
+        return redirect()->intended($redirectPath);
     } else {
         return redirect()->back()
             ->withErrors(['password' => 'The provided credentials do not match our records.'])
@@ -80,7 +80,7 @@ public function login(Request $request)
 {
 
     if(!empty(Auth::check())){
-        return redirect('/home');
+        return redirect('/');
     }
     return view('auth.student-login');
 }
@@ -96,7 +96,7 @@ public function studentLogin(Request $request)
 
     if (Auth::guard('students')->attempt($credentials)) {
         $student = Auth::guard('students')->user();
-        return redirect('/academies'); // Redirect to the '/academies' route upon successful login
+        return redirect('/cohorts'); 
     } else {
         return back()->withErrors(['email' => 'The provided credentials do not match our records.'])->withInput($request->except('password'));
     }
