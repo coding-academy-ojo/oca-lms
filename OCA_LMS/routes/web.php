@@ -161,7 +161,9 @@ Route::get('Student/assignments/{assignment}', [AssignmentSubmissionController::
 
 //Assignment Feedback
 Route::get('/Assignments/feedback', [AssignmentFeedbackController::class, 'index'])->name('assignments.feedback');
+Route::post('/Assignments/feedback/store', [AssignmentFeedbackController::class, 'store'])->name('assignment.feedbacksubmission.store');
 Route::get('/Assignments/feedback/{assignmnet}', [AssignmentFeedbackController::class, 'show'])->name('assignment.feedbacksubmission.show');
+Route::get('/Assignments/feedback/{id}/{studentId}', [AssignmentFeedbackController::class, 'submissionfedback'])->name('assignment.feedbacksubmission.feedback');
 
 
 

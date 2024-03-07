@@ -48,4 +48,14 @@ public function academies() {
     {
         return $this->hasMany(Announcement::class);
     }
+
+    public function assignmnetFeedback()
+    {
+        return $this->hasMany(AssignmentFeedback::class);
+    }
+
+    public function assignmnetSubmission()
+    {
+        return $this->hasMany(AssignmentSubmission::class);
+    }
 }

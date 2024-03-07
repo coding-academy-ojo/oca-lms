@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Assignment;
+use App\Cohort;
 use App\Student;
+use App\Technology_Cohort;
 use App\Topic;
 use Illuminate\Http\Request;
 
@@ -14,12 +16,35 @@ class AssignmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $cohortID=session('cohort_ID');
-        $assignments = Assignment::where('cohort_id',$cohortID)->get();
+        $cohortID = session('cohort_ID');
+        $query = Assignment::where('cohort_id', $cohortID);
+    
+        // Filter by technology
+        if ($request->has('technology_id')) {
+            $query->whereHas('topic', function ($query) use ($request) {
+                $query->where('technology_id', $request->technology_id);
+            });
+        }
+    
+        // Search by assignment name
+        if ($request->has('search')) {
+            $search = $request->search;
+            $query->where('assignment_name', 'like', '%' . $search . '%');
+        }
+    
+        $assignments = $query->get();
+    
+        // Fetch the list of technologies associated with the current cohort
+        // $technologies = TechnologyCohort::where('cohort_id', $cohortID)
+        //     ->with('technology')
+        //     ->get()
+        //     ->pluck('technology');
+    
         return view('Assignment.view_assignment', compact('assignments'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
