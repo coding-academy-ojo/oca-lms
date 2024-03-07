@@ -54,6 +54,9 @@ Project Brief
                     <li><a class="dropdown-item"
                             href="{{ route('edit_project_skills_level', ['id' => $project->id]) }}">Edit Project Skills
                             Level</a></li>
+                    <li>
+                        <a class="dropdown-item" href="{{ route('assign_students', ['projectId' => $project->id]) }}">Assign Students</a>
+                    </li>
                     @endif
 
                     @if(Auth::guard('staff')->user())
@@ -91,8 +94,8 @@ Project Brief
                                     <label for="submission_link" class="form-label">Submission Link</label>
                                     <input type="text" class="form-control" id="submission_link" name="submission_link" required>
 
-                                    <label for="message" class="form-label">Write a message</label>
-                                    <input type="text" class="form-control" id="message" name="message">
+                                    <label for="submission_message" class="form-label">Write a message</label>
+                                    <input type="text" class="form-control" id="submission_message" name="submission_message">
                                 </div>
                                 <div class="text-end">
                                     <button type="submit" class="btn btn-primary">Submit</button>

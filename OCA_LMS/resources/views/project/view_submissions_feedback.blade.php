@@ -11,7 +11,7 @@ Topics
 <section class="inner-bred">
 
     <div class="container">
-      
+
     </div>
 </section>
 
@@ -36,6 +36,9 @@ Topics
         <h3>{{ $project->project_name }}</h3>
 
         @foreach ($submissionsAndFeedback as $item)
+        @php
+            // dd($item)
+        @endphp
             <!-- Display trainee submission -->
             <div class="message mt-3 p-3 bg-light rounded" style="width: 53%">
                 <div class="d-flex align-items-center">
@@ -45,7 +48,9 @@ Topics
                         <p style="font-size: 12px; color: #444;">Submitted at: {{ $item['submission_created_at'] }}</p>
                     </div>
                 </div>
-                <p class="mt-3"><a href="{{ $item['submission_link'] }}">{{ $item['submission_link'] }}</a></p>
+                <p class="mt-3">Submission Link : <a href="{{ $item['submission_link'] }}">{{ $item['submission_link'] }}</a></p>
+                <p class="mt-3">{{ $item['submission_message'] }}</p>
+
             </div>
 
             <!-- Display trainer feedback if available -->

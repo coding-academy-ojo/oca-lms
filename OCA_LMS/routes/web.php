@@ -339,9 +339,9 @@ Route::post('/process_feedback/{submission_id}', 'ProjectController@processFeedb
 
 Route::get('/view_submissions_feedback/{project_id}', 'ProjectController@viewSubmissionsAndFeedback')->name('view_submissions_feedback');
 
-// Route::get('/view_conversation/{project_id}/{submission_id}', 'ProjectController@viewConversation')->name('view_conversation');
+Route::get('/assign-students/{projectId}', 'ProjectController@assignStudents')->name('assign_students');
+Route::post('/assign-students/{projectId}', 'ProjectController@assignStudents')->name('assign_students');
 
-// Route::get('/view_submissions_feedback/{project_id}/{student_id}', 'ProjectController@viewSubmissionsAndFeedback')->name('view_submissions_feedback');
 
 
 

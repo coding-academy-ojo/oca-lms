@@ -30,6 +30,7 @@ class StudentsTableSeeder extends Seeder
                 'mobile' => $faker->phoneNumber,
                 'academy_id' => $academyId,
                 'cohort_id' => $cohortId,
+                'personal_img' => 'person.png',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

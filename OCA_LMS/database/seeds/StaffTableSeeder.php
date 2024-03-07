@@ -20,7 +20,7 @@ class StaffTableSeeder extends Seeder
                 'role' => 'manager',
                 'staff_cv' => null,
                 'staff_bio' => 'Manager bio',
-                'staff_personal_img' => null,
+                'staff_personal_img' => 'person.png',
             ],
             [
                 'staff_name' => 'Super Manager Name',
@@ -29,7 +29,7 @@ class StaffTableSeeder extends Seeder
                 'role' => 'super_manager',
                 'staff_cv' => null,
                 'staff_bio' => 'Super Manager bio',
-                'staff_personal_img' => null,
+                'staff_personal_img' => 'person.png',
             ],
             [
                 'staff_name' => 'Trainer Name',
@@ -38,7 +38,7 @@ class StaffTableSeeder extends Seeder
                 'role' => 'trainer',
                 'staff_cv' => null,
                 'staff_bio' => 'Trainer bio',
-                'staff_personal_img' => null,
+                'staff_personal_img' => 'person.png',
             ],
         ]);
     }

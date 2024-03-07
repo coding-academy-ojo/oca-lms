@@ -7,8 +7,8 @@
         <label for="submission_link" class="form-label">Submission Link</label>
         <input type="text" class="form-control" id="submission_link" name="submission_link" required>
 
-        <label for="message" class="form-label">Write a message</label>
-        <input type="text" class="form-control" id="message" name="message">
+        <label for="submission_message" class="form-label">Write a message</label>
+        <input type="text" class="form-control" id="submission_message" name="submission_message" required>
     </div>
     <div class="text-end">
         <button type="submit" class="btn btn-primary">Submit</button>
