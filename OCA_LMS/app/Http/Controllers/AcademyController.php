@@ -18,32 +18,31 @@ class AcademyController extends Controller
      * @return \Illuminate\Http\Response
      */
   
-public function index()
-{
-    $user = Auth::guard('staff')->user() ?? Auth::guard('students')->user();
-    $isSuperManager = false;
-    $academies = []; // Initialize $academies variable
-
-    if ($user) {
-        if ($user instanceof Staff) {
-            $role = $user->role;
-            if ($role === 'super_manager') {
-                $isSuperManager = true;
-                $academies = Academy::with('staff')->get();
-            } elseif ($role === 'manager' || $role === 'trainer') {
-                $academies = $user->academies()->with('staff')->get();
-            }
-        } elseif ($user instanceof Student) {
-            $academies = $user->academy()->with('students')->get();
-
-        }
-    }
-
-    $allmanagers = Staff::where('role', 'manager')->get();
-
-    return view('academies.index', compact('academies', 'isSuperManager', 'allmanagers'));
-}
-    
+     public function index()
+     {
+         $user = Auth::guard('staff')->user() ?? Auth::guard('students')->user();
+         $isSuperManager = false;
+         $academies = []; 
+     
+         if ($user) {
+             if ($user instanceof Staff) {
+                 $role = $user->role;
+                 if ($role === 'super_manager') {
+                     $isSuperManager = true;
+                     $academies = Academy::with('staff', 'cohorts')->get();
+                 } elseif ($role === 'manager' || $role === 'trainer') {
+                     $academies = $user->academies()->with('staff', 'cohorts')->get();
+                 }
+             } elseif ($user instanceof Student) {
+                 $academies = $user->academy()->with('students')->get();
+             }
+         }
+     
+         $allmanagers = Staff::where('role', 'manager')->get();
+     
+         return view('academies.index', compact('academies', 'isSuperManager', 'allmanagers'));
+     }
+      
     
 
     /**

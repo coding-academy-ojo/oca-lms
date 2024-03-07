@@ -17,6 +17,7 @@ class Staff extends Authenticatable
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $table = 'staff';
+    
     /**
      * The academies that belong to the staff.
      *

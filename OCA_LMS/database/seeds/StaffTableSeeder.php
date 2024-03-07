@@ -14,7 +14,7 @@ class StaffTableSeeder extends Seeder
     {
         DB::table('staff')->insert([
             [
-                'staff_name' => 'Manager Name',
+                'staff_name' => 'Dana',
                 'staff_email' => 'manager@example.com',
                 'staff_password' => Hash::make('password'), // Use a secure password
                 'staff_Phone' => '1234567890',
@@ -23,7 +23,7 @@ class StaffTableSeeder extends Seeder
                 'staff_personal_img' => null,
             ],
             [
-                'staff_name' => 'Super Manager Name',
+                'staff_name' => 'Rana',
                 'staff_email' => 'supermanager@example.com',
                 'staff_password' => Hash::make('password'), // Use a secure password
                 'staff_Phone' => '1234567890',
@@ -32,7 +32,7 @@ class StaffTableSeeder extends Seeder
                 'staff_personal_img' => null,
             ],
             [
-                'staff_name' => 'Trainer Name',
+                'staff_name' => 'Reem',
                 'staff_email' => 'trainer@example.com',
                 'staff_password' => Hash::make('password'), // Use a secure password
                 'staff_Phone' => '1234567890',
