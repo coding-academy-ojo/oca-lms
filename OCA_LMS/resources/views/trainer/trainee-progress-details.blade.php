@@ -296,7 +296,7 @@ var areaChart = function() {
                     data: [25, 20, 60],
                     borderColor: '#ff7900',
                     borderWidth: 3,
-                    backgroundColor: '#ff7900',
+                    backgroundColor: 'rgba(255, 166, 101, 1)',
                     pointBackgroundColor: 'rgba(141, 149, 255, 1)',
                     fill: true // Fill area under the line
                 }]
