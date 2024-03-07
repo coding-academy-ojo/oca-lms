@@ -1,3 +1,9 @@
+
+
+
+
+
+
 <?php
 
 use App\AssignmentFeedback;
@@ -16,6 +22,8 @@ use App\Http\Controllers\SkillController;
 use App\Http\Controllers\AssignmentSubmissionController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\SuperManagerController;
+use App\Http\Controllers\StaffController;
+use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\AnnouncementController;
 
 /*
@@ -54,7 +62,6 @@ Route::post('/login/student', 'AuthController@studentLogin')->name('student.logi
 // Route::resource('classrooms', 'ClassroomController');
 
 
-
 //Rawan Abuseini route
 
 // announcements routes
@@ -62,10 +69,19 @@ Route::get('/announcements', [AnnouncementController::class, 'index'])-> name('A
 Route::post('/announcements', [AnnouncementController::class, 'store'])-> name('announcements.store');
 Route::put('/announcements/{id}', [AnnouncementController::class, 'update'])->name('announcements.update');
 Route::delete('/{announcement:id}', [AnnouncementController::class, 'destroy'])-> name('destroy');
+
+// Add Trainee route
+
+Route::get('/addTrainee', function () {
+    return view('trainer/addTrainee');
+})->name('addTrainee');
+
 ////////////////////////////////////////////////
 
 
-
+//attendance & absense
+Route::get('/attendance', [AbsenceController::class, 'index'])->name('attendance');
+Route::post('/attendance/store-or-update', [AbsenceController::class, 'storeOrUpdate'])->name('attendance.storeOrUpdate');
 
 
 //START Academeies  gruop routes ///////
@@ -81,11 +97,23 @@ Route::get('/academies/{academy}', [AcademyController::class, 'show'])->name('ac
 
 Route::get('/cohorts/{academyId?}', [CohortController::class, 'index'])->name('academyview');
 Route::get('/cohorts/{cohort}/edit', [CohortController::class, 'edit'])->name('cohortedit');
+Route::get('/cohorts/view-cohort/{cohort}', [CohortController::class, 'show'])->name('view-cohort');
+Route::put('/cohort/{cohort_id}', [CohortController::class, 'update'])->name('update-cohort');
+Route::post('/cohorts', [CohortController::class, 'store'])->name('store-cohort');
 
 // super maneger
 Route::get('/supermanager-dashboard', [SuperManagerController::class, 'index'])->name('supermanager-dashboard');
-Route::get('/cohorts/view-cohort/{cohort}', [CohortController::class, 'show'])->name('view-cohort');
 
+
+
+// staff controller
+Route::get('/staff', [StaffController::class, 'index'])->name('staff.index');
+Route::get('/staff/create', [StaffController::class, 'create'])->name('staff.create');
+Route::post('/staff', [StaffController::class, 'store'])->name('staff.store');
+Route::get('/staff/{id}', [StaffController::class, 'show'])->name('staff.show');
+Route::get('/staff/{id}/edit', [StaffController::class, 'edit'])->name('staff.edit');
+Route::put('/staff/{id}', [StaffController::class, 'update'])->name('staff.update');
+Route::delete('/staff/{id}', [StaffController::class, 'destroy'])->name('staff.destroy');
 
 
 // trainee progress details
@@ -93,9 +121,7 @@ Route::get('/cohort/progress-details', function () {
     return view('trainer.trainee-progress-details');
 })->name('trainee-progress-details');
 // attendance
-Route::get('/attendance', function () {
-    return view('supermaneger.attendance');
-})->name('attendance');
+
 
 // absence
 Route::get('/absence-report', function () {
@@ -105,12 +131,12 @@ Route::get('/absence-report/trainee', function () {
     return view('supermaneger.spacificUserReport');
 })->name('spacificUserReport');
 // staff
-Route::get('/staff', function () {
-    return view('supermaneger.staff');
-})->name('staff');
-Route::get('/staff/edit', function () {
-    return view('supermaneger.editStaff');
-})->name('staff.edit');
+// Route::get('/staff', function () {
+//     return view('supermaneger.staff');
+// })->name('staff');
+// Route::get('/staff/edit', function () {
+//     return view('supermaneger.editStaff');
+// })->name('staff.edit');
 
 
 /////////////////////////////////////////////
@@ -330,21 +356,20 @@ Route::get('/edit_project_skills_level/{id}', [ProjectController::class, 'editPr
 Route::put('/update_project_skills_level/{id}', [ProjectController::class, 'updateProjectSkillsLevel'])->name('update_project_skills_level');
 
 // // Show modal
-// Route::get('/add_project_submission_modal/{project_id}', 'ProjectController@showAddProjectSubmissionModal')->name('show_add_project_submission_modal');
+Route::get('/add_project_submission_modal/{project_id}', 'ProjectController@showAddProjectSubmissionModal')->name('show_add_project_submission_modal');
 
 // // Process form submission
-// Route::post('/process_project_submission/{project_id}', 'ProjectController@processProjectSubmission')->name('process_project_submission');
+Route::post('/process_project_submission/{project_id}', 'ProjectController@processProjectSubmission')->name('process_project_submission');
 
-// Route::get('/view_project_submissions/{project_id}', 'ProjectController@viewProjectSubmissions')->name('view_project_submissions');
+Route::get('/view_project_submissions/{project_id}', 'ProjectController@viewProjectSubmissions')->name('view_project_submissions');
 
-// Route::post('/process_feedback/{submission_id}', 'ProjectController@processFeedback')->name('process_feedback');
+Route::post('/process_feedback/{submission_id}', 'ProjectController@processFeedback')->name('process_feedback');
 
-// Route::get('/view_submissions_feedback/{project_id}', 'ProjectController@viewSubmissionsAndFeedback')->name('view_submissions_feedback');
+Route::get('/view_submissions_feedback/{project_id}', 'ProjectController@viewSubmissionsAndFeedback')->name('view_submissions_feedback');
 
+// Route::get('/view_conversation/{project_id}/{submission_id}', 'ProjectController@viewConversation')->name('view_conversation');
 
-
-
-
+// Route::get('/view_submissions_feedback/{project_id}/{student_id}', 'ProjectController@viewSubmissionsAndFeedback')->name('view_submissions_feedback');
 
 
 

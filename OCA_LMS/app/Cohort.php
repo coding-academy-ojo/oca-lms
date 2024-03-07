@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cohort extends Model
 {
-    protected $guarded = ['id', 'created_at', 'updated_at'];
+    protected $guarded = ['id'];
 
      // Cohort belongs to an Academy
      public function academy() {
