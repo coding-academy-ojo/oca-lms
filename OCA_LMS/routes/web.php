@@ -1,7 +1,9 @@
 <?php
 
+use App\AssignmentFeedback;
 use App\Http\Controllers\AcademyController;
 use App\Http\Controllers\AssignmentController;
+use App\Http\Controllers\AssignmentFeedbackController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassroomController;
@@ -11,6 +13,7 @@ use App\Http\Controllers\TechnologyCategoryController;
 use App\Http\Controllers\TechnologyCohortController;
 use App\Http\Controllers\TechnologyController;
 use App\Http\Controllers\SkillController;
+use App\Http\Controllers\AssignmentSubmissionController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\SuperManagerController;
 use App\Http\Controllers\ProfileController;
@@ -150,6 +153,19 @@ Route::get('/assignment/{assignment}/edit', [AssignmentController::class ,'edit'
 Route::put('/assignment/{assignment}', [AssignmentController::class ,'update'])->name('assignment.update');
 Route::delete('/assignment/{assignment}', [AssignmentController::class ,'destroy'])->name('assignment.destroy');
 Route::get('/download/{filename}', [AssignmentController::class, 'downloads'])->name('download');
+Route::delete('assignment/{assignment}/student/{student}',[AssignmentController::class,'removeStudent'] )->name('assignment.removeStudent');
+
+//student assignment&submission route
+Route::get('Student/Assignments', [AssignmentSubmissionController::class, 'index'])->name('student.assignments');
+Route::post('Student/asssignment/store', [AssignmentSubmissionController::class ,'store'])->name('Student.assignment.store');
+Route::get('Student/assignments/{assignment}', [AssignmentSubmissionController::class ,'show'])->name('Student.assignment.show');
+
+//Assignment Feedback
+Route::get('/Assignments/feedback', [AssignmentFeedbackController::class, 'index'])->name('assignments.feedback');
+Route::get('/Assignments/feedback/{assignmnet}', [AssignmentFeedbackController::class, 'show'])->name('assignment.feedbacksubmission.show');
+
+
+
 
 
 
@@ -312,21 +328,20 @@ Route::get('/edit_project_skills_level/{id}', [ProjectController::class, 'editPr
 Route::put('/update_project_skills_level/{id}', [ProjectController::class, 'updateProjectSkillsLevel'])->name('update_project_skills_level');
 
 // // Show modal
-// Route::get('/add_project_submission_modal/{project_id}', 'ProjectController@showAddProjectSubmissionModal')->name('show_add_project_submission_modal');
+Route::get('/add_project_submission_modal/{project_id}', 'ProjectController@showAddProjectSubmissionModal')->name('show_add_project_submission_modal');
 
 // // Process form submission
-// Route::post('/process_project_submission/{project_id}', 'ProjectController@processProjectSubmission')->name('process_project_submission');
+Route::post('/process_project_submission/{project_id}', 'ProjectController@processProjectSubmission')->name('process_project_submission');
 
-// Route::get('/view_project_submissions/{project_id}', 'ProjectController@viewProjectSubmissions')->name('view_project_submissions');
+Route::get('/view_project_submissions/{project_id}', 'ProjectController@viewProjectSubmissions')->name('view_project_submissions');
 
-// Route::post('/process_feedback/{submission_id}', 'ProjectController@processFeedback')->name('process_feedback');
+Route::post('/process_feedback/{submission_id}', 'ProjectController@processFeedback')->name('process_feedback');
 
-// Route::get('/view_submissions_feedback/{project_id}', 'ProjectController@viewSubmissionsAndFeedback')->name('view_submissions_feedback');
+Route::get('/view_submissions_feedback/{project_id}', 'ProjectController@viewSubmissionsAndFeedback')->name('view_submissions_feedback');
 
+// Route::get('/view_conversation/{project_id}/{submission_id}', 'ProjectController@viewConversation')->name('view_conversation');
 
-
-
-
+// Route::get('/view_submissions_feedback/{project_id}/{student_id}', 'ProjectController@viewSubmissionsAndFeedback')->name('view_submissions_feedback');
 
 
 

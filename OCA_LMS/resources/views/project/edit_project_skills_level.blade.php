@@ -13,7 +13,8 @@ Edit Project Skills
     <div class="container">
         <ul class="thm-breadcrumb">
             <li><a href="">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
-            {{-- <li><a href="">{{ $category->Categories_name }}</a></li> --}}
+            <li><a href="/projects">Project</a><span><i class="fa-solid fa-chevron-right"></i></span></li>
+            <li><a style="color:#F16E00"href="">Edit Project Skills</a></li>
         </ul>
     </div>
 </section>

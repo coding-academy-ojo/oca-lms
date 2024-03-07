@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 
-class TopicSeeder extends Seeder
+class TechnologyCohortSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,14 +13,14 @@ class TopicSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('topics')->insert([
+         DB::table('topics')->insert([
             [
                 'topic_name' => 'curd opration',
-                'technology_id' => '1',
+                'technology_id' => '4',
             ],
             [
                 'topic_name' => 'Api',
-                'technology_id' => '3',
+                'technology_id' => '4',
             ],
             [
                 'topic_name' => 'Flex',

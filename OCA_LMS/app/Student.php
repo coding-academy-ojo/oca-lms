@@ -38,7 +38,11 @@ class Student extends Authenticatable
 
     public function assignment()
     {
+<<<<<<< HEAD
         return $this->belongsToMany(Assignment::class, 'assignment_student');
+=======
+        return $this->belongsToMany(Assignment::class, 'assignment_student', 'student_id', 'assignment_id');
+>>>>>>> bb2dbcd6e2a8cb387597f729fd54d497ca35ba64
     }
 
     public function projectSubmissions()
@@ -50,4 +54,15 @@ class Student extends Authenticatable
     {
         return $this->hasMany('App\ProjectFeedback', 'student_id');
     }
+<<<<<<< HEAD
+=======
+
+    
+    public function assignmentsubmision()
+    {
+        return $this->hasMany(AssignmentSubmission::class);
+    }
+
+
+>>>>>>> bb2dbcd6e2a8cb387597f729fd54d497ca35ba64
 }

@@ -10,6 +10,7 @@ class Topic extends Model
     protected $guarded = ['id', 'created_at', 'updated_at'];
     use SoftDeletes;
 
+
     public function assignments()
     {
         return $this->hasMany('App\Assignment', 'topic_id');
