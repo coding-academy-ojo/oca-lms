@@ -68,21 +68,32 @@ class StaffController extends Controller
             'staff_cv' => 'nullable|file',
             'staff_bio' => 'nullable|string',
             'staff_personal_img' => 'nullable|image',
-            'academy_id' => 'nullable|exists:academies,id', // Make academy_id optional but must exist in the academies table if provided
+            'academy_id' => 'nullable|exists:academies,id',
         ]);
     
         $validatedData['staff_password'] = Hash::make($validatedData['staff_password']);
-        
-        // Create the staff member without academy_id in the array
         $staff = Staff::create(Arr::except($validatedData, ['academy_id']));
     
-        // Attach the staff member to the specified academy if academy_id is provided
-        if (!empty($validatedData['academy_id'])) {
+        if (!empty($validatedData['academy_id']) && $validatedData['role'] === 'manager') {
+            
+  
+            $existingManager = Staff::whereHas('academies', function ($query) use ($validatedData) {
+                $query->where('academy_id', $validatedData['academy_id']);
+            })->where('role', 'manager')->first();
+    
+            if ($existingManager) {
+                $existingManager->academies()->detach($validatedData['academy_id']);
+            }
+    
+            $staff->academies()->attach($validatedData['academy_id']);
+        } elseif (!empty($validatedData['academy_id']) && $validatedData['role'] === 'trainer') {
+            // Trainers can be added to multiple academies
             $staff->academies()->attach($validatedData['academy_id']);
         }
     
         return redirect()->route('staff.index')->with('success', 'Staff member created successfully.');
     }
+    
     
     
 
