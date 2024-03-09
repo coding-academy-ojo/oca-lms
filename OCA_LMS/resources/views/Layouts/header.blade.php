@@ -76,15 +76,16 @@
                         @endif
                   
                 </ul>
+                @endauth
                 <ul class="navbar-nav ms-auto ">
-                    <li class="nav-item m-1">
+                    {{-- <li class="nav-item m-1">
                         <a class="nav-link {{ request()->routeIs('profile') ? 'active' : '' }}"
                             href="{{ route('profile') }}">
                             <span class="material-symbols-outlined">
                                 person
                             </span>
                         </a>
-                    </li>
+                    </li> --}}
 
                     <li class="nav-item m-1">
                         <a class="nav-link" href="{{ route('logout') }}">
@@ -96,7 +97,7 @@
 
                 </ul>
             </div>
-            @endauth
+        
 
         </div>
     </nav>
