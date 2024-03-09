@@ -33,7 +33,7 @@
                 readonly value="{{$staff->staff_email}}">
         </div>
 
-        @if ($role == 'manager')
+        @if ($editingUserRole == 'manager')
         <div class="mb-3">
             <label class="form-label">Academies</label>
             <div class="dropdown ">
