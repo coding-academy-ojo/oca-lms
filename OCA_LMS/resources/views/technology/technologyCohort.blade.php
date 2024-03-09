@@ -23,9 +23,7 @@ Technologies
 {{-- =========================================================== --}}
 <div class="innerPage mt-3">
     <div class="container">
-        <div class="col-md-2 ms-auto mb-3">
-            <a href="{{ route('technology.create', ['category' => $category->id]) }}" class=" btn btn-primary m-auto">Create technology</a>
-        </div>
+       
         <div class="projectCard">
             <div class="row">
                 @foreach ($technologies as $technology)

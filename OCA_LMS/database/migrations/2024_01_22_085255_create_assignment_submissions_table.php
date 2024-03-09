@@ -19,6 +19,9 @@ public function up()
         $table->boolean('is_late')->default(0);
         $table->foreignId('assignment_id')->constrained('assignments');
         $table->string('attached_file');
+        $table->text('feedback');
+        $table->unsignedBigInteger('staff_id');
+        $table->foreign('staff_id')->references('id')->on('staff')->onDelete('cascade');
         $table->unsignedBigInteger('student_id');
         $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
         $table->timestamps();

@@ -26,16 +26,23 @@ class StudentsTableSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'is_newsletter' => $faker->boolean,
                 'provider_id' => $faker->randomNumber(),
+                'en_first_name' =>$faker->firstName(),
+                'en_second_name' =>$faker->firstName(),
                 'email_verification' => $faker->boolean,
                 'is_email_verified' => $faker->boolean,
                 'mobile' => $faker->phoneNumber,
                 'en_first_name' => $faker->firstName, 
                 'en_last_name' => $faker->lastName, 
                 'academy_id' => $academyId,
+                'en_first_name' => $faker->name,
+                'en_second_name' => $faker->name,
+                'en_third_name' => $faker->name,
+                'en_last_name' => $faker->name,
                 'cohort_id' => $cohortId,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
         }
+        
     }
 }
