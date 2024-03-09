@@ -70,7 +70,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('traineesProgress') ? 'text-primary' : '' }}"
-                                    href="{{ route('traineesProgress') }}">Progress</a>
+                                    href="{{ route('traineesProgress') }}">Trainees Progress</a>
 
                             </li>
                         @endif

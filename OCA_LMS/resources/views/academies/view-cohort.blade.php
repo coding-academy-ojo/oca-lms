@@ -79,7 +79,7 @@ Amman Cohort 1
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th scope="row">1</th>++
+                                    <th scope="row">1</th>
                                     <td>React</td>
                                     <td>A JavaScript library for building user interfaces.</td>
                                     <td>Official Docs, Tutorials</td>
@@ -119,6 +119,55 @@ Amman Cohort 1
                                         Not Started
                                     </td>
                                     <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#feedbackModal3">View Feedback</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h3 class="text-primary">Softskills Overview</h3>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Trainer</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Satisfaction</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Communication</td>
+                                    <td>Ability to effectively communicate ideas.</td>
+                                    <td>Bayan Al-Nabulsi</td>
+                                    <td>2nd Feb 2024</td>
+                                    <td><div class="satisfaction-bar" style="width: 80%; background-color: #4CAF50;"></div></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Teamwork</td>
+                                    <td>Ability to work well within a team.</td>
+                                    <td>Bayan Al-Nabulsi</td>
+                                    <td>10th Feb 2024</td>
+                                    <td><div class="satisfaction-bar" style="width: 60%; background-color: #ffeb3b;"></div></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Problem-solving</td>
+                                    <td>Ability to solve complex issues effectively.</td>
+                                    <td>Bayan Al-Nabulsi</td>
+                                    <td>3rd Mar 2024</td>
+                                    <td><div class="satisfaction-bar" style="width: 25%; background-color: #f44336;"></div></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -201,6 +250,82 @@ Amman Cohort 1
         </div>
     </div>
     
+    <div class="container my-5">
+        <div class="row">
+            <!-- Soft Skills Development Over Time Chart -->
+            <div class="col-md-6">
+                <div class="card-custom">
+                    <div class="card-header-custom">
+                        <h3 class="text-primary">Soft Skills Development Over Time</h3>
+                    </div>
+                    <canvas id="softSkillsDevelopmentChart" class="chart-container-custom"></canvas>
+                </div>
+            </div>
+    
+            <!-- Soft Skills Development by Subject Chart -->
+            <div class="col-md-6">
+                <div class="card-custom">
+                    <div class="card-header-custom">
+                        <h3 class="text-primary">Soft Skills by Subject</h3>
+                    </div>
+                    <canvas id="softSkillsBySubjectChart" class="chart-container-custom"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Chart data and options can be customized as needed
+        var ctxTime = document.getElementById('softSkillsDevelopmentChart').getContext('2d');
+        var softSkillsTimeChart = new Chart(ctxTime, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                datasets: [{
+                    label: 'Development Over Time',
+                    data: [60, 65, 70, 75, 80, 85],
+                    fill: false,
+                    borderColor: 'rgba(255, 165, 0, 1)',
+                    backgroundColor: 'rgba(255, 165, 0, 0.2)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    
+        var ctxSubject = document.getElementById('softSkillsBySubjectChart').getContext('2d');
+        var softSkillsSubjectChart = new Chart(ctxSubject, {
+            type: 'line',
+            data: {
+                labels: ['Communication', 'Teamwork', 'Problem-solving', 'Leadership', 'Work Ethic', 'Creativity'],
+                datasets: [{
+                    label: 'Development by Subject',
+                    data: [65, 59, 70, 80, 75, 85],
+                    fill: false,
+                    borderColor: 'rgba(255, 140, 0, 1)',
+                    backgroundColor: 'rgba(255, 140, 0, 0.2)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
+    </script>
+    
+    
     <style>
         .timeline {
             position: relative;
@@ -245,6 +370,15 @@ Amman Cohort 1
         .timeline-content h5 {
             margin-top: 0;
         }
+        .satisfaction-bar {
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        .table .satisfaction-bar {
+            margin-top: 5px; /* Adjust based on your table's design */
+        }
+
     </style>
     
 
