@@ -35,27 +35,6 @@ class ProjectController extends Controller
     return view('project.project', compact('projects'));
 }
 
-
-// public function assignStudents($projectId)
-// {
-//     $cohortId = session('cohort_ID');
-//     $students = Student::where('cohort_id', $cohortId)->get();
-//     $project = Project::findOrFail($projectId);
-
-//     if(request()->isMethod('post')) {
-//         // إذا تم اختيار الطلاب، قم بربطهم بالمشروع
-//         if(request()->has('students')) {
-//             $selectedStudents = request('students');
-//             $project->students()->syncWithoutDetaching($selectedStudents);
-//         }
-
-//         return redirect()->route('project_brief', ['id' => $project->id]);
-//     }
-
-//     return view('project.assign_students', compact('project', 'students'));
-// }
-
-
 public function assignStudents($projectId)
 {
     $cohortId = session('cohort_ID');
@@ -203,16 +182,49 @@ public function assignStudents($projectId)
     }
 
 
-    public function updateProject(Request $request, $id)
+//     public function updateProject(Request $request, $id)
+// {
+//     $request->validate([
+//         'project_name' => 'required',
+//         'project_description' => 'required',
+//         // 'project_image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+//         'project_image' => 'required',
+//         'project_start_date' => 'required|date',
+//         'project_delivery_date' => 'required|date|after:start_date',
+//         'project_deliverable' => 'nullable',
+//         'project_resources' => 'nullable',
+//         'project_assessment_methods' => 'nullable',
+//     ]);
+
+//     $project = Project::findOrFail($id);
+//     $project->project_name = $request->input('project_name');
+//     $project->project_description = $request->input('project_description');
+//     $project->cohort_id = session('cohort_ID');
+//     $project->project_start_date = $request->input('project_start_date');
+//     $project->project_delivery_date = $request->input('project_delivery_date');
+//     $project->project_deliverable = $request->input('project_deliverable');
+//     $project->project_resources = $request->input('project_resources');
+//     $project->project_assessment_methods = $request->input('project_assessment_methods');
+
+//     if ($request->hasFile('project_image')) {
+//         $imageName = time().'.'.$request->project_image->extension();
+//         $request->project_image->move(public_path('images'), $imageName);
+//         $project->project_image = $imageName;
+//     }
+
+//     $project->save();
+
+//     return redirect()->route('project_brief', ['id' => $id]);
+// }
+
+public function updateProject(Request $request, $id)
 {
     $request->validate([
         'project_name' => 'required',
         'project_description' => 'required',
-        // 'project_image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'project_image' => 'required',
+        'project_image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'project_start_date' => 'required|date',
         'project_delivery_date' => 'required|date|after:start_date',
-        // 'cohort_id' => 'required|exists:cohorts,id',
         'project_deliverable' => 'nullable',
         'project_resources' => 'nullable',
         'project_assessment_methods' => 'nullable',
@@ -229,6 +241,7 @@ public function assignStudents($projectId)
     $project->project_assessment_methods = $request->input('project_assessment_methods');
 
     if ($request->hasFile('project_image')) {
+        // If a new image is uploaded, move it to the images directory
         $imageName = time().'.'.$request->project_image->extension();
         $request->project_image->move(public_path('images'), $imageName);
         $project->project_image = $imageName;
@@ -238,6 +251,7 @@ public function assignStudents($projectId)
 
     return redirect()->route('project_brief', ['id' => $id]);
 }
+
 
     public function editProjectSkillsLevel($id)
 {
