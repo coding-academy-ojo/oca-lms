@@ -36,6 +36,10 @@ class DatabaseSeeder extends Seeder
 
 
 
+        $this->call(StaffCohortTableSeeder::class);
+        $this->call(ProjectSeeder::class);
+        $this->call(ProjectSkillsTableSeeder::class);
+
         $this->command->info('Database seeded successfully!');
     }
 }

@@ -43,18 +43,20 @@ class TechnologyController extends Controller
         // Validate the incoming request
         $validatedData = $request->validate([
             'technology_category_id' => 'required|exists:technology_categories,id',
-            'technologies_name' => 'required|string|max:255',
+            'technologies_name' => 'required|string|max:255|unique:technologies',
             'technologies_description' => 'required|string',
             'technologies_resources' => 'required|string',
             'technologies_trainingPeriod' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ], [
+            'technologies_name.unique' => 'The Technology name has already been taken.',
         ]);
 
         // Handle file upload
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = $image->getClientOriginalName();
-            $image->move(public_path('images'), $imageName);
+            $image->move(public_path('assets/img'), $imageName); // Store the image in 'public/assets/img'
         } else {
             $imageName = null;
         }
@@ -70,8 +72,10 @@ class TechnologyController extends Controller
         $technology->save();
 
         // Redirect back or to any other route as needed
-        return redirect()->route('categories.show', ['category' => $validatedData['technology_category_id']]);
+        return redirect()->route('categories.show', ['category' => $validatedData['technology_category_id']])
+            ->with('success', 'Technology added successfully.');
     }
+
 
 
     /**
@@ -88,9 +92,9 @@ class TechnologyController extends Controller
 
     public function showInfo(Technology $technology)
     {
-        $Topics=Topic::all();
+        $Topics = Topic::all();
 
-        return view('technology.viewtechnology', compact('technology','Topics'));
+        return view('technology.viewtechnology', compact('technology', 'Topics'));
     }
 
     /**
@@ -155,7 +159,7 @@ class TechnologyController extends Controller
     public function destroy(Technology $technology)
     {
         $technology->delete();
-        return redirect()->route('categories.show', ['category' =>$technology->technology_category_id]);
+        return redirect()->route('categories.show', ['category' => $technology->technology_category_id]);
         // return redirect()->route('categories.show', ['category' => $validatedData['technology_category_id']]);
 
 
