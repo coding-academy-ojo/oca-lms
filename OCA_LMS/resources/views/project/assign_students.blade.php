@@ -10,10 +10,11 @@ Create Project
 @include('layouts.innerNav')
 <section class="inner-bred">
 
-    <div class="container">
+    <div class="container mt-3">
         <ul class="thm-breadcrumb">
             <li><a href="">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
             <li><a href="/projects">Project</a><span><i class="fa-solid fa-chevron-right"></i></span></li>
+            <li><a href="{{ route('project_brief', ['id' => $project->id]) }}">Prpject Brief</a><span><i class="fa-solid fa-chevron-right"></i></span></li>
             <li><a style="color:#F16E00"href="">Assign Students</a></li>
         </ul>
     </div>
