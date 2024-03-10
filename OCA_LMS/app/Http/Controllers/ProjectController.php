@@ -18,16 +18,6 @@ use App\Staff;
 class ProjectController extends Controller
 {
 
-    //     public function showAllProjects()
-    // {
-    //     // Check if the cohort_id is stored in the session for students and staff
-    //     $cohortId = session('cohort_ID');
-    //     // Retrieve projects based on the cohort_id
-    //     $projects = Project::where('cohort_id', $cohortId)->get();
-    //     // Pass the projects to the view
-    //     return view('project.project', compact('projects'));
-    // }
-
     public function showAllProjects()
 {
     $cohortId = session('cohort_ID');
@@ -46,13 +36,44 @@ class ProjectController extends Controller
 }
 
 
-    public function assignStudents($projectId)
+// public function assignStudents($projectId)
+// {
+//     $cohortId = session('cohort_ID');
+//     $students = Student::where('cohort_id', $cohortId)->get();
+//     $project = Project::findOrFail($projectId);
+
+//     if(request()->isMethod('post')) {
+//         // إذا تم اختيار الطلاب، قم بربطهم بالمشروع
+//         if(request()->has('students')) {
+//             $selectedStudents = request('students');
+//             $project->students()->syncWithoutDetaching($selectedStudents);
+//         }
+
+//         return redirect()->route('project_brief', ['id' => $project->id]);
+//     }
+
+//     return view('project.assign_students', compact('project', 'students'));
+// }
+
+
+public function assignStudents($projectId)
 {
     $cohortId = session('cohort_ID');
     $students = Student::where('cohort_id', $cohortId)->get();
-
-    // استرجاع المشروع
     $project = Project::findOrFail($projectId);
+
+    if (request()->isMethod('post')) {
+        // Detach all students associated with the project
+        $project->students()->detach();
+
+        // Attach the selected students
+        if (request()->has('students')) {
+            $selectedStudents = request('students');
+            $project->students()->attach($selectedStudents);
+        }
+
+        return redirect()->route('project_brief', ['id' => $project->id]);
+    }
 
     return view('project.assign_students', compact('project', 'students'));
 }

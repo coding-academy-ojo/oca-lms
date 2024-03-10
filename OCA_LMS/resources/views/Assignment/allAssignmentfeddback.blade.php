@@ -30,13 +30,13 @@ View Asignment Submissions
                 <tbody>
                     @foreach ($assignments as $assignment)
                     <tr>
-                        <td>{{$assignment->student->en_first_name }}</td>
+                        <td>{{$assignment->student->en_first_name }} {{$assignment->student->en_second_name }}</td>
                         <td>{{$assignment->assignment->assignment_name }}</td>
                         <td>{{$assignment->created_at }}</td>
                         <td><a class="link-underline link-underline-opacity-0"
                                 href={{$assignment->attached_file }}target="_blank">{{$assignment->attached_file }}</a></td>
                         <td><a class="link-underline link-underline-opacity-0"
-                                href="{{ route('submit_assignment') }}">View</a></td>
+                                href="{{ route('assignment.feedbacksubmission.feedback', [$assignment->assignment->id, $assignment->student->id]) }}">View</a></td>
                     </tr>
                     @endforeach
                 </tbody>

@@ -76,7 +76,14 @@ Topics
             <a href="{{ route('view_project_submissions', ['project_id' => $project->id]) }}" class="btn btn-primary mt-3">
                 Back to Submissions
             </a>
+            
+            @elseif(Auth::guard('students')->check())
+            <a href="{{ route('project_brief', ['id' => $project->id]) }}" class="btn btn-primary mt-3">
+                Back to Project Brief
+            </a>
+
         @endif
+
 
     </div>
 </div>

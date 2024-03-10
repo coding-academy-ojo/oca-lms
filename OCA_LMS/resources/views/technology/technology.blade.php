@@ -21,11 +21,14 @@ Technologies
 {{-- =========================================================== --}}
 {{-- =================== Breadcrumb Section ==================== --}}
 {{-- =========================================================== --}}
-<div class="innerPage mt-3">
+<!-- <div class="innerPage mt-3">
     <div class="container">
+        @if(Auth::guard('staff')->check() && Auth::guard('staff')->user()->role === 'trainer')
         <div class="col-md-2 ms-auto mb-3">
             <a href="{{ route('technology.create', ['category' => $category->id]) }}" class=" btn btn-primary m-auto">Create technology</a>
         </div>
+        @endif
+
         <div class="projectCard">
             <div class="row">
                 @foreach ($technologies as $technology)
@@ -34,20 +37,25 @@ Technologies
                         <a href="{{ route('technology.showInfo', ['technology' => $technology]) }}">
                             <img src="{{ asset('assets/img/' . $technology->technologies_photo) }}" alt="">
                         </a>
-                        <div class="innerCard">
+                        <div class="innerCard" style="gap: 1rem;
+    display: flex;
+    flex-direction: column;">
                             <a href="{{ route('technology.showInfo', ['technology' => $technology]) }}">
                                 <h4 class="text-center">{{ $technology->technologies_name }}</h4>
                             </a>
-                            <!-- <form method="POST" action="{{ route('technology.addToCohort', ['technology' => $technology]) }}">
-                                @csrf
-                                <button type="submit">Add to Cohort</button>
-                            </form> -->
+                          
+                            @if(Auth::guard('staff')->check() && Auth::guard('staff')->user()->role === 'trainer')
                             <form style="display: flex;" method="POST" action="{{ route('technology.addToCohort', ['technology' => $technology]) }}">
                                 @csrf
                                 <input type="hidden" name="cohort_id" value="{{ $technology->technology_category_id }}">
                                 <button class=" btn btn-primary m-auto" type="submit">Add to Cohort</button>
                                 <a class=" btn btn-primary m-auto" href="{{ route('technology.showInfo', ['technology' => $technology]) }}">view</a>
                             </form>
+                            @else
+                            <a class=" btn btn-primary m-auto" href="{{ route('technology.showInfo', ['technology' => $technology]) }}">view</a>
+
+                            @endif
+
 
                         </div>
                     </div>
@@ -56,7 +64,63 @@ Technologies
             </div>
         </div>
     </div>
+</div> -->
+
+<div class="innerPage mt-3">
+    <div class="container">
+        @if(Auth::guard('staff')->check() && Auth::guard('staff')->user()->role === 'trainer')
+        <!-- ms-auto -->
+        <div class="col-md-2 mb-3">
+            <a href="{{ route('technology.create', ['category' => $category->id]) }}" class="btn btn-primary m-auto">Create technology</a>
+        </div>
+        @endif
+
+        <div class="projectCard">
+            <div class="row justify-content-center"> <!-- Center the row -->
+                <div class="col-md-8"> <!-- Define the column width -->
+                    @if(session('success'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if($errors->any())
+                        <div class="alert alert-danger" role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form method="POST" action="{{ route('technology.addToCohort', ['technology' => $technology->id]) }}">
+                        @csrf
+                        @foreach ($technologies as $technology)
+                        <div class="col-sm-12 mb-3">
+                            <div class="card " style="box-shadow: 0px 4px 6px rgb(0 0 0 / 33%);">
+                                <div class="card-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="technologies[]" id="technology{{ $technology->id }}" value="{{ $technology->id }}">
+                                        <label class="form-check-label" for="technology{{ $technology->id }}">
+                                            {{ $technology->technologies_name }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Add Selected Technologies to Cohort</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
 
 
 

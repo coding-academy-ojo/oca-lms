@@ -14,31 +14,31 @@ class StaffTableSeeder extends Seeder
     {
         DB::table('staff')->insert([
             [
-                'staff_name' => 'Manager Name',
+                'staff_name' => 'Dana',
                 'staff_email' => 'manager@example.com',
                 'staff_password' => Hash::make('password'), // Use a secure password
+                'staff_Phone' => '1234567890',
                 'role' => 'manager',
-                'staff_cv' => null,
-                'staff_bio' => 'Manager bio',
                 'staff_personal_img' => 'person.png',
+                'staff_bio' => 'Manager bio Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
             ],
             [
-                'staff_name' => 'Super Manager Name',
+                'staff_name' => 'Rana',
                 'staff_email' => 'supermanager@example.com',
                 'staff_password' => Hash::make('password'), // Use a secure password
+                'staff_Phone' => '1234567890',
                 'role' => 'super_manager',
-                'staff_cv' => null,
-                'staff_bio' => 'Super Manager bio',
                 'staff_personal_img' => 'person.png',
+                'staff_bio' => 'Super Manager bio Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
             ],
             [
-                'staff_name' => 'Trainer Name',
+                'staff_name' => 'Reem',
                 'staff_email' => 'trainer@example.com',
                 'staff_password' => Hash::make('password'), // Use a secure password
+                'staff_Phone' => '1234567890',
                 'role' => 'trainer',
-                'staff_cv' => null,
-                'staff_bio' => 'Trainer bio',
                 'staff_personal_img' => 'person.png',
+                'staff_bio' => 'Trainer bio Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
             ],
         ]);
     }

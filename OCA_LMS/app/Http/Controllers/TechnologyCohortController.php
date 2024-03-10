@@ -11,17 +11,38 @@ use Illuminate\Support\Facades\Auth;
 
 class TechnologyCohortController extends Controller
 {
-    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
 
+    // public function addToCohort(Request $request, Technology $technology)
+    // {
+    //     $cohortId = 1;
+
+    //     $existingRecord = Technology_Cohort::where('technology_id', $technology->id)
+    //         ->where('cohort_id', $cohortId)
+    //         ->first();
+
+    //     if ($existingRecord) {
+    //         return redirect()->back()->with('error', 'Technology is already added to the cohort');
+    //     }
+
+    //     Technology_Cohort::create([
+    //         'technology_id' => $technology->id,
+    //         'cohort_id' => $cohortId,
+    //         'start_date' => now(),
+    //         'end_date' => now(),
+    //     ]);
+
+    //     return redirect()->back()->with('success', 'Technology added to the cohort successfully');
+    // }
+
     public function addToCohort(Request $request, Technology $technology)
     {
-        // Derive the cohort ID from the technology's category
-        $cohortId = 1;
+        // Retrieve the cohort ID from the session
+        $cohortId = session('cohort_ID');
 
         // Check if the technology is already added to the cohort
         $existingRecord = Technology_Cohort::where('technology_id', $technology->id)
@@ -42,6 +63,7 @@ class TechnologyCohortController extends Controller
 
         return redirect()->back()->with('success', 'Technology added to the cohort successfully');
     }
+
 
 
 
@@ -94,7 +116,7 @@ class TechnologyCohortController extends Controller
             ->get();
 
         // Pass the data to the view
-        return view('technology.TechnologyCohort', compact('technologies', 'category', 'cohortId'));
+        return view('technology.Technology', compact('technologies', 'category', 'cohortId'));
     }
 
     /**

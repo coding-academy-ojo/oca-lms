@@ -5,6 +5,7 @@ use App\Assignment;
 use App\Cohort;
 use App\Student;
 use App\Technology;
+use App\Announcement;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -31,6 +32,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TechnologyCohortSeeder::class);
         $this->call(StaffCohortTableSeeder::class);
         $this->call(ProjectSeeder::class);
+        $this->call(ProjectSkillsTableSeeder::class);
 
         $this->command->info('Database seeded successfully!');
     }

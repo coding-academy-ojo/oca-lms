@@ -27,16 +27,18 @@ Technology
             <div>
                 <div>
                     <div class="vt" style="display: flex;
-    justify-content: flex-end;
-    gap: 1rem;">
+                               justify-content: flex-end;
+                                             gap: 1rem;">
 
+                        @if(Auth::guard('staff')->check() && Auth::guard('staff')->user()->role === 'trainer')
                         <form method="POST" action="{{ route('technology.destroy', ['technology' => $technology]) }}">
                             @csrf
                             @method('DELETE')
                             <a href="{{ route('technology.edit', ['technology' => $technology]) }}" class=" btn btn-primary m-auto">edit</a>
                             <button class=" btn btn-primary m-auto" type="submit">Delete</button>
-
                         </form>
+                        @endif
+
                     </div>
                     @if ($technology->technologies_photo)
                     <!-- <img src="{{ asset('images/' . $technology->technologies_photo) }}" alt="Technology Image"> -->
@@ -51,12 +53,15 @@ Technology
                     @endif
                     <h1>{{ $technology->technologies_name }}</h1>
                     <p>Description: {{ $technology->technologies_description }}</p>
-                    <p>Resources:<a href="{{ $technology->technologies_resources }}"> {{ $technology->technologies_resources }}</a></p>
+                    <p>Resources:<a href="{{ $technology->technologies_resources }}" target="_blank"> {{ $technology->technologies_resources }}</a></p>
                     <p>Training Period: {{ $technology->technologies_trainingPeriod }}</p>
                     <!-- Add more details as needed -->
                     <!-- <p>Category: {{ $technology->technology_category_id }}</p> -->
                     <!-- If you have an image, you can display it like this -->
-
+                    <p>Topics:</p>
+                    @foreach ($Topics as $topic)
+                        <span class="mx-4">{{ $topic->topic_name }}</span>
+                    @endforeach
                 </div>
 
             </div>

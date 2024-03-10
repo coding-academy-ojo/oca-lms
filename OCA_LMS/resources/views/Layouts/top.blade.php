@@ -3,11 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LMS | Home</title>
     <link rel="shortcut icon" href="/style_files/frontend/img/Logo.png" type="image/x-icon">
-
+    <script src="{{asset('assets/boosted/dist/js/boosted.bundle.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/boosted@5.3.2/dist/js/boosted.bundle.min.js"></script>
     <!-- Fonts Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     {{-- Fonts google --}}
@@ -39,6 +42,10 @@
     <link rel="stylesheet" href="/assets/style_files/sujoud.css">
     <!-- style files -->
 
+<!-- Charts CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- Charts CDN -->
 </head>
 
 <body>

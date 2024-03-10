@@ -13,7 +13,8 @@ class AnnouncementController extends Controller
     
     public function index()
     {
-        $announcements = Announcement::latest()->get();
+        $cohortId = session("cohort_ID");
+        $announcements = Announcement::where('cohort_id', $cohortId)->latest()->get(); 
         return view('Pages/announcements', compact('announcements'));
     }
 

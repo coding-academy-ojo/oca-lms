@@ -28,7 +28,7 @@ class ProjectSeeder extends Seeder
                 'cohort_id' => 1, // Adjust based on your cohorts
                 'staff_id' => 3, // Adjust based on your staff
                 'created_at' => now(),
-                'updated_at' => now(),
+                'updated_at' => now()
             ],
             [
                 'project_name' => 'Project 2 : Portfolio Website - Static',

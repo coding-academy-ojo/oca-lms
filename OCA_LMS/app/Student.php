@@ -11,18 +11,28 @@ use Illuminate\Notifications\Notifiable;
 class Student extends Authenticatable
 {
     use Notifiable;
+    protected $fillable = [
+        'en_first_name', 
+        'en_second_name', 
+        'en_third_name', 
+        'en_last_name', 
 
-    public function absences() {
+    ];
+
+    public function absences()
+    {
         return $this->hasMany(Absence::class);
     }
 
     // Student belongs to an Academy
-    public function academy() {
+    public function academy()
+    {
         return $this->belongsTo(Academy::class);
     }
 
     // Student belongs to a Cohort
-    public function cohort() {
+    public function cohort()
+    {
         return $this->belongsTo(Cohort::class);
     }
 

@@ -1,3 +1,9 @@
+
+
+
+
+
+
 <?php
 
 use App\AssignmentFeedback;
@@ -16,6 +22,9 @@ use App\Http\Controllers\SkillController;
 use App\Http\Controllers\AssignmentSubmissionController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\SuperManagerController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StaffController;
+use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\AnnouncementController;
 
 /*
@@ -54,7 +63,6 @@ Route::post('/login/student', 'AuthController@studentLogin')->name('student.logi
 // Route::resource('classrooms', 'ClassroomController');
 
 
-
 //Rawan Abuseini route
 
 // announcements routes
@@ -62,10 +70,19 @@ Route::get('/announcements', [AnnouncementController::class, 'index'])-> name('A
 Route::post('/announcements', [AnnouncementController::class, 'store'])-> name('announcements.store');
 Route::put('/announcements/{id}', [AnnouncementController::class, 'update'])->name('announcements.update');
 Route::delete('/{announcement:id}', [AnnouncementController::class, 'destroy'])-> name('destroy');
+
+// Add Trainee route
+
+Route::get('/addTrainee', function () {
+    return view('trainer/addTrainee');
+})->name('addTrainee');
+
 ////////////////////////////////////////////////
 
 
-
+//attendance & absense
+Route::get('/attendance', [AbsenceController::class, 'index'])->name('attendance');
+Route::post('/attendance/store-or-update', [AbsenceController::class, 'storeOrUpdate'])->name('attendance.storeOrUpdate');
 
 
 //START Academeies  gruop routes ///////
@@ -81,11 +98,23 @@ Route::get('/academies/{academy}', [AcademyController::class, 'show'])->name('ac
 
 Route::get('/cohorts/{academyId?}', [CohortController::class, 'index'])->name('academyview');
 Route::get('/cohorts/{cohort}/edit', [CohortController::class, 'edit'])->name('cohortedit');
+Route::get('/cohorts/view-cohort/{cohort}', [CohortController::class, 'show'])->name('view-cohort');
+Route::put('/cohort/{cohort_id}', [CohortController::class, 'update'])->name('update-cohort');
+Route::post('/cohorts', [CohortController::class, 'store'])->name('store-cohort');
 
 // super maneger
 Route::get('/supermanager-dashboard', [SuperManagerController::class, 'index'])->name('supermanager-dashboard');
-Route::get('/cohorts/view-cohort/{cohort}', [CohortController::class, 'show'])->name('view-cohort');
 
+
+
+// staff controller
+Route::get('/staff', [StaffController::class, 'index'])->name('staff.index');
+Route::get('/staff/create', [StaffController::class, 'create'])->name('staff.create');
+Route::post('/staff', [StaffController::class, 'store'])->name('staff.store');
+Route::get('/staff/{id}', [StaffController::class, 'show'])->name('staff.show');
+Route::get('/staff/{id}/edit', [StaffController::class, 'edit'])->name('staff.edit');
+Route::put('/staff/{id}', [StaffController::class, 'update'])->name('staff.update');
+Route::delete('/staff/{id}', [StaffController::class, 'destroy'])->name('staff.destroy');
 
 
 // trainee progress details
@@ -93,9 +122,7 @@ Route::get('/cohort/progress-details', function () {
     return view('trainer.trainee-progress-details');
 })->name('trainee-progress-details');
 // attendance
-Route::get('/attendance', function () {
-    return view('supermaneger.attendance');
-})->name('attendance');
+
 
 // absence
 Route::get('/absence-report', function () {
@@ -105,12 +132,12 @@ Route::get('/absence-report/trainee', function () {
     return view('supermaneger.spacificUserReport');
 })->name('spacificUserReport');
 // staff
-Route::get('/staff', function () {
-    return view('supermaneger.staff');
-})->name('staff');
-Route::get('/staff/edit', function () {
-    return view('supermaneger.editStaff');
-})->name('staff.edit');
+// Route::get('/staff', function () {
+//     return view('supermaneger.staff');
+// })->name('staff');
+// Route::get('/staff/edit', function () {
+//     return view('supermaneger.editStaff');
+// })->name('staff.edit');
 
 
 /////////////////////////////////////////////
@@ -161,7 +188,9 @@ Route::get('Student/assignments/{assignment}', [AssignmentSubmissionController::
 
 //Assignment Feedback
 Route::get('/Assignments/feedback', [AssignmentFeedbackController::class, 'index'])->name('assignments.feedback');
+Route::post('/Assignments/feedback/store', [AssignmentFeedbackController::class, 'store'])->name('assignment.feedbacksubmission.store');
 Route::get('/Assignments/feedback/{assignmnet}', [AssignmentFeedbackController::class, 'show'])->name('assignment.feedbacksubmission.show');
+Route::get('/Assignments/feedback/{id}/{studentId}', [AssignmentFeedbackController::class, 'submissionfedback'])->name('assignment.feedbacksubmission.feedback');
 
 
 
@@ -205,9 +234,9 @@ Route::get('/createTopics', function () {
 
 
 
-Route::get('/profile', function () {
-    return view('profile.profile');
-})->name('profile');
+// Route::get('/profile', function () {
+//     return view('profile.profile');
+// })->name('profile');
 
 Route::get('/editProfile', function () {
     return view('profile.editProfile');
@@ -218,9 +247,9 @@ Route::get('/editProfile', function () {
 Route::get('/skillsFramework', function () {
     return view('skillsFramework.skillsFramework');
 });
-// Route::get('/addSkillsLevel', function () {
-//     return view('skillsFramework.addSkillsLevel');
-// });
+Route::get('/addSkillsLevel', function () {
+    return view('skillsFramework.addSkillsLevel');
+});
 Route::get('/addSkillsFramework', function () {
     return view('skillsFramework.addSkillsFramework');
 });
@@ -236,17 +265,12 @@ Route::get('/editSkillsFramework', function () {
 
 // View skills
 Route::get('/skills', [SkillController::class, 'index'])->name('skillsFramework');
-
 // Add skill - Show form
 Route::get('/skills/add', [SkillController::class, 'create'])->name('createskillsFramework');
-
 // Store new skill
 Route::post('/skills/add', [SkillController::class, 'store'])->name('addskillsFramework');
-
-
 // Edit skill - Show form
 Route::get('/skills/{skill}/edit', [SkillController::class, 'edit'])->name('editSkill');
-
 // Update skill
 Route::put('/skills/{id}/update', [SkillController::class, 'update'])->name('updateSkill');
 
@@ -261,7 +285,6 @@ Route::put('/updateSkillLevel/{level}/update', 'SkillLevelController@update')->n
 
 
 Route::get('/categories', [TechnologyCategoryController::class, 'index'])->name('categories.index');
-
 // View technologies within a specific category
 Route::get('/categories/{category}', [TechnologyCategoryController::class, 'show'])->name('categories.show');
 
@@ -274,15 +297,22 @@ Route::get('/technology/{technology}', [TechnologyController::class, 'showInfo']
 
 Route::get('/technologies/{technology}/edit', [TechnologyController::class, 'edit'])->name('technology.edit');
 Route::put('/technologies/{technology}/update', [TechnologyController::class, 'update'])->name('technology.update');
-
 Route::delete('/technologies/{technology}', [TechnologyController::class, 'destroy'])->name('technology.destroy');
 Route::post('/technologies/{technology}/addToCohort', [TechnologyCohortController::class, 'addToCohort'])->name('technology.addToCohort');
+// Route::post('technologies/addToCohort', 'TechnologyController@addToCohort')->name('technology.addToCohort');
+
 
 
 Route::get('/rodmap', [TechnologyCategoryController::class, 'indexCohort'])->name('categories.indexCohort');
 Route::get('/rodmap/{category}', [TechnologyCohortController::class, 'show'])->name('rodmap.show');
 
 
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+Route::get('/edit-profile', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::post('/update-profile', [ProfileController::class, 'update'])->name('profile.update');
+
+Route::get('/reset-password', [ProfileController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [ProfileController::class, 'resetPassword'])->name('password.update');
 
 // //////////////////////////////////////
 // // rawan

@@ -16,36 +16,53 @@ Edit Cohort
 
 <div class="container my-5">
     <h2>Edit Cohort</h2>
-    <form>
+    <form method="post" action="{{ route('update-cohort', $cohort->id) }}">
         @csrf
-         @method('PUT')
-
+        @method('PUT')
+    
         <div class="mb-3">
             <label for="cohortName" class="form-label">Cohort Name</label>
-            <input type="text" class="form-control" id="cohortName" name="name" placeholder="Cohort Name Here">
+            <input type="text" class="form-control" id="cohortName" name="name" placeholder="Cohort Name Here" value="{{ $cohort->cohort_name }}">
         </div>
         <div class="mb-3">
             <label for="cohortDonor" class="form-label">Cohort Donor</label>
-            <input type="text" class="form-control" id="cohortDonor" name="cohort_donor" placeholder="Cohort Donor Name" value="Simplon">
+            <input type="text" class="form-control" id="cohortDonor" name="cohort_donor" placeholder="Cohort Donor Name" value="{{ $cohort->cohort_donor }}">
         </div>
         <div class="mb-3">
             <label for="startDate" class="form-label">Start Date</label>
-            <input type="date" class="form-control" id="startDate" name="start_date">
+            <input type="date" class="form-control" id="startDate" name="start_date" value="{{ $cohort->cohort_start_date }}">
         </div>
-
+    
         <div class="mb-3">
             <label for="endDate" class="form-label">End Date</label>
-            <input type="date" class="form-control" id="endDate" name="end_date">
+            <input type="date" class="form-control" id="endDate" name="end_date" value="{{ $cohort->cohort_end_date }}">
         </div>
-
+    
         <div class="mb-3">
             <label for="cohortDescription" class="form-label">Description</label>
-            <textarea class="form-control" id="cohortDescription" name="description" rows="3" placeholder="Brief description about the cohort"></textarea>
+            <textarea class="form-control" id="cohortDescription" name="description" rows="3">{{ $cohort->cohort_description }}</textarea>
         </div>
-
-        <!-- Additional static fields for instructors, courses, etc., can be added here -->
+    
         <button type="submit" class="btn btn-primary">Save Changes</button>
     </form>
+    
 </div>
-
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('form');
+        const startDateInput = document.getElementById('startDate');
+        const endDateInput = document.getElementById('endDate');
+    
+        form.addEventListener('submit', function (e) {
+            const startDate = new Date(startDateInput.value);
+            const endDate = new Date(endDateInput.value);
+    
+            if (endDate < startDate) {
+                e.preventDefault(); 
+                alert('The end date cannot be before the start date.');
+            }
+        });
+    });
+    </script>
+    
 @endsection

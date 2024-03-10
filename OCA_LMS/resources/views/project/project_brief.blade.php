@@ -43,7 +43,7 @@ Project Brief
 
             <!-- Dropdown for Edit Options -->
             <div class="dropdown mt-3 ">
-                <button class="dropdown-toggle btn btn-primary" style="background-color: #f16e00; border:#000 2px solid"
+                <button class="dropdown-toggle btn btn-primary"
                     type="button" id="editOptionsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     Option
                 </button>
@@ -67,7 +67,6 @@ Project Brief
 
                     @if(Auth::guard('students')->user())
                     <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#addSubmissionModal">Add Project Submissions</a></li>
-                    {{-- <li><a class="dropdown-item" href="{{ route('view_submissions_feedback', ['project_id' => $project->id]) }}">View Conversation</a></li> --}}
                     <li><a class="dropdown-item" href="{{ route('view_submissions_feedback', ['project_id' => $project->id, 'student_id' => Auth::guard('students')->user()->id]) }}">View Conversation</a></li>
                     @endif
                 </ul>
@@ -206,8 +205,5 @@ Project Brief
 
     </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 
 @endsection
