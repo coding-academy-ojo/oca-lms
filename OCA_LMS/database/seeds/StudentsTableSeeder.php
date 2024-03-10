@@ -18,7 +18,7 @@ class StudentsTableSeeder extends Seeder
 
         foreach (range(1, 10) as $index) {
             $academyId = DB::table('academies')->inRandomOrder()->first()->id;
-            
+
             $cohortId = DB::table('cohorts')->where('academy_id', $academyId)->inRandomOrder()->first()->id;
 
             DB::table('students')->insert([
@@ -31,14 +31,15 @@ class StudentsTableSeeder extends Seeder
                 'email_verification' => $faker->boolean,
                 'is_email_verified' => $faker->boolean,
                 'mobile' => $faker->phoneNumber,
-                'en_first_name' => $faker->firstName, 
-                'en_last_name' => $faker->lastName, 
+                'en_first_name' => $faker->firstName,
+                'en_last_name' => $faker->lastName,
                 'academy_id' => $academyId,
                 'en_first_name' => $faker->name,
                 'en_second_name' => $faker->name,
                 'en_third_name' => $faker->name,
                 'en_last_name' => $faker->name,
                 'cohort_id' => $cohortId,
+                'personal_img' => 'person.png',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

@@ -25,7 +25,7 @@ class AcademyStaffTableSeeder extends Seeder
 
         // Trainer in one academy
         DB::table('academy_staff')->insert([
-            'academy_id' => $academyIds[1], // Assuming the second academy for the trainer
+            'academy_id' => $academyIds[0], // Assuming the first academy for the manager
             'staff_id' => $trainerId,
         ]);
 

@@ -18,6 +18,7 @@ class CreateProjectSubmissionsTable extends Migration
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('project_id');
             $table->string('submission_link');
+            $table->text('submission_message');
             $table->timestamps();
 
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');

@@ -10,8 +10,22 @@ Topics
 @include('layouts.innerNav')
 <section class="inner-bred">
 
-    <div class="container">
-      
+    <div class="container mt-3">
+        <ul class="thm-breadcrumb">
+            <li><a href="">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
+            <li><a href="/projects">Project</a><span><i class="fa-solid fa-chevron-right"></i></span></li>
+
+            @if(Auth::guard('staff')->check() && Auth::guard('staff')->user()->role === 'trainer')
+            @php
+                $studentIdForConversation = request('student_id');
+            @endphp
+            <li><a href="{{ route('view_project_submissions', ['project_id' => $project->id]) }}">Submissions</a><span><i class="fa-solid fa-chevron-right"></i></span></li>
+            @elseif(Auth::guard('students')->check())
+            <li><a href="{{ route('project_brief', ['id' => $project->id]) }}">Prpject Brief</a><span><i class="fa-solid fa-chevron-right"></i></span></li>
+           @endif
+            <li><a style="color:#F16E00"href="">Views Assignments</a></li>
+        </ul>
+    </div>
     </div>
 </section>
 
@@ -36,6 +50,9 @@ Topics
         <h3>{{ $project->project_name }}</h3>
 
         @foreach ($submissionsAndFeedback as $item)
+        @php
+            // dd($item)
+        @endphp
             <!-- Display trainee submission -->
             <div class="message mt-3 p-3 bg-light rounded" style="width: 53%">
                 <div class="d-flex align-items-center">
@@ -45,7 +62,9 @@ Topics
                         <p style="font-size: 12px; color: #444;">Submitted at: {{ $item['submission_created_at'] }}</p>
                     </div>
                 </div>
-                <p class="mt-3"><a href="{{ $item['submission_link'] }}">{{ $item['submission_link'] }}</a></p>
+                <p class="mt-3">Submission Link : <a href="{{ $item['submission_link'] }}">{{ $item['submission_link'] }}</a></p>
+                <p class="mt-3">{{ $item['submission_message'] }}</p>
+
             </div>
 
             <!-- Display trainer feedback if available -->
@@ -71,7 +90,14 @@ Topics
             <a href="{{ route('view_project_submissions', ['project_id' => $project->id]) }}" class="btn btn-primary mt-3">
                 Back to Submissions
             </a>
+
+            @elseif(Auth::guard('students')->check())
+            <a href="{{ route('project_brief', ['id' => $project->id]) }}" class="btn btn-primary mt-3">
+                Back to Project Brief
+            </a>
+
         @endif
+
 
     </div>
 </div>

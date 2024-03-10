@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProjectSubmission extends Model
 {
     protected $fillable = [
-        'project_id', 'student_id', 'link', 'text_submission'
+        'project_id', 'student_id', 'submission_link','submission_message'
     ];
 
     public function student()
