@@ -10,7 +10,7 @@ Edit Project
 @include('layouts.innerNav')
 <section class="inner-bred">
 
-    <div class="container">
+    <div class="container mt-3">
         <ul class="thm-breadcrumb">
             <li><a href="">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
             <li><a href="/projects">Project</a><span><i class="fa-solid fa-chevron-right"></i></span></li>
