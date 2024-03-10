@@ -26,7 +26,9 @@ Trainees Progress
 
 .orange {
     background-color: orange !important;
+
 }
+
 </style>
 <div class="container">
     <div class="row">
@@ -97,14 +99,14 @@ Trainees Progress
         </div>
         <!-- Chart Section -->
         <div class="col-xl-6 col-lg-6 col-md-12">
-            <p>All Technologies Status </p>
+            <p>All Assignments Status </p>
             <div class="card mb-4">
                 <!-- Roadmap Chart Card -->
                 <div class="card-body">
                     <canvas id="Roadmap" style="width: 100%; height: 200px;"></canvas>
                 </div>
             </div>
-            <p>All Assignments Status</p>
+            <p>All Project Status</p>
             <div class="card">
                 <!-- Stacked Bar Chart Card -->
                 <div class="card-body">
@@ -121,7 +123,7 @@ Trainees Progress
         <div class="row">
 
             <div class="col-md-12">
-            <h2 class=" carousel-title text-primary">Overview on Skills Status</h2>
+                <h2 class=" carousel-title text-primary">Overview on Skills Status</h2>
                 <hr>
 
             </div>
@@ -336,14 +338,15 @@ Trainees Progress
                                         a content
                                         management or e-commerce application</p>
                                 </div>
+                                <div class="row">
+                                    <div class="progress col-2">Level1</div>
+                                    <div class="progress col-6" role="progressbar" aria-label="Basic example"
+                                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip"
+                                        title="0%" style="margin-top: 10px;">
 
-                                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0"
-                                    aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="0%"
-                                    style="margin-top: 10px;">
-                                    <div>Level1</div>
-                                    <div class="progress-bar" style="width: 0%"></div>
+                                        <div class="progress-bar" style="width: 0%"></div>
+                                    </div>
                                 </div>
-
                                 <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25"
                                     aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="25%"
                                     style="margin-top: 10px;">
@@ -368,12 +371,10 @@ Trainees Progress
                 <!-- Carousel Control prev -->
                 <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
                 </a>
                 <!-- Carousel Control Next -->
                 <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
                 </a>
             </div>
             <!-- Carousel Control Next -->
@@ -702,7 +703,8 @@ Trainees Progress
                 type: 'line',
                 data: {
                     labels: ["HTML& CSS", "JS", "React", "NodeJS", "MongoDB", "PostgreSQL",
-                        "Wordpress"],
+                        "Wordpress"
+                    ],
                     datasets: [{
 
                         label: "Roadmap timeline",
@@ -749,9 +751,9 @@ Trainees Progress
                         lables: ['Passed', 'Not Passed', 'not submitted'],
                         data: [5, 85, 10],
                         backgroundColor: [
-                            "#d9d8d7",
-                            "rgba(43, 193, 85, 1)",
-                            "rgba(243, 87, 87, 1)"
+                            "rgba(255, 211, 177, 1)",
+                            "rgba(255, 121, 0, 1)",
+                            "rgba(255, 166, 101, 1)"
                         ],
                         hoverBackgroundColor: [
                             "#d9d8d7",
@@ -779,8 +781,8 @@ Trainees Progress
                     datasets: [{
                         data: [33, 2],
                         backgroundColor: [
-                            "rgba(43, 193, 85, 1)",
-                            "rgba(243, 87, 87, 1)"
+                            "rgba(255, 121, 0, 1)",
+                           "rgba(255, 211, 177, 1)"
                         ],
                         hoverBackgroundColor: [
                             "rgba(43, 193, 85, 1)",
@@ -805,14 +807,14 @@ Trainees Progress
             // Generate gradients for each dataset
             const barChart_3gradientStroke1 = barChart_3.createLinearGradient(0, 0, 0, 300);
             barChart_3gradientStroke1.addColorStop(0, "rgba(102, 115, 253, 1)");
-            barChart_3gradientStroke1.addColorStop(1, "rgba(102, 115, 253, 0.5)");
+            barChart_3gradientStroke1.addColorStop(1, "rgba(255, 166, 101, 1)");
 
             const barChart_3gradientStroke2 = barChart_3.createLinearGradient(0, 0, 0, 300);
-            barChart_3gradientStroke2.addColorStop(0, "rgba(43, 193, 85, 1)");
+            barChart_3gradientStroke2.addColorStop(0, "rgba(255, 166, 101, 1)");
             barChart_3gradientStroke2.addColorStop(1, "rgba(43, 193, 85, 1)");
 
             const barChart_3gradientStroke3 = barChart_3.createLinearGradient(0, 0, 0, 300);
-            barChart_3gradientStroke3.addColorStop(0, "rgba(243, 87, 87, 1)");
+            barChart_3gradientStroke3.addColorStop(0, "rgba(255, 166, 101, 1)");
             barChart_3gradientStroke3.addColorStop(1, "rgba(243, 87, 87, 1)");
 
             // Chart data
