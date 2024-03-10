@@ -17,6 +17,15 @@ Create Technology
 
 <div class="innerPage   mt-3">
     <div class="container">
+        @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
         <div class="addpro">
             <h1>Create New Technology</h1>
             <form method="POST" action="{{ route('technology.store') }}" enctype="multipart/form-data">
@@ -46,7 +55,7 @@ Create Technology
                 </div>
 
                 <!-- Category ID (Hidden Input) -->
-               
+
 
                 <input type="hidden" name="technology_category_id" value="{{ $category }}">
 
