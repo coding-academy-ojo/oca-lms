@@ -37,6 +37,10 @@ Technology
                             <a href="{{ route('technology.edit', ['technology' => $technology]) }}" class=" btn btn-primary m-auto">edit</a>
                             <button class=" btn btn-primary m-auto" type="submit">Delete</button>
                         </form>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal" data-technologyid="{{ $technology->id }}">
+                        Add Topic
+                        </button>
                         @endif
 
                     </div>
@@ -66,6 +70,31 @@ Technology
 
             </div>
 
+        </div>
+    </div>
+</div>
+{{-- Model --}}
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title h5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Close"><span class="visually-hidden">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{{ route('topic.store') }}" enctype="multipart/form-data" class="needs-validation m-auto" novalidate>
+                    @csrf
+                    <div class="input-group my-3">
+                        <input type="text" class="form-control" name="topic" placeholder="Add Topic" aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <input type="hidden" name="technology_id" id="technology_id" value="">
+                        <button class="btn btn-primary" type="submit" id="button-addon2">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
         </div>
     </div>
 </div>
