@@ -173,14 +173,22 @@
                 <p>6</p>
             </div>
         </div>
-        <div class="chart-row">
+        <div class="container my-5 chart-row">
+            
             <div class="chart-container-half">
+                <h3 class="text-primary">Number of students Enrolled Overview</h3>
                 <canvas id="graduatesByAcademy"></canvas>
             </div>
+            
             <div class="chart-container-half">
+                <h3 class="text-primary">Graduated Students Overview</h3>
                 <canvas id="totalSummaryChart"></canvas>
+            
             </div>
-            <div class="chart-container-wide">
+        </div>
+        <div class="container my-5 chart-row">
+            <div class="chart-container-half">
+                <h3 class="text-primary">Cohorts Per Academy Overview</h3>
                 <canvas id="academyPerformanceChart"></canvas>
             </div>
         </div>
