@@ -64,7 +64,7 @@ Technology
                     <!-- If you have an image, you can display it like this -->
                     <p>Topics:</p>
                     @foreach ($Topics as $topic)
-                        <span class="mx-4">{{ $topic->topic_name }}</span>
+                    <span class="mx-4">{{ $topic->topic_name }}</span>
                     @endforeach
                 </div>
 
