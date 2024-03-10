@@ -27,6 +27,7 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\AnnouncementController;
 
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,6 +38,8 @@ use App\Http\Controllers\AnnouncementController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/', function () {
     return view('welcome');

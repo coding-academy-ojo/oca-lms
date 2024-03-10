@@ -23,7 +23,7 @@
             <label for="staffName" class="form-label fw-bold">Name <small class="text-danger">: Not
                     Modifiable</small></label>
             <input type="text" class="form-control" id="staffName" name="name" placeholder="Staff Name Here"
-                readonly value="{{$staff->staff_email}}">
+                readonly value="{{$staff->staff_name}}">
         </div>
 
         <div class="mb-3">
@@ -33,7 +33,7 @@
                 readonly value="{{$staff->staff_email}}">
         </div>
 
-        @if ($role == 'manager')
+        @if ($editingUserRole == 'manager')
         <div class="mb-3">
             <label class="form-label">Academies</label>
             <div class="dropdown ">

@@ -83,10 +83,80 @@
             height: auto;
         }
     }
+    .card-custom {
+        background-color: #ffffff;
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+        border-radius: 0.5rem;
+        padding: 20px;
+    }
 
+    .card-header-custom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 0;
+        background-color: rgba(0, 0, 0, .03);
+        border-bottom: 1px solid rgba(0, 0, 0, .125);
+    }
+
+    .card-filter-group {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .dropdown-toggle::after {
+        margin-left: 0.5rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .card-header-custom {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .card-filter-group {
+            width: 100%;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+        }
+    }
     
  </style>
-
+<div class="container my-5">
+    <div class="row">
+        <!-- Filter Card -->
+        <div class="col-12">
+            <div class="card-custom">
+                <div class="card-header-custom">
+                    <div>
+                        <h5 class="card-title m-0">Filters</h5>
+                    </div>
+                    <div class="card-filter-group">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="academyFilterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                Academy
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="academyFilterDropdown">
+                                <li><a class="dropdown-item" href="#">Amman</a></li>
+                                <li><a class="dropdown-item" href="#">Data Science</a></li>
+                                <li><a class="dropdown-item" href="#">Irbid</a></li>
+                                <li><a class="dropdown-item" href="#">Zarqa</a></li>
+                                <li><a class="dropdown-item" href="#">Balqa</a></li>
+                                <li><a class="dropdown-item" href="#">Aqaba</a></li>
+                        </div>
+                        <button class="btn btn-primary" id="showAll">Show All</button>
+                        <button class="btn btn-outline-success" id="topPerformers">Top Performers</button>
+                        <button class="btn btn-outline-danger" id="needsAttention">Needs Attention</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     <div class="container my-5">
 
         <div class="dashboard-cards">

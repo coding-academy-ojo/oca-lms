@@ -1,32 +1,14 @@
-<footer class="bg-dark text-light py-3 mt-5">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-3">
-                <!-- Your footer logo goes here -->
-                <img src="{{ asset('assets/img/orange.png') }}" alt="Footer Logo" class="img-fluid">
-            </div>
-            <div class="col-md-9">
-                <nav class="navbar navbar-expand-lg navbar-dark">
-                    <div class="container-fluid">
-                        <div class="collapse navbar-collapse" id="navbarNavFooter">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="/">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {{ request()->is('staff') ? 'active' : '' }}" href="/staff">Staff</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {{ request()->is('classes') ? 'active' : '' }}" href="/classes">Classes</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {{ request()->is('skills') ? 'active' : '' }}" href="/skills">Skills</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-        </div>
+<footer class="footer navbar bg-dark" data-bs-theme="dark">
+    <h2 class="visually-hidden">Sitemap & information</h2>
+    <div class="container-xxl footer-social">
+        <h3 class="footer-heading me-md-3">Follow us</h3>
+        <ul class="navbar-nav gap-2 flex-row align-self-start">
+            <li><a href="#" class="btn btn-icon btn-social btn-twitter"><span class="visually-hidden">Twitter</span></a></li>
+            <li><a href="#" class="btn btn-icon btn-social btn-facebook"><span class="visually-hidden">Facebook</span></a></li>
+            <li><a href="#" class="btn btn-icon btn-social btn-instagram"><span class="visually-hidden">Instagram</span></a></li>
+            <li><a href="#" class="btn btn-icon btn-social btn-whatsapp"><span class="visually-hidden">WhatsApp</span></a></li>
+            <li><a href="#" class="btn btn-icon btn-social btn-linkedin"><span class="visually-hidden">LinkedIn</span></a></li>
+            <li><a href="#" class="btn btn-icon btn-social btn-youtube"><span class="visually-hidden">YouTube</span></a></li>
+        </ul>
     </div>
 </footer>

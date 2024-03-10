@@ -39,6 +39,13 @@
 
     <!-- Staff Table Section -->
     <div class="container">
+        <div class="d-flex justify-content-end p-3 px-xl-5">
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#addStaffOffcanvas" aria-controls="addStaffOffcanvas">
+                Create Staff
+            </button>
+        </div>
+        
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -67,11 +74,15 @@
                             @endphp
                         </td>
                         <td >
-                            <a  href="{{ route('staff.edit', $member->id) }}" class="btn btn-secondary btn-sm">Edit</a>
+                            <a  href="{{ route('staff.edit', $member->id) }}" class="btn btn-secondary btn-sm"><span class="material-symbols-outlined">
+                                edit
+                                </span></a>
                             <form   action="{{ route('staff.destroy', $member->id) }}" method="POST" style="display: inline; margin-top:5px">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" class="btn btn-danger btn-sm delete-confirm">Delete</button>
+                                <button type="button" class="btn btn-primary btn-sm delete-confirm"><span class="material-symbols-outlined">
+                                    delete
+                                    </span></button>
                             </form>
                         </td>
                     </tr>
@@ -90,8 +101,7 @@
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <!-- Form for adding staff -->
-            <form id="addStaffForm" action="{{ route('staff.store') }}" method="POST">
+            <form id="addStaffForm" action="{{ route('staff.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
@@ -108,22 +118,28 @@
                 <div class="mb-3">
                     <label for="role" class="form-label">Role</label>
                     <select class="form-select" id="role" name="role" required>
-                        <option value="manager">Manager</option>
+                        @auth('staff')
+                        @if(Auth::guard('staff')->user()->role == 'super_manager')
+                            <option value="manager">Manager</option>
+                        @endif
+                        @endauth
                         <option value="trainer">Trainer</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="academy" class="form-label">Academy</label>
+                    <select class="form-select" id="academy" name="academy_id" required>
+                        @foreach($academies as $academy)
+                            <option value="{{ $academy->id }}">{{ $academy->academy_name }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Add</button>
             </form>
-            
         </div>
     </div>
+    
 
-    <div style="z-index: 1040" class="position-fixed bottom-0 end-0 m-4">
-        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#addStaffOffcanvas"
-            aria-controls="addStaffOffcanvas">
-            <span class="material-symbols-outlined">add</span>
-        </button>
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     
