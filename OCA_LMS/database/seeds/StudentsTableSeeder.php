@@ -44,6 +44,6 @@ class StudentsTableSeeder extends Seeder
                 'updated_at' => now(),
             ]);
         }
-
+        
     }
 }
