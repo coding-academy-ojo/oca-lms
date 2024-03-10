@@ -39,29 +39,59 @@ class TechnologyCohortController extends Controller
     //     return redirect()->back()->with('success', 'Technology added to the cohort successfully');
     // }
 
-    public function addToCohort(Request $request, Technology $technology)
+    // public function addToCohort(Request $request, Technology $technology)
+    // {
+    //     // Retrieve the cohort ID from the session
+    //     $cohortId = session('cohort_ID');
+
+    //     // Check if the technology is already added to the cohort
+    //     $existingRecord = Technology_Cohort::where('technology_id', $technology->id)
+    //         ->where('cohort_id', $cohortId)
+    //         ->first();
+
+    //     if ($existingRecord) {
+    //         return redirect()->back()->with('error', 'Technology is already added to the cohort');
+    //     }
+
+    //     // Create a new record in the junction table
+    //     Technology_Cohort::create([
+    //         'technology_id' => $technology->id,
+    //         'cohort_id' => $cohortId,
+    //         'start_date' => now(),
+    //         'end_date' => now(),
+    //     ]);
+
+    //     return redirect()->back()->with('success', 'Technology added to the cohort successfully');
+    // }
+
+    public function addToCohort(Request $request)
     {
         // Retrieve the cohort ID from the session
         $cohortId = session('cohort_ID');
 
-        // Check if the technology is already added to the cohort
-        $existingRecord = Technology_Cohort::where('technology_id', $technology->id)
-            ->where('cohort_id', $cohortId)
-            ->first();
+        // Loop through the selected technologies and add them to the cohort
+        foreach ($request->input('technologies', []) as $technologyId) {
+            $technology = Technology::findOrFail($technologyId);
 
-        if ($existingRecord) {
-            return redirect()->back()->with('error', 'Technology is already added to the cohort');
+            // Check if the technology is already added to the cohort
+            $existingRecord = Technology_Cohort::where('technology_id', $technology->id)
+                ->where('cohort_id', $cohortId)
+                ->first();
+
+            if ($existingRecord) {
+                return redirect()->back()->with('error', 'Technology "' . $technology->technologies_name . '" is already added to the cohort');
+            }
+
+            // Create a new record in the junction table
+            Technology_Cohort::create([
+                'technology_id' => $technology->id,
+                'cohort_id' => $cohortId,
+                'start_date' => now(),
+                'end_date' => now(),
+            ]);
         }
 
-        // Create a new record in the junction table
-        Technology_Cohort::create([
-            'technology_id' => $technology->id,
-            'cohort_id' => $cohortId,
-            'start_date' => now(),
-            'end_date' => now(),
-        ]);
-
-        return redirect()->back()->with('success', 'Technology added to the cohort successfully');
+        return redirect()->back()->with('success', 'Selected technologies added to the cohort successfully');
     }
 
 
@@ -116,7 +146,7 @@ class TechnologyCohortController extends Controller
             ->get();
 
         // Pass the data to the view
-        return view('technology.Technology', compact('technologies', 'category', 'cohortId'));
+        return view('technology.technologyRodmap', compact('technologies', 'category', 'cohortId'));
     }
 
     /**
