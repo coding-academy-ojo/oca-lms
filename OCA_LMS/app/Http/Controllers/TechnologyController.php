@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Technology;
 use App\TechnologyCategory;
+use App\Topic;
 use Illuminate\Http\Request;
 
 class TechnologyController extends Controller
@@ -80,13 +81,16 @@ class TechnologyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Technology $technology)
+
     {
         return view('technology.Technology', compact('technology'));
     }
 
     public function showInfo(Technology $technology)
     {
-        return view('technology.viewtechnology', compact('technology'));
+        $Topics=Topic::all();
+
+        return view('technology.viewtechnology', compact('technology','Topics'));
     }
 
     /**

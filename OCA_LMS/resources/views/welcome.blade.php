@@ -1,443 +1,181 @@
-<!DOCTYPE HTML>
-<html>
+<!doctype html>
+<html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Education &mdash; Free Website Template by freehtml5.co</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/fonts/HelvNeue55_W1G.woff2" rel="preload" as="font" type="font/woff2" integrity="sha384-R6e0PFLMMV6HBvkQK22ecNfjOzyh89wSndiTC71MuvoaOnhIYgOAGVC0gW0kVN16" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/fonts/HelvNeue75_W1G.woff2" rel="preload" as="font" type="font/woff2" integrity="sha384-ylOkwNNvSwXpWNbpEhI45ruJTXyfQbIb42IxMvSGGcndZBpZ9iAmOFSUl4/Goeqz" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/orange-helvetica.min.css" rel="stylesheet" integrity="sha384-A0Qk1uKfS1i83/YuU13i2nx5pk79PkIfNFOVzTcjCMPGKIDj9Lqx9lJmV7cdBVQZ" crossorigin="anonymous">
+    <!-- Orange Boosted CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/boosted.min.css" rel="stylesheet">
+    <!-- Your Custom CSS -->
+    <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
 
-    <!-- Custom CSS -->
-    <style>
-        body {
-            font-family: "Source Sans Pro", Arial, sans-serif;
-            font-size: 15px;
-            line-height: 1.7;
-            color: #828282;
-            background: #fff;
-        }
-
-        .custom-hero {
-            background-image: url('{{ asset('assets/img/coding-1.png') }}');
-            background-size: cover;
-            background-position: center center;
-            height: 60vh;
-            position: relative;
-        }
-
-        .custom-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-        }
-        .footer-orange-boosted {
-            background-color: #f16e00; /* Orange Boosted primary color */
-            color: white;
-            padding: 2rem 0;
-        }
-
-        .footer-orange-boosted a {
-            color: white;
-        }
-
-        .footer-orange-boosted .footer-heading {
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-
-        .footer-orange-boosted .list-unstyled {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        .footer-orange-boosted .list-unstyled li a:hover {
-            text-decoration: underline;
-        }
-
-        .footer-social-icons {
-            font-size: 1.5rem;
-        }
-
-        .footer-social-icons a {
-            color: white;
-            margin-right: 0.5rem;
-        }
-
-        /* Custom media query for smaller screens */
-        @media (max-width: 768px) {
-            .footer-social-icons {
-                margin-top: 1rem;
-            }
-        }.card {
-    transition: transform 0.3s ease-in-out;
-}
-
-.card:hover {
-    transform: scale(1.05);
-}
-/* Custom Styles */
-/* Primary Orange color for the titles */
-.primary-color {
-    color: #f16e00;
-}
-
-/* Orange border styling for the section header */
-.orange-border-box {
-    border: 3px solid #f16e00;
-    display: inline-block;
-    padding: 10px;
-}
-
-/* Larger font size for the section header */
-.section-header {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin: 1rem 0;
-}
-
-/* Sub-header with slightly faded text color */
-.sub-header {
-    color: #666;
-    margin-bottom: 2rem;
-}
-
-/* Flex container for cards */
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 1rem;
-}
-
-/* Card style */
-.card {
-    border: none;
-    max-width: 350px;
-    margin-bottom: 1rem;
-}
-
-/* Icon style */
-.card-icon {
-    font-size: 3rem;
-    color: #f16e00;
-}
-
-/* Card title */
-.card-title {
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-/* Card body text */
-.card-body {
-    font-size: 0.9rem;
-    color: #666;
-}
-
-/* Media query for responsiveness */
-@media (max-width: 768px) {
-    .card-container {
-        justify-content: center;
-    }
-}
-
-/* Ensure the card content is centered */
-.card .card-body {
-    text-align: center;
-}.topics-section h2 {
-    font-size: 2rem;
-    color: #f16e00; /* Orange color */
-    border: 2px solid #f16e00;
-    display: inline-block;
-    padding: 0.3em 0.7em;
-}
-
-.topics-section p {
-    color: #333;
-    max-width: 800px;
-    margin: 1em auto;
-    line-height: 1.6;
-}
-
-.topics-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-top: 2em;
-}
-
-.topics-tabs ul {
-    list-style: none;
-    background-color: #333;
-    padding: 1em;
-    color: white;
-}
-
-.topics-tabs ul li {
-    margin: 0.5em 0;
-    font-weight: bold;
-}
-
-.topics-tabs ul li:hover {
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-.topic-icon {
-    width: 100px; /* adjust as necessary */
-    height: 100px; /* adjust as necessary */
-    margin-right: 2em;
-}
-
-.topic-description h3 {
-    color: #f16e00;
-    margin-bottom: 0.5em;
-}
-
-.topic-description p {
-    color: #333;
-    line-height: 1.6;
-}
-
-@media (max-width: 768px) {
-    .topics-content {
-        flex-direction: column;
-    }
-
-    .topic-icon {
-        margin: 0 auto 1em auto;
-        display: block;
-    }
-}
-#trainigat{
-    padding: 30px;
-    margin: 30px;
-    background-color: #e9ecef;
-    margin-top: 3rem !important;
-}
-
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/boosted.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <title>OCA || ORANGE CODING ACADEMY</title>
+    <link rel="stylesheet" href="{{asset('assets/style_files/home.css')}}">
+    <script src="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/js/boosted.bundle.min.js"></script>
 </head>
-<body>
 
-    <div class="fh5co-loader"></div>
+<body style="padding: 0px !important;" class="m-0 border-0 bd-example m-0 border-0">
+    <!-- Example Code -->
+    <div class="container-fluid">
 
-    <div id="page">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container">
-                <a class="navbar-brand" href="index.html">Orange<span>.</span></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">
+                    <img src="{{asset('assets/home-img/orange-logo.svg')}}" width="30" height="30" alt="Logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-auto">
-                        {{-- <li class="nav-item active">
-                            <a class="nav-link" href="dashboard.html">Dashboard</a>
-                        </li> --}}
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         @if(Auth::check())
-                        {{-- If user is authenticated, show logout --}}
-                        <li class="nav-item">
-                      
-                
-                            <a href="{{ route('logout') }}">Logout</a>
-
-                        </li>
-                    @else
-                        {{-- If user is not authenticated, show login options --}}
-                        <li class="nav-item {{ Request::is('student/login') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('student.login.form') }}">Student Login</a>
-                        </li>
-                        <li class="nav-item {{ Request::is('staff/login') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('login') }}">Staff Login</a>
-                        </li>
-                    @endif
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('student.login.form') }}">Student Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">Staff Login</a>
+                            </li>
+                        @endif
+                    </ul>
                 </div>
             </div>
         </nav>
-
-        <aside id="fh5co-hero"
-            style="background-image: url('{{ asset('assets/img/coding-1.png') }}'); background-size: cover; background-position: center center; background-repeat: no-repeat; width: 100%; height: 60vh; display: block;">
-            <div class="bg-overlay" style=""></div>
-            <div class="overlay-gradient"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2 text-center slider-text">
-                        <div class="slider-text-inner" style="padding: 10vh 0;">
-                            <h1 style=" color: #FF7900 ; /* Orange Boosted primary color example */
-                        font-family: 'Source Sans Pro', Arial, sans-serif; /* Adjust based on Orange Boosted */
-                        font-weight: bold;
-                        font-size: 3rem;"
-                                class="">Orange Coding Academy</h1>
-                            <p style="color: #111; /* For contrast */
-                        font-family: 'Source Sans Pro', Arial, sans-serif; /* Adjust based on Orange Boosted */
-                        font-size: 1.5rem;"
-                                class="">Learn by Doing</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </aside>
-        <div class="container mt-5" id="trainigat">
-            <div class="text-center mb-4">
-                <div class="orange-border-box">
-                    <h1 class="section-header primary-color">TRAINING AT ORANGE CODING ACADEMY</h1>
-                </div>
-                {{-- <p class="sub-header">Phasellus non dolor nibh. Nullam elementum tellus pretium feugiat. Cras dictum tellus dui, vitae sollicitudin ipsum tincidunt in. Sed tincidunt tristique enim sed sollicitudin.</p> --}}
-            </div>
         
-            <div class="card-container">
-                <!-- Card 1 -->
-                <div class="card">
-                    <div class="card-body">
-                        <i class="card-icon fas fa-unlock-alt"></i>
-                        <h5 class="card-title primary-color">Unlimited access</h5>
-                        <p class="card-text">Morbi leo risus, porta ac consectetur, vestibulum at eros. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <i class="card-icon fas fa-unlock-alt"></i>
-                        <h5 class="card-title primary-color">Unlimited access</h5>
-                        <p class="card-text">Morbi leo risus, porta ac consectetur, vestibulum at eros. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <i class="card-icon fas fa-unlock-alt"></i>
-                        <h5 class="card-title primary-color">Unlimited access</h5>
-                        <p class="card-text">Morbi leo risus, porta ac consectetur, vestibulum at eros. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <i class="card-icon fas fa-unlock-alt"></i>
-                        <h5 class="card-title primary-color">Unlimited access</h5>
-                        <p class="card-text">Morbi leo risus, porta ac consectetur, vestibulum at eros. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor.</p>
-                    </div>
-                </div>
-                <!-- Add additional cards here -->
+
+
+
+
+
+        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" class="" aria-label="Slide 1" style="--bs-carousel-interval: 10000ms;"></button>
+                <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2" class="" style="--bs-carousel-interval: 2000ms;"></button>
+                <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2" aria-label="Slide 3" class="active" aria-current="true"></button>
             </div>
+            <div class="carousel-inner">
+                <div class="carousel-item" data-bs-interval="10000">
+                    <div class="image-text-container">
+                        <img src="{{asset('assets/home-img/Coding.png')}}" class="d-block w-100" alt="First slide">
+
+                    </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <div class="image-text-container">
+                        <img src="{{asset('assets/home-img/image.png')}}" class="d-block w-100" alt="Second slide">
+                    </div>
+                </div>
+                <div class="carousel-item active">
+                    <div class="image-text-container">
+                        <img src="{{asset('assets/home-img/image.png')}}" class="d-block w-100" alt="Third slide">
+
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-{{--         
-        <div class="topics-section">
-            <div class="topics-header">
-                <h2>AVAILABLE TOPICS</h2>
-                <p>Phasellus non dolor nibh. Nullam elementum tellus pretium feugiat. Cras dictum tellus dui, vitae sollicitudin ipsum tincidunt in. Sed tincidunt tristique enim sed sollicitudin.</p>
-            </div>
-            <div class="topics-content">
-                <div class="topics-tabs">
-                    <ul>
-                        <li>Graphic Designing</li>
-                        <li>Online Marketing</li>
-                        <li>Brand & Strategy</li>
-                        <li>Social Marketing</li>
-                        <li>Basic Photography</li>
-                    </ul>
-                </div>
-                <div class="topics-info">
-                    <div class="topic-icon">
-                        <!-- Insert image here -->
-                    </div>
-                    <div class="topic-description">
-                        <h3>Graphic Designing</h3>
-                        <p>Cras dictum tellus dui, vitae sollicitudin ipsum tincidunt adipiscing ante varius at. Sed mollis vestibulum sapien sed mattis. Cras dictum tellus duvi, vitae sollicitudin ipsum tincidunt adipiscing ante varius at. Sed mollis vestibulum sapien sed mattis.</p>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-        
 
-        
-
-
-
-
-
-
-
-        <footer class="footer-orange-boosted">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <h5 class="footer-heading">About Us</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed dictum ligula, cursus blandit risus.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <h5 class="footer-heading">Quick Links</h5>
-                        <ul class="list-unstyled">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Services</a></li>
-                            <li><a href="#">Contact</a></li>
+        <section class="about_section padding bg-white px-2">
+            <div class="row justify-content-center align-items-center">
+                <div class="content col-12 col-lg-5 p-4 m-3">
+                    <div class="text-start">
+                        <p class="text-primary h1 py-4">About Coding Academy</p>
+                        <p class="mb-3 text-start">In light of the increasing demand for qualified programmers in local and regional markets, Orange Jordan took on its shoulders the mission of qualifying a new generation mastering this skill efficiently.</p>
+                        <p class="mb-3 text-start">The Coding Academy by Orange was launched in June 2019, in partnership with Simplon.co, to offer a free of charge 6-month training courses in coding languages for free, supported by 1-month internship in ICT sector. Every year
+                            50 students, out of thousands of applicants, get the opportunity to join the Academy after passing a very competitive admission process. The employability rate among the first batch of students exceeded 70% which proves the
+                            efficiency of the academy’s teaching methodology, curricula and academic staff.</p>
+                        <p class="h3 text-primary mx-2 mt-4">What does the Academy Offer</p>
+                        <ul class="text-start">
+                            <li><strong>6 months</strong> of cost-free training course.</li>
+                            <li><strong>1 month internship</strong> in one of the leading IT companies in the Kingdom.
+                            </li>
+                            <li>Intensive courses offered by a team of qualified trainers in an <strong>active-learning
+                                    experience</strong>, such as: HTML, CSS, JavaScript (React), PHP (Laravel), Python (Flask).
+                            </li>
+                            <li>Networking opportunities with the largest companies in the <strong>local and
+                                    international markets</strong>.</li>
+                            <li>Access to careers and entrepreneurship training courses in <strong>life and
+                                    administrative skills</strong>.</li>
                         </ul>
                     </div>
-                    <div class="col-md-4">
-                        <h5 class="footer-heading">Follow Us</h5>
-                        <div class="footer-social-icons">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="content col-12 col-lg-5 p-4 m-3" data-aos="fade-left">
+                    <div class="about_img">
+
+                        <img src="{{asset('assets/home-img/coding-academy.png')}}" alt="idea-images" class="img-rounded about_img_1" data-aos="fade-right">
+                        <img src="{{asset('assets/home-img/codingAcademy.png')}}" alt="idea-images" class="img-rounded about_img_2" data-aos="fade-right" data-aos-delay="100">
+                        <img src="{{asset('assets/home-img/Image (1).png')}}" alt="idea-images" class="img-rounded about_img_3" data-aos="fade-right" data-aos-delay="200">
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+        <div class=" bg-white">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="academy-partners paragraph paragraph--type--bp-simple paragraph--view-mode--default paragraph--id--231" id="paragraph--id--231">
+                        <div class="paragraph__column">
+                            <div class="text-wrapper">
+                                <div class="clearfix text-formatted field field--name-bp-text field--type-text-long field--label-hidden field__item">
+                                    <p class="align-items-center h1 text-primary d-flex p-5">Our Partners</p>
+                                    <div class="row ">
+                                        <div class="col-md-4 d-flex align-items-center justify-content-center">
+                                            <img class="img-fluid" alt="Coding Academy partner" data-entity-type="file" data-entity-uuid="aa8cb7f6-fe3a-429a-b087-8a430899a6cb" src="{{asset('assets/home-img/economy.png')}}">
+                                        </div>
+                                        <div class="col-md-4 d-flex align-items-center justify-content-center">
+                                            <img class="img-fluid" alt="Coding Academy partner" data-entity-type="file" data-entity-uuid="50b44262-026b-4929-9255-8113c8c38bf5" src="{{asset('assets/home-img/university.png')}}">
+                                        </div>
+                                        <div class="col-md-4 d-flex align-items-center justify-content-center">
+                                            <img class="img-fluid" alt="Simplon" data-entity-type="file" data-entity-uuid="fed83976-6250-4e3f-aa2c-c1562bf42e2d" src="{{asset('assets/home-img/simplon.png')}}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </footer>
-          
-    </div>
+        </div>
 
-    <div class="gototop js-top">
-        <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
     </div>
-
-    <!-- jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!-- jQuery Easing -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- Waypoints -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-    <!-- Stellar Parallax -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/stellar.js/0.6.2/jquery.stellar.min.js"></script>
-    <!-- Carousel -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <!-- Flexslider -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.7.2/jquery.flexslider-min.js"></script>
-    <!-- countTo -->
-    <script src="js/jquery.countTo.js"></script>
-    <!-- Magnific Popup -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
-    <script src="js/magnific-popup-options.js"></script>
-    <!-- Count Down -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery.countdown@2.2.0/jquery.countdown.min.js"></script>
-    <!-- Main -->
-    <script src="js/main.js"></script>
+    <footer class="footer navbar" data-bs-theme="dark">
+        <h2 class="visually-hidden">Sitemap & information</h2>
+        <div class="container-xxl footer-social">
+            <h3 class="footer-heading me-md-3">Follow us</h3>
+            <ul class="navbar-nav gap-2 flex-row align-self-start">
+                <li><a href="#" class="btn btn-icon btn-social btn-twitter"><span class="visually-hidden">Twitter</span></a></li>
+                <li><a href="#" class="btn btn-icon btn-social btn-facebook"><span class="visually-hidden">Facebook</span></a></li>
+                <li><a href="#" class="btn btn-icon btn-social btn-instagram"><span class="visually-hidden">Instagram</span></a></li>
+                <li><a href="#" class="btn btn-icon btn-social btn-whatsapp"><span class="visually-hidden">WhatsApp</span></a></li>
+                <li><a href="#" class="btn btn-icon btn-social btn-linkedin"><span class="visually-hidden">LinkedIn</span></a></li>
+                <li><a href="#" class="btn btn-icon btn-social btn-youtube"><span class="visually-hidden">YouTube</span></a></li>
+            </ul>
+        </div>
+    </footer>
+    <!-- End Example Code -->
     <script>
-        var d = new Date(new Date().getTime() + 1000 * 120 * 120 * 2000);
-
-        // default example
-        simplyCountdown('.simply-countdown-one', {
-            year: d.getFullYear(),
-            month: d.getMonth() + 1,
-            day: d.getDate()
-        });
-
-        //jQuery example
-        $('#simply-countdown-losange').simplyCountdown({
-            year: d.getFullYear(),
-            month: d.getMonth() + 1,
-            day: d.getDate(),
-            enableUtc: false
-        });
+        AOS.init();
     </script>
 </body>
 

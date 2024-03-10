@@ -1,4 +1,4 @@
-
+{{-- 
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-12">
@@ -12,6 +12,10 @@
                     <a class="nav-link" href="{{route('categories.index')}}">Technology category</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('categories.indexCohort') ? 'text-primary' : '' }}" href="{{ route('categories.indexCohort') }}">Roadmap</a>
+        
+                </li>
+                <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('Announcements') ? 'text-primary' : '' }}" href="{{ route('Announcements') }}">Announcements</a>
                
                 </li>
@@ -23,10 +27,7 @@
                     <a class="nav-link {{ request()->routeIs('show_all_projects') ? 'text-primary' : '' }}" href="{{ route('show_all_projects') }}">Projects</a>
                
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('categories.indexCohort') ? 'text-primary' : '' }}" href="{{ route('categories.indexCohort') }}">Roadmap</a>
-        
-                </li>
+               
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('attendance') ? 'text-primary' : '' }}" href="{{ route('attendance') }}">Attendance</a>
               
@@ -64,4 +65,4 @@
 <hr>
     
 @endif
-@endauth
+@endauth --}}

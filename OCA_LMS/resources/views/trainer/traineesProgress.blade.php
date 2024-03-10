@@ -671,6 +671,8 @@ Trainees Progress
             </div>
         </div>
     </div>
+</div>
+</div>
     <script>
     //Changing progress bar colors based on Percentage
     document.addEventListener('DOMContentLoaded', function() {

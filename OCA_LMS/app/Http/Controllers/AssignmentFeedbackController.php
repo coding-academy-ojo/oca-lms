@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Assignment;
 use App\AssignmentFeedback;
 use App\AssignmentSubmission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AssignmentFeedbackController extends Controller
 {
@@ -43,7 +45,15 @@ class AssignmentFeedbackController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $staffId = Auth::id();
+        $assignment_feedback = new AssignmentFeedback();
+        $assignment_feedback->assignment_submission_id  = $request->input('Assignment_submission_ID');
+        $assignment_feedback->feedback = $request->input('Assignment_feedback');
+        // $assignment_submision->staff_id = $staffId;
+        $assignment_feedback->created_at =now();
+
+        $assignment_feedback->save();
+        return redirect()->back()->with('success', 'Assignment submited successfully');
     }
 
     /**
@@ -60,6 +70,15 @@ class AssignmentFeedbackController extends Controller
     }
     
 
+    public function submissionfedback($id , $studentId)
+    {
+        $assignment = Assignment::find($id);
+        $assignment_submissions = AssignmentSubmission::where('assignment_id', $id)
+            ->where('student_id', $studentId)
+            ->get();
+    
+        return view('Assignment.Student_assignment.StudentAssignmentSubmissions', compact('assignment', 'assignment_submissions'));
+    }
     /**
      * Show the form for editing the specified resource.
      *
