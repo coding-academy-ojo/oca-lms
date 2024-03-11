@@ -10,6 +10,20 @@ Topics
 @include('layouts.innerNav')
 <section class="inner-bred">
 
+
+    @if (session('success'))
+        <script>
+            Swal.fire({
+            title: 'Success!',
+            html: '<div style="color: #ff7900; font-size: 30px;"><i class="fas fa-check-circle"></i></div>' +
+                '<div style="margin-top: 20px;">{{ session('success') }}</div>',
+            showConfirmButton: true,
+            timer: 5000,
+            confirmButtonColor: '#ff7900',
+        });
+        </script>
+    @endif
+
     <div class="container mt-3">
         <ul class="thm-breadcrumb">
             <li><a href="">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
