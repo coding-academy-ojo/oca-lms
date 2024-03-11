@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Technology;
 use App\TechnologyCategory;
 use App\Topic;
+use App\Technology_Cohort;
 use Illuminate\Http\Request;
 
 class TechnologyController extends Controller
@@ -93,8 +94,9 @@ class TechnologyController extends Controller
     public function showInfo(Technology $technology)
     {
         $Topics = Topic::all();
-
-        return view('technology.viewtechnology', compact('technology', 'Topics'));
+        $technologyCohort = Technology_Cohort::where('technology_id', $technology->id)->first();
+        // dd($technologyCohort->id);
+        return view('technology.viewtechnology', compact('technology', 'Topics','technologyCohort'));
     }
 
     /**

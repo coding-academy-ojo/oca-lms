@@ -173,14 +173,22 @@
                 <p>6</p>
             </div>
         </div>
-        <div class="chart-row">
+        <div class="container my-5 chart-row">
+            
             <div class="chart-container-half">
+                <h3 class="text-primary">Number of students Enrolled Overview</h3>
                 <canvas id="graduatesByAcademy"></canvas>
             </div>
+            
             <div class="chart-container-half">
+                <h3 class="text-primary">Graduated Students Overview</h3>
                 <canvas id="totalSummaryChart"></canvas>
+            
             </div>
-            <div class="chart-container-wide">
+        </div>
+        <div class="container my-5 chart-row">
+            <div class="chart-container-half">
+                <h3 class="text-primary">Cohorts Per Academy Overview</h3>
                 <canvas id="academyPerformanceChart"></canvas>
             </div>
         </div>
@@ -225,22 +233,22 @@
             labels: ['Amman', 'Data Science', 'Irbid', 'Zarqa', 'Aqaba', 'Balqa'],
             datasets: [
                 {
-                    label: 'Sum of Number of Enrolled Students',
-                    data: [208, 121, 105, 102, 80, 73],
+                    label: 'Cohort 1',
+                    data: [208, 80, 105, 102, 66, 73],
                     backgroundColor: '#ad5129',
                     borderColor: '#ad5129',
                     borderWidth: 1
                 },
                 {
-                    label: 'Sum of Number of Graduates',
-                    data: [199, 121, 70, 66, 46, 49],
+                    label: 'Cohort 2',
+                    data: [199, 121, 70, 66, 80, 49],
                     backgroundColor: '#e66c37',
                     borderColor: '#e66c37',
                     borderWidth: 1
                 },
                 {
-                    label: 'Sum of Number of Students has access to the market',
-                    data: [174, 40, 74, 58, 35, 27],
+                    label: 'Cohort 3',
+                    data: [120, 64, 74, 58, 75, 95],
                     backgroundColor: '#eb895f',
                     borderColor: '#eb895f',
                     borderWidth: 1
