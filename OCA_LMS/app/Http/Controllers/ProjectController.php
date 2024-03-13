@@ -112,7 +112,7 @@ public function assignStudents($projectId)
         }
 
         $project->save();
-        return redirect()->route('add_project_skills_level', ['project_id' => $project->id]);
+        return redirect()->route('add_project_skills_level', ['project_id' => $project->id])->with('success', 'Project created successfully.');
     }
 
 
@@ -167,7 +167,7 @@ public function assignStudents($projectId)
         }
 
         // Redirect to the next page or wherever you want to go
-        return redirect()->route('project_brief', ['id' => $projectId]);
+        return redirect()->route('project_brief', ['id' => $projectId])->with('success', 'Project Skills created successfully.');
     }
 
 
@@ -182,47 +182,12 @@ public function assignStudents($projectId)
     }
 
 
-//     public function updateProject(Request $request, $id)
-// {
-//     $request->validate([
-//         'project_name' => 'required',
-//         'project_description' => 'required',
-//         // 'project_image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-//         'project_image' => 'required',
-//         'project_start_date' => 'required|date',
-//         'project_delivery_date' => 'required|date|after:start_date',
-//         'project_deliverable' => 'nullable',
-//         'project_resources' => 'nullable',
-//         'project_assessment_methods' => 'nullable',
-//     ]);
-
-//     $project = Project::findOrFail($id);
-//     $project->project_name = $request->input('project_name');
-//     $project->project_description = $request->input('project_description');
-//     $project->cohort_id = session('cohort_ID');
-//     $project->project_start_date = $request->input('project_start_date');
-//     $project->project_delivery_date = $request->input('project_delivery_date');
-//     $project->project_deliverable = $request->input('project_deliverable');
-//     $project->project_resources = $request->input('project_resources');
-//     $project->project_assessment_methods = $request->input('project_assessment_methods');
-
-//     if ($request->hasFile('project_image')) {
-//         $imageName = time().'.'.$request->project_image->extension();
-//         $request->project_image->move(public_path('images'), $imageName);
-//         $project->project_image = $imageName;
-//     }
-
-//     $project->save();
-
-//     return redirect()->route('project_brief', ['id' => $id]);
-// }
-
 public function updateProject(Request $request, $id)
 {
     $request->validate([
         'project_name' => 'required',
         'project_description' => 'required',
-        'project_image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'project_image' => 'sometimes|image',
         'project_start_date' => 'required|date',
         'project_delivery_date' => 'required|date|after:start_date',
         'project_deliverable' => 'nullable',
@@ -249,9 +214,8 @@ public function updateProject(Request $request, $id)
 
     $project->save();
 
-    return redirect()->route('project_brief', ['id' => $id]);
+    return redirect()->route('project_brief', ['id' => $id])->with('success', 'Project Update successfully.');
 }
-
 
     public function editProjectSkillsLevel($id)
 {
@@ -301,7 +265,7 @@ public function updateProject(Request $request, $id)
     }
 
     // Redirect to the project brief page
-    return redirect()->route('project_brief', ['id' => $projectId]);
+    return redirect()->route('project_brief', ['id' => $projectId])->with('success', 'Project Skillls Update successfully.');
 }
 
 public function showEditProjectForm($id)
@@ -415,5 +379,3 @@ public function processFeedback(Request $request, $submission_id)
 }
 
 }
-
-
