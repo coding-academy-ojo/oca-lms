@@ -63,11 +63,24 @@
                     </div>
                 </div>
             </div>
-            <div class="card">
+            <div class="card ">
                 <div class="card-body">
                     <h4 class="card-title text-primary">Attendance Overview</h4>
-                    <div class="chart-container">
-                        <canvas id="pie_chart"></canvas>
+                    <div>
+                        <ul class="list-group mb-3 list-group-flush">
+                            <li class="list-group-item px-0 d-flex justify-content-between">
+                                <span>Justified Absence:</span><strong>2</strong>
+                            </li>
+                            <li class="list-group-item px-0 d-flex justify-content-between">
+                                <span class="mb-0">Non-Justified Absence:</span><strong>0</strong>
+                            </li>
+                            <li class="list-group-item px-0 d-flex justify-content-between">
+                                <span class="mb-0">Justified Tardy:</span><strong>3</strong>
+                            </li>
+                            <li class="list-group-item px-0 d-flex justify-content-between">
+                                <span class="mb-0">Non-Justified Tardy:</span><strong>0</strong>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -82,7 +95,7 @@
                             <h4 class="card-title text-primary"> Assignments Overview</h4>
                             <!-- Chart Container for Income/Expense Report -->
                             <div class="chart-container">
-                                <canvas id="barChart_2"></canvas>
+                                <canvas id="assignments_tech"></canvas>
                             </div>
                         </div>
                     </div>
@@ -93,10 +106,10 @@
                     <div class="card">
                         <div class="card-body">
                             <!-- Title for Another Chart -->
-                            <h4 class="card-title text-primary">Project Overview</h4>
+                            <h4 class="card-title text-primary"> Project Overview </h4>
                             <!-- Chart Container for Another Chart -->
                             <div class="chart-container">
-                                <canvas id="areaChart_1"></canvas>
+                                <canvas id="barChart_3"></canvas>
                             </div>
                         </div>
                     </div>
@@ -128,13 +141,13 @@
                             <td>Idea Pitching</td>
                             <td>
                                 <div class="progress" style="background: rgba(127, 99, 244, .1)">
-                                    <div class="progress-bar bg-warning" style="width: 45%;" role="progressbar"><span
-                                            class="sr-only">45% Complete</span>
+                                    <div class="progress-bar bg-success" style="width: 100%;" role="progressbar"><span
+                                            class="sr-only">100% Complete</span>
                                     </div>
                                 </div>
                             </td>
                             <td>Apr 20,2023</td>
-                            <td><span class="badge bg-warning">45%</span></td>
+                            <td><span class="badge bg-success">100%</span></td>
                             </td>
                             <td>
                                 ........
@@ -177,13 +190,13 @@
                             <td>Front-end</td>
                             <td>
                                 <div class="progress" style="background: rgba(70, 74, 83, .1)">
-                                    <div class="progress-bar bg-warning" style="width: 40%;" role="progressbar"><span
-                                            class="sr-only">40% Complete</span>
+                                    <div class="progress-bar bg-warning" style="width: 50%;" role="progressbar"><span
+                                            class="sr-only">50% Complete</span>
                                     </div>
                                 </div>
                             </td>
                             <td>Jul 1,2023</td>
-                            <td><span class="badge bg-warning">40%</span>
+                            <td><span class="badge bg-warning">50%</span>
                             </td>
                             <td>
                                 ........
@@ -236,8 +249,6 @@
                                         title="Close"></a></span>
                             </td>
                         </tr>
-
-
                     </tbody>
                 </table>
             </div>
@@ -246,125 +257,103 @@
 </div>
 
 <script>
-var pieChartCanvas = document.getElementById('pie_chart');
-if (pieChartCanvas) {
-    var ctx = pieChartCanvas.getContext('2d');
-    new Chart(ctx, {
-        type: 'pie',
-        data: {
-            datasets: [{
-                data: [45, 25, 20, 10],
-                backgroundColor: [
-                    "rgba(255, 121, 0, 1)",
-                    "rgba(255, 166, 101, 1)",
-                    "rgba(255, 211, 177, 1)",
-                    "rgba(255,241,229)"
-                ],
-                hoverBackgroundColor: [
-                    "rgba(255, 121, 0, 1)",
-                    "rgba(255, 166, 101, 1)",
-                    "rgba(255, 211, 177, 1)",
-                    "rgba(255,241,229)"
-                ]
-            }],
-            labels: [
-                "Attended",
-                "Absence",
-                "Justified Tardy",
-                "Non justified Tardy"
-            ]
-        },
+// Assignments Bar Chart Initialization
+if (document.getElementById('assignments_tech')) {
+
+    const assignments_tech = document.getElementById("assignments_tech").getContext('2d');
+
+
+
+    // Chart data
+    let barChartData = {
+        labels: ["HTML& CSS", "JS", "React", "NodeJS", "MongoDB", "PostgreSQL", "Wordpress"],
+        datasets: [{
+            label: 'Passed',
+            backgroundColor: "rgba(43, 193, 85, 1)", // Green color
+            hoverBackgroundColor: "rgba(43, 193, 85, 1)",
+            data: [35, 33, 33, 34, 35, 34, 35]
+        }, {
+            label: 'Not Passed',
+            backgroundColor: "rgba(243, 87, 87, 1)", // Red color
+            hoverBackgroundColor: "rgba(243, 87, 87, 1)",
+            data: [0, 2, 2, 1, 0, 1, 0]
+        }]
+    };
+
+    // Chart options
+    new Chart(assignments_tech, {
+        type: 'bar',
+        data: barChartData,
         options: {
-            responsive: true,
+            scales: {
+                xAxes: [{
+                    stacked: true
+                }],
+                yAxes: [{
+                    stacked: true
+                }]
+            },
             legend: {
                 display: true
             },
-            maintainAspectRatio: false // Set to true if you want the chart to maintain its aspect ratio
+            responsive: true,
+            maintainAspectRatio: false,
+            tooltips: {
+                mode: 'index',
+                intersect: false
+            }
         }
     });
 }
-var areaChart = function() {
-    if (jQuery('#areaChart_1').length > 0) {
-        const areaChart_1 = document.getElementById("areaChart_1").getContext('2d');
 
-        new Chart(areaChart_1, {
-            type: 'line',
-            data: {
-                labels: ['Project A', 'Project B', 'Project C'],
-                datasets: [{
-                    label: 'Assigned Projects',
-                    data: [25, 20, 60],
-                    borderColor: '#ff7900',
-                    borderWidth: 3,
-                    backgroundColor: 'rgba(255, 166, 101, 1)',
-                    pointBackgroundColor: 'rgba(141, 149, 255, 1)',
-                    fill: true // Fill area under the line
+
+// All Projects Bar Chart Initialization
+if (document.getElementById('barChart_3')) {
+    const barChart_3 = document.getElementById("barChart_3").getContext('2d');
+
+
+
+    // Chart data
+    let barChartData = {
+        labels: ["HTML& CSS", "JS", "React", "NodeJS", "MongoDB", "PostgreSQL", "Wordpress"],
+        datasets: [{
+            label: 'Passed',
+            backgroundColor: "rgba(43, 193, 85, 1)", // Green color
+            hoverBackgroundColor: "rgba(43, 193, 85, 1)",
+            data: [35, 33, 33, 34, 35, 34, 35]
+        }, {
+            label: 'Corrective actions',
+            backgroundColor: "rgba(243, 87, 87, 1)", // Red color
+            hoverBackgroundColor: "rgba(243, 87, 87, 1)",
+            data: [0, 2, 2, 1, 0, 1, 0]
+        }]
+    };
+
+    // Chart options
+    new Chart(barChart_3, {
+        type: 'bar',
+        data: barChartData,
+        options: {
+            scales: {
+                xAxes: [{
+                    stacked: true
+                }],
+                yAxes: [{
+                    stacked: true
                 }]
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                legend: {
-                    display: false
-                },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            max: 100,
-                            min: 0,
-                            stepSize: 20
-                        }
-                    }],
-                    xAxes: [{}]
-                }
-            }
-        });
-    }
-}
-areaChart();
-
-var barChart = function() {
-    if (jQuery('#barChart_2').length > 0) {
-        const barChart_2 = document.getElementById("barChart_2").getContext('2d');
-        const barChart_2gradientStroke = barChart_2.createLinearGradient(0, 0, 0, 250);
-        barChart_2gradientStroke.addColorStop(0, "rgba(141, 149, 255, 1)");
-        barChart_2gradientStroke.addColorStop(1, "#ff7900");
-
-        new Chart(barChart_2, {
-            type: 'bar',
-            data: {
-                labels: ["HTML& CSS", "JS", "React", "NodeJS", "MongoDB", "PostgreSQL", "Wordpress"],
-                datasets: [{
-                    label: "Completion rate",
-                    data: [65, 59, 80, 81, 56, 55, 40],
-                    borderColor: barChart_2gradientStroke,
-                    borderWidth: "0",
-                    backgroundColor: barChart_2gradientStroke,
-                    hoverBackgroundColor: barChart_2gradientStroke
-                }]
+            legend: {
+                display: true
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                legend: {
-                    display: false
-                },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }],
-                    xAxes: [{
-                        barPercentage: 0.5
-                    }]
-                }
+            responsive: true,
+            maintainAspectRatio: false,
+            tooltips: {
+                mode: 'index',
+                intersect: false
             }
-        });
-    }
+        }
+    });
 }
-barChart();
 </script>
 
 @endsection
