@@ -125,7 +125,7 @@
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered verticle-middle table-responsive-sm">
+                <table class="table verticle-middle table-responsive-sm table-hover">
                     <thead>
                         <tr>
                             <th scope="col">Task</th>
@@ -256,13 +256,289 @@
     </div>
 </div>
 
+<!-- Students Corrective Actions History Section -->
+<div class="container my-4">
+    <h3 class="text-primary">Mohsin's Corrective Actions History</h3>
+    <div class="card">
+        <div class="card-body">
+
+            <div class="table-container" style="max-height: 300px; overflow-y: auto;">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Project</th>
+                            <th scope="col">Trainer</th>
+                            <th scope="col">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>JS project</td>
+                            <td>Rawan Abuseini</td>
+                            <td>
+                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3">Details</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>React project</td>
+                            <td>Rawan Abuseini</td>
+                            <td>
+                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3">Details</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>MongoDB project</td>
+                            <td>Rawan Abuseini</td>
+                            <td>
+                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3">Details</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4</th>
+                            <td>NodeJS project</td>
+                            <td>Rawan Abuseini</td>
+                            <td>
+                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3">Details</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5</th>
+                            <td>Ability to solve complex issues effectively.</td>
+                            <td>Bayan Al-Nabulsi</td>
+                            <td>
+                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3">Details</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Ability to solve complex issues effectively.</td>
+                            <td>Bayan Al-Nabulsi</td>
+                            <td>
+                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3">Details</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Ability to solve complex issues effectively.</td>
+                            <td>Bayan Al-Nabulsi</td>
+                            <td>
+                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3">Details</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Ability to solve complex issues effectively.</td>
+                            <td>Bayan Al-Nabulsi</td>
+                            <td>
+                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3">Details</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Corrective actions details Modal -->
+<div class="modal fade" id="feedbackModal3" tabindex="-1" aria-labelledby="feedbackModalLabel3" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="feedbackModalLabel3">JS Project</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <caption></caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Corrective Action</th>
+                            <th scope="col">File</th>
+                            <th scope="col">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>ToDo App</td>
+                            <td>
+                                <div>
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3">Details</a>
+                                </div>
+                            </td>
+                            <td>10/3/2024</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Read more in Object oriented</td>
+                            <td>
+                                <div>
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3">Details</a>
+                                </div>
+                            </td>
+                            <td>14/3/2024</td>
+                        </tr>
+                        <tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Students Assignments review History Section -->
+<div class="container my-4">
+    <h3 class="text-primary">Mohsin's Assignments Review History</h3>
+    <div class="card">
+        <div class="card-body">
+
+            <div class="table-container" style="max-height: 300px; overflow-y: auto;">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Assignment</th>
+                            <th scope="col">Trainer</th>
+                            <th scope="col">File</th>
+                            <th scope="col">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>JS Functions </td>
+                            <td>Rawan Abuseini</td>
+                            <td>
+                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal4">Details</a>
+                            </td>
+                            <td>14/3/2024</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Data structure</td>
+                            <td>Rawan Abuseini</td>
+                            <td>
+                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal4">Details</a>
+                            </td>
+                            <td>10/3/2024</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>MongoDB installation</td>
+                            <td>Rawan Abuseini</td>
+                            <td>
+                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal4">Details</a>
+                            </td>
+                            <td>10/3/2024</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4</th>
+                            <td>Nodejs integration with PostgreSQL</td>
+                            <td>Rawan Abuseini</td>
+                            <td>
+                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal4">Details</a>
+                            </td>
+                            <td>10/3/2024</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Ability to solve complex issues effectively.</td>
+                            <td>Bayan Al-Nabulsi</td>
+                            <td>
+                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal4">Details</a>
+                            </td>
+                            <td>10/3/2024</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Ability to solve complex issues effectively.</td>
+                            <td>Bayan Al-Nabulsi</td>
+                            <td>
+                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal4">Details</a>
+                            </td>
+                            <td>10/3/2024</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Ability to solve complex issues effectively.</td>
+                            <td>Bayan Al-Nabulsi</td>
+                            <td>
+                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal4">Details</a>
+                            </td>
+                            <td>10/3/2024</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Assinments review details Modal -->
+<div class="modal fade" id="feedbackModal4" tabindex="-1" aria-labelledby="feedbackModalLabel4" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="feedbackModalLabel4">JS Functions</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <caption></caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Assignment</th>
+                            <th scope="col">File</th>
+                            <th scope="col">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>ToDo App</td>
+                            <td>
+                                <div>
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal4">Details</a>
+                                </div>
+                            </td>
+                            <td>10/3/2024</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Read more in Object oriented</td>
+                            <td>
+                                <div>
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal4">Details</a>
+                                </div>
+                            </td>
+                            <td>14/3/2024</td>
+                        </tr>
+                        <tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
-// Assignments Bar Chart Initialization
+// All Assignments Bar Chart Initialization
 if (document.getElementById('assignments_tech')) {
 
     const assignments_tech = document.getElementById("assignments_tech").getContext('2d');
-
-
 
     // Chart data
     let barChartData = {
@@ -306,8 +582,7 @@ if (document.getElementById('assignments_tech')) {
     });
 }
 
-
-// All Projects Bar Chart Initialization
+// All Projects status Bar Chart Initialization
 if (document.getElementById('barChart_3')) {
     const barChart_3 = document.getElementById("barChart_3").getContext('2d');
 

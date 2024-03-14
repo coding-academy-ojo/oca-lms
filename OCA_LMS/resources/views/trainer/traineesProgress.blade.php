@@ -50,9 +50,9 @@ Trainees Progress
                                 <p class="card-title" style="font-size: 0.8rem;">More</p>
                             </a>
                             <div class="progress mb-2 my-2">
-                                <div class="progress-bar progress-animated bg-Success" style="width: 75%">30</div>
+                                <div class="progress-bar progress-animated bg-Success" style="width: 75%">25</div>
                             </div>
-                            <small>30 Trainees Attended </small>
+                            <small>25 Trainees Attended </small>
                         </div>
                     </div>
                 </div>
@@ -68,9 +68,9 @@ Trainees Progress
                             </a>
 
                             <div class="progress mb-2 my-2">
-                                <div class="progress-bar progress-animated bg-success" style="width: 88%">33</div>
+                                <div class="progress-bar progress-animated bg-success" style="width: 88%">28</div>
                             </div>
-                            <small> 33 on time </small>
+                            <small> 28 on time </small>
                         </div>
                     </div>
                 </div>
@@ -82,7 +82,7 @@ Trainees Progress
                             <h4 class="card-title text-primary">Assignments Assessment</h4>
                             <canvas id="Assignments Assessment"></canvas>
                             <a href="">
-                                <p class="card-title text-primary" style="font-size: .8rem;">Flex and Grid</p>
+                                <p class="card-title" style="font-size: .8rem;">Flex and Grid</p>
                             </a>
                         </div>
                     </div>
@@ -95,7 +95,7 @@ Trainees Progress
 
                             <canvas id="Projects Assessment"></canvas>
                             <a href="">
-                                <p class="card-title text-primary" style="font-size: .8rem;">Protfolio project</p>
+                                <p class="card-title" style="font-size: .8rem;">Protfolio project</p>
                             </a>
                         </div>
                     </div>
@@ -677,6 +677,7 @@ Trainees Progress
             </div>
         </div>
     </div>
+
 </div>
 
 <script>
@@ -806,7 +807,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 labels: ['Passed', 'Not Passed'],
                 datasets: [{
 
-                    data: [25, 4],
+                    data: [25, 5],
                     backgroundColor: [
                         "rgba(43, 193, 85, 1)",
                         "rgba(243, 87, 87, 1)",
@@ -835,7 +836,7 @@ document.addEventListener('DOMContentLoaded', function() {
             data: {
 
                 datasets: [{
-                    data: [33, 2],
+                    data: [28, 2],
                     backgroundColor: [
                         "rgba(43, 193, 85, 1)",
                         "rgba(243, 87, 87, 1)"
@@ -852,7 +853,7 @@ document.addEventListener('DOMContentLoaded', function() {
             options: {
                 responsive: true,
                 maintainAspectRatio: true,
-                cutoutPercentage: 70
+                cutoutPercentage: 80
             }
         });
     }

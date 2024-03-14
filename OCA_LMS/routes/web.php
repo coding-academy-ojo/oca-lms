@@ -66,7 +66,7 @@ Route::post('/login/student', 'AuthController@studentLogin')->name('student.logi
 // Route::resource('classrooms', 'ClassroomController');
 
 
-//Rawan Abuseini route
+//Rawan Abuseini route ////////////////////////////////////////////////
 
 // announcements routes
 Route::get('/announcements', [AnnouncementController::class, 'index'])-> name('Announcements');
