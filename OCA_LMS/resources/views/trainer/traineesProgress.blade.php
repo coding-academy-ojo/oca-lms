@@ -41,21 +41,24 @@ Trainees Progress
             <!-- Adjusted for 55% width -->
             <div class="row">
                 <!-- Attendence -->
+                
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-4">
                     <div class="widget-stat card">
                         <div class="card-body">
                             <p class="card-title text-primary" style="font-size: 1.2rem;">Attendance</p>
-                            <p style="font-size: 0.8rem;">5 late, 0 Absence</p>
-                            <a href="">
-                                <p class="card-title" style="font-size: 0.8rem;">More</p>
+                            <p style="font-size: 0.8rem;">5 late, 0 Absence {{$totalAbsenceCount}}</p>
+                            <a href="{{ route('absence') }}">
+                                <p class=" card-title nav-link " style="font-size: 0.8rem;">More</p>
                             </a>
                             <div class="progress mb-2 my-2">
                                 <div class="progress-bar progress-animated bg-Success" style="width: 75%">25</div>
                             </div>
-                            <small>25 Trainees Attended </small>
+                            <small id="attendedCount"> Trainees Attended </small>
                         </div>
                     </div>
                 </div>
+              
+              
                 <!-- Late Assignments Submissions -->
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-4">
                     <div class="widget-stat card">
@@ -680,7 +683,21 @@ Trainees Progress
 
 </div>
 
+
+
+
+
+<!-- // Js code  -->
 <script>
+// Handling data from absence controller
+
+
+
+
+
+
+
+
 //Changing progress bar colors based on Percentage for trainees overview table
 document.addEventListener('DOMContentLoaded', function() {
     const progressBars = document.querySelectorAll('.progress-bar');
@@ -714,7 +731,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 label: 'Passed',
                 backgroundColor: "rgba(43, 193, 85, 1)", // Green color
                 hoverBackgroundColor: "rgba(43, 193, 85, 1)",
-                data: [35, 33, 33, 34, 35, 34, 35]
+                data: [100, 95, 90, 100, 80, 93, 99]
             }, {
                 label: 'Not Passed',
                 backgroundColor: "rgba(243, 87, 87, 1)", // Red color
@@ -762,7 +779,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 label: 'Passed',
                 backgroundColor: "rgba(43, 193, 85, 1)", // Green color
                 hoverBackgroundColor: "rgba(43, 193, 85, 1)",
-                data: [35, 33, 33, 34, 35, 34, 35]
+                data: [100, 95, 90, 100, 80, 93, 99]
             }, {
                 label: 'Corrective actions',
                 backgroundColor: "rgba(243, 87, 87, 1)", // Red color
@@ -865,6 +882,13 @@ document.addEventListener('DOMContentLoaded', function() {
 $(document).ready(function() {
     $('[data-toggle="tooltip"]').tooltip();
 });
+</script>
+
+
+
+<script>
+const element = document.getElementById("id01");
+element.innerHTML = "New Heading";
 </script>
 
 

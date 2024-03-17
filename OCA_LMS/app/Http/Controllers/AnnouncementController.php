@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Announcement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Absence;
+use Illuminate\Support\Facades\DB;
+
+
 
 
 class AnnouncementController extends Controller
@@ -15,7 +19,22 @@ class AnnouncementController extends Controller
     {
         $cohortId = session("cohort_ID");
         $announcements = Announcement::where('cohort_id', $cohortId)->latest()->get(); 
-        return view('Pages/announcements', compact('announcements'));
+        $cohortId = session("cohort_ID");
+    
+        // Count total absences for the specified cohort
+        $totalAbsenceCount = Absence::whereHas('student', function ($query) use ($cohortId) {
+            $query->where('cohort_id', $cohortId);
+        })->count();
+   
+        // Count absences for each student in the cohort
+        $absenceCounts = Absence::select('student_id', DB::raw('COUNT(*) as count'))
+                                 ->whereHas('student', function ($query) use ($cohortId) {
+                                     $query->where('cohort_id', $cohortId);
+                                 })
+                                 ->groupBy('student_id')
+                                 ->get();
+        
+        return view('Pages/announcements', compact('announcements', 'totalAbsenceCount', 'absenceCounts'));
     }
 
 

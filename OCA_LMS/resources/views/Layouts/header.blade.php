@@ -69,8 +69,8 @@
 
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{ request()->routeIs('traineesProgress') ? 'text-primary' : '' }}"
-                                    href="{{ route('traineesProgress') }}">Trainees Progress</a>
+                                <a class="nav-link {{ request()->routeIs('Progress.index') ? 'text-primary' : '' }}"
+                                    href="{{ route('Progress.index') }}">Trainees Progress</a>
 
                             </li>
                         @endif

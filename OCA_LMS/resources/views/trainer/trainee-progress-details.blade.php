@@ -258,7 +258,7 @@
 
 <!-- Students Corrective Actions History Section -->
 <div class="container my-4">
-    <h3 class="text-primary">Mohsin's Corrective Actions History</h3>
+    <h2 class="text-primary">Mohsin's Corrective Actions History</h2>
     <div class="card">
         <div class="card-body">
 
@@ -269,7 +269,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Project</th>
                             <th scope="col">Trainer</th>
-                            <th scope="col">Details</th>
+                            <th scope="col">Log</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -397,7 +397,7 @@
 
 <!-- Students Assignments review History Section -->
 <div class="container my-4">
-    <h3 class="text-primary">Mohsin's Assignments Review History</h3>
+    <h2 class="text-primary">Mohsin's Assignments Review History</h2>
     <div class="card">
         <div class="card-body">
 
@@ -547,7 +547,7 @@ if (document.getElementById('assignments_tech')) {
             label: 'Passed',
             backgroundColor: "rgba(43, 193, 85, 1)", // Green color
             hoverBackgroundColor: "rgba(43, 193, 85, 1)",
-            data: [35, 33, 33, 34, 35, 34, 35]
+            data: [100, 95, 90, 100, 80, 93, 99]
         }, {
             label: 'Not Passed',
             backgroundColor: "rgba(243, 87, 87, 1)", // Red color
@@ -595,7 +595,7 @@ if (document.getElementById('barChart_3')) {
             label: 'Passed',
             backgroundColor: "rgba(43, 193, 85, 1)", // Green color
             hoverBackgroundColor: "rgba(43, 193, 85, 1)",
-            data: [35, 33, 33, 34, 35, 34, 35]
+            data: [100, 95, 90, 100, 80, 93, 99]
         }, {
             label: 'Corrective actions',
             backgroundColor: "rgba(243, 87, 87, 1)", // Red color

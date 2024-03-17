@@ -26,8 +26,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\AnnouncementController;
-
+use App\Http\Controllers\TraineeProgressController;
 use App\Http\Controllers\DashboardController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -124,6 +125,8 @@ Route::delete('/staff/{id}', [StaffController::class, 'destroy'])->name('staff.d
 Route::get('/cohort/progress-details', function () {
     return view('trainer.trainee-progress-details');
 })->name('trainee-progress-details');
+
+Route::get('/traineesProgress', [TraineeProgressController::class, 'index'])->name('Progress.index');
 // attendance
 
 
