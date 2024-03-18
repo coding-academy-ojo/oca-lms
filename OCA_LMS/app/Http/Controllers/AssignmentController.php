@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Absence;
 use App\Assignment;
 use App\Cohort;
 use App\Student;
+use App\Technology;
 use App\Technology_Cohort;
 use App\Topic;
 use Illuminate\Http\Request;
@@ -16,34 +18,38 @@ class AssignmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
-        $cohortID = session('cohort_ID');
-        $query = Assignment::where('cohort_id', $cohortID);
-    
-        // Filter by technology
-        if ($request->has('technology_id')) {
-            $query->whereHas('topic', function ($query) use ($request) {
-                $query->where('technology_id', $request->technology_id);
-            });
-        }
-    
-        // Search by assignment name
-        if ($request->has('search')) {
-            $search = $request->search;
-            $query->where('assignment_name', 'like', '%' . $search . '%');
-        }
-    
-        $assignments = $query->get();
-    
-        // Fetch the list of technologies associated with the current cohort
-        // $technologies = TechnologyCohort::where('cohort_id', $cohortID)
-        //     ->with('technology')
-        //     ->get()
-        //     ->pluck('technology');
-    
-        return view('Assignment.view_assignment', compact('assignments'));
-    }
+
+     public function index(Request $request)
+     {
+         $cohortID = session('cohort_ID');
+         $cohort = Cohort::findOrFail($cohortID);
+     
+         $query = Assignment::where('cohort_id', $cohortID);
+     
+         $search = $request->input('search');
+     
+         $assignments = $query->when($search, function ($query, $search) {
+                 return $query->where('assignment_name', 'like', '%' . $search . '%')
+                              ->orWhereHas('topic', function ($topicQuery) use ($search) {
+                                  $topicQuery->where('topic_name', 'like', '%' . $search . '%');
+                              });
+             })
+             ->when($request->has('technology_id'), function ($query) use ($request) {
+                 $query->whereHas('topic', function ($topicQuery) use ($request) {
+                     $topicQuery->whereHas('technologyCohort', function ($technologyCohortQuery) use ($request) {
+                         $technologyCohortQuery->where('technology_id', $request->technology_id);
+                     });
+                 });
+             })
+             ->get();
+     
+         // Fetch the list of technologies associated with the current cohort from the pivot table
+         $technologies = $cohort->technology;
+     
+      
+
+         return view('Assignment.view_assignment', compact('assignments', 'technologies'));
+     }
     
 
     /**
@@ -54,7 +60,9 @@ class AssignmentController extends Controller
     public function create()
     {
         $cohortID=session('cohort_ID');
-        $topics = Topic::all();
+        $topics = Topic::whereHas('technologyCohort', function ($query) use ($cohortID) {
+            $query->where('cohort_id', $cohortID);
+        })->get();
         $students = Student::where('cohort_id',$cohortID)->get();
         return view('Assignment.create_assignment', compact('topics', 'students'));
     }
@@ -67,35 +75,39 @@ class AssignmentController extends Controller
      */
     public function store(Request $request)
     {
-        $cohortID=session('cohort_ID');
+        $cohortID = session('cohort_ID');
         $assignment = new Assignment;
         $assignment->assignment_name = $request->input('name');
         $assignment->assignment_level = $request->input('level');
         $assignment->assignment_due_date = $request->input('due_date');
-        $assignment->assignment_attached_file = $request->input('assignment_file');
         $assignment->topic_id = $request->input('topic');
         $assignment->cohort_id = $cohortID;
         $assignment->assignment_description = $request->input('description');
+    
+        // Upload and attach assignment file if provided
         if ($request->hasFile('assignment_file')) {
             $file = $request->file('assignment_file');
             $fileName = time() . '.' . $file->getClientOriginalExtension();
             $file->move('assignments_files', $fileName);
             $assignment->assignment_attached_file = $fileName;
         }
-
+    
         $assignment->save();
-
+    
         // Store assignment-student relationships
         $assignment = Assignment::findOrFail($assignment->id); // Assuming you want to retrieve the assignment by ID
-
+    
         if ($request->has('students')) {
             $studentIds = $request->input('students');
-
+    
             // Assign students to the assignment
             $assignment->student()->attach($studentIds);
-            
+        } else {
+            // If no specific students are selected, assign to all students in the cohort
+            $students = Student::where('cohort_id', $cohortID)->pluck('id')->toArray();
+            $assignment->student()->attach($students);
         }
-
+    
         return redirect()->route('assignments')->with('success', 'Assignment created successfully');
     }
 

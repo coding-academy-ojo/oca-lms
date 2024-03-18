@@ -18,7 +18,7 @@
         <div class="col-10 m-auto">
             {{-- view assignmnet details --}}
             <h2 class="col-12 m-auto">{{ $assignment->assignment_name }}</h2>
-            <div class="col-12 m-auto my-3"><b>Technology:</b> {{ $assignment->topic->technology->technologies_name }}</div>
+            {{-- <div class="col-12 m-auto my-3"><b>Technology:</b> {{ $assignment->topic->technology->technologies_name }}</div> --}}
             <div class="col-12 m-auto my-3"><b>Topic:</b> {{ $assignment->topic->topic_name }}</div>
             <div class="col-12 m-auto my-3">{{ $assignment->assignment_description }}</div>
             @if (!empty($assignment->assignment_attached_file))
@@ -32,49 +32,27 @@
             {{-- view all student submission for this assignmnet --}}
             <div class="border border-light my-2">
                 @foreach ($assignment_submissions as $assignment_submission)
-                <p class="mx-3">{{ $assignment_submission->student->en_first_name }} {{ $assignment_submission->student->en_second_name }}</p>
+                    <p class="mx-3">{{ $assignment_submission->student->en_first_name }}
+                        {{ $assignment_submission->student->en_second_name }}</p>
                     <div class="d-flex justify-content-between border border-light my-3 py-3 mx-3">
-                        
+
                         <div class="mx-4"> <a class="link-underline link-underline-opacity-0"
-                            href={{$assignment_submission->attached_file }}target="_blank">{{$assignment_submission->attached_file }}</a></div>
+                                href={{ $assignment_submission->attached_file }}target="_blank">{{ $assignment_submission->attached_file }}</a>
+                        </div>
                         <div class="mx-4"> {{ $assignment_submission->created_at }}</div>
                     </div>
-
+                    @if (!empty($assignment_submission->feedback ))
                     <p class="mx-3">{{ $assignment_submission->staff->staff_name }}</p>
                     <div class="d-flex justify-content-between border border-primary my-3 py-3 mx-3">
                         <div class="mx-4"> {{ $assignment_submission->feedback }}</div>
                         <div class="mx-4"> {{ $assignment_submission->updated_at }}</div>
                     </div>
+                    @else
+                        
+                    @endif
+                 
                 @endforeach
             </div>
-            @if (auth()->check() && auth()->user()->role == 'trainer')
-                <form method="post" action="{{ route('assignment.feedbacksubmission.store') }}"
-                    enctype="multipart/form-data" class="needs-validation  m-auto" novalidate>
-                    @csrf
-                    <div class="input-group my-3 ">
-                        <input type="hidden" name="Assignment_submission_ID" value="{{ $assignment_submission->id }}">
-                        <input type="text" class="form-control" name="Assignment_feedback"
-                            placeholder="write your feedback" aria-label="Recipient's username"
-                            aria-describedby="button-addon2">
-                        <button class="btn btn-primary" type="submit" id="button-addon2">Submit</button>
-                    </div>
-                    <input type="hidden" name="Assignment_submission_ID" value="{{ $assignment_submission->id }}">
-                </form>
-            @else
-                <form method="post" action="{{ route('Student.assignment.store') }}" enctype="multipart/form-data"
-                    class="needs-validation" novalidate>
-                    @csrf
-                    <div class="input-group my-3">
-                        <input type="text" class="form-control" name="Assignment_submission"
-                            placeholder="submit your work" aria-label="Recipient's username"
-                            aria-describedby="button-addon2">
-                        <button class="btn btn-primary" type="submit" id="button-addon2">Submit</button>
-                    </div>
-                    <input type="hidden" name="Assignment_ID" value="{{ $assignment->id }}">
-                </form>
-            @endif
-
-
         </div>
     </div>
 @endsection

@@ -22,7 +22,7 @@ class AssignmentSeeder extends Seeder
                 'assignment_due_date' => '2024-2-28',
                 'assignment_attached_file' => '1708704922.pdf',
                 'topic_id' => '1',
-                'cohort_id' => '4',
+                'cohort_id' => '1',
             ],
             [
                 'assignment_name' => 'curd opration',
@@ -31,7 +31,7 @@ class AssignmentSeeder extends Seeder
                 'assignment_due_date' => '2024-2-28',
                 'assignment_attached_file' => '1708704922.pdf',
                 'topic_id' => '4',
-                'cohort_id' => '4',
+                'cohort_id' => '1',
             ],
             [
                 'assignment_name' => 'Implementing Fetch API in JavaScript',
@@ -40,7 +40,7 @@ class AssignmentSeeder extends Seeder
                 'assignment_due_date' => '2024-2-28',
                 'assignment_attached_file' => null,
                 'topic_id' => '3',
-                'cohort_id' => '4',
+                'cohort_id' => '1',
             ],
             [
                 'assignment_name' => 'create database ',
@@ -63,7 +63,7 @@ class AssignmentSeeder extends Seeder
                 'assignment_due_date' => '2024-2-28',
                 'assignment_attached_file' =>'1708704922.pdf',
                 'topic_id' => '4',
-                'cohort_id' => '2',
+                'cohort_id' => '4',
             ],
             [
                 'assignment_name' => 'Implementing Fetch API in JavaScript',
@@ -73,7 +73,7 @@ class AssignmentSeeder extends Seeder
                 'assignment_due_date' => '2024-2-28',
                 'assignment_attached_file' => null,
                 'topic_id' => '3',
-                'cohort_id' => '2',
+                'cohort_id' => '4',
             ],
             [
                 'assignment_name' => 'curd opration',
@@ -82,7 +82,7 @@ class AssignmentSeeder extends Seeder
                 'assignment_due_date' => '2024-2-28',
                 'assignment_attached_file' => null,
                 'topic_id' => '4',
-                'cohort_id' => '2',
+                'cohort_id' => '4',
             ],
         ]);
     }

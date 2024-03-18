@@ -10,7 +10,7 @@ Route::get('/addTrainee', function () {
 })->name('addTrainee');
 
 
-// Trainees progress page
+//Trainees progress page
 Route::get('/traineesProgress', function () {
     return view('trainer/traineesProgress');
 })->name('traineesProgress');

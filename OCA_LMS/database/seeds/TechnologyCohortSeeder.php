@@ -13,22 +13,26 @@ class TechnologyCohortSeeder extends Seeder
      */
     public function run()
     {
-         DB::table('topics')->insert([
+         DB::table('technology__cohorts')->insert([
             [
-                'topic_name' => 'curd opration',
+                'cohort_id' => '1',
+                'technology_id' => '1',
+            ],
+            [
+                'cohort_id' => '1',
                 'technology_id' => '4',
             ],
             [
-                'topic_name' => 'Api',
-                'technology_id' => '4',
+                'cohort_id' => '1',
+                'technology_id' => '7',
             ],
             [
-                'topic_name' => 'Flex',
-                'technology_id' => '2',
+                'cohort_id' => '4',
+                'technology_id' => '1',
             ],
             [
-                'topic_name' => 'Grid',
-                'technology_id' => '2',
+                'cohort_id' => '4',
+                'technology_id' => '3',
             ],
         ]);
     }

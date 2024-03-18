@@ -21,6 +21,11 @@ class Topic extends Model
         return $this->belongsTo(Technology::class);
     }
 
+    public function technologyCohort()
+    {
+        return $this->belongsTo(Technology_Cohort::class);
+    }
+    
     // public function projects()
     // {
     //     return $this->hasManyThrough('App\Project', 'App\Classroom', 'topic_id', 'classroom_id');

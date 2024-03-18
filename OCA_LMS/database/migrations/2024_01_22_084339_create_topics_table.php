@@ -16,8 +16,8 @@ class CreateTopicsTable extends Migration
         Schema::create('topics', function (Blueprint $table) {
             $table->id();
             $table->string('topic_name');
-            $table->unsignedBigInteger('technology_id');
-            $table->foreign('technology_id')->references('id')->on('technologies')->onDelete('cascade');
+            $table->unsignedBigInteger('technology_cohort_id');
+            $table->foreign('technology_cohort_id')->references('id')->on('technology__cohorts')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

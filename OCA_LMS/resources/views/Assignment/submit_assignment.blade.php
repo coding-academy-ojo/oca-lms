@@ -17,7 +17,7 @@
     <div class="contanier">
         <div class="col-10 m-auto">
             <h2 class="col-12 m-auto">{{ $assignment->assignment_name }}</h2>
-            <div class="col-12 m-auto my-3"><b>Technology:</b> {{ $assignment->topic->technology->technologies_name }}</div>
+            {{-- <div class="col-12 m-auto my-3"><b>Technology:</b> {{ $assignment->topic->roadmap->technologies->technology_name }}</div> --}}
             <div class="col-12 m-auto my-3"><b>Topic:</b> {{ $assignment->topic->topic_name }}</div>
             <div class="col-12 m-auto my-3">{{ $assignment->assignment_description }}</div>
             @if (!empty($assignment->assignment_attached_file))
