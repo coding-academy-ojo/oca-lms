@@ -73,7 +73,7 @@ Announcements
         </div>
         
         <div class="card-body contentDiv d-flex justify-content-between">
-            <div class="col-10"><p class="card-text">{{ $announcement->content }}</p> </div>
+            <div class="col-10"><p class="card-text">{{ $announcement->content }}  {{ $announcement->content }}</p> </div>
            <div class="col-2"> <span class="mx-2 text-break" > {{$announcement->created_at->format('Y-m-d H:i')}}</span></div>
         </div>
         <div class="card-body editDiv" style="display: none;">

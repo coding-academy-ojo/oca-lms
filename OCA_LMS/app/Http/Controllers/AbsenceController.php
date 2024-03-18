@@ -66,6 +66,7 @@ class AbsenceController extends Controller
  
          $students = $studentsQuery->get()->map(function ($student) use ($filteredDate) {
             // Assuming you're using a method to fetch absence details for a given date
+          
             $absence = $student->absences()->whereDate('absences_date', $filteredDate)->first(['absences_type', 'absences_reason', 'absences_duration']);
             return [
                 'id' => $student->id,
@@ -76,7 +77,7 @@ class AbsenceController extends Controller
                 'absenceDuration' => optional($absence)->absences_duration,
             ];
         });
- 
+       
          $counts = [
              'all' => $students->count(),
              'attended' => $students->where('attendanceStatus', 'attended')->count(),
@@ -84,7 +85,6 @@ class AbsenceController extends Controller
              'late' => $students->where('attendanceStatus', 'late')->count(),
              'leaving' => $students->where('attendanceStatus', 'leaving')->count(),
          ];
- 
          if ($request->ajax() && $request->header('x-requested-with') == 'XMLHttpRequest') {
             $response = response()->json([
                 'students' => $students,
@@ -99,8 +99,9 @@ class AbsenceController extends Controller
             $response->header('Expires', 'Sat, 26 Jul 1997 05:00:00 GMT');
     
             return $response;
+             // Return data to both views
+   
         }
-    
 
         return response()->view('supermaneger.attendance', compact('students', 'counts', 'academies', 'cohorts'))
                          ->header('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')

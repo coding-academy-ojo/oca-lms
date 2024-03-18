@@ -74,7 +74,7 @@
                             <a class="nav-link {{ request()->routeIs('absence') ? 'text-primary' : '' }}"
                                 href="{{ route('absence') }}">Absence</a>
 
-<<<<<<< HEAD
+
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('traineesProgress') ? 'text-primary' : '' }}"
@@ -82,12 +82,13 @@
 
                         </li>
                     @endif
-=======
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('traineesProgress') ? 'text-primary' : '' }}"
                                     href="{{ route('traineesProgress') }}">Trainees Progress</a>
->>>>>>> e2ebe0b62e791c5f7677eb3ce960faa3d33e4960
+
+                                <a class="nav-link {{ request()->routeIs('Progress.index') ? 'text-primary' : '' }}"
+                                    href="{{ route('Progress.index') }}">Trainees Progress</a>
 
                 </ul>
             @endauth
