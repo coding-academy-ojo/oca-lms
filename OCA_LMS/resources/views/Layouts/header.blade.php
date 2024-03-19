@@ -9,76 +9,112 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse align-items-end" id="navbarText">
-
+            @auth('students')
+            @if (in_array(Auth::guard('staff')->user()->role, ['super_manager', 'manager','trainer']))
+             @else
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('student.dashboard') ? 'active' : '' }} "
+                            aria-current="page" href="{{ route('student.dashboard') }}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link "
+                            aria-current="page" href="#">Assignments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link "
+                            aria-current="page" href="#">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link "
+                            aria-current="page" href="#">Announcements</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link "
+                            aria-current="page" href="#">Roadmap</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link "
+                            aria-current="page" href="#">Technology</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link "
+                            aria-current="page" href="#">Skills Framework</a>
+                    </li>
+                  
+                  
+                </ul>
+                @endif
+            @endauth
             @auth('staff')
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                @if (in_array(Auth::guard('staff')->user()->role, ['super_manager', 'manager']))
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('supermanager-dashboard') ? 'active' : '' }} "
-                        aria-current="page" href="{{ route('supermanager-dashboard') }}">Home</a>
-                </li>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    @if (in_array(Auth::guard('staff')->user()->role, ['super_manager', 'manager']))
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('supermanager-dashboard') ? 'active' : '' }} "
+                                aria-current="page" href="{{ route('supermanager-dashboard') }}">Home</a>
+                        </li>
 
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('academies') ? 'text-primary' : '' }}""
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('academies') ? 'text-primary' : '' }}""
                                 href=" {{ route('academies') }}">Academies</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('staff.index') ? 'text-primary' : '' }}"
-                        href="{{ route('staff.index') }}">Staff</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('staff.index') ? 'text-primary' : '' }}"
+                                href="{{ route('staff.index') }}">Staff</a>
 
-                </li>
-                @endif
-                @if (Auth::guard('staff')->user()->role == 'trainer')
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Student Inputs
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        @if (in_array(Auth::guard('staff')->user()->role, ['trainer']))
-                        <a class="nav-link text-dark {{ request()->routeIs('assignments') ? 'text-primary' : '' }}"
-                            href="{{ route('assignments') }}">Assignments</a>
-                        @else
-                        <a class="nav-link text-dark {{ request()->routeIs('assignments') ? 'text-primary' : '' }}"
-                            href="{{ route('student.assignments') }}">Assignments</a>
-                        @endif
-                        <a class="nav-link text-dark  {{ request()->routeIs('show_all_projects') ? 'text-primary' : '' }}"
-                            href="{{ route('show_all_projects') }}">Projects</a>
-                        <a class="nav-link text-dark {{ request()->routeIs('Announcements') ? 'text-primary' : '' }}"
-                            href="{{ route('Announcements') }}">Announcements</a>
-                        <a class="nav-link text-dark {{ request()->routeIs('attendance') ? 'text-primary' : '' }}"
-                            href="{{ route('attendance') }}">Attendance</a>
+                        </li>
+                    @endif
+                    @if (Auth::guard('staff')->user()->role == 'trainer')
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Student Inputs
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @if (in_array(Auth::guard('staff')->user()->role, ['trainer']))
+                                    <a class="nav-link text-dark {{ request()->routeIs('assignments') ? 'text-primary' : '' }}"
+                                        href="{{ route('assignments') }}">Assignments</a>
+                                @else
+                                    <a class="nav-link text-dark {{ request()->routeIs('assignments') ? 'text-primary' : '' }}"
+                                        href="{{ route('student.assignments') }}">Assignments</a>
+                                @endif
+                                <a class="nav-link text-dark  {{ request()->routeIs('show_all_projects') ? 'text-primary' : '' }}"
+                                    href="{{ route('show_all_projects') }}">Projects</a>
+                                <a class="nav-link text-dark {{ request()->routeIs('Announcements') ? 'text-primary' : '' }}"
+                                    href="{{ route('Announcements') }}">Announcements</a>
+                                <a class="nav-link text-dark {{ request()->routeIs('attendance') ? 'text-primary' : '' }}"
+                                    href="{{ route('attendance') }}">Attendance</a>
 
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Material
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="nav-link text-dark " href="{{ route('skillsFramework') }}">Skills Framework</a>
-                        <a class="nav-link text-dark " href="{{ route('categories.index') }}">Technology
-                            category</a>
-                        <a class="nav-link text-dark  {{ request()->routeIs('categories.indexCohort') ? 'text-primary' : '' }}"
-                            href="{{ route('categories.indexCohort') }}">Roadmap</a>
-                    </div>
-                </li>
-                @endif
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Material
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="nav-link text-dark " href="{{ route('skillsFramework') }}">Skills Framework</a>
+                                <a class="nav-link text-dark " href="{{ route('categories.index') }}">Technology
+                                    category</a>
+                                <a class="nav-link text-dark  {{ request()->routeIs('categories.indexCohort') ? 'text-primary' : '' }}"
+                                    href="{{ route('categories.indexCohort') }}">Roadmap</a>
+                            </div>
+                        </li>
+                    @endif
 
-                @if (in_array(Auth::guard('staff')->user()->role, ['manager', 'trainer']))
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('absence') ? 'text-primary' : '' }}"
-                        href="{{ route('absence') }}">Absence</a>
-                </li>
+                    @if (in_array(Auth::guard('staff')->user()->role, ['manager', 'trainer']))
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('absence') ? 'text-primary' : '' }}"
+                                href="{{ route('absence') }}">Absence</a>
+                        </li>
 
-                @endif
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('Progress.index') ? 'text-primary' : '' }}"
-                        href="{{ route('Progress.index') }}">Trainees Progress</a>
-                </li>
 
-            </ul>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('trainees.progress') ? 'text-primary' : '' }}"
+                                href="{{ route('trainees.progress') }}">Trainees Progress</a>
+                        </li>
+                    @endif
+                </ul>
             @endauth
             <ul class="navbar-nav ms-auto ">
                 {{-- <li class="nav-item m-1">

@@ -29,7 +29,7 @@ class AuthController extends Controller
                 return '/cohorts';
     
             default:
-                return '/cohorts';
+                return '/student-dashboard';
         }
     }
 // Handle the login attempt
@@ -96,7 +96,7 @@ public function studentLogin(Request $request)
 
     if (Auth::guard('students')->attempt($credentials)) {
         $student = Auth::guard('students')->user();
-        return redirect('/cohorts'); 
+        return redirect('/student-dashboard'); 
     } else {
         return back()->withErrors(['email' => 'The provided credentials do not match our records.'])->withInput($request->except('password'));
     }

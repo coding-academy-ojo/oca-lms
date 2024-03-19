@@ -34,7 +34,7 @@ class DashboardController extends Controller
                     return '/';
             }
         } elseif ($user instanceof Student) {
-            return '/cohorts';
+            return '/student-dashboard';
         } else {
             return '/'; 
         }

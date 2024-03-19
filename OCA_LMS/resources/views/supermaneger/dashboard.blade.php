@@ -52,6 +52,18 @@
             width: 100%;
         }
     }
+    @media (max-width: 768px) {
+    /* Specific adjustment for academyPerformanceChart */
+    #academy-chart-container {
+        height: 300px; /* Fixed height */
+    }
+}
+@media (max-width: 768px) {
+    /* Targeting only the specific chart container */
+    .chart-row .chart-container-half {
+        height: 300px; /* Fixed height */
+    }
+}
 
 
     /* Adjust the styles for charts as needed */
@@ -126,7 +138,7 @@
     }
     
  </style>
-<div class="container my-5">
+{{-- <div class="container my-5">
     <div class="row">
         <!-- Filter Card -->
         <div class="col-12">
@@ -156,22 +168,23 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
     <div class="container my-5">
 
         <div class="dashboard-cards">
             <div class="dashboard-card">
                 <h3>Total Students Enrolled</h3>
-                <p>689</p>
+                <p>{{ $dashboardCardsData['totalStudentsEnrolled'] }}</p>
             </div>
             <div class="dashboard-card">
                 <h3>Total Students Graduates</h3>
-                <p>551</p>
+                <p>{{ $dashboardCardsData['totalStudentsGraduated'] }}</p>
             </div>
             <div class="dashboard-card">
                 <h3>Number of Academies</h3>
-                <p>6</p>
+                <p>{{ $dashboardCardsData['totalAcademies'] }}</p>
             </div>
+            
         </div>
         <div class="container my-5 chart-row">
             
@@ -187,88 +200,58 @@
             </div>
         </div>
         <div class="container my-5 chart-row">
-            <div class="chart-container-half">
+            <div class="chart-container-half" id="academy-chart-container">
                 <h3 class="text-primary">Cohorts Per Academy Overview</h3>
                 <canvas id="academyPerformanceChart"></canvas>
             </div>
+            
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var ctx1 = document.getElementById('graduatesByAcademy').getContext('2d');
-            var graduatesByAcademyChart = new Chart(ctx1, {
-                type: 'bar',
-                data: {
-                    labels: ['Amman', 'Data Science', 'Irbid', 'Zarqa', 'Balqa', 'Aqaba'],
-                    datasets: [{
-                        label: 'Sum of Total Graduates',
-                        data: [199, 121, 70, 66, 49, 46],
-                        backgroundColor: [
-                            '#e66c37'
-                        ],
-                        borderColor: [
-                            '#e66c37'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    indexAxis: 'y',
-                    scales: {
-                        x: {
-                            beginAtZero: true
-                        }
-                    }
+document.addEventListener('DOMContentLoaded', function() {
+    var graduatesByAcademyData = @json($graduatesByAcademyData);
+    
+    var ctx1 = document.getElementById('graduatesByAcademy').getContext('2d');
+    var graduatesByAcademyChart = new Chart(ctx1, {
+        type: 'bar',
+        data: graduatesByAcademyData,
+        options: {
+            indexAxis: 'y',
+            scales: {
+                x: {
+                    beginAtZero: true
                 }
-            });
+            }
+        }
+    });
 
             // After initializing graduatesByAcademyChart...
 
             // Number of Enrolled Students by Academy and Cohort
+            var academyPerformanceChartData = @json($academyPerformanceChartData);
+
             var ctx = document.getElementById('academyPerformanceChart').getContext('2d');
-    var academyPerformanceChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Amman', 'Data Science', 'Irbid', 'Zarqa', 'Aqaba', 'Balqa'],
-            datasets: [
-                {
-                    label: 'Cohort 1',
-                    data: [208, 80, 105, 102, 66, 73],
-                    backgroundColor: '#ad5129',
-                    borderColor: '#ad5129',
-                    borderWidth: 1
-                },
-                {
-                    label: 'Cohort 2',
-                    data: [199, 121, 70, 66, 80, 49],
-                    backgroundColor: '#e66c37',
-                    borderColor: '#e66c37',
-                    borderWidth: 1
-                },
-                {
-                    label: 'Cohort 3',
-                    data: [120, 64, 74, 58, 75, 95],
-                    backgroundColor: '#eb895f',
-                    borderColor: '#eb895f',
-                    borderWidth: 1
-                }
-            ]
-        },
-        options: {
-            scales: {
-                x: {
-                    stacked: false,
-                },
-                y: {
-                    stacked: false,
-                    beginAtZero: true
-                }
+        var academyPerformanceChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: academyPerformanceChartData.labels,
+                datasets: academyPerformanceChartData.datasets
             },
-            responsive: true,
-            maintainAspectRatio: false
-        }
-    });
+            options: {
+                scales: {
+                    x: {
+                        stacked: false,
+                    },
+                    y: {
+                        stacked: false,
+                        beginAtZero: true
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
 
     var ctx3 = document.getElementById('totalSummaryChart').getContext('2d');
     var totalSummaryChart = new Chart(ctx3, {
