@@ -46,7 +46,7 @@ Trainees Progress
                     <div class="widget-stat card">
                         <div class="card-body">
                             <p class="card-title text-primary" style="font-size: 1.2rem;">Attendance</p>
-                            <p style="font-size: 0.8rem;">5 late, 0 Absence {{$totalAbsenceCount}}</p>
+                            <p style="font-size: 0.8rem;">5 late, Absence {{$totalAbsenceCount }}</p>
                             <a href="{{ route('absence') }}">
                                 <p class=" card-title nav-link " style="font-size: 0.8rem;">More</p>
                             </a>
@@ -57,7 +57,7 @@ Trainees Progress
                         </div>
                     </div>
                 </div>
-              
+               
               
                 <!-- Late Assignments Submissions -->
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-4">
@@ -680,7 +680,18 @@ Trainees Progress
             </div>
         </div>
     </div>
+    <h2>Total Absence Count: {{ $totalAbsenceCount }}</h2>
 
+@if ($absenceCounts->isNotEmpty())
+    <h3>Absence Counts by Type:</h3>
+    <ul>
+        @foreach ($absenceCounts as $absenceCount)
+            <li>Student ID: {{ $absenceCount->student_id }}, Absence Type: {{ $absenceCount }}, Count: {{ $absenceCount->count }}</li>
+        @endforeach
+    </ul>
+@else
+    <p>No absence data available.</p>
+@endif
 </div>
 
 

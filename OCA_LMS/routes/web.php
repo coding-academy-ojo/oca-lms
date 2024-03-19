@@ -126,6 +126,7 @@ Route::get('/cohort/progress-details', function () {
     return view('trainer.trainee-progress-details');
 })->name('trainee-progress-details');
 
+// Route::get('/cohort/progress-details', [TraineeProgressController::class, 'index'])->name('ProgressDetails.index');
 Route::get('/traineesProgress', [TraineeProgressController::class, 'index'])->name('Progress.index');
 // attendance
 

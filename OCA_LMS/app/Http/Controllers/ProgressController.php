@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Absence;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
-class TraineeProgressController extends Controller
+
+
+class ProgressController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,30 +19,21 @@ class TraineeProgressController extends Controller
     {
         $cohortId = session("cohort_ID");
     
-        $currentDate = Carbon::now()->toDateString(); // Get current date
-
-        // Count total absences for the specified cohort for the current day
+        // Count total absences for the specified cohort
         $totalAbsenceCount = Absence::whereHas('student', function ($query) use ($cohortId) {
-                $query->where('cohort_id', $cohortId);
-            })
-            ->whereDate('created_at', $currentDate) // Filter by current date
-            ->count();
-    
-        // Count absences for each student in the cohort for the current day
+            $query->where('cohort_id', $cohortId);
+        })->count();
+   
+        // Count absences for each student in the cohort
         $absenceCounts = Absence::select('student_id', DB::raw('COUNT(*) as count'))
-            ->whereHas('student', function ($query) use ($cohortId) {
-                $query->where('cohort_id', $cohortId);
-            })
-            ->whereDate('created_at', $currentDate) // Filter by current date
-            ->groupBy('student_id')
-            ->get();
-    
+                                 ->whereHas('student', function ($query) use ($cohortId) {
+                                     $query->where('cohort_id', $cohortId);
+                                 })
+                                 ->groupBy('student_id')
+                                 ->get();
         return view('trainer.traineesProgress', compact('absenceCounts', 'totalAbsenceCount'));
     }
-
-    
     /**
-     * 
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
