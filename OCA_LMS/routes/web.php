@@ -192,6 +192,8 @@ Route::delete('assignment/{assignment}/student/{student}',[AssignmentController:
 Route::get('Student/Assignments', [AssignmentSubmissionController::class, 'index'])->name('student.assignments');
 Route::post('Student/asssignment/store', [AssignmentSubmissionController::class ,'store'])->name('Student.assignment.store');
 Route::get('Student/assignments/{assignment}', [AssignmentSubmissionController::class ,'show'])->name('Student.assignment.show');
+Route::put('/assignment/feedback/{assignment}', [AssignmentSubmissionController::class ,'update'])->name('submission_feedback.update');
+
 
 //Assignment Feedback
 Route::get('/Assignments/feedback', [AssignmentFeedbackController::class, 'index'])->name('assignments.feedback');

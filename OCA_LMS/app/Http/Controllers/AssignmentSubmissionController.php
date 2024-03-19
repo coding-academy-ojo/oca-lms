@@ -95,15 +95,16 @@ class AssignmentSubmissionController extends Controller
      * @param  \App\AssignmentSubmission  $assignmentSubmission
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AssignmentSubmission $assignmentSubmission)
+    public function update(Request $request, $assignment)
     {
         $staffId = Auth::id();
-        $assignmentSubmission = AssignmentSubmission::findOrFail($request->input('Assignment_submission_ID'));
+        $assignmentSubmission = AssignmentSubmission::findOrFail($assignment);
         $assignmentSubmission->feedback = $request->input('Assignment_feedback');
         $assignmentSubmission->staff_id  = $staffId;
-        $assignmentSubmission->updated_at =now();
-        $assignmentSubmission->update();
-        return redirect()->back()->with('success', 'Assignment submited successfully');
+        $assignmentSubmission->updated_at = now();
+        $assignmentSubmission->save();
+    
+        return redirect()->back()->with('success', 'Assignment submitted successfully');
     }
 
     /**

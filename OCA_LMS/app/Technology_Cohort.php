@@ -12,4 +12,9 @@ class Technology_Cohort extends Model
         'start_date',
         'end_date',
     ];
+
+    public function topic()
+    {
+        return $this->hasMany(Topic::class);
+    }
 }

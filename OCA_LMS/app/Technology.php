@@ -24,9 +24,9 @@ class Technology extends Model
         return $this->belongsTo(TechnologyCategory::class, 'technology_category_id');
     }
 
-    public function technologies()
+    public function cohort()
     {
-        return $this->belongsToMany(Technology::class, 'cohort_technology')->withPivot('start_date', 'end_date');
+        return $this->belongsToMany(Cohort::class, 'technology__cohorts')->withPivot('start_date', 'end_date');
     }
 
     public function technologyCohorts()

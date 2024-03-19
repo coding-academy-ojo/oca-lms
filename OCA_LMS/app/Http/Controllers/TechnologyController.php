@@ -93,8 +93,11 @@ class TechnologyController extends Controller
 
     public function showInfo(Technology $technology)
     {
-        $Topics = Topic::all();
+
         $technologyCohort = Technology_Cohort::where('technology_id', $technology->id)->first();
+        $technologyCohortID=$technologyCohort->id;
+        $Topics = Topic::where('technology_cohort_id',$technologyCohortID)->get();
+
         // dd($technologyCohort->id);
         return view('technology.viewtechnology', compact('technology', 'Topics','technologyCohort'));
     }

@@ -16,19 +16,19 @@ class TopicSeeder extends Seeder
         DB::table('topics')->insert([
             [
                 'topic_name' => 'curd opration',
-                'technology_id' => '1',
+                'technology_cohort_id' => '1',
             ],
             [
                 'topic_name' => 'Api',
-                'technology_id' => '3',
+                'technology_cohort_id' => '3',
             ],
             [
                 'topic_name' => 'Flex',
-                'technology_id' => '2',
+                'technology_cohort_id' => '2',
             ],
             [
                 'topic_name' => 'Grid',
-                'technology_id' => '2',
+                'technology_cohort_id' => '2',
             ],
         ]);
     }

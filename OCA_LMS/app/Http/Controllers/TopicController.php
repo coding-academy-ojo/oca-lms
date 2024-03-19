@@ -39,11 +39,11 @@ class TopicController extends Controller
     public function store(Request $request)
     {
         $topic= new Topic();
-        $topic->topic_name = $request->input('topic_name');
-        $topic->technology_id = $request->input('technology_id');
+        $topic->topic_name = $request->input('topic');
+        $topic->technology_cohort_id = $request->input('technology_id');
         $topic->save();
 
-        return redirect()->route('assignments')->with('success', 'Assignment create successfully');
+        return redirect()->back()->with('success', 'Assignment create successfully');
     }
 
     /**
@@ -65,9 +65,11 @@ class TopicController extends Controller
      */
     public function edit($id)
     {
-        $technologies=Technology::all();
-        $topic = Topic::find($id);
-        return view('Pages.edit_topic',compact('topic','technologies'));
+        $topic = Topic::findOrFail($id); // Find the topic by ID
+        return view('your_edit_view', compact('topic'));
+        // $technologies=Technology::all();
+        // $topic = Topic::find($id);
+        // return view('Pages.edit_topic',compact('topic','technologies'));
     }
 
     /**
@@ -81,10 +83,9 @@ class TopicController extends Controller
     {
         $topic = Topic::find($id);
         $topic->topic_name = $request->input('topic_name');
-        $topic->technology_id = $request->input('technology_id');
         $topic->update();
 
-        return redirect()->route('assignments')->with('success', 'Assignment create successfully');
+        return redirect()->back()->with('success', 'Assignment create successfully');
 
     }
 
@@ -98,7 +99,7 @@ class TopicController extends Controller
     {
         $topic = Topic::find($id);
         $topic->delete();
-        return redirect()->route('assignments')
-            ->with('success', 'assignment$assignment deleted successfully');
+        return redirect()->back()
+            ->with('success', 'assignment$topic deleted successfully');
     }
 }

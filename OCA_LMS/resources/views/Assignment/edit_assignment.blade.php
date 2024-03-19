@@ -154,7 +154,7 @@
                                                         {{ $assignment->topic->topic_name }}</option>
                                                     @foreach ($topics as $topic)
                                                         <option value="{{ $topic->id }}">{{ $topic->topic_name }} -
-                                                            {{ $topic->technology->technologies_name }}</option>
+                                                            </option>
                                                     @endforeach
                                                 </select>
                                                 <div class="invalid-feedback">This field is required</div>

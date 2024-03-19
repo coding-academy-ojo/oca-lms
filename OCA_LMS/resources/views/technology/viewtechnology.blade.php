@@ -37,6 +37,10 @@ Technology
                             <a href="{{ route('technology.edit', ['technology' => $technology]) }}" class=" btn btn-primary m-auto">edit</a>
                             <button class=" btn btn-primary m-auto" type="submit">Delete</button>
                         </form>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal" data-technologyid="{{$technologyCohort->id }}">
+                        Add Topic
+                    </button>
                         @endif
 
                     </div>
@@ -59,14 +63,96 @@ Technology
                     <!-- <p>Category: {{ $technology->technology_category_id }}</p> -->
                     <!-- If you have an image, you can display it like this -->
                     <p>Topics:</p>
-                    @foreach ($Topics as $topic)
-                    <span class="mx-4">{{ $topic->topic_name }}</span>
-                    @endforeach
+                    <div class="table-responsive m-auto col-10 ">
+                        <table class="table table-hover ">
+                            <thead>
+                                <tr>
+                                    <th scope="col ">Topic Name</th>
+                                    <th scope="col ">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($Topics as $topic)                                    
+                                <tr>
+                                        <td>{{ $topic->topic_name }}</td>
+                                        <td>
+                                            <div class="my-auto d-flex">
+                                                <a class="mx-2" data-bs-toggle="modal" data-bs-target="#editTopicModal{{$topic->id}}" href=""><i
+                                                        class="fa-solid fa-pen-to-square"></i></a>
+                                          
+                                                <form action="{{ route('topic.destroy', $topic->id) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="border border-0 m-auto bg-white"
+                                                        onclick="return confirm('Are you sure you want to delete this topic')">
+                                                        <i class="fa-solid fa-trash" style="color: #FF7900;"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-
             </div>
-
         </div>
     </div>
 </div>
+{{-- Model to save new topic  --}}                                    
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title h5" id="exampleModalLabel">Add Topic</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Close"><span class="visually-hidden">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <form id="editTopicForm" method="POST" action="{{ route('topic.store') }}">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="topicName" class="form-label">Topic Name</label>
+                            <input type="text" class="form-control" id="topicName" name="topic">
+                            <input type="hidden" name="technology_id" id="technology_id" value="{{$technologyCohort->id }}">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- model to update topic  --}}
+@foreach ($Topics as $topic)
+
+<div class="modal fade" id="editTopicModal{{$topic->id}}" tabindex="-1" aria-labelledby="editTopicModalLabel{{$topic->id}}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editTopicModalLabel{{$topic->id}}">Edit Topic</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" action="{{ route('topic.update', $topic->id) }}">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="topicName" class="form-label">Topic Name</label>
+                        <input type="text" class="form-control" id="topicName" name="topic_name" value="{{ $topic->topic_name }}">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endforeach
 @endsection
