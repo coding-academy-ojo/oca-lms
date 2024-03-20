@@ -32,7 +32,7 @@ Trainees Progress
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h2 class="text-primary">Trainees Statistics General view / 06-March-2024</h2>
+            <h2 class="text-primary">Trainees Statistics <br> {{ $attendanceOverview['cohort_name'] }} / {{ $attendanceOverview['date'] }}</h2>
         </div>
     </div>
     <div class="row">
@@ -41,43 +41,45 @@ Trainees Progress
             <!-- Adjusted for 55% width -->
             <div class="row">
                 <!-- Attendence -->
-                
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-4">
                     <div class="widget-stat card">
                         <div class="card-body">
-                            <p class="card-title text-primary" style="font-size: 1.2rem;">Attendance</p>
-                            <p style="font-size: 0.8rem;">5 late, Absence {{$totalAbsenceCount }}</p>
-                            <a href="{{ route('absence') }}">
-                                <p class=" card-title nav-link " style="font-size: 0.8rem;">More</p>
-                            </a>
-                            <div class="progress mb-2 my-2">
-                                <div class="progress-bar progress-animated bg-Success" style="width: 75%">25</div>
-                            </div>
-                            <small id="attendedCount"> Trainees Attended </small>
-                        </div>
-                    </div>
-                </div>
-               
-              
-                <!-- Late Assignments Submissions -->
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-4">
-                    <div class="widget-stat card">
-                        <div class="card-body">
-                            <p class="card-title text-primary" style="font-size: 1.2rem;">Late Assignments Submissions
-                            </p>
-                            <p style="font-size: 0.8rem;">2 Trainees Late</p>
+                            <p class="card-title text-primary" style="font-size: 1.2rem;">Student Attendance</p>
+                            <p style="font-size: 0.8rem;">{{ $attendanceOverview['late'] }} late, {{ $attendanceOverview['absent'] }} Absence</p>
                             <a href="">
-                                <p class="card-title" style="font-size: .8rem;">Flex and Grid</p>
+                                <p class="card-title" style="font-size: 0.8rem;">More</p>
                             </a>
-
                             <div class="progress mb-2 my-2">
-                                <div class="progress-bar progress-animated bg-success" style="width: 88%">28</div>
+                                <div class="progress-bar progress-animated bg-Success" style="width: {{ $attendanceOverview['attended_percentage'] }}%">{{ $attendanceOverview['attended'] }}</div>
                             </div>
-                            <small> 28 on time </small>
+                            <small>{{ $attendanceOverview['attended'] }} Trainees Attended </small>
                         </div>
                     </div>
                 </div>
-                <!-- LatestAssignmentSubmission -->
+                
+               <!-- Late Assignments Submissions -->
+            <!-- Late Assignments Submissions -->
+<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-4">
+    <div class="widget-stat card">
+        <div class="card-body">
+            <p class="card-title text-primary" style="font-size: 1.2rem;">Assignments Submissions</p>
+            <p style="font-size: 0.8rem;">{{ $lateAssignmentSubmissions['lateSubmissionsCount'] }} Trainees Late</p>
+            <a href="#">
+                <p class="card-title" style="font-size: .8rem;">Flex and Grid</p>
+            </a>
+
+            <div class="progress mb-2 my-2">
+                <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['didNotSubmitPercentage'] }}%">{{ $lateAssignmentSubmissions['didNotSubmitCount'] }}</div>
+            </div>
+            <small>{{ $lateAssignmentSubmissions['didNotSubmitCount'] }} did not submit ({{ $lateAssignmentSubmissions['didNotSubmitPercentage'] }}%) &</small>
+            
+            <small>{{ $lateAssignmentSubmissions['onTimeCount'] }} on time ({{ $lateAssignmentSubmissions['onTimePercentage'] }}%)</small>
+        </div>
+    </div>
+</div>
+
+
+                <!-- Assignments Assessment -->
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-4">
                     <div class="widget-stat card">
                         <div class="card-body">
@@ -680,18 +682,8 @@ Trainees Progress
             </div>
         </div>
     </div>
-    <h2>Total Absence Count: {{ $totalAbsenceCount }}</h2>
 
-@if ($absenceCounts->isNotEmpty())
-    <h3>Absence Counts by Type:</h3>
-    <ul>
-        @foreach ($absenceCounts as $absenceCount)
-            <li>Student ID: {{ $absenceCount->student_id }}, Absence Type: {{ $absenceCount }}, Count: {{ $absenceCount->count }}</li>
-        @endforeach
-    </ul>
-@else
-    <p>No absence data available.</p>
-@endif
+
 </div>
 
 
