@@ -8,9 +8,3 @@ use App\Http\Controllers\AuthController;
 Route::get('/addTrainee', function () {
     return view('trainer/addTrainee');
 })->name('addTrainee');
-
-
-// Trainees progress page
-Route::get('/traineesProgress', function () {
-    return view('trainer/traineesProgress');
-})->name('traineesProgress');

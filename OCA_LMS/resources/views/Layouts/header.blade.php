@@ -9,6 +9,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse align-items-end" id="navbarText">
+            
 
             @auth('staff')
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -20,7 +21,7 @@
 
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('academies') ? 'text-primary' : '' }}""
-                                href="{{ route('academies') }}">Academies</a>
+                                href=" {{ route('academies') }}">Academies</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('staff.index') ? 'text-primary' : '' }}"
@@ -51,9 +52,6 @@
 
                             </div>
                         </li>
-
-
-
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -63,8 +61,8 @@
                                 <a class="nav-link text-dark " href="{{ route('skillsFramework') }}">Skills Framework</a>
                                 <a class="nav-link text-dark " href="{{ route('categories.index') }}">Technology
                                     category</a>
-                                <a
-                                    class="nav-link text-dark  {{ request()->routeIs('categories.indexCohort') ? 'text-primary' : '' }}"href="{{ route('categories.indexCohort') }}">Roadmap</a>
+                                <a class="nav-link text-dark  {{ request()->routeIs('categories.indexCohort') ? 'text-primary' : '' }}"
+                                    href="{{ route('categories.indexCohort') }}">Roadmap</a>
                             </div>
                         </li>
                     @endif
@@ -73,32 +71,25 @@
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('absence') ? 'text-primary' : '' }}"
                                 href="{{ route('absence') }}">Absence</a>
-
-
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('traineesProgress') ? 'text-primary' : '' }}"
-                                href="{{ route('traineesProgress') }}">Progress</a>
 
+
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('trainees.progress') ? 'text-primary' : '' }}"
+                                href="{{ route('trainees.progress') }}">Trainees Progress</a>
                         </li>
                     @endif
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ request()->routeIs('traineesProgress') ? 'text-primary' : '' }}"
-                                    href="{{ route('traineesProgress') }}">Trainees Progress</a>
-
-
                 </ul>
             @endauth
             <ul class="navbar-nav ms-auto ">
                 {{-- <li class="nav-item m-1">
                         <a class="nav-link {{ request()->routeIs('profile') ? 'active' : '' }}"
-                            href="{{ route('profile') }}">
-                            <span class="material-symbols-outlined">
-                                person
-                            </span>
-                        </a>
-                    </li> --}}
+                href="{{ route('profile') }}">
+                <span class="material-symbols-outlined">
+                    person
+                </span>
+                </a>
+                </li> --}}
 
                 <li class="nav-item m-1">
                     <a class="nav-link" href="{{ route('logout') }}">

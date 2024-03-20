@@ -11,7 +11,7 @@ class AssignmentSubmission extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'assignment_id', 'trainee_id', 'attached_file','is_late'
+        'assignment_id', 'student_id', 'attached_file','is_late'
     ];
 
     public function assignment()

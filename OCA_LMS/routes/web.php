@@ -28,6 +28,7 @@ use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\TraineeProgressController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\StudentDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -126,8 +127,8 @@ Route::get('/cohort/progress-details', function () {
     return view('trainer.trainee-progress-details');
 })->name('trainee-progress-details');
 
-Route::get('/traineesProgress', [TraineeProgressController::class, 'index'])->name('Progress.index');
-// attendance
+// Route::get('/cohort/progress-details', [TraineeProgressController::class, 'index'])->name('ProgressDetails.index');
+Route::get('/traineesProgress', [TraineeProgressController::class, 'index'])->name('trainees.progress');
 
 
 // absence
@@ -144,6 +145,7 @@ Route::get('/absence-report/trainee', function () {
 // Route::get('/staff/edit', function () {
 //     return view('supermaneger.editStaff');
 // })->name('staff.edit');
+Route::get('/student-dashboard', [StudentDashboardController::class, 'index'])->name('student.dashboard');
 
 
 /////////////////////////////////////////////

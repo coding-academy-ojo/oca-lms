@@ -23,6 +23,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // view()->composer(['traineesProgress', 'trainees-progress-details'], function ($view) {
+
+        //     $notifications = \App\Absence::all(); //Change this to the code you would use to get the notifications
+    
+        //     $view->with('Absence', $absence);
+        // });
     }
 }
