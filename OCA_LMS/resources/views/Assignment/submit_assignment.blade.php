@@ -29,5 +29,85 @@
                 <b>Deadline: {{ $assignment->assignment_due_date }}</b>
             </div>
         </div>
+        <div class="col-10 m-auto">
+            <div class="table-responsive">
+                <table class="table table-hover ">
+                    {{-- show all submission for assignmnet with details  --}}
+                    <caption class="visually fs-3 text-primary mb-2">View Assignments Submissions</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col ">Trainee Name</th>
+                            <th scope="col ">Assignment Name</th>
+                            <th scope="col">Submissions Date </th>
+                            <th scope="col">Github Link</th>
+                            <th scope="col">Add Feedback</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{-- show submissions details --}}
+                        @foreach ($AssignmentSubmission as $Assignment)
+                            <tr>
+                                <td>{{ $Assignment->student->en_first_name }} {{ $Assignment->student->en_second_name }}</td>
+                                <td>{{ $Assignment->assignment->assignment_name }}</td>
+                                <td>{{ $Assignment->created_at }}</td>
+                                <td><a class="link-underline link-underline-opacity-0"
+                                        href={{ $Assignment->attached_file }}target="_blank">{{ $Assignment->attached_file }}</a>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-primary add-feedback-btn" data-bs-toggle="modal"
+                                        data-bs-target="#addFeedback{{ $Assignment->id }}">
+                                        Add feedback
+                                    </button>
+                                </td>
+                                <td>
+                                    {{ $Assignment->status }}
+                                    <form method="POST" action="{{ route('changeStatus.update', $Assignment->id) }}">
+                                        @csrf
+                                        @method('PUT')
+                                            <button type="submit" class="btn"><i class="fas fa-check-circle"></i></button>
+                                    </form>
+                                </td>
+                                <td><a class="link-underline link-underline-opacity-0"
+                                        href="{{ route('assignment.feedbacksubmission.feedback', [$Assignment->assignment->id, $Assignment->student->id ,$Assignment->id ]) }}">View</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      
+    </div>
+    <!-- Modal to add feedback-->
+    @foreach ($AssignmentSubmission as $assignment)
+        <div class="modal fade" id="addFeedback{{ $assignment->id }}" tabindex="-1"
+            aria-labelledby="addFeedbackLabel{{ $assignment->id }}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addFeedbackLabel{{ $assignment->id }}">Add feedback</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="POST" action="{{ route('submission_feedback.update', $assignment->id) }}">
+                        @csrf
+                        @method('PUT')
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="topicName" class="form-label">Add feedback</label>
+                                <input type="text" class="form-control" name="Assignment_feedback"
+                                    value="{{ $assignment->feedback }}">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
     </div>
 @endsection

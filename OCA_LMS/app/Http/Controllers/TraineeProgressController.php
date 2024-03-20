@@ -3,10 +3,15 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Cohort;
+use Carbon\Carbon;
+use App\Absence;
+use App\Assignment;
 use App\AssignmentSubmission;
+use App\Cohort;
+
+
 class TraineeProgressController extends Controller
 {
 
@@ -83,12 +88,6 @@ class TraineeProgressController extends Controller
     }
     
     
-    
-    
-
-    
-    
-    
     private function lateAssignmentSubmissions() {
         $staff = Auth::guard('staff')->user();
         $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
@@ -109,13 +108,23 @@ class TraineeProgressController extends Controller
     
         $today = now()->toDateString();
         $totalStudents = $runningCohort->students->count();
+
+        // Get the latest assignment
+        $latestAssignment = Assignment::latest()->first();
+        $latestAssignmentId = $latestAssignment->id;
     
         $todaySubmissions = AssignmentSubmission::whereHas('assignment', function ($query) use ($runningCohort) {
             $query->where('cohort_id', $runningCohort->id);
         })->whereDate('created_at', '=', $today)->get();
+
+        $numberOfSubmissions= AssignmentSubmission::where('assignment_id', $latestAssignmentId);
+
+
     
         $lateSubmissionsCount = $todaySubmissions->where('is_late', true)->count();
         $onTimeCount = $todaySubmissions->where('is_late', false)->count();
+
+        $lastSubmissionsStatus = $numberOfSubmissions->where('status', 'Pass')->count();
         
         $didNotSubmitCount = $totalStudents - ($lateSubmissionsCount + $onTimeCount);
         
@@ -133,20 +142,48 @@ class TraineeProgressController extends Controller
             'latePercentage' => $latePercentage,
             'onTimePercentage' => $onTimePercentage,
             'didNotSubmitPercentage' => $didNotSubmitPercentage,
+            'lastSubmissionsStatus'=>$lastSubmissionsStatus,
         ];
     }
-    
-    
-    
-    
-    
-    
-    
+       
     private function assignmentAssessment() {
         $staff = Auth::guard('staff')->user();
         $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
         
+        if (!$runningCohort) {
+            // No running cohort found for the staff
+            return [
+                'message' => 'No running cohort found.',
+                'totalStudents' => 0,
+                'percentageSubmitted' => 0, // Change here
+            ];
+        }
     
+        // Get the latest assignment
+        $latestAssignment = Assignment::latest()->first();
+        $latestAssignmentId = $latestAssignment->id;
+        $latestAssignmentTitle=$latestAssignment->assignment_name;
+        
+        // Get the number of students assigned to the latest assignment
+        $numberOfStudentsAssigned = $latestAssignment->student()->count();
+    
+        // Get the number of students who submitted the latest assignment
+        $numberOfStudentsSubmitted = AssignmentSubmission::where('assignment_id', $latestAssignmentId)
+            ->distinct('student_id')
+            ->count('student_id');
+        
+        // Calculate the percentage of students who submitted their assignment
+        $percentageSubmitted = ($numberOfStudentsSubmitted / $numberOfStudentsAssigned) * 100;
+
+    $numberOfStudentsNotSubmitted = $numberOfStudentsAssigned- $numberOfStudentsSubmitted;
+        return [
+            'numberOfStudentsAssigned' => $numberOfStudentsAssigned,
+            'percentageSubmitted' => $percentageSubmitted,
+            'numberOfStudentsSubmitted' => $numberOfStudentsSubmitted,
+            'latestAssignmentTitle' => $latestAssignmentTitle,
+            'numberOfStudentsNotSubmitted' => $numberOfStudentsNotSubmitted,
+            'latestAssignmentId' => $latestAssignmentId,
+        ];
     }
     
     private function projectAssessment() {

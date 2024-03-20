@@ -19,32 +19,44 @@ class Assignment_StudentSeeder extends Seeder
                 'student_id' => '1',
             ],
             [
-                'assignment_id' => '2',
+                'assignment_id' => '1',
+                'student_id' => '2',
+            ],
+            [
+                'assignment_id' => '1',
+                'student_id' => '3',
+            ],
+            [
+                'assignment_id' => '4',
+                'student_id' => '2',
+            ],
+            [
+                'assignment_id' => '4',
+                'student_id' => '5',
+            ],
+            [
+                'assignment_id' => '4',
+                'student_id' => '5',
+            ],
+            [
+                'assignment_id' => '5',
                 'student_id' => '1',
             ],
             [
-                'assignment_id' => '4',
-                'student_id' => '2',
-            ],
-            [
                 'assignment_id' => '5',
                 'student_id' => '2',
             ],
             [
-                'assignment_id' => '4',
-                'student_id' => '5',
+                'assignment_id' => '5',
+                'student_id' => '3',
+            ],
+            [
+                'assignment_id' => '5',
+                'student_id' => '4',
             ],
             [
                 'assignment_id' => '5',
                 'student_id' => '5',
-            ],
-            [
-                'assignment_id' => '4',
-                'student_id' => '7',
-            ],
-            [
-                'assignment_id' => '5',
-                'student_id' => '7',
             ],
 
         ]);

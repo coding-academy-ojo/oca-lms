@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Absence;
 use App\Assignment;
+use App\AssignmentSubmission;
 use App\Cohort;
 use App\Student;
 use App\Technology;
@@ -41,16 +42,15 @@ class AssignmentController extends Controller
                      });
                  });
              })
-             ->get();
+             ->paginate(5);
      
          // Fetch the list of technologies associated with the current cohort from the pivot table
          $technologies = $cohort->technology;
      
-      
-
          return view('Assignment.view_assignment', compact('assignments', 'technologies'));
      }
-    
+     
+   
 
     /**
      * Show the form for creating a new resource.
@@ -102,11 +102,12 @@ class AssignmentController extends Controller
     
             // Assign students to the assignment
             $assignment->student()->attach($studentIds);
-        } else {
-            // If no specific students are selected, assign to all students in the cohort
-            $students = Student::where('cohort_id', $cohortID)->pluck('id')->toArray();
-            $assignment->student()->attach($students);
-        }
+        } 
+        // else {
+        //     // If no specific students are selected, assign to all students in the cohort
+        //     $students = Student::where('cohort_id', $cohortID)->pluck('id')->toArray();
+        //     $assignment->student()->attach($students);
+        // }
     
         return redirect()->route('assignments')->with('success', 'Assignment created successfully');
     }
@@ -121,8 +122,11 @@ class AssignmentController extends Controller
     public function show($id)
     {
         $assignment = Assignment::find($id);
+        $cohortID = session('cohort_ID');
+    
+        $AssignmentSubmission = AssignmentSubmission::where('assignment_id',$id)->get();
 
-        return view('Assignment.submit_assignment', compact('assignment'));
+        return view('Assignment.submit_assignment', compact('assignment','AssignmentSubmission'));
     }
 
     /**
@@ -154,30 +158,33 @@ class AssignmentController extends Controller
      */
     public function update(Request $request, Assignment $assignment)
     {
-        $cohortID=session('cohort_ID');
+        $cohortID = session('cohort_ID');
         $assignment->assignment_name = $request->input('name');
         $assignment->assignment_level = $request->input('level');
         $assignment->assignment_due_date = $request->input('due_date');
-        $assignment->assignment_attached_file = $request->input('assignment_file');
         $assignment->topic_id = $request->input('topic');
-        $assignment->cohort_id =  $cohortID;
+        $assignment->cohort_id = $cohortID;
         $assignment->assignment_description = $request->input('description');
+    
         if ($request->hasFile('assignment_file')) {
             $file = $request->file('assignment_file');
             $fileName = time() . '.' . $file->getClientOriginalExtension();
             $file->move('assignments_files', $fileName);
             $assignment->assignment_attached_file = $fileName;
         }
+    
+        $assignment->save();
+    
         if ($request->has('students')) {
             $studentIds = $request->input('students');
-
-            // assign students to the assignment
-            $assignment->student()->attach($studentIds);
+    
+            // sync students to the assignment
+            $assignment->student()->sync($studentIds);
         }
-
-        $assignment->update();
+    
         return redirect()->route('assignments')->with('success', 'Assignment updated successfully');
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -212,4 +219,5 @@ class AssignmentController extends Controller
         $assignment->student()->detach($student->id);
         return redirect()->back()->with('success', 'Student removed from assignment successfully');
     }
+    
 }
