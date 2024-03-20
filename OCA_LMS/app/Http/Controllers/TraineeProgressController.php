@@ -108,13 +108,23 @@ class TraineeProgressController extends Controller
     
         $today = now()->toDateString();
         $totalStudents = $runningCohort->students->count();
+
+        // Get the latest assignment
+        $latestAssignment = Assignment::latest()->first();
+        $latestAssignmentId = $latestAssignment->id;
     
         $todaySubmissions = AssignmentSubmission::whereHas('assignment', function ($query) use ($runningCohort) {
             $query->where('cohort_id', $runningCohort->id);
         })->whereDate('created_at', '=', $today)->get();
+
+        $numberOfSubmissions= AssignmentSubmission::where('assignment_id', $latestAssignmentId);
+
+
     
         $lateSubmissionsCount = $todaySubmissions->where('is_late', true)->count();
         $onTimeCount = $todaySubmissions->where('is_late', false)->count();
+
+        $lastSubmissionsStatus = $numberOfSubmissions->where('status', 'Pass')->count();
         
         $didNotSubmitCount = $totalStudents - ($lateSubmissionsCount + $onTimeCount);
         
@@ -132,6 +142,7 @@ class TraineeProgressController extends Controller
             'latePercentage' => $latePercentage,
             'onTimePercentage' => $onTimePercentage,
             'didNotSubmitPercentage' => $didNotSubmitPercentage,
+            'lastSubmissionsStatus'=>$lastSubmissionsStatus,
         ];
     }
        
