@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Absence;
 use App\Assignment;
-use App\AssignmetSubmission;
+use App\AssignmentSubmission;
 use App\Cohort;
 
 
@@ -88,12 +88,6 @@ class TraineeProgressController extends Controller
     }
     
     
-    
-    
-
-    
-    
-    
     private function lateAssignmentSubmissions() {
         $staff = Auth::guard('staff')->user();
         $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
@@ -140,13 +134,7 @@ class TraineeProgressController extends Controller
             'didNotSubmitPercentage' => $didNotSubmitPercentage,
         ];
     }
-    
-    
-    
-    
-    
-    
-    
+       
     private function assignmentAssessment() {
         $staff = Auth::guard('staff')->user();
         $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
