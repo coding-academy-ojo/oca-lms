@@ -107,6 +107,14 @@ class AssignmentSubmissionController extends Controller
         return redirect()->back()->with('success', 'Assignment submitted successfully');
     }
 
+    public function changeStatus($assignment)
+    {
+        $assignmentSubmission = AssignmentSubmission::findOrFail($assignment);
+        $assignmentSubmission->status = 'Pass';
+        $assignmentSubmission->update();
+    
+        return redirect()->back()->with('success', 'Assignment submitted successfully');
+    }
     /**
      * Remove the specified resource from storage.
      *

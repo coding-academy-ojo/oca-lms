@@ -14,8 +14,8 @@
             </ol>
         </div>
     </section>
-    <div class="contanier">
-        <div class="col-10 m-auto">
+    <div class="container">
+        <div class=" m-auto">
             {{-- view assignmnet details --}}
             <h2 class="col-12 m-auto">{{ $assignment->assignment_name }}</h2>
             {{-- <div class="col-12 m-auto my-3"><b>Technology:</b> {{ $assignment->topic->technology->technologies_name }}</div> --}}
@@ -32,7 +32,7 @@
             {{-- view all student submission for this assignmnet --}}
             <div class="border border-light my-2">
                 @foreach ($assignment_submissions as $assignment_submission)
-                    <p class="mx-3">{{ $assignment_submission->student->en_first_name }}
+                    <p class="mx-3 py-1">{{ $assignment_submission->student->en_first_name }}
                         {{ $assignment_submission->student->en_second_name }}</p>
                     <div class="d-flex justify-content-between border border-light my-3 py-3 mx-3">
 
@@ -50,9 +50,13 @@
                     @else
                         
                     @endif
-                 
                 @endforeach
             </div>
+            {{-- <form method="POST" action="{{ route('changeStatus.update', $Assignment->id) }}">
+                @csrf
+                @method('PUT')
+                    <button type="submit" class="btn btn-primary my-3">Pass</button>
+            </form> --}}
         </div>
     </div>
 @endsection

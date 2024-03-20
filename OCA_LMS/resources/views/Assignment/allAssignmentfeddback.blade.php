@@ -26,26 +26,35 @@
                         <th scope="col">Submissions Date </th>
                         <th scope="col">Github Link</th>
                         <th scope="col">Add Feedback</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Details</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($assignments as $assignment)
+                    {{-- show submissions details --}}
+                    @foreach ($assignments as $Assignment)
                         <tr>
-                            <td>{{ $assignment->student->en_first_name }} {{ $assignment->student->en_second_name }}</td>
-                            <td>{{ $assignment->assignment->assignment_name }}</td>
-                            <td>{{ $assignment->created_at }}</td>
+                            <td>{{ $Assignment->student->en_first_name }} {{ $Assignment->student->en_second_name }}</td>
+                            <td>{{ $Assignment->assignment->assignment_name }}</td>
+                            <td>{{ $Assignment->created_at }}</td>
                             <td><a class="link-underline link-underline-opacity-0"
-                                    href={{ $assignment->attached_file }}target="_blank">{{ $assignment->attached_file }}</a>
+                                    href={{ $Assignment->attached_file }}target="_blank">{{ $Assignment->attached_file }}</a>
                             </td>
                             <td>
                                 <button type="button" class="btn btn-primary add-feedback-btn" data-bs-toggle="modal"
-                                    data-bs-target="#addFeedback{{ $assignment->id }}">
+                                    data-bs-target="#addFeedback{{ $Assignment->id }}">
                                     Add feedback
                                 </button>
                             </td>
+                            <td>
+                                <form method="POST" action="{{ route('changeStatus.update', $Assignment->id) }}">
+                                    @csrf
+                                    @method('PUT')
+                                        <button type="submit" class="btn btn-primary my-3">Pass</button>
+                                </form>
+                            </td>
                             <td><a class="link-underline link-underline-opacity-0"
-                                    href="{{ route('assignment.feedbacksubmission.feedback', [$assignment->assignment->id, $assignment->student->id]) }}">View</a>
+                                    href="{{ route('assignment.feedbacksubmission.feedback', [$Assignment->assignment->id, $Assignment->student->id ,$Assignment->id ]) }}">View</a>
                             </td>
                         </tr>
                     @endforeach

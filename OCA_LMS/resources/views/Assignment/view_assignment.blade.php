@@ -33,15 +33,15 @@
             </div>
         @endif
         {{-- search based on assignmnet name & topic name  --}}
-        <div class="row d-flex">
+        <div class="row d-flex col-7">
             <form action="" method="GET" class="d-flex gap-2">
-                <div class="col-5 d-flex">
-                    <input type="text" class="form-control" placeholder="Search here" name="search"
+                <div class="col-7 d-flex border border-light">
+                    <input type="text" class="form-control border border-white" placeholder="search by assignment name or topic" name="search"
                         value="{{ request('search') }}">
-                    <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+                    <button class="btn rounded-0 bg-primary" type="submit"><i class="fas fa-search"></i></button>
                 </div>
                 {{-- filter based on technology --}}
-                <div class="col-5">
+                {{-- <div class="col-2"> --}}
                     <select class="form-select" name="technology_id" aria-label="Default select example">
                         <option value="">All Technologies</option>
                         @foreach ($technologies as $technology)
@@ -50,11 +50,11 @@
                         </option>
                     @endforeach
                     </select>
-                </div>
+                {{-- </div> --}}
 
             </form>
         </div>
-        <div class="m-auto col-9">
+        <div class="m-auto ">
             <div class="my-5">
                 <a href="{{ route('assignment.create') }}" class="btn btn-primary m-auto"
                     style="width: 90px; height:50px">Create</a>
@@ -81,7 +81,16 @@
                                         href="{{ route('assignment.show', $assignment->id) }}">{{ $assignment->assignment_name }}</a>
                                 </td>
                                 <td>{{ optional($assignment->topic)->topic_name }}</td>
-                               
+                                <td>
+                                 
+                                    {{-- Accessing the technology through the topic's technology cohort --}}
+                                    @if ($assignment->topic && $assignment->topic->technologyCohort)
+                                    {{-- Accessing the technology through the topic's technology cohort --}}
+                                    {{ optional(optional($assignment->topic)->technologyCohort)->technology ? optional(optional($assignment->topic)->technologyCohort)->technology->technologies_name : 'N/A' }}
+                                @else
+                                    {{-- Handle case where either topic or technology cohort is missing --}}
+                                    N/A
+                                @endif                              </td>
                                 <td> <a class="mx-2 link-underline link-underline-opacity-0"
                                         href="{{ route('assignment.feedbacksubmission.show', $assignment->id) }}">view</a>
                                 </td>
@@ -107,5 +116,9 @@
                 </table>
             </div>
         </div>
+        <div class="d-flex justify-content-center" >
+            {{ $assignments->links() }}
+        </div>
     </div>
+    
 @endsection
