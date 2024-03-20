@@ -163,12 +163,15 @@ class TraineeProgressController extends Controller
         
         // Calculate the percentage of students who submitted their assignment
         $percentageSubmitted = ($numberOfStudentsSubmitted / $numberOfStudentsAssigned) * 100;
-    
+
+    $numberOfStudentsNotSubmitted = $numberOfStudentsAssigned- $numberOfStudentsSubmitted;
         return [
             'numberOfStudentsAssigned' => $numberOfStudentsAssigned,
             'percentageSubmitted' => $percentageSubmitted,
             'numberOfStudentsSubmitted' => $numberOfStudentsSubmitted,
             'latestAssignmentTitle' => $latestAssignmentTitle,
+            'numberOfStudentsNotSubmitted' => $numberOfStudentsNotSubmitted,
+            'latestAssignmentId' => $latestAssignmentId,
         ];
     }
     

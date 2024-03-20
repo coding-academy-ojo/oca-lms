@@ -86,7 +86,8 @@ Trainees Progress
 
                             <h6 class="card-title text-primary">Latest Assignment </h6>
                             <canvas id="LatestAssignmentSubmission"></canvas>
-                            <a href="">
+                            <a href="{{ route('assignment.feedbacksubmission.show', $assignmentAssessment['latestAssignmentId']) }}">
+
                                 <p class="card-title" style="font-size: .8rem;">{{$assignmentAssessment['latestAssignmentTitle']}} </p>
                             </a>
                         </div>
@@ -827,7 +828,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 labels: ['Submitted', 'Not Submitted'],
                 datasets: [{
 
-                    data: [ {{ $assignmentAssessment['numberOfStudentsSubmitted'] }}, ],
+                    data: [ {{ $assignmentAssessment['numberOfStudentsSubmitted'] }}, {{ $assignmentAssessment['numberOfStudentsNotSubmitted'] }}],
                     backgroundColor: [
                         "rgba(43, 193, 85, 1)",
                         "rgba(243, 87, 87, 1)",
