@@ -32,7 +32,7 @@ Trainees Progress
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h2 class="text-primary">Trainees Statistics <br> {{ $attendanceOverview['cohort_name'] }} / {{ $attendanceOverview['date'] }}</h2>
+            <h2 class="text-primary">Trainees Statistics <br> <br> {{ $attendanceOverview['cohort_name'] }} / {{ $attendanceOverview['date'] }}</h2>
         </div>
     </div>
     <div class="row">
@@ -65,7 +65,7 @@ Trainees Progress
             <p class="card-title text-primary" style="font-size: 1.2rem;">Assignments Submissions</p>
             <p style="font-size: 0.8rem;">{{ $lateAssignmentSubmissions['lateSubmissionsCount'] }} Trainees Late</p>
             <a href="#">
-                <p class="card-title" style="font-size: .8rem;">Flex and Grid</p>
+                <p class="card-title" style="font-size: .8rem;">{{$assignmentAssessment['latestAssignmentTitle']}}</p>
             </a>
 
             <div class="progress mb-2 my-2">
@@ -87,7 +87,7 @@ Trainees Progress
                             <h6 class="card-title text-primary">Latest Assignment </h6>
                             <canvas id="LatestAssignmentSubmission"></canvas>
                             <a href="">
-                                <p class="card-title" style="font-size: .8rem;">Flex and Grid</p>
+                                <p class="card-title" style="font-size: .8rem;">{{$assignmentAssessment['latestAssignmentTitle']}} </p>
                             </a>
                         </div>
                     </div>
@@ -827,7 +827,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 labels: ['Submitted', 'Not Submitted'],
                 datasets: [{
 
-                    data: [25, 5],
+                    data: [ {{ $assignmentAssessment['numberOfStudentsSubmitted'] }}, ],
                     backgroundColor: [
                         "rgba(43, 193, 85, 1)",
                         "rgba(243, 87, 87, 1)",

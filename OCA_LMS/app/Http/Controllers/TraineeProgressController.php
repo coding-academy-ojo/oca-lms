@@ -139,7 +139,37 @@ class TraineeProgressController extends Controller
         $staff = Auth::guard('staff')->user();
         $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
         
+        if (!$runningCohort) {
+            // No running cohort found for the staff
+            return [
+                'message' => 'No running cohort found.',
+                'totalStudents' => 0,
+                'percentageSubmitted' => 0, // Change here
+            ];
+        }
     
+        // Get the latest assignment
+        $latestAssignment = Assignment::latest()->first();
+        $latestAssignmentId = $latestAssignment->id;
+        $latestAssignmentTitle=$latestAssignment->assignment_name;
+        
+        // Get the number of students assigned to the latest assignment
+        $numberOfStudentsAssigned = $latestAssignment->student()->count();
+    
+        // Get the number of students who submitted the latest assignment
+        $numberOfStudentsSubmitted = AssignmentSubmission::where('assignment_id', $latestAssignmentId)
+            ->distinct('student_id')
+            ->count('student_id');
+        
+        // Calculate the percentage of students who submitted their assignment
+        $percentageSubmitted = ($numberOfStudentsSubmitted / $numberOfStudentsAssigned) * 100;
+    
+        return [
+            'numberOfStudentsAssigned' => $numberOfStudentsAssigned,
+            'percentageSubmitted' => $percentageSubmitted,
+            'numberOfStudentsSubmitted' => $numberOfStudentsSubmitted,
+            'latestAssignmentTitle' => $latestAssignmentTitle,
+        ];
     }
     
     private function projectAssessment() {
