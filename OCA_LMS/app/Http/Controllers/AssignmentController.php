@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Absence;
 use App\Assignment;
+use App\AssignmentSubmission;
 use App\Cohort;
 use App\Student;
 use App\Technology;
@@ -121,8 +122,11 @@ class AssignmentController extends Controller
     public function show($id)
     {
         $assignment = Assignment::find($id);
+        $cohortID = session('cohort_ID');
+    
+        $AssignmentSubmission = AssignmentSubmission::where('assignment_id',$id)->get();
 
-        return view('Assignment.submit_assignment', compact('assignment'));
+        return view('Assignment.submit_assignment', compact('assignment','AssignmentSubmission'));
     }
 
     /**

@@ -22,7 +22,7 @@ class AssignmentFeedbackController extends Controller
         // Assuming you have a relationship between Cohort and Assignment
         $assignments = AssignmentSubmission::whereHas('assignment', function ($query) use ($cohortID) {
             $query->where('cohort_id', $cohortID);
-        })->get();
+        })  ->paginate(5);
         return view('Assignment.allAssignmentfeddback', compact('assignments'));
 
     }
@@ -64,7 +64,7 @@ class AssignmentFeedbackController extends Controller
      */
     public function show($id)
     {
-        $assignments = AssignmentSubmission::where('assignment_id',$id)->get();
+        $assignments = AssignmentSubmission::where('assignment_id',$id)->paginate(5);;
 
         return view('Assignment.allAssignmentfeddback', compact('assignments'));
     }
