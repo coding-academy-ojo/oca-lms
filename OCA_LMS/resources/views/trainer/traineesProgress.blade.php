@@ -35,96 +35,96 @@ Trainees Progress
             <h2 class="text-primary">Trainees Statistics <br> <br> {{ $attendanceOverview['cohort_name'] }} / {{ $attendanceOverview['date'] }}</h2>
         </div>
     </div>
-    <div class="row">
-        <!-- Cards Section -->
-        <div class="col-xl-6 col-lg-6 col-md-12">
-            <!-- Adjusted for 55% width -->
-            <div class="row">
-                <!-- Attendence -->
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-4">
-                    <div class="widget-stat card">
-                        <div class="card-body">
-                            <p class="card-title text-primary" style="font-size: 1.2rem;">Student Attendance</p>
-                            <p style="font-size: 0.8rem;">{{ $attendanceOverview['late'] }} late, {{ $attendanceOverview['absent'] }} Absence</p>
-                            <a href="">
-                                <p class="card-title" style="font-size: 0.8rem;">More</p>
-                            </a>
-                            <div class="progress mb-2 my-2">
-                                <div class="progress-bar progress-animated bg-Success" style="width: {{ $attendanceOverview['attended_percentage'] }}%">{{ $attendanceOverview['attended'] }}</div>
-                            </div>
-                            <small>{{ $attendanceOverview['attended'] }} Trainees Attended </small>
+<div class="row">
+    <!-- Cards Section -->
+    <div class="col-xl-6 col-lg-6 col-md-12">
+        <!-- Adjusted for 55% width -->
+        <div class="row">
+            <!-- Attendance -->
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-4">
+                <div class="widget-stat card">
+                    <div class="card-body">
+                        <p class="card-title text-primary" style="font-size: 1.2rem;">Student Attendance</p>
+                        <p style="font-size: 0.8rem;">{{ $attendanceOverview['late'] }} late, {{ $attendanceOverview['absent'] }} Absence</p>
+                        <a href="#">
+                            <p class="card-title" style="font-size: 0.8rem;">More</p>
+                        </a>
+                        <div class="progress mb-2 my-2">
+                            <div class="progress-bar progress-animated bg-Success" style="width: {{ $attendanceOverview['attended_percentage'] }}%">{{ $attendanceOverview['attended'] }}</div>
                         </div>
+                        <small>{{ $attendanceOverview['attended'] }} Trainees Attended </small>
                     </div>
                 </div>
-                
-               <!-- Late Assignments Submissions -->
-            <!-- Late Assignments Submissions -->
-<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-4">
-    <div class="widget-stat card">
-        <div class="card-body">
-            <p class="card-title text-primary" style="font-size: 1.2rem;">Assignments Submissions</p>
-            <p style="font-size: 0.8rem;">{{ $lateAssignmentSubmissions['lateSubmissionsCount'] }} Trainees Late</p>
-            <a href="#">
-                <p class="card-title" style="font-size: .8rem;">{{$assignmentAssessment['latestAssignmentTitle']}}</p>
-            </a>
-
-            <div class="progress mb-2 my-2">
-                <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['didNotSubmitPercentage'] }}%">{{ $lateAssignmentSubmissions['didNotSubmitCount'] }}</div>
             </div>
-            <small>{{ $lateAssignmentSubmissions['didNotSubmitCount'] }} did not submit ({{ $lateAssignmentSubmissions['didNotSubmitPercentage'] }}%) &</small>
             
-            <small>{{ $lateAssignmentSubmissions['onTimeCount'] }} on time ({{ $lateAssignmentSubmissions['onTimePercentage'] }}%)</small>
+            <!-- Late Assignments Submissions -->
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-4">
+                <div class="widget-stat card">
+                    <div class="card-body">
+                        <p class="card-title text-primary" style="font-size: 1.2rem;">Assignment Review</p>
+                        <p style="font-size: 0.8rem;">  {{$lateAssignmentSubmissions['lastSubmissionsStatus']}} Passed</p>
+                        <a href="#">
+                            <p class="card-title" style="font-size: .8rem;">{{$assignmentAssessment['latestAssignmentTitle']}}</p>
+                        </a>
+                        <div class="progress mb-2 my-2">
+                            <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['didNotSubmitPercentage'] }}%">{{ $lateAssignmentSubmissions['didNotSubmitCount'] }}</div>
+                        </div>
+                        <small>{{ $lateAssignmentSubmissions['didNotSubmitCount'] }} did not submit ({{ $lateAssignmentSubmissions['didNotSubmitPercentage'] }}%) &</small>
+                        
+                        <small>{{ $lateAssignmentSubmissions['onTimeCount'] }} on time ({{ $lateAssignmentSubmissions['onTimePercentage'] }}%)</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assignments Assessment -->
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-4">
+                <div class="widget-stat card">
+                    <div class="card-body">
+                        <h6 class="card-title text-primary">Latest Assignment </h6>
+                        <canvas id="LatestAssignmentSubmission"></canvas>
+                        <a href="{{ route('assignment.feedbacksubmission.show', $assignmentAssessment['latestAssignmentId']) }}">
+                            <p class="card-title" style="font-size: .8rem;">{{$assignmentAssessment['latestAssignmentTitle']}} </p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Projects Assessment Card -->
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-4">
+                <div class="widget-stat card">
+                    <div class="card-body">
+                        <h4 class="card-title text-primary">Projects Assessment</h4>
+                        <canvas id="Projects Assessment"></canvas>
+                        <a href="#">
+                            <p class="card-title" style="font-size: .8rem;">Portfolio project</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Chart Section -->
+    <div class="col-xl-6 col-lg-6 col-md-12">
+        <h4 class="card-title my-2 text-primary">All Assignments Status</h4>
+        <div class="card mb-4">
+            <!-- Roadmap Chart Card -->
+            <div class="card-body">
+                <canvas id="assignments_per_technology" style="width: 100%; height: 200px;"></canvas>
+            </div>
+        </div>
+        <h4 class="card-title my-2 text-primary">All Projects Status</h4>
+        <div class="card">
+            <!-- Stacked Bar Chart Card -->
+            <div class="card-body">
+                <canvas id="barChart_3" style="width: 100%; height: 200px;"></canvas>
+            </div>
         </div>
     </div>
 </div>
 
 
-                <!-- Assignments Assessment -->
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-4">
-                    <div class="widget-stat card">
-                        <div class="card-body">
-
-                            <h6 class="card-title text-primary">Latest Assignment </h6>
-                            <canvas id="LatestAssignmentSubmission"></canvas>
-                            <a href="">
-                                <p class="card-title" style="font-size: .8rem;">{{$assignmentAssessment['latestAssignmentTitle']}} </p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Projects Assessment Card -->
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-4">
-                    <div class="widget-stat card">
-                        <div class="card-body">
-                            <h4 class="card-title text-primary">Projects Assessment</h4>
-
-                            <canvas id="Projects Assessment"></canvas>
-                            <a href="">
-                                <p class="card-title" style="font-size: .8rem;">Protfolio project</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Chart Section -->
-        <div class="col-xl-6 col-lg-6 col-md-12">
-            <h4 class="card-title my-2 text-primary">All Assignments Status</h4>
-            <div class="card mb-4">
-                <!-- Roadmap Chart Card -->
-                <div class="card-body">
-                    <canvas id="assignments_per_technology" style="width: 100%; height: 200px;"></canvas>
-                </div>
-            </div>
-            <h4 class="card-title my-2 text-primary">All Projects Status</h4>
-            <div class="card">
-                <!-- Stacked Bar Chart Card -->
-                <div class="card-body">
-                    <canvas id="barChart_3" style="width: 100%; height: 200px;"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
 
     <!-- Skills carousel -->
 
@@ -827,7 +827,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 labels: ['Submitted', 'Not Submitted'],
                 datasets: [{
 
-                    data: [ {{ $assignmentAssessment['numberOfStudentsSubmitted'] }}, ],
+                    data: [ {{ $assignmentAssessment['numberOfStudentsSubmitted'] }}, {{ $assignmentAssessment['numberOfStudentsNotSubmitted'] }}],
                     backgroundColor: [
                         "rgba(43, 193, 85, 1)",
                         "rgba(243, 87, 87, 1)",
