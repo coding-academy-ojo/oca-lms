@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Absence;
+use App\Assignment;
+use App\AssignmetSubmission;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+
 
 class TraineeProgressController extends Controller
 {
@@ -36,8 +40,39 @@ class TraineeProgressController extends Controller
             ->groupBy('student_id')
             ->get();
     
-        return view('trainer.traineesProgress', compact('absenceCounts', 'totalAbsenceCount'));
+       
+
+
+
+         // Retrieve data from private methods
+
+         $LastAssignmentOverview = $this->LastAssignmentOverview();
+         return view('trainer.traineesProgress', compact('absenceCounts', 'totalAbsenceCount', 'LastAssignmentOverview'));
+
     }
+
+    
+    private function LastAssignmentOverview() {
+        $staff = Auth::guard('staff')->user();
+        $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
+    
+        if ($runningCohort) {
+            // If no running cohort is found, return a default set of values
+    
+            // Get the latest assignment
+            $latestAssignment = Assignment::latest()->first();
+            $LatestAssignment_id = $latestAssignment->id;
+            $totalSubmissions = 0;
+            $numberOfStudentsAssigned = $latestAssignment->student()->count();
+            dd($numberOfStudentsAssigned);
+         // Retrieve all assignments related to the student
+         return $numberOfStudentsAssigned ;
+           
+        }
+    
+    }
+    
+    
 
     
     /**

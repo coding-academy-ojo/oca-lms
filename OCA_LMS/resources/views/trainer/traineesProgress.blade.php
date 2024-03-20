@@ -77,13 +77,13 @@ Trainees Progress
                         </div>
                     </div>
                 </div>
-                <!-- Assignments Assessment -->
+                <!-- LatestAssignmentSubmission -->
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-4">
                     <div class="widget-stat card">
                         <div class="card-body">
 
-                            <h4 class="card-title text-primary">Assignments Assessment</h4>
-                            <canvas id="Assignments Assessment"></canvas>
+                            <h6 class="card-title text-primary">Latest Assignment </h6>
+                            <canvas id="LatestAssignmentSubmission"></canvas>
                             <a href="">
                                 <p class="card-title" style="font-size: .8rem;">Flex and Grid</p>
                             </a>
@@ -111,7 +111,7 @@ Trainees Progress
             <div class="card mb-4">
                 <!-- Roadmap Chart Card -->
                 <div class="card-body">
-                    <canvas id="assignments_tech" style="width: 100%; height: 200px;"></canvas>
+                    <canvas id="assignments_per_technology" style="width: 100%; height: 200px;"></canvas>
                 </div>
             </div>
             <h4 class="card-title my-2 text-primary">All Projects Status</h4>
@@ -730,29 +730,29 @@ document.addEventListener('DOMContentLoaded', function() {
 //Chart for all Assignments based on tech
 document.addEventListener('DOMContentLoaded', function() {
     // Assignments Bar Chart Initialization
-    if (document.getElementById('assignments_tech')) {
-        const assignments_tech = document.getElementById("assignments_tech").getContext('2d');
+    if (document.getElementById('assignments_per_technology')) {
+        const assignments_per_technology = document.getElementById("assignments_per_technology").getContext('2d');
 
 
 
         // Chart data
         let barChartData = {
-            labels: ["HTML& CSS", "JS", "React", "NodeJS", "MongoDB", "PostgreSQL", "Wordpress"],
+            labels: [ "Assignment 1", "Assignment 2", "Assignment 3", "Assignment 4"],
             datasets: [{
                 label: 'Passed',
                 backgroundColor: "rgba(43, 193, 85, 1)", // Green color
                 hoverBackgroundColor: "rgba(43, 193, 85, 1)",
-                data: [100, 95, 90, 100, 80, 93, 99]
+                data: [30, 30, 30, 25]
             }, {
-                label: 'Not Passed',
+                label: 'Not Yet',
                 backgroundColor: "rgba(243, 87, 87, 1)", // Red color
                 hoverBackgroundColor: "rgba(243, 87, 87, 1)",
-                data: [0, 2, 2, 1, 0, 1, 0]
+                data: [0, 0, 0, 5]
             }]
         };
 
         // Chart options
-        new Chart(assignments_tech, {
+        new Chart(assignments_per_technology, {
             type: 'bar',
             data: barChartData,
             options: {
@@ -827,12 +827,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    // Assignments Assessment chart Initialization
-    if (document.getElementById('Assignments Assessment')) {
-        var doughnutChart1 = new Chart(document.getElementById('Assignments Assessment'), {
+    // LatestAssignmentSubmission chart Initialization
+    if (document.getElementById('LatestAssignmentSubmission')) {
+        var doughnutChart1 = new Chart(document.getElementById('LatestAssignmentSubmission'), {
             type: 'doughnut',
             data: {
-                labels: ['Passed', 'Not Passed'],
+                labels: ['Submitted', 'Not Submitted'],
                 datasets: [{
 
                     data: [25, 5],
