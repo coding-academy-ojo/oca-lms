@@ -63,13 +63,19 @@ public function login(Request $request)
 
     
 
-    public function logout()
-    {
-        Auth::logout();
-        
-        // Redirect to the login page
-        return redirect('/login')->with('success', 'You have been logged out.');
-    }
+public function logout()
+{
+    Auth::guard('staff')->logout();
+    
+    Auth::guard('students')->logout();
+
+    request()->session()->invalidate();
+
+    request()->session()->regenerateToken();
+
+    return redirect('/')->with('success', 'You have been logged out.');
+}
+
     
 
 

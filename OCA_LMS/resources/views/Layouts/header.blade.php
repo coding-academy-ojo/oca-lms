@@ -9,10 +9,46 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse align-items-end" id="navbarText">
-            
+            @auth('students')
+          
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('student.dashboard') ? 'active' : '' }} "
+                            aria-current="page" href="{{ route('student.dashboard') }}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link "
+                            aria-current="page" href="#">Assignments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link "
+                            aria-current="page" href="#">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link "
+                            aria-current="page" href="#">Announcements</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link "
+                            aria-current="page" href="#">Roadmap</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link "
+                            aria-current="page" href="#">Technology</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link "
+                            aria-current="page" href="#">Skills Framework</a>
+                    </li>
+                  
+                  
+                </ul>
+               
+            @endauth
 
             @auth('staff')
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    
                     @if (in_array(Auth::guard('staff')->user()->role, ['super_manager', 'manager']))
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('supermanager-dashboard') ? 'active' : '' }} "
