@@ -148,34 +148,7 @@ Route::get('/absence-report/trainee', function () {
 
 /////////////////////////////////////////////
 // rawan bilal
-Route::get('/create-material', function () {
-    return view('Pages/create_material');
-})->name('create-material');
 
-Route::get('/edit-material', function () {
-    return view('Pages/edit_material');
-})->name('edit-material');
-
-Route::get('/create_assignment', function () {
-    return view('Assignment/create_assignment');
-})->name('create_assignment');
-
-Route::get('/edit_assignment', function () {
-    return view('Pages/edit_assignment');
-})->name('edit_assignment');
-
-
-Route::get('/submit_assignment', function () {
-    return view('Pages/submit_assignment');
-})->name('submit_assignment');
-
-Route::get('/view_material', function () {
-    return view('Pages/view_material');
-})->name('view_material');
-
-Route::get('/assignment/allfeedback', function () {
-    return view('Pages/allAssignmentfeddback');
-})->name('allAssignmentfeddback');
 //Assignment Route
 Route::get('/Assignments', [AssignmentController::class, 'index'])->name('assignments');
 Route::get('/Assignment/create', [AssignmentController::class ,'create'])->name('assignment.create');
@@ -187,11 +160,14 @@ Route::delete('/assignment/{assignment}', [AssignmentController::class ,'destroy
 Route::get('/download/{filename}', [AssignmentController::class, 'downloads'])->name('download');
 Route::delete('assignment/{assignment}/student/{student}',[AssignmentController::class,'removeStudent'] )->name('assignment.removeStudent');
 
+
 //student assignment&submission route
 Route::get('Student/Assignments', [AssignmentSubmissionController::class, 'index'])->name('student.assignments');
 Route::post('Student/asssignment/store', [AssignmentSubmissionController::class ,'store'])->name('Student.assignment.store');
 Route::get('Student/assignments/{assignment}', [AssignmentSubmissionController::class ,'show'])->name('Student.assignment.show');
 Route::put('/assignment/feedback/{assignment}', [AssignmentSubmissionController::class ,'update'])->name('submission_feedback.update');
+Route::put('/assignment/feedbackStatus/{assignment}', [AssignmentSubmissionController::class ,'changeStatus'])->name('changeStatus.update');
+
 
 
 //Assignment Feedback
