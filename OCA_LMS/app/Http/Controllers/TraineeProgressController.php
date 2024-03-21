@@ -124,7 +124,7 @@ class TraineeProgressController extends Controller
         $lateSubmissionsCount = $todaySubmissions->where('is_late', true)->count();
         $onTimeCount = $todaySubmissions->where('is_late', false)->count();
 
-        $lastSubmissionsStatus = $numberOfSubmissions->where('status', 'Pass')->count();
+        $passSubmissionsCount = $numberOfSubmissions->where('status', 'Pass')->count();
         
         $didNotSubmitCount = $totalStudents - ($lateSubmissionsCount + $onTimeCount);
         
@@ -133,6 +133,8 @@ class TraineeProgressController extends Controller
         $onTimePercentage = $totalStudents > 0 ? round(($onTimeCount / $totalStudents) * 100, 2) : 0;
     
         $didNotSubmitPercentage = $totalStudents > 0 ? round(($didNotSubmitCount / $totalStudents) * 100, 2) : 0;
+        // Calculate the percentage of "Pass" submissions
+    $passSubmissionsPercentage = $totalStudents > 0 ? round(($passSubmissionsCount / $numberOfSubmissions->count()) * 100, 2) : 0;
     
         return [
             'totalStudents' => $totalStudents,
@@ -142,7 +144,9 @@ class TraineeProgressController extends Controller
             'latePercentage' => $latePercentage,
             'onTimePercentage' => $onTimePercentage,
             'didNotSubmitPercentage' => $didNotSubmitPercentage,
-            'lastSubmissionsStatus'=>$lastSubmissionsStatus,
+            '
+            '=>$passSubmissionsCount,
+            'passSubmissionsStatus' => $passSubmissionsPercentage,
         ];
     }
        

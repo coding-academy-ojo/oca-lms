@@ -62,16 +62,16 @@ Trainees Progress
                 <div class="widget-stat card">
                     <div class="card-body">
                         <p class="card-title text-primary" style="font-size: 1.2rem;">Assignment Review</p>
-                        <p style="font-size: 0.8rem;">  {{$lateAssignmentSubmissions['lastSubmissionsStatus']}} Passed</p>
+                        <p style="font-size: 0.8rem;">  {{$lateAssignmentSubmissions['passSubmissionsCount']}} Passed</p>
                         <a href="#">
                             <p class="card-title" style="font-size: .8rem;">{{$assignmentAssessment['latestAssignmentTitle']}}</p>
                         </a>
                         <div class="progress mb-2 my-2">
-                            <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['didNotSubmitPercentage'] }}%">{{ $lateAssignmentSubmissions['didNotSubmitCount'] }}</div>
+                            <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['passSubmissionsStatus'] }}%">{{ $lateAssignmentSubmissions['didNotSubmitCount'] }}</div>
                         </div>
-                        <small>{{ $lateAssignmentSubmissions['didNotSubmitCount'] }} did not submit ({{ $lateAssignmentSubmissions['didNotSubmitPercentage'] }}%) &</small>
+                        <!-- <small>{{ $lateAssignmentSubmissions['didNotSubmitCount'] }} did not submit ({{ $lateAssignmentSubmissions['didNotSubmitPercentage'] }}%) &</small>
                         
-                        <small>{{ $lateAssignmentSubmissions['onTimeCount'] }} on time ({{ $lateAssignmentSubmissions['onTimePercentage'] }}%)</small>
+                        <small>{{ $lateAssignmentSubmissions['onTimeCount'] }} on time ({{ $lateAssignmentSubmissions['onTimePercentage'] }}%)</small> -->
                     </div>
                 </div>
             </div>
