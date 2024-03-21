@@ -27,12 +27,24 @@ class TechnologyCohortSeeder extends Seeder
                 'technology_id' => '7',
             ],
             [
+                'cohort_id' => '1',
+                'technology_id' => '5',
+            ],
+            [
                 'cohort_id' => '4',
                 'technology_id' => '1',
             ],
             [
                 'cohort_id' => '4',
                 'technology_id' => '3',
+            ],
+            [
+                'cohort_id' => '4',
+                'technology_id' => '6',
+            ],
+            [
+                'cohort_id' => '1',
+                'technology_id' => '2',
             ],
         ]);
     }

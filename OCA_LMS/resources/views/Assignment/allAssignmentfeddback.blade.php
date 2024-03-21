@@ -47,11 +47,11 @@
                                 </button>
                             </td>
                             <td>
-                                <form method="POST" action="{{ route('changeStatus.update', $Assignment->id) }}">
+                                {{-- <form method="POST" action="{{ route('changeStatus.update', $Assignment->id) }}">
                                     @csrf
                                     @method('PUT')
                                         <button type="submit" class="btn btn-primary my-3">Pass</button>
-                                </form>
+                                </form> --}}
                             </td>
                             <td><a class="link-underline link-underline-opacity-0"
                                     href="{{ route('assignment.feedbacksubmission.feedback', [$Assignment->assignment->id, $Assignment->student->id ,$Assignment->id ]) }}">View</a>
@@ -91,4 +91,7 @@
             </div>
         </div>
     @endforeach
+    <div class="d-flex justify-content-center" >
+        {{ $assignments->links() }}
+    </div>
 @endsection

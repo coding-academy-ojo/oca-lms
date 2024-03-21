@@ -59,7 +59,7 @@
                 <a href="{{ route('assignment.create') }}" class="btn btn-primary m-auto"
                     style="width: 90px; height:50px">Create</a>
                 <a href="{{ route('assignments.feedback') }}" class="btn btn-primary m-auto"
-                    style="width: 90px; height:50px">submission</a>
+                    style="width: 90px; height:50px">Submission</a>
             </div>
             <div class="table-responsive">
                 <table class="table table-hover ">
@@ -70,7 +70,7 @@
                             <th scope="col ">Assignment Name</th>
                             <th scope="col">Topic Name </th>
                             <th scope="col">Technology </th>
-                            <th scope="col">Submissions </th>
+                            <th scope="col">Details </th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -92,7 +92,7 @@
                                     N/A
                                 @endif                              </td>
                                 <td> <a class="mx-2 link-underline link-underline-opacity-0"
-                                        href="{{ route('assignment.feedbacksubmission.show', $assignment->id) }}">view</a>
+                                        href="{{ route('assignment.show', $assignment->id) }}">view</a>
                                 </td>
                                 <td>
                                     <div class="my-auto d-flex">
