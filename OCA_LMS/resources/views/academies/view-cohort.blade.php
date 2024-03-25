@@ -250,29 +250,7 @@ Amman Cohort 1
         </div>
     </div>
     
-    <div class="container my-5">
-        <div class="row">
-            <!-- Soft Skills Development Over Time Chart -->
-            <div class="col-md-6">
-                <div class="card-custom">
-                    <div class="card-header-custom">
-                        <h3 class="text-primary">Soft Skills Development Over Time</h3>
-                    </div>
-                    <canvas id="softSkillsDevelopmentChart" class="chart-container-custom"></canvas>
-                </div>
-            </div>
-    
-            <!-- Soft Skills Development by Subject Chart -->
-            <div class="col-md-6">
-                <div class="card-custom">
-                    <div class="card-header-custom">
-                        <h3 class="text-primary">Soft Skills by Subject</h3>
-                    </div>
-                    <canvas id="softSkillsBySubjectChart" class="chart-container-custom"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
+
     
     <script>
     document.addEventListener('DOMContentLoaded', function() {
