@@ -43,7 +43,7 @@
                             <td>
                                 <button type="button" class="btn btn-primary add-feedback-btn" data-bs-toggle="modal"
                                     data-bs-target="#addFeedback{{ $Assignment->id }}">
-                                    Add feedback
+                                    ➕
                                 </button>
                             </td>
                             <td>

@@ -24,6 +24,8 @@ class CreateAssignmentsTable extends Migration
             $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade');
             $table->unsignedBigInteger('cohort_id');
             $table->foreign('cohort_id')->references('id')->on('cohorts')->onDelete('cascade');
+            $table->unsignedBigInteger('trainer_id');
+            $table->foreign('trainer_id')->references('id')->on('staff')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

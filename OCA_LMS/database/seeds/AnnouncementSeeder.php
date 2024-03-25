@@ -24,7 +24,7 @@ class AnnouncementSeeder extends Seeder
                 'content' => $faker->paragraph,
                 'date' => $faker->date(),
                 'staff_id' => 3,
-                'cohort_id' => 2,
+                'cohort_id' => 1,
             ]);
         }
 

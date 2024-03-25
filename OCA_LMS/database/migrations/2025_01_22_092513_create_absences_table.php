@@ -17,9 +17,10 @@ class CreateAbsencesTable extends Migration
             $table->id();
             $table->enum('absences_type', ['late', 'absent', 'leaving']);
             $table->date('absences_date')->useCurrent();
-            $table->text('absences_reason');
-            $table->integer('absences_duration');
-            $table->foreignId('student_id')->constrained('students')->onDelete('cascade');
+            $table->text('absences_reason')->nullable();
+            $table->integer('absences_duration')->nullable();
+            $table->unsignedBigInteger('student_id');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->timestamps();
         });
     }

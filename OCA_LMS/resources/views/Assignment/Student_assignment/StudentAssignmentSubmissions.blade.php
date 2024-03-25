@@ -52,6 +52,15 @@
                     @endif
                 @endforeach
             </div>
+               <form method="POST" action="{{ route('Student.assignment.store') }}">
+                @csrf
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="submit youe assignmnet" name="Assignment_submission" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <input type="hidden" name="Assignment_ID" value="{{$assignment->id }}">
+                    <button class="btn btn-primary" type="submit" id="button-addon2">Submit</button>
+                  </div>
+               
+            </form>
             {{-- <form method="POST" action="{{ route('changeStatus.update', $Assignment->id) }}">
                 @csrf
                 @method('PUT')

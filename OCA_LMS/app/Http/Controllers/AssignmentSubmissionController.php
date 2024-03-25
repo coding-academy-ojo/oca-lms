@@ -50,6 +50,14 @@ class AssignmentSubmissionController extends Controller
         $assignment_submision->assignment_id = $request->input('Assignment_ID');
         $assignment_submision->student_id = $studentId;
         $assignment_submision->created_at =now();
+        $assignmnetId=$request->input('Assignment_ID');
+        $Assignment = Assignment::find( $assignmnetId);
+        $assignmnetdate=$Assignment->assignment_due_date;
+        if(now()> $assignmnetdate)
+        {
+            $assignment_submision->is_late =1;
+        }
+     
 
         $assignment_submision->save();
         return redirect()->back()->with('success', 'Assignment submited successfully');
@@ -68,11 +76,11 @@ class AssignmentSubmissionController extends Controller
          $studentId = Auth::id();
          $assignment = Assignment::find($id);
          $assignment_submissions = AssignmentSubmission::where('assignment_id', $id)
-             ->where('student_id', $studentId)
+             ->where('student_id',1)
              ->get();
-        $assignmnet_feedback= AssignmentFeedback::where('assignment_id', $id)->get();
+        // $assignmnet_feedback= AssignmentFeedback::where('assignment_id', $id)->get();
      
-         return view('Assignment.Student_assignment.StudentAssignmentSubmissions', compact('assignment', 'assignment_submissions','assignmnet_feedback'));
+         return view('Assignment.Student_assignment.StudentAssignmentSubmissions', compact('assignment', 'assignment_submissions'));
      }
 
     
