@@ -15,16 +15,36 @@ class AssignmentFeedbackController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $cohortID = session('cohort_ID');
+        
+        $query = AssignmentSubmission::query()
+            ->whereHas('assignment', function ($query) use ($cohortID) {
+                $query->where('cohort_id', $cohortID);
+            });
     
-        // Assuming you have a relationship between Cohort and Assignment
-        $assignments = AssignmentSubmission::whereHas('assignment', function ($query) use ($cohortID) {
-            $query->where('cohort_id', $cohortID);
-        })  ->paginate(5);
+            if ($request->has('search')) {
+                $search = $request->input('search');
+                $query->where(function ($query) use ($search) {
+                    $query->whereHas('assignment', function ($query) use ($search) {
+                        $query->where('assignment_name', 'like', "%$search%");
+                    })->orWhereHas('student', function ($query) use ($search) {
+                        $query->where('en_first_name', 'like', "%$search%")
+                            ->orWhere('en_second_name', 'like', "%$search%")
+                            ->orWhere('en_last_name', 'like', "%$search%")
+                            ->orWhere('ar_first_name', 'like', "%$search%")
+                            ->orWhere('ar_second_name', 'like', "%$search%")
+                            ->orWhere('ar_last_name', 'like', "%$search%");
+                    });
+                });
+            }
+        
+            $assignments = $query->paginate(5);
+    
+        $assignments = $query->paginate(5);
+        
         return view('Assignment.allAssignmentfeddback', compact('assignments'));
-
     }
 
     /**
@@ -45,15 +65,7 @@ class AssignmentFeedbackController extends Controller
      */
     public function store(Request $request)
     {
-        $staffId = Auth::id();
-        $assignment_feedback = new AssignmentFeedback();
-        $assignment_feedback->assignment_submission_id  = $request->input('Assignment_submission_ID');
-        $assignment_feedback->feedback = $request->input('Assignment_feedback');
-        // $assignment_submision->staff_id = $staffId;
-        $assignment_feedback->created_at =now();
-
-        $assignment_feedback->save();
-        return redirect()->back()->with('success', 'Assignment submited successfully');
+  
     }
 
     /**
@@ -76,8 +88,9 @@ class AssignmentFeedbackController extends Controller
         $assignment_submissions = AssignmentSubmission::where('assignment_id', $id)
             ->where('student_id', $studentId)
             ->get();
-    
-        return view('Assignment.Student_assignment.StudentAssignmentSubmissions', compact('assignment', 'assignment_submissions'));
+            $lastSubmission = $assignment_submissions->last();
+            $lastSubmissionID = $lastSubmission->id;
+        return view('Assignment.Student_assignment.StudentAssignmentSubmissions', compact('assignment', 'assignment_submissions','lastSubmissionID'));
     }
     /**
      * Show the form for editing the specified resource.
