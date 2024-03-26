@@ -18,8 +18,9 @@ class AnnouncementController extends Controller
     public function index()
     {
         $cohortId = session("cohort_ID");
+        dd(session("cohort_ID"));
         $announcements = Announcement::where('cohort_id', $cohortId)->latest()->get(); 
-        $cohortId = session("cohort_ID");
+        
     
         // Count total absences for the specified cohort
         $totalAbsenceCount = Absence::whereHas('student', function ($query) use ($cohortId) {
@@ -47,9 +48,9 @@ class AnnouncementController extends Controller
         $validatedData = $request->validate([
             'content' => 'required',
         ]);
-         // Create a new announcement instance
          $staffId = Auth::id();
          $cohortId = session("cohort_ID");
+
         // Create a new instance of the Announcement model with the validated data
         $announcement = new Announcement();
         $announcement->content = $validatedData['content'];

@@ -25,8 +25,7 @@
                             aria-current="page" href="#">Projects</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link "
-                            aria-current="page" href="#">Announcements</a>
+                    <a class="nav-link {{ request()->routeIs('announcements') ? 'text-primary' : '' }}" href="{{ route('Announcements') }}">Announcements</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link "
@@ -81,8 +80,7 @@
                                 @endif
                                 <a class="nav-link text-dark  {{ request()->routeIs('show_all_projects') ? 'text-primary' : '' }}"
                                     href="{{ route('show_all_projects') }}">Projects</a>
-                                <a class="nav-link text-dark {{ request()->routeIs('Announcements') ? 'text-primary' : '' }}"
-                                    href="{{ route('Announcements') }}">Announcements</a>
+                                    <a class="nav-link {{ request()->routeIs('Announcements') ? 'text-primary' : '' }}" href="{{ route('Announcements') }}">Announcements</a>
                                 <a class="nav-link text-dark {{ request()->routeIs('attendance') ? 'text-primary' : '' }}"
                                     href="{{ route('attendance') }}">Attendance</a>
 
