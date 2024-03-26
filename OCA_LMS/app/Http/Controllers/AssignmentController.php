@@ -11,6 +11,7 @@ use App\Technology;
 use App\Technology_Cohort;
 use App\Topic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AssignmentController extends Controller
 {
@@ -75,13 +76,16 @@ class AssignmentController extends Controller
      */
     public function store(Request $request)
     {
+        $TrainertId = Auth::id();
         $cohortID = session('cohort_ID');
         $assignment = new Assignment;
         $assignment->assignment_name = $request->input('name');
         $assignment->assignment_level = $request->input('level');
         $assignment->assignment_due_date = $request->input('due_date');
         $assignment->topic_id = $request->input('topic');
+        $assignment->created_at =now();
         $assignment->cohort_id = $cohortID;
+        $assignment->trainer_id = $TrainertId;
         $assignment->assignment_description = $request->input('description');
     
         // Upload and attach assignment file if provided
@@ -158,12 +162,15 @@ class AssignmentController extends Controller
      */
     public function update(Request $request, Assignment $assignment)
     {
+        $TrainertId = Auth::id();
         $cohortID = session('cohort_ID');
         $assignment->assignment_name = $request->input('name');
         $assignment->assignment_level = $request->input('level');
         $assignment->assignment_due_date = $request->input('due_date');
         $assignment->topic_id = $request->input('topic');
         $assignment->cohort_id = $cohortID;
+        $assignment->trainer_id = $TrainertId;
+
         $assignment->assignment_description = $request->input('description');
     
         if ($request->hasFile('assignment_file')) {

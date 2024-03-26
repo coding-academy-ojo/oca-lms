@@ -17,6 +17,11 @@ class Assignment extends Model
         return $this->belongsTo(Topic::class);
     }
 
+    public function staff()
+    {
+        return $this->belongsTo(Staff::class);
+    }
+
 
     // Relationship with AssignmentSubmissions
     public function assignmentSubmissions()

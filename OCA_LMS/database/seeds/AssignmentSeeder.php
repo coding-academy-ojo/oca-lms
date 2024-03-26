@@ -23,6 +23,8 @@ class AssignmentSeeder extends Seeder
                 'assignment_attached_file' => '1708704922.pdf',
                 'topic_id' => '1',
                 'cohort_id' => '1',
+                'trainer_id'=> '3',
+
             ],
             [
                 'assignment_name' => 'Make full curd opration',
@@ -32,6 +34,8 @@ class AssignmentSeeder extends Seeder
                 'assignment_attached_file' => '1708704922.pdf',
                 'topic_id' => '4',
                 'cohort_id' => '1',
+                'trainer_id'=> '3',
+
             ],
             [
                 'assignment_name' => 'Implementing Fetch API in JavaScript',
@@ -41,6 +45,7 @@ class AssignmentSeeder extends Seeder
                 'assignment_attached_file' => null,
                 'topic_id' => '3',
                 'cohort_id' => '1',
+                'trainer_id'=> '3',
             ],
             [
                 'assignment_name' => 'Creating static registration page ',
@@ -57,6 +62,8 @@ class AssignmentSeeder extends Seeder
                 'assignment_attached_file' => null,
                 'topic_id' => '4',
                 'cohort_id' => '1',
+                'trainer_id'=> '3',
+
             ],
             [
                 'assignment_name' => 'create database ',
@@ -80,6 +87,8 @@ class AssignmentSeeder extends Seeder
                 'assignment_attached_file' =>'1708704922.pdf',
                 'topic_id' => '6',
                 'cohort_id' => '1',
+                'trainer_id'=> '3',
+
             ],
             [
                 'assignment_name' => 'create database ',
@@ -103,6 +112,8 @@ class AssignmentSeeder extends Seeder
                 'assignment_attached_file' =>'1708704922.pdf',
                 'topic_id' => '4',
                 'cohort_id' => '4',
+                'trainer_id'=> '3',
+
             ],
             
             [
@@ -114,6 +125,8 @@ class AssignmentSeeder extends Seeder
                 'assignment_attached_file' => null,
                 'topic_id' => '3',
                 'cohort_id' => '4',
+                'trainer_id'=> '3',
+
             ],
             [
                 'assignment_name' => 'curd opration',
@@ -123,6 +136,8 @@ class AssignmentSeeder extends Seeder
                 'assignment_attached_file' => null,
                 'topic_id' => '4',
                 'cohort_id' => '4',
+                'trainer_id'=> '3',
+
             ],
         ]);
     }
