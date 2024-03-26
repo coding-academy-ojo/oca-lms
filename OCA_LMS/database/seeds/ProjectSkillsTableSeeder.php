@@ -36,6 +36,27 @@ class ProjectSkillsTableSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'project_id' => 3,
+                'skill_id' => 1,
+                'level_id' => 3,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'project_id' => 3,
+                'skill_id' => 2,
+                'level_id' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'project_id' => 3,
+                'skill_id' => 3,
+                'level_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ];
 
         // Insert data into the project_skills table

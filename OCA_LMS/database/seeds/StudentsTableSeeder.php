@@ -14,36 +14,109 @@ class StudentsTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
-
-        foreach (range(1, 10) as $index) {
-            $academyId = DB::table('academies')->inRandomOrder()->first()->id;
-
-            $cohortId = DB::table('cohorts')->where('academy_id', $academyId)->inRandomOrder()->first()->id;
 
             DB::table('students')->insert([
-                'email' => $faker->unique()->safeEmail,
-                'password' => Hash::make('password'),
-                'is_newsletter' => $faker->boolean,
-                'provider_id' => $faker->randomNumber(),
-                'en_first_name' =>$faker->firstName(),
-                'en_second_name' =>$faker->firstName(),
-                'email_verification' => $faker->boolean,
-                'is_email_verified' => $faker->boolean,
-                'mobile' => $faker->phoneNumber,
-                'en_first_name' => $faker->firstName,
-                'en_last_name' => $faker->lastName,
-                'academy_id' => $academyId,
-                'en_first_name' => $faker->name,
-                'en_second_name' => $faker->name,
-                'en_third_name' => $faker->name,
-                'en_last_name' => $faker->name,
-                'cohort_id' => $cohortId,
-                'personal_img' => 'person.png',
-                'created_at' => now(),
-                'updated_at' => now(),
+                [
+                    'email' => 'rawanbilal@gmail.com',
+                    'password' => Hash::make('password'),
+                    'en_first_name' =>'Rawan',
+                    'en_second_name' =>'Bilal',              
+                    'mobile' => '0775494887',           
+                    'academy_id' => 1,
+                    'cohort_id' => 1,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'email' => 'randali@gmail.com',
+                    'password' => Hash::make('password'),
+                    'en_first_name' =>'Rand',
+                    'en_second_name' =>'Ali',              
+                    'mobile' => '0775491787',           
+                    'academy_id' => 1,
+                    'cohort_id' => 1,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'email' => 'ahmadhasan@gmail.com',
+                    'password' => Hash::make('password'),
+                    'en_first_name' =>'Ahmad',
+                    'en_second_name' =>'Hasan',              
+                    'mobile' => '0775494836',           
+                    'academy_id' => 1,
+                    'cohort_id' => 1,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'email' => 'karamanas@gmail.com',
+                    'password' => Hash::make('password'),
+                    'en_first_name' =>'karam',
+                    'en_second_name' =>'Anas',              
+                    'mobile' => '0775491657',           
+                    'academy_id' => 1,
+                    'cohort_id' => 1,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'email' => 'alibilal@gmail.com',
+                    'password' => Hash::make('password'),
+                    'en_first_name' =>'Ali',
+                    'en_second_name' =>'Bilal',              
+                    'mobile' => '0775476287',           
+                    'academy_id' => 1,
+                    'cohort_id' => 1,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'email' => 'danahani@gmail.com',
+                    'password' => Hash::make('password'),
+                    'en_first_name' =>'Dana',
+                    'en_second_name' =>'Hani',              
+                    'mobile' => '0775435287',           
+                    'academy_id' => 1,
+                    'cohort_id' => 1,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'email' => 'omarmansour@gmail.com',
+                    'password' => Hash::make('password'),
+                    'en_first_name' =>'Omar',
+                    'en_second_name' =>'Mansour',              
+                    'mobile' => '0775141287',           
+                    'academy_id' => 1,
+                    'cohort_id' => 1,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'email' => 'talalmohammad@gmail.com',
+                    'password' => Hash::make('password'),
+                    'en_first_name' =>'Talal',
+                    'en_second_name' =>'Mohammad',              
+                    'mobile' => '0775147287',           
+                    'academy_id' => 1,
+                    'cohort_id' => 1,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'email' => 'omamaali@gmail.com',
+                    'password' => Hash::make('password'),
+                    'en_first_name' =>'Omama',
+                    'en_second_name' =>'Ali',              
+                    'mobile' => '0775142287',           
+                    'academy_id' => 1,
+                    'cohort_id' => 1,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+           
             ]);
         }
         
     }
-}

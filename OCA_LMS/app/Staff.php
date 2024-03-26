@@ -62,6 +62,12 @@ class Staff extends Authenticatable
         return $this->hasMany(AssignmentFeedback::class);
     }
 
+    
+    public function assignmnet()
+    {
+        return $this->hasMany(Assignment::class);
+    }
+
     public function assignmnetSubmission()
     {
         return $this->hasMany(AssignmentSubmission::class);

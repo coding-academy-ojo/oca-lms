@@ -46,6 +46,38 @@ class ProjectSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'project_name' => 'Project 3 : Building Online Quiz Website Using JavaScript',
+                'project_description' => 'Build a responsive and dynamic quiz website that requires the user to register and sign in to answer quiz questions, compare the user answers with the correct answers previously saved on local storage.',
+                'project_start_date' => '2024-04-01',
+                'project_delivery_date' => '2024-04-04',
+                'project_image' => '1708779664.jpg',
+                'project_deliverable' => 'Responsive website
+                GitHub Repo Link that contains the whole project (all above).
+                Trello Link that contains the whole tasks.',
+                'project_resources' => 'Resource 3, Resource 4',
+                'project_assessment_methods' => 'The project will be evaluated in front of the Technical Team, the evaluation duration will be 15min for each one individually and 10 .',
+                'cohort_id' => 1,
+                'staff_id' => 3,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'project_name' => 'Project 4 : Build Ecommerce Website (PHP & MySql)',
+                'project_description' => 'You will build an e-commerce web application using Front-end and back-end (PHP and MYSQL), You can choose any type of products you want [cars, clothes, furniture, ..etc.], but.',
+                'project_start_date' => '2024-04-20',
+                'project_delivery_date' => '2024-04-25',
+                'project_image' => '1708779664.jpg',
+                'project_deliverable' => 'Responsive website
+                GitHub Repo Link that contains the whole project (all above).
+                Trello Link that contains the whole tasks.',
+                'project_resources' => 'Resource 3, Resource 4',
+                'project_assessment_methods' => 'The project will be evaluated in front of the Technical Team, the evaluation duration will be 15min for each one individually and 10 .',
+                'cohort_id' => 1,
+                'staff_id' => 3,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }
