@@ -52,6 +52,13 @@
                     @endif
                 @endforeach
             </div>
+            <div>
+                <form method="POST" action="{{ route('changeStatus.update', $lastSubmissionID) }}">
+                    @csrf
+                    @method('PUT')
+                        <button type="submit" class="border border-0 m-auto btn btn-primary "> Pass</button>
+                </form>
+            </div>
                <form method="POST" action="{{ route('Student.assignment.store') }}">
                 @csrf
                 <div class="input-group mb-3">

@@ -15,6 +15,13 @@
         </div>
     </section>
     <div class="container">
+        <form action="" method="GET" class="d-flex gap-2">
+            <div class="col-7 d-flex border border-light">
+                <input type="text" class="form-control border border-white" placeholder="search by assignment name or topic" name="search"
+                    value="{{ request('search') }}">
+                <button class="btn rounded-0 bg-primary" type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
         <div class="table-responsive">
             <table class="table table-hover ">
                 {{-- show all submission for assignmnet with details  --}}
@@ -43,15 +50,15 @@
                             <td>
                                 <button type="button" class="btn btn-primary add-feedback-btn" data-bs-toggle="modal"
                                     data-bs-target="#addFeedback{{ $Assignment->id }}">
-                                    ➕
+                                    +
                                 </button>
                             </td>
                             <td>
-                                {{-- <form method="POST" action="{{ route('changeStatus.update', $Assignment->id) }}">
-                                    @csrf
-                                    @method('PUT')
-                                        <button type="submit" class="btn btn-primary my-3">Pass</button>
-                                </form> --}}
+                                @if ($Assignment->status == 'not pass')
+                                😭❌
+                             @else
+                               😀 ✔ 
+                             @endif
                             </td>
                             <td><a class="link-underline link-underline-opacity-0"
                                     href="{{ route('assignment.feedbacksubmission.feedback', [$Assignment->assignment->id, $Assignment->student->id ,$Assignment->id ]) }}">View</a>

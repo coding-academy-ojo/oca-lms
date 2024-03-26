@@ -18,7 +18,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link "
-                            aria-current="page" href="#">Assignments</a>
+                            aria-current="page" href="{{ route('student.assignments') }}">Assignments</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link "
@@ -71,13 +71,8 @@
                                 Student Inputs
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                @if (in_array(Auth::guard('staff')->user()->role, ['trainer']))
                                     <a class="nav-link text-dark {{ request()->routeIs('assignments') ? 'text-primary' : '' }}"
                                         href="{{ route('assignments') }}">Assignments</a>
-                                @else
-                                    <a class="nav-link text-dark {{ request()->routeIs('assignments') ? 'text-primary' : '' }}"
-                                        href="{{ route('student.assignments') }}">Assignments</a>
-                                @endif
                                 <a class="nav-link text-dark  {{ request()->routeIs('show_all_projects') ? 'text-primary' : '' }}"
                                     href="{{ route('show_all_projects') }}">Projects</a>
                                     <a class="nav-link {{ request()->routeIs('Announcements') ? 'text-primary' : '' }}" href="{{ route('Announcements') }}">Announcements</a>
@@ -116,6 +111,7 @@
                 </ul>
             @endauth
             <ul class="navbar-nav ms-auto ">
+                
                 {{-- <li class="nav-item m-1">
                         <a class="nav-link {{ request()->routeIs('profile') ? 'active' : '' }}"
                 href="{{ route('profile') }}">

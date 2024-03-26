@@ -56,23 +56,17 @@
                                         href={{ $Assignment->attached_file }}target="_blank">{{ $Assignment->attached_file }}</a>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-primary  add-feedback-btn" data-bs-toggle="modal"
+                                    <button type="button" class="btn btn-primary  add-feedback-btn m-auto" data-bs-toggle="modal"
                                         data-bs-target="#addFeedback{{ $Assignment->id }}">
                                         +
                                     </button>
                                 </td>
                                 <td>
                                     @if ($Assignment->status == 'not pass')
-                                   
-                                       <form method="POST" action="{{ route('changeStatus.update', $Assignment->id) }}">
-                                        @csrf
-                                        @method('PUT')
-                                            <button type="submit" class="border border-0 m-auto bg-white "> 😭 ✔</button>
-                                    </form>
-                                    @else
-                                      🎊😀  
-                                    @endif
-                                    {{-- {{ $Assignment->status }} --}}
+                                    😭❌
+                                 @else
+                                   😀 ✔ 
+                                 @endif
                                  
                                 </td>
                                 <td><a class="link-underline link-underline-opacity-0"
