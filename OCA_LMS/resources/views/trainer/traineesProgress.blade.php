@@ -77,15 +77,15 @@ Trainees Progress
                         <div class="progress mb-2 my-4">
                             <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['passSubmissionsStatus'] }}%">{{ $lateAssignmentSubmissions['passSubmissionsStatus'] }} %</div>
                         </div>
-                        <small>{{$lateAssignmentSubmissions['passSubmissionsCount']}} Trainees Passed of {{$lateAssignmentSubmissions['numberOfSubmissions']}}  </small>
+                        <small>{{$lateAssignmentSubmissions['passSubmissionsCount']}} Trainees out of {{$lateAssignmentSubmissions['numberOfSubmissions']}} passed </small>
                         <div class="progress mb-2 my-4">
                             <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['notPassSubmissionsPercentage'] }}%">{{ $lateAssignmentSubmissions['notPassSubmissionsPercentage'] }} %</div>
                         </div>
-                        <small>{{ $lateAssignmentSubmissions['notPassSubmissionsCount'] }} Trainees not reviewed yet of {{$lateAssignmentSubmissions['numberOfSubmissions']}}</small>
+                        <small>{{ $lateAssignmentSubmissions['notPassSubmissionsCount'] }} Trainees out of {{$lateAssignmentSubmissions['numberOfSubmissions']}} not reviewed yet</small>
                         <div class="progress mb-2 my-4">
                             <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['latePercentage'] }}%">{{ $lateAssignmentSubmissions['latePercentage'] }} %</div>
                         </div>
-                        <small>{{ $lateAssignmentSubmissions['latePercentage'] }} Trainees Submit Late of {{$lateAssignmentSubmissions['numberOfSubmissions']}} </small>
+                        <small>{{ $lateAssignmentSubmissions['latePercentage'] }} Trainees out of {{$lateAssignmentSubmissions['numberOfSubmissions']}}  submitted late</small>
                         
 
                          <a href="{{ route('assignment.show', $assignmentAssessment['latestAssignmentId']) }}">
@@ -101,7 +101,7 @@ Trainees Progress
                     <div class="card-body">
                         <h6 class="card-title text-primary">Latest Assignment </h6>
                         <canvas id="LatestAssignmentSubmission"></canvas>
-                        <a href="{{ route('assignment.feedbacksubmission.show', $assignmentAssessment['latestAssignmentId']) }}">
+                        <a href="{{ route('assignment.show', $assignmentAssessment['latestAssignmentId']) }}">
                             <p class="card-title" style="font-size: 1rem;">{{$assignmentAssessment['latestAssignmentTitle']}} </p>
                         </a>
                     </div>
@@ -133,16 +133,15 @@ Trainees Progress
 
 </div>
 
-    <!-- Skills carousel -->
+   
 
     <div class="container my-5">
-
+ <!-- Skills carousel -->
         <div class="row">
 
             <div class="col-md-12">
                 <h2 class=" carousel-title text-primary">Overview on Skills Status</h2>
                 <hr>
-
             </div>
             <!-- End of Col-md-12 -->
 
@@ -152,7 +151,7 @@ Trainees Progress
                 ================================= 
             -->
 
-            <div id="carouselExample" class="carousel slide d-none d-sm-none d-md-block" data-ride="carousel">
+            <div id="carouselExample" class="carousel slide d-none d-sm-none d-md-block card py-3" data-ride="carousel">
 
                 <div class="carousel-inner">
 
@@ -188,8 +187,8 @@ Trainees Progress
                                 </div>
 
                             </div>
-                            <div class="col-md-3">
-                                <div>
+                            <div class="col-md-3 ">
+                                <div class="pb-1">
                                     <p style="font-size: 14px; margin-top: 10px;">S2: Create static and adaptive web
                                         user interfaces</p>
                                 </div>
@@ -553,29 +552,30 @@ Trainees Progress
         <div class="row my-5">
             <h1 class="text-primary"> All Trainees Overview</h1>
             <div class="col-md-12">
-                <div class="widget blank no-padding">
-                    <div class="panel panel-default work-progress-table">
-                    </div>
-                    <div class="table-responsive">
+                    <div class="table-responsive card" style="max-height: 400px; overflow-y: auto;">
                         <!-- Add this wrapper -->
-                        <table id="mytable" class="table">
+                        <table id="mytable" class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th><input type="checkbox" id="checkall" /></th>
+                                    <th>#</th>
                                     <th>Name</th>
-                                    <th>Student Progress</td>
+                                    <th>Student Progress</th>
+                                    <th>#</th>
+                                    <th>#</th>
+                                    <th>#</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><input type="checkbox" class="checkthis" /></td>
+                                    <td>1</td>
                                     <td>Mohsin</td>
                                     <td style="width: 70%;">
                                         <div class="progress">
-                                            <div style="width: 60%;" aria-valuemax="100" aria-valuemin="0"
-                                                aria-valuenow="60" role="progressbar" class="red progress-bar">
-                                                <span>60%</span>
-                                            </div>
+                                        <div class="progress">
+  <div class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+  <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+  <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
                                         </div>
                                     </td>
                                     <td><a href="{{route('trainee-progress-details')}}" class="btn btn-primary">View</a>
@@ -583,7 +583,7 @@ Trainees Progress
 
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" class="checkthis" /></td>
+                                    <td>2</td>
                                     <td>Haseeb</td>
                                     <td>
                                         <div class="progress">
@@ -599,7 +599,7 @@ Trainees Progress
 
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" class="checkthis" /></td>
+                                    <td>3</td>
                                     <td>Hussain</td>
 
                                     <td>
@@ -616,7 +616,7 @@ Trainees Progress
 
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" class="checkthis" /></td>
+                                    <td>4</td>
                                     <td>Noman</td>
 
                                     <td>
@@ -633,7 +633,7 @@ Trainees Progress
 
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" class="checkthis" /></td>
+                                    <td>5</td>
                                     <td>Ubaid</td>
 
                                     <td>
@@ -649,7 +649,7 @@ Trainees Progress
 
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" class="checkthis" /></td>
+                                    <td>6</td>
                                     <td>Adnan</td>
 
                                     <td>
@@ -666,7 +666,7 @@ Trainees Progress
                                 </tr>
 
                                 <tr>
-                                    <td><input type="checkbox" class="checkthis" /></td>
+                                    <td>7</td>
                                     <td>Saboor</td>
 
                                     <td>
@@ -685,7 +685,7 @@ Trainees Progress
                             </tbody>
                         </table>
                     </div>
-                </div>
+                
             </div>
         </div>
     </div>

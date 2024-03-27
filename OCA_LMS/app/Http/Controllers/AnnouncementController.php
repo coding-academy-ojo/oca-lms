@@ -6,6 +6,7 @@ use App\Announcement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Absence;
+use App\Student;
 use Illuminate\Support\Facades\DB;
 
 
@@ -18,10 +19,14 @@ class AnnouncementController extends Controller
     public function index()
     {
         $cohortId = session("cohort_ID");
-        dd(session("cohort_ID"));
+        //dd(session("cohort_ID"));
         $announcements = Announcement::where('cohort_id', $cohortId)->latest()->get(); 
+        // get cohort id from session based on studen id and use it to get cohort announcements in students view 
+        $studentId = session('student_id');
         
-    
+        $student = Student::find($studentId);
+        //$cohortId = $student->cohort_id;
+        dd($studentId);
         // Count total absences for the specified cohort
         $totalAbsenceCount = Absence::whereHas('student', function ($query) use ($cohortId) {
             $query->where('cohort_id', $cohortId);
