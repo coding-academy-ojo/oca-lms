@@ -21,9 +21,10 @@ class TraineeProgressController extends Controller
         $lateAssignmentSubmissions = $this->lateAssignmentSubmissions();
         $assignmentAssessment = $this->assignmentAssessment();
         $projectAssessment = $this->projectAssessment();
+        $allTrainessOverview = $this->allTrainessOverview();
 
         // Return view with data
-        return view('trainer.traineesProgress', compact('attendanceOverview', 'lateAssignmentSubmissions', 'assignmentAssessment', 'projectAssessment'));
+        return view('trainer.traineesProgress', compact('attendanceOverview', 'lateAssignmentSubmissions', 'assignmentAssessment', 'projectAssessment' , 'allTrainessOverview'));
     }
     private function attendanceOverview() {
         $staff = Auth::guard('staff')->user();
@@ -202,6 +203,27 @@ $notPassSubmissionsPercentage = $numberOfSubmissions > 0 ? intval(($notPassSubmi
         
     
     }
+
+    private function allTrainessOverview() {
+        $staff = Auth::guard('staff')->user();
+        $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
+        $students = $runningCohort->students;
+        // dd($students);
+        
+         return $students;
+
+
+    
+    }
+
+//     public function showDetails($id)
+// {
+//     // Retrieve the student details based on the provided ID
+//     $student = Student::find($id);
+
+//     // Pass the student details to the view
+//     return view('trainer.trainee_progress_details', compact('student'));
+// }
     
     
 }

@@ -44,6 +44,7 @@
                             <img src="{{ asset('assets/img/usericon.jpg') }}" width="100"
                                 class="img-fluid rounded-circle" alt="">
                         </div>
+                        
                         <h3 class="mt-4 mb-1">Mohsin</h3>
                         <p class="text-muted"> SWE</p>
                         <ul class="list-group mb-3 list-group-flush">
