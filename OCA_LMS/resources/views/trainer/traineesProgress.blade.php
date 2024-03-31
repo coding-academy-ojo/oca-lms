@@ -77,15 +77,15 @@ Trainees Progress
                         <div class="progress mb-2 my-4">
                             <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['passSubmissionsStatus'] }}%">{{ $lateAssignmentSubmissions['passSubmissionsStatus'] }} %</div>
                         </div>
-                        <small>{{$lateAssignmentSubmissions['passSubmissionsCount']}} Trainees out of {{$lateAssignmentSubmissions['numberOfSubmissions']}} passed </small>
+                        <small>{{$lateAssignmentSubmissions['passSubmissionsCount']}} Trainees Passed of {{$lateAssignmentSubmissions['numberOfSubmissions']}}  </small>
                         <div class="progress mb-2 my-4">
                             <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['notPassSubmissionsPercentage'] }}%">{{ $lateAssignmentSubmissions['notPassSubmissionsPercentage'] }} %</div>
                         </div>
-                        <small>{{ $lateAssignmentSubmissions['notPassSubmissionsCount'] }} Trainees out of {{$lateAssignmentSubmissions['numberOfSubmissions']}} not reviewed yet</small>
+                        <small>{{ $lateAssignmentSubmissions['notPassSubmissionsCount'] }} Trainees not reviewed yet of {{$lateAssignmentSubmissions['numberOfSubmissions']}}</small>
                         <div class="progress mb-2 my-4">
                             <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['latePercentage'] }}%">{{ $lateAssignmentSubmissions['latePercentage'] }} %</div>
                         </div>
-                        <small>{{ $lateAssignmentSubmissions['latePercentage'] }} Trainees out of {{$lateAssignmentSubmissions['numberOfSubmissions']}}  submitted late</small>
+                        <small>{{ $lateAssignmentSubmissions['latePercentage'] }} Trainees Submit Late of {{$lateAssignmentSubmissions['numberOfSubmissions']}} </small>
                         
 
                          <a href="{{ route('assignment.show', $assignmentAssessment['latestAssignmentId']) }}">
@@ -101,7 +101,7 @@ Trainees Progress
                     <div class="card-body">
                         <h6 class="card-title text-primary">Latest Assignment </h6>
                         <canvas id="LatestAssignmentSubmission"></canvas>
-                        <a href="{{ route('assignment.show', $assignmentAssessment['latestAssignmentId']) }}">
+                        <a href="{{ route('assignment.feedbacksubmission.show', $assignmentAssessment['latestAssignmentId']) }}">
                             <p class="card-title" style="font-size: 1rem;">{{$assignmentAssessment['latestAssignmentTitle']}} </p>
                         </a>
                     </div>
@@ -133,15 +133,16 @@ Trainees Progress
 
 </div>
 
-   
+    <!-- Skills carousel -->
 
     <div class="container my-5">
- <!-- Skills carousel -->
+
         <div class="row">
 
             <div class="col-md-12">
                 <h2 class=" carousel-title text-primary">Overview on Skills Status</h2>
                 <hr>
+
             </div>
             <!-- End of Col-md-12 -->
 
@@ -151,7 +152,7 @@ Trainees Progress
                 ================================= 
             -->
 
-            <div id="carouselExample" class="carousel slide d-none d-sm-none d-md-block card py-3" data-ride="carousel">
+            <div id="carouselExample" class="carousel slide d-none d-sm-none d-md-block" data-ride="carousel">
 
                 <div class="carousel-inner">
 
@@ -187,8 +188,8 @@ Trainees Progress
                                 </div>
 
                             </div>
-                            <div class="col-md-3 ">
-                                <div class="pb-1">
+                            <div class="col-md-3">
+                                <div>
                                     <p style="font-size: 14px; margin-top: 10px;">S2: Create static and adaptive web
                                         user interfaces</p>
                                 </div>
@@ -548,146 +549,244 @@ Trainees Progress
 
 
 
-        <!-- Table for All trainees  -->
+        <!-- Masterpiece tracking Table for All trainees  -->
         <div class="row my-5">
-            <h1 class="text-primary"> All Trainees Overview</h1>
-            <div class="col-md-12">
-                    <div class="table-responsive card" style="max-height: 400px; overflow-y: auto;">
-                        <!-- Add this wrapper -->
-                        <table id="mytable" class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Student Progress</th>
-                                    <th>#</th>
-                                    <th>#</th>
-                                    <th>#</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Mohsin</td>
-                                    <td style="width: 70%;">
-                                        <div class="progress">
-                                        <div class="progress">
-  <div class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-  <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-  <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-</div>
-                                        </div>
-                                    </td>
-                                    <td><a href="{{route('trainee-progress-details')}}" class="btn btn-primary">View</a>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Haseeb</td>
-                                    <td>
-                                        <div class="progress">
-                                            <div style="width: 80%;" aria-valuemax="100" aria-valuemin="0"
-                                                aria-valuenow="80" role="progressbar" class="green progress-bar">
-                                                <span>80%</span>
-                                            </div>
-                                        </div>
-                                    </td>
-
-                                    <td><a href="{{route('trainee-progress-details')}}" class="btn btn-primary">View</a>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Hussain</td>
-
-                                    <td>
-                                        <div class="progress">
-                                            <div style="width: 40%;" aria-valuemax="100" aria-valuemin="0"
-                                                aria-valuenow="40" role="progressbar" class="purple progress-bar">
-                                                <span>40%</span>
-                                            </div>
-                                        </div>
-                                    </td>
-
-                                    <td><a href="{{route('trainee-progress-details')}}" class="btn btn-primary">View</a>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Noman</td>
-
-                                    <td>
-                                        <div class="progress">
-                                            <div style="width: 90%;" aria-valuemax="100" aria-valuemin="0"
-                                                aria-valuenow="90" role="progressbar" class="purple progress-bar">
-                                                <span>90%</span>
-                                            </div>
-                                        </div>
-                                    </td>
-
-                                    <td><a href="{{route('trainee-progress-details')}}" class="btn btn-primary">View</a>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Ubaid</td>
-
-                                    <td>
-                                        <div class="progress">
-                                            <div style="width: 60%;" aria-valuemax="100" aria-valuemin="0"
-                                                aria-valuenow="60" role="progressbar" class="red progress-bar">
-                                                <span>60%</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td><a href="{{route('trainee-progress-details')}}" class="btn btn-primary">View</a>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>Adnan</td>
-
-                                    <td>
-                                        <div class="progress">
-                                            <div style="width: 45%;" aria-valuemax="100" aria-valuemin="0"
-                                                aria-valuenow="45" role="progressbar" class="red progress-bar">
-                                                <span>45%</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td><a href="{{route('trainee-progress-details')}}" class="btn btn-primary">View</a>
-                                    </td>
-
-                                </tr>
-
-                                <tr>
-                                    <td>7</td>
-                                    <td>Saboor</td>
-
-                                    <td>
-                                        <div class="progress">
-                                            <div style="width: 89%;" aria-valuemax="100" aria-valuemin="0"
-                                                aria-valuenow="89" role="progressbar" class="green progress-bar">
-                                                <span>89%</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td><a href="{{route('trainee-progress-details')}}" class="btn btn-primary">View</a>
-                                    </td>
-                                </tr>
-
-
-                            </tbody>
-                        </table>
-                    </div>
-                
-            </div>
+    <h1 class="text-primary"> Masterpiece tracking <span class="bg-primary">    </span></h1> 
+    <div class="col-md-12">
+        <div class="table-responsive card pb-3">
+            <!-- Add this wrapper -->
+            <table id="mytable" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Task</th>
+                        <th> Deadline </th>
+                        <th>Progress</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Idea pitching</td>
+                        <td>5-6-2024</td>
+                        <td>
+                            <div class="progress">
+                                <div style="width: 80%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="80"
+                                    role="progressbar" class="green progress-bar" data-toggle="tooltip" title="25 of 30">
+                                    <span>80%</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Wireframe & Mockup</td>
+                        <td>30-6-2024</td>
+                        <td>
+                            <div class="progress">
+                                <div style="width: 80%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="80"
+                                    role="progressbar" class="green progress-bar" data-toggle="tooltip" title="25 of 30">
+                                    <span>80%</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Front-end</td>
+                        <td>15-8-2024</td>
+                        <td>
+                            <div class="progress">
+                                <div style="width: 40%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40"
+                                    role="progressbar" class="purple progress-bar" data-toggle="tooltip" title="12 of 30">
+                                    <span>40%</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td >4</td>
+                        <td >Full-stack version fully functional</td>
+                        <td>15-9-2024</td>
+                        <td>
+                            <div class="progress">
+                                <div style="width: 20%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="20"
+                                    role="progressbar" class="purple progress-bar" data-toggle="tooltip" title="8 of 30">
+                                    <span>20%</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td >5</td>
+                        <td >All deliverables (Docs, presentation, brief)</td>
+                        <td>30-10-2024</td>
+                        <td>
+                            <div class="progress">
+                                <div style="width: 60%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="60"
+                                    role="progressbar" class="red progress-bar" data-toggle="tooltip" title="17 of 30">
+                                    <span>60%</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+    </div>
+</div>
+
+
+
+
+   <!-- Table for All trainees  -->
+    <div class="row my-5">
+        <h1 class="text-primary"> All Trainees Overview <span class="bg-primary">    </span></h1> 
+        <div class="col-md-12">
+            <div class="table-responsive card" style="max-height: 400px; overflow-y: auto;">
+                <!-- Add this wrapper -->
+                <table id="mytable" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Student Progress</th>
+                            <th>#</th>
+                            <th>#</th>
+                            <th>#</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Mohsin</td>
+                            <td style="width: 70%;">
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="15"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 30%"
+                                        aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 20%"
+                                        aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </td>
+                            <td><a href="{{route('trainee-progress-details')}}" class="btn btn-primary">View</a>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Haseeb</td>
+                            <td>
+                                <div class="progress">
+                                    <div style="width: 80%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="80"
+                                        role="progressbar" class="green progress-bar">
+                                        <span>80%</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td><a href="{{route('trainee-progress-details')}}" class="btn btn-primary">View</a>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Hussain</td>
+
+                            <td>
+                                <div class="progress">
+                                    <div style="width: 40%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40"
+                                        role="progressbar" class="purple progress-bar">
+                                        <span>40%</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td><a href="{{route('trainee-progress-details')}}" class="btn btn-primary">View</a>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Noman</td>
+
+                            <td>
+                                <div class="progress">
+                                    <div style="width: 90%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="90"
+                                        role="progressbar" class="purple progress-bar">
+                                        <span>90%</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td><a href="{{route('trainee-progress-details')}}" class="btn btn-primary">View</a>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Ubaid</td>
+
+                            <td>
+                                <div class="progress">
+                                    <div style="width: 60%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="60"
+                                        role="progressbar" class="red progress-bar">
+                                        <span>60%</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><a href="{{route('trainee-progress-details')}}" class="btn btn-primary">View</a>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Adnan</td>
+
+                            <td>
+                                <div class="progress">
+                                    <div style="width: 45%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="45"
+                                        role="progressbar" class="red progress-bar">
+                                        <span>45%</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><a href="{{route('trainee-progress-details')}}" class="btn btn-primary">View</a>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>7</td>
+                            <td>Saboor</td>
+
+                            <td>
+                                <div class="progress">
+                                    <div style="width: 89%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="89"
+                                        role="progressbar" class="green progress-bar">
+                                        <span>89%</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><a href="{{route('trainee-progress-details')}}" class="btn btn-primary">View</a>
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
     </div>
 
 

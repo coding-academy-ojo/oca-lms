@@ -18,15 +18,12 @@ class AnnouncementController extends Controller
     
     public function index()
     {
-        $cohortId = session("cohort_ID");
-        //dd(session("cohort_ID"));
-        $announcements = Announcement::where('cohort_id', $cohortId)->latest()->get(); 
-        // get cohort id from session based on studen id and use it to get cohort announcements in students view 
-        $studentId = session('student_id');
-        
+          // get cohort id from session based on studen id and use it to get cohort announcements in students view 
+          $studentId = session('student_id');
         $student = Student::find($studentId);
-        //$cohortId = $student->cohort_id;
-        dd($studentId);
+        $cohortId = $student->cohort_id;
+        $announcements = Announcement::where('cohort_id', $cohortId)->latest()->get(); 
+     
         // Count total absences for the specified cohort
         $totalAbsenceCount = Absence::whereHas('student', function ($query) use ($cohortId) {
             $query->where('cohort_id', $cohortId);
