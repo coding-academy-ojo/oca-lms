@@ -33,8 +33,8 @@
             </div>
         @endif
         {{-- search based on assignmnet name & topic name  --}}
-        <div class="row d-flex col-7">
-            <form action="" method="GET" class="d-flex gap-2">
+        <div class="row d-flex col-7 flex-wrap">
+            <form action="" method="GET" class="d-flex gap-2 ">
                 <div class="col-7 d-flex border border-light">
                     <input type="text" class="form-control border border-white" placeholder="search by assignment name or topic" name="search"
                         value="{{ request('search') }}">
