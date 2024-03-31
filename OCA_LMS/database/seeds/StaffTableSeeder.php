@@ -23,6 +23,15 @@ class StaffTableSeeder extends Seeder
                 'staff_bio' => 'Manager bio Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
             ],
             [
+                'staff_name' => 'Salameh',
+                'staff_email' => 'manager1@example.com',
+                'staff_password' => Hash::make('password'), // Use a secure password
+                'staff_Phone' => '1234567890',
+                'role' => 'manager',
+                'staff_personal_img' => 'person.png',
+                'staff_bio' => 'Manager bio Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+            ],
+            [
                 'staff_name' => 'Rana',
                 'staff_email' => 'supermanager@example.com',
                 'staff_password' => Hash::make('password'), // Use a secure password
@@ -34,6 +43,51 @@ class StaffTableSeeder extends Seeder
             [
                 'staff_name' => 'Reem',
                 'staff_email' => 'trainer@example.com',
+                'staff_password' => Hash::make('password'), // Use a secure password
+                'staff_Phone' => '1234567890',
+                'role' => 'trainer',
+                'staff_personal_img' => 'person.png',
+                'staff_bio' => 'Trainer bio Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+            ],
+            [
+                'staff_name' => 'Rawan',
+                'staff_email' => 'trainer1@example.com',
+                'staff_password' => Hash::make('password'), // Use a secure password
+                'staff_Phone' => '1234567890',
+                'role' => 'trainer',
+                'staff_personal_img' => 'person.png',
+                'staff_bio' => 'Trainer bio Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+            ],   
+            [
+                'staff_name' => 'Ayman',
+                'staff_email' => 'trainer2@example.com',
+                'staff_password' => Hash::make('password'), // Use a secure password
+                'staff_Phone' => '1234567890',
+                'role' => 'trainer',
+                'staff_personal_img' => 'person.png',
+                'staff_bio' => 'Trainer bio Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+            ],
+            [
+                'staff_name' => 'Alaa',
+                'staff_email' => 'trainer3@example.com',
+                'staff_password' => Hash::make('password'), // Use a secure password
+                'staff_Phone' => '1234567890',
+                'role' => 'trainer',
+                'staff_personal_img' => 'person.png',
+                'staff_bio' => 'Trainer bio Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+            ],
+            [
+                'staff_name' => 'Amro',
+                'staff_email' => 'trainer4@example.com',
+                'staff_password' => Hash::make('password'), // Use a secure password
+                'staff_Phone' => '1234567890',
+                'role' => 'trainer',
+                'staff_personal_img' => 'person.png',
+                'staff_bio' => 'Trainer bio Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+            ],
+            [
+                'staff_name' => 'Amal',
+                'staff_email' => 'trainer5@example.com',
                 'staff_password' => Hash::make('password'), // Use a secure password
                 'staff_Phone' => '1234567890',
                 'role' => 'trainer',
