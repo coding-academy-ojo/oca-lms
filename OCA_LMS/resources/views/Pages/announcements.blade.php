@@ -89,7 +89,7 @@ Announcements
             </form>
         </div>
     </div>
-    <?php dd($cohort_id); ?>
+   
 
 
     <script>
