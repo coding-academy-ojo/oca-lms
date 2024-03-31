@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TechnologyCohortSeeder::class);
         $this->call(TopicSeeder::class);
         $this->call(AnnouncementSeeder::class);
-        // $this->call(AbsencesTableSeeder::class);
+        $this->call(AbsencesTableSeeder::class);
         $this->call(AssignmentSeeder::class);
         $this->call(Assignment_StudentSeeder::class);
         $this->call(Assignment_SubmissionsSeeder::class);
