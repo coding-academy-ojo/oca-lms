@@ -224,6 +224,8 @@ $notPassSubmissionsPercentage = $numberOfSubmissions > 0 ? intval(($notPassSubmi
 //     // Pass the student details to the view
 //     return view('trainer.trainee_progress_details', compact('student'));
 // }
+
+
     
     
 }
