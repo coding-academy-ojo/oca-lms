@@ -676,10 +676,12 @@ Trainees Progress
                                 
                                 </div>
                             </td>
-                            <td><a href="{{route('trainee-progress-details', $student->id) }}" class="btn btn-primary">View</a>
-                            </td>
+                            <td>
+    <a href="{{ route('ProgressDetails.showDetails', ['id' => $student->id]) }}" class="btn btn-primary">View</a>
+</td>
 
-                        </tr>
+
+                                             </tr>
                         <tr>
                             
 

@@ -10,9 +10,10 @@ use App\Absence;
 use App\Assignment;
 use App\AssignmentSubmission;
 use App\Cohort;
+use App\Student;
 
 
-class TraineeProgressController extends Controller
+class TraineesProgressController extends Controller
 {
 
     public function index() {
@@ -216,14 +217,14 @@ $notPassSubmissionsPercentage = $numberOfSubmissions > 0 ? intval(($notPassSubmi
     
     }
 
-//     public function showDetails($id)
-// {
-//     // Retrieve the student details based on the provided ID
-//     $student = Student::find($id);
+    public function showDetails($id)
+{
+    // Retrieve the student details based on the provided ID
+    $student = Student::find($id);
 
-//     // Pass the student details to the view
-//     return view('trainer.trainee_progress_details', compact('student'));
-// }
+    // Pass the student details to the view
+    return view('trainer.trainee_progress_details', compact('student'));
+}
 
 
     
