@@ -76,16 +76,17 @@ class AssignmentController extends Controller
      */
     public function store(Request $request)
     {
-        $TrainertId = Auth::id();
+        $trainerId = Auth::id();
         $cohortID = session('cohort_ID');
+        
         $assignment = new Assignment;
         $assignment->assignment_name = $request->input('name');
         $assignment->assignment_level = $request->input('level');
         $assignment->assignment_due_date = $request->input('due_date');
         $assignment->topic_id = $request->input('topic');
-        $assignment->created_at =now();
+        $assignment->created_at = now();
         $assignment->cohort_id = $cohortID;
-        $assignment->trainer_id = $TrainertId;
+        $assignment->trainer_id = $trainerId;
         $assignment->assignment_description = $request->input('description');
     
         // Upload and attach assignment file if provided
@@ -103,18 +104,19 @@ class AssignmentController extends Controller
     
         if ($request->has('students')) {
             $studentIds = $request->input('students');
-    
+            
+            // If "All students" is selected, get all student IDs in the cohort
+            if (in_array('', $studentIds)) {
+                $studentIds = Student::where('cohort_id', $cohortID)->pluck('id')->toArray();
+            }
+            
             // Assign students to the assignment
             $assignment->student()->attach($studentIds);
-        } 
-        // else {
-        //     // If no specific students are selected, assign to all students in the cohort
-        //     $students = Student::where('cohort_id', $cohortID)->pluck('id')->toArray();
-        //     $assignment->student()->attach($students);
-        // }
+        }
     
         return redirect()->route('assignments')->with('success', 'Assignment created successfully');
     }
+    
 
 
     /**
@@ -142,7 +144,9 @@ class AssignmentController extends Controller
     public function edit($id)
     {
         $cohortID=session('cohort_ID');
-        $topics = Topic::all();
+        $topics = Topic::whereHas('technologyCohort', function ($query) use ($cohortID) {
+            $query->where('cohort_id', $cohortID);
+        })->get();
         $Allstudents = Student::where('cohort_id',$cohortID)->get();
         $assignment = Assignment::find($id);
         // Retrieve all assignments related to the student
@@ -170,6 +174,8 @@ class AssignmentController extends Controller
         $assignment->topic_id = $request->input('topic');
         $assignment->cohort_id = $cohortID;
         $assignment->trainer_id = $TrainertId;
+        $assignment->updated_at = now();
+
 
         $assignment->assignment_description = $request->input('description');
     
@@ -181,12 +187,17 @@ class AssignmentController extends Controller
         }
     
         $assignment->save();
-    
+
         if ($request->has('students')) {
             $studentIds = $request->input('students');
-    
-            // sync students to the assignment
-            $assignment->student()->sync($studentIds);
+            
+            // If "All students" is selected, get all student IDs in the cohort
+            if (in_array('', $studentIds)) {
+                $studentIds = Student::where('cohort_id', $cohortID)->pluck('id')->toArray();
+            }
+            
+            // Assign students to the assignment
+            $assignment->student()->attach($studentIds);
         }
     
         return redirect()->route('assignments')->with('success', 'Assignment updated successfully');
