@@ -232,8 +232,8 @@
                                 <div class="col-12 ">
                                     @foreach ($students as $Student)
                                         <div class="d-flex">
-                                            <div class="">{{ $Student->en_first_name }}</div>
-                                            <div>
+                                            <div class="my-2 mx-2">{{ $Student->en_first_name }}</div>
+                                            <div class="my-2">
                                                 <form action="{{ route('assignment.removeStudent', ['assignment' => $assignment->id, 'student' => $Student->id]) }}"
                                                     method="post">
                                                     @csrf

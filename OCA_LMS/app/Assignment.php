@@ -23,6 +23,7 @@ class Assignment extends Model
     }
 
 
+
     // Relationship with AssignmentSubmissions
     public function assignmentSubmissions()
     {

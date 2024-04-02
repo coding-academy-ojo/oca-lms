@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+
 class StaffCohortTableSeeder extends Seeder
 {
     /**
@@ -25,13 +26,26 @@ class StaffCohortTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'staff_id' => 2,
+                'staff_id' => 7,
                 'cohort_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
-            ],   [
-                'staff_id' => 2,
+            ],
+            [
+                'staff_id' => 4,
+                'cohort_id' => 4,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'staff_id' => 5,
                 'cohort_id' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'staff_id' => 8,
+                'cohort_id' => 13,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

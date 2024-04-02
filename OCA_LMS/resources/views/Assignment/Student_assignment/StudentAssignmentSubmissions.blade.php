@@ -41,38 +41,35 @@
                         </div>
                         <div class="mx-4"> {{ $assignment_submission->created_at }}</div>
                     </div>
-                    @if (!empty($assignment_submission->feedback ))
-                    <p class="mx-3">{{ $assignment_submission->staff->staff_name }}</p>
-                    <div class="d-flex justify-content-between border border-primary my-3 py-3 mx-3">
-                        <div class="mx-4"> {{ $assignment_submission->feedback }}</div>
-                        <div class="mx-4"> {{ $assignment_submission->updated_at }}</div>
-                    </div>
+                    @if (!empty($assignment_submission->feedback))
+                        <p class="mx-3">{{ $assignment_submission->staff->staff_name }}</p>
+                        <div class="d-flex justify-content-between border border-primary my-3 py-3 mx-3">
+                            <div class="mx-4"> {{ $assignment_submission->feedback }}</div>
+                            <div class="mx-4"> {{ $assignment_submission->updated_at }}</div>
+                        </div>
                     @else
-                        
                     @endif
                 @endforeach
             </div>
-            <div>
-                <form method="POST" action="{{ route('changeStatus.update', $lastSubmissionID) }}">
+            @if (auth()->check() && (auth()->user()->role == 'trainer' || auth()->user()->role == 'manager'))
+                <div>
+                    <form method="POST" action="{{ route('changeStatus.update', $lastSubmissionID) }}">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="border border-0 m-auto btn btn-primary mb-3 "> Pass</button>
+                    </form>
+                </div>
+            @else
+                <form method="POST" action="{{ route('Student.assignment.store') }}">
                     @csrf
-                    @method('PUT')
-                        <button type="submit" class="border border-0 m-auto btn btn-primary "> Pass</button>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="submit youe assignmnet"
+                            name="Assignment_submission" aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <input type="hidden" name="Assignment_ID" value="{{ $assignment->id }}">
+                        <button class="btn btn-primary" type="submit" id="button-addon2">Submit</button>
+                    </div>
                 </form>
-            </div>
-               <form method="POST" action="{{ route('Student.assignment.store') }}">
-                @csrf
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="submit youe assignmnet" name="Assignment_submission" aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <input type="hidden" name="Assignment_ID" value="{{$assignment->id }}">
-                    <button class="btn btn-primary" type="submit" id="button-addon2">Submit</button>
-                  </div>
-               
-            </form>
-            {{-- <form method="POST" action="{{ route('changeStatus.update', $Assignment->id) }}">
-                @csrf
-                @method('PUT')
-                    <button type="submit" class="btn btn-primary my-3">Pass</button>
-            </form> --}}
+            @endif
         </div>
     </div>
 @endsection

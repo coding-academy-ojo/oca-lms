@@ -6,8 +6,8 @@ use App\AssignmentSubmission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Assignment;
-use App\AssignmentFeedback;
 use App\Student;
+use Carbon\Carbon;
 
 class AssignmentSubmissionController extends Controller
 {
@@ -18,8 +18,9 @@ class AssignmentSubmissionController extends Controller
      */
     public function index()
     {
-        $studentId = Auth::id();
+        $studentId = session('student_id');
         $student = Student::find($studentId);
+        $cohortId = $student->cohort_id;
         // Retrieve all assignments related to the current student 
         $assignments = $student->assignment;
         
@@ -44,12 +45,12 @@ class AssignmentSubmissionController extends Controller
      */
     public function store(Request $request)
     {
-        $studentId = Auth::id();
+        $studentId = session('student_id');
         $assignment_submision = new AssignmentSubmission();
         $assignment_submision->attached_file = $request->input('Assignment_submission');
         $assignment_submision->assignment_id = $request->input('Assignment_ID');
         $assignment_submision->student_id = $studentId;
-        $assignment_submision->created_at =now();
+        $assignment_submision->created_at = Carbon::now();
         $assignmnetId=$request->input('Assignment_ID');
         $Assignment = Assignment::find( $assignmnetId);
         $assignmnetdate=$Assignment->assignment_due_date;

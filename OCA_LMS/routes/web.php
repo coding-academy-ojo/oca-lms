@@ -26,12 +26,13 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\AnnouncementController;
-use App\Http\Controllers\TraineeProgressController;
+use App\Http\Controllers\TraineesProgressController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StudentDashboardController;
 use App\Http\Controllers\TrainerDashboardController;
 use App\Http\Controllers\AbsenceReportController;
-use App\Http\Controllers\SoftSkillsTrainingController;
+use App\Http\Controllers\SoftSkillsTrainingController;use App\Http\Controllers\SingleTraineeProgressController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -133,12 +134,12 @@ Route::delete('/staff/{id}', [StaffController::class, 'destroy'])->name('staff.d
 
 
 // trainee progress details
-Route::get('/cohort/progress-details', function () {
-    return view('trainer.trainee-progress-details');
-})->name('trainee-progress-details');
+// Route::get('/cohort/progress-details', function () {
+//     return view('trainer.trainee-progress-details');
+// })->name('trainee-progress-details');
 
-// Route::get('/cohort/progress-details', [TraineeProgressController::class, 'index'])->name('ProgressDetails.index');
-Route::get('/traineesProgress', [TraineeProgressController::class, 'index'])->name('trainees.progress');
+ Route::get('/cohort/progress-details/{id}',[ SingleTraineeProgressController::class, 'index'])->name('ProgressDetails.showDetails');
+Route::get('/traineesProgress', [TraineesProgressController::class, 'index'])->name('trainees.progress');
 
 
 // absence
