@@ -36,20 +36,20 @@
         <div class="row d-flex col-7 flex-wrap">
             <form action="" method="GET" class="d-flex gap-2 ">
                 <div class="col-7 d-flex border border-light">
-                    <input type="text" class="form-control border border-white" placeholder="search by assignment name or topic" name="search"
-                        value="{{ request('search') }}">
+                    <input type="text" class="form-control border border-white"
+                        placeholder="search by assignment name or topic" name="search" value="{{ request('search') }}">
                     <button class="btn rounded-0 bg-primary" type="submit"><i class="fas fa-search"></i></button>
                 </div>
                 {{-- filter based on technology --}}
                 {{-- <div class="col-2"> --}}
-                    <select class="form-select" name="technology_id" aria-label="Default select example">
-                        <option value="">All Technologies</option>
-                        @foreach ($technologies as $technology)
+                <select class="form-select" name="technology_id" aria-label="Default select example">
+                    <option value="">All Technologies</option>
+                    @foreach ($technologies as $technology)
                         <option value="{{ $technology->id }}">
                             {{ $technology->technologies_name }}
                         </option>
                     @endforeach
-                    </select>
+                </select>
                 {{-- </div> --}}
 
             </form>
@@ -82,15 +82,14 @@
                                 </td>
                                 <td>{{ optional($assignment->topic)->topic_name }}</td>
                                 <td>
-                                 
+
                                     {{-- Accessing the technology through the topic's technology cohort --}}
                                     @if ($assignment->topic && $assignment->topic->technologyCohort)
-                                    {{-- Accessing the technology through the topic's technology cohort --}}
-                                    {{ optional(optional($assignment->topic)->technologyCohort)->technology ? optional(optional($assignment->topic)->technologyCohort)->technology->technologies_name : 'N/A' }}
-                                @else
-                                    {{-- Handle case where either topic or technology cohort is missing --}}
-                                    N/A
-                                @endif                              </td>
+                                        {{-- Accessing the technology through the topic's technology cohort --}}
+                                        {{ $assignment->topic->technologyCohort->technology_id }}
+                                        {{-- {{ optional(optional(optional($assignment->topic)->technologyCohort)->technology)->technologies_name }} --}}
+                                    @endif
+                                </td>
                                 <td> <a class="mx-2 link-underline link-underline-opacity-0"
                                         href="{{ route('assignment.show', $assignment->id) }}">view</a>
                                 </td>
@@ -116,9 +115,8 @@
                 </table>
             </div>
         </div>
-        <div class="d-flex justify-content-center" >
+        <div class="d-flex justify-content-center">
             {{ $assignments->links() }}
         </div>
     </div>
-    
 @endsection
