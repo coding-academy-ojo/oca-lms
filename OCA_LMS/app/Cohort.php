@@ -37,4 +37,9 @@ class Cohort extends Model
     {
         return $this->belongsToMany(Technology::class, 'technology__cohorts')->withPivot('start_date', 'end_date');
     }
+
+    public function softSkillsTrainings()
+    {
+        return $this->hasMany(SoftSkillsTraining::class);
+    }
 }

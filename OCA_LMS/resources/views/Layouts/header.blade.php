@@ -78,7 +78,8 @@
                                     <a class="nav-link {{ request()->routeIs('Announcements') ? 'text-primary' : '' }}" href="{{ route('Announcements') }}">Announcements</a>
                                 <a class="nav-link text-dark {{ request()->routeIs('attendance') ? 'text-primary' : '' }}"
                                     href="{{ route('attendance') }}">Attendance</a>
-
+                                    <a class="nav-link text-dark {{ request()->routeIs('soft-skills.*') ? 'text-primary' : '' }}"
+                                        href="{{ route('soft-skills.index') }}">Soft Skills</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">

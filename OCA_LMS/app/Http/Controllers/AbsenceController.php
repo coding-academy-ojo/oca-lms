@@ -65,7 +65,6 @@ class AbsenceController extends Controller
          $cohorts = $cohortsQuery->get();
  
          $students = $studentsQuery->get()->map(function ($student) use ($filteredDate) {
-            // Assuming you're using a method to fetch absence details for a given date
           
             $absence = $student->absences()->whereDate('absences_date', $filteredDate)->first(['absences_type', 'absences_reason', 'absences_duration']);
             return [
@@ -93,13 +92,13 @@ class AbsenceController extends Controller
                 'cohorts' => $cohorts,
             ]);
     
-            // Set no-cache headers
+           
             $response->header('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
             $response->header('Pragma', 'no-cache');
             $response->header('Expires', 'Sat, 26 Jul 1997 05:00:00 GMT');
     
             return $response;
-             // Return data to both views
+    
    
         }
 

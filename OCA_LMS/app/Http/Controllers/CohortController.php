@@ -45,6 +45,7 @@ class CohortController extends Controller
                 $canEditCohort = true;
             }elseif ($user->role == 'trainer') {
                 $cohorts = $user->cohorts()->with('academy')->get();
+                // dd($cohorts);
             }
         } elseif ($user instanceof Student) {
             $cohorts = $user->cohort ? collect([$user->cohort()->with('academy')->first()]) : collect([]);

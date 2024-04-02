@@ -7,7 +7,7 @@
 
     <script src="{{ asset('assets/js_files/attendance.js') }}"></script>
 
-    @include('layouts.innerNav')
+    <link rel="stylesheet" href="{{asset('assets/style_files/absence_attendance.css')}}">
 
     <nav style="padding: 50px 50px 0;" aria-label="breadcrumb" class="breadcrumb-container">
         <ol class="breadcrumb">
@@ -15,32 +15,7 @@
             <li class="breadcrumb-item active" aria-current="page">Attendance</li>
         </ol>
     </nav>
-    <style>
-        .pagination .page-item {
-            display: inline-block;
-            /* This makes sure that pagination items line up horizontally */
-        }
 
-
-
-        .pagination .page-link:hover {
-            color: #fff;
-            background-color: #ff7900;
-            border-color: #ff7900;
-        }
-
-        .pagination .page-item.active .page-link {
-            color: #fff;
-            background-color: #ff7900;
-            border-color: #ff7900;
-        }
-
-        .pagination .page-item.disabled .page-link {
-            color: #ccc;
-            background-color: #fff;
-            border-color: #ccc;
-        }
-    </style>
 
     <div class="container mt-2">
         <div class="row row-cols-1 row-cols-md-4 g-4 my-4">
@@ -165,18 +140,16 @@
 
     <script>
         $(document).ready(function() {
-            // Set up AJAX
             $.ajaxSetup({
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest',
                     'Cache-Control': 'no-cache, max-age=0'
                 }
             });
-
-            // Initialize global variables for pagination
+    
             let currentPage = 1;
-            let rowsPerPage = 5; // Default rows per page
-
+            let rowsPerPage = 5; 
+    
             // Function to update the visible rows in the table based on pagination
             function displayPage(students) {
                 const startIndex = (currentPage - 1) * rowsPerPage;
@@ -184,30 +157,30 @@
                 const paginatedItems = students.slice(startIndex, endIndex);
                 populateAttendanceTable(paginatedItems);
             }
-
+    
             // Function to update pagination controls
             function setupPagination(students) {
                 const pageCount = Math.ceil(students.length / rowsPerPage);
                 const paginationUl = $('.pagination');
                 paginationUl.find('.page-number').remove(); // Remove existing page numbers
-
+    
                 // Clear the pagination controls before adding new ones
                 paginationUl.html('');
-
+    
                 // Add the Previous button
                 const prevPageItem = $(
                     '<li class="page-item"><a class="page-link" href="#" id="prevPage">Previous</a></li>');
                 paginationUl.append(prevPageItem);
-
+    
                 for (let i = 1; i <= pageCount; i++) {
                     const pageItem = $('<li class="page-item page-number"></li>');
                     const pageLink = $('<a class="page-link" href="#">').text(i);
-
+    
                     // Check if the current page is the active page
                     if (i === currentPage) {
                         pageItem.addClass('active');
                     }
-
+    
                     pageLink.on('click', function(e) {
                         e.preventDefault();
                         currentPage = i;
@@ -215,16 +188,16 @@
                         $('.pagination .page-item').removeClass('active');
                         pageItem.addClass('active');
                     });
-
+    
                     pageItem.append(pageLink);
                     paginationUl.append(pageItem);
                 }
-
+    
                 // Add the Next button
                 const nextPageItem = $(
                     '<li class="page-item"><a class="page-link" href="#" id="nextPage">Next</a></li>');
                 paginationUl.append(nextPageItem);
-
+    
                 // Event listener for the Previous button
                 $('#prevPage').on('click', function(e) {
                     e.preventDefault();
@@ -235,7 +208,7 @@
                         $('.pagination .page-number').eq(currentPage - 1).addClass('active');
                     }
                 });
-
+    
                 // Event listener for the Next button
                 $('#nextPage').on('click', function(e) {
                     e.preventDefault();
@@ -247,25 +220,25 @@
                     }
                 });
             }
-
-
+    
+    
             const today = new Date().toISOString().split('T')[0];
             $('#dateFilter').val(today);
-
+    
             function populateFilters(academies, cohorts) {
                 const academySelect = $('#academySelect');
                 academySelect.empty().append('<option value="">Choose Academy...</option>');
                 academies.forEach(academy => {
                     academySelect.append(`<option value="${academy.id}">${academy.academy_name}</option>`);
                 });
-
+    
                 const cohortSelect = $('#cohortSelect');
                 cohortSelect.empty().append('<option value="">Choose Cohort...</option>');
                 cohorts.forEach(cohort => {
                     cohortSelect.append(`<option value="${cohort.id}">${cohort.cohort_name}</option>`);
                 });
             }
-
+    
             // Function to fetch and display attendance data based on filters
             function loadAttendanceData(filters = {}) {
                 $.ajax({
@@ -285,7 +258,7 @@
                     }
                 });
             }
-
+    
             // Function to populate the attendance table
             function populateAttendanceTable(students) {
                 const tableBody = $("#attendanceTableBody");
@@ -322,10 +295,10 @@
                     tableBody.append(row);
                 });
             }
-
-
-
-
+    
+    
+    
+    
             // Event listeners for filter changes
             $('#academySelect, #cohortSelect, #dateFilter').on('change', function() {
                 const filters = {
@@ -335,7 +308,7 @@
                 };
                 loadAttendanceData(filters);
             });
-
+    
             // Event listeners for pagination controls (rows per page selection)
             $('#rowsPerPage').change(function() {
                 rowsPerPage = parseInt($(this).val());
@@ -346,14 +319,14 @@
                     date: $('#dateFilter').val()
                 });
             });
-
+    
             function updateAttendanceStats(counts) {
                 $('#AllStudents').text(counts.all);
                 $('#AttendedToday').text(counts.attended);
                 $('#AbsentToday').text(counts.absent);
                 $('#LateToday').text(counts.late);
             }
-
+    
             function resetEditing() {
                 $('.status-select, .reason-input, .duration-input').addClass('d-none');
                 $('.status-text, .reason-text, .duration-text').removeClass('d-none');
@@ -365,16 +338,16 @@
             // Edit button functionality
             $(document).on('click', '.edit-btn', function() {
                 resetEditing(); // Reset editing for all rows
-
+    
                 const $row = $(this).closest('tr');
                 $row.find('.status-text, .reason-text, .duration-text').addClass('d-none');
                 $row.find('.status-select, .reason-input, .duration-input').removeClass('d-none');
-
+    
                 $(this).addClass('d-none');
                 $row.find('.save-btn, .cancel-btn').removeClass(
                     'd-none');
             });
-
+    
             // Cancel button functionality
             $(document).on('click', '.cancel-btn', function() {
                 const $row = $(this).closest('tr');
@@ -386,9 +359,9 @@
                     'd-none');
                 $(this).addClass('d-none');
             });
-
-
-
+    
+    
+    
             // Save button functionality
             $(document).on('click', '.save-btn', function() {
                 const selectedDate = $('#dateFilter').val();
@@ -398,11 +371,11 @@
                         title: 'Oops...',
                         text: 'You have to choose a date first!',
                         confirmButtonColor: '#ff7900',
-
+    
                     });
                     return; // Exit the function if no date is selected
                 }
-
+    
                 const $row = $(this).closest('tr');
                 const studentId = $row.data('student-id');
                 let status = $row.find('.status-select').val();
@@ -442,10 +415,8 @@
                     }
                 });
             });
-
+    
             loadAttendanceData();
         });
     </script>
-
-
 @endsection

@@ -132,8 +132,8 @@ class TraineeProgressController extends Controller
         $didNotSubmitCount = $totalStudents - ($lateSubmissionsCount + $onTimeCount);
 
 // Calculate percentage of All counts 
-$latePercentage = $totalStudents > 0 ? intval(($lateSubmissionsCount / $numberOfSubmissions) * 100) : 0;
-$onTimePercentage = $totalStudents > 0 ? intval(($onTimeCount / $numberOfSubmissions) * 100) : 0;
+$latePercentage = $numberOfSubmissions > 0 ? intval(($lateSubmissionsCount / $numberOfSubmissions) * 100) : 0;
+$onTimePercentage = $numberOfSubmissions > 0 ? intval(($onTimeCount / $numberOfSubmissions) * 100) : 0;
 $didNotSubmitPercentage = $totalStudents > 0 ? intval(($didNotSubmitCount / $totalStudents) * 100) : 0;
 $passSubmissionsPercentage = $numberOfSubmissions > 0 ? intval(($passSubmissionsCount / $numberOfSubmissions) * 100) : 0;
 $notPassSubmissionsPercentage = $numberOfSubmissions > 0 ? intval(($notPassSubmissionsCount / $numberOfSubmissions) * 100) : 0;
@@ -183,7 +183,7 @@ $notPassSubmissionsPercentage = $numberOfSubmissions > 0 ? intval(($notPassSubmi
             ->count('student_id');
         
         // Calculate the percentage of students who submitted their assignment
-        $percentageSubmitted = ($numberOfStudentsSubmitted / $numberOfStudentsAssigned) * 100;
+        $percentageSubmitted = $numberOfStudentsAssigned > 0 ? ($numberOfStudentsSubmitted / $numberOfStudentsAssigned) * 100 : 0;
 
     $numberOfStudentsNotSubmitted = $numberOfStudentsAssigned- $numberOfStudentsSubmitted;
         return [

@@ -1,0 +1,21 @@
+.pagination .page-item {
+    display: inline-block;
+}
+
+.pagination .page-link:hover {
+    color: #fff;
+    background-color: #ff7900;
+    border-color: #ff7900;
+}
+
+.pagination .page-item.active .page-link {
+    color: #fff;
+    background-color: #ff7900;
+    border-color: #ff7900;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #ccc;
+    background-color: #fff;
+    border-color: #ccc;
+}

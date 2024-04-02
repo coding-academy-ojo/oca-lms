@@ -15,21 +15,22 @@ Amman Cohort 1
     <div class="dashboard-cards">
         <div class="dashboard-card">
             <h3>Number of Students</h3>
-            <p>32</p>
+            <p>{{ $cardsStatistics['statistics']['Number_of_Students'] }}</p>
         </div>
         <div class="dashboard-card">
             <h3>Number of Briefs</h3>
-            <p>4</p>
+            <p>{{ $cardsStatistics['statistics']['Number_of_Briefs'] }}</p>
         </div>
         <div class="dashboard-card">
             <h3>Total Assignments</h3>
-            <p>13</p>
+            <p>{{ $cardsStatistics['statistics']['Total_Assignments'] }}</p>
         </div>
         <div class="dashboard-card">
             <h3>Total Technologies</h3>
-            <p>3</p>
+            <p>{{ $cardsStatistics['statistics']['Total_Technologies'] }}</p>
         </div>
     </div>
+    
 
 
     <div class="row mt-4">
@@ -38,18 +39,22 @@ Amman Cohort 1
                 <div class="card-body">
                     <h3 class="mb-0 text-primary">Cohort Information</h3>
                     <div class="my-3">
-                        <h5 class="card-title">Amman Cohort 1</h5>
-                        <p class="card-text">This cohort aims to empower participants through intensive training in web development, focusing on both front-end and back-end technologies. With a curriculum designed to foster practical skills and real-world problem-solving abilities, our goal is to prepare students for successful careers in the tech industry.</p>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Start Date: <strong>05 May 2024</strong></li>
-                            <li class="list-group-item">End Date: <strong>18 Sep 2024</strong></li>
-                            <li class="list-group-item">Donor: <strong>EU</strong></li>
-                        </ul>
+                        @if($cardsStatistics['cohort'])
+                            <h5 class="card-title">{{ $cardsStatistics['cohort']->cohort_name }}</h5>
+                            <p class="card-text">{{ $cardsStatistics['cohort']->cohort_description }}</p>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Start Date: <strong>{{ $cardsStatistics['cohort']->cohort_start_date }}</strong></li>
+                                <li class="list-group-item">End Date: <strong>{{ $cardsStatistics['cohort']->cohort_end_date }}</strong></li>
+                                <li class="list-group-item">Donor: <strong>{{ $cardsStatistics['cohort']->cohort_donor }}</strong></li>
+                            </ul>
+                        @else
+                            <p>No running cohort found.</p>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
-
+    
         <div class="col-lg-6 mb-4">
             <div class="card shadow-sm">
                 <div style="height: 380px" class="card-body">
@@ -59,6 +64,7 @@ Amman Cohort 1
             </div>
         </div>
     </div>
+    
     <div class="row">
         <div class="col-12">
             <div class="card shadow-sm">
@@ -74,56 +80,47 @@ Amman Cohort 1
                                     <th scope="col">Resources</th>
                                     <th scope="col">Training Period</th>
                                     <th scope="col">Status</th>
+                                    {{-- <th scope="col">Satisfaction</th> --}}
                                     <th scope="col">Feedback</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @if (count($technologiesOverview) === 0)
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>React</td>
-                                    <td>A JavaScript library for building user interfaces.</td>
-                                    <td>Official Docs, Tutorials</td>
-                                    <td>1 Month</td>
+                                    <td colspan="7">No technologies added yet</td>
+                                </tr>
+                                @else
+                                @foreach($technologiesOverview as $index => $technology)
+                                <tr>
+                                    <th scope="row">{{ $index + 1 }}</th>
+                                    <td>{{ $technology['name'] }}</td>
+                                    <td>{{ $technology['description'] }}</td>
+                                    <td>{{ $technology['resources'] }}</td>
+                                    <td>{{ $technology['training_period'] }}</td>
                                     <td>
                                         <div style="width: 100%; background-color: #ddd;">
-                                            <div style="height: 20px; width: 100%; background-color: #4CAF50;"></div>
+                                            <div style="height: 20px; width: {{ $technology['percentage'] }}%; background-color: {{ $technology['status'] == 'Finished' ? '#4CAF50' : ($technology['status'] == 'In Progress' ? '#ffa500' : '#f44336') }};"></div>
                                         </div>
-                                        Finished
+                                        {{ $technology['status'] }}
                                     </td>
-                                    <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#feedbackModal1">View Feedback</button></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>PHP</td>
-                                    <td>A popular general-purpose scripting language.</td>
-                                    <td>Official Docs, Laracasts</td>
-                                    <td>2 Months</td>
-                                    <td>
-                                        <div style="width: 100%; background-color: #ddd;">
-                                            <div style="height: 20px; width: 50%; background-color: #4CAF50;"></div>
-                                        </div>
-                                        In Progress
+                                    <td class="justify-content-center">
+                                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#feedbackModal{{ $index + 1 }}"><span class="material-symbols-outlined">
+                                            open_in_new
+                                            </span></button>
                                     </td>
-                                    <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#feedbackModal2">View Feedback</button></td>
+                                       {{-- <div class="satisfaction-container" style="width: 100px; background-color: #f0f0f0;border-radius: 5px;">
+                                            <div class="satisfaction-bar" style="width:100%; background-color: #4CAF50;" style="height: 100%; transition: width 0.5s ease-in-out;"></div>
+                                        </div> --}}
+
                                 </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Laravel</td>
-                                    <td>A PHP framework for web artisans.</td>
-                                    <td>Official Docs, Laracasts</td>
-                                    <td>2 Months</td>
-                                    <td>
-                                        <div style="width: 100%; background-color: #ddd;">
-                                            <div style="height: 20px; width: 0%; background-color: #f44336;"></div>
-                                        </div>
-                                        Not Started
-                                    </td>
-                                    <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#feedbackModal3">View Feedback</button></td>
-                                </tr>
+                                @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
                 </div>
+                
+                
             </div>
         </div>
     </div>
@@ -133,6 +130,7 @@ Amman Cohort 1
                 <div class="card-body">
                     <h3 class="text-primary">Softskills Overview</h3>
                     <div class="table-responsive">
+                        @if(count($softSkillsForCohort) > 0)
                         <table class="table table-hover">
                             <thead>
                                 <tr>
@@ -145,37 +143,31 @@ Amman Cohort 1
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($softSkillsForCohort as $index => $softSkill)
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>Communication</td>
-                                    <td>Ability to effectively communicate ideas.</td>
-                                    <td>Bayan Al-Nabulsi</td>
-                                    <td>2nd Feb 2024</td>
-                                    <td><div class="satisfaction-bar" style="width: 80%; background-color: #4CAF50;"></div></td>
+                                    <th scope="row">{{ $index + 1 }}</th>
+                                    <td>{{ $softSkill->name }}</td>
+                                    <td>{{ $softSkill->description }}</td>
+                                    <td>{{ $softSkill->trainer }}</td>
+                                    <td>{{ $softSkill->date }}</td>
+                                    <td>
+                                        <div class="satisfaction-container" style="width: 100px; background-color: #f0f0f0;border-radius: 5px;">
+                                            <div class="satisfaction-bar" style="width: {{ $softSkill->satisfaction * 20 }}%; background-color: #4CAF50;" style="height: 100%; transition: width 0.5s ease-in-out;"></div>
+                                        </div>
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Teamwork</td>
-                                    <td>Ability to work well within a team.</td>
-                                    <td>Bayan Al-Nabulsi</td>
-                                    <td>10th Feb 2024</td>
-                                    <td><div class="satisfaction-bar" style="width: 60%; background-color: #ffeb3b;"></div></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Problem-solving</td>
-                                    <td>Ability to solve complex issues effectively.</td>
-                                    <td>Bayan Al-Nabulsi</td>
-                                    <td>3rd Mar 2024</td>
-                                    <td><div class="satisfaction-bar" style="width: 25%; background-color: #f44336;"></div></td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
+                        @else
+                        <p>No soft skills data available for this cohort.</p>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
     
     <!-- Enhanced Feedback Modals with Progress Bars -->
     <div class="modal fade" id="feedbackModal1" tabindex="-1" aria-labelledby="feedbackModalLabel1" aria-hidden="true">
@@ -362,46 +354,50 @@ Amman Cohort 1
 
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
 
-    var ctx3 = document.getElementById('totalSummaryChart').getContext('2d');
-    var totalSummaryChart = new Chart(ctx3, {
-        type: 'bar', // Change to 'bar' for a bar chart
-        data: {
-            labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], // Days of the week
-            datasets: [{
-                label: 'Attendance',
-                data: [30, 28, 32, 31, 29], // Example attendance data
-                backgroundColor: '#e66c37', // Blue, semi-transparent
-                borderColor: '#e66c37', // Blue, solid
-                borderWidth: 1
-            }, {
-                label: 'Absence',
-                data: [], 
-                backgroundColor: '#f3a17a',
-                borderColor: '#f3a17a', 
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                x: {
-                    stacked: true, 
-                },
-                y: {
-                    stacked: true,
-                    beginAtZero: true, 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var ctx3 = document.getElementById('totalSummaryChart').getContext('2d');
+        var totalSummaryChart = new Chart(ctx3, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode(array_keys($attendanceOverview['attendance_data'])) !!},
+                datasets: [{
+                    label: 'Attendance',
+                    data: {!! json_encode(array_values($attendanceOverview['attendance_data'])) !!},
+                    backgroundColor: '#e66c37',
+                    borderColor: '#e66c37',
+                    borderWidth: 1
+                }, {
+                    label: 'Late',
+                    data: {!! json_encode(array_values($attendanceOverview['late_data'])) !!},
+                    backgroundColor: '#ffa500', // Orange color for late students
+                    borderColor: '#ffa500',
+                    borderWidth: 1
+                }, {
+                    label: 'Absence',
+                    data: {!! json_encode(array_values($attendanceOverview['absence_data'])) !!},
+                    backgroundColor: '#f3a17a',
+                    borderColor: '#f3a17a',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        stacked: true,
+                    },
+                    y: {
+                        stacked: true,
+                        beginAtZero: true,
+                    }
                 }
             }
-        }
+        });
     });
-
-    totalSummaryChart.data.datasets[1].data = totalSummaryChart.data.datasets[0].data.map(attendance => 32 - attendance);
-    totalSummaryChart.update(); // Update the chart to reflect new data
-});
 </script>
+
 
 @endsection

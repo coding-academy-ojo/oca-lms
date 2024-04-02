@@ -29,7 +29,9 @@ use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\TraineeProgressController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StudentDashboardController;
-
+use App\Http\Controllers\TrainerDashboardController;
+use App\Http\Controllers\AbsenceReportController;
+use App\Http\Controllers\SoftSkillsTrainingController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -103,13 +105,21 @@ Route::get('/academies/{academy}', [AcademyController::class, 'show'])->name('ac
 
 Route::get('/cohorts/{academyId?}', [CohortController::class, 'index'])->name('academyview');
 Route::get('/cohorts/{cohort}/edit', [CohortController::class, 'edit'])->name('cohortedit');
-Route::get('/cohorts/view-cohort/{cohort}', [CohortController::class, 'show'])->name('view-cohort');
+Route::get('/cohorts/view-cohort/{cohort}', [TrainerDashboardController::class, 'index'])->name('view-cohort');
 Route::put('/cohort/{cohort_id}', [CohortController::class, 'update'])->name('update-cohort');
 Route::post('/cohorts', [CohortController::class, 'store'])->name('store-cohort');
 
 // super maneger
 Route::get('/supermanager-dashboard', [SuperManagerController::class, 'index'])->name('supermanager-dashboard');
+// soft skills 
 
+Route::get('soft-skills', [SoftSkillsTrainingController::class, 'index'])->name('soft-skills.index');
+Route::get('soft-skills/create', [SoftSkillsTrainingController::class, 'create'])->name('soft-skills.create');
+Route::post('soft-skills', [SoftSkillsTrainingController::class, 'store'])->name('soft-skills.store');
+Route::get('soft-skills/{softSkillsTraining}', [SoftSkillsTrainingController::class, 'show'])->name('soft-skills.show');
+Route::get('soft-skills/{softSkillsTraining}/edit', [SoftSkillsTrainingController::class, 'edit'])->name('soft-skills.edit');
+Route::put('soft-skills/{softSkillsTraining}', [SoftSkillsTrainingController::class, 'update'])->name('soft-skills.update');
+Route::delete('soft-skills/{softSkillsTraining}', [SoftSkillsTrainingController::class, 'destroy'])->name('soft-skills.destroy');
 
 
 // staff controller
@@ -132,12 +142,10 @@ Route::get('/traineesProgress', [TraineeProgressController::class, 'index'])->na
 
 
 // absence
-Route::get('/absence-report', function () {
-    return view('supermaneger.absence');
-})->name('absence');
-Route::get('/absence-report/trainee', function () {
-    return view('supermaneger.spacificUserReport');
-})->name('spacificUserReport');
+Route::get('/absence-report', [AbsenceReportController::class, 'index'])->name('absence');
+
+Route::get('students/{studentId}/absence', 'AbsenceReportController@show')->name('spacificUserReport');
+
 // staff
 // Route::get('/staff', function () {
 //     return view('supermaneger.staff');

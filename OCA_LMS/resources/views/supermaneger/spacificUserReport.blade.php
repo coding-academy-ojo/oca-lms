@@ -1,4 +1,3 @@
-
 @extends('Layouts.app')
 @section('title')
 Student Absence Report
@@ -17,36 +16,36 @@ Student Absence Report
 </nav>
 
 <div class="container mt-5">
-    <h2 class="mb-4 text-primary">Student Absence Report</h2>
+    <h2 class="mb-4 text-primary">Student Absence Report - {{ $student->en_first_name }} {{ $student->en_last_name }}</h2>
+    @if ($student->absences->isEmpty())
+        <div class="alert alert-info" role="alert">
+            No absence records found for this student.
+        </div>
+    @else
     <div class="table-responsive">
         <table class="table">
             <thead class="table-orange">
                 <tr>
                     <th scope="col">Date</th>
+                    <th scope="col">Type</th>
                     <th scope="col">Reason</th>
                     <th scope="col">Duration</th>
-
                 </tr>
             </thead>
             <tbody>
-                <!-- Static Row Example -->
+                @foreach ($student->absences as $absence)
                 <tr>
-                    <td>2024-02-10</td>
-                    <td>Medical Leave</td>
-                    <td>3 Days</td>
-
+                    <td>{{ $absence->absences_date }}</td>
+                    <td>{{ $absence->absences_type }}</td> <!-- Display whether it was late or absent -->
+                    <td>{{ $absence->absences_reason }}</td>
+                    <td>{{ $absence->absences_duration }} Hours</td>
                 </tr>
-                <tr>
-                    <td>2024-01-25</td>
-                    <td>Family Emergency</td>
-                    <td>1 Day</td>
-
-                </tr>
-                <!-- Add more static rows as needed -->
+                @endforeach
             </tbody>
         </table>
     </div>
-    <a href="javascript:history.back()" class="btn btn-secondary mt-3">Back to Absence Record</a>
+    @endif
+    <a href="javascript:history.back()" class="btn btn-secondary mt-3" style="margin-bottom: 50px">Back to Absence Record</a>
 </div>
 
 @endsection
