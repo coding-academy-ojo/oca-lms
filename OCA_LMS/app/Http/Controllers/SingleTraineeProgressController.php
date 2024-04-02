@@ -43,12 +43,23 @@ class SingleTraineeProgressController extends Controller
             $technologyNames[] = $technologyName;
            
         }
-//dd($technologyNames);
 
-       
+// Access the assigned assignments for the student     
+$student = Student::with('assignment')->find($id);
+$assignments = $student->assignment;
+
+ //$assignmentId = $assignments->id;
+
+// Retrieve pass submissions for the given assignment ID
+//$passSubmissions = AssignmentSubmission::where('assignment_id', $assignmentId)
+                                    //   ->where('status', 'Pass') // Adjust the condition based on your logic
+                                    //   ->get();
+// $studentAssignment = Assignment::find($assignmentId);
+// $assignmentTitle=$studentAssignment->assignment_name;
+//dd($assignments);
        
         // Pass the student details to the view
-        return view('trainer\trainee-progress-details', compact('student', 'absencesCount', 'lateCount', 'technologyNames'));
+        return view('trainer\trainee-progress-details', compact('student', 'absencesCount', 'lateCount', 'technologyNames', 'assignments'));
     }
 
     public function create()
@@ -62,7 +73,7 @@ class SingleTraineeProgressController extends Controller
         //
     }
 
-    public function show(Trainee $trainee)
+   public function show(Trainee $trainee)
     {
         //
     }

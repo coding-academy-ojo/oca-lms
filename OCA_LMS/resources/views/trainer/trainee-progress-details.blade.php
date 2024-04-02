@@ -124,7 +124,7 @@
 
 <!-- Students Assignments review History Section -->
 <div class="container my-4">
-    <h2 class="text-primary">Mohsin's Assignments Review History</h2>
+    <h2 class="text-primary">Mohsin's Assignments History</h2>
     <div class="card">
         <div class="card-body">
 
@@ -134,82 +134,29 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Assignment</th>
-                            <th scope="col">Trainer</th>
                             <th scope="col">Submission Status</th>
-                            <th scope="col">Log</th>
                             <th scope="col">Due Date</th>
+                            <th scope="col">Log</th>
+                           
                         </tr>
                     </thead>
                     <tbody>
+
+                    @foreach ($assignments as $assignment)
                         <tr>
-                            <th scope="row">1</th>
-                            <td>JS Functions </td>
-                            <td>Rawan Abuseini</td>
-                            <td>Late 23 hour </td>
+                            <th scope="row">{{$assignment->id}}</th>
+                            <td> {{$assignment->assignment_name}}</td>
+                            <td>Passed </td>
+                          
+                            <td>14/3/2024 <Span>Submitted Late</Span> </td>
                             <td>
-                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal4">Details</a>
+                                <a href="{{ route('assignment.show', $assignment->id) }}" >Details</a>
                             </td>
-                            <td>14/3/2024</td>
+                           
                         </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Data structure</td>
-                            <td>Rawan Abuseini</td>
-                            <td>Late 2 hours</td>
-                            <td>
-                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal4">Details</a>
-                            </td>
-                            <td>10/3/2024</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>MongoDB installation</td>
-                            <td>Rawan Abuseini</td>
-                            <td>On time</td>
-                            <td>
-                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal4">Details</a>
-                            </td>
-                            <td>10/3/2024</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>Nodejs integration with PostgreSQL</td>
-                            <td>Rawan Abuseini</td>
-                            <td>On time</td>
-                            <td>
-                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal4">Details</a>
-                            </td>
-                            <td>10/3/2024</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Ability to solve complex issues effectively.</td>
-                            <td>Bayan Al-Nabulsi</td>
-                            <td>On time</td>
-                            <td>
-                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal4">Details</a>
-                            </td>
-                            <td>10/3/2024</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Ability to solve complex issues effectively.</td>
-                            <td>Bayan Al-Nabulsi</td>
-                            <td>
-                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal4">Details</a>
-                            </td>
-                            <td>10/3/2024</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Ability to solve complex issues effectively.</td>
-                            <td>Bayan Al-Nabulsi</td>
-                            <td>On time</td>
-                            <td>
-                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal4">Details</a>
-                            </td>
-                            <td>10/3/2024</td>
-                        </tr>
+
+                        @endforeach
+                        
                     </tbody>
                 </table>
             </div>
