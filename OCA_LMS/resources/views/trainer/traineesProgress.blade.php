@@ -189,7 +189,7 @@ Trainees Progress
 
                             </div>
                             <div class="col-md-3">
-                                <div>
+                                <div class="pb-1">
                                     <p style="font-size: 14px; margin-top: 10px;">S2: Create static and adaptive web
                                         user interfaces</p>
                                 </div>
@@ -601,7 +601,7 @@ Trainees Progress
                         <td>
                             <div class="progress">
                                 <div style="width: 40%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40"
-                                    role="progressbar" class="purple progress-bar" data-toggle="tooltip" title="12 of 30">
+                                    role="progressbar" class="red progress-bar" data-toggle="tooltip" title="12 of 30">
                                     <span>40%</span>
                                 </div>
                             </div>
@@ -615,7 +615,7 @@ Trainees Progress
                         <td>
                             <div class="progress">
                                 <div style="width: 20%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="20"
-                                    role="progressbar" class="purple progress-bar" data-toggle="tooltip" title="8 of 30">
+                                    role="progressbar" class="red progress-bar" data-toggle="tooltip" title="8 of 30">
                                     <span>20%</span>
                                 </div>
                             </div>
@@ -629,7 +629,7 @@ Trainees Progress
                         <td>
                             <div class="progress">
                                 <div style="width: 60%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="60"
-                                    role="progressbar" class="red progress-bar" data-toggle="tooltip" title="17 of 30">
+                                    role="progressbar" class="progress-bar" data-toggle="tooltip" title="17 of 30">
                                     <span>60%</span>
                                 </div>
                             </div>
@@ -656,130 +656,36 @@ Trainees Progress
                         <tr>
                             <th>#</th>
                             <th>Name</th>
-                            <th>Student Progress</th>
-                            <th>#</th>
-                            <th>#</th>
-                            <th>#</th>
+                            <th>Trainees Progress</th>
+                            <th>Details</th>
+                           
+                           
                         </tr>
                     </thead>
                     <tbody>
+                
+                    @foreach ($allTrainessOverview as $student)
                         <tr>
-                            <td>1</td>
-                            <td>Mohsin</td>
+                            <td>{{$student->id}}</td>
+                            <td>{{$student->en_first_name}}  </td>
                             <td style="width: 70%;">
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="15"
-                                        aria-valuemin="0" aria-valuemax="100"></div>
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 30%"
-                                        aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 20%"
-                                        aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"> 100% of Projects </div>
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30% Absence</div>
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">20% Internship</div>
+                                
                                 </div>
                             </td>
-                            <td><a href="{{route('trainee-progress-details')}}" class="btn btn-primary">View</a>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Haseeb</td>
                             <td>
-                                <div class="progress">
-                                    <div style="width: 80%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="80"
-                                        role="progressbar" class="green progress-bar">
-                                        <span>80%</span>
-                                    </div>
-                                </div>
-                            </td>
+    <a href="{{ route('ProgressDetails.showDetails', ['id' => $student->id]) }}" class="btn btn-primary">View</a>
+</td>
 
-                            <td><a href="{{route('trainee-progress-details')}}" class="btn btn-primary">View</a>
-                            </td>
 
-                        </tr>
+                                             </tr>
                         <tr>
-                            <td>3</td>
-                            <td>Hussain</td>
+                            
 
-                            <td>
-                                <div class="progress">
-                                    <div style="width: 40%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40"
-                                        role="progressbar" class="purple progress-bar">
-                                        <span>40%</span>
-                                    </div>
-                                </div>
-                            </td>
-
-                            <td><a href="{{route('trainee-progress-details')}}" class="btn btn-primary">View</a>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Noman</td>
-
-                            <td>
-                                <div class="progress">
-                                    <div style="width: 90%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="90"
-                                        role="progressbar" class="purple progress-bar">
-                                        <span>90%</span>
-                                    </div>
-                                </div>
-                            </td>
-
-                            <td><a href="{{route('trainee-progress-details')}}" class="btn btn-primary">View</a>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Ubaid</td>
-
-                            <td>
-                                <div class="progress">
-                                    <div style="width: 60%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="60"
-                                        role="progressbar" class="red progress-bar">
-                                        <span>60%</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><a href="{{route('trainee-progress-details')}}" class="btn btn-primary">View</a>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>Adnan</td>
-
-                            <td>
-                                <div class="progress">
-                                    <div style="width: 45%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="45"
-                                        role="progressbar" class="red progress-bar">
-                                        <span>45%</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><a href="{{route('trainee-progress-details')}}" class="btn btn-primary">View</a>
-                            </td>
-
-                        </tr>
-
-                        <tr>
-                            <td>7</td>
-                            <td>Saboor</td>
-
-                            <td>
-                                <div class="progress">
-                                    <div style="width: 89%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="89"
-                                        role="progressbar" class="green progress-bar">
-                                        <span>89%</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><a href="{{route('trainee-progress-details')}}" class="btn btn-primary">View</a>
-                            </td>
-                        </tr>
-
-
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -807,22 +713,22 @@ Trainees Progress
 
 
 
-//Changing progress bar colors based on Percentage for trainees overview table
-document.addEventListener('DOMContentLoaded', function() {
-    const progressBars = document.querySelectorAll('.progress-bar');
+// //Changing progress bar colors based on Percentage for trainees overview table
+// document.addEventListener('DOMContentLoaded', function() {
+//     const progressBars = document.querySelectorAll('.progress-bar');
 
-    progressBars.forEach(function(bar) {
-        const progressValue = parseInt(bar.getAttribute('aria-valuenow'));
+//     progressBars.forEach(function(bar) {
+//         const progressValue = parseInt(bar.getAttribute('aria-valuenow'));
 
-        if (progressValue > 75) {
-            bar.classList.add('green');
-        } else if (progressValue < 50) {
-            bar.classList.add('red');
-        } else {
-            bar.classList.add('orange');
-        }
-    });
-});
+//         if (progressValue > 75) {
+//             bar.classList.add('green');
+//         } else if (progressValue < 50) {
+//             bar.classList.add('red');
+//         } else {
+//             bar.classList.add('orange');
+//         }
+//     });
+// });
 
 
 //Chart for all Assignments based on tech

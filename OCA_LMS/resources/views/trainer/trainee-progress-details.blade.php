@@ -44,20 +44,21 @@
                             <img src="{{ asset('assets/img/usericon.jpg') }}" width="100"
                                 class="img-fluid rounded-circle" alt="">
                         </div>
-                        <h3 class="mt-4 mb-1">Mohsin</h3>
-                        <p class="text-muted"> SWE</p>
+                        
+                        <h3 class="mt-4 mb-1">{{$student->en_first_name}} {{$student->en_second_name}}</h3>
+                        <p class="text-muted"> {{$student->educational_background}}</p>
                         <ul class="list-group mb-3 list-group-flush">
                             <li class="list-group-item px-0 d-flex justify-content-between">
-                                <span>Student no.</span><strong>02</strong>
+                                <span>Student no.</span><strong>{{$student->id}}</strong>
                             </li>
                             <li class="list-group-item px-0 d-flex justify-content-between">
-                                <span class="mb-0">Phone No. :</span><strong>0777807890</strong>
+                                <span class="mb-0">Phone No. :</span><strong>{{$student->mobile}}</strong>
                             </li>
                             <li class="list-group-item px-0 d-flex justify-content-between">
                                 <span class="mb-0">Admission Date. :</span><strong>01 July 2023</strong>
                             </li>
                             <li class="list-group-item px-0 d-flex justify-content-between">
-                                <span class="mb-0">Email:</span><strong>Mohsin@gmail.com</strong>
+                                <span class="mb-0">Email:</span><strong>{{$student->email}}</strong>
                             </li>
                         </ul>
                     </div>
@@ -69,13 +70,13 @@
                     <div>
                         <ul class="list-group mb-3 list-group-flush">
                             <li class="list-group-item px-0 d-flex justify-content-between">
-                                <span>Justified Absence:</span><strong>2</strong>
+                                <span>Justified Absence:</span><strong>{{$absencesCount}}</strong>
                             </li>
                             <li class="list-group-item px-0 d-flex justify-content-between">
                                 <span class="mb-0">Non-Justified Absence:</span><strong>0</strong>
                             </li>
                             <li class="list-group-item px-0 d-flex justify-content-between">
-                                <span class="mb-0">Justified Tardy:</span><strong>3</strong>
+                                <span class="mb-0">Justified Tardy:</span><strong>{{$lateCount}}</strong>
                             </li>
                             <li class="list-group-item px-0 d-flex justify-content-between">
                                 <span class="mb-0">Non-Justified Tardy:</span><strong>0</strong>
@@ -565,10 +566,12 @@
 if (document.getElementById('assignments_tech')) {
 
     const assignments_tech = document.getElementById("assignments_tech").getContext('2d');
+    // Define your labels using the technologyNames array
+    let labels = <?php echo json_encode($technologyNames); ?>;
 
     // Chart data
     let barChartData = {
-        labels: ["HTML& CSS", "JS", "React", "NodeJS", "MongoDB", "PostgreSQL", "Wordpress"],
+        labels: labels,
         datasets: [{
             label: 'Passed',
             backgroundColor: "rgba(43, 193, 85, 1)", // Green color
