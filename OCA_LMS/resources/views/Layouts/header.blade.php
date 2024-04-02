@@ -48,11 +48,14 @@
             @auth('staff')
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     
+                    @if (Auth::guard('staff')->user()->role == 'super_manager')
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('supermanager-dashboard') ? 'active' : '' }} "
+                            aria-current="page" href="{{ route('supermanager-dashboard') }}">Home</a>
+                    </li>
+                    @endif
                     @if (in_array(Auth::guard('staff')->user()->role, ['super_manager', 'manager']))
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('supermanager-dashboard') ? 'active' : '' }} "
-                                aria-current="page" href="{{ route('supermanager-dashboard') }}">Home</a>
-                        </li>
+                      
 
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('academies') ? 'text-primary' : '' }}""
@@ -75,7 +78,7 @@
                                         href="{{ route('assignments') }}">Assignments</a>
                                 <a class="nav-link text-dark  {{ request()->routeIs('show_all_projects') ? 'text-primary' : '' }}"
                                     href="{{ route('show_all_projects') }}">Projects</a>
-                                    <a class="nav-link {{ request()->routeIs('Announcements') ? 'text-primary' : '' }}" href="{{ route('Announcements') }}">Announcements</a>
+                                    <a class="nav-link text-dark{{ request()->routeIs('Announcements') ? 'text-primary' : '' }}" href="{{ route('Announcements') }}">Announcements</a>
                                 <a class="nav-link text-dark {{ request()->routeIs('attendance') ? 'text-primary' : '' }}"
                                     href="{{ route('attendance') }}">Attendance</a>
                                     <a class="nav-link text-dark {{ request()->routeIs('soft-skills.*') ? 'text-primary' : '' }}"
