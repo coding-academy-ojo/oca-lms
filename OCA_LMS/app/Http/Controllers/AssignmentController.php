@@ -86,7 +86,7 @@ class AssignmentController extends Controller
         $assignment->topic_id = $request->input('topic');
         $assignment->created_at = now();
         $assignment->cohort_id = $cohortID;
-        $assignment->trainer_id = $trainerId;
+        $assignment->staff_id = $trainerId;
         $assignment->assignment_description = $request->input('description');
     
         // Upload and attach assignment file if provided
@@ -173,7 +173,7 @@ class AssignmentController extends Controller
         $assignment->assignment_due_date = $request->input('due_date');
         $assignment->topic_id = $request->input('topic');
         $assignment->cohort_id = $cohortID;
-        $assignment->trainer_id = $TrainertId;
+        $assignment->staff_id = $TrainertId;
         $assignment->updated_at = now();
 
 
