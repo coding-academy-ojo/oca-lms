@@ -124,7 +124,7 @@
 
 <!-- Students Assignments review History Section -->
 <div class="container my-4">
-    <h2 class="text-primary">Mohsin's Assignments History</h2>
+    <h2 class="text-primary">{{$student->en_first_name}}'s Assignments History</h2>
     <div class="card">
         <div class="card-body">
 
@@ -217,7 +217,7 @@
 
 <!-- Students Projects History Section -->
 <div class="container my-4">
-    <h2 class="text-primary">Mohsin's Projects History</h2>
+    <h2 class="text-primary">{{$student->en_first_name}}'s Projects History</h2>
     <div class="card">
         <div class="card-body">
 
@@ -226,10 +226,10 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col" style="width: auto;">Time</th>
+                            <th scope="col" style="width: auto;">Due date</th>
                             <th scope="col">Project</th>
                             <th scope="col">Status</th>
-                            <th scope="col"># of corrective actions</th>
+                            <th scope="col"># Of Corrective Actions</th>
                             <th scope="col">Log</th>
                         </tr>
                     </thead>

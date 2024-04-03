@@ -18,10 +18,17 @@ class AnnouncementController extends Controller
     
     public function index()
     {
-          // get cohort id from session based on studen id and use it to get cohort announcements in students view 
-          $studentId = session('student_id');
+        if (auth()->check() && (auth()->user()->role == "trainer" || auth()->user()->role == "manager")) {
+            # code... 
+            $cohortId = session("cohort_ID");
+        } else {
+            # code...
+              // get cohort id from session based on studen id and use it to get cohort announcements in students view 
+        $studentId = session('student_id');
         $student = Student::find($studentId);
         $cohortId = $student->cohort_id;
+        }
+        
         $announcements = Announcement::where('cohort_id', $cohortId)->latest()->get(); 
      
         // Count total absences for the specified cohort
@@ -39,6 +46,10 @@ class AnnouncementController extends Controller
         
         return view('Pages/announcements', compact('announcements', 'totalAbsenceCount', 'absenceCounts'));
     }
+
+
+
+
 
 
    
