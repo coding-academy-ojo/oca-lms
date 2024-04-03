@@ -142,7 +142,7 @@
                     </thead>
                     <tbody>
 
-                    @foreach ($assignments as $assignment)
+                    @foreach ($studentAssignments as $assignment)
                         <tr>
                             <th scope="row">{{$assignment->id}}</th>
                             <td> {{$assignment->assignment_name}}</td>
@@ -514,7 +514,7 @@ if (document.getElementById('assignments_tech')) {
 
     const assignments_tech = document.getElementById("assignments_tech").getContext('2d');
     // Define your labels using the technologyNames array
-    let labels = <?php echo json_encode($technologyNames); ?>;
+    let labels = <?php echo json_encode($technologyNames); ?>; 
 
     // Chart data
     let barChartData = {
@@ -523,12 +523,12 @@ if (document.getElementById('assignments_tech')) {
             label: 'Passed',
             backgroundColor: "rgba(43, 193, 85, 1)", // Green color
             hoverBackgroundColor: "rgba(43, 193, 85, 1)",
-            data: [100, 95, 90, 100, 80, 93, 99]
+            data: <?php echo json_encode($countValues); ?>
         }, {
             label: 'Not Passed',
             backgroundColor: "rgba(243, 87, 87, 1)", // Red color
             hoverBackgroundColor: "rgba(243, 87, 87, 1)",
-            data: [0, 2, 2, 1, 0, 1, 0]
+            data: [0, 0, 0, 0, 0, 0, 0]
         }]
     };
 
