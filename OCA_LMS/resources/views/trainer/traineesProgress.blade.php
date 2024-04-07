@@ -99,7 +99,7 @@ Trainees Progress
             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-4 " style="width: 300px;">
                 <div class="widget-stat card">
                     <div class="card-body">
-                        <h6 class="card-title text-primary">Latest Assignment </h6>
+                        <h6 class="card-title text-primary">Assignment Submission</h6>
                         <canvas id="LatestAssignmentSubmission"></canvas>
                         <a href="{{ route('assignment.feedbacksubmission.show', $assignmentAssessment['latestAssignmentId']) }}">
                             <p class="card-title" style="font-size: 1rem;">{{$assignmentAssessment['latestAssignmentTitle']}} </p>

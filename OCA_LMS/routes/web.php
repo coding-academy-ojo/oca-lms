@@ -66,12 +66,6 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/login/student', 'AuthController@showStudentLoginForm')->name('student.login.form');
 Route::post('/login/student', 'AuthController@studentLogin')->name('student.login');
 
-// classrome resource route
-
-// Route::resource('classrooms', 'ClassroomController');
-
-
-//Rawan Abuseini route ////////////////////////////////////////////////
 
 // announcements routes
 Route::get('/announcements', [AnnouncementController::class, 'index'])-> name('Announcements');
@@ -133,12 +127,8 @@ Route::put('/staff/{id}', [StaffController::class, 'update'])->name('staff.updat
 Route::delete('/staff/{id}', [StaffController::class, 'destroy'])->name('staff.destroy');
 
 
-// trainee progress details
-// Route::get('/cohort/progress-details', function () {
-//     return view('trainer.trainee-progress-details');
-// })->name('trainee-progress-details');
-
- Route::get('/cohort/progress-details/{id}',[ SingleTraineeProgressController::class, 'index'])->name('ProgressDetails.showDetails');
+//Progress 
+Route::get('/cohort/progress-details/{id}',[ SingleTraineeProgressController::class, 'index'])->name('ProgressDetails.showDetails');
 Route::get('/traineesProgress', [TraineesProgressController::class, 'index'])->name('trainees.progress');
 
 
@@ -188,10 +178,6 @@ Route::get('/Assignments/feedback/{assignmnet}', [AssignmentFeedbackController::
 Route::get('/Assignments/feedback/{id}/{studentId}', [AssignmentFeedbackController::class, 'submissionfedback'])->name('assignment.feedbacksubmission.feedback');
 
 
-
-
-
-
 //Topic route
 Route::get('/Topic/create', [TopicController::class ,'create'])->name('topic.create');
 Route::post('/topic/store', [TopicController::class ,'store'])->name('topic.store');
@@ -200,44 +186,16 @@ Route::put('/topic/{topic}', [TopicController::class ,'update'])->name('topic.up
 Route::delete('/topic/{topic}', [TopicController::class ,'destroy'])->name('topic.destroy');
 
 
-
-
-
-
-///////////////////////////////////
-// ayman
-
-Route::get('/test', function () {
-    return view('test');
-});
-
-Route::get('/test2', function () {
-    return view('test2');
-});
-
-
-
 Route::get('/topics', function () {
     return view('topics.topics');
 })->name('topics');
 Route::get('/createTopics', function () {
     return view('topics.createTopics');
 })->name('createTopics');
-// Route::get('/editTopics', function () {
-//     return view('topics.editTopics');
-// })->name('editTopics');
-
-
-
-// Route::get('/profile', function () {
-//     return view('profile.profile');
-// })->name('profile');
 
 Route::get('/editProfile', function () {
     return view('profile.editProfile');
 })->name('editProfile');
-
-
 
 Route::get('/skillsFramework', function () {
     return view('skillsFramework.skillsFramework');
@@ -308,21 +266,6 @@ Route::post('/update-profile', [ProfileController::class, 'update'])->name('prof
 
 Route::get('/reset-password', [ProfileController::class, 'showResetForm'])->name('password.reset');
 Route::post('/reset-password', [ProfileController::class, 'resetPassword'])->name('password.update');
-
-// //////////////////////////////////////
-// // rawan
-
-// // Add Trainee route
-
-// Route::get('/addTrainee', function () {
-//     return view('trainer/addTrainee');
-// })->name('addTrainee');
-
-
-// // Trainees progress page
-// Route::get('/traineesProgress', function () {
-//     return view('trainer/traineesProgress');
-// })->name('traineesProgress');
 
 
 

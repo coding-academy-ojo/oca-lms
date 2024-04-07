@@ -138,11 +138,14 @@ $latePercentage = $numberOfSubmissions > 0 ? intval(($lateSubmissionsCount / $nu
 $onTimePercentage = $numberOfSubmissions > 0 ? intval(($onTimeCount / $numberOfSubmissions) * 100) : 0;
 $didNotSubmitPercentage = $totalStudents > 0 ? intval(($didNotSubmitCount / $totalStudents) * 100) : 0;
 $passSubmissionsPercentage = $numberOfSubmissions > 0 ? intval(($passSubmissionsCount / $numberOfSubmissions) * 100) : 0;
-$notPassSubmissionsPercentage = 0;
+$notPassSubmissionsPercentage = $numberOfSubmissions > 0 ? 100 - intval(($notPassSubmissionsCount / $numberOfSubmissions) * 100) : 100;
+
+
 //$numberOfSubmissions > 0 ? intval(($notPassSubmissionsCount / $numberOfSubmissions) * 100) : 0;
 
 
-        // dd($latePercentage);
+
+        // dd($notPassSubmissionsPercentage);
         return [
             'totalStudents' => $totalStudents,
             'lateSubmissionsCount' => $lateSubmissionsCount,
