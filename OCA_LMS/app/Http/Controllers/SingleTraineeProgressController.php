@@ -81,6 +81,24 @@ $countValues = array_values($assignmentCountsByTechnology);
 // $studentAssignment = Assignment::find($assignmentId);
 // $assignmentTitle=$studentAssignment->assignment_name;
 
+// Loop through the assignments to fetch submission status, due date, and is late status
+foreach ($studentAssignments as $assignment) {
+    // Fetch the submission status for the assignment
+    $submission = $assignment->assignmentSubmissions()->where('student_id', $student->id)->first();
+
+    $submissionStatus = $submission->status; // Assuming 'Passed' if submission exists, 'Not Submitted' otherwise
+    // Fetch the due date for the assignment
+    $dueDate = $assignment->assignment_due_date; // Assuming 'due_date' is the field name in the assignments table
+
+   // Fetch the "is late" status for the assignment submission
+  $isLate = $submission ? ($submission->is_late ? 'Late' : 'On Time') : 'Not Submitted';
+
+    // Assign submission status, due date, and is late status to each assignment object
+    $assignment->submissionStatus = $submissionStatus;
+    $assignment->dueDate = $dueDate;
+    $assignment->isLate = $isLate;
+}
+
        
         // Pass the student details to the view
         return view('trainer\trainee-progress-details', compact('student', 'absencesCount', 'lateCount', 'technologyNames', 'studentAssignments', 'countValues'));

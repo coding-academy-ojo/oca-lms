@@ -145,8 +145,8 @@
                         <tr>
                             <th scope="row">{{$assignment->id}}</th>
                             <td> {{$assignment->assignment_name}}</td>
-                            <td>Passed </td>
-                            <td>14/3/2024 <Span>Submitted Late</Span> </td>
+                            <td>{{$assignment->submissionStatus}}</td>
+                            <td>{{$assignment->dueDate}} <Span style="color: {{$assignment->isLate === 'Late' ? 'red' : 'inherit'}}">{{$assignment->isLate}}</Span> </td>
                             <td>
                                 <a href="{{ route('assignment.show', $assignment->id) }}" >Details</a>
                             </td>
@@ -156,56 +156,6 @@
                         
                     </tbody>
                 </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Assinments review details Modal -->
-<div class="modal fade" id="feedbackModal4" tabindex="-1" aria-labelledby="feedbackModalLabel4" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="feedbackModalLabel4">JS Functions</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <table class="table">
-                    <caption></caption>
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Assignment</th>
-                            <th scope="col">File</th>
-                            <th scope="col">Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>ToDo App</td>
-                            <td>
-                                <div>
-                                    <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal4">Details</a>
-                                </div>
-                            </td>
-                            <td>10/3/2024</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Read more in Object oriented</td>
-                            <td>
-                                <div>
-                                    <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal4">Details</a>
-                                </div>
-                            </td>
-                            <td>14/3/2024</td>
-                        </tr>
-                        <tr>
-                    </tbody>
-                </table>
-
-
             </div>
         </div>
     </div>
