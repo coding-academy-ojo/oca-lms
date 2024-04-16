@@ -44,7 +44,7 @@
                             <img src="{{ asset('assets/img/usericon.jpg') }}" width="100"
                                 class="img-fluid rounded-circle" alt="">
                         </div>
-                        
+
                         <h3 class="mt-4 mb-1">{{$student->en_first_name}} {{$student->en_second_name}}</h3>
                         <p class="text-muted"> {{$student->educational_background}}</p>
                         <ul class="list-group mb-3 list-group-flush">
@@ -141,19 +141,21 @@
                     </thead>
                     <tbody>
 
-                    @foreach ($studentAssignments as $assignment)
+                        @foreach ($studentAssignments as $assignment)
                         <tr>
                             <th scope="row">{{$assignment->id}}</th>
                             <td> {{$assignment->assignment_name}}</td>
                             <td>{{$assignment->submissionStatus}}</td>
-                            <td>{{$assignment->dueDate}} <Span style="color: {{$assignment->isLate === 'Late' ? 'red' : 'inherit'}}">{{$assignment->isLate}}</Span> </td>
+                            <td>{{$assignment->dueDate}} <Span
+                                    style="color: {{$assignment->isLate === 'Late' ? 'red' : 'inherit'}}">{{$assignment->isLate}}</Span>
+                            </td>
                             <td>
-                                <a href="{{ route('assignment.show', $assignment->id) }}" >Details</a>
+                                <a href="{{ route('assignment.show', $assignment->id) }}">Details</a>
                             </td>
                         </tr>
 
                         @endforeach
-                        
+
                     </tbody>
                 </table>
             </div>
@@ -182,10 +184,10 @@
                     </thead>
                     <tbody>
                         <tr>
-                        <th scope="row">1</th>
-                           <td>29/2/2024</td> 
-                           <td>JS project</td>
-                           <td>Passed</td>
+                            <th scope="row">1</th>
+                            <td>29/2/2024</td>
+                            <td>JS project</td>
+                            <td>Passed</td>
                             <td>2 from Rawan Abuseini </td>
                             <td>
                                 <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3">Details</a>
@@ -193,9 +195,9 @@
                         </tr>
                         <tr>
                             <th scope="row">2</th>
-                            <td>10/3/2024</td> 
+                            <td>10/3/2024</td>
                             <td>React project</td>
-                            <td>Passed</td> 
+                            <td>Passed</td>
                             <td>No corrective Actions</td>
                             <td>
                                 <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3"></a>
@@ -203,9 +205,9 @@
                         </tr>
                         <tr>
                             <th scope="row">3</th>
-                            <td>19/3/2024</td> 
+                            <td>19/3/2024</td>
                             <td>MongoDB project</td>
-                            <td>Passed</td> 
+                            <td>Passed</td>
                             <td>No corrective Actions</td>
                             <td>
                                 <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3"></a>
@@ -213,9 +215,9 @@
                         </tr>
                         <tr>
                             <th scope="row">4</th>
-                            <td>10/4/2024</td> 
+                            <td>10/4/2024</td>
                             <td>NodeJS project</td>
-                            <td>Passed</td> 
+                            <td>Passed</td>
                             <td>No corrective Actions</td>
                             <td>
                                 <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3"></a>
@@ -223,9 +225,9 @@
                         </tr>
                         <tr>
                             <th scope="row">5</th>
-                            <td>19/4/2024</td> 
+                            <td>19/4/2024</td>
                             <td>Mini Project</td>
-                            <td>Passed</td> 
+                            <td>Passed</td>
                             <td>No corrective Actions</td>
                             <td>
                                 <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3"></a>
@@ -233,11 +235,11 @@
                         </tr>
                         <tr>
                             <th scope="row">6</th>
-                            <td>10/3/2024</td> 
+                            <td>10/3/2024</td>
                             <td>Project X</td>
-                            <td>Passed</td> 
+                            <td>Passed</td>
                             <td>No corrective Actions</td>
-                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3"></a>
+                            <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3"></a>
                             </td>
                         </tr>
                         <tr>
@@ -336,8 +338,8 @@
                             <td>Idea Pitching</td>
                             <td>
                                 <div class="progress" style="background: rgba(127, 99, 244, .1)">
-                                    <div class="progress-bar bg-success" style="width: 100%;" role="progressbar">100%<span
-                                            class="sr-only">100% Complete</span>
+                                    <div class="progress-bar bg-success" style="width: 100%;" role="progressbar">
+                                        100%<span class="sr-only">100% Complete</span>
                                     </div>
                                 </div>
                             </td>
@@ -387,7 +389,7 @@
                             <td>
                                 ........
                             </td>
-                            
+
                         </tr>
                         <tr>
                             <td>All other deliverables</td>
@@ -402,7 +404,7 @@
                             <td>
                                 ........
                             </td>
-                            
+
                         </tr>
                     </tbody>
                 </table>
@@ -410,8 +412,79 @@
         </div>
     </div>
 </div>
+<!-- masterpiece info form -->
+<!-- <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Add New Masterpiece Progress</div>
+
+                <div class="card-body">
+                    <form method="POST" action="{{ route('masterpiece.store') }}">
+                        @csrf
+
+                        <div class="form-group">
+                            <label for="task">Task</label>
+                            <select id="task" class="form-control @error('task') is-invalid @enderror" name="task"
+                                required autocomplete="task" autofocus>
+                                <option value="">Select Task</option>
+                                <option >Idea pitching</option>
+                                <option >Wireframe & Mockup</option>
+                                <option >Fully responsive Front-end</option>
+                                <option >Final version fully functional</option>
+                                <option >All other deliverables</option>
+                                
+                            </select>
+                            @error('task')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
 
 
+                        <div class="form-group">
+                            <label for="progress">Progress (%)</label>
+                            <input id="progress" type="number" min="0" max="100"
+                                class="form-control @error('progress') is-invalid @enderror" name="progress"
+                                value="{{ old('progress') }}" required autocomplete="progress">
+                            @error('progress')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="deadline">Deadline</label>
+                            <input id="deadline" type="date"
+                                class="form-control @error('deadline') is-invalid @enderror" name="deadline"
+                                value="{{ old('deadline') }}" required autocomplete="deadline">
+                            @error('deadline')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="notes">Notes</label>
+                            <textarea id="notes" class="form-control @error('notes') is-invalid @enderror" name="notes"
+                                required autocomplete="notes">{{ old('notes') }}</textarea>
+                            @error('notes')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
 
 <script>
 // All Assignments Bar Chart Initialization
@@ -419,7 +492,7 @@ if (document.getElementById('assignments_tech')) {
 
     const assignments_tech = document.getElementById("assignments_tech").getContext('2d');
     // Define your labels using the technologyNames array
-    let labels = <?php echo json_encode($technologyNames); ?>; 
+    let labels = <?php echo json_encode($technologyNames); ?>;
 
     // Chart data
     let barChartData = {

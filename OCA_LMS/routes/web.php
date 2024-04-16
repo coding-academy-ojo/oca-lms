@@ -79,6 +79,14 @@ Route::get('/addTrainee', function () {
     return view('trainer/addTrainee');
 })->name('addTrainee');
 
+
+// Route to show the form for creating a new masterpiece progress entry
+Route::get('/masterpiece/create', [MasterpieceController::class, 'create'])->name('masterpiece.create');
+
+// Route to store a newly created masterpiece progress entry
+Route::post('/masterpiece', [MasterpieceController::class, 'store'])->name('masterpiece.store');
+
+
 ////////////////////////////////////////////////
 
 
