@@ -79,9 +79,15 @@ Trainees Progress
                         </div>
                         <small>{{$lateAssignmentSubmissions['passSubmissionsCount']}} Trainees Passed of {{$lateAssignmentSubmissions['numberOfSubmissions']}}  </small>
                         <div class="progress mb-2 my-4">
-                            <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['notPassSubmissionsPercentage'] }}%">{{ $lateAssignmentSubmissions['notPassSubmissionsPercentage'] }} %</div>
+                        <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['notPassSubmissionsPercentage'] }}%">{{ $lateAssignmentSubmissions['notPassSubmissionsPercentage'] }}%</div>
                         </div>
-                        <small>{{ $lateAssignmentSubmissions['notPassSubmissionsCount'] }} Trainees not reviewed yet of {{$lateAssignmentSubmissions['numberOfSubmissions']}}</small>
+                        @if ($lateAssignmentSubmissions['notPassSubmissionsPercentage'] == 100)
+                            <small>All Assignments are reviewed</small>
+                        @else
+                            <small>{{ $lateAssignmentSubmissions['notPassSubmissionsCount'] }} Trainees not reviewed yet of {{$lateAssignmentSubmissions['numberOfSubmissions']}}</small>
+                        @endif
+
+
                         <div class="progress mb-2 my-4">
                             <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['latePercentage'] }}%">{{ $lateAssignmentSubmissions['latePercentage'] }} %</div>
                         </div>
@@ -550,7 +556,7 @@ Trainees Progress
 
 
         <!-- Masterpiece tracking Table for All trainees  -->
-        <div class="row my-5">
+<div class="row my-5">
     <h1 class="text-primary"> Masterpiece tracking <span class="bg-primary">    </span></h1> 
     <div class="col-md-12">
         <div class="table-responsive card pb-3">
@@ -559,7 +565,7 @@ Trainees Progress
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Task</th>
+                        <th style="width: 350px;">Task</th>
                         <th> Deadline </th>
                         <th>Progress</th>
                         <th>Notes</th>
@@ -667,22 +673,18 @@ Trainees Progress
                     @foreach ($allTrainessOverview as $student)
                         <tr>
                             <td>{{$student->id}}</td>
-                            <td>{{$student->en_first_name}}  </td>
+                            <td>{{$student->en_first_name}} {{$student->en_second_name}} </td>
                             <td style="width: 70%;">
                             <div class="progress">
                                     <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"> 100% of Projects </div>
                                     <div class="progress-bar bg-info" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30% Absence</div>
                                     <div class="progress-bar bg-success" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">20% Internship</div>
-                                
                                 </div>
                             </td>
                             <td>
-    <a href="{{ route('ProgressDetails.showDetails', ['id' => $student->id]) }}" class="btn btn-primary">View</a>
-</td>
-
-
-                                             </tr>
-                        <tr>
+                             <a href="{{ route('ProgressDetails.showDetails', ['id' => $student->id]) }}" class="btn btn-primary">View</a>
+                            </td>
+                            </tr>
                             
 
                         @endforeach

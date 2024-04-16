@@ -114,8 +114,6 @@ class TraineesProgressController extends Controller
         // Get the latest assignment
         $latestAssignment = Assignment::latest()->first();
         $latestAssignmentId = $latestAssignment->id;
-       
-    
         $todaySubmissions = AssignmentSubmission::whereHas('assignment', function ($query) use ($runningCohort) {
             $query->where('cohort_id', $runningCohort->id);
         })->whereDate('created_at', '=', $today)->get();
@@ -133,17 +131,13 @@ class TraineesProgressController extends Controller
         $notPassSubmissionsCount = $numberOfSubmissions - $passSubmissionsCount;      
         $didNotSubmitCount = $totalStudents - ($lateSubmissionsCount + $onTimeCount);
 
-// Calculate percentage of All counts 
-$latePercentage = $numberOfSubmissions > 0 ? intval(($lateSubmissionsCount / $numberOfSubmissions) * 100) : 0;
-$onTimePercentage = $numberOfSubmissions > 0 ? intval(($onTimeCount / $numberOfSubmissions) * 100) : 0;
-$didNotSubmitPercentage = $totalStudents > 0 ? intval(($didNotSubmitCount / $totalStudents) * 100) : 0;
-$passSubmissionsPercentage = $numberOfSubmissions > 0 ? intval(($passSubmissionsCount / $numberOfSubmissions) * 100) : 0;
-$notPassSubmissionsPercentage = $numberOfSubmissions > 0 ? 100 - intval(($notPassSubmissionsCount / $numberOfSubmissions) * 100) : 100;
-
-
-//$numberOfSubmissions > 0 ? intval(($notPassSubmissionsCount / $numberOfSubmissions) * 100) : 0;
-
-
+        // Calculate percentage of All counts 
+        $latePercentage = $numberOfSubmissions > 0 ? intval(($lateSubmissionsCount / $numberOfSubmissions) * 100) : 0;
+        $onTimePercentage = $numberOfSubmissions > 0 ? intval(($onTimeCount / $numberOfSubmissions) * 100) : 0;
+        $didNotSubmitPercentage = $totalStudents > 0 ? intval(($didNotSubmitCount / $totalStudents) * 100) : 0;
+        $passSubmissionsPercentage = $numberOfSubmissions > 0 ? intval(($passSubmissionsCount / $numberOfSubmissions) * 100) : 0;
+        $notPassSubmissionsPercentage = $numberOfSubmissions > 0 ? 100 - intval(($notPassSubmissionsCount / $numberOfSubmissions) * 100) : 100;
+        //$numberOfSubmissions > 0 ? intval(($notPassSubmissionsCount / $numberOfSubmissions) * 100) : 0;
 
         // dd($notPassSubmissionsPercentage);
         return [
@@ -160,8 +154,7 @@ $notPassSubmissionsPercentage = $numberOfSubmissions > 0 ? 100 - intval(($notPas
             'notPassSubmissionsCount' => $notPassSubmissionsCount,
             'notPassSubmissionsPercentage' => $notPassSubmissionsPercentage,
         ];
-    }
-       
+    }     
     private function assignmentAssessment() {
         $staff = Auth::guard('staff')->user();
         $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
@@ -215,22 +208,12 @@ $notPassSubmissionsPercentage = $numberOfSubmissions > 0 ? 100 - intval(($notPas
         $students = $runningCohort->students;
         // dd($students);
         
-         return $students;
-
-
-    
+    return $students;
     }
 
-    public function showDetails($id)
-{
+    public function showDetails($id){
     // Retrieve the student details based on the provided ID
     $student = Student::find($id);
-
     // Pass the student details to the view
     return view('trainer.trainee_progress_details', compact('student'));
-}
-
-
-    
-    
-}
+}}

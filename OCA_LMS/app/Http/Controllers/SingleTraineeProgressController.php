@@ -74,15 +74,6 @@ foreach ($studentAssignments as $assignment) {
 // Extract only the values (count of assignments) without keys (technology IDs)
 $countValues = array_values($assignmentCountsByTechnology);
 
-
-// Now $assignmentCountsByTechnology contains the count of assignments for each technology ID associated with the cohort
-//dd($assignment->topic); // Check the topic associated with the assignment
-// dd($assignment->topic->technologyCohort); // Check the technology cohort associated with the topic
-//dd($assignment->topic->technologyCohort->technologies); // Check the technology associated with the technology cohort
-
-
-
-
 // Retrieve pass submissions for the given assignment ID
 //$passSubmissions = AssignmentSubmission::where('assignment_id', $assignmentId)
                                     //   ->where('status', 'Pass') // Adjust the condition based on your logic
