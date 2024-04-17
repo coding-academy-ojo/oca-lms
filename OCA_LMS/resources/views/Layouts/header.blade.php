@@ -80,6 +80,8 @@
                                     href="{{ route('show_all_projects') }}">Projects</a>
                                 <a class="nav-link text-dark {{ request()->routeIs('Announcements') ? 'text-primary' : '' }}" 
                                     href="{{ route('Announcements') }}">Announcements</a>
+                                    <a class="nav-link text-dark {{ request()->routeIs('Announcements') ? 'text-primary' : '' }}" 
+                                    href="{{ route('Announcements') }}">Masterpiece</a>
                                 <a class="nav-link text-dark {{ request()->routeIs('attendance') ? 'text-primary' : '' }}"
                                     href="{{ route('attendance') }}">Attendance</a>
                                     <a class="nav-link text-dark {{ request()->routeIs('soft-skills.*') ? 'text-primary' : '' }}"
