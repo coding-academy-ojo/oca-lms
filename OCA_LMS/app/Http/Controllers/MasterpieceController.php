@@ -8,8 +8,8 @@ class MasterpieceController extends Controller
 {
     public function index()
     {
-        $tasks = MasterpieceProgress::all();
-        return view('trainer\trainee-progress-details', compact('tasks'));
+        //$tasks = Masterpiece::all();
+        return view('pages/masterpiece');
     }
 
     public function store()

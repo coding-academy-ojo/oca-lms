@@ -31,7 +31,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StudentDashboardController;
 use App\Http\Controllers\TrainerDashboardController;
 use App\Http\Controllers\AbsenceReportController;
-use App\Http\Controllers\SoftSkillsTrainingController;use App\Http\Controllers\SingleTraineeProgressController;
+use App\Http\Controllers\SoftSkillsTrainingController;
+use App\Http\Controllers\SingleTraineeProgressController;
+use App\Http\Controllers\MasterpieceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,7 +83,7 @@ Route::get('/addTrainee', function () {
 
 
 // Route to show the form for creating a new masterpiece progress entry
-Route::get('/masterpiece/create', [MasterpieceController::class, 'create'])->name('masterpiece.create');
+Route::get('/masterpiece', [MasterpieceController::class, 'index'])->name('Masterpiece');
 
 // Route to store a newly created masterpiece progress entry
 Route::post('/masterpiece', [MasterpieceController::class, 'store'])->name('masterpiece.store');
