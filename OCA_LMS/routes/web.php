@@ -87,6 +87,8 @@ Route::get('/masterpiece', [MasterpieceController::class, 'index'])->name('Maste
 
 // Route to store a newly created masterpiece progress entry
 Route::post('/masterpiece', [MasterpieceController::class, 'store'])->name('masterpiece.store');
+// Route to store a newly created masterpiece progress entry
+// Route::post('/masterpiece', [MasterpieceController::class, 'create'])->name('masterpiece.create');
 
 
 ////////////////////////////////////////////////

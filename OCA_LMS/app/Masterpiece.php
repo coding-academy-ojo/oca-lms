@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Student;
-use App\Models\Staff;
-
+use App\Student;
+use App\Staff;
 class Masterpiece extends Model
 {
-    use HasFactory;
+   
 
     protected $table = 'masterpiece_progress';
 
@@ -23,6 +22,6 @@ class Masterpiece extends Model
     {
         return $this->belongsTo(Staff::class, 'staff_id');
     }
-    use SoftDeletes;
+    
 
 }
