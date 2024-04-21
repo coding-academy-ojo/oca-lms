@@ -253,45 +253,38 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-    var ctx3 = document.getElementById('totalSummaryChart').getContext('2d');
-    var totalSummaryChart = new Chart(ctx3, {
-        type: 'doughnut',
-        data: {
-            labels: ['Remaining Enrolled', 'Remaining Graduates', 'Employed Graduates'],
-            datasets: [{
-                label: 'Summary',
-                data: [689 - 551, 551 - 419, 419], // The data for the donut segments
-                backgroundColor: [
-                    '#e66c37',
-                    '#eb895f',
-                    '#ad5129'
-                ],
-               
-                borderWidth: 1
-            }]
-        },
-        options: {
-            cutout: '60%', // This is the correct property in Chart.js version 3.x or later
-            maintainAspectRatio: false,
-            plugins: {
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            var label = context.label || '';
-                            if (label) {
-                                label += ': ';
-                            }
-                            var total = context.dataset.data.reduce((previousValue, currentValue) => previousValue + currentValue, 0);
-                            var currentValue = context.dataset.data[context.dataIndex];
-                            var percentage = ((currentValue / total) * 100).toFixed(2);
-                            label += currentValue + ' (' + percentage + '%)';
-                            return label;
+        var totalSummaryChartData = @json($totalSummaryChartData);
+
+var ctx3 = document.getElementById('totalSummaryChart').getContext('2d');
+var totalSummaryChart = new Chart(ctx3, {
+    type: 'doughnut',
+    data: {
+        labels: totalSummaryChartData.labels,
+        datasets: totalSummaryChartData.datasets
+    },
+    options: {
+        cutout: '60%',
+        maintainAspectRatio: false,
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        var label = context.label || '';
+                        if (label) {
+                            label += ': ';
                         }
+                        var total = context.dataset.data.reduce((previousValue, currentValue) => previousValue + currentValue, 0);
+                        var currentValue = context.dataset.data[context.dataIndex];
+                        var percentage = ((currentValue / total) * 100).toFixed(2);
+                        label += currentValue + ' (' + percentage + '%)';
+                        return label;
                     }
                 }
             }
         }
-    });
+    }
+});
+
 });
 </script>
 @endsection

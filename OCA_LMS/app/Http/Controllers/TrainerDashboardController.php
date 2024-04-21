@@ -20,12 +20,13 @@ class TrainerDashboardController extends Controller
     public function index($cohortId)
     {
         $cohort = Cohort::findOrFail($cohortId); 
-        
+        // dd($cohort);
         session(['cohort_ID' => $cohortId]);
         $softSkillsForCohort = $this->softSkillsForCohort();
         $cardsStatistics = $this->cardsStatistics();
         $attendanceOverview = $this->attendanceOverview();
         $technologiesOverview = $this->technologiesOverview();
+        // dd($technologiesOverview,$attendanceOverview);
         return view('academies.view-cohort', compact('cardsStatistics', 'attendanceOverview', 'technologiesOverview' , 'softSkillsForCohort'));
     }
 
@@ -58,7 +59,7 @@ class TrainerDashboardController extends Controller
         $totalTechnologies = Technology_Cohort::where('cohort_id', $cohortId)->distinct()->count('technology_id');
     
         return [
-            'cohort' => $runningCohort, // Return the running cohort data
+            'cohort' => $runningCohort, 
             'statistics' => [
                 'Number_of_Students' => $numberOfStudents,
                 'Number_of_Briefs' => $numberOfBriefs,
@@ -77,6 +78,7 @@ class TrainerDashboardController extends Controller
         if (!$runningCohort) {
             // If no running cohort is found, return a default set of values
             return [
+                
                 'cohort_name' => 'N/A',
                 'date' => Carbon::now()->format('d-F-Y'),
                 'attendance_data' => [],
@@ -143,7 +145,7 @@ class TrainerDashboardController extends Controller
         $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
     
         if (!$runningCohort) {
-            return []; // Return an empty array if no running cohort is found
+            return [];
         }
     
         $technologiesData = [];
@@ -167,7 +169,10 @@ class TrainerDashboardController extends Controller
                 $status = 'Not Started';
             }
     
+            $start_date = Carbon::parse($technology->pivot->start_date)->format('d-F-Y');
+
             $technologiesData[] = [
+                'start_date' => $start_date,
                 'name' => $technology->technologies_name,
                 'description' => $technology->technologies_description,
                 'resources' => $technology->technologies_resources,
