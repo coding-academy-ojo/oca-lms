@@ -44,7 +44,7 @@
                             <img src="{{ asset('assets/img/usericon.jpg') }}" width="100"
                                 class="img-fluid rounded-circle" alt="">
                         </div>
-                        
+
                         <h3 class="mt-4 mb-1">{{$student->en_first_name}} {{$student->en_second_name}}</h3>
                         <p class="text-muted"> {{$student->educational_background}}</p>
                         <ul class="list-group mb-3 list-group-flush">
@@ -137,78 +137,27 @@
                             <th scope="col">Submission Status</th>
                             <th scope="col">Due Date</th>
                             <th scope="col">Log</th>
-                           
                         </tr>
                     </thead>
                     <tbody>
 
-                    @foreach ($studentAssignments as $assignment)
+                        @foreach ($studentAssignments as $assignment)
                         <tr>
                             <th scope="row">{{$assignment->id}}</th>
                             <td> {{$assignment->assignment_name}}</td>
-                            <td>Passed </td>
-                          
-                            <td>14/3/2024 <Span>Submitted Late</Span> </td>
-                            <td>
-                                <a href="{{ route('assignment.show', $assignment->id) }}" >Details</a>
+                            <td>{{$assignment->submissionStatus}}</td>
+                            <td>{{$assignment->dueDate}} <Span
+                                    style="color: {{$assignment->isLate === 'Late' ? 'red' : 'inherit'}}">{{$assignment->isLate}}</Span>
                             </td>
-                           
+                            <td>
+                                <a href="{{ route('assignment.show', $assignment->id) }}">Details</a>
+                            </td>
                         </tr>
 
                         @endforeach
-                        
+
                     </tbody>
                 </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Assinments review details Modal -->
-<div class="modal fade" id="feedbackModal4" tabindex="-1" aria-labelledby="feedbackModalLabel4" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="feedbackModalLabel4">JS Functions</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <table class="table">
-                    <caption></caption>
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Assignment</th>
-                            <th scope="col">File</th>
-                            <th scope="col">Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>ToDo App</td>
-                            <td>
-                                <div>
-                                    <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal4">Details</a>
-                                </div>
-                            </td>
-                            <td>10/3/2024</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Read more in Object oriented</td>
-                            <td>
-                                <div>
-                                    <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal4">Details</a>
-                                </div>
-                            </td>
-                            <td>14/3/2024</td>
-                        </tr>
-                        <tr>
-                    </tbody>
-                </table>
-
-
             </div>
         </div>
     </div>
@@ -236,9 +185,9 @@
                     <tbody>
                         <tr>
                             <th scope="row">1</th>
-                           <td>29/2/2024</td> 
-                           <td>JS project</td>
-                           <td>Passed</td>
+                            <td>29/2/2024</td>
+                            <td>JS project</td>
+                            <td>Passed</td>
                             <td>2 from Rawan Abuseini </td>
                             <td>
                                 <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3">Details</a>
@@ -246,9 +195,9 @@
                         </tr>
                         <tr>
                             <th scope="row">2</th>
-                            <td>10/3/2024</td> 
+                            <td>10/3/2024</td>
                             <td>React project</td>
-                            <td>Passed</td> 
+                            <td>Passed</td>
                             <td>No corrective Actions</td>
                             <td>
                                 <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3"></a>
@@ -256,9 +205,9 @@
                         </tr>
                         <tr>
                             <th scope="row">3</th>
-                            <td>19/3/2024</td> 
+                            <td>19/3/2024</td>
                             <td>MongoDB project</td>
-                            <td>Passed</td> 
+                            <td>Passed</td>
                             <td>No corrective Actions</td>
                             <td>
                                 <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3"></a>
@@ -266,9 +215,9 @@
                         </tr>
                         <tr>
                             <th scope="row">4</th>
-                            <td>10/4/2024</td> 
+                            <td>10/4/2024</td>
                             <td>NodeJS project</td>
-                            <td>Passed</td> 
+                            <td>Passed</td>
                             <td>No corrective Actions</td>
                             <td>
                                 <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3"></a>
@@ -276,9 +225,9 @@
                         </tr>
                         <tr>
                             <th scope="row">5</th>
-                            <td>19/4/2024</td> 
+                            <td>19/4/2024</td>
                             <td>Mini Project</td>
-                            <td>Passed</td> 
+                            <td>Passed</td>
                             <td>No corrective Actions</td>
                             <td>
                                 <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3"></a>
@@ -286,11 +235,11 @@
                         </tr>
                         <tr>
                             <th scope="row">6</th>
-                            <td>10/3/2024</td> 
+                            <td>10/3/2024</td>
                             <td>Project X</td>
-                            <td>Passed</td> 
+                            <td>Passed</td>
                             <td>No corrective Actions</td>
-                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3"></a>
+                            <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3"></a>
                             </td>
                         </tr>
                         <tr>
@@ -381,9 +330,7 @@
                             <th scope="col">Task</th>
                             <th scope="col">Progress</th>
                             <th scope="col">Deadline</th>
-                            <th scope="col">Label</th>
                             <th>Notes</th>
-                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -391,113 +338,73 @@
                             <td>Idea Pitching</td>
                             <td>
                                 <div class="progress" style="background: rgba(127, 99, 244, .1)">
-                                    <div class="progress-bar bg-success" style="width: 100%;" role="progressbar"><span
-                                            class="sr-only">100% Complete</span>
+                                    <div class="progress-bar bg-success" style="width: 100%;" role="progressbar">
+                                        100%<span class="sr-only">100% Complete</span>
                                     </div>
                                 </div>
                             </td>
                             <td>Apr 20,2023</td>
-                            <td><span class="badge bg-success">100%</span></td>
-                            </td>
                             <td>
                                 ........
                             </td>
-                            <td>
-                                <span>
-                                    <a href="javascript:void()" class="mr-4" data-toggle="tooltip" data-placement="top"
-                                        title="Edit"><i class="fa fa-pencil color-muted"></i>
-                                    </a>
-                                    <a href="javascript:void()" data-toggle="tooltip" data-placement="top"
-                                        title="Close"></a>
-                                </span>
-                            </td>
-
-
-
                         </tr>
                         <tr>
                             <td>Wireframe & Mockup</td>
                             <td>
                                 <div class="progress" style="background: rgba(76, 175, 80, .1)">
-                                    <div class="progress-bar bg-success" style="width: 80%;" role="progressbar"><span
+                                    <div class="progress-bar bg-success" style="width: 80%;" role="progressbar">80%<span
                                             class="sr-only">80% Complete</span>
                                     </div>
                                 </div>
                             </td>
                             <td>Jun 15,2023</td>
-                            <td><span class="badge bg-success">80%</span>
-                            </td>
                             <td>
                                 ........
-                            </td>
-                            <td><span><a href="javascript:void()" class="mr-4" data-toggle="tooltip"
-                                        data-placement="top" title="Edit"><i class="fa fa-pencil color-muted"></i>
-                                    </a><a href="javascript:void()" data-toggle="tooltip" data-placement="top"
-                                        title="Close"></a></span>
                             </td>
                         </tr>
                         <tr>
                             <td>Front-end</td>
                             <td>
                                 <div class="progress" style="background: rgba(70, 74, 83, .1)">
-                                    <div class="progress-bar bg-warning" style="width: 50%;" role="progressbar"><span
+                                    <div class="progress-bar bg-warning" style="width: 50%;" role="progressbar">50%<span
                                             class="sr-only">50% Complete</span>
                                     </div>
                                 </div>
                             </td>
                             <td>Jul 1,2023</td>
-                            <td><span class="badge bg-warning">50%</span>
-                            </td>
                             <td>
                                 ........
-                            </td>
-                            <td><span><a href="javascript:void()" class="mr-4" data-toggle="tooltip"
-                                        data-placement="top" title="Edit"><i class="fa fa-pencil color-muted"></i>
-                                    </a><a href="javascript:void()" data-toggle="tooltip" data-placement="top"
-                                        title="Close"></a></span>
                             </td>
                         </tr>
                         <tr>
                             <td>Final version fully functional</td>
                             <td>
                                 <div class="progress" style="background: rgba(255, 87, 34, .1)">
-                                    <div class="progress-bar bg-danger" style="width: 20%;" role="progressbar"><span
+                                    <div class="progress-bar bg-danger" style="width: 20%;" role="progressbar">20%<span
                                             class="sr-only">20% Complete</span>
                                     </div>
                                 </div>
                             </td>
                             <td>Aug 5,2023</td>
-                            <td><span class="badge bg-danger">20%</span>
-                            </td>
                             <td>
                                 ........
                             </td>
-                            <td><span><a href="javascript:void()" class="mr-4" data-toggle="tooltip"
-                                        data-placement="top" title="Edit"><i class="fa fa-pencil color-muted"></i>
-                                    </a><a href="javascript:void()" data-toggle="tooltip" data-placement="top"
-                                        title="Close"></a></span>
-                            </td>
+
                         </tr>
                         <tr>
                             <td>All other deliverables</td>
                             <td>
                                 <div class="progress" style="background: rgba(255, 193, 7, .1)">
-                                    <div class="progress-bar bg-success" style="width: 70%;" role="progressbar"><span
+                                    <div class="progress-bar bg-success" style="width: 70%;" role="progressbar">70%<span
                                             class="sr-only">70% Complete</span>
                                     </div>
                                 </div>
                             </td>
                             <td>Aug 28,2023</td>
-                            <td><span class="badge bg-success">70%</span>
-                            </td>
                             <td>
                                 ........
                             </td>
-                            <td><span><a href="javascript:void()" class="mr-4" data-toggle="tooltip"
-                                        data-placement="top" title="Edit"><i class="fa fa-pencil color-muted"></i>
-                                    </a><a href="javascript:void()" data-toggle="tooltip" data-placement="top"
-                                        title="Close"></a></span>
-                            </td>
+
                         </tr>
                     </tbody>
                 </table>
@@ -507,14 +414,13 @@
 </div>
 
 
-
 <script>
 // All Assignments Bar Chart Initialization
 if (document.getElementById('assignments_tech')) {
 
     const assignments_tech = document.getElementById("assignments_tech").getContext('2d');
     // Define your labels using the technologyNames array
-    let labels = <?php echo json_encode($technologyNames); ?>; 
+    let labels = <?php echo json_encode($technologyNames); ?>;
 
     // Chart data
     let barChartData = {

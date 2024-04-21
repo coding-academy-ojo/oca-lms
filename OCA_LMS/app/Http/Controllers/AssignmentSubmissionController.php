@@ -54,11 +54,21 @@ class AssignmentSubmissionController extends Controller
         $assignmnetId=$request->input('Assignment_ID');
         $Assignment = Assignment::find( $assignmnetId);
         $assignmnetdate=$Assignment->assignment_due_date;
+        $numberOfSubmissions = AssignmentSubmission::where('assignment_id', $request->input('Assignment_ID'))
+        ->where('student_id', $studentId)
+        ->count();
         if(now()> $assignmnetdate)
         {
-            $assignment_submision->is_late =1;
+            if ($numberOfSubmissions<1) {
+                $assignment_submision->is_late =1;
+            } else {
+                $assignment_submision->is_late =0;
+            }  
         }
-     
+        else{
+            $assignment_submision->is_late =0;
+        }
+
 
         $assignment_submision->save();
         return redirect()->back()->with('success', 'Assignment submited successfully');

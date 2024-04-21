@@ -74,21 +74,30 @@ foreach ($studentAssignments as $assignment) {
 // Extract only the values (count of assignments) without keys (technology IDs)
 $countValues = array_values($assignmentCountsByTechnology);
 
-
-// Now $assignmentCountsByTechnology contains the count of assignments for each technology ID associated with the cohort
-//dd($assignment->topic); // Check the topic associated with the assignment
-// dd($assignment->topic->technologyCohort); // Check the technology cohort associated with the topic
-//dd($assignment->topic->technologyCohort->technologies); // Check the technology associated with the technology cohort
-
-
-
-
 // Retrieve pass submissions for the given assignment ID
 //$passSubmissions = AssignmentSubmission::where('assignment_id', $assignmentId)
                                     //   ->where('status', 'Pass') // Adjust the condition based on your logic
                                     //   ->get();
 // $studentAssignment = Assignment::find($assignmentId);
 // $assignmentTitle=$studentAssignment->assignment_name;
+
+// Loop through the assignments to fetch submission status, due date, and is late status
+foreach ($studentAssignments as $assignment) {
+    // Fetch the submission status for the assignment
+    $submission = $assignment->assignmentSubmissions()->where('student_id', $student->id)->first();
+
+    $submissionStatus = $submission->status; // Assuming 'Passed' if submission exists, 'Not Submitted' otherwise
+    // Fetch the due date for the assignment
+    $dueDate = $assignment->assignment_due_date; // Assuming 'due_date' is the field name in the assignments table
+
+   // Fetch the "is late" status for the assignment submission
+  $isLate = $submission ? ($submission->is_late ? 'Late' : 'On Time') : 'Not Submitted';
+
+    // Assign submission status, due date, and is late status to each assignment object
+    $assignment->submissionStatus = $submissionStatus;
+    $assignment->dueDate = $dueDate;
+    $assignment->isLate = $isLate;
+}
 
        
         // Pass the student details to the view
