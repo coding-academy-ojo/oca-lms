@@ -19,6 +19,7 @@ class CreateAbsencesTable extends Migration
             $table->date('absences_date')->useCurrent();
             $table->text('absences_reason')->nullable();
             $table->string('absences_duration')->nullable();
+            $table->string('file_path')->nullable();
             $table->unsignedBigInteger('student_id');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->timestamps();

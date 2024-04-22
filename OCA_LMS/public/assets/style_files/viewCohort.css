@@ -13,7 +13,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     flex-grow: 1;
-    margin: 10px;
+    margin: 8px;
     text-align: center;
     border-radius: 4px;
 }
@@ -64,4 +64,189 @@
         width: 100%;
         flex-basis: 100%;
     }
+}
+
+#cohort-milestone-heading {
+    text-align: center;
+}
+
+#cohort-milestone-list {
+    --col-gap: 2rem;
+    --row-gap: 2rem;
+    --line-w: 0.25rem;
+    display: grid;
+    grid-template-columns: var(--line-w) 1fr;
+    grid-auto-columns: max-content;
+    column-gap: var(--col-gap);
+    list-style: none;
+    width: min(60rem, 90%);
+    margin-inline: auto;
+}
+
+
+/* line */
+
+#cohort-milestone-list::before {
+    content: "";
+    grid-column: 1;
+    grid-row: 1 / span 20;
+    background: rgb(225, 225, 225);
+    border-radius: calc(var(--line-w) / 2);
+}
+
+
+/* columns*/
+
+
+/* row gaps */
+
+#cohort-milestone-list li:not(:last-child) {
+    margin-bottom: var(--row-gap);
+}
+
+
+/* card */
+
+#cohort-milestone-list li {
+    grid-column: 2;
+    --inlineP: 1.5rem;
+    margin-inline: var(--inlineP);
+    grid-row: span 2;
+    display: grid;
+    grid-template-rows: min-content min-content min-content;
+}
+
+
+/* date */
+
+#cohort-milestone-list li .date {
+    --dateH: 3rem;
+    height: var(--dateH);
+    margin-inline: calc(var(--inlineP) * -1);
+    text-align: center;
+    background-color: var(--accent-color);
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 700;
+    display: grid;
+    place-content: center;
+    position: relative;
+    border-radius: calc(var(--dateH) / 2) 0 0 calc(var(--dateH) / 2);
+}
+
+
+/* date flap */
+
+#cohort-milestone-list li .date::before {
+    content: "";
+    width: var(--inlineP);
+    aspect-ratio: 1;
+    background: var(--accent-color);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2) 100%, transparent);
+    position: absolute;
+    top: 100%;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    right: 0;
+}
+
+
+/* circle */
+
+#cohort-milestone-list li .date::after {
+    content: "";
+    position: absolute;
+    width: 2rem;
+    aspect-ratio: 1;
+    background: var(--bgColor);
+    border: 0.3rem solid var(--accent-color);
+    border-radius: 50%;
+    top: 50%;
+    transform: translate(50%, -50%);
+    right: calc(100% + var(--col-gap) + var(--line-w) / 2);
+}
+
+
+/* title descr */
+
+#cohort-milestone-list li .title,
+#cohort-milestone-list li .descr {
+    background: var(--bgColor);
+    position: relative;
+    padding-inline: 1.5rem;
+}
+
+#cohort-milestone-list li .title {
+    overflow: hidden;
+    padding-block-start: 1.5rem;
+    padding-block-end: 1rem;
+    font-weight: 500;
+}
+
+#cohort-milestone-list li .descr {
+    padding-block-end: 1.5rem;
+    font-weight: 300;
+}
+
+
+/* shadows */
+
+#cohort-milestone-list li .title::before,
+#cohort-milestone-list li .descr::before {
+    content: "";
+    position: absolute;
+    width: 90%;
+    height: 0.5rem;
+    background: rgba(0, 0, 0, 0.5);
+    left: 50%;
+    border-radius: 50%;
+    filter: blur(4px);
+    transform: translate(-50%, 50%);
+}
+
+#cohort-milestone-list li .title::before {
+    bottom: calc(100% + 0.125rem);
+}
+
+#cohort-milestone-list li .descr::before {
+    z-index: -1;
+    bottom: 0.25rem;
+}
+
+@media (min-width: 40rem) {
+    #cohort-milestone-list {
+        grid-template-columns: 1fr var(--line-w) 1fr;
+    }
+    #cohort-milestone-list::before {
+        grid-column: 2;
+    }
+    #cohort-milestone-list li:nth-child(odd) {
+        grid-column: 1;
+    }
+    #cohort-milestone-list li:nth-child(even) {
+        grid-column: 3;
+    }
+    /* start second card */
+    #cohort-milestone-list li:nth-child(2) {
+        grid-row: 2/4;
+    }
+    #cohort-milestone-list li:nth-child(odd) .date::before {
+        clip-path: polygon(0 0, 100% 0, 100% 100%);
+        left: 0;
+    }
+    #cohort-milestone-list li:nth-child(odd) .date::after {
+        transform: translate(-50%, -50%);
+        left: calc(100% + var(--col-gap) + var(--line-w) / 2);
+    }
+    #cohort-milestone-list li:nth-child(odd) .date {
+        border-radius: 0 calc(var(--dateH) / 2) calc(var(--dateH) / 2) 0;
+    }
+}
+
+.credits {
+    margin-top: 1rem;
+    text-align: right;
+}
+
+.credits a {
+    color: var(--color);
 }

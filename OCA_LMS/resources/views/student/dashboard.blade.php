@@ -126,20 +126,21 @@
                     <div>
                         <ul class="list-group mb-3 list-group-flush">
                             <li class="list-group-item px-0 d-flex justify-content-between">
-                                <span>Justified Absence:</span><strong>2</strong>
+                                <span>Justified Absence:</span><strong>{{ $justifiedAbsencesCount }}</strong>
                             </li>
                             <li class="list-group-item px-0 d-flex justify-content-between">
-                                <span class="mb-0">Non-Justified Absence:</span><strong>0</strong>
+                                <span class="mb-0">Non-Justified Absence:</span><strong>{{ $nonJustifiedAbsencesCount }}</strong>
                             </li>
                             <li class="list-group-item px-0 d-flex justify-content-between">
-                                <span class="mb-0">Justified Tardy:</span><strong>3</strong>
+                                <span class="mb-0">Justified Tardy:</span><strong>{{ $justifiedLateCount }}</strong>
                             </li>
                             <li class="list-group-item px-0 d-flex justify-content-between">
-                                <span class="mb-0">Non-Justified Tardy:</span><strong>0</strong>
+                                <span class="mb-0">Non-Justified Tardy:</span><strong>{{ $nonJustifiedLateCount }}</strong>
                             </li>
                         </ul>
                     </div>
                 </div>
+                
             </div>
         </div>
 
@@ -420,51 +421,55 @@
 
 <script>
 // All Assignments Bar Chart Initialization
-if (document.getElementById('assignments_tech')) {
+// Extracted assignment data from PHP
+let assignmentsData = <?php echo json_encode($assignmentsStatus); ?>;
 
-    const assignments_tech = document.getElementById("assignments_tech").getContext('2d');
+// Prepare chart data
+let labels = assignmentsData.map(assignment => assignment.assignment_name);
+let passedData = assignmentsData.map(assignment => (assignment.status === 'Passed') ? 1 : 0);
+let notPassedData = assignmentsData.map(assignment => (assignment.status === 'Not Passed') ? 1 : 0);
 
-    // Chart data
-    let barChartData = {
-        labels: ["HTML& CSS", "JS", "React", "NodeJS", "MongoDB", "PostgreSQL", "Wordpress"],
-        datasets: [{
-            label: 'Passed',
-            backgroundColor: "rgba(43, 193, 85, 1)", // Green color
-            hoverBackgroundColor: "rgba(43, 193, 85, 1)",
-            data: [100, 95, 90, 100, 80, 93, 99]
-        }, {
-            label: 'Not Passed',
-            backgroundColor: "rgba(243, 87, 87, 1)", // Red color
-            hoverBackgroundColor: "rgba(243, 87, 87, 1)",
-            data: [0, 2, 2, 1, 0, 1, 0]
-        }]
-    };
+// Chart data
+let barChartData = {
+    labels: labels,
+    datasets: [{
+        label: 'Passed',
+        backgroundColor: passedData.map(value => (value === 1) ? "rgba(43, 193, 85, 1)" : "rgba(255, 255, 255, 0)"),
+        hoverBackgroundColor: "rgba(43, 193, 85, 1)",
+        data: passedData
+    }, {
+        label: 'Not Passed',
+        backgroundColor: notPassedData.map(value => (value === 1) ? "rgba(243, 87, 87, 1)" : "rgba(255, 255, 255, 0)"),
+        hoverBackgroundColor: "rgba(243, 87, 87, 1)",
+        data: notPassedData
+    }]
+};
 
-    // Chart options
-    new Chart(assignments_tech, {
-        type: 'bar',
-        data: barChartData,
-        options: {
-            scales: {
-                xAxes: [{
-                    stacked: true
-                }],
-                yAxes: [{
-                    stacked: true
-                }]
-            },
-            legend: {
-                display: true
-            },
-            responsive: true,
-            maintainAspectRatio: false,
-            tooltips: {
-                mode: 'index',
-                intersect: false
-            }
+// Update the chart with new data
+let chart = new Chart(assignments_tech, {
+    type: 'bar',
+    data: barChartData,
+    options: {
+        scales: {
+            xAxes: [{
+                stacked: true
+            }],
+            yAxes: [{
+                stacked: true
+            }]
+        },
+        legend: {
+            display: true
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+        tooltips: {
+            mode: 'index',
+            intersect: false
         }
-    });
-}
+    }
+});
+
 
 // All Projects status Bar Chart Initialization
 if (document.getElementById('barChart_3')) {

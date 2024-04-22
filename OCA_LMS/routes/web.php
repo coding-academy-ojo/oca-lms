@@ -146,6 +146,8 @@ Route::get('/traineesProgress', [TraineesProgressController::class, 'index'])->n
 
 // absence
 Route::get('/absence-report', [AbsenceReportController::class, 'index'])->name('absence');
+Route::post('/absence/upload/{absence_id}', [AbsenceReportController::class,'UploudAbsenceReport'])->name('absence.upload');
+Route::get('/absence/{absence_id}/download', [AbsenceReportController::class,'downloadAbsenceReport'])->name('absence.download');
 
 Route::get('students/{studentId}/absence', 'AbsenceReportController@show')->name('spacificUserReport');
 

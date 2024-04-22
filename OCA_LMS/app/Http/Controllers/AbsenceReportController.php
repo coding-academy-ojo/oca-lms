@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\Student;
+use App\Absence;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-
+use Illuminate\Support\Facades\Storage;
 class AbsenceReportController extends Controller
 {
     public function index(Request $request)
@@ -28,17 +29,17 @@ class AbsenceReportController extends Controller
                     return response()->json(['message' => 'Manager is not assigned to any academies'], 404);
                 }
             
-                // Initialize an empty collection to store all running cohorts
+       
                 $runningCohorts = collect();
             
-                // Loop through each academy to retrieve its running cohorts
+           
                 foreach ($academies as $academy) {
                     $runningCohorts = $runningCohorts->merge(
                         $academy->cohorts()->where('cohort_end_date', '>', now())->get()
                     );
                 }
             
-                // Check if there are any running cohorts
+              
                 if ($runningCohorts->isEmpty()) {
                     return response()->json(['message' => 'No running cohorts found'], 404);
                 }
@@ -117,5 +118,58 @@ class AbsenceReportController extends Controller
             return back()->withError('Error fetching student records: ' . $e->getMessage())->withInput();
         }
     }
+
+  
+    public function UploudAbsenceReport(Request $request, $absenceId){
+        try {
+            $absence = Absence::findOrFail($absenceId);
     
+            $request->validate([
+                'report_file' => 'required|file|max:102400', 
+            ]);
+    
+            $file = $request->file('report_file');
+    
+            $fileName = time() . '_' . $file->getClientOriginalName();
+    
+            $publicPath = 'absence_reports/' . $fileName;
+            $file->move(public_path('absence_reports'), $fileName);
+    
+            $absence->update([
+                'file_path' => $publicPath,
+            ]);
+    
+            return back()->withSuccess('Report uploaded successfully.');
+        } catch (ModelNotFoundException $e) {
+            return back()->withError('Absence not found');
+        } catch (\Exception $e) {
+            return back()->withError('Error uploading report: ' . $e->getMessage());
+        }
+    }
+    
+    public function downloadAbsenceReport($absenceId)
+    {
+        try {
+            $absence = Absence::findOrFail($absenceId);
+           
+            if (!$absence->file_path) {
+                return back()->withError('Absence report not found');
+            }
+            
+            // Convert the file path to use the correct directory separator
+            $filePath = public_path(str_replace('/', DIRECTORY_SEPARATOR, $absence->file_path));
+            // dd($filePath);
+            if (!file_exists($filePath)) {
+                return back()->withError('File not found');
+            }
+            
+            return response()->download($filePath);
+        } catch (ModelNotFoundException $e) {
+            return back()->withError('Absence not found');
+        } catch (\Exception $e) {
+            return back()->withError('Error downloading report: ' . $e->getMessage());
+        }
+    }
+    
+
 }

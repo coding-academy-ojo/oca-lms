@@ -16,7 +16,7 @@ class AssignmentSubmission extends Model
 
     public function assignment()
     {
-        return $this->belongsTo('App\Assignment');
+        return $this->belongsTo(Assignment::class);
     }
 
     public function assignmentFeedback()
@@ -35,5 +35,4 @@ class AssignmentSubmission extends Model
      }
  
 
-    // Add any additional relations you need
 }

@@ -12,7 +12,7 @@ Amman Cohort 1
 
 
 <div class="container my-5">
-    <div class="dashboard-cards">
+    <div class="d-flex  flex-wrap dashboard-cards">
         <div class="dashboard-card">
             <h3>Number of Students</h3>
             <p>{{ $cardsStatistics['statistics']['Number_of_Students'] }}</p>
@@ -81,7 +81,7 @@ Amman Cohort 1
                                     <th scope="col">Training Period</th>
                                     <th scope="col">Status</th>
                                     {{-- <th scope="col">Satisfaction</th> --}}
-                                    <th scope="col">Feedback</th>
+                                    {{-- <th scope="col">Feedback</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -103,11 +103,11 @@ Amman Cohort 1
                                         </div>
                                         {{ $technology['status'] }}
                                     </td>
-                                    <td class="justify-content-center">
+                                    {{-- <td class="justify-content-center">
                                         <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#feedbackModal{{ $index + 1 }}"><span class="material-symbols-outlined">
                                             open_in_new
                                             </span></button>
-                                    </td>
+                                    </td> --}}
                                        {{-- <div class="satisfaction-container" style="width: 100px; background-color: #f0f0f0;border-radius: 5px;">
                                             <div class="satisfaction-bar" style="width:100%; background-color: #4CAF50;" style="height: 100%; transition: width 0.5s ease-in-out;"></div>
                                         </div> --}}
@@ -196,51 +196,26 @@ Amman Cohort 1
     
     <div class="row">
         <div class="col-12">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h3 class="text-primary">Cohort Milestones</h3>
-                    <p class="text-muted">May to September Cohort Progress</p>
-                    <div class="timeline">
-                        <div class="timeline-item completed">
-                            <div class="timeline-marker"></div>
-                            <div class="timeline-content">
-                                <h5 class="mb-1">May - Introduction & Setup</h5>
-                                <p>Getting started with basic setup, tools, and understanding the course outline.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item completed">
-                            <div class="timeline-marker"></div>
-                            <div class="timeline-content">
-                                <h5 class="mb-1">June - React</h5>
-                                <p>Covering React fundamentals, building components, and state management.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item active">
-                            <div class="timeline-marker"></div>
-                            <div class="timeline-content">
-                                <h5 class="mb-1">July - PHP & Laravel</h5>
-                                <p>Introduction to PHP, Laravel basics, and building a simple application.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-marker"></div>
-                            <div class="timeline-content">
-                                <h5 class="mb-1">August - Advanced Laravel</h5>
-                                <p>Diving deeper into Laravel, covering advanced topics and building a complex project.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-marker"></div>
-                            <div class="timeline-content">
-                                <h5 class="mb-1">September - Capstone Project</h5>
-                                <p>Applying all learned skills to develop a comprehensive project, presentations, and graduation.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div id="cohort-milestone" class="card shadow-sm">
+                <h2 id="cohort-milestone-heading" style="text-align:center" class="m-4 text-primary">Cohort Milestone</h2>
+                <ul id="cohort-milestone-list">
+                    @foreach($technologiesOverview as $index => $technology)
+                    @php
+                        $color = $technology['percentage'] == 0 ? '#FF0000' : ($technology['percentage'] < 100 ? '#ffa500' : '#4CAF50');
+                    @endphp
+                    <li style="--accent-color: {{ $color }}">
+                        <div class="date">{{ $technology['name'] }}</div>
+                        <div  class="title h4"> {{ $technology['start_date'] }}</div>
+                        <div class="descr">{{ $technology['description'] }}</div>
+                    </li>
+                    @endforeach
+                </ul>
             </div>
         </div>
     </div>
+    
+    
+    
     
 
     
@@ -296,60 +271,7 @@ Amman Cohort 1
     </script>
     
     
-    <style>
-        .timeline {
-            position: relative;
-            padding-left: 30px;
-            list-style: none;
-        }
-        .timeline:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 18px;
-            width: 4px;
-            background: #e9ecef;
-        }
-        .timeline-item {
-            margin-bottom: 20px;
-            position: relative;
-        }
-        .timeline-marker {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border: 4px solid #fff;
-            background-color: #6c757d; /* Default marker color */
-            z-index: 1;
-        }
-        .timeline-item.completed .timeline-marker {
-            background-color: #28a745; /* Completed marker color */
-        }
-        .timeline-item.active .timeline-marker {
-            background-color: #007bff; /* Active marker color */
-        }
-        .timeline-content {
-            margin-left: 60px;
-            margin-top: -5px;
-        }
-        .timeline-content h5 {
-            margin-top: 0;
-        }
-        .satisfaction-bar {
-            height: 20px;
-            border-radius: 4px;
-        }
 
-        .table .satisfaction-bar {
-            margin-top: 5px; /* Adjust based on your table's design */
-        }
-
-    </style>
     
 
 </div>

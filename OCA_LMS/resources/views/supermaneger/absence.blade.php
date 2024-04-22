@@ -177,8 +177,7 @@
                         '<td>' +
                         '<div class="d-flex justify-content-end gap-2">' +
                         '<a href="/students/' + student.id +
-                        '/absence"><button class="btn btn-primary">View</button></a>' +
-                        '<button class="btn btn-secondary"><span class="material-symbols-outlined">upload_file</span> Report</button>' +
+                        '/absence"><button class="btn btn-primary">View</button></a>'+
                         '</div>' +
                         '</td>' +
                         '</tr>';
