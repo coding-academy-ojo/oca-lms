@@ -19,65 +19,51 @@ Announcements
     </div>
 </section>
 
-<!-- Sidebar with Student Selection -->
-<div class="container my-5">
-    <div class="row">
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-header">Student Name</div>
-                <div class="card-body">
-                    <select id="student-select" class="form-control">
-                        <option value="">Select Student</option>
-                        @foreach ($students as $student)
-                        <option value="{{ $student->id }}">{{ $student->en_first_name }} {{ $student->en_second_name }}</option>
-                        @endforeach
-                    </select>
-                </div>
+<div class="container">
+    <!-- Masterpiece Progress Section -->
+    <div class="container my-4">
+    <h3 class="mb-4 text-primary"> Set Masterpiece Task deadlines </h3>
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-responsive-sm table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-primary">Task</th>
+                            <th scope="col">Idea Pitching</th>
+                            <th scope="col">Wireframe &amp; Mockup</th>
+                            <th scope="col">Front-end</th>
+                            <th scope="col">Final version fully functional</th>
+                            <th scope="col">All other deliverables</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="text-primary">Deadline</th>
+                            <td><input type="date" id="idea_pitching_date" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" onchange="enableSetButton()"></td>
+                            <td><input type="date" id="wireframe_date" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" onchange="enableSetButton()"></td>
+                            <td><input type="date" id="frontend_date" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" onchange="enableSetButton()"></td>
+                            <td><input type="date" id="final_version_date" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" onchange="enableSetButton()"></td>
+                            <td><input type="date" id="other_deliverables_date" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" onchange="enableSetButton()"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button id="setButton" class="btn btn-primary" disabled onclick="setDates()">Set</button>
             </div>
         </div>
-        <div class="col-md-9">
-            <!-- Masterpiece Info Form -->
-            <div class="card mb-3">
-                <div class="card-header">Set a Deadline for each Masterpiece Task<span id="selected-student-name"></span></div>
-                <div class="card-body">
-                    <form id="masterpiece-form" method="POST" action="{{ route('masterpiece.store') }}">
-                        @csrf
-                        <input type="hidden" name="student_id" id="student-id">
-                        <div class="form-group mb-3">
-                            <label for="task">Task</label>
-                            <select id="task" class="form-control @error('task') is-invalid @enderror" name="task" required autocomplete="task" autofocus>
-                                <option value="">Select Task</option>
-                                <option>Idea pitching</option>
-                                <option>Wireframe & Mockup</option>
-                                <option>Fully responsive Front-end</option>
-                                <option>Final version fully functional</option>
-                                <option>All other deliverables</option>
-                            </select>
-                            @error('task')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
+    </div>
+</div>
 
-                        <div class="form-group mb-3">
-                            <label for="deadline">Deadline</label>
-                            <input id="deadline" type="date" class="form-control @error('deadline') is-invalid @enderror" name="deadline" value="{{ old('deadline') }}" required autocomplete="deadline">
-                            @error('deadline')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-            </div>
 
+
+    <div class="row">
+       
+        <div class="col">
             <!-- Masterpiece Progress Entry Form -->
+            <h3 class="mb-4 text-primary">Enter Masterpiece Progress </h3>
             <div class="card my-3">
-                <div class="card-header">Masterpiece Progress Entry <span id="selected-student-name"></span></div>
+               
                 <div class="card-body">
                     <form id="masterpiece-form" method="POST" action="{{ route('masterpiece.store') }}">
                         @csrf
@@ -140,5 +126,33 @@ Announcements
         </div>
     </div>
 </div>
+
+<!-- <script>
+    function enableSetButton() {
+        document.getElementById('setButton').disabled = false;
+    }
+
+    function setDates() {
+        // Fetch the values from input fields and perform further actions
+        var ideaPitchingDate = document.getElementById('idea_pitching_date').value;
+        var wireframeDate = document.getElementById('wireframe_date').value;
+        var frontendDate = document.getElementById('frontend_date').value;
+        var finalVersionDate = document.getElementById('final_version_date').value;
+        var otherDeliverablesDate = document.getElementById('other_deliverables_date').value;
+
+        // You can perform additional actions here with the selected dates
+        // For example, you can send these dates to the server for further processing
+
+        // For demonstration, alerting the selected dates
+        alert("Idea Pitching: " + ideaPitchingDate +
+              "\nWireframe & Mockup: " + wireframeDate +
+              "\nFront-end: " + frontendDate +
+              "\nFinal version fully functional: " + finalVersionDate +
+              "\nAll other deliverables: " + otherDeliverablesDate);
+
+        // After performing required actions, disable the button again
+        document.getElementById('setButton').disabled = true;
+    }
+</script> -->
 @endsection
 
