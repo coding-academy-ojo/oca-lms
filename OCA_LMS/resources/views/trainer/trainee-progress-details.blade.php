@@ -128,37 +128,37 @@
     <div class="card">
         <div class="card-body">
 
-            <div class="table-container" style="max-height: 300px; overflow-y: auto;">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Assignment</th>
-                            <th scope="col">Submission Status</th>
-                            <th scope="col">Due Date</th>
-                            <th scope="col">Log</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+        <div class="table-container" style="max-height: 300px; overflow-y: auto;">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Assignment</th>
+                <th scope="col">Submission Status</th>
+                <th scope="col">Due Date</th>
+                <th scope="col">Log</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($studentAssignments as $assignment)
+                @if ($assignment->submissionStatus === 'No Assignments Assigned')
+                    <tr>
+                        <td colspan="5" class="text-center text-primary">No Assignments are assigned for {{$student->en_first_name}}</td>
+                    </tr>
+                @else
+                    <tr>
+                        <th scope="row">{{ $assignment->id }}</th>
+                        <td>{{ $assignment->assignment_name }}</td>
+                        <td>{{ $assignment->submissionStatus }}</td>
+                        <td>{{ $assignment->dueDate }} <Span style="color: {{ $assignment->isLate === 'Late' ? 'red' : 'inherit' }}">{{ $assignment->isLate }}</Span></td>
+                        <td><a href="{{ route('assignment.show', $assignment->id) }}">Details</a></td>
+                    </tr>
+                @endif
+            @endforeach
+        </tbody>
+    </table>
+</div>
 
-                        @foreach ($studentAssignments as $assignment)
-                        <tr>
-                            <th scope="row">{{$assignment->id}}</th>
-                            <td> {{$assignment->assignment_name}}</td>
-                            <td>{{$assignment->submissionStatus}}</td>
-                            <td>{{$assignment->dueDate}} <Span
-                                    style="color: {{$assignment->isLate === 'Late' ? 'red' : 'inherit'}}">{{$assignment->isLate}}</Span>
-                            </td>
-                            <td>
-                                <a href="{{ route('assignment.show', $assignment->id) }}">Details</a>
-                            </td>
-                        </tr>
-
-                        @endforeach
-
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
 </div>

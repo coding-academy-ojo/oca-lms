@@ -86,9 +86,12 @@ foreach ($studentAssignments as $assignment) {
     // Fetch the submission status for the assignment
     $submission = $assignment->assignmentSubmissions()->where('student_id', $student->id)->first();
 
-    $submissionStatus = $submission->status; // Assuming 'Passed' if submission exists, 'Not Submitted' otherwise
+// Assuming 'No Assignments Assigned' if submission does not exist
+$submissionStatus = $submission ? $submission->status : 'No Assignments Assigned';
+
+
     // Fetch the due date for the assignment
-    $dueDate = $assignment->assignment_due_date; // Assuming 'due_date' is the field name in the assignments table
+    $dueDate = $assignment->assignment_due_date; 
 
    // Fetch the "is late" status for the assignment submission
   $isLate = $submission ? ($submission->is_late ? 'Late' : 'On Time') : 'Not Submitted';

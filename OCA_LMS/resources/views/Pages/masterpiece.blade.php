@@ -23,6 +23,7 @@ Announcements
     <!-- Masterpiece Progress Section -->
     <div class="container my-4">
     <h3 class="mb-4 text-primary"> Set Masterpiece Task deadlines </h3>
+    <form method="POST" action="{{ route('masterpiece.deadlines') }}">
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
@@ -48,7 +49,8 @@ Announcements
                         </tr>
                     </tbody>
                 </table>
-                <button id="setButton" class="btn btn-primary" disabled onclick="setDates()">Set</button>
+                <button id="setButton" type="submit" class="btn btn-primary" disabled onclick="setDates()">Set</button>
+            </form>
             </div>
         </div>
     </div>
@@ -65,7 +67,7 @@ Announcements
             <div class="card my-3">
                
                 <div class="card-body">
-                    <form id="masterpiece-form" method="POST" action="{{ route('masterpiece.store') }}">
+                    <form id="masterpiece-form" method="POST" action="{{ route('masterpiece.progress') }}">
                         @csrf
                         <input type="hidden" name="student_id" id="student-id">
                         
@@ -127,32 +129,32 @@ Announcements
     </div>
 </div>
 
-<!-- <script>
+<script>
     function enableSetButton() {
         document.getElementById('setButton').disabled = false;
     }
 
-    function setDates() {
-        // Fetch the values from input fields and perform further actions
-        var ideaPitchingDate = document.getElementById('idea_pitching_date').value;
-        var wireframeDate = document.getElementById('wireframe_date').value;
-        var frontendDate = document.getElementById('frontend_date').value;
-        var finalVersionDate = document.getElementById('final_version_date').value;
-        var otherDeliverablesDate = document.getElementById('other_deliverables_date').value;
+    // function setDates() {
+    //     // Fetch the values from input fields and perform further actions
+    //     var ideaPitchingDate = document.getElementById('idea_pitching_date').value;
+    //     var wireframeDate = document.getElementById('wireframe_date').value;
+    //     var frontendDate = document.getElementById('frontend_date').value;
+    //     var finalVersionDate = document.getElementById('final_version_date').value;
+    //     var otherDeliverablesDate = document.getElementById('other_deliverables_date').value;
 
-        // You can perform additional actions here with the selected dates
-        // For example, you can send these dates to the server for further processing
+    //     // You can perform additional actions here with the selected dates
+    //     // For example, you can send these dates to the server for further processing
 
-        // For demonstration, alerting the selected dates
-        alert("Idea Pitching: " + ideaPitchingDate +
-              "\nWireframe & Mockup: " + wireframeDate +
-              "\nFront-end: " + frontendDate +
-              "\nFinal version fully functional: " + finalVersionDate +
-              "\nAll other deliverables: " + otherDeliverablesDate);
+    //     // For demonstration, alerting the selected dates
+    //     alert("Idea Pitching: " + ideaPitchingDate +
+    //           "\nWireframe & Mockup: " + wireframeDate +
+    //           "\nFront-end: " + frontendDate +
+    //           "\nFinal version fully functional: " + finalVersionDate +
+    //           "\nAll other deliverables: " + otherDeliverablesDate);
 
         // After performing required actions, disable the button again
         document.getElementById('setButton').disabled = true;
     }
-</script> -->
+</script>
 @endsection
 

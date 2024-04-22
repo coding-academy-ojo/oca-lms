@@ -86,9 +86,11 @@ Route::get('/addTrainee', function () {
 Route::get('/masterpiece', [MasterpieceController::class, 'index'])->name('Masterpiece');
 
 // Route to store a newly created masterpiece progress entry
-Route::post('/masterpiece', [MasterpieceController::class, 'store'])->name('masterpiece.store');
+//  Route::post('/masterpiece', [MasterpieceController::class, 'store'])->name('masterpiece.store');
 // Route to store a newly created masterpiece progress entry
 // Route::post('/masterpiece', [MasterpieceController::class, 'create'])->name('masterpiece.create');
+Route::post('/masterpiece/deadlines', 'MasterpieceController@storeDeadline')->name('masterpiece.deadlines');
+Route::post('/masterpiece/progress', 'MasterpieceController@storeProgress')->name('masterpiece.progress');
 
 
 ////////////////////////////////////////////////
