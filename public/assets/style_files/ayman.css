@@ -1,0 +1,288 @@
+/* {{-- ========================= Start style code ========================== --}} */
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+section.innerImage.classRoom {
+    position: relative;
+}
+
+section.innerImage.classRoom .pageTitle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: orange;
+    color: white;
+    padding: 1rem;
+    border-radius: 15px;
+}
+
+ul.thm-breadcrumb {
+    display: flex;
+    gap: 8px;
+}
+
+ul.thm-breadcrumb li {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+ul.thm-breadcrumb li {
+    margin-top: 3px;
+}
+
+ul.thm-breadcrumb li a {
+    color: black;
+    text-decoration: none;
+}
+
+.innerImage img {
+    width: 100%;
+    height: 300px;
+}
+
+header img,
+footer img {
+    width: 100px;
+}
+
+.navbar-orange {
+    background-color: orange;
+}
+
+.navbar-orange .navbar-nav .nav-link {
+    color: #fff;
+}
+
+.navbar-orange .navbar-toggler-icon {
+    background-color: #fff;
+}
+
+
+/* {{-- ======== Start Projects style==== --}} */
+
+.projectCard .card .innerCard {
+    padding: 1rem;
+}
+
+.projectCard .card img {
+    width: 100%;
+    height: 250px;
+}
+
+.projectCard .card .createdby {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 5px;
+    margin-top: 2rem;
+}
+
+.projectCard .card .createdby p {
+    margin-bottom: 3px;
+}
+
+.projectCard .card .createdby img {
+    width: 40px;
+    height: 40px;
+    background: orange;
+    border-radius: 50px;
+    padding: 2px;
+}
+
+
+/* {{-- ======== End Projects style==== --}} */
+
+
+/* {{-- ======== Start Create Project style==== --}} */
+
+.addpro form {
+    border: 1px solid;
+    border-radius: 12px;
+    padding: 2rem;
+}
+
+.addpro .form-group {
+    position: relative;
+}
+
+.addpro textarea.form-control {
+    border-radius: 12px !important;
+    min-height: 8rem !important;
+    max-height: 35rem !important;
+    overflow-y: auto;
+}
+
+.addpro input.form-control {
+    border-radius: 12px !important;
+    min-height: 3rem !important;
+    max-height: 10rem !important;
+}
+
+.addpro .text-danger {
+    color: red;
+    margin-left: 3px;
+}
+
+.auto-resize {
+    overflow-y: hidden;
+    resize: none;
+}
+
+
+/* {{-- ======== End Create Project style==== --}} */
+
+
+/* {{-- ======== Start Topics style==== --}} */
+
+.topicBt {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.topicBt a {
+    width: 5rem;
+    height: auto;
+    background: black;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+}
+
+.topicBt a:hover {
+    color: orange;
+}
+
+
+/* {{-- ======== End Topics style==== --}} */
+
+
+/* {{-- ======== Start profile style==== --}} */
+
+body {
+    /* margin-top: 20px; */
+    color: #1a202c;
+    text-align: left;
+    /* background-color: #e2e8f0; */
+}
+
+.main-body {
+    padding: 15px;
+}
+
+.card {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
+}
+
+.gutters-sm {
+    margin-right: -8px;
+    margin-left: -8px;
+}
+
+.gutters-sm>.col,
+.gutters-sm>[class*=col-] {
+    padding-right: 8px;
+    padding-left: 8px;
+}
+
+.mb-3,
+.my-3 {
+    margin-bottom: 1rem !important;
+}
+
+.bg-gray-300 {
+    background-color: #e2e8f0;
+}
+
+.h-100 {
+    height: 100% !important;
+}
+
+.shadow-none {
+    box-shadow: none !important;
+}
+
+
+/* {{-- ======== End profile style==== --}} */
+/* {{-- ======== start skillsFramework style==== --}} */
+
+
+.skillsFramework .tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.skillsFramework .tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+    width: 100%;
+}
+
+.skillsFramework .tab button:hover {
+    background-color: #ddd;
+}
+
+.skillsFramework .tab button.active {
+    background-color: #ccc;
+}
+
+.skillsFramework .tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    height: 100%;
+}
+
+.actionbtn {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+/* {{-- ======== start skillsFramework style==== --}} */
+
+
+/* {{-- ========================= End style code ========================== --}} */
+
+
+/* {{-- ========================= Start responsive code ========================== --}} */
+
+
+/* {{-- ========================= End responsive code ========================== --}} */
