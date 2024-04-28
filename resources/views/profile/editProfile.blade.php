@@ -304,7 +304,75 @@ Profile
               <span class="invalid-feedback" role="alert">{{ $message }}</span>
               @enderror
             </div>
+
+            <div class="form-group mb-3">
+              <label for="en_last_name">{{ __('mobile') }}</label>
+              <input id="en_last_name" type="text" class="form-control @error('mobile') is-invalid @enderror" name="mobile" value="{{ old('mobile', $user->mobile) }}" required autocomplete="en_last_name">
+              @error('mobile')
+              <span class="invalid-feedback" role="alert">{{ $message }}</span>
+              @enderror
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="en_last_name">{{ __('birthdate') }}</label>
+              <input id="en_last_name" type="text" class="form-control @error('birthdate') is-invalid @enderror" name="birthdate" value="{{ old('birthdate', $user->birthdate) }}" required autocomplete="en_last_name">
+              @error('birthdate')
+              <span class="invalid-feedback" role="alert">{{ $message }}</span>
+              @enderror
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="en_last_name">{{ __('gender') }}</label>
+              <input id="en_last_name" type="text" class="form-control @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender', $user->gender) }}" required autocomplete="en_last_name">
+              @error('gender')
+              <span class="invalid-feedback" role="alert">{{ $message }}</span>
+              @enderror
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="en_last_name">{{ __('education') }}</label>
+              <input id="en_last_name" type="text" class="form-control @error('education') is-invalid @enderror" name="education" value="{{ old('education', $user->education) }}" required autocomplete="en_last_name">
+              @error('education')
+              <span class="invalid-feedback" role="alert">{{ $message }}</span>
+              @enderror
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="en_last_name">{{ __('educational status') }}</label>
+              <input id="en_last_name" type="text" class="form-control @error('educational_status') is-invalid @enderror" name="educational_status" value="{{ old('educational_status', $user->educational_status) }}" required autocomplete="en_last_name">
+              @error('educational_status')
+              <span class="invalid-feedback" role="alert">{{ $message }}</span>
+              @enderror
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="en_last_name">{{ __('city') }}</label>
+              <input id="en_last_name" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city', $user->city) }}" required autocomplete="en_last_name">
+              @error('city')
+              <span class="invalid-feedback" role="alert">{{ $message }}</span>
+              @enderror
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="en_last_name">{{ __('address') }}</label>
+              <input id="en_last_name" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address', $user->address) }}" required autocomplete="en_last_name">
+              @error('address')
+              <span class="invalid-feedback" role="alert">{{ $message }}</span>
+              @enderror
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="en_last_name">{{ __('relative mobile ') }}</label>
+              <input id="en_last_name" type="text" class="form-control @error('relative_mobile_1') is-invalid @enderror" name="relative_mobile_1" value="{{ old('relative_mobile_1', $user->relative_mobile_1) }}" required autocomplete="en_last_name">
+              @error('relative_mobile_1')
+              <span class="invalid-feedback" role="alert">{{ $message }}</span>
+              @enderror
+            </div>
+
+
             @else
+
+
             <div class="form-group mb-3">
               <label for="staff_name">{{ __('Name') }}</label>
               <input id="staff_name" type="text" class="form-control @error('staff_name') is-invalid @enderror" name="staff_name" value="{{ old('staff_name', $user->staff_name) }}" required autocomplete="staff_name" autofocus>
@@ -312,6 +380,56 @@ Profile
               <span class="invalid-feedback" role="alert">{{ $message }}</span>
               @enderror
             </div>
+
+            <div class="form-group mb-3">
+              <label for="phone">{{ __('Phone Number') }}</label>
+              <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone', $user->staff_Phone ?? '') }}" autocomplete="phone">
+              @error('phone')
+              <span class="invalid-feedback" role="alert">{{ $message }}</span>
+              @enderror
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="linkedin">{{ __('LinkedIn') }}</label>
+              <input id="linkedin" type="text" class="form-control @error('linkedin') is-invalid @enderror" name="linkedin" value="{{ old('linkedin', $user->linkedin ?? '') }}" autocomplete="linkedin">
+              @error('linkedin')
+              <span class="invalid-feedback" role="alert">{{ $message }}</span>
+              @enderror
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="bio">{{ __('Bio') }}</label>
+              <textarea id="bio" class="form-control @error('bio') is-invalid @enderror" name="bio" rows="4" autocomplete="bio">{{ old('bio', $user->staff_bio ?? $user->about) }}</textarea>
+              @error('bio')
+              <span class="invalid-feedback" role="alert">{{ $message }}</span>
+              @enderror
+            </div>
+
+            <!-- <div class="form-group mb-3">
+              <label for="education">{{ __('Education') }}</label>
+              <input id="education" type="text" class="form-control @error('education') is-invalid @enderror" name="education" value="{{ old('education', $user->education ?? '') }}" autocomplete="education">
+              @error('education')
+              <span class="invalid-feedback" role="alert">{{ $message }}</span>
+              @enderror
+            </div> -->
+
+            <div class="form-group mb-3">
+              <label for="experience">{{ __('Experience') }}</label>
+              <input id="experience" type="text" class="form-control @error('experience') is-invalid @enderror" name="experience" value="{{ old('experience', $user->field_of_experience ?? '') }}" autocomplete="experience">
+              @error('experience')
+              <span class="invalid-feedback" role="alert">{{ $message }}</span>
+              @enderror
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="experience">{{ __('Field of experience') }}</label>
+              <input id="experience" type="text" class="form-control @error('experience') is-invalid @enderror" name="experience" value="{{ old('field_of_experience', $user->field_of_experience ?? '') }}" autocomplete="experience">
+              @error('field_of_experience')
+              <span class="invalid-feedback" role="alert">{{ $message }}</span>
+              @enderror
+            </div>
+
+
             @endif
 
             <!-- Email input -->
