@@ -119,7 +119,7 @@ Route::post('/cohorts', [CohortController::class, 'store'])->name('store-cohort'
 
 // super maneger
 Route::get('/supermanager-dashboard', [SuperManagerController::class, 'index'])->name('supermanager-dashboard');
-// soft skills 
+// soft skills
 
 Route::get('soft-skills', [SoftSkillsTrainingController::class, 'index'])->name('soft-skills.index');
 Route::get('soft-skills/create', [SoftSkillsTrainingController::class, 'create'])->name('soft-skills.create');
@@ -140,7 +140,7 @@ Route::put('/staff/{id}', [StaffController::class, 'update'])->name('staff.updat
 Route::delete('/staff/{id}', [StaffController::class, 'destroy'])->name('staff.destroy');
 
 
-//Progress 
+//Progress
 Route::get('/cohort/progress-details/{id}',[ SingleTraineeProgressController::class, 'index'])->name('ProgressDetails.showDetails');
 Route::get('/traineesProgress', [TraineesProgressController::class, 'index'])->name('trainees.progress');
 
@@ -324,6 +324,10 @@ Route::get('/view_submissions_feedback/{project_id}', 'ProjectController@viewSub
 
 Route::get('/assign-students/{projectId}', 'ProjectController@assignStudents')->name('assign_students');
 Route::post('/assign-students/{projectId}', 'ProjectController@assignStudents')->name('assign_students');
+
+
+Route::post('/update-project-status/{projectId}/{studentId}', 'ProjectController@updateProjectStatus')->name('update_project_status');
+Route::get('/filter-projects', 'ProjectController@filterProjects')->name('filter_projects');
 
 
 

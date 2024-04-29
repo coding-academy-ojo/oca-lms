@@ -66,6 +66,15 @@ Create Project
         </div>
 
         <div class="mb-3">
+            <label for="project_type" class="form-label">Project Type</label>
+            <select class="form-select" id="project_type" name="project_type">
+                <option value="Group">Group</option>
+                <option value="Individual">Individual</option>
+                <option value="Corrective Action">Corrective Action</option>
+            </select>
+        </div>
+        
+        <div class="mb-3">
             <label for="project_image" class="form-label">Project Image</label>
             <input type="file" class="form-control" id="project_image" name="project_image" required>
         </div>

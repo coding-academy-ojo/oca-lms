@@ -26,10 +26,10 @@ class CreateProjectsTable extends Migration
             $table->unsignedBigInteger('cohort_id');
             $table->foreignId('staff_id')->constrained('staff')->nullable();
             $table->foreign('cohort_id')->references('id')->on('cohorts');
+            $table->enum('project_type', ['Group', 'Individual', 'Corrective Action']);
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.

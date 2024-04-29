@@ -23,7 +23,7 @@ Edit Project
         });
         </script>
     @endif
-    
+
     <div class="container mt-3">
         <ul class="thm-breadcrumb">
             <li><a href="">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
@@ -63,6 +63,15 @@ Edit Project
     <div class="mb-3">
         <label for="description" class="form-label">Project Description</label>
         <textarea class="form-control auto-grow" id="description" name="project_description" required>{{ old('project_description', $project->project_description) }}</textarea>
+    </div>
+
+    <div class="mb-3">
+        <label for="project_type" class="form-label">Project Type</label>
+        <select class="form-select" id="project_type" name="project_type">
+            <option value="Group" {{ old('project_type', $project->project_type) === 'Group' ? 'selected' : '' }}>Group</option>
+            <option value="Individual" {{ old('project_type', $project->project_type) === 'Individual' ? 'selected' : '' }}>Individual</option>
+            <option value="Corrective Action" {{ old('project_type', $project->project_type) === 'Corrective Action' ? 'selected' : '' }}>Corrective Action</option>
+        </select>
     </div>
 
     <div class="mb-3">

@@ -57,11 +57,28 @@ All Projects
         </div>
         @endif
 
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <form action="{{ route('filter_projects') }}" method="GET">
+                    <div class="input-group">
+                            <select name="project_filter" id="project_filter" class="form-control">
+                                <option value="all">All projects</option>
+                                <option value="main">Main Project</option>
+                                <option value="group">Group</option>
+                                <option value="individual">Individual</option>
+                                <option value="corrective_action">Corrective Action</option>
+                            </select>
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
             <div class="row">
                 @foreach($projects as $project)
+
                     <div class="col-sm-3 mb-3">
-                        <div class="card">
+                        <div class="card mt-2">
                             <div class="innerCard">
                                 <a href="{{ route('project_brief', ['id' => $project->id]) }}">
                                     <img style="height: 250px; width: 100%;" src="{{ asset('images/' . $project->project_image) }}" alt="{{ $project->project_name }}">
