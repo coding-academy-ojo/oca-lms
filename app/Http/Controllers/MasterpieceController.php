@@ -36,7 +36,7 @@ class MasterpieceController extends Controller
 
     // Find the masterpiece task by ID
     $task = MasterpieceTask::findOrFail($taskId);
-dd($task);
+    dd($task);
     // Update the deadline for the task
     $task->deadline = $deadline;
     $task->save();
