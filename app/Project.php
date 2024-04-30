@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     protected $fillable = [
-        'name', 'description', 'start_date', 'delivery_date', 'cohort_id', 'staff_id'
+        'name', 'description', 'start_date', 'delivery_date', 'cohort_id', 'staff_id','project_type'
     ];
 
     public function cohort()

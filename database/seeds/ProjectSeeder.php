@@ -26,7 +26,8 @@ class ProjectSeeder extends Seeder
                 'project_resources' => 'Resource 1, Resource 2',
                 'project_assessment_methods' => 'The project will be evaluated in front of the Technical Team, the evaluation duration will be 15min for each one individually and 10 .',
                 'cohort_id' => 1, // Adjust based on your cohorts
-                'staff_id' => 3, // Adjust based on your staff
+                'staff_id' => 7, // Adjust based on your staff
+                'project_type' => 'Group',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -42,7 +43,8 @@ class ProjectSeeder extends Seeder
                 'project_resources' => 'Resource 3, Resource 4',
                 'project_assessment_methods' => 'The project will be evaluated in front of the Technical Team, the evaluation duration will be 15min for each one individually and 10 .',
                 'cohort_id' => 1,
-                'staff_id' => 3,
+                'staff_id' => 7,
+                'project_type' => 'Corrective Action',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -58,7 +60,8 @@ class ProjectSeeder extends Seeder
                 'project_resources' => 'Resource 3, Resource 4',
                 'project_assessment_methods' => 'The project will be evaluated in front of the Technical Team, the evaluation duration will be 15min for each one individually and 10 .',
                 'cohort_id' => 1,
-                'staff_id' => 3,
+                'staff_id' => 7,
+                'project_type' => 'Individual',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -74,7 +77,8 @@ class ProjectSeeder extends Seeder
                 'project_resources' => 'Resource 3, Resource 4',
                 'project_assessment_methods' => 'The project will be evaluated in front of the Technical Team, the evaluation duration will be 15min for each one individually and 10 .',
                 'cohort_id' => 1,
-                'staff_id' => 3,
+                'staff_id' => 7,
+                'project_type' => 'Group',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -88,7 +92,8 @@ class ProjectSeeder extends Seeder
                 'project_resources' => 'Resource 1, Resource 2',
                 'project_assessment_methods' => 'The project will be evaluated in front of the Technical Team, the evaluation duration will be 15min for each one individually and 10 .',
                 'cohort_id' => 4, // Adjust based on your cohorts
-                'staff_id' => 3, // Adjust based on your staff
+                'staff_id' => 4, // Adjust based on your staff
+                'project_type' => 'Group',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -104,7 +109,8 @@ class ProjectSeeder extends Seeder
                 'project_resources' => 'Resource 3, Resource 4',
                 'project_assessment_methods' => 'The project will be evaluated in front of the Technical Team, the evaluation duration will be 15min for each one individually and 10 .',
                 'cohort_id' => 4,
-                'staff_id' => 3,
+                'staff_id' => 4,
+                'project_type' => 'Group',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -120,7 +126,8 @@ class ProjectSeeder extends Seeder
                 'project_resources' => 'Resource 3, Resource 4',
                 'project_assessment_methods' => 'The project will be evaluated in front of the Technical Team, the evaluation duration will be 15min for each one individually and 10 .',
                 'cohort_id' => 4,
-                'staff_id' => 3,
+                'staff_id' => 4,
+                'project_type' => 'Corrective Action',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -136,7 +143,8 @@ class ProjectSeeder extends Seeder
                 'project_resources' => 'Resource 3, Resource 4',
                 'project_assessment_methods' => 'The project will be evaluated in front of the Technical Team, the evaluation duration will be 15min for each one individually and 10 .',
                 'cohort_id' => 4,
-                'staff_id' => 3,
+                'staff_id' => 4,
+                'project_type' => 'Individual',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

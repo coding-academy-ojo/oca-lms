@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class TraineeSkillsProgress extends Model
 {
-    protected $fillable = ['trainee_id', 'project_id', 'skill_id', 'level_id', 'achieved'];
+    protected $fillable = ['student_id', 'project_id', 'project_status'];
 
     public function trainee()
     {
-        return $this->belongsTo(User::class, 'trainee_id');
+        return $this->belongsTo(Student::class, 'student_id');
     }
 
     public function project()
@@ -18,8 +18,4 @@ class TraineeSkillsProgress extends Model
         return $this->belongsTo(Project::class);
     }
 
-    public function skillLevel()
-    {
-        return $this->belongsTo(SkillLevel::class, 'skill_id', 'level_id');
-    }
 }
