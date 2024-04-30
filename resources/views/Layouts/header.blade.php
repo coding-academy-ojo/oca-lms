@@ -10,7 +10,7 @@
         </button>
         <div class="collapse navbar-collapse align-items-end" id="navbarText">
             @auth('students')
-          
+
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('student.dashboard') ? 'active' : '' }} "
@@ -22,7 +22,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link "
-                            aria-current="page" href="#">Projects</a>
+                            aria-current="page" href="{{ route('show_all_projects') }}">Projects</a>
                     </li>
                     <li class="nav-item">
                     <a class="nav-link "  aria-current="page" href="{{ route('Announcements') }}">Announcements</a>
@@ -39,15 +39,15 @@
                         <a class="nav-link "
                             aria-current="page" href="#">Skills Framework</a>
                     </li>
-                  
-                  
+
+
                 </ul>
-               
+
             @endauth
 
             @auth('staff')
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    
+
                     @if (Auth::guard('staff')->user()->role == 'super_manager')
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('supermanager-dashboard') ? 'active' : '' }} "
@@ -55,7 +55,7 @@
                     </li>
                     @endif
                     @if (in_array(Auth::guard('staff')->user()->role, ['super_manager', 'manager']))
-                      
+
 
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('academies') ? 'text-primary' : '' }}""
@@ -78,9 +78,9 @@
                                         href="{{ route('assignments') }}">Assignments</a>
                                 <a class="nav-link text-dark  {{ request()->routeIs('show_all_projects') ? 'text-primary' : '' }}"
                                     href="{{ route('show_all_projects') }}">Projects</a>
-                                <a class="nav-link text-dark {{ request()->routeIs('Announcements') ? 'text-primary' : '' }}" 
+                                <a class="nav-link text-dark {{ request()->routeIs('Announcements') ? 'text-primary' : '' }}"
                                     href="{{ route('Announcements') }}">Announcements</a>
-                                    <a class="nav-link text-dark {{ request()->routeIs('Masterpiece') ? 'text-primary' : '' }}" 
+                                    <a class="nav-link text-dark {{ request()->routeIs('Masterpiece') ? 'text-primary' : '' }}"
                                     href="{{ route('Masterpiece') }}">Masterpiece</a>
                                 <a class="nav-link text-dark {{ request()->routeIs('attendance') ? 'text-primary' : '' }}"
                                     href="{{ route('attendance') }}">Attendance</a>
@@ -118,7 +118,7 @@
                 </ul>
             @endauth
             <ul class="navbar-nav ms-auto ">
-                
+
                 {{-- <li class="nav-item m-1">
                         <a class="nav-link {{ request()->routeIs('profile') ? 'active' : '' }}"
                 href="{{ route('profile') }}">
