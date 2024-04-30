@@ -73,13 +73,13 @@
                                 <span>Justified Absence:</span><strong>{{$absencesCount}}</strong>
                             </li>
                             <li class="list-group-item px-0 d-flex justify-content-between">
-                                <span class="mb-0">Non-Justified Absence:</span><strong>0</strong>
+                                <span class="mb-0">Non-Justified Absence:</span><strong>{{$nonJustifiedAbsencesCount}}</strong>
                             </li>
                             <li class="list-group-item px-0 d-flex justify-content-between">
                                 <span class="mb-0">Justified Tardy:</span><strong>{{$lateCount}}</strong>
                             </li>
                             <li class="list-group-item px-0 d-flex justify-content-between">
-                                <span class="mb-0">Non-Justified Tardy:</span><strong>0</strong>
+                                <span class="mb-0">Non-Justified Tardy:</span><strong>{{$nonJustifiedLateCount}}</strong>
                             </li>
                         </ul>
                     </div>
