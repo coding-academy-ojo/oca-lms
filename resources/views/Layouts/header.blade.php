@@ -29,15 +29,15 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link "
-                            aria-current="page" href="#">Roadmap</a>
+                            aria-current="page" href="{{ route('categories.indexCohort') }}">Roadmap</a>
                     </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link "
+                            aria-current="page" href="{{ route('categories.index') }}">Technology</a>
+                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link "
-                            aria-current="page" href="#">Technology</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link "
-                            aria-current="page" href="#">Skills Framework</a>
+                            aria-current="page" href="{{ route('skillsFramework') }}">Skills Framework</a>
                     </li>
 
 
@@ -119,14 +119,14 @@
             @endauth
             <ul class="navbar-nav ms-auto ">
 
-                {{-- <li class="nav-item m-1">
-                        <a class="nav-link {{ request()->routeIs('profile') ? 'active' : '' }}"
-                href="{{ route('profile') }}">
+                 <li class="nav-item m-1">
+                        <a class="nav-link {{ request()->routeIs('profile.index') ? 'active' : '' }}"
+                href="{{ route('profile.index') }}">
                 <span class="material-symbols-outlined">
                     person
                 </span>
                 </a>
-                </li> --}}
+                </li> 
 
                 <li class="nav-item m-1">
                     <a class="nav-link" href="{{ route('logout') }}">

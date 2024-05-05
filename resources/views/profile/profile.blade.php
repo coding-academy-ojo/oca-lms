@@ -24,8 +24,8 @@ Profile
     <div class="container">
         <div class="main-body">
             <div class="col-md-2 ms-auto mb-3">
-                <a href="{{route('editProfile')}}">Edit Profile</a>
-                &nbsp;
+                <a href="">Edit Profile</a>
+                &nbsp;  
                 <a href="">Reset Password</a>
             </div>
             <div class="row gutters-sm">
@@ -149,6 +149,8 @@ Profile
                 @auth('staff')
                 <a class=" btn btn-primary mb-3" href="{{ route('profile.edit') }}">Edit Profile</a>
                 &nbsp;
+                @endauth
+                @auth('students')
                 <a class=" btn btn-primary mb-3" href="{{ route('password.reset') }}">View Details</a>
                 @endauth
 
@@ -184,7 +186,8 @@ Profile
                             <!-- Add more user information fields here -->
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">LinkedIn</h6>
-                                <span class="text-secondary">{{ $user->linkedin ?? 'link' }}</span>
+                                <span class="text-secondary"> <a href="{{ $user->linkedin ?? 'link' }}">{{ $user->linkedin ?? 'link' }}</a></span>
+                               
                             </li>
                         </ul>
                     </div>

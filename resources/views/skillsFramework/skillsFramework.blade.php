@@ -26,9 +26,11 @@ Skills Framework (Competence)
 <div class="innerPage mt-3">
     <div class="container">
         <div class="skillsFramework" style="    text-align: justify;">
+            @auth('staff')
             <div class="actionbtn">
                 <a class=" btn btn-primary mb-3" href="{{ route('createskillsFramework') }}">Add skills</a>
             </div>
+            @endauth
 
             <div class="row">
                 <div class="col-sm-3 mb-3">
@@ -42,6 +44,7 @@ Skills Framework (Competence)
                     @foreach($skills as $key => $skill)
                     <div id="sk{{ $skill->id }}" class="tabcontent" @if($loop->first) style="display: block;" @endif>
                         <div class="row">
+                            @auth('staff')
                             <div class="actionbtn">
                                 <div class=" ms-auto mb-3">
                                     <a class=" btn btn-primary m-auto" href="{{ route('editSkill', ['skill' => $skill->id]) }}">Edit Skill</a>
@@ -52,6 +55,7 @@ Skills Framework (Competence)
                                     </div>
                                 </div>
                             </div>
+                            @endauth
                             @foreach($skillLevels->where('skill_id', $skill->id) as $skillLevel)
                             <div class="col-sm-4 mb-3">
                                 <h3>{{ $skillLevel->level->levels_name }}</h3>

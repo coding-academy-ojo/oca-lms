@@ -201,32 +201,32 @@ Route::put('/topic/{topic}', [TopicController::class ,'update'])->name('topic.up
 Route::delete('/topic/{topic}', [TopicController::class ,'destroy'])->name('topic.destroy');
 
 
-Route::get('/topics', function () {
-    return view('topics.topics');
-})->name('topics');
-Route::get('/createTopics', function () {
-    return view('topics.createTopics');
-})->name('createTopics');
+// Route::get('/topics', function () {
+//     return view('topics.topics');
+// })->name('topics');
+// Route::get('/createTopics', function () {
+//     return view('topics.createTopics');
+// })->name('createTopics');
 
-Route::get('/editProfile', function () {
-    return view('profile.editProfile');
-})->name('editProfile');
+// Route::get('/editProfile', function () {
+//     return view('profile.editProfile');
+// })->name('editProfile');
 
-Route::get('/skillsFramework', function () {
-    return view('skillsFramework.skillsFramework');
-});
-Route::get('/addSkillsLevel', function () {
-    return view('skillsFramework.addSkillsLevel');
-});
-Route::get('/addSkillsFramework', function () {
-    return view('skillsFramework.addSkillsFramework');
-});
-Route::get('/editSkillsLevel', function () {
-    return view('skillsFramework.editSkillsLevel');
-});
-Route::get('/editSkillsFramework', function () {
-    return view('skillsFramework.editSkillsFramework');
-});
+// Route::get('/skillsFramework', function () {
+//     return view('skillsFramework.skillsFramework');
+// });
+// Route::get('/addSkillsLevel', function () {
+//     return view('skillsFramework.addSkillsLevel');
+// });
+// Route::get('/addSkillsFramework', function () {
+//     return view('skillsFramework.addSkillsFramework');
+// });
+// Route::get('/editSkillsLevel', function () {
+//     return view('skillsFramework.editSkillsLevel');
+// });
+// Route::get('/editSkillsFramework', function () {
+//     return view('skillsFramework.editSkillsFramework');
+// });
 
 
 
