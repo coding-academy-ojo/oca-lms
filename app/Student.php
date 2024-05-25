@@ -11,13 +11,7 @@ use Illuminate\Notifications\Notifiable;
 class Student extends Authenticatable
 {
     use Notifiable;
-    protected $fillable = [
-        'en_first_name', 
-        'en_second_name', 
-        'en_third_name', 
-        'en_last_name', 
-
-    ];
+    protected $guarded = ['id'];
 
     public function absences()
     {

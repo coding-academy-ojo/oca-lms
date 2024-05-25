@@ -38,7 +38,7 @@
     </div> --}}
 
     <!-- Staff Table Section -->
-    <div class="container">
+    <div style="min-height: 60vh" class="container">
         <div class="d-flex justify-content-end p-3 px-xl-5">
             <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#addStaffOffcanvas" aria-controls="addStaffOffcanvas">

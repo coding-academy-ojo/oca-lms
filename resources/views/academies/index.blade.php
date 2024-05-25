@@ -51,7 +51,7 @@
             </button>
         </div>
     @endif
-    <div class="d-flex align-items-center flex-wrap my-4 gap-3 justify-content-center g-4">
+    <div style="min-height: 50vh" class="d-flex align-items-center flex-wrap my-4 gap-3 justify-content-center g-4">
 
         @forelse ($academies as $academy)
             <div class="col-md-8 col-lg-8 mb-4">

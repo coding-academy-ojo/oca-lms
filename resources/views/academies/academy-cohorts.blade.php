@@ -7,7 +7,7 @@
 @section('content')
     @include('layouts.innerNav')
 
-    <div style="min-height: 40vh" class="container">
+    <div style="min-height: 50vh" class="container">
         <div class="row justify-content-center my-5">
             @foreach($cohorts as $cohort)
                 <div class="col-md-8 col-lg-8 mb-4">

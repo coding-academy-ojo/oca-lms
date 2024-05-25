@@ -42,7 +42,7 @@
                 <div class="form-group col-lg-6 col-md-7 mb-4">
                     <div class="d-flex justify-content-start">
                         <div>
-                            <a class="forget-credentials" href="#">Forgot your password?</a>
+                            {{-- <a class="forget-credentials" href="#">Forgot your password?</a> --}}
                         </div>
                     </div>
                 </div>

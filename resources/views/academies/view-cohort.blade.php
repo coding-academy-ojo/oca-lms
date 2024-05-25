@@ -2,7 +2,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link rel="stylesheet" href="{{asset('assets/style_files/viewCohort.css')}}">
 @section('title')
-Amman Cohort 1
+{{ $cardsStatistics['cohort']->cohort_name }}
 @endsection
 @section('content')
     @include('layouts.innerNav')
@@ -37,7 +37,10 @@ Amman Cohort 1
         <div class="col-lg-6 mb-4">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h3 class="mb-0 text-primary">Cohort Information</h3>
+                    <div class="d-flex w-100 justify-content-between">
+                        <h3 class="mb-0 text-primary">Cohort Information</h3>
+                        <a href="{{ route('import-data.index', ['id' => $cardsStatistics['cohort']->id]) }}" class="btn btn-info">Import Data</a>
+                    </div>
                     <div class="my-3">
                         @if($cardsStatistics['cohort'])
                             <h5 class="card-title">{{ $cardsStatistics['cohort']->cohort_name }}</h5>
@@ -76,7 +79,7 @@ Amman Cohort 1
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
-                                    <th scope="col">Description</th>
+                                    {{-- <th scope="col">Description</th> --}}
                                     <th scope="col">Resources</th>
                                     <th scope="col">Training Period</th>
                                     <th scope="col">Status</th>
@@ -94,7 +97,7 @@ Amman Cohort 1
                                 <tr>
                                     <th scope="row">{{ $index + 1 }}</th>
                                     <td>{{ $technology['name'] }}</td>
-                                    <td>{{ $technology['description'] }}</td>
+                                    {{-- <td>{{ $technology['description'] }}</td> --}}
                                     <td>{{ $technology['resources'] }}</td>
                                     <td>{{ $technology['training_period'] }}</td>
                                     <td>
@@ -136,7 +139,7 @@ Amman Cohort 1
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
-                                    <th scope="col">Description</th>
+                                    {{-- <th scope="col">Description</th> --}}
                                     <th scope="col">Trainer</th>
                                     <th scope="col">Date</th>
                                     <th scope="col">Satisfaction</th>
@@ -147,12 +150,12 @@ Amman Cohort 1
                                 <tr>
                                     <th scope="row">{{ $index + 1 }}</th>
                                     <td>{{ $softSkill->name }}</td>
-                                    <td>{{ $softSkill->description }}</td>
+                                    {{-- <td>{{ $softSkill->description }}</td> --}}
                                     <td>{{ $softSkill->trainer }}</td>
                                     <td>{{ $softSkill->date }}</td>
                                     <td>
                                         <div class="satisfaction-container" style="width: 100px; background-color: #f0f0f0;border-radius: 5px;">
-                                            <div class="satisfaction-bar" style="width: {{ $softSkill->satisfaction * 20 }}%; background-color: #4CAF50;" style="height: 100%; transition: width 0.5s ease-in-out;"></div>
+                                            <div style="height: 20px; width:{{ $softSkill->satisfaction * 20 }}%; background-color: #4CAF50;" style="height: 100%; transition: width 0.5s ease-in-out;"></div>
                                         </div>
                                     </td>
                                 </tr>
@@ -197,22 +200,29 @@ Amman Cohort 1
     <div class="row">
         <div class="col-12">
             <div id="cohort-milestone" class="card shadow-sm">
-                <h2 id="cohort-milestone-heading" style="text-align:center" class="m-4 text-primary">Cohort Milestone</h2>
+                <h2 id="cohort-milestone-heading" style="text-align:start" class="my-4 mx-3 h3 text-primary">Cohort Milestone</h2>
                 <ul id="cohort-milestone-list">
-                    @foreach($technologiesOverview as $index => $technology)
+                    @foreach($milestoneOverview as $index => $milestone)
                     @php
-                        $color = $technology['percentage'] == 0 ? '#FF0000' : ($technology['percentage'] < 100 ? '#ffa500' : '#4CAF50');
+                        // Determine color based on the percentage
+                        $color = '#FF0000'; 
+                        if ($milestone['percentage'] > 0 && $milestone['percentage'] < 100) {
+                            $color = '#ffa500'; // Orange color for in-progress
+                        } elseif ($milestone['percentage'] >= 100) {
+                            $color = '#4CAF50'; // Green color for completed
+                        }
                     @endphp
                     <li style="--accent-color: {{ $color }}">
-                        <div class="date">{{ $technology['name'] }}</div>
-                        <div  class="title h4"> {{ $technology['start_date'] }}</div>
-                        <div class="descr">{{ $technology['description'] }}</div>
+                        <div class="date">{{ $milestone['name'] }}</div>
+                        <div class="title h4">{{ $milestone['start_date'] }}</div>
+                        {{-- <div class="descr">{{ $milestone['description'] }}</div> --}}
                     </li>
                     @endforeach
                 </ul>
             </div>
         </div>
     </div>
+    
     
     
     

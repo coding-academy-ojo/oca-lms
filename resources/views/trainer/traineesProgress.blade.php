@@ -28,7 +28,42 @@ Trainees Progress
     background-color: orange !important;
 
 }
+
+    .skill-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 200px; /* Adjust as needed */
+        padding: 10px;
+        box-sizing: border-box;
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .skill-title {
+        font-size: 14px;
+        margin-top: 10px;
+        text-align: center;
+        flex-grow: 1;
+    }
+    .skill-levels {
+        width: 100%;
+    }
+    .skill-progress {
+        position: relative;
+        margin-top: 10px;
+    }
+    #levels-progress-bar span {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        text-align: center;
+        color: #fff;
+    }
 </style>
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -142,511 +177,50 @@ Trainees Progress
     <!-- Skills carousel -->
 
     <div class="container my-5">
-
         <div class="row">
-
             <div class="col-md-12">
                 <h2 class=" carousel-title text-primary">Overview on Skills Status</h2>
                 <hr>
-
             </div>
-            <!-- End of Col-md-12 -->
-
-            <!-- 
-                =================================
-                This Code Block is For PC Edition
-                ================================= 
-            -->
-
-            <div id="carouselExample" class="carousel slide d-none d-sm-none d-md-block" data-ride="carousel">
-
-                <div class="carousel-inner">
-
-
-
-                    <!-- first carousel slide -->
-
-                    <div class="carousel-item active">
-
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="pb-1">
-                                    <p style="font-size: 14px; margin-top: 10px;">S1: Create mock-ups for an application
-                                    </p>
-                                </div>
-                                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0"
-                                    aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="0 of 30"
-                                    style="margin-top: 10px;">
-                                    <div>Level1</div>
-                                    <div class="progress-bar" style="width: 0%"></div>
-                                </div>
-                                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25"
-                                    aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="7 of 30"
-                                    style="margin-top: 10px;">
-                                    <div>Level2</div>
-                                    <div class="progress-bar" style="width: 25%"></div>
-                                </div>
-                                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="50"
-                                    aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="15 of 30"
-                                    style="margin-top: 10px;">
-                                    <div>Level3</div>
-                                    <div class="progress-bar" style="width: 50%"></div>
-                                </div>
-
+        </div>
+    
+        <div id="carouselExample" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                @foreach(array_chunk($skillsStatus, 4) as $skillChunk)
+                <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                    <div class="d-flex justify-content-between">
+                        @foreach($skillChunk as $skill)
+                        <div class="flex-grow-1 mx-2 skill-card">
+                            <div class="pb-1">
+                                <p class="skill-title">{{ $skill['skill_name'] }}</p>
                             </div>
-                            <div class="col-md-3">
-                                <div class="pb-1">
-                                    <p style="font-size: 14px; margin-top: 10px;">S2: Create static and adaptive web
-                                        user interfaces</p>
+                            <div class="skill-levels">
+                                @foreach($skill['levels'] as $level)
+                                <div class="progress skill-progress">
+                                    <div  id="levels-progress-bar" class="progress-bar" role="progressbar" style="width: {{ $level['progress'] }}%;">
+                                        <span>{{ $level['level_name'] }}</span>
+                                    </div>
                                 </div>
-                                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0"
-                                    aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="0 of 30"
-                                    style="margin-top: 10px;">
-                                    <div>Level1</div>
-                                    <div class="progress-bar" style="width: 0%"></div>
-                                </div>
-                                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25"
-                                    aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="7 of 30"
-                                    style="margin-top: 10px;">
-                                    <div>Level2</div>
-                                    <div class="progress-bar" style="width: 25%"></div>
-                                </div>
-                                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="50"
-                                    aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="15 of 30"
-                                    style="margin-top: 10px;">
-                                    <div>Level3</div>
-                                    <div class="progress-bar" style="width: 50%"></div>
-                                </div>
-
-                            </div>
-                            <div class="col-md-3">
-                                <div class="pb-1">
-                                    <p style="margin-top: 10px; font-size: 14px;">S3: Develop a dynamic web user
-                                        interface</p>
-                                </div>
-                                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0"
-                                    aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="0 of 30"
-                                    style="margin-top: 10px;">
-                                    <div>Level1</div>
-                                    <div class="progress-bar" style="width: 0%"></div>
-                                </div>
-                                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25"
-                                    aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="7 of 30"
-                                    style="margin-top: 10px;">
-                                    <div>Level2</div>
-                                    <div class="progress-bar" style="width: 25%"></div>
-                                </div>
-                                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="50"
-                                    aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="15 of 30"
-                                    style="margin-top: 10px;">
-                                    <div>Level3</div>
-                                    <div class="progress-bar" style="width: 50%"></div>
-                                </div>
-
-                            </div>
-                            <div class="col-md-3">
-                                <div>
-                                    <p style="margin-top: 10px; font-size: 14px;">S4: Create a user interface with a
-                                        content management or
-                                        e-commerce solution</p>
-                                </div>
-                                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0"
-                                    aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="0 of 30"
-                                    style="margin-top: 10px;">
-                                    <div>Level1</div>
-                                    <div class="progress-bar" style="width: 0%"></div>
-                                </div>
-                                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25"
-                                    aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="7 of 30"
-                                    style="margin-top: 10px;">
-                                    <div>Level2</div>
-                                    <div class="progress-bar" style="width: 25%"></div>
-                                </div>
-                                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="50"
-                                    aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="15 of 30"
-                                    style="margin-top: 10px;">
-                                    <div>Level3</div>
-                                    <div class="progress-bar" style="width: 50%"></div>
-                                </div>
-
+                                @endforeach
                             </div>
                         </div>
-
+                        @endforeach
                     </div>
-                    <!-- end of first carousel slide -->
-
-
-                    <!-- Second carousel slide -->
-                    <div class="carousel-item ">
-
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="pb-1">
-                                    <p style="margin-top: 10px; font-size: 14px;">S5: Create a database</p>
-                                </div>
-                                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0"
-                                    aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="0 of 30"
-                                    style="margin-top: 10px;">
-                                    <div>Level1</div>
-                                    <div class="progress-bar" style="width: 0%"></div>
-                                </div>
-                                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25"
-                                    aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="7 of 30"
-                                    style="margin-top: 10px;">
-                                    <div>Level2</div>
-                                    <div class="progress-bar" style="width: 25%"></div>
-                                </div>
-                                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="50"
-                                    aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="15 of 30"
-                                    style="margin-top: 10px;">
-                                    <div>Level3</div>
-                                    <div class="progress-bar" style="width: 50%"></div>
-                                </div>
-
-                            </div>
-                            <div class="col-md-3">
-                                <div class="pb-1">
-                                    <p style="margin-top: 10px; font-size: 14px;">S6: Develop data access components</p>
-                                </div>
-                                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0"
-                                    aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="0 of 30"
-                                    style="margin-top: 10px;">
-                                    <div>Level1</div>
-                                    <div class="progress-bar" style="width: 0%"></div>
-                                </div>
-                                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25"
-                                    aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="7 of 30"
-                                    style="margin-top: 10px;">
-                                    <div>Level2</div>
-                                    <div class="progress-bar" style="width: 25%"></div>
-                                </div>
-                                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="50"
-                                    aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="15 of 30"
-                                    style="margin-top: 10px;">
-                                    <div>Level3</div>
-                                    <div class="progress-bar" style="width: 50%"></div>
-                                </div>
-
-                            </div>
-                            <div class="col-md-3">
-                                <div>
-                                    <p style="margin-top: 10px; font-size: 14px;">S7: Develop the back end of a web or
-                                        mobile web application
-                                    </p>
-                                </div>
-
-                                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0"
-                                    aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="0 of 30"
-                                    style="margin-top: 10px;">
-                                    <div>Level1</div>
-                                    <div class="progress-bar" style="width: 0%"></div>
-                                </div>
-                                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25"
-                                    aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="7 of 30"
-                                    style="margin-top: 10px;">
-                                    <div>Level2</div>
-                                    <div class="progress-bar" style="width: 25%"></div>
-                                </div>
-                                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="50"
-                                    aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="15 of 30"
-                                    style="margin-top: 10px;">
-                                    <div>Level3</div>
-                                    <div class="progress-bar" style="width: 50%"></div>
-                                </div>
-
-                            </div>
-                            <div class="col-md-3 ">
-                                <div>
-                                    <p style="font-size: 14px; margin-top: 10px;">S8: Create and implement components in
-                                        a content
-                                        management or e-commerce application</p>
-                                </div>
-                                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0"
-                                    aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="0 of 30"
-                                    style="margin-top: 10px;">
-                                    <div>Level1</div>
-                                    <div class="progress-bar" style="width: 0%"></div>
-                                </div>
-                                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25"
-                                    aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="7 of 30"
-                                    style="margin-top: 10px;">
-                                    <div>Level2</div>
-                                    <div class="progress-bar" style="width: 25%"></div>
-                                </div>
-                                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="50"
-                                    aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" title="15 of 30"
-                                    style="margin-top: 10px;">
-                                    <div>Level3</div>
-                                    <div class="progress-bar" style="width: 50%"></div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- End of Second carousel slide -->
-
-                    <!-- Carousel Control prev -->
-                    <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <!-- Carousel Control Next -->
-                    <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-
                 </div>
-                <!-- Carousel Control Next -->
-
+                @endforeach
             </div>
-            <!-- End of Carousel Example -->
-
-            <!-- 
-                =================================
-                /End of PC Edition 
-                =================================
-            -->
-
-
-            <!-- 
-                =================================
-                This Code Block is For Mobile Edition
-                ================================= 
-            -->
-
-            <div id="carouselExampleMobile" class="carousel slide d-md-none d-lg-none d-xl-none" data-ride="carousel">
-
-                <div class="carousel-inner">
-
-                    <div class="carousel-item active">
-
-                        <img class="d-block w-100"
-                            src="https://fakeimg.pl/800x400/?retina=1&amp;text=Logo 1&amp;font=noto" alt="First slide">
-
-                    </div>
-                    <!-- Carousel Item 1 -->
-
-                    <div class="carousel-item">
-
-                        <img class="d-block w-100"
-                            src="https://fakeimg.pl/800x400/?retina=1&amp;text=Logo 2&amp;font=noto" alt="Second slide">
-
-                    </div>
-                    <!-- Carousel Item 2 -->
-
-                    <div class="carousel-item">
-
-                        <img class="d-block w-100"
-                            src="https://fakeimg.pl/800x400/?retina=1&amp;text=Logo 3&amp;font=noto" alt="Third slide">
-
-                    </div>
-                    <!-- Carousel Item 3 -->
-
-                    <div class="carousel-item">
-
-                        <img class="d-block w-100"
-                            src="https://fakeimg.pl/800x400/?retina=1&amp;text=Logo 4&amp;font=noto" alt="Fourth slide">
-
-                    </div>
-                    <!-- Carousel Item 4 -->
-
-                    <div class="carousel-item">
-
-                        <img class="d-block w-100"
-                            src="https://fakeimg.pl/800x400/?retina=1&amp;text=Logo 5&amp;font=noto" alt="Fifth slide">
-
-                    </div>
-                    <!-- Carousel Item 5 -->
-
-                    <div class="carousel-item">
-
-                        <img class="d-block w-100"
-                            src="https://fakeimg.pl/800x400/?retina=1&amp;text=Logo 6&amp;font=noto" alt="Sixth slide">
-
-                    </div>
-                    <!-- Carousel Item 6 -->
-
-                    <div class="carousel-item">
-
-                        <img class="d-block w-100"
-                            src="https://fakeimg.pl/800x400/?retina=1&amp;text=Logo 7&amp;font=noto"
-                            alt="Seventh slide">
-
-                    </div>
-                    <!-- Carousel Item 7 -->
-
-                    <div class="carousel-item">
-
-                        <img class="d-block w-100"
-                            src="https://fakeimg.pl/800x400/?retina=1&amp;text=Logo 8&amp;font=noto" alt="Eighth slide">
-
-                    </div>
-                    <!-- Carousel Item 8 -->
-
-                    <div class="carousel-item">
-
-                        <img class="d-block w-100"
-                            src="https://fakeimg.pl/800x400/?retina=1&amp;text=Logo 9&amp;font=noto" alt="Ninth slide">
-
-                    </div>
-                    <!-- Carousel Item 9 -->
-
-                    <div class="carousel-item">
-
-                        <img class="d-block w-100"
-                            src="https://fakeimg.pl/800x400/?retina=1&amp;text=Logo 10&amp;font=noto" alt="Tenth slide">
-
-                    </div>
-                    <!-- Carousel Item 10 -->
-
-                    <div class="carousel-item">
-
-                        <img class="d-block w-100"
-                            src="https://fakeimg.pl/800x400/?retina=1&amp;text=Logo 11&amp;font=noto"
-                            alt="Eleventh slide">
-
-                    </div>
-                    <!-- Carousel Item 11 -->
-
-                    <div class="carousel-item">
-
-                        <img class="d-block w-100"
-                            src="https://fakeimg.pl/800x400/?retina=1&amp;text=Logo 12&amp;font=noto"
-                            alt="Twelveth slide">
-
-                    </div>
-                    <!-- Carousel Item 12 -->
-
-                </div>
-
-                <a class="carousel-control-prev" href="#carouselExampleMobile" role="button" data-slide="prev">
-
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-
-                    <span class="sr-only">Previous</span>
-
-                </a>
-                <!-- Carousel Control Prev -->
-
-                <a class="carousel-control-next" href="#carouselExampleMobile" role="button" data-slide="next">
-
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-
-                    <span class="sr-only">Next</span>
-
-                </a>
-                <!-- Carousel Control Next -->
-
-            </div>
-            <!-- End of Carousel Example -->
-
-            <!-- 
-                =================================
-                /End of Mobile Edition 
-                =================================
-            -->
-
+        
+            <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
-        <!-- End of Row -->
-
-
-
-
-
-
-        <!-- Masterpiece tracking Table for All trainees  -->
-<div class="row my-5">
-    <h1 class="text-primary"> Masterpiece tracking <span class="bg-primary">    </span></h1> 
-    <div class="col-md-12">
-        <div class="table-responsive card pb-3">
-            <!-- Add this wrapper -->
-            <table id="mytable" class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th style="width: 350px;">Task</th>
-                        <th> Deadline </th>
-                        <th>Progress</th>
-                        <th>Notes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Idea pitching</td>
-                        <td>5-6-2024</td>
-                        <td>
-                            <div class="progress">
-                                <div style="width: 80%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="80"
-                                    role="progressbar" class="green progress-bar" data-toggle="tooltip" title="25 of 30">
-                                    <span>80%</span>
-                                </div>
-                            </div>
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Wireframe & Mockup</td>
-                        <td>30-6-2024</td>
-                        <td>
-                            <div class="progress">
-                                <div style="width: 80%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="80"
-                                    role="progressbar" class="green progress-bar" data-toggle="tooltip" title="25 of 30">
-                                    <span>80%</span>
-                                </div>
-                            </div>
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Front-end</td>
-                        <td>15-8-2024</td>
-                        <td>
-                            <div class="progress">
-                                <div style="width: 40%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40"
-                                    role="progressbar" class="red progress-bar" data-toggle="tooltip" title="12 of 30">
-                                    <span>40%</span>
-                                </div>
-                            </div>
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td >4</td>
-                        <td >Full-stack version fully functional</td>
-                        <td>15-9-2024</td>
-                        <td>
-                            <div class="progress">
-                                <div style="width: 20%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="20"
-                                    role="progressbar" class="red progress-bar" data-toggle="tooltip" title="8 of 30">
-                                    <span>20%</span>
-                                </div>
-                            </div>
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td >5</td>
-                        <td >All deliverables (Docs, presentation, brief)</td>
-                        <td>30-10-2024</td>
-                        <td>
-                            <div class="progress">
-                                <div style="width: 60%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="60"
-                                    role="progressbar" class="progress-bar" data-toggle="tooltip" title="17 of 30">
-                                    <span>60%</span>
-                                </div>
-                            </div>
-                        </td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+        
+   
 
 
 
@@ -698,7 +272,7 @@ Trainees Progress
     </div>
 
 
-</div>
+
 
 
 
