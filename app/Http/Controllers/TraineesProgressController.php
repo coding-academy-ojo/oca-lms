@@ -6,10 +6,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use App\Absence;
+use App\Skill;
 use App\Assignment;
 use App\AssignmentSubmission;
 use App\Cohort;
+use App\Level;
 use App\Student;
 
 
@@ -23,10 +24,14 @@ class TraineesProgressController extends Controller
         $assignmentAssessment = $this->assignmentAssessment();
         $projectAssessment = $this->projectAssessment();
         $allTrainessOverview = $this->allTrainessOverview();
+        $skillsStatus = $this->skillsStatus();
+
 
         // Return view with data
-        return view('trainer.traineesProgress', compact('attendanceOverview', 'lateAssignmentSubmissions', 'assignmentAssessment', 'projectAssessment' , 'allTrainessOverview'));
-    }
+        return view('trainer.traineesProgress', compact(
+            'attendanceOverview', 'lateAssignmentSubmissions', 'assignmentAssessment', 
+            'projectAssessment', 'allTrainessOverview', 'skillsStatus'
+        ));    }
     private function attendanceOverview() {
         $staff = Auth::guard('staff')->user();
         $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
@@ -164,7 +169,7 @@ class TraineesProgressController extends Controller
             return [
                 'message' => 'No running cohort found.',
                 'totalStudents' => 0,
-                'percentageSubmitted' => 0, // Change here
+                'percentageSubmitted' => 0, 
             ];
         }
     
@@ -198,8 +203,7 @@ class TraineesProgressController extends Controller
     private function projectAssessment() {
         $staff = Auth::guard('staff')->user();
         $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
-        
-    
+        return 0;
     }
 
     private function allTrainessOverview() {
@@ -216,4 +220,36 @@ class TraineesProgressController extends Controller
     $student = Student::find($id);
     // Pass the student details to the view
     return view('trainer.trainee_progress_details', compact('student'));
-}}
+}
+private function skillsStatus() {
+    // Fetch all levels
+    $levels = Level::all();
+
+    // Fetch all skills and their levels
+    $skills = Skill::with('skillLevels')->get();
+
+    $skillsStatus = [];
+
+    foreach ($skills as $skill) {
+        $skillLevels = $skill->skillLevels->pluck('level_id')->toArray();
+        $levelsStatus = [];
+
+        foreach ($levels as $level) {
+            $levelsStatus[] = [
+                'level_name' => $level->levels_name,
+                'progress' => in_array($level->id, $skillLevels) ? 100 : 0
+            ];
+        }
+
+        $skillsStatus[] = [
+            'skill_name' => $skill->skills_name,
+            'levels' => $levelsStatus
+        ];
+    }
+
+    return $skillsStatus;
+}
+
+
+}
+

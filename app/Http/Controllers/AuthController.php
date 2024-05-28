@@ -14,7 +14,7 @@ class AuthController extends Controller
         if(!empty(Auth::check())){
             return redirect('/');
         }
-        return view('auth.login');
+        return view('Auth.login');
     }
     
     // handle the role redirect pages
@@ -88,7 +88,7 @@ public function logout()
     if(!empty(Auth::check())){
         return redirect('/');
     }
-    return view('auth.student-login');
+    return view('Auth.student-login');
 }
 public function studentLogin(Request $request)
 {

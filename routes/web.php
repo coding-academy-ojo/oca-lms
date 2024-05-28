@@ -34,6 +34,7 @@ use App\Http\Controllers\AbsenceReportController;
 use App\Http\Controllers\SoftSkillsTrainingController;
 use App\Http\Controllers\SingleTraineeProgressController;
 use App\Http\Controllers\MasterpieceController;
+use App\Http\Controllers\ImportDataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -331,4 +332,9 @@ Route::get('/filter-projects', 'ProjectController@filterProjects')->name('filter
 
 
 
-
+// import data
+Route::get('/import-data/{id}', [ImportDataController::class, 'index'])->name('import-data.index');
+Route::post('/import-data/{cohortId}', [ImportDataController::class, 'import'])->name('import-data.import');
+Route::post('/import-data/import-softskills/{cohortId}', [ImportDataController::class, 'importSoftSkillsTrainings'])->name('import-data.import-softskills');
+Route::post('/import-data/import-technologies/{cohortId}', [ImportDataController::class, 'importTechnologies'])->name('import-data.import-technologies');
+Route::post('import-data/{cohortId}/assignments', [ImportDataController::class, 'importAssignments'])->name('import-data.import-assignments');
