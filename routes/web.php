@@ -153,13 +153,6 @@ Route::get('/absence/{absence_id}/download', [AbsenceReportController::class,'do
 
 Route::get('students/{studentId}/absence', 'AbsenceReportController@show')->name('spacificUserReport');
 
-// staff
-// Route::get('/staff', function () {
-//     return view('supermaneger.staff');
-// })->name('staff');
-// Route::get('/staff/edit', function () {
-//     return view('supermaneger.editStaff');
-// })->name('staff.edit');
 Route::get('/student-dashboard', [StudentDashboardController::class, 'index'])->name('student.dashboard');
 
 
@@ -200,36 +193,6 @@ Route::post('/topic/store', [TopicController::class ,'store'])->name('topic.stor
 Route::get('/topic/{topic}/edit', [TopicController::class ,'edit'])->name('topic.edit');
 Route::put('/topic/{topic}', [TopicController::class ,'update'])->name('topic.update');
 Route::delete('/topic/{topic}', [TopicController::class ,'destroy'])->name('topic.destroy');
-
-
-// Route::get('/topics', function () {
-//     return view('topics.topics');
-// })->name('topics');
-// Route::get('/createTopics', function () {
-//     return view('topics.createTopics');
-// })->name('createTopics');
-
-// Route::get('/editProfile', function () {
-//     return view('profile.editProfile');
-// })->name('editProfile');
-
-// Route::get('/skillsFramework', function () {
-//     return view('skillsFramework.skillsFramework');
-// });
-// Route::get('/addSkillsLevel', function () {
-//     return view('skillsFramework.addSkillsLevel');
-// });
-// Route::get('/addSkillsFramework', function () {
-//     return view('skillsFramework.addSkillsFramework');
-// });
-// Route::get('/editSkillsLevel', function () {
-//     return view('skillsFramework.editSkillsLevel');
-// });
-// Route::get('/editSkillsFramework', function () {
-//     return view('skillsFramework.editSkillsFramework');
-// });
-
-
 
 
 // View skills
