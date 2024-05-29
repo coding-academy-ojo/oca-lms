@@ -16,16 +16,13 @@ class CreateMasterpieceProgressTable extends Migration
         Schema::create('masterpiece_progress', function (Blueprint $table) {
             $table->id();
             $table->unsignedTinyInteger('progress');
-            $table->unsignedBigInteger('staff_id')->default(0); // Set a default value
+            $table->unsignedBigInteger('staff_id');
             $table->foreign('staff_id')->references('id')->on('staff')->onDelete('cascade');
             $table->unsignedBigInteger('student_id');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
-            $table->date('deadline');
             $table->text('notes')->nullable();
             $table->timestamps();
             $table->softDeletes();
-
-            
         });
     }
 

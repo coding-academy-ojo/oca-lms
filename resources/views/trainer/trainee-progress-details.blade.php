@@ -8,6 +8,16 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/orange-boosted/dist/css/orangeboosted.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+<section class="inner-bred my-5">
+    <div class="container">
+        <ul class="thm-breadcrumb">
+            <li><a href="/">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
+            <li><a style="color:#F16E00" href="/traineesProgress">Progress</a></li>
+            
+        </ul>
+    </div>
+</section>
+
 <style>
 @media (min-width: 992px) {
     .chart-container {
