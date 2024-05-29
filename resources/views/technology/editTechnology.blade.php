@@ -11,7 +11,7 @@ Edit Technology
 <section class="inner-bred">
     <div class="container">
         <ul class="thm-breadcrumb">
-            <li><a href="">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
+            <li><a href="/categories">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
             <li><a href="">Edit Technology</a></li>
 
         </ul>

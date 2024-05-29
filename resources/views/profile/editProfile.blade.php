@@ -10,7 +10,7 @@ Profile
 <section class="inner-bred">
   <div class="container">
     <ul class="thm-breadcrumb">
-      <li><a href="">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
+      <li><a href="/profile">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
       <li><a href="">Profile</a></li>
 
     </ul>
@@ -330,14 +330,6 @@ Profile
             </div>
 
             <div class="form-group mb-3">
-              <label for="en_last_name">{{ __('education') }}</label>
-              <input id="en_last_name" type="text" class="form-control @error('education') is-invalid @enderror" name="education" value="{{ old('education', $user->education) }}" required autocomplete="en_last_name">
-              @error('education')
-              <span class="invalid-feedback" role="alert">{{ $message }}</span>
-              @enderror
-            </div>
-
-            <div class="form-group mb-3">
               <label for="en_last_name">{{ __('educational status') }}</label>
               <input id="en_last_name" type="text" class="form-control @error('educational_status') is-invalid @enderror" name="educational_status" value="{{ old('educational_status', $user->educational_status) }}" required autocomplete="en_last_name">
               @error('educational_status')
@@ -389,6 +381,8 @@ Profile
               @enderror
             </div>
 
+
+            @auth('students')
             <div class="form-group mb-3">
               <label for="linkedin">{{ __('LinkedIn') }}</label>
               <input id="linkedin" type="text" class="form-control @error('linkedin') is-invalid @enderror" name="linkedin" value="{{ old('linkedin', $user->linkedin ?? '') }}" autocomplete="linkedin">
@@ -396,6 +390,8 @@ Profile
               <span class="invalid-feedback" role="alert">{{ $message }}</span>
               @enderror
             </div>
+            @endauth
+
 
             <div class="form-group mb-3">
               <label for="bio">{{ __('Bio') }}</label>
@@ -404,31 +400,6 @@ Profile
               <span class="invalid-feedback" role="alert">{{ $message }}</span>
               @enderror
             </div>
-
-            <!-- <div class="form-group mb-3">
-              <label for="education">{{ __('Education') }}</label>
-              <input id="education" type="text" class="form-control @error('education') is-invalid @enderror" name="education" value="{{ old('education', $user->education ?? '') }}" autocomplete="education">
-              @error('education')
-              <span class="invalid-feedback" role="alert">{{ $message }}</span>
-              @enderror
-            </div> -->
-
-            <div class="form-group mb-3">
-              <label for="experience">{{ __('Experience') }}</label>
-              <input id="experience" type="text" class="form-control @error('experience') is-invalid @enderror" name="experience" value="{{ old('experience', $user->field_of_experience ?? '') }}" autocomplete="experience">
-              @error('experience')
-              <span class="invalid-feedback" role="alert">{{ $message }}</span>
-              @enderror
-            </div>
-
-            <div class="form-group mb-3">
-              <label for="experience">{{ __('Field of experience') }}</label>
-              <input id="experience" type="text" class="form-control @error('experience') is-invalid @enderror" name="experience" value="{{ old('field_of_experience', $user->field_of_experience ?? '') }}" autocomplete="experience">
-              @error('field_of_experience')
-              <span class="invalid-feedback" role="alert">{{ $message }}</span>
-              @enderror
-            </div>
-
 
             @endif
 
@@ -440,9 +411,17 @@ Profile
               <span class="invalid-feedback" role="alert">{{ $message }}</span>
               @enderror
             </div>
+            <br>
 
-            <!-- Add more fields as needed -->
-
+            <!-- Image input -->
+            <div class="form-group mb-3">
+              <label for="staff_personal_img">{{ __('Profile Image') }}</label>
+              <input id="staff_personal_img" type="file" class="form-control-file @error('staff_personal_img') is-invalid @enderror" name="staff_personal_img" accept="image/*">
+              @error('staff_personal_img')
+              <span class="invalid-feedback" role="alert">{{ $message }}</span>
+              @enderror
+            </div>
+            <hr>
             <!-- Submit button -->
             <div class="form-group">
               <button type="submit" class="btn btn-primary">{{ __('Update Profile') }}</button>

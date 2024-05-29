@@ -161,12 +161,10 @@ class TechnologyController extends Controller
      * @param  \App\Technology  $technology
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Technology $technology)
+    public function destroy(Technology_Cohort $technology)
     {
+        dd($technology);
         $technology->delete();
-        return redirect()->route('categories.show', ['category' => $technology->technology_category_id]);
-        // return redirect()->route('categories.show', ['category' => $validatedData['technology_category_id']]);
-
-
+        return redirect()->route('categories.indexCohort')->with('success', 'Technology cohort deleted successfully!');
     }
 }

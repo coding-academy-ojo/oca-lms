@@ -95,8 +95,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="nav-link text-dark " href="{{ route('skillsFramework') }}">Skills Framework</a>
-                                <a class="nav-link text-dark " href="{{ route('categories.index') }}">Technology
-                                    category</a>
+                                <a class="nav-link text-dark " href="{{ route('categories.index') }}">Technologies</a>
                                 <a class="nav-link text-dark  {{ request()->routeIs('categories.indexCohort') ? 'text-primary' : '' }}"
                                     href="{{ route('categories.indexCohort') }}">Roadmap</a>
                             </div>

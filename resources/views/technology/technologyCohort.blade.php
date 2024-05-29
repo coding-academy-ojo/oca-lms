@@ -12,7 +12,7 @@ Technologies
 
     <div class="container">
         <ul class="thm-breadcrumb">
-            <li><a href="">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
+            <li><a href="/categories">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
             <li><a href="">{{ $category->Categories_name }}</a></li>
         </ul>
     </div>
