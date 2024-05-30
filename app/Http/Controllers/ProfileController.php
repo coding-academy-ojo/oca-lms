@@ -73,6 +73,7 @@ class ProfileController extends Controller
     public function showResetForm()
     {
 
+    
         $user = Auth::guard('staff')->check() ? Auth::guard('staff')->user() : Auth::guard('students')->user();
         // dd($user);
         return view('profile.resetPassword', compact('user'));

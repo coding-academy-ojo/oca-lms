@@ -8,7 +8,7 @@ Profile
 <section class="inner-bred">
     <div class="container">
         <ul class="thm-breadcrumb">
-            <li><a href="">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
+            <li><a href="/profile">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
             <li><a href="">Profile</a></li>
 
         </ul>
@@ -150,9 +150,9 @@ Profile
                 <a class=" btn btn-primary mb-3" href="{{ route('profile.edit') }}">Edit Profile</a>
                 &nbsp;
                 @endauth
-                @auth('students')
+                <!-- @auth('students')
                 <a class=" btn btn-primary mb-3" href="{{ route('password.reset') }}">View Details</a>
-                @endauth
+                @endauth -->
 
                 <a class=" btn btn-primary mb-3" href="{{ route('password.reset') }}">Reset Password</a>
                 &nbsp;
@@ -167,8 +167,7 @@ Profile
                                 <div class="mt-3">
                                     <h4>{{ $user->staff_name ?? $user->en_first_name }} {{$user->en_last_name }}</h4>
                                     <p class="text-secondary mb-1">{{ $user->role ?? 'Student' }}</p>
-                                    <!-- You can adjust the below line to display the appropriate location -->
-                                    <p class="text-muted font-size-sm">{{ $user->location ?? 'Location' }}</p>
+                                    <!-- <p class="text-muted font-size-sm">{{ $user->location ?? 'Location' }}</p> -->
                                 </div>
                             </div>
                         </div>
@@ -184,11 +183,13 @@ Profile
                                 <span class="text-secondary">{{ $user->staff_Phone ?? 'N/A' }}</span>
                             </li>
                             <!-- Add more user information fields here -->
+                            @auth('students')
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">LinkedIn</h6>
-                                <span class="text-secondary"> <a href="{{ $user->linkedin ?? 'link' }}">{{ $user->linkedin ?? 'link' }}</a></span>
-                               
+                                <span class="text-secondary"> <a href="{{ $user->linkedin_link  }}">link</a></span>
+
                             </li>
+                            @endauth
                         </ul>
                     </div>
                 </div>
@@ -205,32 +206,7 @@ Profile
                                 </div>
                             </div>
                             <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Education</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    {{ $user->education ?? '----' }}
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Experience </h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    {{ $user->education ?? '2 years' }}
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Field of experience </h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    {{ $user->field_of_experience ?? 'manager' }}
-                                </div>
-                            </div>
+
                             <!-- Add more user information fields here -->
                         </div>
                     </div>

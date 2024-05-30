@@ -211,6 +211,7 @@ Route::put('/skills/{id}/update', [SkillController::class, 'update'])->name('upd
 // Route::get('editSkillsLevel/{level}/edit', [SkillLevelController::class, 'edit'])->name('editSkillLevel');
 Route::get('editSkillsLevel/{skill}/edit', 'SkillLevelController@edit')->name('editSkillLevel');
 Route::put('/updateSkillLevel/{level}/update', 'SkillLevelController@update')->name('updateSkillLevel');
+Route::put('/updateSkillLevel/store', 'SkillLevelController@store')->name('storeSkillLevel');
 
 
 
@@ -229,7 +230,7 @@ Route::get('/technology/{technology}', [TechnologyController::class, 'showInfo']
 
 Route::get('/technologies/{technology}/edit', [TechnologyController::class, 'edit'])->name('technology.edit');
 Route::put('/technologies/{technology}/update', [TechnologyController::class, 'update'])->name('technology.update');
-Route::delete('/technologies/{technology}', [TechnologyController::class, 'destroy'])->name('technology.destroy');
+Route::delete('/technologies/technology/{technology}', [TechnologyController::class, 'destroy'])->name('technology.destroy');
 Route::post('/technologies/{technology}/addToCohort', [TechnologyCohortController::class, 'addToCohort'])->name('technology.addToCohort');
 // Route::post('technologies/addToCohort', 'TechnologyController@addToCohort')->name('technology.addToCohort');
 

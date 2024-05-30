@@ -19,7 +19,7 @@ Skills Framework (Competence)
 {{-- =========================================================== --}}
 
 
-<div class="innerPage  mt-3">
+<!-- <div class="innerPage  mt-3">
     <div class="container">
         <div class="addpro">
             <h1 class="text-center mb-4">Edit Levels for {{ $skill->skills_name }} </h1>
@@ -27,12 +27,34 @@ Skills Framework (Competence)
             <form method="POST" action="{{ route('updateSkillLevel', ['level' => $skillLevel->id]) }}" class="mb-3">
                 @csrf
                 @method('PUT')
-                <!-- Title -->
+            
                 <div class="mb-4">
                     <label for="title" class="form-label">level {{$skillLevel->name}} description <span class="text-danger">*</span></label>
                     <textarea class="form-control" id="1" rows="3" placeholder="Enter your skills" name="level" require>{{ $skillLevel->skillLevels_description }}</textarea>
+                </div>
+              
+                <button type="submit" class="btn btn-primary rounded-pill">Update</button>
+            </form>
+            @endforeach
+        </div>
+    </div>
+</div> -->
 
-                    <!-- <input type="text" class="form-control rounded-pill" id="title" name="level 1 description" placeholder="level 1 description" required> -->
+<div class="innerPage mt-3">
+    <div class="container">
+        <div class="addpro">
+            <h1 class="text-center mb-4">Edit Levels for {{ $skill->skills_name }}</h1>
+            @php
+            $words = ['Imitate', 'Adapt', 'Transpose'];
+            @endphp
+            @foreach($skillLevels as $index => $skillLevel)
+            <form method="POST" action="{{ route('updateSkillLevel', ['level' => $skillLevel->id]) }}" class="mb-3">
+                @csrf
+                @method('PUT')
+                <!-- Title -->
+                <div class="mb-4">
+                    <label for="title" class="form-label">level {{ $words[$index % count($words)] }} description <span class="text-danger">*</span></label>
+                    <textarea class="form-control" id="1" rows="3" placeholder="Enter your skills" name="level" required>{{ $skillLevel->skillLevels_description }}</textarea>
                 </div>
                 <!-- Submit Button -->
                 <button type="submit" class="btn btn-primary rounded-pill">Update</button>
@@ -41,5 +63,6 @@ Skills Framework (Competence)
         </div>
     </div>
 </div>
+
 
 @endsection

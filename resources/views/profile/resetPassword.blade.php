@@ -8,7 +8,7 @@ Profile
 <section class="inner-bred">
     <div class="container">
         <ul class="thm-breadcrumb">
-            <li><a href="">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
+            <li><a href="/profile">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
             <li><a href="">Profile</a></li>
 
         </ul>

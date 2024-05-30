@@ -25,12 +25,19 @@ Skills Framework (Competence)
 
 <div class="innerPage mt-3">
     <div class="container">
-        <div class="skillsFramework" style="    text-align: justify;">
-            @auth('staff')
+        <!-- Success message section -->
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+
+        <div class="skillsFramework" style="text-align: justify;">
+            <!-- @auth('staff')
             <div class="actionbtn">
-                <a class=" btn btn-primary mb-3" href="{{ route('createskillsFramework') }}">Add skills</a>
+                <a class="btn btn-primary mb-3" href="{{ route('createskillsFramework') }}">Add skills</a>
             </div>
-            @endauth
+            @endauth -->
 
             <div class="row">
                 <div class="col-sm-3 mb-3">
@@ -46,12 +53,12 @@ Skills Framework (Competence)
                         <div class="row">
                             @auth('staff')
                             <div class="actionbtn">
-                                <div class=" ms-auto mb-3">
-                                    <a class=" btn btn-primary m-auto" href="{{ route('editSkill', ['skill' => $skill->id]) }}">Edit Skill</a>
+                                <div class="ms-auto mb-3">
+                                    <a class="btn btn-primary m-auto" href="{{ route('editSkill', ['skill' => $skill->id]) }}">Edit Skill</a>
                                 </div>
                                 <div class="actionbtn">
-                                    <div class=" ms-auto mb-3">
-                                        <a class=" btn btn-primary m-auto" href="{{ route('editSkillLevel', ['skill' => $skill->id]) }}">Edit all levels</a>
+                                    <div class="ms-auto mb-3">
+                                        <a class="btn btn-primary m-auto" href="{{ route('editSkillLevel', ['skill' => $skill->id]) }}">Edit all levels</a>
                                     </div>
                                 </div>
                             </div>
@@ -66,12 +73,12 @@ Skills Framework (Competence)
                     </div>
                     @endforeach
                     <!-- Move the link outside of the loop -->
-
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 
 
