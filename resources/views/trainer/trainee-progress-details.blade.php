@@ -13,7 +13,7 @@
         <ul class="thm-breadcrumb">
             <li><a href="/">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
             <li><a style="color:#F16E00" href="/traineesProgress">Progress</a></li>
-            
+
         </ul>
     </div>
 </section>
@@ -83,13 +83,15 @@
                                 <span>Justified Absence:</span><strong>{{$absencesCount}}</strong>
                             </li>
                             <li class="list-group-item px-0 d-flex justify-content-between">
-                                <span class="mb-0">Non-Justified Absence:</span><strong>{{$nonJustifiedAbsencesCount}}</strong>
+                                <span class="mb-0">Non-Justified
+                                    Absence:</span><strong>{{$nonJustifiedAbsencesCount}}</strong>
                             </li>
                             <li class="list-group-item px-0 d-flex justify-content-between">
                                 <span class="mb-0">Justified Tardy:</span><strong>{{$lateCount}}</strong>
                             </li>
                             <li class="list-group-item px-0 d-flex justify-content-between">
-                                <span class="mb-0">Non-Justified Tardy:</span><strong>{{$nonJustifiedLateCount}}</strong>
+                                <span class="mb-0">Non-Justified
+                                    Tardy:</span><strong>{{$nonJustifiedLateCount}}</strong>
                             </li>
                         </ul>
                     </div>
@@ -138,36 +140,39 @@
     <div class="card">
         <div class="card-body">
 
-        <div class="table-container" style="max-height: 300px; overflow-y: auto;">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Assignment</th>
-                <th scope="col">Submission Status</th>
-                <th scope="col">Due Date</th>
-                <th scope="col">Log</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($studentAssignments as $assignment)
-                @if ($assignment->submissionStatus === 'No Assignments Assigned')
-                    <tr>
-                        <td colspan="5" class="text-center text-primary">No Assignments are assigned for {{$student->en_first_name}}</td>
-                    </tr>
-                @else
-                    <tr>
-                        <th scope="row">{{ $assignment->id }}</th>
-                        <td>{{ $assignment->assignment_name }}</td>
-                        <td>{{ $assignment->submissionStatus }}</td>
-                        <td>{{ $assignment->dueDate }} <Span style="color: {{ $assignment->isLate === 'Late' ? 'red' : 'inherit' }}">{{ $assignment->isLate }}</Span></td>
-                        <td><a href="{{ route('assignment.show', $assignment->id) }}">Details</a></td>
-                    </tr>
-                @endif
-            @endforeach
-        </tbody>
-    </table>
-</div>
+            <div class="table-container" style="max-height: 300px; overflow-y: auto;">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Assignment</th>
+                            <th scope="col">Submission Status</th>
+                            <th scope="col">Due Date</th>
+                            <th scope="col">Log</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($studentAssignments as $assignment)
+                        @if ($assignment->submissionStatus === 'No Assignments Assigned')
+                        <tr>
+                            <td colspan="5" class="text-center text-primary">No Assignments are assigned for
+                                {{$student->en_first_name}}</td>
+                        </tr>
+                        @else
+                        <tr>
+                            <th scope="row">{{ $assignment->id }}</th>
+                            <td>{{ $assignment->assignment_name }}</td>
+                            <td>{{ $assignment->submissionStatus }}</td>
+                            <td>{{ $assignment->dueDate }} <Span
+                                    style="color: {{ $assignment->isLate === 'Late' ? 'red' : 'inherit' }}">{{ $assignment->isLate }}</Span>
+                            </td>
+                            <td><a href="{{ route('assignment.show', $assignment->id) }}">Details</a></td>
+                        </tr>
+                        @endif
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
         </div>
     </div>
@@ -344,84 +349,31 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($progressEntries as $progress)
                         <tr>
-                            <td>Idea Pitching</td>
+                            <td>{{ $progress->task_name }}</td>
                             <td>
                                 <div class="progress" style="background: rgba(127, 99, 244, .1)">
-                                    <div class="progress-bar bg-success" style="width: 100%;" role="progressbar">
-                                        100%<span class="sr-only">100% Complete</span>
+                                    <div class="progress-bar bg-success" style="width: {{ $progress->progress }}%;"
+                                        role="progressbar">
+                                        {{ $progress->progress }}%<span class="sr-only">{{ $progress->progress }}%
+                                            Complete</span>
                                     </div>
                                 </div>
                             </td>
-                            <td>Apr 20,2023</td>
-                            <td>
-                                ........
-                            </td>
+                            <td>{{ $progress->task_deadline }}</td>
+                            <!-- Change $task->task_deadline to $progress->task_deadline -->
+                            <td>{{ $progress->notes }}</td>
                         </tr>
-                        <tr>
-                            <td>Wireframe & Mockup</td>
-                            <td>
-                                <div class="progress" style="background: rgba(76, 175, 80, .1)">
-                                    <div class="progress-bar bg-success" style="width: 80%;" role="progressbar">80%<span
-                                            class="sr-only">80% Complete</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>Jun 15,2023</td>
-                            <td>
-                                ........
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Front-end</td>
-                            <td>
-                                <div class="progress" style="background: rgba(70, 74, 83, .1)">
-                                    <div class="progress-bar bg-warning" style="width: 50%;" role="progressbar">50%<span
-                                            class="sr-only">50% Complete</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>Jul 1,2023</td>
-                            <td>
-                                ........
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Final version fully functional</td>
-                            <td>
-                                <div class="progress" style="background: rgba(255, 87, 34, .1)">
-                                    <div class="progress-bar bg-danger" style="width: 20%;" role="progressbar">20%<span
-                                            class="sr-only">20% Complete</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>Aug 5,2023</td>
-                            <td>
-                                ........
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>All other deliverables</td>
-                            <td>
-                                <div class="progress" style="background: rgba(255, 193, 7, .1)">
-                                    <div class="progress-bar bg-success" style="width: 70%;" role="progressbar">70%<span
-                                            class="sr-only">70% Complete</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>Aug 28,2023</td>
-                            <td>
-                                ........
-                            </td>
-
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
+
+
 
 
 <script>

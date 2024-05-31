@@ -13,6 +13,8 @@ use App\AssignmentSubmission;
 use App\Cohort;
 use App\Student;
 use App\Technology_Cohort;
+use App\MasterpieceProgress; 
+use App\MasterpieceTask;
 
 class SingleTraineeProgressController extends Controller
 {
@@ -82,6 +84,29 @@ class SingleTraineeProgressController extends Controller
             $assignment->dueDate = $dueDate;
             $assignment->isLate = $isLate;
         }
-        return view('trainer\trainee-progress-details', compact('student', 'absencesCount', 'nonJustifiedAbsencesCount','lateCount', 'nonJustifiedLateCount', 'technologyNames', 'studentAssignments', 'countValues'));
+        $studentId = $id; // Replace 1 with the actual student ID
+
+        $progressEntries = MasterpieceProgress::where('student_id', $studentId)
+            ->with(['student', 'staff', 'tasks'])
+            ->get(); 
+        
+        foreach ($progressEntries as $progress) {
+            $taskId = $progress->masterpiece_task_id;
+            
+            // Retrieve the task using Eloquent
+            $task = MasterpieceTask::find($taskId);
+            
+            // Check if the task is found before accessing its properties
+            if ($task) {
+                // Add the task name and deadline as new attributes to the progress entry
+                $progress->task_name = $task->task_name;
+                $progress->task_deadline = $task->deadline;
+            } else {
+                // Handle case when task is not found
+                $progress->task_name = 'Task Not Found'; // Or any other appropriate value
+            }
+        }
+        
+        return view('trainer\trainee-progress-details', compact('student', 'absencesCount', 'nonJustifiedAbsencesCount','lateCount', 'nonJustifiedLateCount', 'technologyNames', 'studentAssignments', 'countValues', 'progressEntries'));
     }
 }

@@ -91,7 +91,7 @@ Route::get('/addTrainee', function () {
 Route::get('/masterpiece', [MasterpieceController::class, 'index'])->name('Masterpiece');
 Route::post('/masterpiece/task-deadline', [MasterpieceController::class, 'setTaskDeadline'])->name('masterpiece.task.deadline.store');
 Route::post('/masterpiece/progress', [MasterpieceController::class, 'storeProgress'])->name('masterpiece.progress.store');
-
+//Route::get('/cohort/progress-details/{id}', [MasterpieceProgressController::class, 'ShowProgress'])->name('masterpiece.progress.ShowProgress');
 
 ////////////////////////////////////////////////
 

@@ -65,10 +65,10 @@ class MasterpieceController extends Controller
         $progressData = [
             'student_id' => $validatedData['student_id'],
             'staff_id' => $staffId,
+            'masterpiece_task_id'=> $validatedData['task_id'],
             'progress' => $validatedData['progress'],
             'notes' => $validatedData['notes'],
         ];
-    
         // Insert the progress data into the database
         $masterpieceProgress = MasterpieceProgress::create($progressData);
     
@@ -79,8 +79,5 @@ class MasterpieceController extends Controller
         return redirect()->back()->with('success', 'Progress entry submitted successfully.');
     }
     
-    
-  
-     
 
 }

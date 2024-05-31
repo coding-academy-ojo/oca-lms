@@ -27,5 +27,10 @@ class MasterpieceProgress extends Model
     {
         return $this->belongsToMany(MasterpieceTask::class, 'masterpiece_progress_task', 'masterpiece_progress_id', 'masterpiece_task_id');
     }
+
+    public function masterpiece_task()
+    {
+        return $this->belongsTo(MasterpieceTask::class,'masterpiece_task_id');
+    }
 }
 
