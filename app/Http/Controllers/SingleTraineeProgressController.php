@@ -84,11 +84,15 @@ class SingleTraineeProgressController extends Controller
             $assignment->dueDate = $dueDate;
             $assignment->isLate = $isLate;
         }
-        $studentId = $id; // Replace 1 with the actual student ID
+        $studentId = $id;
 
         $progressEntries = MasterpieceProgress::where('student_id', $studentId)
-            ->with(['student', 'staff', 'tasks'])
-            ->get(); 
+    ->with(['student', 'staff', 'tasks'])
+    ->join('masterpiece_tasks', 'masterpiece_progress.masterpiece_task_id', '=', 'masterpiece_tasks.id')
+    ->orderBy('masterpiece_tasks.id') // Order by task ID
+    ->select('masterpiece_progress.*', 'masterpiece_tasks.task_name', 'masterpiece_tasks.deadline as task_deadline')
+    ->get();
+
         
         foreach ($progressEntries as $progress) {
             $taskId = $progress->masterpiece_task_id;
@@ -96,14 +100,10 @@ class SingleTraineeProgressController extends Controller
             // Retrieve the task using Eloquent
             $task = MasterpieceTask::find($taskId);
             
-            // Check if the task is found before accessing its properties
             if ($task) {
-                // Add the task name and deadline as new attributes to the progress entry
+                // Add the task name and deadline to the progress entry
                 $progress->task_name = $task->task_name;
                 $progress->task_deadline = $task->deadline;
-            } else {
-                // Handle case when task is not found
-                $progress->task_name = 'Task Not Found'; // Or any other appropriate value
             }
         }
         

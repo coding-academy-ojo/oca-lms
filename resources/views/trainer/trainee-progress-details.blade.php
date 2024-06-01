@@ -354,15 +354,25 @@
                             <td>{{ $progress->task_name }}</td>
                             <td>
                                 <div class="progress" style="background: rgba(127, 99, 244, .1)">
-                                    <div class="progress-bar bg-success" style="width: {{ $progress->progress }}%;"
-                                        role="progressbar">
-                                        {{ $progress->progress }}%<span class="sr-only">{{ $progress->progress }}%
-                                            Complete</span>
+                                    @php
+                                        $progressColor = 'bg-success'; // Default to green
+                                        if ($progress->progress < 25) {
+                                            $progressColor = 'bg-danger'; // Red
+                                        } elseif ($progress->progress >= 25 && $progress->progress < 75) {
+                                            $progressColor = 'bg-warning'; // Orange
+                                        }
+                                    @endphp
+                                    <div class="progress-bar {{ $progressColor }}" 
+                                         style="width: {{ $progress->progress }}%;" 
+                                         role="progressbar" 
+                                         data-toggle="tooltip" 
+                                         data-placement="top" 
+                                         title="{{ $progress->progress }}%">
+                                        {{ $progress->progress }}%<span class="sr-only">{{ $progress->progress }}% Complete</span>
                                     </div>
                                 </div>
                             </td>
                             <td>{{ $progress->task_deadline }}</td>
-                            <!-- Change $task->task_deadline to $progress->task_deadline -->
                             <td>{{ $progress->notes }}</td>
                         </tr>
                         @endforeach
@@ -372,6 +382,14 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip(); 
+    });
+</script>
+
+
 
 
 
