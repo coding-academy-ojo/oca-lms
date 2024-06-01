@@ -12,7 +12,9 @@ use App\Assignment;
 use App\AssignmentSubmission;
 use App\Cohort;
 use App\Student;
+use App\Project;
 use App\Technology_Cohort;
+use App\TraineeSkillsProgress;
 use App\MasterpieceProgress; 
 use App\MasterpieceTask;
 
@@ -106,7 +108,28 @@ class SingleTraineeProgressController extends Controller
                 $progress->task_deadline = $task->deadline;
             }
         }
-        
-        return view('trainer\trainee-progress-details', compact('student', 'absencesCount', 'nonJustifiedAbsencesCount','lateCount', 'nonJustifiedLateCount', 'technologyNames', 'studentAssignments', 'countValues', 'progressEntries'));
+        $studentProjects = $this->getStudentProjects($id);
+    
+        return view('trainer\trainee-progress-details', compact('student', 'absencesCount', 'nonJustifiedAbsencesCount','lateCount', 'nonJustifiedLateCount', 'technologyNames', 'studentAssignments', 'countValues', 'progressEntries','studentProjects'));
+    }
+
+    private function getStudentProjects($studentId) {
+        $student = Student::find($studentId);
+        $cohortId = $student->cohort_id;
+
+        $projects = Project::where('cohort_id', $cohortId)->get();
+
+        return $projects->map(function($project) use ($studentId) {
+            $traineeProgress = TraineeSkillsProgress::where('student_id', $studentId)
+                ->where('project_id', $project->id)
+                ->first();
+
+            return [
+                'due_date' => $project->project_delivery_date,
+                'project_name' => $project->project_name,
+                'status' => $traineeProgress ? ($traineeProgress->project_status == 1 ? 'Passed' : 'Not Passed') : 'Not Assigned',
+                'submission_date' => $traineeProgress && $traineeProgress->created_at ? $traineeProgress->created_at->format('d/m/Y') : 'N/A', // Format the date as needed
+            ];
+        });
     }
 }
