@@ -73,8 +73,6 @@ class MasterpieceController extends Controller
                 'notes' => $validatedData['notes'],
             ]);
     
-            // Optionally, update the pivot table if necessary
-            // $existingProgress->tasks()->syncWithoutDetaching([$validatedData['task_id']]);
         } else {
             // Create the progress data array
             $progressData = [
