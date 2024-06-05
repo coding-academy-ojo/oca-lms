@@ -5,10 +5,9 @@
         <div class="container-fluid">
             <div class="navbar-brand me-auto">
                 <a class="stretched-link" href="#">
-                    <img src="{{ asset('assets/img/orange-logo.svg') }}" width="50" height="50"
-                        alt="Boosted - Back to Home" loading="lazy">
+                    <img src="{{ asset('assets/img/orange-logo.svg') }}" width="50" height="50" alt="Boosted - Back to Home" loading="lazy">
                 </a>
-                <h3 class="me-auto m-2 navbar-item"> Orange Coding Academy</h1>
+                <h3 class="me-auto m-2 navbar-item">Orange Coding Academy</h3>
             </div>
 
             <div class="d-flex pt-2">
