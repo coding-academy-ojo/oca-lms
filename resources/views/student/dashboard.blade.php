@@ -472,52 +472,66 @@ let chart = new Chart(assignments_tech, {
 
 
 // All Projects status Bar Chart Initialization
-if (document.getElementById('barChart_3')) {
-    const barChart_3 = document.getElementById("barChart_3").getContext('2d');
+document.addEventListener('DOMContentLoaded', function() {
+    if (document.getElementById('barChart_3')) {
+        const barChart_3 = document.getElementById("barChart_3").getContext('2d');
 
+        // Assuming studentProjects is available in the global scope or passed to the view
+        let labels = [];
+        let passedData = [];
+        let failedData = [];
 
-
-    // Chart data
-    let barChartData = {
-        labels: ["HTML& CSS", "JS", "React", "NodeJS", "MongoDB", "PostgreSQL", "Wordpress"],
-        datasets: [{
-            label: 'Passed',
-            backgroundColor: "rgba(43, 193, 85, 1)", // Green color
-            hoverBackgroundColor: "rgba(43, 193, 85, 1)",
-            data: [100, 95, 90, 100, 80, 93, 99]
-        }, {
-            label: 'Corrective actions',
-            backgroundColor: "rgba(243, 87, 87, 1)", // Red color
-            hoverBackgroundColor: "rgba(243, 87, 87, 1)",
-            data: [0, 2, 2, 1, 0, 1, 0]
-        }]
-    };
-
-    // Chart options
-    new Chart(barChart_3, {
-        type: 'bar',
-        data: barChartData,
-        options: {
-            scales: {
-                xAxes: [{
-                    stacked: true
-                }],
-                yAxes: [{
-                    stacked: true
-                }]
-            },
-            legend: {
-                display: true
-            },
-            responsive: true,
-            maintainAspectRatio: false,
-            tooltips: {
-                mode: 'index',
-                intersect: false
+        @foreach ($studentProjects as $project)
+            labels.push("{{ $project['project_name'] }}");
+            if ("{{ $project['status'] }}" === 'Passed') {
+                passedData.push(100);
+                failedData.push(0);
+            } else {
+                passedData.push(0);
+                failedData.push(100);
             }
-        }
-    });
-}
+        @endforeach
+
+        let barChartData = {
+            labels: labels,
+            datasets: [{
+                label: 'Passed',
+                backgroundColor: "rgba(43, 193, 85, 1)", // Green color
+                hoverBackgroundColor: "rgba(43, 193, 85, 1)",
+                data: passedData
+            }, {
+                label: 'Failed',
+                backgroundColor: "rgba(243, 87, 87, 1)", // Red color
+                hoverBackgroundColor: "rgba(243, 87, 87, 1)",
+                data: failedData
+            }]
+        };
+
+        new Chart(barChart_3, {
+            type: 'bar',
+            data: barChartData,
+            options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                },
+                legend: {
+                    display: true
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                }
+            }
+        });
+    }
+});
 </script>
 
 @endsection

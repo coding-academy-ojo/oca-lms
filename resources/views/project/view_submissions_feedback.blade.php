@@ -151,10 +151,12 @@ View Submissions and Feedback
             <a href="{{ route('view_project_submissions', ['project_id' => $project->id]) }}" class="btn btn-primary mt-3">
                 Back to Submissions
             </a>
+            <br> <br>
         @elseif(Auth::guard('students')->check())
             <a href="{{ route('project_brief', ['id' => $project->id]) }}" class="btn btn-primary mt-3">
                 Back to Project Brief
             </a>
+            <br> <br>
         @endif
 
     </div>
@@ -254,9 +256,11 @@ View Submissions and Feedback
         <button type="submit" class="btn btn-primary">Save</button>
     </form>
 @endif
+<br> <br>
 
 
     </div>
+    <br> <br>
 </div> --}}
 
 @endsection

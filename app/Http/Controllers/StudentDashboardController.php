@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Absence;
 use App\AssignmentSubmission;
+use App\Student; 
+
+use App\TraineeSkillsProgress;
+use App\Project;
 
 class StudentDashboardController extends Controller
 {
@@ -17,8 +21,9 @@ class StudentDashboardController extends Controller
         $justifiedLateCount = $this->countJustifiedLate($student->id);
         $nonJustifiedLateCount = $this->countNonJustifiedLate($student->id);
         $assignmentsStatus = $this->getAssignmentsStatus($student->id);
+        $studentProjects = $this->getStudentProjects($student->id);
         
-        return view('student.dashboard', compact('student', 'justifiedAbsencesCount', 'nonJustifiedAbsencesCount', 'justifiedLateCount', 'nonJustifiedLateCount', 'assignmentsStatus'));
+        return view('student.dashboard', compact('student', 'justifiedAbsencesCount', 'nonJustifiedAbsencesCount', 'justifiedLateCount', 'nonJustifiedLateCount', 'assignmentsStatus', 'studentProjects'));
     }
 
     private function countJustifiedAbsences($studentId)
@@ -72,6 +77,26 @@ class StudentDashboardController extends Controller
             });
     // dd($assignmentsStatus);
         return $assignmentsStatus;
+    }
+
+    private function getStudentProjects($studentId) {
+        $student = Student::find($studentId);
+        $cohortId = $student->cohort_id;
+
+        $projects = Project::where('cohort_id', $cohortId)->get();
+
+        return $projects->map(function($project) use ($studentId) {
+            $traineeProgress = TraineeSkillsProgress::where('student_id', $studentId)
+                ->where('project_id', $project->id)
+                ->first();
+
+            return [
+                'due_date' => $project->project_delivery_date,
+                'project_name' => $project->project_name,
+                'status' => $traineeProgress ? ($traineeProgress->project_status == 1 ? 'Passed' : 'Not Passed') : '',
+                'submission_date' => $traineeProgress && $traineeProgress->created_at ? $traineeProgress->created_at->format('d/m/Y') : 'N/A', // Format the date as needed
+            ];
+        });
     }
     
     
