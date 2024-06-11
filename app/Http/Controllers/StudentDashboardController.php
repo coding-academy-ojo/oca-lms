@@ -10,6 +10,8 @@ use App\Student;
 
 use App\TraineeSkillsProgress;
 use App\Project;
+use App\MasterpieceProgress;
+use App\MasterpieceTask;
 
 class StudentDashboardController extends Controller
 {
@@ -22,8 +24,10 @@ class StudentDashboardController extends Controller
         $nonJustifiedLateCount = $this->countNonJustifiedLate($student->id);
         $assignmentsStatus = $this->getAssignmentsStatus($student->id);
         $studentProjects = $this->getStudentProjects($student->id);
+        $studentMasterpieceEntries = $this->getStudentasterpieceProgressEntries($student->id);
+       
         
-        return view('student.dashboard', compact('student', 'justifiedAbsencesCount', 'nonJustifiedAbsencesCount', 'justifiedLateCount', 'nonJustifiedLateCount', 'assignmentsStatus', 'studentProjects'));
+        return view('student.dashboard', compact('student', 'justifiedAbsencesCount', 'nonJustifiedAbsencesCount', 'justifiedLateCount', 'nonJustifiedLateCount', 'assignmentsStatus', 'studentProjects', 'studentMasterpieceEntries'));
     }
 
     private function countJustifiedAbsences($studentId)
@@ -99,11 +103,32 @@ class StudentDashboardController extends Controller
         });
     }
     
+    private function getStudentasterpieceProgressEntries($studentId) {
+        $student = Student::find($studentId);
+        $cohortId = $student->cohort_id;
+    $progressEntries = MasterpieceProgress::where('student_id', $studentId)
+    ->with(['student', 'staff', 'tasks'])
+    ->join('masterpiece_tasks', 'masterpiece_progress.masterpiece_task_id', '=', 'masterpiece_tasks.id')
+    ->orderBy('masterpiece_tasks.id') // Order by task ID
+    ->select('masterpiece_progress.*', 'masterpiece_tasks.task_name', 'masterpiece_tasks.deadline as task_deadline')
+    ->get();
+
+        
+        foreach ($progressEntries as $progress) {
+            $taskId = $progress->masterpiece_task_id;
+            
+            // Retrieve the task using Eloquent
+            $task = MasterpieceTask::find($taskId);
+            
+            if ($task) {
+                // Add the task name and deadline to the progress entry
+                $progress->task_name = $task->task_name;
+                $progress->task_deadline = $task->deadline;
+            }
+        }
     
     
-    
-    
+        return $progressEntries;
     
 }
-    
-
+}
