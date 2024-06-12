@@ -127,7 +127,6 @@ class StudentDashboardController extends Controller
             }
         }
     
-    
         return $progressEntries;
     
 }
