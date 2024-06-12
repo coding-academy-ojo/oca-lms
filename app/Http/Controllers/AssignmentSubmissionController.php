@@ -23,7 +23,7 @@ class AssignmentSubmissionController extends Controller
         $cohortId = $student->cohort_id;
         // Retrieve all assignments related to the current student 
         $assignments = $student->assignment;
-        
+
         return view('Assignment.Student_assignment.assignment_show', compact('assignments'));
     }
 
@@ -51,22 +51,20 @@ class AssignmentSubmissionController extends Controller
         $assignment_submision->assignment_id = $request->input('Assignment_ID');
         $assignment_submision->student_id = $studentId;
         $assignment_submision->created_at = Carbon::now();
-        $assignmnetId=$request->input('Assignment_ID');
-        $Assignment = Assignment::find( $assignmnetId);
-        $assignmnetdate=$Assignment->assignment_due_date;
+        $assignmnetId = $request->input('Assignment_ID');
+        $Assignment = Assignment::find($assignmnetId);
+        $assignmnetdate = $Assignment->assignment_due_date;
         $numberOfSubmissions = AssignmentSubmission::where('assignment_id', $request->input('Assignment_ID'))
-        ->where('student_id', $studentId)
-        ->count();
-        if(now()> $assignmnetdate)
-        {
-            if ($numberOfSubmissions<1) {
-                $assignment_submision->is_late =1;
+            ->where('student_id', $studentId)
+            ->count();
+        if (now() > $assignmnetdate) {
+            if ($numberOfSubmissions < 1) {
+                $assignment_submision->is_late = 1;
             } else {
-                $assignment_submision->is_late =0;
-            }  
-        }
-        else{
-            $assignment_submision->is_late =0;
+                $assignment_submision->is_late = 0;
+            }
+        } else {
+            $assignment_submision->is_late = 0;
         }
 
 
@@ -81,20 +79,20 @@ class AssignmentSubmissionController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     //to view assignment individual and submit the solution 
-     public function show($id)
-     {
-         $studentId = Auth::id();
-         $assignment = Assignment::find($id);
-         $assignment_submissions = AssignmentSubmission::where('assignment_id', $id)
-             ->where('student_id',1)
-             ->get();
+    //to view assignment individual and submit the solution 
+    public function show($id)
+    {
+        $studentId = session('student_id');
+        $assignment = Assignment::find($id);
+        $assignment_submissions = AssignmentSubmission::where('assignment_id', $id)
+            ->where('student_id', $studentId)
+            ->get();
         // $assignmnet_feedback= AssignmentFeedback::where('assignment_id', $id)->get();
-     
-         return view('Assignment.Student_assignment.StudentAssignmentSubmissions', compact('assignment', 'assignment_submissions'));
-     }
 
-    
+        return view('Assignment.Student_assignment.StudentAssignmentSubmissions', compact('assignment', 'assignment_submissions'));
+    }
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -122,7 +120,7 @@ class AssignmentSubmissionController extends Controller
         $assignmentSubmission->staff_id  = $staffId;
         $assignmentSubmission->updated_at = now();
         $assignmentSubmission->save();
-    
+
         return redirect()->back()->with('success', 'Assignment submitted successfully');
     }
 
@@ -131,7 +129,7 @@ class AssignmentSubmissionController extends Controller
         $assignmentSubmission = AssignmentSubmission::findOrFail($assignment);
         $assignmentSubmission->status = 'Pass';
         $assignmentSubmission->update();
-    
+
         return redirect()->back()->with('success', 'Assignment submitted successfully');
     }
     /**
