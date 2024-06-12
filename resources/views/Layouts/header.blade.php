@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{{ route('academyview') }}">
             <img src="{{ asset('assets/img/orange-logo.svg') }}" width="50" height="50" alt="Boosted - Back to Home"
                 loading="lazy">
         </a>

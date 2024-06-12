@@ -127,7 +127,7 @@ class SingleTraineeProgressController extends Controller
             return [
                 'due_date' => $project->project_delivery_date,
                 'project_name' => $project->project_name,
-                'status' => $traineeProgress ? ($traineeProgress->project_status == 1 ? 'Passed' : 'Not Passed') : 'Not Assigned',
+                'status' => $traineeProgress ? ($traineeProgress->project_status == 1 ? 'Passed' : 'Not Passed') : '',
                 'submission_date' => $traineeProgress && $traineeProgress->created_at ? $traineeProgress->created_at->format('d/m/Y') : 'N/A', // Format the date as needed
             ];
         });

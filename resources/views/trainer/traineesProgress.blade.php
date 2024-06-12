@@ -167,9 +167,7 @@ Trainees Progress
                     <div class="card-body">
                         <h4 class="card-title text-primary">Projects Assessment</h4>
                         <canvas id="ProjectsAssessment"></canvas>
-                        <a href="#">
-                            <p class="card-title" style="font-size: 1rem;">Portfolio project</p>
-                        </a>
+                        
                     </div>
                 </div>
             </div>
@@ -210,7 +208,7 @@ Trainees Progress
                                 @foreach($skill['levels'] as $level)
                                 <div class="progress skill-progress">
                                     <div  id="levels-progress-bar" class="progress-bar" role="progressbar" style="width: {{ $level['progress'] }}%;">
-                                        <span>{{ $level['level_name'] }}</span>
+                                        <span>{{ $level['level_name'] }} 35-35</span>
                                     </div>
                                 </div>
                                 @endforeach
@@ -258,8 +256,15 @@ Trainees Progress
                             <td>{{ $student['id'] }}</td>
                             <td>{{ $student['name'] }}</td>
                             <td style="width: 70%;">
-                                <div style="width: 80%;" class="progress">
-                                    <div  class="progress-bar" role="progressbar" style="width: {{ $student['passedPercentage'] }}%" aria-valuenow="{{ $student['passedPercentage'] }}" aria-valuemin="0" aria-valuemax="100">{{ $student['passedPercentage'] }}% of Projects</div>
+                                <div style="width: 100%;" class="progress">
+                                    <!-- Dynamic part for projects -->
+                                    <div class="progress-bar" role="progressbar" style="width: {{ $student['passedPercentage'] }}%; background-color: #ffc107;" aria-valuenow="{{ $student['passedPercentage'] }}" aria-valuemin="0" aria-valuemax="100">{{ $student['passedPercentage'] }}% of Projects</div>
+                                    
+                                    <!-- Static part for internship -->
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 30%;">Internship</div>
+                                    
+                                    <!-- Static part for absence -->
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 30%;">Absence</div>
                                 </div>
                             </td>
                             <td>

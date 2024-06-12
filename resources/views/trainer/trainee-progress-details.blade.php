@@ -391,8 +391,6 @@ if (document.getElementById('assignments_tech')) {
 }
 
 // All Projects status Bar Chart Initialization
-
-// All Projects status Bar Chart Initialization
 document.addEventListener('DOMContentLoaded', function() {
     if (document.getElementById('barChart_3')) {
         const barChart_3 = document.getElementById("barChart_3").getContext('2d');

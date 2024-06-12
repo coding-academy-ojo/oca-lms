@@ -212,7 +212,7 @@ class TrainerDashboardController extends Controller
         $milestones = [];
         $currentDate = Carbon::now();
     
-        // Fetch technology data
+     
         foreach ($runningCohort->technology as $technology) {
             $startDate = Carbon::parse($technology->pivot->start_date);
             $endDate = Carbon::parse($technology->pivot->end_date);
@@ -220,13 +220,12 @@ class TrainerDashboardController extends Controller
             $percentage = 0;
             $status = 'Not Started';
     
-            // Calculate the total days between start and end dates
             $totalDays = $startDate->diffInDays($endDate);
     
             if ($currentDate->between($startDate, $endDate)) {
-                if ($totalDays > 0) { // Check to avoid division by zero
+                if ($totalDays > 0) { 
                     $percentage = ($currentDate->diffInDays($startDate) / $totalDays) * 100;
-                } else { // If the start and end date are the same, we consider the progress as 100%
+                } else { 
                     $percentage = 100;
                 }
                 $status = 'In Progress';
@@ -245,40 +244,14 @@ class TrainerDashboardController extends Controller
             ];
         }
     
-        // Fetch soft skills data
-        foreach ($runningCohort->softSkillsTrainings as $softSkill) {
-            $skillDate = Carbon::parse($softSkill->date);
-            $skillEndDate = $skillDate->copy()->addHours(12);
-            $trainingHours = 12; // Training duration in hours
-    
-            $percentage = 0;
-            if ($currentDate->gt($skillEndDate)) {
-                $percentage = 100;
-            } else if ($currentDate->between($skillDate, $skillEndDate)) {
-                if ($trainingHours > 0) { // Check to avoid division by zero
-                    $percentage = ($currentDate->diffInHours($skillDate) / $trainingHours) * 100;
-                } else { // If training hours is zero, it should never be but just a safeguard
-                    $percentage = 100;
-                }
-            }
-    
-            $milestones[] = [
-                'start_date' => $skillDate->format('d-F-Y'),
-                'name' => $softSkill->name,
-                'description' => $softSkill->description,
-                'status' => $currentDate->gt($skillEndDate) ? 'Completed' : 'In Progress',
-                'percentage' => round($percentage),
-                'type' => 'Soft Skill'
-            ];
-        }
-    
-        // Sort milestones by start date
+       
         usort($milestones, function ($a, $b) {
             return $a['start_date'] <=> $b['start_date'];
         });
     
         return $milestones;
     }
+    
     
     
     
