@@ -8,9 +8,10 @@
         <div class="container">
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb m-3">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page"><a href=""> Class</a></li>
-                    <li class="breadcrumb-item active" aria-current="page"><a href=""> Assignment </a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('academyview') }}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('assignments') }}"> Assignment </a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="">Edit Assignment </a></li>
+
                 </ol>
             </nav>
         </div>
