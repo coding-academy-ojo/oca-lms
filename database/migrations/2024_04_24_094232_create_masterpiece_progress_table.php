@@ -20,6 +20,8 @@ class CreateMasterpieceProgressTable extends Migration
             $table->foreign('staff_id')->references('id')->on('staff')->onDelete('cascade');
             $table->unsignedBigInteger('student_id');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+            $table->unsignedBigInteger('masterpiece_task_id');
+            $table->foreign('masterpiece_task_id')->references('id')->on('masterpiece_tasks')->onDelete('cascade');
             $table->text('notes')->nullable();
             $table->timestamps();
             $table->softDeletes();

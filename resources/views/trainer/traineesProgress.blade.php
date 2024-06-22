@@ -166,10 +166,8 @@ Trainees Progress
                 <div class="widget-stat card">
                     <div class="card-body">
                         <h4 class="card-title text-primary">Projects Assessment</h4>
-                        <canvas id="Projects Assessment"></canvas>
-                        <a href="#">
-                            <p class="card-title" style="font-size: 1rem;">Portfolio project</p>
-                        </a>
+                        <canvas id="ProjectsAssessment"></canvas>
+                        
                     </div>
                 </div>
             </div>
@@ -210,7 +208,7 @@ Trainees Progress
                                 @foreach($skill['levels'] as $level)
                                 <div class="progress skill-progress">
                                     <div  id="levels-progress-bar" class="progress-bar" role="progressbar" style="width: {{ $level['progress'] }}%;">
-                                        <span>{{ $level['level_name'] }}</span>
+                                        <span>{{ $level['level_name'] }} 35-35</span>
                                     </div>
                                 </div>
                                 @endforeach
@@ -238,11 +236,11 @@ Trainees Progress
 
 
    <!-- Table for All trainees  -->
-    <div class="row my-5">
-        <h1 class="text-primary"> All Trainees Overview <span class="bg-primary">    </span></h1> 
+   
+      <div class="row my-5">
+        <h1 class="text-primary">All Trainees Overview</h1>
         <div class="col-md-12">
             <div class="table-responsive card" style="max-height: 400px; overflow-y: auto;">
-                <!-- Add this wrapper -->
                 <table id="mytable" class="table table-hover">
                     <thead>
                         <tr>
@@ -250,34 +248,33 @@ Trainees Progress
                             <th>Name</th>
                             <th>Trainees Progress</th>
                             <th>Details</th>
-                           
-                           
                         </tr>
                     </thead>
                     <tbody>
-                
-                    @foreach ($allTrainessOverview as $student)
+                        @foreach ($allTrainessOverview as $student)
                         <tr>
-                            <td>{{$student->id}}</td>
-                            <td>{{$student->en_first_name}} {{$student->en_second_name}} </td>
+                            <td>{{ $student['id'] }}</td>
+                            <td>{{ $student['name'] }}</td>
                             <td style="width: 70%;">
-                            <div class="progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"> 100% of Projects </div>
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30% Absence</div>
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">20% Internship</div>
+                                <div style="width: 100%;" class="progress">
+                                    <!-- Dynamic part for projects -->
+                                    <div class="progress-bar" role="progressbar" style="width: {{ $student['passedPercentage'] }}%; background-color: #ffc107;" aria-valuenow="{{ $student['passedPercentage'] }}" aria-valuemin="0" aria-valuemax="100">{{ $student['passedPercentage'] }}% of Projects</div>
+                                    
+                                    <!-- Static part for internship -->
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 30%;">Internship</div>
+                                    
+                                    <!-- Static part for absence -->
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 30%;">Absence</div>
                                 </div>
                             </td>
                             <td>
-                             <a href="{{ route('ProgressDetails.showDetails', ['id' => $student->id]) }}" class="btn btn-primary">View</a>
+                                <a href="{{ route('ProgressDetails.showDetails', ['id' => $student['id']]) }}" class="btn btn-primary">View</a>
                             </td>
-                            </tr>
-                            
-
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-
         </div>
     </div>
 
@@ -450,13 +447,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Projects Assessment Chart Initialization
-    if (document.getElementById('Projects Assessment')) {
-        var doughnutChart2 = new Chart(document.getElementById('Projects Assessment'), {
+
+    let passedStudents = {{ $projectsAssessment['passedStudents'] }};
+    let failedStudents = {{ $projectsAssessment['failedStudents'] }};
+
+    if (document.getElementById('ProjectsAssessment')) {
+        var doughnutChart2 = new Chart(document.getElementById('ProjectsAssessment'), {
             type: 'doughnut',
             data: {
-
                 datasets: [{
-                    data: [28, 2],
+                    data: [passedStudents, failedStudents],
                     backgroundColor: [
                         "rgba(43, 193, 85, 1)",
                         "rgba(243, 87, 87, 1)"
@@ -477,9 +477,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
-
-
 });
 
 $(document).ready(function() {

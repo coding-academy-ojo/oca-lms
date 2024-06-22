@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('title')
@@ -21,6 +22,12 @@ Announcements
 <div class="container">
     <!-- Masterpiece Progress Section -->
     <div class="container my-4">
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
         <div class="row my-5">
             <div class="col">
                 <!-- Masterpiece Task Form -->
@@ -31,22 +38,21 @@ Announcements
                             @csrf
                             <div class="form-group mb-3">
                                 <label for="task">Task</label>
-                                <select id="task" class="form-control @error('task') is-invalid @enderror" name="task_id"
-                                    required autocomplete="task" autofocus>
+                                <select id="task" class="form-control @error('task') is-invalid @enderror" name="task_id" required autocomplete="task" autofocus>
                                     <option value="">Select Task</option>
                                     @foreach($tasks as $taskId => $taskName)
-                                    <option value="{{ $taskId }}">{{ $taskName }}</option>
+                                        <option value="{{ $taskId }}">{{ $taskName }}</option>
                                     @endforeach
                                 </select>
                                 @error('task')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
                             <div class="form-group mb-3">
                                 <label for="deadline">Deadline</label>
-                                <input type="date" id="deadline" name="deadline" class="form-control" required>
+                                <input type="date" id="deadline" name="deadline" class="form-control" required min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                             </div>
                             <button type="submit" class="btn btn-primary">Set Deadline</button>
                         </form>
@@ -55,14 +61,11 @@ Announcements
             </div>
         </div>
 
-
         <div class="row">
-
             <div class="col">
                 <!-- Masterpiece Progress Entry Form -->
                 <h3 class="mb-4 text-primary">Enter Masterpiece Progress </h3>
                 <div class="card my-3">
-
                     <div class="card-body">
                         <form id="masterpiece-form" method="POST" action="{{ route('masterpiece.progress.store') }}">
                             @csrf
@@ -72,17 +75,16 @@ Announcements
                             <div class="form-group row mb-3">
                                 <div class="col-md-6">
                                     <label for="task">Task</label>
-                                    <select id="task" class="form-control @error('task') is-invalid @enderror" name="task_id"
-                                    required autocomplete="task" autofocus>
-                                    <option value="">Select Task</option>
-                                    @foreach($tasks as $taskId => $taskName)
-                                    <option value="{{ $taskId }}">{{ $taskName }}</option>
-                                    @endforeach
-                                </select>
+                                    <select id="task" class="form-control @error('task') is-invalid @enderror" name="task_id" required autocomplete="task" autofocus>
+                                        <option value="">Select Task</option>
+                                        @foreach($tasks as $taskId => $taskName)
+                                            <option value="{{ $taskId }}">{{ $taskName }}</option>
+                                        @endforeach
+                                    </select>
                                     @error('task')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
                                 </div>
                                 <div class="col-md-6">
@@ -90,8 +92,7 @@ Announcements
                                     <select id="student-select" class="form-control" name="student_id">
                                         <option value="">Select Student</option>
                                         @foreach ($students as $student)
-                                        <option value="{{ $student->id }}">{{ $student->en_first_name }}
-                                            {{ $student->en_second_name }}</option>
+                                            <option value="{{ $student->id }}">{{ $student->en_first_name }} {{ $student->en_second_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -100,24 +101,21 @@ Announcements
                             <!-- Other Form Fields -->
                             <div class="form-group mb-3">
                                 <label for="progress">Progress (%)</label>
-                                <input id="progress" type="number" min="0" max="100"
-                                    class="form-control @error('progress') is-invalid @enderror" name="progress"
-                                    value="{{ old('progress') }}" required autocomplete="progress">
+                                <input id="progress" type="number" min="0" max="100" class="form-control @error('progress') is-invalid @enderror" name="progress" value="{{ old('progress') }}" required autocomplete="progress">
                                 @error('progress')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="notes">Notes</label>
-                                <textarea id="notes" class="form-control @error('notes') is-invalid @enderror"
-                                    name="notes" required autocomplete="notes">{{ old('notes') }}</textarea>
+                                <textarea id="notes" class="form-control @error('notes') is-invalid @enderror" name="notes" required autocomplete="notes">{{ old('notes') }}</textarea>
                                 @error('notes')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
@@ -132,7 +130,4 @@ Announcements
 
 
 
-<script>
-
-</script>
 @endsection

@@ -12,7 +12,8 @@ use App\AssignmentSubmission;
 use App\Cohort;
 use App\Level;
 use App\Student;
-
+use App\TraineeSkillsProgress;
+use App\Project;
 
 class TraineesProgressController extends Controller
 {
@@ -25,12 +26,13 @@ class TraineesProgressController extends Controller
         $projectAssessment = $this->projectAssessment();
         $allTrainessOverview = $this->allTrainessOverview();
         $skillsStatus = $this->skillsStatus();
+        $projectsAssessment = $this->projectsAssessment();
 
 
         // Return view with data
         return view('trainer.traineesProgress', compact(
             'attendanceOverview', 'lateAssignmentSubmissions', 'assignmentAssessment', 
-            'projectAssessment', 'allTrainessOverview', 'skillsStatus'
+            'projectAssessment', 'allTrainessOverview', 'skillsStatus','projectsAssessment'
         ));    }
     private function attendanceOverview() {
         $staff = Auth::guard('staff')->user();
@@ -209,10 +211,33 @@ class TraineesProgressController extends Controller
     private function allTrainessOverview() {
         $staff = Auth::guard('staff')->user();
         $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
+
+        if (!$runningCohort) {
+            return [];
+        }
         $students = $runningCohort->students;
-        // dd($students);
-        
-    return $students;
+        $cohortProjectsCount = Project::where('cohort_id', $runningCohort->id)->count();
+
+        $studentsOverview = [];
+
+        foreach ($students as $student) {
+            $passedProjectsCount = TraineeSkillsProgress::where('student_id', $student->id)
+                ->where('project_status', 1)
+                ->whereIn('project_id', Project::where('cohort_id', $runningCohort->id)->pluck('id'))
+                ->count();
+
+            $passedPercentage = $cohortProjectsCount > 0 ? ($passedProjectsCount / $cohortProjectsCount) * 100 : 0;
+
+            $studentsOverview[] = [
+                'id' => $student->id,
+                'name' => $student->en_first_name . ' ' . $student->en_second_name,
+                'passedPercentage' => intval($passedPercentage),
+                'passedProjectsCount' => $passedProjectsCount,
+                'cohortProjectsCount' => $cohortProjectsCount
+            ];
+        }
+
+        return $studentsOverview;
     }
 
     public function showDetails($id){
@@ -249,7 +274,43 @@ private function skillsStatus() {
 
     return $skillsStatus;
 }
+private function projectsAssessment() {
+    $staff = Auth::guard('staff')->user();
+    $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
 
+    if (!$runningCohort) {
+        return [
+            'message' => 'No running cohort found.',
+            'passedStudents' => 0,
+            'failedStudents' => 0,
+        ];
+    }
+
+    $students = $runningCohort->students;
+
+    $passedStudentsCount = 0;
+    $failedStudentsCount = 0;
+
+    foreach ($students as $student) {
+        $projects = Project::where('cohort_id', $runningCohort->id)->pluck('id');
+
+        $projectStatus = TraineeSkillsProgress::whereIn('project_id', $projects)
+            ->where('student_id', $student->id)
+            ->where('project_status', 1)
+            ->count();
+
+        if ($projectStatus > 0) {
+            $passedStudentsCount++;
+        } else {
+            $failedStudentsCount++;
+        }
+    }
+
+    return [
+        'passedStudents' => $passedStudentsCount,
+        'failedStudents' => $failedStudentsCount,
+    ];
+}
 
 }
 

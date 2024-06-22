@@ -13,7 +13,7 @@
         <ul class="thm-breadcrumb">
             <li><a href="/">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
             <li><a style="color:#F16E00" href="/traineesProgress">Progress</a></li>
-            
+
         </ul>
     </div>
 </section>
@@ -83,13 +83,15 @@
                                 <span>Justified Absence:</span><strong>{{$absencesCount}}</strong>
                             </li>
                             <li class="list-group-item px-0 d-flex justify-content-between">
-                                <span class="mb-0">Non-Justified Absence:</span><strong>{{$nonJustifiedAbsencesCount}}</strong>
+                                <span class="mb-0">Non-Justified
+                                    Absence:</span><strong>{{$nonJustifiedAbsencesCount}}</strong>
                             </li>
                             <li class="list-group-item px-0 d-flex justify-content-between">
                                 <span class="mb-0">Justified Tardy:</span><strong>{{$lateCount}}</strong>
                             </li>
                             <li class="list-group-item px-0 d-flex justify-content-between">
-                                <span class="mb-0">Non-Justified Tardy:</span><strong>{{$nonJustifiedLateCount}}</strong>
+                                <span class="mb-0">Non-Justified
+                                    Tardy:</span><strong>{{$nonJustifiedLateCount}}</strong>
                             </li>
                         </ul>
                     </div>
@@ -138,36 +140,39 @@
     <div class="card">
         <div class="card-body">
 
-        <div class="table-container" style="max-height: 300px; overflow-y: auto;">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Assignment</th>
-                <th scope="col">Submission Status</th>
-                <th scope="col">Due Date</th>
-                <th scope="col">Log</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($studentAssignments as $assignment)
-                @if ($assignment->submissionStatus === 'No Assignments Assigned')
-                    <tr>
-                        <td colspan="5" class="text-center text-primary">No Assignments are assigned for {{$student->en_first_name}}</td>
-                    </tr>
-                @else
-                    <tr>
-                        <th scope="row">{{ $assignment->id }}</th>
-                        <td>{{ $assignment->assignment_name }}</td>
-                        <td>{{ $assignment->submissionStatus }}</td>
-                        <td>{{ $assignment->dueDate }} <Span style="color: {{ $assignment->isLate === 'Late' ? 'red' : 'inherit' }}">{{ $assignment->isLate }}</Span></td>
-                        <td><a href="{{ route('assignment.show', $assignment->id) }}">Details</a></td>
-                    </tr>
-                @endif
-            @endforeach
-        </tbody>
-    </table>
-</div>
+            <div class="table-container" style="max-height: 300px; overflow-y: auto;">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Assignment</th>
+                            <th scope="col">Submission Status</th>
+                            <th scope="col">Due Date</th>
+                            <th scope="col">Log</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($studentAssignments as $assignment)
+                        @if ($assignment->submissionStatus === 'No Assignments Assigned')
+                        <tr>
+                            <td colspan="5" class="text-center text-primary">No Assignments are assigned for
+                                {{$student->en_first_name}}</td>
+                        </tr>
+                        @else
+                        <tr>
+                            <th scope="row">{{ $assignment->id }}</th>
+                            <td>{{ $assignment->assignment_name }}</td>
+                            <td>{{ $assignment->submissionStatus }}</td>
+                            <td>{{ $assignment->dueDate }} <Span
+                                    style="color: {{ $assignment->isLate === 'Late' ? 'red' : 'inherit' }}">{{ $assignment->isLate }}</Span>
+                            </td>
+                            <td><a href="{{ route('assignment.show', $assignment->id) }}">Details</a></td>
+                        </tr>
+                        @endif
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
         </div>
     </div>
@@ -176,104 +181,50 @@
 
 <!-- Students Projects History Section -->
 <div class="container my-4">
-    <h2 class="text-primary">{{$student->en_first_name}}'s Projects History</h2>
+    <h2 class="text-primary">{{ $student->en_first_name }}'s Projects History</h2>
     <div class="card">
         <div class="card-body">
-
-            <div class="table-container" style="max-height: 300px; overflow-y: auto;">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col" style="width: auto;">Due date</th>
-                            <th scope="col">Project</th>
-                            <th scope="col">Status</th>
-                            <th scope="col"># Of Corrective Actions</th>
-                            <th scope="col">Log</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>29/2/2024</td>
-                            <td>JS project</td>
-                            <td>Passed</td>
-                            <td>2 from Rawan Abuseini </td>
-                            <td>
-                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3">Details</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>10/3/2024</td>
-                            <td>React project</td>
-                            <td>Passed</td>
-                            <td>No corrective Actions</td>
-                            <td>
-                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>19/3/2024</td>
-                            <td>MongoDB project</td>
-                            <td>Passed</td>
-                            <td>No corrective Actions</td>
-                            <td>
-                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>10/4/2024</td>
-                            <td>NodeJS project</td>
-                            <td>Passed</td>
-                            <td>No corrective Actions</td>
-                            <td>
-                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">5</th>
-                            <td>19/4/2024</td>
-                            <td>Mini Project</td>
-                            <td>Passed</td>
-                            <td>No corrective Actions</td>
-                            <td>
-                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">6</th>
-                            <td>10/3/2024</td>
-                            <td>Project X</td>
-                            <td>Passed</td>
-                            <td>No corrective Actions</td>
-                            <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">7</th>
-                            <td>Ability to solve complex issues effectively.</td>
-                            <td>Bayan Al-Nabulsi</td>
-                            <td>
-                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Ability to solve complex issues effectively.</td>
-                            <td>Bayan Al-Nabulsi</td>
-                            <td>
-                                <a href="" data-bs-toggle="modal" data-bs-target="#feedbackModal3"></a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            @if (!empty($studentProjects))
+                @if (count($studentProjects) > 0)
+                    <div class="table-container" style="max-height: 300px; overflow-y: auto;">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col" style="width: auto;">Due Date</th>
+                                    <th scope="col">Project</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Submission Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($studentProjects as $index => $project)
+                                    <tr>
+                                        <th scope="row">{{ $index + 1 }}</th>
+                                        <td>{{ $project['due_date'] }}</td>
+                                        <td>{{ $project['project_name'] }}</td>
+                                        <td>{{ $project['status'] }}</td>
+                                        <td>{{ $project['submission_date'] }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                <tr>
+                    <td colspan="5" class="text-center text-primary">No projects found.</td>
+                </tr>
+                  
+                @endif
+            @else
+            <tr>
+                <td colspan="5" class="text-center text-primary">No data available.</td>
+            </tr>
+            @endif
         </div>
     </div>
 </div>
+
 
 <!-- Project details History Modal -->
 <div class="modal fade" id="feedbackModal3" tabindex="-1" aria-labelledby="feedbackModalLabel3" aria-hidden="true">
@@ -344,84 +295,49 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($progressEntries as $progress)
                         <tr>
-                            <td>Idea Pitching</td>
+                            <td>{{ $progress->task_name }}</td>
                             <td>
                                 <div class="progress" style="background: rgba(127, 99, 244, .1)">
-                                    <div class="progress-bar bg-success" style="width: 100%;" role="progressbar">
-                                        100%<span class="sr-only">100% Complete</span>
+                                    @php
+                                        $progressColor = 'bg-success'; // Default to green
+                                        if ($progress->progress < 25) {
+                                            $progressColor = 'bg-danger'; // Red
+                                        } elseif ($progress->progress >= 25 && $progress->progress < 75) {
+                                            $progressColor = 'bg-warning'; // Orange
+                                        }
+                                    @endphp
+                                    <div class="progress-bar {{ $progressColor }}" 
+                                         style="width: {{ $progress->progress }}%;" 
+                                         role="progressbar" 
+                                         data-toggle="tooltip" 
+                                         data-placement="top" 
+                                         title="{{ $progress->progress }}%">
+                                        {{ $progress->progress }}%<span class="sr-only">{{ $progress->progress }}% Complete</span>
                                     </div>
                                 </div>
                             </td>
-                            <td>Apr 20,2023</td>
-                            <td>
-                                ........
-                            </td>
+                            <td>{{ $progress->task_deadline }}</td>
+                            <td>{{ $progress->notes }}</td>
                         </tr>
-                        <tr>
-                            <td>Wireframe & Mockup</td>
-                            <td>
-                                <div class="progress" style="background: rgba(76, 175, 80, .1)">
-                                    <div class="progress-bar bg-success" style="width: 80%;" role="progressbar">80%<span
-                                            class="sr-only">80% Complete</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>Jun 15,2023</td>
-                            <td>
-                                ........
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Front-end</td>
-                            <td>
-                                <div class="progress" style="background: rgba(70, 74, 83, .1)">
-                                    <div class="progress-bar bg-warning" style="width: 50%;" role="progressbar">50%<span
-                                            class="sr-only">50% Complete</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>Jul 1,2023</td>
-                            <td>
-                                ........
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Final version fully functional</td>
-                            <td>
-                                <div class="progress" style="background: rgba(255, 87, 34, .1)">
-                                    <div class="progress-bar bg-danger" style="width: 20%;" role="progressbar">20%<span
-                                            class="sr-only">20% Complete</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>Aug 5,2023</td>
-                            <td>
-                                ........
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>All other deliverables</td>
-                            <td>
-                                <div class="progress" style="background: rgba(255, 193, 7, .1)">
-                                    <div class="progress-bar bg-success" style="width: 70%;" role="progressbar">70%<span
-                                            class="sr-only">70% Complete</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>Aug 28,2023</td>
-                            <td>
-                                ........
-                            </td>
-
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip(); 
+    });
+</script>
+
+
+
+
 
 
 <script>
@@ -475,52 +391,67 @@ if (document.getElementById('assignments_tech')) {
 }
 
 // All Projects status Bar Chart Initialization
-if (document.getElementById('barChart_3')) {
-    const barChart_3 = document.getElementById("barChart_3").getContext('2d');
+document.addEventListener('DOMContentLoaded', function() {
+    if (document.getElementById('barChart_3')) {
+        const barChart_3 = document.getElementById("barChart_3").getContext('2d');
 
+        // Assuming studentProjects is available in the global scope or passed to the view
+        let labels = [];
+        let passedData = [];
+        let failedData = [];
 
-
-    // Chart data
-    let barChartData = {
-        labels: ["HTML& CSS", "JS", "React", "NodeJS", "MongoDB", "PostgreSQL", "Wordpress"],
-        datasets: [{
-            label: 'Passed',
-            backgroundColor: "rgba(43, 193, 85, 1)", // Green color
-            hoverBackgroundColor: "rgba(43, 193, 85, 1)",
-            data: [100, 95, 90, 100, 80, 93, 99]
-        }, {
-            label: 'Corrective actions',
-            backgroundColor: "rgba(243, 87, 87, 1)", // Red color
-            hoverBackgroundColor: "rgba(243, 87, 87, 1)",
-            data: [0, 2, 2, 1, 0, 1, 0]
-        }]
-    };
-
-    // Chart options
-    new Chart(barChart_3, {
-        type: 'bar',
-        data: barChartData,
-        options: {
-            scales: {
-                xAxes: [{
-                    stacked: true
-                }],
-                yAxes: [{
-                    stacked: true
-                }]
-            },
-            legend: {
-                display: true
-            },
-            responsive: true,
-            maintainAspectRatio: false,
-            tooltips: {
-                mode: 'index',
-                intersect: false
+        @foreach ($studentProjects as $project)
+            labels.push("{{ $project['project_name'] }}");
+            if ("{{ $project['status'] }}" === 'Passed') {
+                passedData.push(100);
+                failedData.push(0);
+            } else {
+                passedData.push(0);
+                failedData.push(100);
             }
-        }
-    });
-}
+        @endforeach
+
+        let barChartData = {
+            labels: labels,
+            datasets: [{
+                label: 'Passed',
+                backgroundColor: "rgba(43, 193, 85, 1)", // Green color
+                hoverBackgroundColor: "rgba(43, 193, 85, 1)",
+                data: passedData
+            }, {
+                label: 'Failed',
+                backgroundColor: "rgba(243, 87, 87, 1)", // Red color
+                hoverBackgroundColor: "rgba(243, 87, 87, 1)",
+                data: failedData
+            }]
+        };
+
+        new Chart(barChart_3, {
+            type: 'bar',
+            data: barChartData,
+            options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                },
+                legend: {
+                    display: true
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                }
+            }
+        });
+    }
+});
+
 </script>
 
 @endsection

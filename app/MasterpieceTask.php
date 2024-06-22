@@ -12,9 +12,10 @@ class MasterpieceTask extends Model
     {
         return self::pluck('task_name', 'id');
     }
+    
     public function masterpieceProgress()
     {
-        return $this->belongsToMany(Masterpiece::class, 'task_id');
+        return $this->belongsToMany(MasterpieceProgress::class, 'masterpiece_progress_task', 'masterpiece_task_id', 'masterpiece_progress_id')->withPivot('id');
     }
 }
 

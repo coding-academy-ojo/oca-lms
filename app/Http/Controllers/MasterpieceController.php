@@ -61,26 +61,38 @@ class MasterpieceController extends Controller
         // Get the staff ID from the authenticated user
         $staffId = Auth::guard('staff')->user()->id;
     
-        // Create the progress data array
-        $progressData = [
-            'student_id' => $validatedData['student_id'],
-            'staff_id' => $staffId,
-            'progress' => $validatedData['progress'],
-            'notes' => $validatedData['notes'],
-        ];
+        // Check if a progress record already exists for the student and task
+        $existingProgress = MasterpieceProgress::where('student_id', $validatedData['student_id'])
+            ->where('masterpiece_task_id', $validatedData['task_id'])
+            ->first();
     
-        // Insert the progress data into the database
-        $masterpieceProgress = MasterpieceProgress::create($progressData);
+        if ($existingProgress) {
+            // Update the existing progress record
+            $existingProgress->update([
+                'progress' => $validatedData['progress'],
+                'notes' => $validatedData['notes'],
+            ]);
     
-        // Attach the task to the progress using the pivot table
-        $masterpieceProgress->tasks()->attach($validatedData['task_id']);
+        } else {
+            // Create the progress data array
+            $progressData = [
+                'student_id' => $validatedData['student_id'],
+                'staff_id' => $staffId,
+                'masterpiece_task_id' => $validatedData['task_id'],
+                'progress' => $validatedData['progress'],
+                'notes' => $validatedData['notes'],
+            ];
     
-        // Redirect the user after successful insertion
+            // Insert the progress data into the database
+            $masterpieceProgress = MasterpieceProgress::create($progressData);
+    
+            // Attach the task to the progress using the pivot table
+            $masterpieceProgress->tasks()->attach($validatedData['task_id']);
+        }
+    
+        // Redirect the user after successful insertion/update
         return redirect()->back()->with('success', 'Progress entry submitted successfully.');
     }
     
-    
-  
-     
 
 }
