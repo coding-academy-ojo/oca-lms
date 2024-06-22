@@ -207,6 +207,9 @@ Profile
                             </div>
                             <hr>
 
+
+                            
+
                             <!-- Add more user information fields here -->
                         </div>
                     </div>
