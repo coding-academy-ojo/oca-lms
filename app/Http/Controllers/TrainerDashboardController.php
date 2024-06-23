@@ -22,20 +22,20 @@ class TrainerDashboardController extends Controller
         $cohort = Cohort::findOrFail($cohortId); 
         // dd($cohort);
         session(['cohort_ID' => $cohortId]);
-        $softSkillsForCohort = $this->softSkillsForCohort();
-        $cardsStatistics = $this->cardsStatistics();
-        $milestoneOverview = $this->milestoneOverview();
-        $attendanceOverview = $this->attendanceOverview();
-        $technologiesOverview = $this->technologiesOverview();
+        $softSkillsForCohort = $this->softSkillsForCohort($cohort);
+        $cardsStatistics = $this->cardsStatistics($cohort);
+        $milestoneOverview = $this->milestoneOverview($cohort);
+        $attendanceOverview = $this->attendanceOverview($cohort);
+        $technologiesOverview = $this->technologiesOverview($cohort);
         // dd($technologiesOverview,$attendanceOverview);
-        return view('academies.view-cohort', compact('cardsStatistics', 'attendanceOverview', 'technologiesOverview' , 'softSkillsForCohort' ,'milestoneOverview'));
+        return view('academies.view-cohort', compact('cardsStatistics','cohort', 'attendanceOverview', 'technologiesOverview' , 'softSkillsForCohort' ,'milestoneOverview'));
     }
 
-    private function cardsStatistics()
+    private function cardsStatistics($cohort)
     {
         $staff = Auth::guard('staff')->user();
     
-        $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
+        $runningCohort = $cohort;
     
         if (!$runningCohort) {
             return [
@@ -72,9 +72,9 @@ class TrainerDashboardController extends Controller
     
 
 
-    private function attendanceOverview() {
+    private function attendanceOverview($cohort) {
         $staff = Auth::guard('staff')->user();
-        $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
+        $runningCohort = $cohort;
     
         if (!$runningCohort) {
             // If no running cohort is found, return a default set of values
@@ -140,10 +140,10 @@ class TrainerDashboardController extends Controller
     
 
 
-    private function technologiesOverview() {
+    private function technologiesOverview($cohort) {
         $staff = Auth::guard('staff')->user();
     
-        $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
+        $runningCohort = $cohort;
     
         if (!$runningCohort) {
             return [];
@@ -186,10 +186,10 @@ class TrainerDashboardController extends Controller
         return $technologiesData;
     }
     
-    private function softSkillsForCohort()
+    private function softSkillsForCohort($cohort)
     {
         $staff = Auth::guard('staff')->user();
-        $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
+        $runningCohort = $cohort;
 
         if (!$runningCohort) {
             return [];
@@ -201,9 +201,9 @@ class TrainerDashboardController extends Controller
         return $softSkills;
     }
 
-    private function milestoneOverview() {
+    private function milestoneOverview($cohort) {
         $staff = Auth::guard('staff')->user();
-        $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
+        $runningCohort = $cohort;
     
         if (!$runningCohort) {
             return [];

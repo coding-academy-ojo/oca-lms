@@ -19,7 +19,7 @@ class CreateSoftSkillsTrainingsTable extends Migration
             $table->text('description');
             $table->string('trainer');
             $table->date('date');
-            $table->integer('satisfaction')->nullable();
+            $table->double('satisfaction', 8, 2)->nullable();
             $table->unsignedBigInteger('cohort_id');
             $table->foreign('cohort_id')->references('id')->on('cohorts')->onDelete('cascade');
             $table->timestamps();

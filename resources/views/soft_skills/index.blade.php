@@ -53,19 +53,36 @@
                         <td>{{ $softSkill->description }}</td>
                         <td>{{ $softSkill->trainer }}</td>
                         <td>{{ $softSkill->date }}</td>
-                        <td>{{ $softSkill->satisfaction }}</td>
+                        <td>
+                            <div class="progress" style="height: 20px;">
+                                <div class="progress-bar" role="progressbar" 
+                                    style="width: {{ $softSkill->satisfaction }}%; 
+                                           background-color: {{ $softSkill->satisfaction < 80 ? '#FFD700' : '#499557' }}; 
+                                           color: black; 
+                                           display: flex; 
+                                           align-items: center; 
+                                           justify-content: center;">
+                                    {{ $softSkill->satisfaction }}%
+                                </div>
+                            </div>
+                        </td>
                         <td>{{ $softSkill->cohort->cohort_name }}</td> <!-- Adjust this to the actual column name -->
                         <td class="d-flex gap-2">
-                            <a href="{{ route('soft-skills.edit', $softSkill->id) }}" class="btn btn-secondary btn-sm "><span class="material-symbols-outlined">Edit</span></a>
-                            <form action="{{ route('soft-skills.destroy', $softSkill->id) }}" method="POST" >
+                            <a href="{{ route('soft-skills.edit', $softSkill->id) }}" class="btn btn-secondary btn-sm">
+                                <span class="material-symbols-outlined">Edit</span>
+                            </a>
+                            <form action="{{ route('soft-skills.destroy', $softSkill->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" class="btn btn-primary btn-sm delete-confirm "><span class="material-symbols-outlined">Delete</span></button>
+                                <button type="button" class="btn btn-primary btn-sm delete-confirm">
+                                    <span class="material-symbols-outlined">Delete</span>
+                                </button>
                             </form>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
+                
             </table>
         @endif
         
@@ -110,24 +127,20 @@
                 </div>
                 <div class="mb-3">
                     <label for="satisfaction" class="form-label">Satisfaction</label>
-                    <fieldset class="star-rating">
-                        <legend class="visually-hidden">Satisfaction Rating</legend>
-                        <input type="radio" id="terrible" name="satisfaction" value="1" class="visually-hidden">
-                        <label for="terrible" title="Terrible"><span class="visually-hidden">1 star</span></label>
-                        
-                        <input type="radio" id="bad" name="satisfaction" value="2" class="visually-hidden">
-                        <label for="bad" title="Bad"><span class="visually-hidden">2 stars</span></label>
-                        
-                        <input type="radio" id="mixed" name="satisfaction" value="3" class="visually-hidden">
-                        <label for="mixed" title="Mixed"><span class="visually-hidden">3 stars</span></label>
-                        
-                        <input type="radio" id="good" name="satisfaction" value="4" class="visually-hidden" checked>
-                        <label for="good" title="Good"><span class="visually-hidden">4 stars</span></label>
-
-                        <input type="radio"   id="excellent" name="satisfaction" value="5" class="visually-hidden">
-                        <label for="excellent" title="Excellent"><span class="visually-hidden">5 stars</span></label>
-                    </fieldset>
+                    <input type="range" class="form-range" id="satisfaction" name="satisfaction" min="0" max="100" step="1" value="0" oninput="updateSatisfactionValue(this.value)">
+                    <div class="d-flex justify-content-between">
+                        <small>0%</small>
+                        <small>100%</small>
+                    </div>
+                    <input type="text" id="satisfactionValue" class="form-control mt-2" value="0%" readonly>
                 </div>
+                
+                <script>
+                    function updateSatisfactionValue(value) {
+                        document.getElementById('satisfactionValue').value = value + '%';
+                    }
+                </script>
+                
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>
         </div>

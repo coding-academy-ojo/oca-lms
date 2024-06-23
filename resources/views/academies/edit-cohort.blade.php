@@ -42,6 +42,25 @@ Edit Cohort
             <label for="cohortDescription" class="form-label">Description</label>
             <textarea class="form-control" id="cohortDescription" name="description" rows="3">{{ $cohort->cohort_description }}</textarea>
         </div>
+        <div class="mb-3">
+            <label class="form-label">Trainers</label>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" style="width: 100%; border-radius: 0; text-align: left;" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    Choose Trainers
+                </button>
+                <div class="dropdown-menu p-2 form-select" aria-labelledby="dropdownMenuButton">
+                    @foreach ($trainers as $trainer)
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="trainers[]" value="{{ $trainer->id }}"
+                            id="trainer{{ $trainer->id }}" @if(in_array($trainer->id, $cohort->staff->pluck('id')->toArray())) checked @endif>
+                        <label class="form-check-label" for="trainer{{ $trainer->id }}">
+                            {{ $trainer->staff_name }}
+                        </label>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
     
         <button type="submit" class="btn btn-primary">Save Changes</button>
     </form>
@@ -63,6 +82,6 @@ Edit Cohort
             }
         });
     });
-    </script>
+</script>
     
 @endsection
