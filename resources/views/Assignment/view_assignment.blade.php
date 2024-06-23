@@ -7,8 +7,7 @@
     <section class="inner-bred my-3">
         <div class="container">
             <ol class="breadcrumb m-3">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="#"> Class</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('academyview') }}">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><a href="#"> Assignments </a></li>
             </ol>
         </div>
