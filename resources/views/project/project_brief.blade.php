@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('Layouts.app')
 @section('title')
 Project Brief
 @endsection
@@ -7,7 +7,7 @@ Project Brief
 {{-- =================== Breadcrumb Section ==================== --}}
 {{-- =========================================================== --}}
 
-@include('layouts.innerNav')
+@include('Layouts.innerNav')
 <section class="inner-bred">
 
 

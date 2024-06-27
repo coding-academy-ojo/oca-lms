@@ -9,7 +9,7 @@ Announcements
 {{-- =================== Breadcrumb Section ==================== --}}
 {{-- =========================================================== --}}
 
-@include('layouts.innerNav')
+@include('Layouts.innerNav')
 <section class="inner-bred my-3">
     <div class="container">
         <ul class="thm-breadcrumb">

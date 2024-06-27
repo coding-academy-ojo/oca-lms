@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('Layouts.app')
 
 @section('title')
     Academies
 @endsection
 
 @section('content')
-    @include('layouts.innerNav')
+    @include('Layouts.innerNav')
     <style>
         @media (max-width: 780px) {
             .edit-academy-btn {

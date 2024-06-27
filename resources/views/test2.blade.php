@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('Layouts.app')
 @section('content')
 {{-- =========================================================== --}}
 {{-- =================== Breadcrumb Section ==================== --}}
@@ -10,7 +10,7 @@
     </div>
    
 </section>
-@include('layouts.innerNav')
+@include('Layouts.innerNav')
 <section class="inner-bred">
     <div class="container">
          <ul class="thm-breadcrumb">

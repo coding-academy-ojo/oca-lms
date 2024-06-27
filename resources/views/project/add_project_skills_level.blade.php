@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('Layouts.app')
 @section('title')
 Add Project Skills
 @endsection
@@ -7,7 +7,7 @@ Add Project Skills
 {{-- =================== Breadcrumb Section ==================== --}}
 {{-- =========================================================== --}}
 
-@include('layouts.innerNav')
+@include('Layouts.innerNav')
 <section class="inner-bred">
 
     @if (session('success'))

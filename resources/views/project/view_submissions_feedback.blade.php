@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('Layouts.app')
 @section('title')
 View Submissions and Feedback
 @endsection
@@ -7,7 +7,7 @@ View Submissions and Feedback
 {{-- =================== Breadcrumb Section ==================== --}}
 {{-- =========================================================== --}}
 
-@include('layouts.innerNav')
+@include('Layouts.innerNav')
 <section class="inner-bred">
 
     @if (session('success'))

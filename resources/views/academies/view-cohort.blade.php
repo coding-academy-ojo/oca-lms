@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('Layouts.app')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link rel="stylesheet" href="{{asset('assets/style_files/viewCohort.css')}}">
 @section('title')
 {{ $cohort->cohort_name }}
 @endsection
 @section('content')
-    @include('layouts.innerNav')
+    @include('Layouts.innerNav')
 
 
 

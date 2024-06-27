@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('Layouts.app')
 @section('title')
 Create Technology
 @endsection
@@ -7,7 +7,7 @@ Create Technology
 {{-- =================== Breadcrumb Section ==================== --}}
 {{-- =========================================================== --}}
 
-@include('layouts.innerNav')
+@include('Layouts.innerNav')
 
 {{-- =========================================================== --}}
 {{-- =================== Breadcrumb Section ==================== --}}

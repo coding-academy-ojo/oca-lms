@@ -1,12 +1,12 @@
 
 {{-- ========================= Start Top Section ========================== --}}
-@include('layouts.top')
+@include('Layouts.top')
 {{-- ========================= End Top Section ========================== --}}
 
 
 
 {{-- ============================= Start Header =========================== --}}
-@include('layouts.header')
+@include('Layouts.header')
 {{-- ============================= End Header ============================= --}}
 
 
@@ -18,11 +18,11 @@
 
 
 {{-- ============================= Start Footer =========================== --}}
-@include('layouts.footer')
+@include('Layouts.footer')
 {{-- ============================= End Footer ============================= --}}
 
 
 
 {{-- ======================= Start Bottom Section ========================= --}}
-@include('layouts.bottom')
+@include('Layouts.bottom')
 {{-- ========================= End Bottom Section ========================= --}}

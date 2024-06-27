@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('Layouts.app')
 
 @section('title', 'Edit Staff')
 
 @section('content')
 
-@include('layouts.innerNav')
+@include('Layouts.innerNav')
 
 <nav style="padding: 50px 50px 0;" aria-label="breadcrumb">
     <ol class="breadcrumb">

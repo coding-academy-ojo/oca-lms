@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('Layouts.app')
 
 @section('title', 'Soft Skills Training')
 
 @section('content')
-    @include('layouts.innerNav')
+    @include('Layouts.innerNav')
     @if(session('success'))
     <script>
     Swal.fire({

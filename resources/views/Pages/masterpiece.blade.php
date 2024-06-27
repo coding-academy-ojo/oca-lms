@@ -1,5 +1,5 @@
 
-@extends('layouts.app')
+@extends('Layouts.app')
 
 @section('title')
 Announcements
@@ -7,7 +7,7 @@ Announcements
 
 @section('content')
 {{-- Include Inner Navigation --}}
-@include('layouts.innerNav')
+@include('Layouts.innerNav')
 
 {{-- Breadcrumb Section --}}
 <section class="inner-bred my-3">

@@ -4,7 +4,7 @@ View Material
 @endsection
 @section('content')
 
-    @include('layouts.innerNav')
+    @include('Layouts.innerNav')
     <section class="inner-bred my-3">
         <div class="container">
             <ol class="breadcrumb m-3">

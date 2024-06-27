@@ -1,5 +1,5 @@
 <!-- resources/views/pages/announcements.blade.php -->
-@extends('layouts.app')
+@extends('Layouts.app')
 @section('title')
 Trainees Progress
 @endsection
@@ -9,7 +9,7 @@ Trainees Progress
 {{-- =========================================================== --}}
 
 
-@include('layouts.innerNav')
+@include('Layouts.innerNav')
 <section class="inner-bred my-5 ">
     <div class="container">
         <ul class="thm-breadcrumb">
