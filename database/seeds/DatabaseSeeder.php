@@ -17,12 +17,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(SkillsSeeder::class);
-        // $this->call(LevelsSeeder::class);
+         $this->call(SkillsSeeder::class);
+         $this->call(LevelsSeeder::class);
         $this->call(StaffTableSeeder::class);
-        // $this->call(TechnologyCategorySeeder::class);
+        $this->call(TechnologyCategorySeeder::class);
         // $this->call(TechnologySeeder::class);
-        // $this->call(SkillLevelsSeeder::class);
+        $this->call(SkillLevelsSeeder::class);
         // $this->call(AcademyTableSeeder::class);
         // $this->call(AcademyStaffTableSeeder::class,);
         // $this->call(CohortsTableSeeder::class);
