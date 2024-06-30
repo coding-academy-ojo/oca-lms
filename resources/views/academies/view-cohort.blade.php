@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('Layouts.app')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link rel="stylesheet" href="{{asset('assets/style_files/viewCohort.css')}}">
 @section('title')
-{{ $cardsStatistics['cohort']->cohort_name }}
+{{ $cohort->cohort_name }}
 @endsection
 @section('content')
-    @include('layouts.innerNav')
+    @include('Layouts.innerNav')
 
 
 
@@ -39,7 +39,7 @@
                 <div class="card-body">
                     <div class="d-flex w-100 justify-content-between">
                         <h3 class="mb-0 text-primary">Cohort Information</h3>
-                        <a href="{{ route('import-data.index', ['id' => $cardsStatistics['cohort']->id]) }}" class="btn btn-info">Import Data</a>
+                        <a href="{{ route('import-data.index', ['id' => $cohort->id]) }}" class="btn btn-info">Import Data</a>
                     </div>
                     <div class="my-3">
                         @if($cardsStatistics['cohort'])
@@ -154,13 +154,22 @@
                                     <td>{{ $softSkill->trainer }}</td>
                                     <td>{{ $softSkill->date }}</td>
                                     <td>
-                                        <div class="satisfaction-container" style="width: 100px; background-color: #f0f0f0;border-radius: 5px;">
-                                            <div style="height: 20px; width:{{ $softSkill->satisfaction * 20 }}%; background-color: #4CAF50;" style="height: 100%; transition: width 0.5s ease-in-out;"></div>
+                                        <div class="progress" style="height: 20px; background-color: #f0f0f0; border-radius: 5px;">
+                                            <div class="progress-bar" role="progressbar" 
+                                                style="width: {{ $softSkill->satisfaction }}%; 
+                                                       background-color: {{ $softSkill->satisfaction < 80 ? '#FFD700' : '#499557' }}; 
+                                                       color: black; 
+                                                       display: flex; 
+                                                       align-items: center; 
+                                                       justify-content: center;">
+                                                {{ $softSkill->satisfaction }}%
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
+                            
                         </table>
                         @else
                         <p>No soft skills data available for this cohort.</p>

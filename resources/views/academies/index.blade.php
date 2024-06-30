@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('Layouts.app')
 
 @section('title')
     Academies
 @endsection
 
 @section('content')
-    @include('layouts.innerNav')
+    @include('Layouts.innerNav')
     <style>
         @media (max-width: 780px) {
             .edit-academy-btn {
@@ -107,10 +107,23 @@
                                                     <p class="card-text">Cohort Donor: {{ $cohort->cohort_donor }}</p>
                                                     <!-- Example additional detail -->
                                                 </div>
+                                                <div class="d-flex gap-1">
                                                 <div>
                                                     <a href="{{ route('view-cohort', ['cohort' => $cohort->id]) }}"
-                                                        class="btn btn-sm btn-primary">View Cohort</a>
+                                                        class="btn btn-sm btn-primary"><span class="material-symbols-outlined">
+                                                            visibility
+                                                            </span></a>
                                                 </div>
+                                               @if ($user = Auth::guard('staff')->user()->role == 'manager')
+                                                <div>
+                                                    <a href="{{ route('cohortedit', ['cohort' => $cohort->id]) }}" class="btn btn-sm btn-primary">
+                                                        <span class="material-symbols-outlined">edit</span>
+                                                    </a>
+                                                </div>
+                                                @endif
+
+                                                
+                                            </div>
                                             </div>
                                         </div>
                                     @empty

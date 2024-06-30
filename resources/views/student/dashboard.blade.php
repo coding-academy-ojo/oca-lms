@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('Layouts.app')
 
 @section('title', 'Student Progress Overview')
 
 @section('content')
-@include('layouts.innerNav')
+@include('Layouts.innerNav')
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/orange-boosted/dist/css/orangeboosted.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

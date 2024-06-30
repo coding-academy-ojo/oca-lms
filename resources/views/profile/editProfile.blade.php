@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('Layouts.app')
 @section('title')
 Profile
 @endsection
@@ -6,7 +6,7 @@ Profile
 
 
 @section('content')
-@include('layouts.innerNav')
+@include('Layouts.innerNav')
 <section class="inner-bred">
   <div class="container">
     <ul class="thm-breadcrumb">

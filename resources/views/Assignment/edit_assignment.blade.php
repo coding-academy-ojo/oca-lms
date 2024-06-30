@@ -3,7 +3,7 @@
     Edit Assignment
 @endsection
 @section('content')
-    @include('layouts.innerNav')
+    @include('Layouts.innerNav')
     <section class="inner-bred my-3">
         <div class="container">
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">

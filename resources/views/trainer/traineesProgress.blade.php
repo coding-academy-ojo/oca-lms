@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('Layouts.app')
 @section('title')
 Trainees Progress
 @endsection
 @section('content')
-@include('layouts.innerNav')
+@include('Layouts.innerNav')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <section class="inner-bred my-5">

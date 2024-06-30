@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('Layouts.app')
 @section('title')
 Technologies
 @endsection
@@ -7,7 +7,7 @@ Technologies
 {{-- =================== Breadcrumb Section ==================== --}}
 {{-- =========================================================== --}}
 
-@include('layouts.innerNav')
+@include('Layouts.innerNav')
 <section class="inner-bred">
 
     <div class="container">

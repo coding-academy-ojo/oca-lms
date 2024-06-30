@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('Layouts.app')
 @section('title')
 Skills Framework (Competence)
 @endsection
 
 @section('content')
-@include('layouts.innerNav')
+@include('Layouts.innerNav')
 <section class="inner-bred">
     <div class="container">
         <ul class="thm-breadcrumb">

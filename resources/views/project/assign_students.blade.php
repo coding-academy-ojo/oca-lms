@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('Layouts.app')
 @section('title')
 Create Project
 @endsection
@@ -7,7 +7,7 @@ Create Project
 {{-- =================== Breadcrumb Section ==================== --}}
 {{-- =========================================================== --}}
 
-@include('layouts.innerNav')
+@include('Layouts.innerNav')
 <section class="inner-bred">
 
 

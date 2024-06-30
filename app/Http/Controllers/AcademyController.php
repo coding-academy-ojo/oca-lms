@@ -23,6 +23,7 @@ class AcademyController extends Controller
          $user = Auth::guard('staff')->user() ?? Auth::guard('students')->user();
          $isSuperManager = false;
          $academies = []; 
+         $trainers = []; 
      
          if ($user) {
              if ($user instanceof Staff) {
@@ -30,9 +31,15 @@ class AcademyController extends Controller
                  if ($role === 'super_manager') {
                      $isSuperManager = true;
                      $academies = Academy::with('staff', 'cohorts')->get();
-                 } elseif ($role === 'manager' || $role === 'trainer') {
+                 } elseif ($role === 'manager') {
                      $academies = $user->academies()->with('staff', 'cohorts')->get();
-                 }
+                     $academyIds = $user->academies->pluck('id')->toArray();
+                     $trainers = Staff::whereHas('academies', function ($query) use ($academyIds) {
+                        $query->whereIn('academies.id', $academyIds);
+                    })->where('role', 'trainer')->get();
+                 }elseif ( $role === 'trainer') {
+                    $academies = $user->academies()->with('staff', 'cohorts')->get();
+                }
              } elseif ($user instanceof Student) {
                  $academies = $user->academy()->with('students')->get();
              }
@@ -40,7 +47,7 @@ class AcademyController extends Controller
      
          $allmanagers = Staff::where('role', 'manager')->get();
      
-         return view('academies.index', compact('academies', 'isSuperManager', 'allmanagers'));
+         return view('academies.index', compact('academies', 'trainers', 'isSuperManager', 'allmanagers'));
      }
       
     

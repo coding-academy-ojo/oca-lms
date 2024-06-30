@@ -30,6 +30,8 @@ class TraineesProgressController extends Controller
 
 
         // Return view with data
+        // dd($attendanceOverview, $lateAssignmentSubmissions, $assignmentAssessment, 
+        //     $projectAssessment, $allTrainessOverview, $skillsStatus,$projectsAssessment);
         return view('trainer.traineesProgress', compact(
             'attendanceOverview', 'lateAssignmentSubmissions', 'assignmentAssessment', 
             'projectAssessment', 'allTrainessOverview', 'skillsStatus','projectsAssessment'
@@ -112,6 +114,11 @@ class TraineesProgressController extends Controller
                 'latePercentage' => 0,
                 'onTimePercentage' => 0,
                 'didNotSubmitPercentage' => 0,
+                'passSubmissionsCount'=>0,
+                'passSubmissionsStatus' => 0,
+                'numberOfSubmissions' => 0,
+                'notPassSubmissionsCount' => 0,
+                'notPassSubmissionsPercentage' => 0,
             ];
         }
     
@@ -172,14 +179,33 @@ class TraineesProgressController extends Controller
                 'message' => 'No running cohort found.',
                 'totalStudents' => 0,
                 'percentageSubmitted' => 0, 
+                'numberOfStudentsAssigned' => 0,
+                'latestAssignmentTitle' => 0,
+                'numberOfStudentsNotSubmitted' => 0,
+                'latestAssignmentId' => 0,
+                'numberOfStudentsSubmitted' => 0,
             ];
         }
     
-        // Get the latest assignment
-        $latestAssignment = Assignment::latest()->first();
+        // Get the latest assignment for the running cohort
+        $latestAssignment = Assignment::where('cohort_id', $runningCohort->id)->latest()->first();
+    
+        if (!$latestAssignment) {
+            return [
+                'message' => 'No assignment found for the running cohort.',
+                'totalStudents' => 0,
+                'percentageSubmitted' => 0, 
+                'numberOfStudentsAssigned' => 0,
+                'latestAssignmentTitle' => 0,
+                'numberOfStudentsNotSubmitted' => 0,
+                'latestAssignmentId' => 0,
+                'numberOfStudentsSubmitted' => 0,
+            ];
+        }
+    
         $latestAssignmentId = $latestAssignment->id;
-        $latestAssignmentTitle=$latestAssignment->assignment_name;
-        
+        $latestAssignmentTitle = $latestAssignment->assignment_name;
+    
         // Get the number of students assigned to the latest assignment
         $numberOfStudentsAssigned = $latestAssignment->student()->count();
     
@@ -190,8 +216,8 @@ class TraineesProgressController extends Controller
         
         // Calculate the percentage of students who submitted their assignment
         $percentageSubmitted = $numberOfStudentsAssigned > 0 ? ($numberOfStudentsSubmitted / $numberOfStudentsAssigned) * 100 : 0;
-
-    $numberOfStudentsNotSubmitted = $numberOfStudentsAssigned- $numberOfStudentsSubmitted;
+    
+        $numberOfStudentsNotSubmitted = $numberOfStudentsAssigned - $numberOfStudentsSubmitted;
         return [
             'numberOfStudentsAssigned' => $numberOfStudentsAssigned,
             'percentageSubmitted' => $percentageSubmitted,
@@ -201,6 +227,7 @@ class TraineesProgressController extends Controller
             'latestAssignmentId' => $latestAssignmentId,
         ];
     }
+    
     
     private function projectAssessment() {
         $staff = Auth::guard('staff')->user();

@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('Layouts.app')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 @section('title')
     Dashboard
 @endsection
 @section('content')
-    @include('layouts.innerNav')
+    @include('Layouts.innerNav')
 
 
 <style>

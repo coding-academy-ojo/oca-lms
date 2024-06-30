@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('Layouts.app')
 
 @section('title', 'Edit Soft Skills Training')
 
 @section('content')
 
-@include('layouts.innerNav')
+@include('Layouts.innerNav')
 
 <nav style="padding: 50px 50px 0;" aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -41,24 +41,20 @@
 
         <div class="mb-3">
             <label for="satisfaction" class="form-label">Satisfaction</label>
-            <fieldset class="star-rating">
-                <legend class="visually-hidden">Satisfaction Rating</legend>
-                <input type="radio" id="terrible" name="satisfaction" value="1" class="visually-hidden" {{ $softSkillsTraining->satisfaction == 1 ? 'checked' : '' }}>
-                <label for="terrible" title="Terrible"><span class="visually-hidden">1 star</span></label>
-                
-                <input type="radio" id="bad" name="satisfaction" value="2" class="visually-hidden" {{ $softSkillsTraining->satisfaction == 2 ? 'checked' : '' }}>
-                <label for="bad" title="Bad"><span class="visually-hidden">2 stars</span></label>
-                
-                <input type="radio" id="mixed" name="satisfaction" value="3" class="visually-hidden" {{ $softSkillsTraining->satisfaction == 3 ? 'checked' : '' }}>
-                <label for="mixed" title="Mixed"><span class="visually-hidden">3 stars</span></label>
-                
-                <input type="radio" id="good" name="satisfaction" value="4" class="visually-hidden" {{ $softSkillsTraining->satisfaction == 4 ? 'checked' : '' }}>
-                <label for="good" title="Good"><span class="visually-hidden">4 stars</span></label>
-        
-                <input type="radio" id="excellent" name="satisfaction" value="5" class="visually-hidden" {{ $softSkillsTraining->satisfaction == 5 ? 'checked' : '' }}>
-                <label for="excellent" title="Excellent"><span class="visually-hidden">5 stars</span></label>
-            </fieldset>
+            <input type="range" class="form-range" id="satisfaction" name="satisfaction" min="0" max="100" step="1" value="0" oninput="updateSatisfactionValue(this.value)">
+            <div class="d-flex justify-content-between">
+                <small>0%</small>
+                <small>100%</small>
+            </div>
+            <input type="text" id="satisfactionValue" class="form-control mt-2" value="0%" readonly>
         </div>
+        
+        <script>
+            function updateSatisfactionValue(value) {
+                document.getElementById('satisfactionValue').value = value + '%';
+            }
+        </script>
+        
         
         <div class="mb-3">
             <label for="cohort" class="form-label fw-bold">Cohort</label>

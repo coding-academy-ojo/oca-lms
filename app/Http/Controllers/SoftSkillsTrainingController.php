@@ -52,7 +52,7 @@ class SoftSkillsTrainingController extends Controller
             'description' => 'required',
             'trainer' => 'required',
             'date' => 'required|date',
-            'satisfaction' => 'nullable|integer|min:1|max:5',
+            'satisfaction' => 'nullable|numeric|min:0|max:100',
             'cohort_id' => 'required|exists:cohorts,id',
         ]);
     
@@ -103,8 +103,8 @@ class SoftSkillsTrainingController extends Controller
             'description' => 'required',
             'trainer' => 'required',
             'date' => 'required|date',
-            'satisfaction' => 'nullable|integer|min:1|max:5',
-            'cohort_id' => 'required|exists:cohorts,id', 
+            'satisfaction' => 'nullable|numeric|min:0|max:100',
+            'cohort_id' => 'required|exists:cohorts,id',
         ]);
     
         $softSkillsTraining->update($request->all());
