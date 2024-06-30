@@ -40,7 +40,7 @@ class ProjectController extends Controller
                 })->get();
         }
 
-        return view('project.project', compact('projects','project_filter'));
+        return view('project.Project', compact('projects','project_filter'));
     }
 
 public function filterProjects(Request $request)
@@ -117,7 +117,7 @@ public function filterProjects(Request $request)
         }
     }
 
-    return view('project.project', compact('projects', 'project_filter'));
+    return view('project.Project', compact('projects', 'project_filter'));
 }
 
 
