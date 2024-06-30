@@ -58,8 +58,9 @@ class TechnologyCategoryController extends Controller
      */
     public function show(TechnologyCategory $category)
     {
-        // dd(1);
+       
         $technologies = $category->technologies;
+        // dd($technologies);
         return view('technology.Technology', compact('category', 'technologies'));
     }
 

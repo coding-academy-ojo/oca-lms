@@ -95,7 +95,9 @@ class TechnologyController extends Controller
     {
 
         $technologyCohort = Technology_Cohort::where('technology_id', $technology->id)->first();
+        // dd($technology);
         $technologyCohortID=$technologyCohort->id;
+  
         $Topics = Topic::where('technology_cohort_id',$technologyCohortID)->get();
 
         // dd($technologyCohort->id);
