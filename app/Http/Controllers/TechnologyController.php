@@ -93,15 +93,17 @@ class TechnologyController extends Controller
 
     public function showInfo(Technology $technology)
     {
+        $technologyCohort = Technology::where('id', $technology->id)->first();
 
-        $technologyCohort = Technology_Cohort::where('technology_id', $technology->id)->first();
-        // dd($technology);
-        $technologyCohortID=$technologyCohort->id;
-  
-        $Topics = Topic::where('technology_cohort_id',$technologyCohortID)->get();
+        if (!$technologyCohort) {
+            // Handle case where $technologyCohort is null
+            return redirect()->route('route.to.redirect')->with('error', 'Technology Cohort not found.');
+        }
 
-        // dd($technologyCohort->id);
-        return view('technology.viewtechnology', compact('technology', 'Topics','technologyCohort'));
+        $technologyCohortID = $technologyCohort->id;
+        $Topics = Topic::where('technology_cohort_id', $technologyCohortID)->get();
+
+        return view('technology.viewtechnology', compact('technology', 'Topics', 'technologyCohort'));
     }
 
     /**
@@ -163,10 +165,10 @@ class TechnologyController extends Controller
      * @param  \App\Technology  $technology
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Technology_Cohort $technology)
+    public function destroy(technology $technology)
     {
-        dd($technology);
+        // dd($technology);
         $technology->delete();
-        return redirect()->route('categories.indexCohort')->with('success', 'Technology cohort deleted successfully!');
+        return redirect()->route('categories.index')->with('success', 'Technology cohort deleted successfully!');
     }
 }

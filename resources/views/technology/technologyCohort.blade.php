@@ -23,7 +23,7 @@ Technologies
 {{-- =========================================================== --}}
 <div class="innerPage mt-3">
     <div class="container">
-       
+
         <div class="projectCard">
             <div class="row">
                 @foreach ($technologies as $technology)
@@ -38,7 +38,7 @@ Technologies
                             <a href="{{ route('technology.showInfo', ['technology' => $technology]) }}">
                                 <h4 class="text-center">{{ $technology->technologies_name }}</h4>
                             </a>
-                           
+
                             <a class=" btn btn-primary m-auto" href="{{ route('technology.showInfo', ['technology' => $technology]) }}">view</a>
 
                         </div>
