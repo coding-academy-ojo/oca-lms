@@ -88,7 +88,7 @@ class TechnologyController extends Controller
     public function show(Technology $technology)
 
     {
-        return view('technology.Technology', compact('technology'));
+        return view('technology.technology', compact('technology'));
     }
 
     public function showInfo(Technology $technology)

@@ -37,7 +37,7 @@ Technology Categories
             {{ session('success') }}
         </div>
         @endif
-        aaaaaaaaaaaaaaaaaaaa
+     
         <div class="projectCard">
             <div class="row">
                 @foreach ($categories as $category)

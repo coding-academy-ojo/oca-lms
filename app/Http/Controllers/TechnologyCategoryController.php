@@ -61,7 +61,7 @@ class TechnologyCategoryController extends Controller
        
         $technologies = $category->technologies;
         // dd($technologies);
-        return view('technology.Technology', compact('category', 'technologies'));
+        return view('technology.technology', compact('category', 'technologies'));
     }
 
     /**
