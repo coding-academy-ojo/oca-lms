@@ -18,8 +18,8 @@ class CreateCohortsTable extends Migration
             $table->string('cohort_name');
             $table->text('cohort_description');
             $table->text('cohort_start_date');
-            $table->text('cohort_end_date');
-            $table->text('cohort_donor');
+            $table->date('cohort_end_date');
+            $table->date('cohort_donor');
             $table->unsignedBigInteger('academy_id');
             $table->foreign('academy_id')->references('id')->on('academies');
             $table->timestamps();
