@@ -66,11 +66,15 @@ class TechnologyCohortController extends Controller
 
     public function addToCohort(Request $request)
     {
-        // Retrieve the cohort ID from the session
         $cohortId = session('cohort_ID');
 
         // Retrieve the selected technologies from the request
         $selectedTechnologies = $request->input('technologies', []);
+
+        // Check if no technologies are selected
+        if (empty($selectedTechnologies)) {
+            return redirect()->back()->with('error', 'No technology selected.');
+        }
 
         // Check if any technology is already added to the cohort
         $existingTechnologies = Technology_Cohort::whereIn('technology_id', $selectedTechnologies)
@@ -82,8 +86,8 @@ class TechnologyCohortController extends Controller
             $existingTechnologyNames = Technology::whereIn('id', $existingTechnologies)
                 ->pluck('technologies_name')
                 ->all();
-
-            return redirect()->back()->with('error', 'The following technologies are already added to the cohort so choose another technology: ' . implode(', ', $existingTechnologyNames));
+            
+            return redirect()->back()->with('error', 'The following technologies are already added to the cohort: ' . implode(', ', $existingTechnologyNames));
         }
 
         // Add selected technologies to the cohort
@@ -97,6 +101,7 @@ class TechnologyCohortController extends Controller
         }
 
         return redirect()->back()->with('success', 'Selected technologies added to the cohort successfully.');
+  
     }
 
 
