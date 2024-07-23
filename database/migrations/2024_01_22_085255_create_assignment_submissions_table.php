@@ -20,7 +20,7 @@ public function up()
         $table->foreignId('assignment_id')->constrained('assignments');
         $table->string('attached_file');
         $table->text('feedback')->nullable();
-        $table->string('status')->nullable();
+        
         $table->unsignedBigInteger('staff_id')->nullable();
         $table->foreign('staff_id')->references('id')->on('staff')->onDelete('cascade');
         $table->unsignedBigInteger('student_id');
