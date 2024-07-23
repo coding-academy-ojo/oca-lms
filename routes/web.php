@@ -233,7 +233,9 @@ Route::put('/technologies/{technology}/update', [TechnologyController::class, 'u
 Route::delete('/technologies/technology/{technology}', [TechnologyController::class, 'destroy'])->name('technology.destroy');
 // Route::post('/technologies/{technology}/addToCohort', [TechnologyCohortController::class, 'addToCohort'])->name('technology.addToCohort');
 // Route::post('technologies/addToCohort', 'TechnologyController@addToCohort')->name('technology.addToCohort');
-Route::post('/technologies/{technology}/addToCohort', 'TechnologyController@addToCohort')->name('technology.addToCohort');
+// Route::post('/technologies/{technology}/addToCohort', 'TechnologyController@addToCohort')->name('technology.addToCohort');
+Route::post('/technology111/addToCohort', 'TechnologyCohortController@addToCohort')->name('technology.addToCohort');
+
 
 
 

@@ -69,35 +69,35 @@ class TechnologyCohortController extends Controller
         // Retrieve the cohort ID from the session
         $cohortId = session('cohort_ID');
 
-        // Loop through the selected technologies and add them to the cohort
-        foreach ($request->input('technologies', []) as $technologyId) {
-            $technology = Technology::findOrFail($technologyId);
+        // Retrieve the selected technologies from the request
+        $selectedTechnologies = $request->input('technologies', []);
 
-            // Check if the technology is already added to the cohort
-            $existingRecord = Technology_Cohort::where('technology_id', $technology->id)
-                ->where('cohort_id', $cohortId)
-                ->first();
+        // Check if any technology is already added to the cohort
+        $existingTechnologies = Technology_Cohort::whereIn('technology_id', $selectedTechnologies)
+            ->where('cohort_id', $cohortId)
+            ->pluck('technology_id')
+            ->all();
 
-            if ($existingRecord) {
-                return redirect()->back()->with('error', 'Technology "' . $technology->technologies_name . '" is already added to the cohort');
-            }
+        if (!empty($existingTechnologies)) {
+            $existingTechnologyNames = Technology::whereIn('id', $existingTechnologies)
+                ->pluck('technologies_name')
+                ->all();
 
-            // Create a new record in the junction table
+            return redirect()->back()->with('error', 'The following technologies are already added to the cohort so choose another technology: ' . implode(', ', $existingTechnologyNames));
+        }
+
+        // Add selected technologies to the cohort
+        foreach ($selectedTechnologies as $technologyId) {
             Technology_Cohort::create([
-                'technology_id' => $technology->id,
+                'technology_id' => $technologyId,
                 'cohort_id' => $cohortId,
                 'start_date' => now(),
                 'end_date' => now(),
             ]);
         }
 
-        return redirect()->back()->with('success', 'Selected technologies added to the cohort successfully');
+        return redirect()->back()->with('success', 'Selected technologies added to the cohort successfully.');
     }
-
-
-
-
-
 
 
     public function index()
