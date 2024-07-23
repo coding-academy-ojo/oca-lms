@@ -231,8 +231,10 @@ Route::get('/technology/{technology}', [TechnologyController::class, 'showInfo']
 Route::get('/technologies/{technology}/edit', [TechnologyController::class, 'edit'])->name('technology.edit');
 Route::put('/technologies/{technology}/update', [TechnologyController::class, 'update'])->name('technology.update');
 Route::delete('/technologies/technology/{technology}', [TechnologyController::class, 'destroy'])->name('technology.destroy');
-Route::post('/technologies/{technology}/addToCohort', [TechnologyCohortController::class, 'addToCohort'])->name('technology.addToCohort');
+// Route::post('/technologies/{technology}/addToCohort', [TechnologyCohortController::class, 'addToCohort'])->name('technology.addToCohort');
 // Route::post('technologies/addToCohort', 'TechnologyController@addToCohort')->name('technology.addToCohort');
+Route::post('/technologies/{technology}/addToCohort', 'TechnologyController@addToCohort')->name('technology.addToCohort');
+
 
 
 
