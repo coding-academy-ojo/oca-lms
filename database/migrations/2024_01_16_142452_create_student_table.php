@@ -69,7 +69,8 @@ class CreateStudentTable extends Migration
             $table->string('linkedin_link')->nullable();
             $table->foreignId('academy_id')->constrained()->onDelete('cascade');
             $table->foreignId('cohort_id')->constrained()->onDelete('cascade');
-            
+            $table->string('certificate_type')->nullable();
+            $table->boolean('internship_status')->default(0);
             $table->unsignedBigInteger('staff_id')->nullable();
             $table->foreign('staff_id')->references('id')->on('staff')->onDelete('cascade');
             $table->timestamps();
