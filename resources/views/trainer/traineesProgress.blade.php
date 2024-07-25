@@ -1,3 +1,6 @@
+To check if there is data for the assignments and submissions in the Blade template, you can add conditional statements. Here's how you can integrate those checks into your existing Blade template:
+
+```blade
 @extends('Layouts.app')
 @section('title')
 Trainees Progress
@@ -28,198 +31,147 @@ Trainees Progress
 </section>
 
 <style>
-.green {
-    background-color: #2BC155 !important;
-}
-
-.red {
-    background-color: #F35757 !important;
-}
-
-.orange {
-    background-color: orange !important;
-
-}
-
-    .skill-card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        height: 200px; /* Adjust as needed */
-        padding: 10px;
-        box-sizing: border-box;
-        background-color: #f8f9fa;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    .skill-title {
-        font-size: 14px;
-        margin-top: 10px;
-        text-align: center;
-        flex-grow: 1;
-    }
-    .skill-levels {
-        width: 100%;
-    }
-    .skill-progress {
-        position: relative;
-        margin-top: 10px;
-    }
-    #levels-progress-bar span {
-        position: absolute;
-        width: 100%;
-        left: 0;
-        text-align: center;
-        color: #fff;
-    }
+/* Add your custom styles here */
 </style>
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            
-       <h2 class="text-primary">Trainees Statistics</h2>
-       <h2> {{ $attendanceOverview['cohort_name'] }} / {{ $attendanceOverview['date'] }}</h2>
-    </div>
+            <h2 class="text-primary">Trainees Statistics</h2>
+            <h2> {{ $attendanceOverview['cohort_name'] }} / {{ $attendanceOverview['date'] }}</h2>
+        </div>
     </div>
     <div class="row">
-    <!-- Cards Section -->
-    <div class="col-xl-12">
-        <!-- Adjusted for full width -->
-        <div class="row">
-            <!-- Attendance -->
-            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-4">
-                <div class="widget-stat card">
-                    <div class="card-body">
-                        <p class="card-title text-primary mb-4" style="font-size: 1.2rem;">Student Attendance</p>
-                        
-                        <div class="progress mb-2 my-4">
-                            <div class="progress-bar progress-animated bg-Success" style="width: {{ $attendanceOverview['attended_percentage'] }}%">{{ $attendanceOverview['attended_percentage'] }}%</div>
+        <!-- Cards Section -->
+        <div class="col-xl-12">
+            <div class="row">
+                <!-- Attendance -->
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-4">
+                    <div class="widget-stat card">
+                        <div class="card-body">
+                            <p class="card-title text-primary mb-4" style="font-size: 1.2rem;">Student Attendance</p>
+                            <div class="progress mb-2 my-4">
+                                <div class="progress-bar progress-animated bg-Success" style="width: {{ $attendanceOverview['attended_percentage'] }}%">{{ $attendanceOverview['attended_percentage'] }}%</div>
+                            </div>
+                            <small>{{ $attendanceOverview['attended'] }} Trainees Attended </small>
+                            <div class="progress mb-2 my-4">
+                                <div class="progress-bar progress-animated bg-Success" style="width: {{ $attendanceOverview['late_percentage'] }}%">{{ $attendanceOverview['late_percentage'] }}%</div>
+                            </div>
+                            <small>{{ $attendanceOverview['late'] }} Trainees late </small>
+                            <div class="progress mb-2 my-4">
+                                <div class="progress-bar progress-animated bg-Success" style="width: {{ $attendanceOverview['absent_percentage'] }}%">{{ $attendanceOverview['absent_percentage'] }}%</div>
+                            </div>
+                            <small>{{ $attendanceOverview['absent'] }} Trainees Absent </small>
+                            <a href="{{ route('absence') }}">
+                                <p class="card-title mt-3" style="font-size: 1rem;">More</p>
+                            </a>
                         </div>
-                        <small>{{ $attendanceOverview['attended'] }} Trainees Attended </small>
-                        <div class="progress mb-2 my-4">
-                            <div class="progress-bar progress-animated bg-Success" style="width: {{ $attendanceOverview['late_percentage'] }}%">{{ $attendanceOverview['late_percentage'] }}%</div>
-                        </div>
-                        <small>{{ $attendanceOverview['late'] }} Trainees late  </small>
-                        <div class="progress mb-2 my-4">
-                            <div class="progress-bar progress-animated bg-Success" style="width: {{ $attendanceOverview['absent_percentage'] }}%">{{ $attendanceOverview['absent_percentage'] }}%</div>
-                        </div>
-                        <small>{{ $attendanceOverview['absent'] }} Trainees Absent  </small>
-
-                        <a href="{{ route('absence') }}">
-                            <p class="card-title mt-3" style="font-size: 1rem;">More</p>
-                        </a>
                     </div>
                 </div>
-            </div>
-            
-            <!--  Assignments review -->
-            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-4 ">
-                <div class="widget-stat card">
-                    <div class="card-body">
-                        <p class="card-title text-primary mb-4" style="font-size: 1.2rem;">Assignment Review</p>
-                        
-                        <div class="progress mb-2 my-4">
-                            <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['passSubmissionsStatus'] }}%">{{ $lateAssignmentSubmissions['passSubmissionsStatus'] }} %</div>
+                
+                <!-- Assignments Review -->
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-4">
+                    <div class="widget-stat card">
+                        <div class="card-body">
+                            <p class="card-title text-primary mb-4" style="font-size: 1.2rem;">Assignment Review</p>
+                            <div class="progress mb-2 my-4">
+                                <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['passSubmissionsStatus'] }}%">{{ $lateAssignmentSubmissions['passSubmissionsStatus'] }}%</div>
+                            </div>
+                            <small>{{ $lateAssignmentSubmissions['passSubmissionsCount'] }} Trainees Passed of {{ $lateAssignmentSubmissions['numberOfSubmissions'] }}</small>
+                            <div class="progress mb-2 my-4">
+                                <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['notPassSubmissionsPercentage'] }}%">{{ $lateAssignmentSubmissions['notPassSubmissionsPercentage'] }}%</div>
+                            </div>
+                            @if ($lateAssignmentSubmissions['notPassSubmissionsPercentage'] == 100)
+                                <small>All Assignments are reviewed</small>
+                            @else
+                                <small>{{ $lateAssignmentSubmissions['notPassSubmissionsCount'] }} Trainees not reviewed yet of {{ $lateAssignmentSubmissions['numberOfSubmissions'] }}</small>
+                            @endif
+                            <div class="progress mb-2 my-4">
+                                <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['latePercentage'] }}%">{{ $lateAssignmentSubmissions['latePercentage'] }}%</div>
+                            </div>
+                            <small>{{ $lateAssignmentSubmissions['latePercentage'] }} Trainees Submit Late of {{ $lateAssignmentSubmissions['numberOfSubmissions'] }}</small>
+                            @if ($assignmentAssessment)
+                                <a href="{{ route('assignment.show', $assignmentAssessment['latestAssignmentId']) }}">
+                                    <p class="card-title mt-3" style="font-size: 1rem;">{{ $assignmentAssessment['latestAssignmentTitle'] }}</p>
+                                </a>
+                            @else
+                                <p>No recent assignments found.</p>
+                            @endif
                         </div>
-                        <small>{{$lateAssignmentSubmissions['passSubmissionsCount']}} Trainees Passed of {{$lateAssignmentSubmissions['numberOfSubmissions']}}  </small>
-                        <div class="progress mb-2 my-4">
-                        <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['notPassSubmissionsPercentage'] }}%">{{ $lateAssignmentSubmissions['notPassSubmissionsPercentage'] }}%</div>
-                        </div>
-                        @if ($lateAssignmentSubmissions['notPassSubmissionsPercentage'] == 100)
-                            <small>All Assignments are reviewed</small>
-                        @else
-                            <small>{{ $lateAssignmentSubmissions['notPassSubmissionsCount'] }} Trainees not reviewed yet of {{$lateAssignmentSubmissions['numberOfSubmissions']}}</small>
-                        @endif
-
-
-                        <div class="progress mb-2 my-4">
-                            <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['latePercentage'] }}%">{{ $lateAssignmentSubmissions['latePercentage'] }} %</div>
-                        </div>
-                        <small>{{ $lateAssignmentSubmissions['latePercentage'] }} Trainees Submit Late of {{$lateAssignmentSubmissions['numberOfSubmissions']}} </small>
-                        
-
-                         <a href="{{ route('assignment.show', $assignmentAssessment['latestAssignmentId']) }}">
-                            <p class="card-title mt-3" style="font-size: 1rem;">{{$assignmentAssessment['latestAssignmentTitle']}}</p>
-                        </a>
-                        </div>
-                </div>
-            </div>
-
-            <!-- Assignments Assessment -->
-            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-4 " style="width: 300px;">
-                <div class="widget-stat card">
-                    <div class="card-body">
-                        <h6 class="card-title text-primary">Assignment Submission</h6>
-                        <canvas id="LatestAssignmentSubmission"></canvas>
-                        <a href="{{ route('assignment.feedbacksubmission.show', $assignmentAssessment['latestAssignmentId']) }}">
-                            <p class="card-title" style="font-size: 1rem;">{{$assignmentAssessment['latestAssignmentTitle']}} </p>
-                        </a>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Projects Assessment  -->
-            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-4" style="width: 300px;">
-                <div class="widget-stat card">
-                    <div class="card-body">
-                        <h4 class="card-title text-primary">Projects Assessment</h4>
-                        <canvas id="ProjectsAssessment"></canvas>
-                        
+
+                <!-- Assignments Submission -->
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-4" style="width: 300px;">
+                    <div class="widget-stat card">
+                        <div class="card-body">
+                            <h6 class="card-title text-primary">Assignment Submission</h6>
+                            @if ($assignmentAssessment)
+                                <canvas id="LatestAssignmentSubmission"></canvas>
+                                <a href="{{ route('assignment.feedbacksubmission.show', $assignmentAssessment['latestAssignmentId']) }}">
+                                    <p class="card-title" style="font-size: 1rem;">{{ $assignmentAssessment['latestAssignmentTitle'] }}</p>
+                                </a>
+                            @else
+                                <p>No recent assignments found.</p>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projects Assessment -->
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-4" style="width: 300px;">
+                    <div class="widget-stat card">
+                        <div class="card-body">
+                            <h4 class="card-title text-primary">Projects Assessment</h4>
+                            @if ($projectsAssessment)
+                                <canvas id="ProjectsAssessment"></canvas>
+                            @else
+                                <p>No projects assessment data available.</p>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-
-    
-    <!-- Chart Section -->
-   
-</div>
-
-
-</div>
 
     <!-- Skills carousel -->
-
     <div class="container my-5">
         <div class="row">
             <div class="col-md-12">
-                <h2 class=" carousel-title text-primary">Overview on Skills Status</h2>
+                <h2 class="carousel-title text-primary">Overview on Skills Status</h2>
                 <hr>
             </div>
         </div>
-    
         <div id="carouselExample" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
-                @foreach(array_chunk($skillsStatus, 4) as $skillChunk)
-                <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                    <div class="d-flex justify-content-between">
-                        @foreach($skillChunk as $skill)
-                        <div class="flex-grow-1 mx-2 skill-card">
-                            <div class="pb-1">
-                                <p class="skill-title">{{ $skill['skill_name'] }}</p>
-                            </div>
-                            <div class="skill-levels">
-                                @foreach($skill['levels'] as $level)
-                                <div class="progress skill-progress">
-                                    <div  id="levels-progress-bar" class="progress-bar" role="progressbar" style="width: {{ $level['progress'] }}%;">
-                                        <span>{{ $level['level_name'] }} 35-35</span>
+                @if (!empty($skillsStatus))
+                    @foreach(array_chunk($skillsStatus, 4) as $skillChunk)
+                        <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                            <div class="d-flex justify-content-between">
+                                @foreach($skillChunk as $skill)
+                                    <div class="flex-grow-1 mx-2 skill-card">
+                                        <div class="pb-1">
+                                            <p class="skill-title">{{ $skill['skill_name'] }}</p>
+                                        </div>
+                                        <div class="skill-levels">
+                                            @foreach($skill['levels'] as $level)
+                                                <div class="progress skill-progress">
+                                                    <div id="levels-progress-bar" class="progress-bar" role="progressbar" style="width: {{ $level['progress'] }}%;">
+                                                        <span>{{ $level['level_name'] }} 35-35</span>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
                                     </div>
-                                </div>
                                 @endforeach
                             </div>
                         </div>
-                        @endforeach
-                    </div>
-                </div>
-                @endforeach
+                    @endforeach
+                @else
+                    <p>No skills data available.</p>
+                @endif
             </div>
-        
             <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
@@ -229,9 +181,9 @@ Trainees Progress
                 <span class="sr-only">Next</span>
             </a>
         </div>
-        
-   
+    </div>
 
+   
 
 
 

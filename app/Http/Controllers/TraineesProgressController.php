@@ -54,6 +54,7 @@ class TraineesProgressController extends Controller
                 'late_percentage' => 0
             ];
         }
+        
     
         $students = $runningCohort->students;
         $totalStudents = $students->count();
