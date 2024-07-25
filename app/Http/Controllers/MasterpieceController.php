@@ -18,7 +18,7 @@ class MasterpieceController extends Controller
         $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
         $students = $runningCohort->students;
         $tasks = MasterpieceTask::allTaskNames();
-       return view('pages.masterpiece', compact('students', 'tasks'));
+       return view('Pages.masterpiece', compact('students', 'tasks'));
     }
 
     public function setTaskDeadline(Request $request)
