@@ -16,7 +16,7 @@ class SoftSkillsTrainingController extends Controller
     public function index()
     {
         $staff = Auth::guard('staff')->user();
-        $runningCohorts = $staff->cohorts()->where('cohort_end_date', '>', now())->get();
+        $runningCohorts = $staff->cohorts()->get();
         
         if ($runningCohorts->isEmpty()) {
             return redirect()->route('dashboard')->with('error', 'No running cohorts found for the trainer');
@@ -34,7 +34,7 @@ class SoftSkillsTrainingController extends Controller
     public function create()
     {
         $staff = Auth::guard('staff')->user();
-        $runningCohorts = $staff->cohorts()->where('cohort_end_date', '>', now())->get();
+        $runningCohorts = $staff->cohorts()->get();
         
         return view('soft-skills.create', compact('runningCohorts'));
     }
@@ -81,7 +81,7 @@ class SoftSkillsTrainingController extends Controller
     public function edit(SoftSkillsTraining $softSkillsTraining)
     {
         $staff = Auth::guard('staff')->user();
-        $runningCohorts = $staff->cohorts()->where('cohort_end_date', '>', now())->get();
+        $runningCohorts = $staff->cohorts()->get();
 
         abort_if(!$runningCohorts->pluck('id')->contains($softSkillsTraining->cohort_id), 403);
 

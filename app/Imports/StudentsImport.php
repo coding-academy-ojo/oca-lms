@@ -92,6 +92,8 @@ class StudentsImport implements ToModel, WithHeadingRow
             'eligible_to_move' => 'nullable|string',
             'github_link' => 'nullable|string|url',
             'linkedin_link' => 'nullable|string|url',
+            'certificate_type' => 'nullable|string', 
+            'internship_status' => 'nullable|boolean',
         ]);
 
         if ($validator->fails()) {
@@ -155,6 +157,8 @@ class StudentsImport implements ToModel, WithHeadingRow
             'eligible_to_move' => $row['eligible_to_move'] ?? null,
             'github_link' => $row['github_link'] ?? null,
             'linkedin_link' => $row['linkedin_link'] ?? null,
+            'certificate_type' => $row['certificate_type'] ?? null,
+            'internship_status' => $row['internship_status'] ?? 0,
             'academy_id' => $this->academyId,
             'cohort_id' => $this->cohortId,
         ]);
