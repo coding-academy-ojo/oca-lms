@@ -1,6 +1,3 @@
-To check if there is data for the assignments and submissions in the Blade template, you can add conditional statements. Here's how you can integrate those checks into your existing Blade template:
-
-```blade
 @extends('Layouts.app')
 @section('title')
 Trainees Progress
