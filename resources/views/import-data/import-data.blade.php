@@ -347,6 +347,15 @@
                             <td><strong>linkedin_link</strong></td>
                             <td>The student's LinkedIn profile link <span class="text-primary">(string, optional, URL)</span>.</td>
                         </tr>
+                        <tr>
+                            <td><strong>certificate_type</strong></td>
+                            <td>The type of certificate the student has <span class="text-primary">(string, optional)</span>.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>internship_status</strong></td>
+                            <td>Whether the student has an internship status: <br/><span class="text-primary">(0)</span> not having an internship, <br/><span class="text-primary">(1)</span> having an internship <span class="text-primary">(boolean, optional)</span>.</td>
+                        </tr>
+                        
                     </tbody>
                 </table>
             </div>
