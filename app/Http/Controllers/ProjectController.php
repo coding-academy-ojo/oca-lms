@@ -38,6 +38,8 @@ class ProjectController extends Controller
                 ->whereHas('students', function ($query) use ($studentId) {
                     $query->where('student_id', $studentId);
                 })->get();
+
+                dd($projects);
         }
 
         return view('project.Project', compact('projects','project_filter'));

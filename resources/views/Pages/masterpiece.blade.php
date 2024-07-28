@@ -13,8 +13,8 @@ Announcements
 <section class="inner-bred my-3">
     <div class="container">
         <ul class="thm-breadcrumb">
-            <li><a href="#">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
-            <li><a href="#">Test</a></li>
+            <li><a href="/cohorts">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
+            <li><a href="/masterpiece">Masterpiece</a></li>
         </ul>
     </div>
 </section>
@@ -125,9 +125,126 @@ Announcements
                 </div>
             </div>
         </div>
-    </div>
+  
+
+
+
+
+<!-- New Section with Dropdown Lists -->
+<div class="container my-5">
+        <h3 class="mb-4 text-primary">Choose Certificate Type and Internship Status</h3>
+        <div class="row">
+            <!-- Column for Certificate Type and Student Dropdown -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <form id="certificate-form" method="POST" action="{{ route('update.certificate') }}">
+                            @csrf
+                            <div class="form-group mb-3">
+                                <label for="student-select">Student Name</label>
+                                <select id="student-select" class="form-control" name="student_id">
+                                    <option value="">Select Student</option>
+                                    @foreach ($students as $student)
+                                        <option value="{{ $student->id }}">{{ $student->en_first_name }} {{ $student->en_second_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="dropdown1">Select Certificate Type</label>
+                                <select id="dropdown1" class="form-control" name="certificate_type">
+                                    <option value="None">None</option>
+                                    <option value="Attendance">Attendance</option>
+                                    <option value="Front-end">Front-end</option>
+                                    <option value="Back-end">Back-end</option>
+                                    <option value="Full-Stack">Full-Stack</option>
+                                </select>
+                            </div>
+                           
+                            <button type="submit" class="btn btn-primary">Update Certificate</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column for Internship Status and Student Dropdown -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <form id="internship-form" method="POST" action="{{ route('update.internship') }}">
+                            @csrf
+                            <div class="form-group mb-3">
+                                <label for="student-select-internship">Student Name</label>
+                                <select id="student-select-internship" class="form-control" name="student_id">
+                                    <option value="">Select Student</option>
+                                    @foreach ($students as $student)
+                                        <option value="{{ $student->id }}">{{ $student->en_first_name }} {{ $student->en_second_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="dropdown2">Select Internship Status</label>
+                                <select id="dropdown2" class="form-control" name="internship_status">
+                                    <option value="1">Interned</option>
+                                    <option value="0">Non-interned</option>
+                                </select>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">Update Internship</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle certificate form submission
+            document.getElementById('certificate-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "Do you want to update the certificate type?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, update it!',
+                    cancelButtonText: 'No, cancel!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.submit();
+                    }
+                });
+            });
 
+            // Handle internship form submission
+            document.getElementById('internship-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "Do you want to update the internship status?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, update it!',
+                    cancelButtonText: 'No, cancel!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.submit();
+                    }
+                });
+            });
+
+            // Check if there's a success message
+            @if(session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: '{{ session('success') }}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+        });
+    </script>
+  </div>
+  </div>
 
 @endsection

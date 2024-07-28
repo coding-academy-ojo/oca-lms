@@ -93,6 +93,35 @@ class MasterpieceController extends Controller
         // Redirect the user after successful insertion/update
         return redirect()->back()->with('success', 'Progress entry submitted successfully.');
     }
+
+
+    public function updateCertificate(Request $request)
+    {
+        $request->validate([
+            'student_id' => 'required|exists:students,id',
+            'certificate_type' => 'required|string',
+        ]);
+
+        $student = Student::find($request->student_id);
+        $student->certificate_type = $request->certificate_type;
+        $student->save();
+
+        return redirect()->back()->with('success', 'Certificate type updated successfully.');
+    }
+
+    public function updateInternship(Request $request)
+    {
+        $request->validate([
+            'student_id' => 'required|exists:students,id',
+            'internship_status' => 'required|boolean',
+        ]);
+
+        $student = Student::find($request->student_id);
+        $student->internship_status = $request->internship_status;
+        $student->save();
+
+        return redirect()->back()->with('success', 'Internship status updated successfully.');
+    }
     
 
 }
