@@ -18,6 +18,7 @@ class MasterpieceController extends Controller
         $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
         $students = $runningCohort->students;
         $tasks = MasterpieceTask::allTaskNames();
+        dd($runningCohort);
        return view('Pages.masterpiece', compact('students', 'tasks'));
     }
 
