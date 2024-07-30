@@ -210,10 +210,14 @@ Trainees Progress
                                     <div class="progress-bar" role="progressbar" style="width: {{ $student['passedPercentage'] }}%; background-color: #ffc107;" aria-valuenow="{{ $student['passedPercentage'] }}" aria-valuemin="0" aria-valuemax="100">{{ $student['passedPercentage'] }}% of Projects</div>
                                     
                                     <!-- Static part for internship -->
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 30%;">Internship</div>
+                                    @if( $student['internship_status'])
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 30%;">
+                                        Internship
+                                    </div>
+                                    @endif
                                     
                                     <!-- Static part for absence -->
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 30%;">Absence</div>
+                                    
                                 </div>
                             </td>
                             <td>

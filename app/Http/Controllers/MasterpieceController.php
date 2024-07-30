@@ -16,9 +16,11 @@ class MasterpieceController extends Controller
     {
         $staff = Auth::guard('staff')->user();
         $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
-        $students = $runningCohort->students;
-        $tasks = MasterpieceTask::allTaskNames();
-        dd($runningCohort);
+        $cohortID = session('cohort_ID');
+        $students = Student::where('cohort_id', $cohortID)->get();
+        //$students = $runningCohort->students;
+        $tasks = MasterpieceTask::allTaskNames(); 
+        //dd($cohortStudent);
        return view('Pages.masterpiece', compact('students', 'tasks'));
     }
 
@@ -126,3 +128,7 @@ class MasterpieceController extends Controller
     
 
 }
+
+
+
+
