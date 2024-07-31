@@ -109,20 +109,23 @@ class TechnologyController extends Controller
 
     public function showInfo(Technology $technology)
     {
-        $technologyCohort = $technology->cohorts()->first();
+        $cohortId = session('cohort_ID');
+
+        // Find the specific technology cohort based on the cohort ID and technology ID
+        $technologyCohort = $technology->cohorts()->where('cohort_id', $cohortId)->first();
 
         if (!$technologyCohort) {
-            // Handle case where $technologyCohort is null
             return redirect()->route('route.to.redirect')->with('error', 'Technology Cohort not found.');
         }
 
         $technologyCohortID = $technologyCohort->pivot->id;
 
+        dd($technologyCohortID);
+
         $Topics = Topic::where('technology_cohort_id', $technologyCohortID)->get();
 
         return view('technology.viewtechnology', compact('technology', 'Topics', 'technologyCohort'));
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -186,7 +189,7 @@ class TechnologyController extends Controller
     {
         // Delete the records from the pivot table where technology_id matches the technology's id
         DB::table('technology__cohorts')->where('technology_id', $technology->id)->delete();
-        
+
         return redirect()->route('categories.indexCohort')->with('success', 'Technology deleted successfully from Roadmap !');
     }
 
@@ -198,5 +201,4 @@ class TechnologyController extends Controller
 
         return redirect()->route('categories.index')->with('success', 'Technology deleted successfully!');
     }
-    
 }
