@@ -120,7 +120,7 @@ class TechnologyController extends Controller
 
         $technologyCohortID = $technologyCohort->pivot->id;
 
-        dd($technologyCohortID);
+        // dd($technologyCohortID);
 
         $Topics = Topic::where('technology_cohort_id', $technologyCohortID)->get();
 
