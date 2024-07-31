@@ -178,8 +178,9 @@ class TraineesProgressController extends Controller
     private function assignmentAssessment() {
         $staff = Auth::guard('staff')->user();
         $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
-        
-        if (!$runningCohort) {
+        $cohortId = session('cohort_ID');
+        $cohort = Cohort::find($cohortId);
+        if (!$cohort) {
             // No running cohort found for the staff
             return [
                 'message' => 'No running cohort found.',
@@ -194,7 +195,7 @@ class TraineesProgressController extends Controller
         }
     
         // Get the latest assignment for the running cohort
-        $latestAssignment = Assignment::where('cohort_id', $runningCohort->id)->latest()->first();
+        $latestAssignment = Assignment::where('cohort_id', $cohort->id)->latest()->first();
     
         if (!$latestAssignment) {
             return [
@@ -238,6 +239,8 @@ class TraineesProgressController extends Controller
     private function projectAssessment() {
         $staff = Auth::guard('staff')->user();
         $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
+        $cohortId = session('cohort_ID');
+        $cohort = Cohort::find($cohortId);
         return 0;
     }
 
@@ -311,10 +314,11 @@ private function projectsAssessment() {
     $staff = Auth::guard('staff')->user();
     $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
     $cohortID = session('cohort_ID'); // Assuming the cohort ID is stored in the session
+    $cohort = Cohort::find($cohortId);
     $latestProjectWithSubmission = $this->getLatestProjectWithSubmission($cohortID);
 
     //dd($latestProjectWithSubmission);
-    if (!$runningCohort) {
+    if (!$cohort) {
         return [
             'message' => 'No running cohort found.',
             'passedStudents' => 0,
@@ -323,13 +327,11 @@ private function projectsAssessment() {
     }
 
     $students = $runningCohort->students;
-
     $passedStudentsCount = 0;
     $failedStudentsCount = 0;
 
     foreach ($students as $student) {
         $projects = Project::where('cohort_id', $runningCohort->id)->pluck('id');
-
         $projectStatus = TraineeSkillsProgress::whereIn('project_id', $projects)
             ->where('student_id', $student->id)
             ->where('project_status', 1)
