@@ -54,6 +54,7 @@ class TraineesProgressController extends Controller
                 'late_percentage' => 0
             ];
         }
+        
     
         $students = $runningCohort->students;
         $totalStudents = $students->count();
@@ -237,33 +238,29 @@ class TraineesProgressController extends Controller
 
     private function allTrainessOverview() {
         $staff = Auth::guard('staff')->user();
-        $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
-
-        if (!$runningCohort) {
-            return [];
-        }
-        $students = $runningCohort->students;
-        $cohortProjectsCount = Project::where('cohort_id', $runningCohort->id)->count();
-
+        $cohortID = session('cohort_ID');
+        $students = Student::where('cohort_id', $cohortID)->get();
+        $cohortProjectsCount = Project::where('cohort_id', $cohortID)->count();
         $studentsOverview = [];
-
+    //dd($students);
         foreach ($students as $student) {
             $passedProjectsCount = TraineeSkillsProgress::where('student_id', $student->id)
                 ->where('project_status', 1)
-                ->whereIn('project_id', Project::where('cohort_id', $runningCohort->id)->pluck('id'))
+                ->whereIn('project_id', Project::where('cohort_id', $cohortID)->pluck('id'))
                 ->count();
-
+    
             $passedPercentage = $cohortProjectsCount > 0 ? ($passedProjectsCount / $cohortProjectsCount) * 100 : 0;
-
+    
             $studentsOverview[] = [
                 'id' => $student->id,
                 'name' => $student->en_first_name . ' ' . $student->en_second_name,
+                'internship_status' => $student->internship_status,
                 'passedPercentage' => intval($passedPercentage),
                 'passedProjectsCount' => $passedProjectsCount,
                 'cohortProjectsCount' => $cohortProjectsCount
             ];
         }
-
+    
         return $studentsOverview;
     }
 
@@ -340,4 +337,3 @@ private function projectsAssessment() {
 }
 
 }
-

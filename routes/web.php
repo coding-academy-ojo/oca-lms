@@ -84,14 +84,13 @@ Route::get('/addTrainee', function () {
 
 
 // Route to show the form for creating a new masterpiece progress entry
-// Route::get('/masterpiece', [MasterpieceController::class, 'index'])->name('Masterpiece');
- Route::get('/masterpiece', [MasterpieceController::class, 'index'])->name('masterpiece.index');
-
-
+Route::get('/masterpiece', [MasterpieceController::class, 'index'])->name('masterpiece.index');
 Route::get('/masterpiece', [MasterpieceController::class, 'index'])->name('Masterpiece');
 Route::post('/masterpiece/task-deadline', [MasterpieceController::class, 'setTaskDeadline'])->name('masterpiece.task.deadline.store');
 Route::post('/masterpiece/progress', [MasterpieceController::class, 'storeProgress'])->name('masterpiece.progress.store');
-//Route::get('/cohort/progress-details/{id}', [MasterpieceProgressController::class, 'ShowProgress'])->name('masterpiece.progress.ShowProgress');
+Route::post('/update-certificate', [MasterpieceController::class, 'updateCertificate'])->name('update.certificate');
+Route::post('/update-internship', [MasterpieceController::class, 'updateInternship'])->name('update.internship');
+
 
 ////////////////////////////////////////////////
 

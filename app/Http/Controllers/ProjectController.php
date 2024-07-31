@@ -28,6 +28,7 @@ class ProjectController extends Controller
 
         if (Auth::guard('staff')->check() && Auth::guard('staff')->user()->role === 'trainer') {
             $projects = Project::where('cohort_id', $cohortId)->get();
+            //dd($projects);
         } else {
             // $studentId = Auth::guard('students')->user()->id;
             $studentId = session('student_id');
@@ -38,6 +39,8 @@ class ProjectController extends Controller
                 ->whereHas('students', function ($query) use ($studentId) {
                     $query->where('student_id', $studentId);
                 })->get();
+
+                
         }
 
         return view('project.Project', compact('projects','project_filter'));

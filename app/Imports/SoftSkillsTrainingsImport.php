@@ -44,7 +44,7 @@ class SoftSkillsTrainingsImport implements ToModel, WithHeadingRow
             'description' => 'required|string',
             'trainer' => 'required|string',
             'date' => 'required|date_format:Y-m-d',
-            'satisfaction' => 'required|integer|min:0|max:5',
+            'satisfaction' => 'required|integer|min:0|max:100',
         ]);
 
         if ($validator->fails()) {
