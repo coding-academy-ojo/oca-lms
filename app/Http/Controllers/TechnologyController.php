@@ -7,6 +7,7 @@ use App\TechnologyCategory;
 use App\Topic;
 use App\Technology_Cohort;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TechnologyController extends Controller
 {
@@ -91,19 +92,38 @@ class TechnologyController extends Controller
         return view('technology.technology', compact('technology'));
     }
 
+    // public function showInfo(Technology $technology)
+    // {
+    //     $technologyCohort = Technology::where('id', $technology->id)->first();
+
+    //     if (!$technologyCohort) {
+    //         // Handle case where $technologyCohort is null
+    //         return redirect()->route('route.to.redirect')->with('error', 'Technology Cohort not found.');
+    //     }
+
+    //     $technologyCohortID = 
+    //     $Topics = Topic::where('technology_cohort_id', $$technologyCohort->id)->get();
+
+    //     return view('technology.viewtechnology', compact('technology', 'Topics', 'technologyCohort'));
+    // }
+
     public function showInfo(Technology $technology)
     {
-        $technologyCohort = Technology::where('id', $technology->id)->first();
+        $cohortId = session('cohort_ID');
+
+        // Find the specific technology cohort based on the cohort ID and technology ID
+        $technologyCohort = $technology->cohorts()->where('cohort_id', $cohortId)->first();
 
         if (!$technologyCohort) {
-            // Handle case where $technologyCohort is null
             return redirect()->route('route.to.redirect')->with('error', 'Technology Cohort not found.');
         }
 
-        $technologyCohortID = $technologyCohort->id;
+        $technologyCohortID = $technologyCohort->pivot->id;
+
+
         $Topics = Topic::where('technology_cohort_id', $technologyCohortID)->get();
 
-        return view('technology.viewtechnology', compact('technology', 'Topics', 'technologyCohort'));
+        return view('technology.viewtechnology', compact('technology', 'Topics', 'technologyCohort','technologyCohortID'));
     }
 
     /**
@@ -114,7 +134,6 @@ class TechnologyController extends Controller
      */
     public function edit(Technology $technology)
     {
-        // dd(1);
         return view('technology.editTechnology', compact('technology'));
     }
 
@@ -165,10 +184,20 @@ class TechnologyController extends Controller
      * @param  \App\Technology  $technology
      * @return \Illuminate\Http\Response
      */
-    public function destroy(technology $technology)
+    public function destroy(Technology $technology)
     {
-        // dd($technology);
+        // Delete the records from the pivot table where technology_id matches the technology's id
+        DB::table('technology__cohorts')->where('technology_id', $technology->id)->delete();
+
+        return redirect()->route('categories.indexCohort')->with('success', 'Technology deleted successfully from Roadmap !');
+    }
+
+    public function delete($id)
+    {
+        // Find the technology by ID and delete it
+        $technology = Technology::findOrFail($id);
         $technology->delete();
-        return redirect()->route('categories.index')->with('success', 'Technology cohort deleted successfully!');
+
+        return redirect()->route('categories.index')->with('success', 'Technology deleted successfully!');
     }
 }

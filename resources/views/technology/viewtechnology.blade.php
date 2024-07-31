@@ -117,7 +117,7 @@ Technology
                         <div class="mb-3">
                             <label for="topicName" class="form-label">Topic Name</label>
                             <input type="text" class="form-control" id="topicName" name="topic">
-                            <input type="hidden" name="technology_id" id="technology_id" value="{{$technologyCohort->id }}">
+                            <input type="hidden" name="technology_id" id="technology_id" value="{{$technologyCohortID }}">
                         </div>
                     </div>
                     <div class="modal-footer">

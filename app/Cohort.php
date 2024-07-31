@@ -8,18 +8,21 @@ class Cohort extends Model
 {
     protected $guarded = ['id'];
 
-     // Cohort belongs to an Academy
-     public function academy() {
+    // Cohort belongs to an Academy
+    public function academy()
+    {
         return $this->belongsTo(Academy::class);
     }
 
     // Cohort has many Students
-    public function students() {
+    public function students()
+    {
         return $this->hasMany(Student::class);
     }
 
     // Cohort belongs to many Staff
-    public function staff() {
+    public function staff()
+    {
         return $this->belongsToMany(Staff::class, 'staff_cohort');
     }
 
@@ -41,5 +44,11 @@ class Cohort extends Model
     public function softSkillsTrainings()
     {
         return $this->hasMany(SoftSkillsTraining::class);
+    }
+    public function technologies()
+    {
+        return $this->belongsToMany(Technology::class, 'technology__cohorts')
+            ->withPivot('id', 'start_date', 'end_date')
+            ->withTimestamps();
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+
 use App\Technology_Cohort;
 
 use Illuminate\Database\Eloquent\Model;
@@ -37,5 +38,11 @@ class Technology extends Model
     public function topics()
     {
         return $this->hasMany(Topic::class, 'technologycohort_id');
+    }
+    public function cohorts()
+    {
+        return $this->belongsToMany(Cohort::class, 'technology__cohorts')
+            ->withPivot('id', 'start_date', 'end_date')
+            ->withTimestamps();
     }
 }

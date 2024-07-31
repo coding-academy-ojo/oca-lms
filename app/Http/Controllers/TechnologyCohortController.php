@@ -140,7 +140,7 @@ class TechnologyCohortController extends Controller
     public function show(TechnologyCategory $category)
     {
         // Retrieve cohort ID from session
-        
+
         $cohortId = session('cohort_ID');
 
         // Retrieve technologies for the specified category and cohort

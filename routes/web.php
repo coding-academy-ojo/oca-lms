@@ -224,6 +224,8 @@ Route::get('/categories/{category}', [TechnologyCategoryController::class, 'show
 // View technology details
 Route::get('/technologies/{technology}', [TechnologyController::class, 'show'])->name('technology.show');
 Route::get('/technologies/create/{category}', [TechnologyController::class, 'create'])->name('technology.create');
+Route::delete('/technology/{id}', [TechnologyController::class, 'delete'])->name('technology.delete');
+
 Route::post('/technologies', [TechnologyController::class, 'store'])->name('technology.store');
 Route::get('/technology/{technology}', [TechnologyController::class, 'showInfo'])->name('technology.showInfo');
 
@@ -233,7 +235,7 @@ Route::delete('/technologies/technology/{technology}', [TechnologyController::cl
 // Route::post('/technologies/{technology}/addToCohort', [TechnologyCohortController::class, 'addToCohort'])->name('technology.addToCohort');
 // Route::post('technologies/addToCohort', 'TechnologyController@addToCohort')->name('technology.addToCohort');
 // Route::post('/technologies/{technology}/addToCohort', 'TechnologyController@addToCohort')->name('technology.addToCohort');
-Route::post('/technology111/addToCohort', 'TechnologyCohortController@addToCohort')->name('technology.addToCohort');
+Route::post('/technology/addToCohort', 'TechnologyCohortController@addToCohort')->name('technology.addToCohort');
 
 
 

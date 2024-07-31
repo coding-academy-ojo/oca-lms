@@ -314,7 +314,7 @@ private function projectsAssessment() {
     $staff = Auth::guard('staff')->user();
     $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
     $cohortID = session('cohort_ID'); // Assuming the cohort ID is stored in the session
-    $cohort = Cohort::find($cohortId);
+    $cohort = Cohort::find($cohortID);
     $latestProjectWithSubmission = $this->getLatestProjectWithSubmission($cohortID);
 
     //dd($latestProjectWithSubmission);
@@ -326,12 +326,12 @@ private function projectsAssessment() {
         ];
     }
 
-    $students = $runningCohort->students;
+    $students = $cohort->students;
     $passedStudentsCount = 0;
     $failedStudentsCount = 0;
 
     foreach ($students as $student) {
-        $projects = Project::where('cohort_id', $runningCohort->id)->pluck('id');
+        $projects = Project::where('cohort_id', $cohort->id)->pluck('id');
         $projectStatus = TraineeSkillsProgress::whereIn('project_id', $projects)
             ->where('student_id', $student->id)
             ->where('project_status', 1)
