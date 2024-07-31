@@ -12,7 +12,7 @@
     <div class="container">
         <ul class="thm-breadcrumb">
             <li><a href="/">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
-            <li><a style="color:#F16E00" href="/traineesProgress">Progress</a></li>
+            <li><a style="color:#F16E00" href="/traineesProgress"> Student Progress Overview</a></li>
 
         </ul>
     </div>
@@ -60,7 +60,7 @@
                         <p class="text-muted"> Certificate Type: {{$student->certificate_type}}</p>
                         <p class="text-muted">
                            {{ $student->internship_status ? 'Interned' : 'Not Interned' }}
-                        </p>
+                    </p>
                         <ul class="list-group mb-3 list-group-flush">
                             
                             <li class="list-group-item px-0 d-flex justify-content-between">

@@ -110,7 +110,7 @@ class SingleTraineeProgressController extends Controller
         }
         $studentProjects = $this->getStudentProjects($id);
     
-        return view('trainer\trainee-progress-details', compact('student', 'absencesCount', 'nonJustifiedAbsencesCount','lateCount', 'nonJustifiedLateCount', 'technologyNames', 'studentAssignments', 'countValues', 'progressEntries','studentProjects'));
+        return view('trainer.trainee-progress-details', compact('student', 'absencesCount', 'nonJustifiedAbsencesCount','lateCount', 'nonJustifiedLateCount', 'technologyNames', 'studentAssignments', 'countValues', 'progressEntries','studentProjects'));
     }
 
     private function getStudentProjects($studentId) {

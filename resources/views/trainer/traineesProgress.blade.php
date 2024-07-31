@@ -124,6 +124,9 @@ Trainees Progress
                                 <canvas id="ProjectsAssessment"></canvas>
                             @else
                                 <p>No projects assessment data available.</p>
+                                <a href="{{ route('view_project_submissions', $projectsAssessment['latestProjectWithSubmission->id']) }}">
+                                    <p class="card-title" style="font-size: 1rem;">{{ $projectsAssessment['latestProjectWithSubmission->project_name'] }}</p>
+                                </a>
                             @endif
                         </div>
                     </div>
@@ -155,7 +158,7 @@ Trainees Progress
                                             @foreach($skill['levels'] as $level)
                                                 <div class="progress skill-progress">
                                                     <div id="levels-progress-bar" class="progress-bar" role="progressbar" style="width: {{ $level['progress'] }}%;">
-                                                        <span>{{ $level['level_name'] }} 35-35</span>
+                                                        <span>{{ $level['level_name'] }}</span>
                                                     </div>
                                                 </div>
                                             @endforeach
