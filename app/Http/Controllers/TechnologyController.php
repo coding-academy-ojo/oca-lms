@@ -123,7 +123,7 @@ class TechnologyController extends Controller
 
         $Topics = Topic::where('technology_cohort_id', $technologyCohortID)->get();
 
-        return view('technology.viewtechnology', compact('technology', 'Topics', 'technologyCohort','technologyCohortID'));
+        return view('technology.viewtechnology', compact('technology', 'Topics', 'technologyCohort', 'technologyCohortID'));
     }
 
     /**
@@ -192,12 +192,44 @@ class TechnologyController extends Controller
         return redirect()->route('categories.indexCohort')->with('success', 'Technology deleted successfully from Roadmap !');
     }
 
+    // public function delete($id)
+    // {
+    //     // Find the technology by ID and delete it
+    //     $technology = Technology::findOrFail($id);
+    //     $technology->delete();
+
+    //     return redirect()->route('categories.index')->with('success', 'Technology deleted successfully!');
+    // }
+
+    // public function delete($id)
+    // {
+    //     $technology = Technology::findOrFail($id);
+
+    //     // Check if the technology is found in other related entities (e.g., topics)
+    //     if ($technology->topics()->exists()) {
+    //         return redirect()->route('categories.index')->with('error', 'Technology is found in other roadmaps. Please remove it from those roadmaps and try again.');
+    //     }
+
+    //     // If no dependencies, delete the technology
+    //     $technology->delete();
+
+    //     return redirect()->route('categories.index')->with('success', 'Technology deleted successfully!');
+    // }
+
     public function delete($id)
     {
-        // Find the technology by ID and delete it
-        $technology = Technology::findOrFail($id);
-        $technology->delete();
+        try {
+            $technology = Technology::findOrFail($id);
+            $categoryId = $technology->technology_category_id;
 
-        return redirect()->route('categories.index')->with('success', 'Technology deleted successfully!');
+            // Attempt to delete the technology
+            $technology->delete();
+
+            // If successful, redirect with success message
+            return redirect("/categories/$categoryId")->with('success', 'Technology deleted successfully!');
+        } catch (\Exception $e) {
+            // If an error occurs (e.g., foreign key constraint violation), redirect with error message
+            return redirect("/categories/$categoryId")->with('error', 'Technology is found in other roadmaps. Please remove it from those roadmaps and try again.');
+        }
     }
 }

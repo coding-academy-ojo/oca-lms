@@ -72,7 +72,9 @@ Technologies
                                         {{ $technology->technologies_name }}
                                     </label>
                                 </div>
-                              
+                               
+                                <a href="{{ url('/technology/delete/' . $technology->id) }}" class="btn btn-danger btn-sm ms-auto">Delete</a>
+
                             </div>
                         </div>
                     </div>

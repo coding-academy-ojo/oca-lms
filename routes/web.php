@@ -224,7 +224,7 @@ Route::get('/categories/{category}', [TechnologyCategoryController::class, 'show
 // View technology details
 Route::get('/technologies/{technology}', [TechnologyController::class, 'show'])->name('technology.show');
 Route::get('/technologies/create/{category}', [TechnologyController::class, 'create'])->name('technology.create');
-Route::delete('/technology/{id}', [TechnologyController::class, 'delete'])->name('technology.delete');
+Route::get('/technology/delete/{id}', [TechnologyController::class, 'delete'])->name('technology.delete');
 
 Route::post('/technologies', [TechnologyController::class, 'store'])->name('technology.store');
 Route::get('/technology/{technology}', [TechnologyController::class, 'showInfo'])->name('technology.showInfo');

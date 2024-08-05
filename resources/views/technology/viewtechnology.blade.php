@@ -35,8 +35,9 @@ Technology
                             @csrf
                             @method('DELETE')
                             <a href="{{ route('technology.edit', ['technology' => $technology]) }}" class=" btn btn-primary m-auto">edit</a>
-                            <button class=" btn btn-primary m-auto" type="submit">Delete</button>
+                            <button class=" btn btn-primary m-auto" type="submit">Remove Technology from Roadmap</button>
                         </form>
+                        
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#exampleModal" data-technologyid="{{$technologyCohort->id }}">
                         Add Topic

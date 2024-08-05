@@ -17,4 +17,9 @@ class Technology_Cohort extends Model
     {
         return $this->hasMany(Topic::class);
     }
+    
+    public function technology()
+    {
+        return $this->belongsTo(Technology::class);
+    }
 }

@@ -29,6 +29,7 @@ class ImportDataController extends Controller
 
         $import = new StudentsImport($cohortId);
         Excel::import($import, $request->file('file'));
+      
 
         $errors = $import->getErrors();
 
@@ -39,6 +40,7 @@ class ImportDataController extends Controller
             foreach ($errors as $index => $error) {
                 $errorMessages[] = 'Row ' . ($index + 1) . ' - ' . implode(', ', $error['errors']);
             }
+            dd($errorMessages);
             return redirect()->back()->with('warning', 'Some rows were not imported: ' . implode('; ', $errorMessages));
         }
     }
