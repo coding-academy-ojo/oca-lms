@@ -120,6 +120,7 @@ class TechnologyController extends Controller
             return redirect()->route('route.to.redirect')->with('error', 'Technology Cohort not found.');
         }
 
+        
         $technologyCohortID = $cohortInfo->pivot->id;
         $technologyCohort = technology_Cohort::find($technologyCohortID);
         // dd($technologyCohort);
