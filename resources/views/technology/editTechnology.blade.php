@@ -26,8 +26,16 @@ Edit Technology
         <div class="addpro">
             <h1 class="text-center mb-4">Edit Topic </h1>
             <!-- edit.blade.php -->
-
-            <form method="POST" action="{{ route('technology.update', ['technology' => $technology->id]) }}" enctype="multipart/form-data">
+            @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            <form method="POST" action="{{ route('technology.update', ['technology' => $technology->id]) }}" enctype="multipart/form-data" class="mb-5">
                 @csrf
                 @method('PUT')
 

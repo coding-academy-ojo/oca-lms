@@ -236,6 +236,8 @@ Route::delete('/technologies/technology/{technology}', [TechnologyController::cl
 // Route::post('technologies/addToCohort', 'TechnologyController@addToCohort')->name('technology.addToCohort');
 // Route::post('/technologies/{technology}/addToCohort', 'TechnologyController@addToCohort')->name('technology.addToCohort');
 Route::post('/technology/addToCohort', 'TechnologyCohortController@addToCohort')->name('technology.addToCohort');
+Route::get('/Roadmap/edit', [TechnologyCohortController::class, 'edit'])->name('Roadmap.edit');
+Route::put('/Roadmap/update', [TechnologyCohortController::class, 'update'])->name('Roadmap.update');
 
 
 

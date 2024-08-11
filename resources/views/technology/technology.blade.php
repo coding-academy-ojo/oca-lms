@@ -31,7 +31,8 @@ Technologies
 <div class="innerPage mt-3">
     <div class="container">
         <div class="col-md-2 ms-auto mb-3">
-            <a href="{{ route('technology.create', ['category' => $category->id]) }}" class="btn btn-primary m-auto">Create technology</a>
+            <a href="{{ route('technology.create', ['category' => $category->id]) }}" class="btn btn-primary m-auto">Create New Technology</a>
+
         </div>
 
         <div class="projectCard">
@@ -72,8 +73,11 @@ Technologies
                                         {{ $technology->technologies_name }}
                                     </label>
                                 </div>
-                               
-                                <a href="{{ url('/technology/delete/' . $technology->id) }}" class="btn btn-danger btn-sm ms-auto">Delete</a>
+                                <div style="    position: absolute; right: 5%;">
+                                    <a href="{{ route('technology.edit', ['technology' => $technology]) }}" class=" btn btn-primary btn-sm m-auto">Edit Technology</a>
+                                    <a href="{{ url('/technology/delete/' . $technology->id) }}" class="btn btn-danger btn-sm ms-auto">Delete</a>
+
+                                </div>
 
                             </div>
                         </div>

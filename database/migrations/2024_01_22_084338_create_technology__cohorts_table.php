@@ -17,7 +17,7 @@ class CreateTechnologyCohortsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('technology_id');
             $table->unsignedBigInteger('cohort_id')->nullable(); // Change to allow NULL values
-            $table->text('technologies_trainingPeriod');
+            $table->text('technologies_trainingPeriod')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->timestamps();

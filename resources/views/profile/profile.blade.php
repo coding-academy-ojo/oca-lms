@@ -159,12 +159,19 @@ Profile
 
             </div>
             <div class="row gutters-sm">
+                @if(session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+                @endif
                 <div class="col-md-4 mb-3">
+
                     <div class="card">
+
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
                                 <!-- <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150"> -->
-                                <img src="{{ $user->staff_personal_img ? asset('storage/' . $user->staff_personal_img) : 'https://bootdey.com/img/Content/avatar/avatar7.png' }}" alt="Admin" class="rounded-circle" width="150">
+                                <img src="{{ $user->staff_personal_img ? asset('images/' . $user->staff_personal_img) : 'https://bootdey.com/img/Content/avatar/avatar7.png' }}" alt="image" class="rounded-circle" style="width: 155px;     height: 155px;">
 
                                 <div class="mt-3">
                                     <h4>{{ $user->staff_name ?? $user->en_first_name }} {{$user->en_last_name }}</h4>
@@ -178,7 +185,7 @@ Profile
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">Email</h6>
-                                <span class="text-secondary">{{ $user->staff_email ?? $user->email }}</span>
+                                <span class="text-secondary">{{ $user->staff_email ?? $user->email  }}</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">Phone Number</h6>

@@ -109,17 +109,20 @@ class TechnologyController extends Controller
 
     public function showInfo(Technology $technology)
     {
+    
         $cohortId = session('cohort_ID');
 
         // Find the specific technology cohort based on the cohort ID and technology ID
-        $technologyCohort = $technology->cohorts()->where('cohort_id', $cohortId)->first();
+        $cohortInfo = $technology->cohorts()->where('cohort_id', $cohortId)->first();
 
-        if (!$technologyCohort) {
+
+        if (!$cohortInfo) {
             return redirect()->route('route.to.redirect')->with('error', 'Technology Cohort not found.');
         }
 
-        $technologyCohortID = $technologyCohort->pivot->id;
-
+        $technologyCohortID = $cohortInfo->pivot->id;
+        $technologyCohort = technology_Cohort::find($technologyCohortID);
+        // dd($technologyCohort);
 
         $Topics = Topic::where('technology_cohort_id', $technologyCohortID)->get();
 
@@ -229,7 +232,7 @@ class TechnologyController extends Controller
             return redirect("/categories/$categoryId")->with('success', 'Technology deleted successfully!');
         } catch (\Exception $e) {
             // If an error occurs (e.g., foreign key constraint violation), redirect with error message
-            return redirect("/categories/$categoryId")->with('error', 'Technology is found in other roadmaps. Please remove it from those roadmaps and try again.');
+            return redirect("/categories/$categoryId")->with('error', 'This technology is already in the roadmap, Please remove it from those roadmaps and try again.');
         }
     }
 }

@@ -245,31 +245,36 @@ Profile
 
 <div class="container">
   <div class="row justify-content-center">
+    <!-- Display errors -->
+    @if ($errors->any())
+    <div class="alert alert-danger">
+      <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+      </ul>
+    </div>
+    @endif
     <div class="col-md-8">
       <div class="card">
         <div class="card-header">{{ __('Edit Profile') }}</div>
 
+
+
+
         <div class="card-body">
-          <form method="POST" action="{{ route('profile.update') }}">
+          <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
             @csrf
 
-            <!-- Display errors -->
-            @if ($errors->any())
-            <div class="alert alert-danger">
-              <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-              </ul>
+            <!-- Email input -->
+            <div class="form-group mb-3">
+              <label for="email">{{ __('Email') }}</label>
+              <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="staff_email" value="{{ old('email', $user->staff_email ?? $user->email) }}" required autocomplete="email">
+              @error('email')
+              <span class="invalid-feedback" role="alert">{{ $message }}</span>
+              @enderror
             </div>
-            @endif
 
-            <!-- Display success message -->
-            @if (session('success'))
-            <div class="alert alert-success" role="alert">
-              {{ session('success') }}
-            </div>
-            @endif
 
             <!-- Name inputs -->
             @if(Auth::guard('students')->check())
@@ -361,8 +366,22 @@ Profile
               @enderror
             </div>
 
+            <div class="form-group mb-3">
+              <label for="linkedin">{{ __('LinkedIn') }}</label>
+              <input id="linkedin" type="text" class="form-control @error('linkedin') is-invalid @enderror" name="linkedin" value="{{ old('linkedin', $user->linkedin ?? '') }}" autocomplete="linkedin">
+              @error('linkedin')
+              <span class="invalid-feedback" role="alert">{{ $message }}</span>
+              @enderror
+            </div>
+
+
+
 
             @else
+
+
+
+
 
 
             <div class="form-group mb-3">
@@ -375,27 +394,15 @@ Profile
 
             <div class="form-group mb-3">
               <label for="phone">{{ __('Phone Number') }}</label>
-              <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone', $user->staff_Phone ?? '') }}" autocomplete="phone">
+              <input id="phone" type="number" class="form-control @error('phone') is-invalid @enderror" name="staff_Phone" value="{{ old('phone', $user->staff_Phone ?? '') }}" autocomplete="phone">
               @error('phone')
               <span class="invalid-feedback" role="alert">{{ $message }}</span>
               @enderror
             </div>
 
-
-            @auth('students')
-            <div class="form-group mb-3">
-              <label for="linkedin">{{ __('LinkedIn') }}</label>
-              <input id="linkedin" type="text" class="form-control @error('linkedin') is-invalid @enderror" name="linkedin" value="{{ old('linkedin', $user->linkedin ?? '') }}" autocomplete="linkedin">
-              @error('linkedin')
-              <span class="invalid-feedback" role="alert">{{ $message }}</span>
-              @enderror
-            </div>
-            @endauth
-
-
             <div class="form-group mb-3">
               <label for="bio">{{ __('Bio') }}</label>
-              <textarea id="bio" class="form-control @error('bio') is-invalid @enderror" name="bio" rows="4" autocomplete="bio">{{ old('bio', $user->staff_bio ?? $user->about) }}</textarea>
+              <textarea id="bio" class="form-control @error('bio') is-invalid @enderror" name="staff_bio" rows="4" autocomplete="bio">{{ old('bio', $user->staff_bio ?? $user->about) }}</textarea>
               @error('bio')
               <span class="invalid-feedback" role="alert">{{ $message }}</span>
               @enderror
@@ -403,14 +410,7 @@ Profile
 
             @endif
 
-            <!-- Email input -->
-            <div class="form-group mb-3">
-              <label for="email">{{ __('Email') }}</label>
-              <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', $user->staff_email ?? $user->email) }}" required autocomplete="email">
-              @error('email')
-              <span class="invalid-feedback" role="alert">{{ $message }}</span>
-              @enderror
-            </div>
+
             <br>
 
             <!-- Image input -->
@@ -426,6 +426,7 @@ Profile
             <div class="form-group">
               <button type="submit" class="btn btn-primary">{{ __('Update Profile') }}</button>
             </div>
+
           </form>
 
         </div>
