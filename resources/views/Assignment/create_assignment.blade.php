@@ -157,7 +157,7 @@
                                                 <label class="my-2">Date</label>
                                                 <div>
                                                     <input type="date" class="form-control" name="due_date"
-                                                        min="{{ date('Y-m-d') }}" required>
+                                                        required>
                                                     <div class="invalid-feedback">This field is required</div>
                                                 </div>
                                             </div>

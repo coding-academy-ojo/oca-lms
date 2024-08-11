@@ -52,7 +52,8 @@ Announcements
                             </div>
                             <div class="form-group mb-3">
                                 <label for="deadline">Deadline</label>
-                                <input type="date" id="deadline" name="deadline" class="form-control" required min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
+                                <input type="date" id="deadline" name="deadline" class="form-control" >
+                                <!-- <input type="date" id="deadline" name="deadline" class="form-control" required min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}"> -->
                             </div>
                             <button type="submit" class="btn btn-primary">Set Deadline</button>
                         </form>
