@@ -59,7 +59,7 @@ Technology
                     <h1>{{ $technology->technologies_name }}</h1>
                     <p>Description: {{ $technology->technologies_description }}</p>
                     <p>Resources:<a href="{{ $technology->technologies_resources }}" target="_blank"> {{ $technology->technologies_resources }}</a></p>
-                    <p>Estimated time for this technology : {{ $technologyCohort->technologies_trainingPeriod ?? $technology->technologies_trainingPeriod  }}</p>
+                    <p>Estimated time for this technology : {{ $technologyCohort->technologies_training_period ?? $technology->technologies_training_period  }}</p>
                     <p>Starting Date for this technology : {{ $technologyCohort->start_date }}</p>
                     <p>Ending Date for this technology : {{ $technologyCohort->end_date }}</p>
                     <!-- Add more details as needed -->

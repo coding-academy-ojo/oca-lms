@@ -42,7 +42,7 @@ Edit Technology
                 <!-- start_date -->
                 <div class="mb-4">
                     <label for="technologies_name" class="form-label">Estimated time for this technology</label>
-                    <input type="text" class="form-control" id="technologies_name" name="technologies_trainingPeriod" value="{{ $technology->technologies_trainingPeriod }}">
+                    <input type="text" class="form-control" id="technologies_name" name="technologies_training_period" value="{{ $technology->technologies_training_period }}">
                 </div>
 
 

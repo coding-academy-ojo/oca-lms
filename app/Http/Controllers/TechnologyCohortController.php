@@ -180,7 +180,7 @@ class TechnologyCohortController extends Controller
         $RoadmapTechId = $request->technologyID;
         $technology = technology_Cohort::find($RoadmapTechId);
         $validatedData = $request->validate([
-            'technologies_trainingPeriod' =>'required',
+            'technologies_training_period' =>'required',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
         ]);
