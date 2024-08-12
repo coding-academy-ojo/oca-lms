@@ -74,8 +74,8 @@ Technologies
                                     </label>
                                 </div>
                                 <div style="    position: absolute; right: 5%;">
-                                    <a href="{{ route('technology.edit', ['technology' => $technology]) }}" class=" btn btn-primary btn-sm m-auto">Edit Technology</a>
-                                    <a href="{{ url('/technology/delete/' . $technology->id) }}" class="btn btn-danger btn-sm ms-auto">Delete</a>
+                                    <a href="{{ route('technology.edit', ['technology' => $technology]) }}" class=" btn btn-primary btn-sm m-auto"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a href="{{ url('/technology/delete/' . $technology->id) }}" class="btn btn-danger btn-sm ms-auto"><i class="fa-solid fa-trash-can"></i></a>
 
                                 </div>
 

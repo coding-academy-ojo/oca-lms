@@ -65,7 +65,9 @@ class ProfileController extends Controller
             // Add the image path to the validated data
             $validatedData['staff_personal_img'] = $imageName;
         }
-        // dd($validatedData);
+
+        $user->staff_Phone= $request->staff_Phone ;
+        // dd($user->staff_Phone);
 
         // Update user profile
         $user->update($validatedData);
@@ -127,51 +129,7 @@ class ProfileController extends Controller
     }
 
 
-    // public function resetPassword(Request $request)
-    // {
-    //     dd($request);
-    //     $user = Auth::guard('staff')->check() ? Auth::guard('staff')->user() : Auth::guard('students')->user();
-
-    //     $request->validate([
-    //         'old-password' => 'required|string',
-    //         'password' => 'required|string|min:8|confirmed',
-    //     ]);
-
-    //     if (!Hash::check($request->input('old-password'), $user->password)) {
-    //         return redirect()->back()->withErrors(['old-password' => 'The old password provided is incorrect'])->withInput();
-    //     }
-
-    //     $user->update([
-    //         'password' => Hash::make($request->password),
-    //     ]);
-
-    //     return redirect()->back()->with('success', 'Password updated successfully');
-    // }
-
-
-
-    // public function resetPassword(Request $request)
-    // {
-    //     $user = Auth::guard('staff')->check() ? Auth::guard('staff')->user() : Auth::guard('students')->user();
-
-    //     $request->validate([
-    //         'old-password' => 'required|string',
-    //         'password' => 'required|string|min:8|confirmed',
-    //     ]);
-
-    //     if (!Hash::check($request->input('old-password'), $user->getAuthPassword())) {
-    //         return redirect()->back()->withErrors(['old-password' => 'The old password provided is incorrect'])->withInput();
-    //     }
-
-    //     // Determine which column to update based on the user type
-    //     $passwordColumn = Auth::guard('staff')->check() ? 'staff_password' : 'password';
-
-    //     $user->update([
-    //         $passwordColumn => Hash::make($request->password),
-    //     ]);
-
-    //     return redirect()->back()->with('success', 'Password updated successfully');
-    // }
+   
 
 
     public function resetPassword(Request $request)

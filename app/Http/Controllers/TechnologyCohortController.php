@@ -184,9 +184,9 @@ class TechnologyCohortController extends Controller
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
         ]);
+        $technology->technologies_training_period= $request->technologies_training_period ;
         
-        // dd($technology);
-
+        // dd( $technology->technologies_training_period);
         // Update the technology record with validated data
         $technology->update($validatedData);
         $RoadmapTechnology = technology_Cohort::find($RoadmapTechId);
