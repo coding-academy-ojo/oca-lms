@@ -170,8 +170,8 @@ class TrainerDashboardController extends Controller
                 $status = 'Not Started';
             }
     
-            $start_date = Carbon::parse($technology->pivot->start_date)->format('d-F-Y');
-
+          $start_date = $startDate->format('d-F-Y');
+    
             $technologiesData[] = [
                 'start_date' => $start_date,
                 'name' => $technology->technologies_name,
@@ -184,7 +184,7 @@ class TrainerDashboardController extends Controller
         }
     
         return $technologiesData;
-    }
+    }   
     
     private function softSkillsForCohort($cohort)
     {

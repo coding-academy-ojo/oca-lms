@@ -39,7 +39,10 @@
                 <div class="card-body">
                     <div class="d-flex w-100 justify-content-between">
                         <h3 class="mb-0 text-primary">Cohort Information</h3>
-                        <a href="{{ route('import-data.index', ['id' => $cohort->id]) }}" class="btn btn-info">Import Data</a>
+                        <div class="d-flex gap-2 flex-column">
+                            <a href="{{ route('absence', ['cohort_id' => $cohort->id]) }}" class="btn btn-primary">Cohort Absence</a>
+                            <a href="{{ route('import-data.index', ['id' => $cohort->id]) }}" class="btn btn-info">Import Data</a>
+                    </div>
                     </div>
                     <div class="my-3">
                         @if($cardsStatistics['cohort'])

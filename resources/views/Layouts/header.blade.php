@@ -66,6 +66,7 @@
                                 href="{{ route('staff.index') }}">Staff</a>
 
                         </li>
+                        
                     @endif
                     @if (Auth::guard('staff')->user()->role == 'trainer')
                         <li class="nav-item dropdown">
@@ -100,13 +101,14 @@
                                     href="{{ route('categories.indexCohort') }}">Roadmap</a>
                             </div>
                         </li>
+                        {{-- <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('absence') ? 'text-primary' : '' }}"
+                                href="{{ route('absence') }}">Absence</a>
+                        </li> --}}
                     @endif
 
                     @if (in_array(Auth::guard('staff')->user()->role, ['manager', 'trainer']))
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('absence') ? 'text-primary' : '' }}"
-                                href="{{ route('absence') }}">Absence</a>
-                        </li>
+                     
 
 
                         <li class="nav-item">
