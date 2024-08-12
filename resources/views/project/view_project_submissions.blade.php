@@ -86,7 +86,7 @@ View Project Submissions
     <tbody>
         @foreach($submissions as $submission)
             <tr>
-                <td>{{ $submission->student->en_first_name }}</td>
+                <td>{{ $submission->student->en_first_name }} {{ $submission->student->en_last_name }}</td>
                 <td>
                     <a href="{{ route('view_submissions_feedback', ['project_id' => $project->id, 'submission_id' => $submission->id]) }}" target="_blank">
                         {{ $submission->submission_link }}
