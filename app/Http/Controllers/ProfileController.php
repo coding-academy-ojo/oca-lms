@@ -65,7 +65,9 @@ class ProfileController extends Controller
             // Add the image path to the validated data
             $validatedData['staff_personal_img'] = $imageName;
         }
-        // dd($validatedData);
+
+        $user->staff_Phone= $request->staff_Phone ;
+        // dd($user->staff_Phone);
 
         // Update user profile
         $user->update($validatedData);
