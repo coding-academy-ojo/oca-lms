@@ -81,11 +81,11 @@ Create Project
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="project_start_date" class="form-label">Start Date</label>
-                <input min="{{ date('Y-m-d') }}" type="date" class="form-control" id="project_start_date" name="project_start_date" required>
+                <input  type="date" class="form-control" id="project_start_date" name="project_start_date" required>
             </div>
             <div class="col-md-6 mb-3">
                 <label for="project_delivery_date" class="form-label">Delivery Date</label>
-                <input  min="{{ date('Y-m-d') }}" type="date" class="form-control" id="project_delivery_date" name="project_delivery_date" required>
+                <input  type="date" class="form-control" id="project_delivery_date" name="project_delivery_date" required>
             </div>
         </div>
 

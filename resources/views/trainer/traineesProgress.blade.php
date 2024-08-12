@@ -135,58 +135,6 @@ Trainees Progress
         </div>
     </div>
 
-    <!-- Skills carousel -->
-    <div class="container my-5">
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="carousel-title text-primary">Overview on Skills Status</h2>
-                <hr>
-            </div>
-        </div>
-        <div id="carouselExample" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                @if (!empty($skillsStatus))
-                    @foreach(array_chunk($skillsStatus, 4) as $skillChunk)
-                        <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                            <div class="d-flex justify-content-between">
-                                @foreach($skillChunk as $skill)
-                                    <div class="flex-grow-1 mx-2 skill-card">
-                                        <div class="pb-1">
-                                            <p class="skill-title">{{ $skill['skill_name'] }}</p>
-                                        </div>
-                                        <div class="skill-levels">
-                                            @foreach($skill['levels'] as $level)
-                                                <div class="progress skill-progress">
-                                                    <div id="levels-progress-bar" class="progress-bar" role="progressbar" style="width: {{ $level['progress'] }}%;">
-                                                        <span>{{ $level['level_name'] }}</span>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    @endforeach
-                @else
-                    <p>No skills data available.</p>
-                @endif
-            </div>
-            <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-    </div>
-
-   
-
-
-
    <!-- Table for All trainees  -->
    
       <div class="row my-5">

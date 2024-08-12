@@ -65,7 +65,7 @@ class TraineesProgressController extends Controller
     
         if ($totalStudents == 0) {
             return [
-                'cohort_name' => $runningCohort->cohort_name,
+                'cohort_name' => $cohort->cohort_name,
                 'date' => Carbon::now()->format('d-F-Y'),
                 'total_students' => 0,
                 'attended' => 0,
