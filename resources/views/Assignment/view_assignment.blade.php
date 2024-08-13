@@ -33,25 +33,24 @@
         @endif
         {{-- search based on assignmnet name & topic name  --}}
         <div class="row d-flex col-7 flex-wrap">
-            <form action="" method="GET" class="d-flex gap-2 ">
+            <form action="" method="GET" class="d-flex gap-2">
                 <div class="col-7 d-flex border border-light">
                     <input type="text" class="form-control border border-white"
                         placeholder="search by assignment name or topic" name="search" value="{{ request('search') }}">
                     <button class="btn rounded-0 bg-primary" type="submit"><i class="fas fa-search"></i></button>
                 </div>
-                {{-- filter based on technology --}}
-                {{-- <div class="col-2"> --}}
-                <select class="form-select" name="technology_id" aria-label="Default select example">
+            
+                {{-- Filter based on technology --}}
+                <select class="form-select" name="technology_id" aria-label="Default select example" onchange="this.form.submit()">
                     <option value="">All Technologies</option>
                     @foreach ($technologies as $technology)
-                        <option value="{{ $technology->id }}">
+                        <option value="{{ $technology->id }}" {{ request('technology_id') == $technology->id ? 'selected' : '' }}>
                             {{ $technology->technologies_name }}
                         </option>
                     @endforeach
                 </select>
-                {{-- </div> --}}
-
             </form>
+            
         </div>
         <div class="m-auto ">
             <div class="my-5">
