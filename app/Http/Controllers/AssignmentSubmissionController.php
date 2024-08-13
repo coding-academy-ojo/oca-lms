@@ -50,6 +50,7 @@ class AssignmentSubmissionController extends Controller
         $assignment_submision->attached_file = $request->input('Assignment_submission');
         $assignment_submision->assignment_id = $request->input('Assignment_ID');
         $assignment_submision->student_id = $studentId;
+        $assignment_submision->status = 'not pass';
         $assignment_submision->created_at = Carbon::now();
         $assignmnetId = $request->input('Assignment_ID');
         $Assignment = Assignment::find($assignmnetId);

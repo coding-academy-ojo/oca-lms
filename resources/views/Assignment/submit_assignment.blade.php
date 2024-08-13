@@ -59,7 +59,7 @@
                                 @endif
 
                                 <td><a class="link-underline link-underline-opacity-0"
-                                        href={{ $Assignment->attached_file }}target="_blank">{{ $Assignment->attached_file }}</a>
+                                        href={{ $Assignment->attached_file }}>{{ $Assignment->attached_file }}</a>
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-primary  add-feedback-btn ms-3"
@@ -68,10 +68,10 @@
                                     </button>
                                 </td>
                                 <td>
-                                    @if ($Assignment->status == 'not pass')
-                                        😭❌
+                                    @if ($Assignment->status == 'Pass')
+                                            😀 ✔
                                     @else
-                                        😀 ✔
+                                            😭❌
                                     @endif
 
                                 </td>
