@@ -122,11 +122,12 @@ Trainees Progress
                             <h4 class="card-title text-primary">Projects Assessment</h4>
                             @if ($projectsAssessment)
                                 <canvas id="ProjectsAssessment"></canvas>
+                                <a href="{{ route('view_project_submissions', $projectsAssessment['latestProjectWithSubmissionId']) }}">
+                                    <p class="card-title" style="font-size: 1rem;">{{ $projectsAssessment['latestProjectWithSubmissionName'] }}</p>
+                                </a>
                             @else
                                 <p>No projects assessment data available.</p>
-                                <a href="{{ route('view_project_submissions', $projectsAssessment['latestProjectWithSubmission->id']) }}">
-                                    <p class="card-title" style="font-size: 1rem;">{{ $projectsAssessment['latestProjectWithSubmission->project_name'] }}</p>
-                                </a>
+                                
                             @endif
                         </div>
                     </div>
