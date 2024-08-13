@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Student;
 use Illuminate\Http\Request;
 use App\Academy;
 use App\Cohort;
@@ -21,10 +22,12 @@ class SuperManagerController extends Controller
     private function getDashboardData() {
         $totalAcademies = Academy::count(); 
 
-        $totalStudentsEnrolled = Cohort::where('cohort_end_date', '>', Carbon::now()->format('Y-m-d'))
-                                        ->withCount('students')
-                                        ->get()
-                                        ->sum('students_count');
+        $totalStudentsEnrolled = Student::count();
+        // Cohort::
+        // where('cohort_end_date', '>', Carbon::now()->format('Y-m-d'))
+        //                                 ->withCount('students')
+        //                                 ->get()
+        //                                 ->sum('students_count');
 
         $totalStudentsGraduated = Cohort::where('cohort_end_date', '<=', Carbon::now()->format('Y-m-d'))
                                          ->withCount('students')

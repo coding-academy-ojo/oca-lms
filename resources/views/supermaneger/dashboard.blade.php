@@ -2,143 +2,158 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 @section('title')
-    Dashboard
+Academies Cohorts Overview
 @endsection
 @section('content')
     @include('Layouts.innerNav')
 
 
-<style>
-       .dashboard-cards {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        margin: 20px 0;
-    }
-
-    .dashboard-card {
-        /* background-color: #FFA500; */
-        /* color: white; */
-        max-width: 373px;
-
-        border: 2px solid #e66c37; /* Adjusted to a darker border for visibility */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        flex-grow: 1;
-        margin: 10px;
-        text-align: center;
-        border-radius: 4px; /* Optional for rounded corners */
-    }
-
-    .dashboard-card h3 {
-        margin: 0;
-        padding: 0;
-        font-size: 1.5rem;
-    }
-
-    .dashboard-card p {
-        font-size: 2.5rem; 
-        margin: 5px 0 15px; 
-        font-weight: bold;
-    }
-
-    /* Adjustments for responsiveness */
-    @media (max-width: 768px) {
+    <style>
         .dashboard-cards {
-            flex-direction: column;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 20px 0;
         }
 
         .dashboard-card {
-            width: 100%;
+            /* background-color: #FFA500; */
+            /* color: white; */
+            max-width: 373px;
+
+            border: 2px solid #e66c37;
+            /* Adjusted to a darker border for visibility */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            flex-grow: 1;
+            margin: 10px;
+            text-align: center;
+            border-radius: 4px;
+            /* Optional for rounded corners */
         }
-    }
-    @media (max-width: 768px) {
-    /* Specific adjustment for academyPerformanceChart */
-    #academy-chart-container {
-        height: 300px; /* Fixed height */
-    }
-}
-@media (max-width: 768px) {
-    /* Targeting only the specific chart container */
-    .chart-row .chart-container-half {
-        height: 300px; /* Fixed height */
-    }
-}
 
-
-    /* Adjust the styles for charts as needed */
-    .chart-row {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        align-items: flex-start;
-    }
-
-    .chart-container-half {
-        flex: 1 0 calc(50vh - 10px); /* flex grow | flex shrink | flex basis */
-        height: 50vh;
-        margin: 5px; /* Added some margin for spacing */
-    }
-
-    .chart-container-wide {
-        flex: 0 0 calc(90vw - 10px); 
-        height: 50vh;
-        margin: 5px; 
-    }
-
-    /* Additional responsive styling if necessary */
-    @media (max-width: 768px) {
-        .chart-container-half,
-        .chart-container-wide {
-            width: 100%;
-            flex-basis: 100%;
-            height: auto;
+        .dashboard-card h3 {
+            margin: 0;
+            padding: 0;
+            font-size: 1.5rem;
         }
-    }
-    .card-custom {
-        background-color: #ffffff;
-        border: none;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        margin-bottom: 30px;
-        border-radius: 0.5rem;
-        padding: 20px;
-    }
 
-    .card-header-custom {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.75rem 1.25rem;
-        margin-bottom: 0;
-        background-color: rgba(0, 0, 0, .03);
-        border-bottom: 1px solid rgba(0, 0, 0, .125);
-    }
+        .dashboard-card p {
+            font-size: 2.5rem;
+            margin: 5px 0 15px;
+            font-weight: bold;
+        }
 
-    .card-filter-group {
-        display: flex;
-        gap: 0.5rem;
-    }
+        /* Adjustments for responsiveness */
+        @media (max-width: 768px) {
+            .dashboard-cards {
+                flex-direction: column;
+            }
 
-    .dropdown-toggle::after {
-        margin-left: 0.5rem;
-    }
+            .dashboard-card {
+                width: 100%;
+            }
+        }
 
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .card-header-custom {
-            flex-direction: column;
+        @media (max-width: 768px) {
+
+            /* Specific adjustment for academyPerformanceChart */
+            #academy-chart-container {
+                height: 300px;
+                /* Fixed height */
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            /* Targeting only the specific chart container */
+            .chart-row .chart-container-half {
+                height: 300px;
+                /* Fixed height */
+            }
+        }
+
+
+        /* Adjust the styles for charts as needed */
+        .chart-row {
+            gap: 75px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
             align-items: flex-start;
         }
 
-        .card-filter-group {
-            width: 100%;
-            justify-content: space-between;
-            margin-top: 0.5rem;
+
+        .chart-container-half {
+    flex: 1 1 45%; /* Allows each chart to take up roughly half of the container's width */
+    max-width: 100%;
+    height: 300px; /* Fixed height, adjust as needed */
+    margin: 5px;
+    box-sizing: border-box;
+}
+
+.chart-container-wide {
+    flex: 1 1 90%;
+    max-width: 100%;
+    height: 300px; /* Fixed height, adjust as needed */
+    margin: 5px;
+    box-sizing: border-box;
+}
+
+        /* Additional responsive styling if necessary */
+        @media (max-width: 768px) {
+
+            .chart-container-half,
+            .chart-container-wide {
+                width: 100%;
+                flex-basis: 100%;
+                height: auto;
+            }
         }
-    }
-    
- </style>
-{{-- <div class="container my-5">
+
+        .card-custom {
+            background-color: #ffffff;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            border-radius: 0.5rem;
+            padding: 20px;
+        }
+
+        .card-header-custom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1.25rem;
+            margin-bottom: 0;
+            background-color: rgba(0, 0, 0, .03);
+            border-bottom: 1px solid rgba(0, 0, 0, .125);
+        }
+
+        .card-filter-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .dropdown-toggle::after {
+            margin-left: 0.5rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .card-header-custom {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .card-filter-group {
+                width: 100%;
+                justify-content: space-between;
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+    {{-- <div class="container my-5">
     <div class="row">
         <!-- Filter Card -->
         <div class="col-12">
@@ -184,19 +199,19 @@
                 <h3>Number of Academies</h3>
                 <p>{{ $dashboardCardsData['totalAcademies'] }}</p>
             </div>
-            
+
         </div>
         <div class="container my-5 chart-row">
-            
+
             <div class="chart-container-half">
                 <h3 class="text-primary">Number of students Enrolled Overview</h3>
                 <canvas id="graduatesByAcademy"></canvas>
             </div>
-            
+
             <div class="chart-container-half">
                 <h3 class="text-primary">Graduated Students Overview</h3>
-                <canvas id="totalSummaryChart"></canvas>
-            
+                <canvas  id="totalSummaryChart"></canvas>
+
             </div>
         </div>
         <div class="container my-5 chart-row">
@@ -204,27 +219,37 @@
                 <h3 class="text-primary">Cohorts Per Academy Overview</h3>
                 <canvas id="academyPerformanceChart"></canvas>
             </div>
-            
+
         </div>
     </div>
 
     <script>
-document.addEventListener('DOMContentLoaded', function() {
-    var graduatesByAcademyData = @json($graduatesByAcademyData);
-    
-    var ctx1 = document.getElementById('graduatesByAcademy').getContext('2d');
-    var graduatesByAcademyChart = new Chart(ctx1, {
-        type: 'bar',
-        data: graduatesByAcademyData,
-        options: {
-            indexAxis: 'y',
-            scales: {
-                x: {
-                    beginAtZero: true
+        document.addEventListener('DOMContentLoaded', function() {
+            var graduatesByAcademyData = @json($graduatesByAcademyData);
+
+            var ctx1 = document.getElementById('graduatesByAcademy').getContext('2d');
+            var graduatesByAcademyChart = new Chart(ctx1, {
+                type: 'bar',
+                data: graduatesByAcademyData,
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false // Hides the legend
+                        },
+                        tooltip: {
+                            enabled: true // Hides the tooltips
+                        }
+                    },
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true
+                        }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
                 }
-            }
-        }
-    });
+            });
 
             // After initializing graduatesByAcademyChart...
 
@@ -232,59 +257,86 @@ document.addEventListener('DOMContentLoaded', function() {
             var academyPerformanceChartData = @json($academyPerformanceChartData);
 
             var ctx = document.getElementById('academyPerformanceChart').getContext('2d');
-        var academyPerformanceChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: academyPerformanceChartData.labels,
-                datasets: academyPerformanceChartData.datasets
-            },
-            options: {
-                scales: {
-                    x: {
-                        stacked: false,
-                    },
-                    y: {
-                        stacked: false,
-                        beginAtZero: true
-                    }
+            var academyPerformanceChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: academyPerformanceChartData.labels,
+                    datasets: academyPerformanceChartData.datasets
                 },
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        });
-
-        var totalSummaryChartData = @json($totalSummaryChartData);
-
-var ctx3 = document.getElementById('totalSummaryChart').getContext('2d');
-var totalSummaryChart = new Chart(ctx3, {
-    type: 'doughnut',
-    data: {
-        labels: totalSummaryChartData.labels,
-        datasets: totalSummaryChartData.datasets
-    },
-    options: {
-        cutout: '60%',
-        maintainAspectRatio: false,
-        plugins: {
-            tooltip: {
-                callbacks: {
-                    label: function(context) {
-                        var label = context.label || '';
-                        if (label) {
-                            label += ': ';
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false // Hides the legend
+                        },
+                        tooltip: {
+                            enabled: true // Hides the tooltips
                         }
-                        var total = context.dataset.data.reduce((previousValue, currentValue) => previousValue + currentValue, 0);
-                        var currentValue = context.dataset.data[context.dataIndex];
-                        var percentage = ((currentValue / total) * 100).toFixed(2);
-                        label += currentValue + ' (' + percentage + '%)';
-                        return label;
-                    }
+                    },
+                    scales: {
+                        x: {
+                            stacked: false,
+                        },
+                        y: {
+                            stacked: false,
+                            beginAtZero: true
+                        }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                    // width: 600,
+                    // height: 200
                 }
-            }
-        }
-    }
-});
+            });
 
-});
-</script>
+
+            var totalSummaryChartData = @json($totalSummaryChartData);
+
+            var ctx3 = document.getElementById('totalSummaryChart').getContext('2d');
+            var totalSummaryChart = new Chart(ctx3, {
+                type: 'bar', // Change type to 'bar'
+                data: {
+                    labels: totalSummaryChartData.labels, // Use existing labels
+                    datasets: totalSummaryChartData.datasets // Use existing datasets
+                },
+                options: {
+                  
+                    indexAxis: 'y', // Horizontal bars (set to 'x' for vertical bars)
+                    scales: {
+                        x: {
+                            beginAtZero: true // Start x-axis from zero
+                        },
+                        y: {
+                            beginAtZero: true // Start y-axis from zero if needed
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    var label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    var value = context.raw; // Get the value of the bar
+                                    var total = context.dataset.data.reduce((a, b) => a + b,
+                                    0); // Total for percentage calculation
+                                    var percentage = ((value / total) * 100).toFixed(2);
+                                    label += value + ' (' + percentage + '%)';
+                                    return label;
+                                }
+                            }
+                        },
+                        legend: {
+                            display: false // Display the legend if needed
+                        }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                    
+                }
+            });
+
+
+        });
+    </script>
 @endsection
