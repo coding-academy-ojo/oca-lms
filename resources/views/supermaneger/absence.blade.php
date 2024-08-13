@@ -19,14 +19,14 @@
             <div class="d-flex gap-2">
                 <input id="search_student" type="text" class="form-control" placeholder="Search Trainee..."
                     aria-label="Search">
-                @auth('staff')
+                {{-- @auth('staff')
                     @if (Auth::guard('staff')->user()->role == 'manager')
                         <select class="form-select" id="cohortSelect">
 
                             <!-- Options -->
                         </select>
                     @endif
-                @endauth
+                @endauth --}}
             </div>
         </div>
 

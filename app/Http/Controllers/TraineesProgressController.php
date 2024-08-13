@@ -36,11 +36,15 @@ class TraineesProgressController extends Controller
             'attendanceOverview', 'lateAssignmentSubmissions', 'assignmentAssessment', 
             'projectAssessment', 'allTrainessOverview', 'skillsStatus','projectsAssessment'
         ));    }
+
+
     private function attendanceOverview() {
         $staff = Auth::guard('staff')->user();
         $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
-    
-        if (!$runningCohort) {
+        $cohortId = session('cohort_ID');
+        $cohort = Cohort::find($cohortId);
+        //dd($runningCohort);
+        if (!$cohort) {
             // If no running cohort is found, return a default set of values
             return [
                 'cohort_name' => 'N/A',
@@ -55,13 +59,13 @@ class TraineesProgressController extends Controller
             ];
         }
         
-    
-        $students = $runningCohort->students;
+ 
+        $students = $cohort->students;
         $totalStudents = $students->count();
     
         if ($totalStudents == 0) {
             return [
-                'cohort_name' => $runningCohort->cohort_name,
+                'cohort_name' => $cohort->cohort_name,
                 'date' => Carbon::now()->format('d-F-Y'),
                 'total_students' => 0,
                 'attended' => 0,
@@ -87,7 +91,7 @@ class TraineesProgressController extends Controller
         $latePercentage = $totalStudents > 0 ? ($lateCount / $totalStudents) * 100 : 0;
     
         return [
-            'cohort_name' => $runningCohort->cohort_name,
+            'cohort_name' => $cohort->cohort_name,
             'date' => Carbon::now()->format('d-F-Y'),
             'total_students' => $totalStudents,
             'attended' => $attended,
@@ -99,12 +103,13 @@ class TraineesProgressController extends Controller
         ];
     }
     
-    
+     
     private function lateAssignmentSubmissions() {
         $staff = Auth::guard('staff')->user();
         $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
-        
-        if (!$runningCohort) {
+        $cohortId = session('cohort_ID');
+        $cohort = Cohort::find($cohortId);
+        if (!$cohort) {
             // No running cohort found for the staff
             return [
                 'message' => 'No running cohort found.',
@@ -124,13 +129,13 @@ class TraineesProgressController extends Controller
         }
     
         $today = now()->toDateString();
-        $totalStudents = $runningCohort->students->count();
+        $totalStudents = $cohort->students->count();
 
         // Get the latest assignment
         $latestAssignment = Assignment::latest()->first();
         $latestAssignmentId = $latestAssignment->id;
-        $todaySubmissions = AssignmentSubmission::whereHas('assignment', function ($query) use ($runningCohort) {
-            $query->where('cohort_id', $runningCohort->id);
+        $todaySubmissions = AssignmentSubmission::whereHas('assignment', function ($query) use ($cohortId) {
+            $query->where('cohort_id', $cohortId);
         })->whereDate('created_at', '=', $today)->get();
 
         $Submissions= AssignmentSubmission::where('assignment_id', $latestAssignmentId)->get();
@@ -173,8 +178,9 @@ class TraineesProgressController extends Controller
     private function assignmentAssessment() {
         $staff = Auth::guard('staff')->user();
         $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
-        
-        if (!$runningCohort) {
+        $cohortId = session('cohort_ID');
+        $cohort = Cohort::find($cohortId);
+        if (!$cohort) {
             // No running cohort found for the staff
             return [
                 'message' => 'No running cohort found.',
@@ -189,7 +195,7 @@ class TraineesProgressController extends Controller
         }
     
         // Get the latest assignment for the running cohort
-        $latestAssignment = Assignment::where('cohort_id', $runningCohort->id)->latest()->first();
+        $latestAssignment = Assignment::where('cohort_id', $cohort->id)->latest()->first();
     
         if (!$latestAssignment) {
             return [
@@ -233,6 +239,8 @@ class TraineesProgressController extends Controller
     private function projectAssessment() {
         $staff = Auth::guard('staff')->user();
         $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
+        $cohortId = session('cohort_ID');
+        $cohort = Cohort::find($cohortId);
         return 0;
     }
 
@@ -241,6 +249,9 @@ class TraineesProgressController extends Controller
         $cohortID = session('cohort_ID');
         $students = Student::where('cohort_id', $cohortID)->get();
         $cohortProjectsCount = Project::where('cohort_id', $cohortID)->count();
+
+        //getting latestproject 
+        
         $studentsOverview = [];
     //dd($students);
         foreach ($students as $student) {
@@ -253,11 +264,12 @@ class TraineesProgressController extends Controller
     
             $studentsOverview[] = [
                 'id' => $student->id,
-                'name' => $student->en_first_name . ' ' . $student->en_second_name,
+                'name' => $student->en_first_name . ' ' . $student->en_last_name,
                 'internship_status' => $student->internship_status,
                 'passedPercentage' => intval($passedPercentage),
                 'passedProjectsCount' => $passedProjectsCount,
-                'cohortProjectsCount' => $cohortProjectsCount
+                'cohortProjectsCount' => $cohortProjectsCount,
+               
             ];
         }
     
@@ -267,8 +279,8 @@ class TraineesProgressController extends Controller
     public function showDetails($id){
     // Retrieve the student details based on the provided ID
     $student = Student::find($id);
-    // Pass the student details to the view
-    return view('trainer.trainee_progress_details', compact('student'));
+       // Pass the student details to the view
+    return view('trainer.trainee_progress_details', compact('student', 'latestProject'));
 }
 private function skillsStatus() {
     // Fetch all levels
@@ -301,8 +313,14 @@ private function skillsStatus() {
 private function projectsAssessment() {
     $staff = Auth::guard('staff')->user();
     $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
+    $cohortID = session('cohort_ID'); // Assuming the cohort ID is stored in the session
+    $cohort = Cohort::find($cohortID);
+    $latestProjectWithSubmission = $this->getLatestProjectWithSubmission($cohortID);
+    $latestProjectWithSubmissionName = $latestProjectWithSubmission->project_name;
+    $latestProjectWithSubmissionId = $latestProjectWithSubmission->id;
 
-    if (!$runningCohort) {
+//  dd($latestProjectWithSubmission);
+    if (!$cohort) {
         return [
             'message' => 'No running cohort found.',
             'passedStudents' => 0,
@@ -310,14 +328,12 @@ private function projectsAssessment() {
         ];
     }
 
-    $students = $runningCohort->students;
-
+    $students = $cohort->students;
     $passedStudentsCount = 0;
     $failedStudentsCount = 0;
 
     foreach ($students as $student) {
-        $projects = Project::where('cohort_id', $runningCohort->id)->pluck('id');
-
+        $projects = Project::where('cohort_id', $cohort->id)->pluck('id');
         $projectStatus = TraineeSkillsProgress::whereIn('project_id', $projects)
             ->where('student_id', $student->id)
             ->where('project_status', 1)
@@ -333,7 +349,25 @@ private function projectsAssessment() {
     return [
         'passedStudents' => $passedStudentsCount,
         'failedStudents' => $failedStudentsCount,
+        'latestProjectWithSubmission' => $latestProjectWithSubmission,
+        'latestProjectWithSubmissionName' =>  $latestProjectWithSubmissionName,
+        'latestProjectWithSubmissionId' => $latestProjectWithSubmissionId
     ];
 }
+
+public function getLatestProjectWithSubmission($cohortID)
+{
+    // Find the latest project with at least one submission for the given cohort ID
+    $latestProjectWithSubmission = Project::where('cohort_id', $cohortID)
+        ->whereHas('submissions', function ($query) {
+            $query->whereNotNull('submission_link');
+        })
+        ->orderBy('created_at', 'desc')
+        ->with('submissions') // Eager load submissions to avoid N+1 problem
+        ->first();
+
+    return $latestProjectWithSubmission;
+}
+
 
 }

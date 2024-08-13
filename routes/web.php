@@ -146,7 +146,7 @@ Route::get('/traineesProgress', [TraineesProgressController::class, 'index'])->n
 
 
 // absence
-Route::get('/absence-report', [AbsenceReportController::class, 'index'])->name('absence');
+Route::get('/absence-report/{cohort_id?}', [AbsenceReportController::class, 'index'])->name('absence');
 Route::post('/absence/upload/{absence_id}', [AbsenceReportController::class,'UploudAbsenceReport'])->name('absence.upload');
 Route::get('/absence/{absence_id}/download', [AbsenceReportController::class,'downloadAbsenceReport'])->name('absence.download');
 
@@ -224,7 +224,7 @@ Route::get('/categories/{category}', [TechnologyCategoryController::class, 'show
 // View technology details
 Route::get('/technologies/{technology}', [TechnologyController::class, 'show'])->name('technology.show');
 Route::get('/technologies/create/{category}', [TechnologyController::class, 'create'])->name('technology.create');
-Route::delete('/technology/{id}', [TechnologyController::class, 'delete'])->name('technology.delete');
+Route::get('/technology/delete/{id}', [TechnologyController::class, 'delete'])->name('technology.delete');
 
 Route::post('/technologies', [TechnologyController::class, 'store'])->name('technology.store');
 Route::get('/technology/{technology}', [TechnologyController::class, 'showInfo'])->name('technology.showInfo');
@@ -236,6 +236,8 @@ Route::delete('/technologies/technology/{technology}', [TechnologyController::cl
 // Route::post('technologies/addToCohort', 'TechnologyController@addToCohort')->name('technology.addToCohort');
 // Route::post('/technologies/{technology}/addToCohort', 'TechnologyController@addToCohort')->name('technology.addToCohort');
 Route::post('/technology/addToCohort', 'TechnologyCohortController@addToCohort')->name('technology.addToCohort');
+Route::get('/Roadmap/edit', [TechnologyCohortController::class, 'edit'])->name('Roadmap.edit');
+Route::put('/Roadmap/update', [TechnologyCohortController::class, 'update'])->name('Roadmap.update');
 
 
 

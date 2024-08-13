@@ -86,7 +86,7 @@ class TechnologyCohortController extends Controller
             $existingTechnologyNames = Technology::whereIn('id', $existingTechnologies)
                 ->pluck('technologies_name')
                 ->all();
-            
+
             return redirect()->back()->with('error', 'The following technologies are already added to the cohort: ' . implode(', ', $existingTechnologyNames));
         }
 
@@ -101,7 +101,6 @@ class TechnologyCohortController extends Controller
         }
 
         return redirect()->back()->with('success', 'Selected technologies added to the cohort successfully.');
-  
     }
 
 
@@ -160,9 +159,13 @@ class TechnologyCohortController extends Controller
      * @param  \App\Technology_Cohort  $technology_Cohort
      * @return \Illuminate\Http\Response
      */
-    public function edit(Technology_Cohort $technology_Cohort)
+    public function edit(Request $ID)
     {
-        //
+
+        $technology = Technology_Cohort::findOrFail($ID->ID);
+        //    dd($technology);
+
+        return view('technology.editRoadmapTechnology', compact('technology'));
     }
 
     /**
@@ -172,9 +175,29 @@ class TechnologyCohortController extends Controller
      * @param  \App\Technology_Cohort  $technology_Cohort
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Technology_Cohort $technology_Cohort)
+    public function update(Request $request)
     {
-        //
+        $RoadmapTechId = $request->technologyID;
+        $technology = technology_Cohort::find($RoadmapTechId);
+        $validatedData = $request->validate([
+            'technologies_training_period' =>'required',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after:start_date',
+        ]);
+        $technology->technologies_training_period= $request->technologies_training_period ;
+        
+        // dd( $technology->technologies_training_period);
+        // Update the technology record with validated data
+        $technology->update($validatedData);
+        $RoadmapTechnology = technology_Cohort::find($RoadmapTechId);
+        // $GeneralTechnology = Technology::find($RoadmapTechnology->technology_id);
+
+
+        // dd($RoadmapTechnology->technology_id);
+        // Redirect back with a success message
+        return redirect()->route('technology.showInfo', ['technology' => $RoadmapTechnology->technology_id])
+            ->with('success', 'Technology updated successfully');
+            
     }
 
     /**

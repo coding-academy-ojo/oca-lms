@@ -31,16 +31,17 @@ Technology
                                              gap: 1rem;">
 
                         @if(Auth::guard('staff')->check() && Auth::guard('staff')->user()->role === 'trainer')
+                       
                         <form method="POST" action="{{ route('technology.destroy', ['technology' => $technology]) }}">
                             @csrf
                             @method('DELETE')
-                            <a href="{{ route('technology.edit', ['technology' => $technology]) }}" class=" btn btn-primary m-auto">edit</a>
-                            <button class=" btn btn-primary m-auto" type="submit">Delete</button>
+                            <a href="{{ route('Roadmap.edit', ['ID' => $technologyCohortID]) }}" class=" btn btn-primary  m-auto">Edit Technology</a>
+                            <button class=" btn btn-primary m-auto" type="submit">Remove Technology from Roadmap</button>
                         </form>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal" data-technologyid="{{$technologyCohort->id }}">
-                        Add Topic
-                    </button>
+
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-technologyid="{{$technologyCohortID }}">
+                            Add Topic
+                        </button>
                         @endif
 
                     </div>
@@ -58,7 +59,9 @@ Technology
                     <h1>{{ $technology->technologies_name }}</h1>
                     <p>Description: {{ $technology->technologies_description }}</p>
                     <p>Resources:<a href="{{ $technology->technologies_resources }}" target="_blank"> {{ $technology->technologies_resources }}</a></p>
-                    <p>Training Period: {{ $technology->technologies_trainingPeriod }}</p>
+                    <p>Estimated time for this technology : {{ $technologyCohort->technologies_training_period ?? $technology->technologies_training_period  }}</p>
+                    <p>Starting Date for this technology : {{ $technologyCohort->start_date }}</p>
+                    <p>Ending Date for this technology : {{ $technologyCohort->end_date }}</p>
                     <!-- Add more details as needed -->
                     <!-- <p>Category: {{ $technology->technology_category_id }}</p> -->
                     <!-- If you have an image, you can display it like this -->
@@ -73,26 +76,24 @@ Technology
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($Topics as $topic)                                    
+                                @foreach ($Topics as $topic)
                                 <tr>
-                                        <td>{{ $topic->id }}</td>
-                                        <td>{{ $topic->topic_name }}</td>
-                                        <td>
-                                            <div class="my-auto d-flex">
-                                                <a class="mx-2" data-bs-toggle="modal" data-bs-target="#editTopicModal{{$topic->id}}" href=""><i
-                                                        class="fa-solid fa-pen-to-square"></i></a>
-                                          
-                                                <form action="{{ route('topic.destroy', $topic->id) }}" method="post">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="border border-0 m-auto bg-white"
-                                                        onclick="return confirm('Are you sure you want to delete this topic')">
-                                                        <i class="fa-solid fa-trash" style="color: #FF7900;"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    <td>{{ $topic->id }}</td>
+                                    <td>{{ $topic->topic_name }}</td>
+                                    <td>
+                                        <div class="my-auto d-flex">
+                                            <a class="mx-2" data-bs-toggle="modal" data-bs-target="#editTopicModal{{$topic->id}}" href=""><i class="fa-solid fa-pen-to-square"></i></a>
+
+                                            <form action="{{ route('topic.destroy', $topic->id) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="border border-0 m-auto bg-white" onclick="return confirm('Are you sure you want to delete this topic')">
+                                                    <i class="fa-solid fa-trash" style="color: #FF7900;"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -102,7 +103,7 @@ Technology
         </div>
     </div>
 </div>
-{{-- Model to save new topic  --}}                                    
+{{-- Model to save new topic  --}}
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

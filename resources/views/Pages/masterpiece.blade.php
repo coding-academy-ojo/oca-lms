@@ -52,7 +52,8 @@ Announcements
                             </div>
                             <div class="form-group mb-3">
                                 <label for="deadline">Deadline</label>
-                                <input type="date" id="deadline" name="deadline" class="form-control" required min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
+                                <input type="date" id="deadline" name="deadline" class="form-control" >
+                                <!-- <input type="date" id="deadline" name="deadline" class="form-control" required min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}"> -->
                             </div>
                             <button type="submit" class="btn btn-primary">Set Deadline</button>
                         </form>
@@ -92,7 +93,7 @@ Announcements
                                     <select id="student-select" class="form-control" name="student_id">
                                         <option value="">Select Student</option>
                                         @foreach ($students as $student)
-                                            <option value="{{ $student->id }}">{{ $student->en_first_name }} {{ $student->en_second_name }}</option>
+                                            <option value="{{ $student->id }}">{{ $student->en_first_name }} {{ $student->en_last_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -145,7 +146,7 @@ Announcements
                                 <select id="student-select" class="form-control" name="student_id">
                                     <option value="">Select Student</option>
                                     @foreach ($students as $student)
-                                        <option value="{{ $student->id }}">{{ $student->en_first_name }} {{ $student->en_second_name }}</option>
+                                        <option value="{{ $student->id }}">{{ $student->en_first_name }} {{ $student->en_last_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -177,7 +178,7 @@ Announcements
                                 <select id="student-select-internship" class="form-control" name="student_id">
                                     <option value="">Select Student</option>
                                     @foreach ($students as $student)
-                                        <option value="{{ $student->id }}">{{ $student->en_first_name }} {{ $student->en_second_name }}</option>
+                                        <option value="{{ $student->id }}">{{ $student->en_first_name }} {{ $student->en_last_name }}</option>
                                     @endforeach
                                 </select>
                             </div>

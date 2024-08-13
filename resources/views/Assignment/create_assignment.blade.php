@@ -157,7 +157,7 @@
                                                 <label class="my-2">Date</label>
                                                 <div>
                                                     <input type="date" class="form-control" name="due_date"
-                                                        min="{{ date('Y-m-d') }}" required>
+                                                        required>
                                                     <div class="invalid-feedback">This field is required</div>
                                                 </div>
                                             </div>
@@ -192,7 +192,7 @@
                                                     </label>
                                                     @foreach($students as $student)
                                                     <label>
-                                                        <input class="form-check-input" type="checkbox"  name="students[]" value="{{ $student->id }}">{{ $student->en_first_name }} {{ $student->en_second_name }}  
+                                                        <input class="form-check-input" type="checkbox"  name="students[]" value="{{ $student->id }}">{{ $student->en_first_name }} {{ $student->en_last_name }}  
                                                     </label>
                                                 @endforeach
                              
