@@ -55,7 +55,7 @@
                                 class="img-fluid rounded-circle" alt="">
                         </div>
 
-                        <h3 class="mt-4 mb-1">{{$student->en_first_name}} {{$student->en_second_name}}</h3>
+                        <h3 class="mt-4 mb-1">{{$student->en_first_name}} {{$student->en_last_name}}</h3>
                         <p class="text-muted"> {{$student->educational_background}}</p>
                         <p class="text-muted"> Certificate Type: {{$student->certificate_type}}</p>
                         <p class="text-muted"> Internship Status: {{ $student->internship_status ? 'Interned' : 'Not Interned' }} </p>
