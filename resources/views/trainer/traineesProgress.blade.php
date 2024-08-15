@@ -28,7 +28,13 @@ Trainees Progress
 </section>
 
 <style>
-/* Add your custom styles here */
+    .project-name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+        display: block;
+    }
 </style>
 
 <div class="container">
@@ -123,7 +129,7 @@ Trainees Progress
                             @if ($projectsAssessment)
                                 <canvas id="ProjectsAssessment"></canvas>
                                 <a href="{{ route('view_project_submissions', $projectsAssessment['latestProjectWithSubmissionId']) }}">
-                                    <p class="card-title" style="font-size: 1rem;">{{ $projectsAssessment['latestProjectWithSubmissionName'] }}</p>
+                                    <p class="card-title project-name" style="font-size: 1rem;">{{ $projectsAssessment['latestProjectWithSubmissionName'] }}</p>
                                 </a>
                             @else
                                 <p>No projects assessment data available.</p>
