@@ -68,10 +68,10 @@
                                     </button>
                                 </td>
                                 <td>
-                                    @if ($Assignment->status == 'Pass')
-                                            😀 ✔
+                                    @if ($Assignment->status == 'not pass')
+                                    😭❌     
                                     @else
-                                            😭❌
+                                    😀 ✔
                                     @endif
 
                                 </td>
