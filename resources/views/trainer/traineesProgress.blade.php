@@ -92,7 +92,7 @@ Trainees Progress
                             <div class="progress mb-2 my-4">
                                 <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['latePercentage'] }}%">{{ $lateAssignmentSubmissions['latePercentage'] }}%</div>
                             </div>
-                            <small>{{ $lateAssignmentSubmissions['latePercentage'] }} Trainees Submit Late of {{ $lateAssignmentSubmissions['numberOfSubmissions'] }}</small>
+                            <small>{{ $lateAssignmentSubmissions['lateSubmissionsCount'] }} Trainees Submit Late of {{ $lateAssignmentSubmissions['numberOfSubmissions'] }}</small>
                             @if ($assignmentAssessment)
                                 <a href="{{ route('assignment.show', $assignmentAssessment['latestAssignmentId']) }}">
                                     <p class="card-title mt-3" style="font-size: 1rem;">{{ $assignmentAssessment['latestAssignmentTitle'] }}</p>
