@@ -49,7 +49,7 @@
                         {{-- show submissions details --}}
                         @foreach ($AssignmentSubmission as $Assignment)
                             <tr>
-                                <td>{{ $Assignment->student->en_first_name }} {{ $Assignment->student->en_second_name }}
+                                <td>{{ $Assignment->student->en_first_name }} {{ $Assignment->student->en_last_name }}
                                 </td>
                                 <td>{{ $Assignment->assignment->assignment_name }}</td>
                                 @if ($Assignment->is_late == 1)
