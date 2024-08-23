@@ -204,7 +204,7 @@ Academies Cohorts Overview
         <div class="container my-5 chart-row">
 
             <div class="chart-container-half">
-                <h3 class="text-primary">Number of students Enrolled Overview</h3>
+                <h3 class="text-primary">Enrolled Students Overview</h3>
                 <canvas id="graduatesByAcademy"></canvas>
             </div>
 
@@ -302,13 +302,15 @@ Academies Cohorts Overview
                   
                     indexAxis: 'y', // Horizontal bars (set to 'x' for vertical bars)
                     scales: {
-                        x: {
-                            beginAtZero: true // Start x-axis from zero
-                        },
-                        y: {
-                            beginAtZero: true // Start y-axis from zero if needed
-                        }
-                    },
+            x: {
+                stacked: true,
+                barPercentage: 0.8, // Adjust this to control the width of bars relative to the category
+                categoryPercentage: 0.9 // Example: adjust this value to control the width
+            },
+            y: {
+                stacked: true
+            }
+        },
                     plugins: {
                         tooltip: {
                             callbacks: {

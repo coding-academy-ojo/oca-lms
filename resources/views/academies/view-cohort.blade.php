@@ -40,9 +40,14 @@
                     <div class="d-flex w-100 justify-content-between">
                         <h3 class="mb-0 text-primary">Cohort Information</h3>
                         <div class="d-flex gap-2 flex-column">
-                            <a href="{{ route('absence', ['cohort_id' => $cohort->id]) }}" class="btn btn-primary">Cohort Absence</a>
+                            @if (in_array(Auth::guard('staff')->user()->role, ['trainer', 'manager']))
+                                @php
+                                    $encryptedCohortId = Crypt::encryptString($cohort->id);
+                                @endphp
+                                <a href="{{ route('absence', ['cohort_id' => $encryptedCohortId]) }}" class="btn btn-primary">Cohort Absence</a>
+                            @endif
                             <a href="{{ route('import-data.index', ['id' => $cohort->id]) }}" class="btn btn-info">Import Data</a>
-                    </div>
+                        </div>
                     </div>
                     <div class="my-3">
                         @if($cardsStatistics['cohort'])
@@ -65,7 +70,24 @@
             <div class="card shadow-sm">
                 <div style="height: 380px" class="card-body">
                     <h3 class="text-primary">Weekly Attendance Report</h3>
+                    @if($attendanceOverview['cohort_status'] == 'active')
                     <canvas id="totalSummaryChart"></canvas>
+                @else
+                    <div class="text-center my-4">
+                        <p class="fs-5 text-dark">
+                            This cohort graduated. 
+                            @if (in_array(Auth::guard('staff')->user()->role, ['trainer', 'manager']))
+                            For more info click here
+                                @php
+                                    $encryptedCohortId = Crypt::encryptString($cohort->id);
+                                @endphp
+                                <a href="{{ route('absence', ['cohort_id' => $encryptedCohortId]) }}" class="text-primary mt-2">cohort absence</a>
+                                 to display absences data.
+                            @endif
+                        </p>
+                    </div>
+                @endif
+                
                 </div>
             </div>
         </div>

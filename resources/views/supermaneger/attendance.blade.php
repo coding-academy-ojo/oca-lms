@@ -11,7 +11,8 @@
 
     <nav style="padding: 50px 50px 0;" aria-label="breadcrumb" class="breadcrumb-container">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('academyview') }}">Cohort 4</a></li>
+
+            <li class="breadcrumb-item"><a href="{{ route('academyview') }}">Academies</a></li>
             <li class="breadcrumb-item active" aria-current="page">Attendance</li>
         </ol>
     </nav>
@@ -102,7 +103,7 @@
                                 <th scope="col">Trainee</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Reason</th>
-                                <th scope="col">Duration (Hours)</th>
+                                <th scope="col">Duration (Minutes)</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
