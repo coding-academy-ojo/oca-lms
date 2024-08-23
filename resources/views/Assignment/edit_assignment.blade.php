@@ -199,16 +199,18 @@
                                                 <div class="dropdown-button form-control" onclick="toggleDropdown()">Select
                                                     Student</div>
                                                 <div class="dropdown-content" id="dropdownContent">
+                                                    @if(!$isAllAssigned)
                                                     <label>
                                                         <input class="form-check-input" type="checkbox" name="students[]"
                                                             value="" onclick="selectAll()">All students
                                                     </label>
+                                                    @endif
                                                     @foreach ($assignmentStudents as $student)
                                                         <label>
                                                             <input class="form-check-input" type="checkbox"
                                                                 name="students[]"
                                                                 value="{{ $student->id }}">{{ $student->en_first_name }}
-                                                            {{ $student->en_second_name }}
+                                                            {{ $student->en_last_name }}
                                                         </label>
                                                     @endforeach
 

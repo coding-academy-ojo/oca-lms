@@ -55,12 +55,10 @@
                                 class="img-fluid rounded-circle" alt="">
                         </div>
 
-                        <h3 class="mt-4 mb-1">{{$student->en_first_name}} {{$student->en_second_name}}</h3>
+                        <h3 class="mt-4 mb-1">{{$student->en_first_name}} {{$student->en_last_name}}</h3>
                         <p class="text-muted"> {{$student->educational_background}}</p>
                         <p class="text-muted"> Certificate Type: {{$student->certificate_type}}</p>
-                        <p class="text-muted">
-                           {{ $student->internship_status ? 'Interned' : 'Not Interned' }}
-                    </p>
+                        <p class="text-muted"> Internship Status: {{ $student->internship_status ? 'Interned' : 'Not Interned' }} </p>
                         <ul class="list-group mb-3 list-group-flush">
                             
                             <li class="list-group-item px-0 d-flex justify-content-between">

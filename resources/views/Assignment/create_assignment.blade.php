@@ -192,7 +192,7 @@
                                                     </label>
                                                     @foreach($students as $student)
                                                     <label>
-                                                        <input class="form-check-input" type="checkbox"  name="students[]" value="{{ $student->id }}">{{ $student->en_first_name }} {{ $student->en_second_name }}  
+                                                        <input class="form-check-input" type="checkbox"  name="students[]" value="{{ $student->id }}">{{ $student->en_first_name }} {{ $student->en_last_name }}  
                                                     </label>
                                                 @endforeach
                              

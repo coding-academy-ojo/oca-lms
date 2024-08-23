@@ -28,7 +28,13 @@ Trainees Progress
 </section>
 
 <style>
-/* Add your custom styles here */
+    .project-name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+        display: block;
+    }
 </style>
 
 <div class="container">
@@ -66,37 +72,68 @@ Trainees Progress
                     </div>
                 </div>
                 
-                <!-- Assignments Review -->
-                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-4">
-                    <div class="widget-stat card">
-                        <div class="card-body">
-                            <p class="card-title text-primary mb-4" style="font-size: 1.2rem;">Assignment Review</p>
-                            <div class="progress mb-2 my-4">
-                                <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['passSubmissionsStatus'] }}%">{{ $lateAssignmentSubmissions['passSubmissionsStatus'] }}%</div>
-                            </div>
-                            <small>{{ $lateAssignmentSubmissions['passSubmissionsCount'] }} Trainees Passed of {{ $lateAssignmentSubmissions['numberOfSubmissions'] }}</small>
-                            <div class="progress mb-2 my-4">
-                                <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['notPassSubmissionsPercentage'] }}%">{{ $lateAssignmentSubmissions['notPassSubmissionsPercentage'] }}%</div>
-                            </div>
-                            @if ($lateAssignmentSubmissions['notPassSubmissionsPercentage'] == 100)
-                                <small>All Assignments are reviewed</small>
-                            @else
-                                <small>{{ $lateAssignmentSubmissions['notPassSubmissionsCount'] }} Trainees not reviewed yet of {{ $lateAssignmentSubmissions['numberOfSubmissions'] }}</small>
-                            @endif
-                            <div class="progress mb-2 my-4">
-                                <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['latePercentage'] }}%">{{ $lateAssignmentSubmissions['latePercentage'] }}%</div>
-                            </div>
-                            <small>{{ $lateAssignmentSubmissions['latePercentage'] }} Trainees Submit Late of {{ $lateAssignmentSubmissions['numberOfSubmissions'] }}</small>
-                            @if ($assignmentAssessment)
-                                <a href="{{ route('assignment.show', $assignmentAssessment['latestAssignmentId']) }}">
-                                    <p class="card-title mt-3" style="font-size: 1rem;">{{ $assignmentAssessment['latestAssignmentTitle'] }}</p>
-                                </a>
-                            @else
-                                <p>No recent assignments found.</p>
-                            @endif
-                        </div>
-                    </div>
+               <!-- Assignments Review -->
+<!-- Assignments Review -->
+<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-4">
+    <div class="widget-stat card">
+        <div class="card-body">
+            <p class="card-title text-primary mb-4" style="font-size: 1.2rem;">Assignment Review</p>
+
+            <!-- Passed Submissions Progress Bar -->
+            <div class="progress mb-2 my-4">
+                <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['passSubmissionsStatus'] }}%">
+                    {{ $lateAssignmentSubmissions['passSubmissionsStatus'] }}%
                 </div>
+            </div>
+            
+            <!-- Check if passSubmissionsStatus is zero -->
+            @if ($lateAssignmentSubmissions['passSubmissionsStatus'] == 0)
+                <small>No submissions yet</small>
+                @else
+                <small>{{ $lateAssignmentSubmissions['passSubmissionsCount'] }} Trainees Passed of {{ $lateAssignmentSubmissions['numberOfSubmissions'] }}</small>
+            @endif
+
+            <!-- Not Passed Submissions Progress Bar -->
+            <div class="progress mb-2 my-4">
+                <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['notPassSubmissionsPercentage'] }}%">
+                    {{ $lateAssignmentSubmissions['notPassSubmissionsPercentage'] }}%
+                </div>
+            </div>
+            @if ($lateAssignmentSubmissions['notPassSubmissionsPercentage'] == 100)
+                <small>All Assignments are reviewed</small>
+            @else
+                <small>{{ $lateAssignmentSubmissions['notPassSubmissionsCount'] }} Trainees not reviewed yet of {{ $lateAssignmentSubmissions['numberOfSubmissions'] }}</small>
+            @endif
+
+            <!-- Late Submissions Progress Bar -->
+            <div class="progress mb-2 my-4">
+                <div class="progress-bar progress-animated bg-success" style="width: {{ $lateAssignmentSubmissions['latePercentage'] }}%">
+                    {{ $lateAssignmentSubmissions['latePercentage'] }}%
+                </div>
+            </div>
+           
+            
+            <!-- Check if lateSubmissionsCount is zero -->
+            @if ($lateAssignmentSubmissions['lateSubmissionsCount'] == 0) 
+            <small>No late submissions</small>
+            @else
+            <small>{{ $lateAssignmentSubmissions['lateSubmissionsCount'] }} Trainees Submit Late of {{ $lateAssignmentSubmissions['numberOfSubmissions'] }}</small>
+            
+            @endif
+
+            <!-- Latest Assignment Assessment -->
+            @if ($assignmentAssessment)
+                <a href="{{ route('assignment.show', $assignmentAssessment['latestAssignmentId']) }}">
+                    <p class="card-title mt-3" style="font-size: 1rem;">{{ $assignmentAssessment['latestAssignmentTitle'] }}</p>
+                </a>
+            @else
+                <p>No recent assignments found.</p>
+            @endif
+        </div>
+    </div>
+</div>
+
+
 
                 <!-- Assignments Submission -->
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-4" style="width: 300px;">
@@ -122,11 +159,12 @@ Trainees Progress
                             <h4 class="card-title text-primary">Projects Assessment</h4>
                             @if ($projectsAssessment)
                                 <canvas id="ProjectsAssessment"></canvas>
+                                <a href="{{ route('view_project_submissions', $projectsAssessment['latestProjectWithSubmissionId']) }}">
+                                    <p class="card-title project-name" style="font-size: 1rem;">{{ $projectsAssessment['latestProjectWithSubmissionName'] }}</p>
+                                </a>
                             @else
                                 <p>No projects assessment data available.</p>
-                                <a href="{{ route('view_project_submissions', $projectsAssessment['latestProjectWithSubmission->id']) }}">
-                                    <p class="card-title" style="font-size: 1rem;">{{ $projectsAssessment['latestProjectWithSubmission->project_name'] }}</p>
-                                </a>
+                                
                             @endif
                         </div>
                     </div>

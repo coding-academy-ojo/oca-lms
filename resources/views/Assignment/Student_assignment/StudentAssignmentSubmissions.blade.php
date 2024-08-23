@@ -33,11 +33,11 @@
             <div class="border border-light my-2">
                 @foreach ($assignment_submissions as $assignment_submission)
                     <p class="mx-3 py-1">{{ $assignment_submission->student->en_first_name }}
-                        {{ $assignment_submission->student->en_second_name }}</p>
+                        {{ $assignment_submission->student->en_last_name }}</p>
                     <div class="d-flex justify-content-between border border-light my-3 py-3 mx-3">
 
                         <div class="mx-4"> <a class="link-underline link-underline-opacity-0"
-                                href={{ $assignment_submission->attached_file }}target="_blank">{{ $assignment_submission->attached_file }}</a>
+                                href={{ $assignment_submission->attached_file }}>{{ $assignment_submission->attached_file }}</a>
                         </div>
                         <div class="mx-4"> {{ $assignment_submission->created_at }}</div>
                     </div>

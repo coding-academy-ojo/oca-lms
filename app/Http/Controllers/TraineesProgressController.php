@@ -316,8 +316,10 @@ private function projectsAssessment() {
     $cohortID = session('cohort_ID'); // Assuming the cohort ID is stored in the session
     $cohort = Cohort::find($cohortID);
     $latestProjectWithSubmission = $this->getLatestProjectWithSubmission($cohortID);
+    $latestProjectWithSubmissionName = $latestProjectWithSubmission->project_name;
+    $latestProjectWithSubmissionId = $latestProjectWithSubmission->id;
 
-    //dd($latestProjectWithSubmission);
+//  dd($latestProjectWithSubmission);
     if (!$cohort) {
         return [
             'message' => 'No running cohort found.',
@@ -347,7 +349,9 @@ private function projectsAssessment() {
     return [
         'passedStudents' => $passedStudentsCount,
         'failedStudents' => $failedStudentsCount,
-        'latestProjectWithSubmission' => $latestProjectWithSubmission
+        'latestProjectWithSubmission' => $latestProjectWithSubmission,
+        'latestProjectWithSubmissionName' =>  $latestProjectWithSubmissionName,
+        'latestProjectWithSubmissionId' => $latestProjectWithSubmissionId
     ];
 }
 

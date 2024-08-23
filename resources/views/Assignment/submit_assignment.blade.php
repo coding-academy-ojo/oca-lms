@@ -49,7 +49,7 @@
                         {{-- show submissions details --}}
                         @foreach ($AssignmentSubmission as $Assignment)
                             <tr>
-                                <td>{{ $Assignment->student->en_first_name }} {{ $Assignment->student->en_second_name }}
+                                <td>{{ $Assignment->student->en_first_name }} {{ $Assignment->student->en_last_name }}
                                 </td>
                                 <td>{{ $Assignment->assignment->assignment_name }}</td>
                                 @if ($Assignment->is_late == 1)
@@ -59,7 +59,7 @@
                                 @endif
 
                                 <td><a class="link-underline link-underline-opacity-0"
-                                        href={{ $Assignment->attached_file }}target="_blank">{{ $Assignment->attached_file }}</a>
+                                        href={{ $Assignment->attached_file }}>{{ $Assignment->attached_file }}</a>
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-primary  add-feedback-btn ms-3"
@@ -69,9 +69,9 @@
                                 </td>
                                 <td>
                                     @if ($Assignment->status == 'not pass')
-                                        😭❌
+                                    😭❌     
                                     @else
-                                        😀 ✔
+                                    😀 ✔
                                     @endif
 
                                 </td>
