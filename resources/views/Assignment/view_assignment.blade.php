@@ -80,13 +80,7 @@
                                 </td>
                                 <td>{{ optional($assignment->topic)->topic_name }}</td>
                                 <td>
-
-                                    {{-- Accessing the technology through the topic's technology cohort --}}
-                                    @if ($assignment->topic && $assignment->topic->technologyCohort)
-                                        {{-- Accessing the technology through the topic's technology cohort --}}
-                                        {{ $assignment->topic->technologyCohort->technology_id }}
-                                        {{-- {{ optional(optional(optional($assignment->topic)->technologyCohort)->technology)->technologies_name }} --}}
-                                    @endif
+                                    {{ $assignment->topic->technologyCohort->technology->technologies_name }}
                                 </td>
                                 <td> <a class="mx-2 link-underline link-underline-opacity-0"
                                         href="{{ route('assignment.show', $assignment->id) }}">view</a>

@@ -122,16 +122,35 @@ class AssignmentController extends Controller
      * @param  \App\Assignment  $assignment
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    // public function show($id)
+    // {
+    //     $assignment = Assignment::find($id);
+    //     $cohortID = session('cohort_ID');
+        
+        
+    //     $AssignmentSubmission = AssignmentSubmission::where('assignment_id',$id)->get();
+
+
+    //     return view('Assignment.submit_assignment', compact('assignment','AssignmentSubmission'));
+    // }
+
+    public function show(Request $request, $id)
     {
-        $assignment = Assignment::find($id);
         $cohortID = session('cohort_ID');
+        $assignment = Assignment::where('cohort_id', $cohortID)->findOrFail($id); 
+        // $query = Assignment::where('cohort_id', $cohortID);
+        $search = $request->input('search');
+        $AssignmentSubmission = AssignmentSubmission::where('assignment_id', $id)
+            ->when($search, function ($assignment, $search) {
+                return $assignment->whereHas('student', function ($studentQuery) use ($search) {
+                    $studentQuery->where('en_first_name', 'like', '%' . $search . '%')
+                                 ->orWhere('en_last_name', 'like', '%' . $search . '%');
+                });
+            })
+            ->paginate(5);
     
-        $AssignmentSubmission = AssignmentSubmission::where('assignment_id',$id)->get();
-
-        return view('Assignment.submit_assignment', compact('assignment','AssignmentSubmission'));
+        return view('Assignment.submit_assignment', compact('assignment', 'AssignmentSubmission'));
     }
-
     /**
      * Show the form for editing the specified resource.
      *

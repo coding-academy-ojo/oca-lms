@@ -16,6 +16,7 @@
     </section>
     <div class="contanier">
         <div class="col-10 m-auto">
+    
             <h2 class="col-12 m-auto">{{ $assignment->assignment_name }}</h2>
             {{-- <div class="col-12 m-auto my-3"><b>Technology:</b> {{ $assignment->topic->roadmap->technologies->technology_name }}</div> --}}
             <div class="col-12 m-auto my-3"><b>Topic:</b> {{ $assignment->topic->topic_name }}</div>
@@ -30,7 +31,14 @@
             </div>
         </div>
         <div class="col-10 m-auto">
-            <div class="table-responsive">
+            <div class="table-responsive mb-3 mt-3">
+                <form action="" method="GET" class="d-flex gap-2">
+                    <div class="col-7 d-flex border border-light">
+                        <input type="text" class="form-control border border-white"
+                            placeholder="search by student name" name="search" value="{{ request('search') }}">
+                        <button class="btn rounded-0 bg-primary" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
                 <table class="table table-hover ">
                     {{-- show all submission for assignmnet with details  --}}
                     <caption class="visually fs-3 text-primary mb-2">View Assignments Submissions</caption>
@@ -115,5 +123,8 @@
             </div>
         </div>
     @endforeach
+    <div class="d-flex justify-content-center">
+        {{ $AssignmentSubmission->links() }}
+    </div>
     </div>
 @endsection

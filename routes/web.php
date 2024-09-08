@@ -157,25 +157,26 @@ Route::get('/student-dashboard', [StudentDashboardController::class, 'index'])->
 
 /////////////////////////////////////////////
 // rawan bilal
-
-//Assignment Route
-Route::get('/Assignments', [AssignmentController::class, 'index'])->name('assignments');
-Route::get('/Assignment/create', [AssignmentController::class ,'create'])->name('assignment.create');
-Route::post('/asssignment/store', [AssignmentController::class ,'store'])->name('assignment.store');
-Route::get('/assignments/{assignment}', [AssignmentController::class ,'show'])->name('assignment.show');
-Route::get('/assignment/{assignment}/edit', [AssignmentController::class ,'edit'])->name('assignment.edit');
-Route::put('/assignment/{assignment}', [AssignmentController::class ,'update'])->name('assignment.update');
-Route::delete('/assignment/{assignment}', [AssignmentController::class ,'destroy'])->name('assignment.destroy');
-Route::get('/download/{filename}', [AssignmentController::class, 'downloads'])->name('download');
-Route::delete('assignment/{assignment}/student/{student}',[AssignmentController::class,'removeStudent'] )->name('assignment.removeStudent');
+// Route::middleware(['role:trainer'])->group(function () {
+// //Assignment Route
+// // Route::get('/Assignments', [AssignmentController::class, 'index'])->name('assignments');
+// // Route::get('/Assignment/create', [AssignmentController::class ,'create'])->name('assignment.create');
+// // Route::post('/asssignment/store', [AssignmentController::class ,'store'])->name('assignment.store');
+// // Route::get('/assignments/{assignment}', [AssignmentController::class ,'show'])->name('assignment.show');
+// // Route::get('/assignment/{assignment}/edit', [AssignmentController::class ,'edit'])->name('assignment.edit');
+// // Route::put('/assignment/{assignment}', [AssignmentController::class ,'update'])->name('assignment.update');
+// // Route::delete('/assignment/{assignment}', [AssignmentController::class ,'destroy'])->name('assignment.destroy');
+// // Route::get('/download/{filename}', [AssignmentController::class, 'downloads'])->name('download');
+// // Route::delete('assignment/{assignment}/student/{student}',[AssignmentController::class,'removeStudent'] )->name('assignment.removeStudent');
+// });
 
 
 //student assignment&submission route
-Route::get('Student/Assignments', [AssignmentSubmissionController::class, 'index'])->name('student.assignments');
-Route::post('Student/asssignment/store', [AssignmentSubmissionController::class ,'store'])->name('Student.assignment.store');
-Route::get('Student/assignments/{assignment}', [AssignmentSubmissionController::class ,'show'])->name('Student.assignment.show');
-Route::put('/assignment/feedback/{assignment}', [AssignmentSubmissionController::class ,'update'])->name('submission_feedback.update');
-Route::put('/assignment/feedbackStatus/{assignment}', [AssignmentSubmissionController::class ,'changeStatus'])->name('changeStatus.update');
+//Route::get('Student/Assignments', [AssignmentSubmissionController::class, 'index'])->name('student.assignments');
+//Route::post('Student/asssignment/store', [AssignmentSubmissionController::class ,'store'])->name('Student.assignment.store');
+//Route::get('Student/assignments/{assignment}', [AssignmentSubmissionController::class ,'show'])->name('Student.assignment.show');
+// Route::put('/assignment/feedback/{assignment}', [AssignmentSubmissionController::class ,'update'])->name('submission_feedback.update');
+// Route::put('/assignment/feedbackStatus/{assignment}', [AssignmentSubmissionController::class ,'changeStatus'])->name('changeStatus.update');
 
 
 
@@ -186,12 +187,9 @@ Route::get('/Assignments/feedback/{assignmnet}', [AssignmentFeedbackController::
 Route::get('/Assignments/feedback/{id}/{studentId}', [AssignmentFeedbackController::class, 'submissionfedback'])->name('assignment.feedbacksubmission.feedback');
 
 
+
 //Topic route
-Route::get('/Topic/create', [TopicController::class ,'create'])->name('topic.create');
-Route::post('/topic/store', [TopicController::class ,'store'])->name('topic.store');
-Route::get('/topic/{topic}/edit', [TopicController::class ,'edit'])->name('topic.edit');
-Route::put('/topic/{topic}', [TopicController::class ,'update'])->name('topic.update');
-Route::delete('/topic/{topic}', [TopicController::class ,'destroy'])->name('topic.destroy');
+
 
 
 // View skills
@@ -309,3 +307,45 @@ Route::post('/import-data/{cohortId}', [ImportDataController::class, 'import'])-
 Route::post('/import-data/import-softskills/{cohortId}', [ImportDataController::class, 'importSoftSkillsTrainings'])->name('import-data.import-softskills');
 Route::post('/import-data/import-technologies/{cohortId}', [ImportDataController::class, 'importTechnologies'])->name('import-data.import-technologies');
 Route::post('import-data/{cohortId}/assignments', [ImportDataController::class, 'importAssignments'])->name('import-data.import-assignments');
+
+//student routes
+Route::middleware(['role:student'])->group(function () {
+
+    Route::get('Student/Assignments', [AssignmentSubmissionController::class, 'index'])->name('student.assignments');
+    Route::get('Student/assignments/{assignment}', [AssignmentSubmissionController::class ,'show'])->name('Student.assignment.show');
+    Route::post('Student/asssignment/store', [AssignmentSubmissionController::class ,'store'])->name('Student.assignment.store');
+    Route::put('/assignment/feedback/{assignment}', [AssignmentSubmissionController::class ,'update'])->name('submission_feedback.update');
+    Route::put('/assignment/feedbackStatus/{assignment}', [AssignmentSubmissionController::class ,'changeStatus'])->name('changeStatus.update');
+});
+
+//trainer routes
+Route::middleware(['role:trainer'])->group(function () {
+
+    //assignmnet routes 
+    Route::get('/Assignments', [AssignmentController::class, 'index'])->name('assignments');
+    Route::get('/Assignment/create', [AssignmentController::class ,'create'])->name('assignment.create');
+    Route::post('/asssignment/store', [AssignmentController::class ,'store'])->name('assignment.store');
+    Route::get('/assignments/{assignment}', [AssignmentController::class ,'show'])->name('assignment.show');
+    Route::get('/assignment/{assignment}/edit', [AssignmentController::class ,'edit'])->name('assignment.edit');
+    Route::put('/assignment/{assignment}', [AssignmentController::class ,'update'])->name('assignment.update');
+    Route::delete('/assignment/{assignment}', [AssignmentController::class ,'destroy'])->name('assignment.destroy');
+    Route::get('/download/{filename}', [AssignmentController::class, 'downloads'])->name('download');
+    Route::delete('assignment/{assignment}/student/{student}',[AssignmentController::class,'removeStudent'] )->name('assignment.removeStudent');
+
+    //topic rotes 
+    Route::get('/Topic/create', [TopicController::class ,'create'])->name('topic.create');
+    Route::post('/topic/store', [TopicController::class ,'store'])->name('topic.store');
+    Route::get('/topic/{topic}/edit', [TopicController::class ,'edit'])->name('topic.edit');
+    Route::put('/topic/{topic}', [TopicController::class ,'update'])->name('topic.update');
+    Route::delete('/topic/{topic}', [TopicController::class ,'destroy'])->name('topic.destroy');
+});
+
+//manger routes
+Route::middleware(['role:manager'])->group(function () {
+
+});
+
+Route::middleware(['super_manager'])->group(function () {
+
+
+});
