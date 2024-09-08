@@ -6,12 +6,12 @@ Trainer's Academies and Cohorts
 @section('content')
 @include('Layouts.innerNav')
 
-<nav style="padding: 50px 50px 0;" aria-label="breadcrumb">
+{{-- <nav style="padding: 50px 50px 0;" aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Academies</a></li>
         <li class="breadcrumb-item active" aria-current="page">Cohorts</li>
     </ol>
-</nav>
+</nav> --}}
 
 <div class="container my-5">
     <h2>Academy Cohorts</h2>

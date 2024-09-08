@@ -3,62 +3,42 @@
 namespace App\Http\Controllers;
 use App\Student;
 use App\Absence;
+use App\Cohort;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Crypt;
+
+
 class AbsenceReportController extends Controller
 {
     public function index(Request $request, $cohort_id = null)
     {
-        // Save the cohort_id in the session if it's passed
-    if ($cohort_id) {
-        session(['selected_cohort_id' => $cohort_id]);
-    }
-        
+        try {
+            if ($cohort_id) {
+                $decryptedCohortId = Crypt::decryptString($cohort_id);
+                session(['selected_cohort_id' => $decryptedCohortId]);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Invalid or expired cohort ID'], 400);
+        }
         if ($request->ajax()) {
             $staff = Auth::guard('staff')->user();
     
-            if ($staff->role == 'trainer') {
-                $selectedCohortId = $cohort_id ?: session('selected_cohort_id');
-
-                $runningCohort = $staff->cohorts()->where('cohort_id',$selectedCohortId)->first();
-                if (!$runningCohort) {
-                    return response()->json(['message' => 'No running cohort found for the trainer'], 404);
-                }
-                $studentsQuery = $runningCohort->students();
-            } elseif ($staff->role == 'manager') {
-                // Retrieve all academies assigned to the manager
-                $academies = $staff->academies()->get();
+            $selectedCohortId = $cohort_id ?: session('selected_cohort_id');
     
-                // Check if the manager is assigned to any academies
-                if ($academies->isEmpty()) {
-                    return response()->json(['message' => 'Manager is not assigned to any academies'], 404);
-                }
-    
-                $runningCohorts = collect();
-    
-                foreach ($academies as $academy) {
-                    $runningCohorts = $runningCohorts->merge(
-                        $academy->cohorts()->where('cohort_end_date', '>', now())->get()
-                    );
-                }
-    
-                if ($runningCohorts->isEmpty()) {
-                    return response()->json(['message' => 'No running cohorts found'], 404);
-                }
-                $studentsQuery = Student::query();
-    
-                $selectedCohortId = $cohort_id ?: session('selected_cohort_id');
-
-                if ($selectedCohortId) {
-                    $studentsQuery->whereHas('cohort', function ($query) use ($selectedCohortId) {
-                        $query->where('id', $selectedCohortId);
-                    });
-                }
-            } else {
-                return response()->json(['message' => 'Invalid user role'], 403);
+            if (!$selectedCohortId) {
+                return response()->json(['message' => 'Cohort ID is required'], 400);
             }
+    
+            $runningCohort = Cohort::where('id', $selectedCohortId)->first();
+    
+            if (!$runningCohort) {
+                return response()->json(['message' => 'Cohort not found'], 404);
+            }
+    
+            $studentsQuery = $runningCohort->students();
     
             $query = $request->input('query');
     
@@ -80,7 +60,7 @@ class AbsenceReportController extends Controller
                 ])->get();
     
                 return response()->json([
-                    'cohorts' => $staff->role == 'manager' ? $runningCohorts : $runningCohort,
+                    'cohorts' => [$runningCohort], 
                     'students' => $students,
                 ], 200);
             } catch (\Exception $e) {
@@ -90,6 +70,7 @@ class AbsenceReportController extends Controller
             return view('supermaneger.absence');
         }
     }
+    
     
     
     

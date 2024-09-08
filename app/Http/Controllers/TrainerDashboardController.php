@@ -79,12 +79,12 @@ class TrainerDashboardController extends Controller
         if (!$runningCohort) {
             // If no running cohort is found, return a default set of values
             return [
-                
                 'cohort_name' => 'N/A',
                 'date' => Carbon::now()->format('d-F-Y'),
                 'attendance_data' => [],
                 'late_data' => [],
-                'absence_data' => []
+                'absence_data' => [],
+                'cohort_status' => 'not available'
             ];
         }
     
@@ -97,17 +97,30 @@ class TrainerDashboardController extends Controller
                 'date' => Carbon::now()->format('d-F-Y'),
                 'attendance_data' => [],
                 'late_data' => [],
-                'absence_data' => []
+                'absence_data' => [],
+                'cohort_status' => 'active'
             ];
         }
     
-        $attendanceData = [];
-        $lateData = [];
-        $absenceData = [];
+        // Check if the cohort's end date has passed
+        if ($runningCohort->cohort_end_date <= Carbon::now()) {
+            return [
+                'cohort_name' => $runningCohort->cohort_name,
+                'date' => Carbon::now()->format('d-F-Y'),
+                'attendance_data' => [], // Empty data as no new data required
+                'late_data' => [],
+                'absence_data' => [],
+                'cohort_status' => 'ended'
+            ];
+        }
     
         // Calculate dates for the last 7 days
         $startDate = Carbon::today()->subDays(6);
         $endDate = Carbon::today();
+    
+        $attendanceData = [];
+        $lateData = [];
+        $absenceData = [];
     
         for ($date = $startDate; $date->lte($endDate); $date->addDay()) {
             $dayOfWeek = $date->isoFormat('dddd');
@@ -134,9 +147,11 @@ class TrainerDashboardController extends Controller
             'date' => Carbon::now()->format('d-F-Y'),
             'attendance_data' => $attendanceData,
             'late_data' => $lateData,
-            'absence_data' => $absenceData
+            'absence_data' => $absenceData,
+            'cohort_status' => 'active'
         ];
     }
+    
     
 
 

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('assets/style_files/absence_attendance.css') }}">
     <nav style="padding: 50px 50px 0;" aria-label="breadcrumb" class="breadcrumb-container">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('academyview') }}">Cohort 4</a></li>
+            <li  class="breadcrumb-item"><a href="{{ route('academyview') }}" id="cohort_name_li">Cohort </a></li>
             <li class="breadcrumb-item active" aria-current="page">Absence</li>
         </ol>
     </nav>
@@ -133,12 +133,16 @@
                         cohortSelect.empty();
     
                         if (Array.isArray(response.cohorts)) {
+                            $('#cohort_name_li').text(response.cohorts[0].cohort_name);
+
                             cohortSelect.append('<option value="" selected>Choose Cohort...</option>');
                             response.cohorts.forEach(function(cohort) {
                                 cohortSelect.append('<option value="' + cohort.id + '">' +
                                     cohort.cohort_name + '</option>');
                             });
                         } else {
+                            $('#cohort_name_li').text( response.cohorts.cohort_name);
+
                             cohortSelect.append('<option value="' + response.cohorts.id +
                                 '" selected>' + response.cohorts.cohort_name + '</option>');
                         }
