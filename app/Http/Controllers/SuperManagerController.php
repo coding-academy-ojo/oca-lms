@@ -138,8 +138,7 @@ class SuperManagerController extends Controller
                     
                     $totalGraduated += $graduatedCount;
                     $totalNotGraduated += $notGraduatedCount;
-                }
-                
+                }                
         
                 $graduatedData[] = $totalGraduated;
                 $notGraduatedData[] = $totalNotGraduated;
