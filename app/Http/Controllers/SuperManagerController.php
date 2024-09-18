@@ -125,14 +125,21 @@ class SuperManagerController extends Controller
                 $totalNotGraduated = 0;
         
                 foreach ($academy->cohorts as $cohort) {
-                    // Count students with a non-null certificate_type (graduated)
-                    $graduatedCount = $cohort->students->where('certificate_type', '!=', null)->count();
-                    // Count students with a null certificate_type (not graduated)
-                    $notGraduatedCount = $cohort->students->where('certificate_type', '=', null)->count();
+                    // Count students with a non-null and not 'None' certificate_type (graduated)
+                    $graduatedCount = $cohort->students->where('certificate_type', '!=', null)
+                                                       ->where('certificate_type', '!=', 'None')
+                                                       ->count();
+                    
+                    // Count students with a null or 'None' certificate_type (not graduated)
+                    $notGraduatedCount = $cohort->students->where(function($query) {
+                                                    $query->where('certificate_type', '=', null)
+                                                          ->orWhere('certificate_type', '=', 'None');
+                                                })->count();
                     
                     $totalGraduated += $graduatedCount;
                     $totalNotGraduated += $notGraduatedCount;
                 }
+                
         
                 $graduatedData[] = $totalGraduated;
                 $notGraduatedData[] = $totalNotGraduated;
