@@ -226,6 +226,7 @@ Academies Cohorts Overview
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var graduatesByAcademyData = @json($graduatesByAcademyData);
+            console.log(graduatesByAcademyData);
 
             var ctx1 = document.getElementById('graduatesByAcademy').getContext('2d');
             var graduatesByAcademyChart = new Chart(ctx1, {
@@ -255,38 +256,57 @@ Academies Cohorts Overview
 
             // Number of Enrolled Students by Academy and Cohort
             var academyPerformanceChartData = @json($academyPerformanceChartData);
+            console.log(academyPerformanceChartData);
 
-            var ctx = document.getElementById('academyPerformanceChart').getContext('2d');
-            var academyPerformanceChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: academyPerformanceChartData.labels,
-                    datasets: academyPerformanceChartData.datasets
+var ctx = document.getElementById('academyPerformanceChart').getContext('2d');
+var academyPerformanceChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: academyPerformanceChartData.labels,
+        datasets: academyPerformanceChartData.datasets.map(dataset => ({
+            ...dataset,
+            barThickness: 20, // Set a value for the bar thickness (adjust this number)
+            categoryPercentage: 0.8, // Adjust the category width
+            barPercentage: 0.9 // Adjust the bar width within the category
+        }))
+    },
+    options: {
+        plugins: {
+            legend: {
+                display: true // Display the legend
+            },
+            tooltip: {
+                enabled: true // Enable tooltips
+            }
+        },
+        scales: {
+            x: {
+                stacked: false,
+                grid: {
+                    display: false // Hide grid lines
                 },
-                options: {
-                    plugins: {
-                        legend: {
-                            display: false // Hides the legend
-                        },
-                        tooltip: {
-                            enabled: true // Hides the tooltips
-                        }
-                    },
-                    scales: {
-                        x: {
-                            stacked: false,
-                        },
-                        y: {
-                            stacked: false,
-                            beginAtZero: true
-                        }
-                    },
-                    responsive: true,
-                    maintainAspectRatio: false
-                    // width: 600,
-                    // height: 200
-                }
-            });
+                ticks: {
+                    autoSkip: false, // Show all labels to ensure they fit
+                    maxRotation: 90, // Rotate labels if needed
+                    minRotation: 45 // Rotate labels to fit better
+                },
+                // Add some space between groups of bars
+                barThickness: 20, // Adjust the width of each bar
+                groupPercentage: 0.8 // Adjust the spacing between grouped bars
+            },
+            y: {
+                stacked: false,
+                beginAtZero: true
+            }
+        },
+        responsive: true,
+        maintainAspectRatio: false
+        // width: 600,
+        // height: 200
+    }
+});
+
+
 
 
             var totalSummaryChartData = @json($totalSummaryChartData);

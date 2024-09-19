@@ -81,6 +81,17 @@ Route::delete('/{announcement:id}', [AnnouncementController::class, 'destroy'])-
 Route::get('/addTrainee', function () {
     return view('trainer/addTrainee');
 })->name('addTrainee');
+// super maneger
+Route::get('/supermanager-dashboard', [SuperManagerController::class, 'index'])->name('supermanager-dashboard');
+Route::get('/staff', [StaffController::class, 'index'])->name('staff.index');
+
+
+
+// cohorts
+Route::get('/cohorts/{cohort}/edit', [CohortController::class, 'edit'])->name('cohortedit');
+Route::get('/cohorts/view-cohort/{cohort}', [TrainerDashboardController::class, 'index'])->name('view-cohort');
+Route::put('/cohort/{cohort_id}', [CohortController::class, 'update'])->name('update-cohort');
+Route::post('/cohorts', [CohortController::class, 'store'])->name('store-cohort');
 
 
 //attendance & absense
@@ -272,7 +283,6 @@ Route::middleware(['role:manager'])->group(function () {
 Route::get('students/{studentId}/absence', 'AbsenceReportController@show')->name('spacificUserReport');
 
 // staff controller
-Route::get('/staff', [StaffController::class, 'index'])->name('staff.index');
 Route::get('/staff/create', [StaffController::class, 'create'])->name('staff.create');
 Route::post('/staff', [StaffController::class, 'store'])->name('staff.store');
 Route::get('/staff/{id}', [StaffController::class, 'show'])->name('staff.show');
@@ -280,17 +290,12 @@ Route::get('/staff/{id}/edit', [StaffController::class, 'edit'])->name('staff.ed
 Route::put('/staff/{id}', [StaffController::class, 'update'])->name('staff.update');
 Route::delete('/staff/{id}', [StaffController::class, 'destroy'])->name('staff.destroy');
 
-Route::get('/cohorts/{cohort}/edit', [CohortController::class, 'edit'])->name('cohortedit');
-Route::get('/cohorts/view-cohort/{cohort}', [TrainerDashboardController::class, 'index'])->name('view-cohort');
-Route::put('/cohort/{cohort_id}', [CohortController::class, 'update'])->name('update-cohort');
-Route::post('/cohorts', [CohortController::class, 'store'])->name('store-cohort');
-
 
 });
 
 Route::middleware(['super_manager'])->group(function () {
 // staff controller
-Route::get('/staff', [StaffController::class, 'index'])->name('staff.index');
+
 Route::get('/staff/create', [StaffController::class, 'create'])->name('staff.create');
 Route::post('/staff', [StaffController::class, 'store'])->name('staff.store');
 Route::get('/staff/{id}', [StaffController::class, 'show'])->name('staff.show');
@@ -301,12 +306,6 @@ Route::delete('/staff/{id}', [StaffController::class, 'destroy'])->name('staff.d
 Route::get('/academies/{academy}/edit', [AcademyController::class, 'edit'])->name('editacademy');
 Route::put('/academies/{academy}', [AcademyController::class, 'update'])->name('academies.update');
 Route::post('/academies', [AcademyController::class, 'store'])->name('academies.store');
-
-
-// super maneger
-Route::get('/supermanager-dashboard', [SuperManagerController::class, 'index'])->name('supermanager-dashboard');
-
-
 
 
 });

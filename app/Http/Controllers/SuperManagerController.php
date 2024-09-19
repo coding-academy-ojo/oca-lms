@@ -23,10 +23,7 @@ class SuperManagerController extends Controller
         $totalAcademies = Academy::count(); 
 
         $totalStudentsEnrolled = Student::count();
-        $StudentsGraduated_withoutnull = Student::where('certificate_type', '!=' , null)->count();
-        $noneStudents = Student::where('certificate_type', 'None')->count();
-        
-        $totalStudentsGraduated = $StudentsGraduated_withoutnull - $noneStudents;
+        $totalStudentsGraduated = Student::where('certificate_type', '!=' , null)->count();
         return [
             'totalStudentsEnrolled' => $totalStudentsEnrolled,
             'totalStudentsGraduated' => $totalStudentsGraduated,
@@ -70,34 +67,53 @@ class SuperManagerController extends Controller
     
 
     private function getAcademyPerformanceChartData() {
+        // Fetch academies with cohorts and students
         $academies = Academy::with(['cohorts' => function($query) {
             $query->has('students');
         }, 'cohorts.students'])->get();
     
-        $labels = $academies->pluck('academy_name')->toArray();
-        $datasets = [];
+        $labels = [];
+        $datasets = [
+            [
+                'label' => 'Total Students',
+                'data' => [],
+                'backgroundColor' => '#e66c37',
+                'borderColor' => '#e66c37',
+                'borderWidth' => 1,
+            ],
+            [
+                'label' => 'Graduated Students',
+                'data' => [],
+                'backgroundColor' => '#32c832',
+                'borderColor' => '#32c832',
+                'borderWidth' => 1,
+            ]
+        ];
     
+        $index = 0; // Index for label positioning
+    
+        // Prepare labels and datasets
         foreach ($academies as $academy) {
             foreach ($academy->cohorts as $cohort) {
+                $cohortLabel =  $cohort->cohort_name;
+                $labels[] = $cohortLabel;
+    
                 $totalStudentCount = $cohort->students->count();
                 $graduatedStudentCount = $cohort->students->where('certificate_type', '!=', null)->count();
-                    $datasets[] = [
-                    'label' => $cohort->cohort_name . ' - Total Students',
-                    'data' => array_fill(0, count($labels), 0), 
-                    'backgroundColor' => '#e66c37',
-                    'borderColor' => '#e66c37',
-                    'borderWidth' => 1
-                ];
-                $datasets[count($datasets) - 1]['data'][array_search($academy->academy_name, $labels)] = $totalStudentCount;
-        
-                $datasets[] = [
-                    'label' => $cohort->cohort_name . ' - Graduated Students',
-                    'data' => array_fill(0, count($labels), 0), 
-                    'backgroundColor' => '#32c832', 
-                    'borderColor' => '#32c832',
-                    'borderWidth' => 1
-                ];
-                $datasets[count($datasets) - 1]['data'][array_search($academy->academy_name, $labels)] = $graduatedStudentCount;
+    
+                // Initialize dataset arrays if they are not yet populated
+                if (!isset($datasets[0]['data'][$index])) {
+                    $datasets[0]['data'][$index] = 0; // Initialize total students data
+                }
+                if (!isset($datasets[1]['data'][$index])) {
+                    $datasets[1]['data'][$index] = 0; // Initialize graduated students data
+                }
+    
+                // Set dataset values
+                $datasets[0]['data'][$index] = $totalStudentCount; // Total students
+                $datasets[1]['data'][$index] = $graduatedStudentCount; // Graduated students
+    
+                $index++;
             }
         }
     
@@ -106,10 +122,6 @@ class SuperManagerController extends Controller
             'datasets' => $datasets,
         ];
     }
-    
-
-    
-    
     
     
 
@@ -129,15 +141,13 @@ class SuperManagerController extends Controller
         
                 foreach ($academy->cohorts as $cohort) {
                     // Count students with a non-null certificate_type (graduated)
-                    //$graduatedCount = $cohort->students->where('certificate_type', '!=', null)->count();
-                    $graduatedCount = $cohort->students->whereNotIn('certificate_type', [null, 'None'])->count();
-                    
+                    $graduatedCount = $cohort->students->where('certificate_type', '!=', null)->count();
                     // Count students with a null certificate_type (not graduated)
-                    //$notGraduatedCount = $cohort->students->where('certificate_type', '=', null)->count();
-                    $notGraduatedCount = $cohort->students->whereIn('certificate_type', [null, 'None'])->count();
+                    $notGraduatedCount = $cohort->students->where('certificate_type', '=', null)->count();
+                    
                     $totalGraduated += $graduatedCount;
                     $totalNotGraduated += $notGraduatedCount;
-                }             
+                }
         
                 $graduatedData[] = $totalGraduated;
                 $notGraduatedData[] = $totalNotGraduated;
