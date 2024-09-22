@@ -280,7 +280,7 @@ Route::middleware(['role:trainer'])->group(function () {
 
 //manger routes
 Route::middleware(['role:manager'])->group(function () {
-Route::get('students/{studentId}/absence', 'AbsenceReportController@show')->name('spacificUserReport');
+
 
 // staff controller
 Route::get('/staff/create', [StaffController::class, 'create'])->name('staff.create');

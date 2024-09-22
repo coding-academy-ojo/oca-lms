@@ -101,7 +101,10 @@ class SuperManagerController extends Controller
                 $labels[] = $cohortLabel;
     
                 $totalStudentCount = $cohort->students->count();
-                $graduatedStudentCount = $cohort->students->where('certificate_type', '!=', null)->count();
+                $graduatedStudentCount = $cohort->students->filter(function($student) {
+                    return $student->certificate_type !== null && $student->certificate_type !== 'None';
+                })->count();
+               // dd($graduatedStudentCount);
     
                 // Initialize dataset arrays if they are not yet populated
                 if (!isset($datasets[0]['data'][$index])) {
@@ -137,21 +140,39 @@ class SuperManagerController extends Controller
             
             foreach ($academiesWithGraduates as $academy) {
                 $labels[] = $academy->academy_name; 
-        
+            
                 $totalGraduated = 0;
                 $totalNotGraduated = 0;
-        
+            
                 foreach ($academy->cohorts as $cohort) {
+                    // Get students' names and certificate types for debugging
+                    // dd($cohort->students->map(function($student) {
+                    //     return [
+                    //         'name' => $student->en_first_name,
+                    //         'certificate_type' => $student->certificate_type
+                    //     ];
+                    // }));
+            
+                    // Filter students who have a valid certificate (i.e., graduated students)
+                    $graduatedCount = $cohort->students->filter(function($student) {
+                        return $student->certificate_type !== null && $student->certificate_type !== 'None';
+                    })->count();
                 
-                    $graduatedCount = $cohort->students->whereNotIn('certificate_type', [null, 'None'])->count();
-                    $notGraduatedCount = $cohort->students->whereIn('certificate_type', [null, 'None'])->count();
+                    // Filter students who have no certificate or 'None' as the certificate (i.e., not graduated students)
+                    $notGraduatedCount = $cohort->students->filter(function($student) {
+                        return $student->certificate_type === null || $student->certificate_type === 'None';
+                    })->count();
+                    
+                    // Accumulate the counts
                     $totalGraduated += $graduatedCount;
                     $totalNotGraduated += $notGraduatedCount;
                 }
-        
+            
                 $graduatedData[] = $totalGraduated;
                 $notGraduatedData[] = $totalNotGraduated;
             }
+            
+            
         
             return [
                 'labels' => $labels,

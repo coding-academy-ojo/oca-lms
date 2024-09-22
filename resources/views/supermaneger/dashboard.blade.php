@@ -343,7 +343,7 @@ var academyPerformanceChart = new Chart(ctx, {
                                     var total = context.dataset.data.reduce((a, b) => a + b,
                                     0); // Total for percentage calculation
                                     var percentage = ((value / total) * 100).toFixed(2);
-                                    label += value + ' (' + percentage + '%)';
+                                    label += value;
                                     return label;
                                 }
                             }
