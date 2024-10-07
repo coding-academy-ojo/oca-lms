@@ -142,6 +142,7 @@ Route::get('/projects', [ProjectController::class, 'showAllProjects'])->name('sh
 // Project Brief
 Route::get('/project_brief/{id}', [ProjectController::class, 'showProjectBrief'])->name('project_brief');
 Route::get('/filter-projects', 'ProjectController@filterProjects')->name('filter_projects');
+Route::get('/assign-students/{projectId}', 'ProjectController@assignStudents')->name('assign_students');
 
 
 
@@ -166,8 +167,7 @@ Route::middleware(['role:student'])->group(function () {
     Route::get('/view_project_submissions/{project_id}', 'ProjectController@viewProjectSubmissions')->name('view_project_submissions');
     Route::post('/process_feedback/{submission_id}', 'ProjectController@processFeedback')->name('process_feedback');
     Route::get('/view_submissions_feedback/{project_id}', 'ProjectController@viewSubmissionsAndFeedback')->name('view_submissions_feedback');
-    Route::get('/assign-students/{projectId}', 'ProjectController@assignStudents')->name('assign_students');
-    Route::post('/assign-students/{projectId}', 'ProjectController@assignStudents')->name('assign_students');
+   
 
     // Show modal
     Route::get('/add_project_submission_modal/{project_id}', 'ProjectController@showAddProjectSubmissionModal')->name('show_add_project_submission_modal');
@@ -280,8 +280,6 @@ Route::middleware(['role:trainer'])->group(function () {
 
 //manger routes
 Route::middleware(['role:manager'])->group(function () {
-
-
 // staff controller
 Route::get('/staff/create', [StaffController::class, 'create'])->name('staff.create');
 Route::post('/staff', [StaffController::class, 'store'])->name('staff.store');
@@ -289,8 +287,6 @@ Route::get('/staff/{id}', [StaffController::class, 'show'])->name('staff.show');
 Route::get('/staff/{id}/edit', [StaffController::class, 'edit'])->name('staff.edit');
 Route::put('/staff/{id}', [StaffController::class, 'update'])->name('staff.update');
 Route::delete('/staff/{id}', [StaffController::class, 'destroy'])->name('staff.destroy');
-
-
 });
 
 Route::middleware(['super_manager'])->group(function () {
@@ -302,10 +298,7 @@ Route::get('/staff/{id}', [StaffController::class, 'show'])->name('staff.show');
 Route::get('/staff/{id}/edit', [StaffController::class, 'edit'])->name('staff.edit');
 Route::put('/staff/{id}', [StaffController::class, 'update'])->name('staff.update');
 Route::delete('/staff/{id}', [StaffController::class, 'destroy'])->name('staff.destroy');
-
 Route::get('/academies/{academy}/edit', [AcademyController::class, 'edit'])->name('editacademy');
 Route::put('/academies/{academy}', [AcademyController::class, 'update'])->name('academies.update');
 Route::post('/academies', [AcademyController::class, 'store'])->name('academies.store');
-
-
 });
