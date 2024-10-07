@@ -143,6 +143,11 @@ Route::get('/projects', [ProjectController::class, 'showAllProjects'])->name('sh
 Route::get('/project_brief/{id}', [ProjectController::class, 'showProjectBrief'])->name('project_brief');
 Route::get('/filter-projects', 'ProjectController@filterProjects')->name('filter_projects');
 Route::get('/assign-students/{projectId}', 'ProjectController@assignStudents')->name('assign_students');
+// Process form submission
+Route::post('/process_project_submission/{project_id}', 'ProjectController@processProjectSubmission')->name('process_project_submission');
+Route::get('/view_project_submissions/{project_id}', 'ProjectController@viewProjectSubmissions')->name('view_project_submissions');
+Route::post('/process_feedback/{submission_id}', 'ProjectController@processFeedback')->name('process_feedback');
+Route::get('/view_submissions_feedback/{project_id}', 'ProjectController@viewSubmissionsAndFeedback')->name('view_submissions_feedback');
 
 
 
@@ -162,12 +167,7 @@ Route::middleware(['role:student'])->group(function () {
     Route::put('/assignment/feedback/{assignment}', [AssignmentSubmissionController::class ,'update'])->name('submission_feedback.update');
     Route::put('/assignment/feedbackStatus/{assignment}', [AssignmentSubmissionController::class ,'changeStatus'])->name('changeStatus.update');
 
-    // Process form submission
-    Route::post('/process_project_submission/{project_id}', 'ProjectController@processProjectSubmission')->name('process_project_submission');
-    Route::get('/view_project_submissions/{project_id}', 'ProjectController@viewProjectSubmissions')->name('view_project_submissions');
-    Route::post('/process_feedback/{submission_id}', 'ProjectController@processFeedback')->name('process_feedback');
-    Route::get('/view_submissions_feedback/{project_id}', 'ProjectController@viewSubmissionsAndFeedback')->name('view_submissions_feedback');
-   
+    
 
     // Show modal
     Route::get('/add_project_submission_modal/{project_id}', 'ProjectController@showAddProjectSubmissionModal')->name('show_add_project_submission_modal');
