@@ -143,7 +143,8 @@ Route::get('/projects', [ProjectController::class, 'showAllProjects'])->name('sh
 Route::get('/project_brief/{id}', [ProjectController::class, 'showProjectBrief'])->name('project_brief');
 Route::get('/filter-projects', 'ProjectController@filterProjects')->name('filter_projects');
 Route::get('/assign-students/{projectId}', 'ProjectController@assignStudents')->name('assign_students');
-Route::post('/projects/{id}/assign-students', [ProjectController::class, 'assignStudents']);
+Route::post('/assign-students/{projectId}', 'ProjectController@assignStudents')->name('assign_students');
+// Route::post('/projects/{id}/assign-students', [ProjectController::class, 'assignStudents']);
 // Process form submission
 Route::post('/process_project_submission/{project_id}', 'ProjectController@processProjectSubmission')->name('process_project_submission');
 Route::get('/view_project_submissions/{project_id}', 'ProjectController@viewProjectSubmissions')->name('view_project_submissions');
