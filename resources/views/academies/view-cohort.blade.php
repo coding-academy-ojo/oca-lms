@@ -97,7 +97,18 @@
         <div class="col-12">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h3 class="text-primary">Technologies Overview</h3>
+                    <div class="d-flex w-100 justify-content-between">
+                        <h3 class="mb-0 text-primary">Technologies Overview</h3>
+                        <div class="d-flex gap-2 flex-column">
+                            @if (in_array(Auth::guard('staff')->user()->role, ['trainer', 'manager']))
+                                @php
+                                    $encryptedCohortId = Crypt::encryptString($cohort->id);
+                                @endphp
+                                <a href="{{ route('technology.satisfaction', ['cohort_id' => $encryptedCohortId]) }}" class="btn btn-primary">Satisfaction</a>
+                            @endif
+                        </div>
+                    </div>
+
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
@@ -105,7 +116,6 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
                                     {{-- <th scope="col">Description</th> --}}
-                                    <th scope="col">Resources</th>
                                     <th scope="col">Training Period</th>
                                     <th scope="col">Status</th>
                                     {{-- <th scope="col">Satisfaction</th> --}}
@@ -123,7 +133,6 @@
                                     <th scope="row">{{ $index + 1 }}</th>
                                     <td>{{ $technology['name'] }}</td>
                                     {{-- <td>{{ $technology['description'] }}</td> --}}
-                                    <td>{{ $technology['resources'] }}</td>
                                     <td>{{ $technology['training_period'] }}</td>
                                     <td>
                                         <div style="width: 100%; background-color: #ddd;">

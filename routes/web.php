@@ -35,6 +35,7 @@ use App\Http\Controllers\SoftSkillsTrainingController;
 use App\Http\Controllers\SingleTraineeProgressController;
 use App\Http\Controllers\MasterpieceController;
 use App\Http\Controllers\ImportDataController;
+use App\Http\Controllers\technologySatisfactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -279,6 +280,8 @@ Route::middleware(['role:trainer'])->group(function () {
     Route::post('/update-internship', [MasterpieceController::class, 'updateInternship'])->name('update.internship');
 
 });
+Route::get('/technology-satisfaction/{cohort_id}', [technologySatisfactionController::class, 'index'])->name('technology.satisfaction');
+Route::put('/update-satisfaction', [technologySatisfactionController::class, 'updateSatisfaction'])->name('update-satisfaction');
 
 //manger routes
 Route::middleware(['role:manager'])->group(function () {

@@ -16,38 +16,54 @@ class CohortController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $academyId = null)
-    {
-        $user = Auth::guard('staff')->user() ?? Auth::guard('students')->user();
+public function index(Request $request, $academyId = null)
+{
+    $user = Auth::guard('staff')->user() ?? Auth::guard('students')->user();
 
-        $academies = collect();
-        $canEditCohort = false;
+    $academies = collect();
+    $canEditCohort = false;
 
-        if ($user instanceof Staff) {
-            // Staff user (manager, trainer, or super manager)
-            if ($user->role == 'super_manager') {
-                $academies = Academy::with('cohorts', 'managers')->get();
-                $canEditCohort = true;
-            } elseif ($user->role == 'manager') {
-                // Managers can only view cohorts of academies they are assigned to
-                $academyIds = $user->academies->pluck('id')->toArray();
-                $academies = Academy::with('cohorts', 'managers')->whereIn('id', $academyIds)->get();
-                $canEditCohort = true;
-            }  elseif ($user->role == 'trainer') {
-                $academyIds = $user->academies->pluck('id')->toArray();
-                $academies = Academy::with(['cohorts' => function($query) use ($user) {
-                    $query->whereHas('staff', function ($query) use ($user) {
-                        $query->where('staff_id', $user->id);
-                    });
-                }])->whereIn('id', $academyIds)->get();
-                // dd($academies);
-            }
-        } elseif ($user instanceof Student) {
-            $cohorts = $user->cohort ? collect([$user->cohort()->with('academy')->first()]) : collect([]);
+    if ($user instanceof Staff) {
+        // Staff user (manager, trainer, or super manager)
+        if ($user->role == 'super_manager') {
+            $academies = Academy::with('cohorts', 'managers')
+                ->get()
+                ->each(function($academy) {
+                    // Sort cohorts by cohort_end_date descending
+                    $academy->cohorts = $academy->cohorts->sortByDesc('cohort_end_date');
+                });
+            $canEditCohort = true;
+        } elseif ($user->role == 'manager') {
+            // Managers can only view cohorts of academies they are assigned to
+            $academyIds = $user->academies->pluck('id')->toArray();
+            $academies = Academy::with('cohorts', 'managers')
+                ->whereIn('id', $academyIds)
+                ->get()
+                ->each(function($academy) {
+                    // Sort cohorts by cohort_end_date descending
+                    $academy->cohorts = $academy->cohorts->sortByDesc('cohort_end_date');
+                });
+            $canEditCohort = true;
+        } elseif ($user->role == 'trainer') {
+            $academyIds = $user->academies->pluck('id')->toArray();
+            $academies = Academy::with(['cohorts' => function($query) use ($user) {
+                $query->whereHas('staff', function ($query) use ($user) {
+                    $query->where('staff_id', $user->id);
+                });
+            }])
+            ->whereIn('id', $academyIds)
+            ->get()
+            ->each(function($academy) {
+                // Sort cohorts by cohort_end_date descending
+                $academy->cohorts = $academy->cohorts->sortByDesc('cohort_end_date');
+            });
         }
-
-        return view('academies.academy-cohorts', compact('academies', 'canEditCohort'));
+    } elseif ($user instanceof Student) {
+        $cohorts = $user->cohort ? collect([$user->cohort()->with('academy')->first()]) : collect([]);
     }
+
+    return view('academies.academy-cohorts', compact('academies', 'canEditCohort'));
+}
 
 
     /**
