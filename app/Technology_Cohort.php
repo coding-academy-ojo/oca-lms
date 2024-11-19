@@ -11,6 +11,7 @@ class Technology_Cohort extends Model
         'cohort_id',
         'start_date',
         'end_date',
+        'satisfaction_rate',
     ];
 
     public function topic()

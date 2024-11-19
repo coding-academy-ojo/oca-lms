@@ -30,16 +30,28 @@ class AcademyController extends Controller
                  $role = $user->role;
                  if ($role === 'super_manager') {
                      $isSuperManager = true;
-                     $academies = Academy::with('staff', 'cohorts')->get();
+                     $academies = Academy::with('staff', 'cohorts')->get()
+                         ->each(function($academy) {
+                             // Sort cohorts by cohort_end_date ascending (oldest first)
+                             $academy->cohorts = $academy->cohorts->sortByDesc('cohort_end_date');
+                         });
                  } elseif ($role === 'manager') {
-                     $academies = $user->academies()->with('staff', 'cohorts')->get();
+                     $academies = $user->academies()->with('staff', 'cohorts')->get()
+                         ->each(function($academy) {
+                             // Sort cohorts by cohort_end_date ascending (oldest first)
+                             $academy->cohorts = $academy->cohorts->sortByDesc('cohort_end_date');
+                         });
                      $academyIds = $user->academies->pluck('id')->toArray();
                      $trainers = Staff::whereHas('academies', function ($query) use ($academyIds) {
-                        $query->whereIn('academies.id', $academyIds);
-                    })->where('role', 'trainer')->get();
-                 }elseif ( $role === 'trainer') {
-                    $academies = $user->academies()->with('staff', 'cohorts')->get();
-                }
+                         $query->whereIn('academies.id', $academyIds);
+                     })->where('role', 'trainer')->get();
+                 } elseif ($role === 'trainer') {
+                     $academies = $user->academies()->with('staff', 'cohorts')->get()
+                         ->each(function($academy) {
+                             // Sort cohorts by cohort_end_date ascending (oldest first)
+                             $academy->cohorts = $academy->cohorts->sortByDesc('cohort_end_date');
+                         });
+                 }
              } elseif ($user instanceof Student) {
                  $academies = $user->academy()->with('students')->get();
              }
@@ -49,6 +61,7 @@ class AcademyController extends Controller
      
          return view('academies.index', compact('academies', 'trainers', 'isSuperManager', 'allmanagers'));
      }
+     
       
     
 

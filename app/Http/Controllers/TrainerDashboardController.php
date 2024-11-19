@@ -227,7 +227,6 @@ class TrainerDashboardController extends Controller
         $milestones = [];
         $currentDate = Carbon::now();
     
-     
         foreach ($runningCohort->technology as $technology) {
             $startDate = Carbon::parse($technology->pivot->start_date);
             $endDate = Carbon::parse($technology->pivot->end_date);
@@ -238,9 +237,9 @@ class TrainerDashboardController extends Controller
             $totalDays = $startDate->diffInDays($endDate);
     
             if ($currentDate->between($startDate, $endDate)) {
-                if ($totalDays > 0) { 
+                if ($totalDays > 0) {
                     $percentage = ($currentDate->diffInDays($startDate) / $totalDays) * 100;
-                } else { 
+                } else {
                     $percentage = 100;
                 }
                 $status = 'In Progress';
@@ -255,14 +254,20 @@ class TrainerDashboardController extends Controller
                 'description' => $technology->technologies_description,
                 'status' => $status,
                 'percentage' => round($percentage),
-                'type' => 'Technology'
+                'type' => 'Technology',
+                'start_date_raw' => $startDate // Keep raw date for sorting
             ];
         }
     
-       
+        // Sort milestones by the raw `start_date`
         usort($milestones, function ($a, $b) {
-            return $a['start_date'] <=> $b['start_date'];
+            return $a['start_date_raw']->timestamp <=> $b['start_date_raw']->timestamp;
         });
+    
+        // Remove the raw date after sorting
+        foreach ($milestones as &$milestone) {
+            unset($milestone['start_date_raw']);
+        }
     
         return $milestones;
     }
