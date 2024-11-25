@@ -43,11 +43,11 @@ class TraineesProgressController extends Controller
         $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
         $cohortId = session('cohort_ID');
         $cohort = Cohort::find($cohortId);
-        //dd($runningCohort);
-        if (!$cohort) {
+        // dd($runningCohort);
+        if (!$runningCohort) {
             // If no running cohort is found, return a default set of values
             return [
-                'cohort_name' => 'N/A',
+                'cohort_name' => $cohort->cohort_name,
                 'date' => Carbon::now()->format('d-F-Y'),
                 'total_students' => 0,
                 'attended' => 0,
