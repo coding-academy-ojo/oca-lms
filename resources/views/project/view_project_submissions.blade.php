@@ -81,7 +81,7 @@ View Project Submissions
             @if(Auth::guard('staff')->check() && Auth::guard('staff')->user()->role === 'trainer')
                 <th>Action</th>
             @endif
-            <th>View Conversation</th> <!-- Add this column -->
+            <th>Details</th> <!-- Add this column -->
         </tr>
     </thead>
     <tbody>
