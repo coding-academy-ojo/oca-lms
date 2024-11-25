@@ -23,6 +23,7 @@ class AssignmentSubmissionController extends Controller
         $cohortId = $student->cohort_id;
         // Retrieve all assignments related to the current student 
         $assignments = $student->assignment;
+        // dd($assignments);
 
         return view('Assignment.Student_assignment.assignment_show', compact('assignments'));
     }

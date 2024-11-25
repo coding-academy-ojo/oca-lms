@@ -44,7 +44,7 @@ class AssignmentController extends Controller
     
         //retrive all technologies related to current cohort
         $technologies = $cohort->technology;
-    
+   
         return view('Assignment.view_assignment', compact('assignments', 'technologies'));
     }
     

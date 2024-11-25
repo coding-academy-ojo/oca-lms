@@ -77,7 +77,7 @@
                         @foreach ($assignments as $assignment)
                             <tr>
                                 <td><a class="link-offset-2 link-underline link-underline-opacity-0"
-                                        href="{{ route('assignment.show', $assignment->id) }}">{{ $assignment->assignment_name }}</a>
+                                        href="{{ route('assignment.show', $assignment->id) }}">{{ $assignment->assignment_name }}  </a>
                                 </td>
                                 <td>{{ optional($assignment->topic)->topic_name }}</td>
                                 <td>
