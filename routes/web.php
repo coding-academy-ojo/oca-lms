@@ -161,6 +161,7 @@ Route::post('/import-data/{cohortId}', [ImportDataController::class, 'import'])-
 Route::post('/import-data/import-softskills/{cohortId}', [ImportDataController::class, 'importSoftSkillsTrainings'])->name('import-data.import-softskills');
 Route::post('/import-data/import-technologies/{cohortId}', [ImportDataController::class, 'importTechnologies'])->name('import-data.import-technologies');
 Route::post('import-data/{cohortId}/assignments', [ImportDataController::class, 'importAssignments'])->name('import-data.import-assignments');
+Route::put('/assignment/feedbackStatus/{assignment}', [AssignmentSubmissionController::class ,'changeStatus'])->name('changeStatus.update');
 
 //student routes
 Route::middleware(['role:student'])->group(function () {
@@ -169,7 +170,6 @@ Route::middleware(['role:student'])->group(function () {
     Route::get('Student/assignments/{assignment}', [AssignmentSubmissionController::class ,'show'])->name('Student.assignment.show');
     Route::post('Student/asssignment/store', [AssignmentSubmissionController::class ,'store'])->name('Student.assignment.store');
     Route::put('/assignment/feedback/{assignment}', [AssignmentSubmissionController::class ,'update'])->name('submission_feedback.update');
-    Route::put('/assignment/feedbackStatus/{assignment}', [AssignmentSubmissionController::class ,'changeStatus'])->name('changeStatus.update');
 
     
 
