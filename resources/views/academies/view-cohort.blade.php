@@ -118,7 +118,7 @@
                                     {{-- <th scope="col">Description</th> --}}
                                     <th scope="col">Training Period</th>
                                     <th scope="col">Status</th>
-                                    {{-- <th scope="col">Satisfaction</th> --}}
+                                    <th scope="col">Satisfaction</th>
                                     {{-- <th scope="col">Feedback</th> --}}
                                 </tr>
                             </thead>
@@ -129,6 +129,7 @@
                                 </tr>
                                 @else
                                 @foreach($technologiesOverview as $index => $technology)
+                                
                                 <tr>
                                     <th scope="row">{{ $index + 1 }}</th>
                                     <td>{{ $technology['name'] }}</td>
@@ -148,6 +149,19 @@
                                        {{-- <div class="satisfaction-container" style="width: 100px; background-color: #f0f0f0;border-radius: 5px;">
                                             <div class="satisfaction-bar" style="width:100%; background-color: #4CAF50;" style="height: 100%; transition: width 0.5s ease-in-out;"></div>
                                         </div> --}}
+                                       <td>
+                                            <div class="progress" style="height: 20px; background-color: #f0f0f0; border-radius: 5px;">
+                                                <div class="progress-bar" role="progressbar" 
+                                                    style="width: {{ $technology['satisfactionRate'] }}%; 
+                                                           background-color: {{ $technology['satisfactionRate'] < 80 ? '#FFD700' : '#499557' }}; 
+                                                           color: black; 
+                                                           display: flex; 
+                                                           align-items: center; 
+                                                           justify-content: center;">
+                                                    {{ $technology['satisfactionRate'] }}%
+                                                </div>
+                                            </div>
+                                        </td>
 
                                 </tr>
                                 @endforeach
