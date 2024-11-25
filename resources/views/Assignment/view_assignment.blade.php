@@ -32,12 +32,13 @@
             </div>
         @endif
         {{-- search based on assignmnet name & topic name  --}}
-        <div class="row d-flex col-7 flex-wrap">
+        <div class="row d-flex  ">
+            <div class="col-9">
             <form action="" method="GET" class="d-flex gap-2">
                 <div class="col-7 d-flex border border-light">
                     <input type="text" class="form-control border border-white"
-                        placeholder="search by assignment name or topic" name="search" value="{{ request('search') }}">
-                    <button class="btn rounded-0 bg-primary" type="submit"><i class="fas fa-search"></i></button>
+                        placeholder="Search by assignment name or topic" name="search" value="{{ request('search') }}">
+                    <button class="btn rounded-0 btn-primary" type="submit"><i class="fas fa-search"></i></button>
                 </div>
             
                 {{-- Filter based on technology --}}
@@ -50,19 +51,19 @@
                     @endforeach
                 </select>
             </form>
-            
+            </div>
+            <div class=" col-3">
+                <a href="{{ route('assignment.create') }}" class="btn btn-primary m-auto">Create</a>
+                <a href="{{ route('assignments.feedback') }}" class="btn btn-primary m-auto">Submission</a>
+            </div>
         </div>
         <div class="m-auto ">
-            <div class="my-5">
-                <a href="{{ route('assignment.create') }}" class="btn btn-primary m-auto"
-                    style="width: 90px; height:50px">Create</a>
-                <a href="{{ route('assignments.feedback') }}" class="btn btn-primary m-auto"
-                    style="width: 90px; height:50px">Submission</a>
-            </div>
-            <div class="table-responsive">
+        <h3 class="visually fs-3 text-primary my-3">View Assignments</h3>
+            <div class="table-responsive card ">
+                
                 <table class="table table-hover ">
                     {{-- show all assignmnets --}}
-                    <caption class="visually fs-3 text-primary mb-2">View Assignments</caption>
+                    
                     <thead>
                         <tr>
                             <th scope="col ">Assignment Name</th>
