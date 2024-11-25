@@ -56,6 +56,7 @@ View Project Submissions
 <p>{{ $project->project_name }}</p>
 <p>{{ $cohort->cohort_name }}</p>
 
+
 <form action="{{ route('view_project_submissions', ['project_id' => $project->id]) }}" method="GET">
     <div class="row">
         <div class="col-md-4">
@@ -69,8 +70,8 @@ View Project Submissions
 
  <!-- ... (existing code) ... -->
 @if($submissions->count() > 0)
-
-<table class="table">
+<div class="table-responsive card my-3" style="max-height: 400px; overflow-y: auto;">
+<table class="table table-hover">
     <thead>
         <tr>
             <th>Trainee</th>
@@ -109,7 +110,7 @@ View Project Submissions
                 @endif
 
                 <td>
-                    <a href="{{ route('view_submissions_feedback', ['project_id' => $project->id, 'student_id' => $submission->student_id]) }}" class="btn btn-info">View Conversation</a>
+                    <a href="{{ route('view_submissions_feedback', ['project_id' => $project->id, 'student_id' => $submission->student_id]) }}" class="btn btn-info">View Details</a>
                 </td>
 
             </tr>
@@ -117,6 +118,9 @@ View Project Submissions
         @endforeach
     </tbody>
 </table>
+</div>
+
+<p><b>Number of submissions:</b> {{$submissions->count()}} </p>
 @else
 <p>No submissions available for this project.</p>
 @endif
