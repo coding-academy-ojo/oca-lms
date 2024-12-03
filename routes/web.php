@@ -114,6 +114,13 @@ Route::get('/academies/{academy}', [AcademyController::class, 'show'])->name('ac
 // start cohort
 Route::get('/cohorts/{academyId?}', [CohortController::class, 'index'])->name('academyview');
 
+ //Assignment Feedback
+ Route::get('/Assignments/feedback', [AssignmentFeedbackController::class, 'index'])->name('assignments.feedback');
+ Route::post('/Assignments/feedback/store', [AssignmentFeedbackController::class, 'store'])->name('assignment.feedbacksubmission.store');
+ Route::get('/Assignments/feedback/{assignmnet}', [AssignmentFeedbackController::class, 'show'])->name('assignment.feedbacksubmission.show');
+ Route::get('/Assignments/feedback/{id}/{studentId}', [AssignmentFeedbackController::class, 'submissionfedback'])->name('assignment.feedbacksubmission.feedback');
+
+
 //Progress
 Route::get('/cohort/progress-details/{id}',[ SingleTraineeProgressController::class, 'index'])->name('ProgressDetails.showDetails');
 Route::get('/traineesProgress', [TraineesProgressController::class, 'index'])->name('trainees.progress');
@@ -197,14 +204,7 @@ Route::middleware(['role:trainer'])->group(function () {
     /////////////////////////////////////////////
     // rawan bilal
 
-    //Assignment Feedback
-    Route::get('/Assignments/feedback', [AssignmentFeedbackController::class, 'index'])->name('assignments.feedback');
-    Route::post('/Assignments/feedback/store', [AssignmentFeedbackController::class, 'store'])->name('assignment.feedbacksubmission.store');
-    Route::get('/Assignments/feedback/{assignmnet}', [AssignmentFeedbackController::class, 'show'])->name('assignment.feedbacksubmission.show');
-    Route::get('/Assignments/feedback/{id}/{studentId}', [AssignmentFeedbackController::class, 'submissionfedback'])->name('assignment.feedbacksubmission.feedback');
-
-
-
+   
 
     //topic routes 
     Route::get('/Topic/create', [TopicController::class ,'create'])->name('topic.create');

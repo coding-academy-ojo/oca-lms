@@ -132,7 +132,7 @@ class TraineesProgressController extends Controller
         $totalStudents = $cohort->students->count();
 
         // Get the latest assignment
-        $latestAssignment = Assignment::latest()->first();
+        $latestAssignment = Assignment::where('cohort_id', $cohort->id)->latest()->first();
         $latestAssignmentId = $latestAssignment->id;
         $todaySubmissions = AssignmentSubmission::whereHas('assignment', function ($query) use ($cohortId) {
             $query->where('cohort_id', $cohortId);
@@ -148,15 +148,19 @@ class TraineesProgressController extends Controller
         ->where('assignment_id', $latestAssignmentId)
         ->count();
 
-        $notPassSubmissionsCount = $numberOfSubmissions - $passSubmissionsCount;      
+        $notPassSubmissionsCount = $numberOfSubmissions - $passSubmissionsCount;
+             
         $didNotSubmitCount = $totalStudents - ($lateSubmissionsCount + $onTimeCount);
 
         // Calculate percentage of All counts 
         $latePercentage = $numberOfSubmissions > 0 ? intval(($lateSubmissionsCount / $numberOfSubmissions) * 100) : 0;
         $onTimePercentage = $numberOfSubmissions > 0 ? intval(($onTimeCount / $numberOfSubmissions) * 100) : 0;
         $didNotSubmitPercentage = $totalStudents > 0 ? intval(($didNotSubmitCount / $totalStudents) * 100) : 0;
-        $passSubmissionsPercentage = $numberOfSubmissions > 0 ? intval(($passSubmissionsCount / $numberOfSubmissions) * 100) : 0;
-        $notPassSubmissionsPercentage = $numberOfSubmissions > 0 ? 100 - intval(($notPassSubmissionsCount / $numberOfSubmissions) * 100) : 100;
+        $passSubmissionsPercentage = $numberOfSubmissions > 0 
+        ? number_format(($passSubmissionsCount / $numberOfSubmissions) * 100, 1) 
+        : 0;
+    
+        $notPassSubmissionsPercentage = $numberOfSubmissions > 0 ? number_format(($notPassSubmissionsCount / $numberOfSubmissions) * 100 , 1) : 100;
         //$numberOfSubmissions > 0 ? intval(($notPassSubmissionsCount / $numberOfSubmissions) * 100) : 0;
 
         // dd($notPassSubmissionsPercentage);
