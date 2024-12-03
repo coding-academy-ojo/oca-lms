@@ -139,7 +139,7 @@ class TraineesProgressController extends Controller
         $todaySubmissions = AssignmentSubmission::whereHas('assignment', function ($query) use ($cohortId) {
             $query->where('cohort_id', $cohortId);
         })->whereDate('created_at', '=', $today)->get();
-        $totalStudents = Assignment_Student::where('assignment_id',$latestAssignmentId )->count();
+        $totalAssignedStudents = Assignment_Student::where('assignment_id',$latestAssignmentId )->count();
         //dd($totalStudents);
         $Submissions= AssignmentSubmission::where('assignment_id', $latestAssignmentId)->get();
         $numberOfSubmissions = AssignmentSubmission::where('assignment_id', $latestAssignmentId)
