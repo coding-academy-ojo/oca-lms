@@ -186,6 +186,11 @@ class TrainerDashboardController extends Controller
             }
     
           $start_date = $startDate->format('d-F-Y');
+
+          // Access satisfaction_rate directly through the technologyCohorts relationship
+          $satisfactionRate = $technology->technologyCohorts()
+          ->where('cohort_id', $cohort->id)
+          ->value('satisfaction_rate');
     
             $technologiesData[] = [
                 'start_date' => $start_date,
@@ -195,6 +200,7 @@ class TrainerDashboardController extends Controller
                 'training_period' => $trainingPeriod, 
                 'status' => $status,
                 'percentage' => $percentage,
+                'satisfactionRate' => $satisfactionRate,
             ];
         }
     
