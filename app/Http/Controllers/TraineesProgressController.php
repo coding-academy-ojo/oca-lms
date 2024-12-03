@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Skill;
 use App\Assignment;
+use App\Assignment_Student;
 use App\AssignmentSubmission;
 use App\Cohort;
 use App\Level;
@@ -129,15 +130,17 @@ class TraineesProgressController extends Controller
         }
     
         $today = now()->toDateString();
-        $totalStudents = $cohort->students->count();
-
+       // $totalStudents = $cohort->students->count();
+      
+        
         // Get the latest assignment
         $latestAssignment = Assignment::where('cohort_id', $cohort->id)->latest()->first();
         $latestAssignmentId = $latestAssignment->id;
         $todaySubmissions = AssignmentSubmission::whereHas('assignment', function ($query) use ($cohortId) {
             $query->where('cohort_id', $cohortId);
         })->whereDate('created_at', '=', $today)->get();
-
+        $totalStudents = Assignment_Student::where('assignment_id',$latestAssignmentId )->count();
+        //dd($totalStudents);
         $Submissions= AssignmentSubmission::where('assignment_id', $latestAssignmentId)->get();
         $numberOfSubmissions = AssignmentSubmission::where('assignment_id', $latestAssignmentId)
         ->distinct('student_id')
@@ -163,7 +166,7 @@ class TraineesProgressController extends Controller
         $notPassSubmissionsPercentage = $numberOfSubmissions > 0 ? number_format(($notPassSubmissionsCount / $numberOfSubmissions) * 100 , 1) : 100;
         //$numberOfSubmissions > 0 ? intval(($notPassSubmissionsCount / $numberOfSubmissions) * 100) : 0;
 
-        // dd($notPassSubmissionsPercentage);
+        
         return [
             'totalStudents' => $totalStudents,
             'lateSubmissionsCount' => $lateSubmissionsCount,
