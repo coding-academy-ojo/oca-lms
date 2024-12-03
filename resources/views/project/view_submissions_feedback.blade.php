@@ -63,6 +63,52 @@ View Submissions and Feedback
 
             <h2>View Submissions and Feedback</h2>
             <h4>{{ $project->project_name }}</h4>
+            {{-- Start Evaluation --}}
+            <div class="col-md-4  text-center m-2 p-2 d-flex"> <!-- 30% width for Evaluation -->
+                @if(Auth::guard('staff')->check() && Auth::guard('staff')->user()->role === 'trainer')
+                    <form action="{{ route('update_project_status', ['projectId' => $project->id, 'studentId' => request('student_id')]) }}" method="post">
+                        @csrf
+                        <div class="mb-3 ">
+                            <label for="project_status">Project Status:</label>
+                            <!-- Select element for project status -->
+                            @if($projectStatus == 2)
+                            <select name="project_status" id="project_status" style="background-color: #d30606; color:white">
+                            @elseif($projectStatus == 1)
+                            <select name="project_status" id="project_status" style="background-color: #2c8506; color:white">
+                            @else
+                            <select name="project_status" id="project_status" style="background-color: #444; color:white">
+                            @endif
+                                <option value="0" {{ $projectStatus == 0 ? 'selected' : '' }}>Not evaluated</option>
+                                <option value="1" {{ $projectStatus == 1 ? 'selected' : '' }}>Confirm Skills</option>
+                                <option value="2" {{ $projectStatus == 2 ? 'selected' : '' }}>Corrective Action</option>
+                            </select>
+                        </div>
+                       
+                    </form>
+                @elseif (Auth::guard('students')->check())
+                <div class="mb-3">
+                    <label for="project_status">Project Status:</label>
+                    @if($projectStatus == 2)
+                        <div class="alert alert-danger" role="alert">
+                            You received Corrective Action.
+                        </div>
+                    @elseif($projectStatus == 1)
+                        <div class="alert alert-success" role="alert">
+                            Congratulations! You have confirmed your skills.
+                        </div>
+                    @else
+                        <div class="alert alert-info" role="alert">
+                            Your project is not evaluated yet.
+                        </div>
+                    @endif
+                </div>
+                @endif
+            <div>
+                <button type="submit" class="btn btn-primary m-2">Save</button>
+            </div>
+            </div>
+            {{-- End Evaluation --}}
+
 
             {{-- Start Conversation --}}
             <div class="col-md-8 my-3 "> <!-- 60% width for Conversation -->
@@ -103,48 +149,7 @@ View Submissions and Feedback
             </div>
             {{-- End Conversation --}}
 
-            {{-- Start Evaluation --}}
-            <div class="col-md-4  text-center p-2"> <!-- 30% width for Evaluation -->
-                @if(Auth::guard('staff')->check() && Auth::guard('staff')->user()->role === 'trainer')
-                    <form action="{{ route('update_project_status', ['projectId' => $project->id, 'studentId' => request('student_id')]) }}" method="post">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="project_status">Project Status:</label>
-                            <!-- Select element for project status -->
-                            @if($projectStatus == 2)
-                            <select name="project_status" id="project_status" style="background-color: #d30606; color:white">
-                            @elseif($projectStatus == 1)
-                            <select name="project_status" id="project_status" style="background-color: #2c8506; color:white">
-                            @else
-                            <select name="project_status" id="project_status" style="background-color: #444; color:white">
-                            @endif
-                                <option value="0" {{ $projectStatus == 0 ? 'selected' : '' }}>Not evaluated</option>
-                                <option value="1" {{ $projectStatus == 1 ? 'selected' : '' }}>Confirm Skills</option>
-                                <option value="2" {{ $projectStatus == 2 ? 'selected' : '' }}>Corrective Action</option>
-                            </select>
-                        </div>
-                       
-                    </form>
-                @elseif (Auth::guard('students')->check())
-                <div class="mb-3">
-                    <label for="project_status">Project Status:</label>
-                    @if($projectStatus == 2)
-                        <div class="alert alert-danger" role="alert">
-                            You received Corrective Action.
-                        </div>
-                    @elseif($projectStatus == 1)
-                        <div class="alert alert-success" role="alert">
-                            Congratulations! You have confirmed your skills.
-                        </div>
-                    @else
-                        <div class="alert alert-info" role="alert">
-                            Your project is not evaluated yet.
-                        </div>
-                    @endif
-                </div>
-                @endif
-            </div>
-            {{-- End Evaluation --}}
+           
 
         </div>
         <div class="d-flex ">
@@ -162,9 +167,7 @@ View Submissions and Feedback
            
         @endif
     </div>
-        <div>
-        <button type="submit" class="btn btn-primary m-2">Save</button>
-    </div>
+   
 </div>
     </div>
 </div>

@@ -287,24 +287,20 @@ Route::put('/update-satisfaction', [technologySatisfactionController::class, 'up
 //manger routes
 Route::middleware(['role:manager'])->group(function () {
 // staff controller
-Route::get('/staff/create', [StaffController::class, 'create'])->name('staff.create');
-Route::post('/staff', [StaffController::class, 'store'])->name('staff.store');
-Route::get('/staff/{id}', [StaffController::class, 'show'])->name('staff.show');
-Route::get('/staff/{id}/edit', [StaffController::class, 'edit'])->name('staff.edit');
-Route::put('/staff/{id}', [StaffController::class, 'update'])->name('staff.update');
-Route::delete('/staff/{id}', [StaffController::class, 'destroy'])->name('staff.destroy');
 });
 
 Route::middleware(['super_manager'])->group(function () {
 // staff controller
 
+
+Route::get('/academies/{academy}/edit', [AcademyController::class, 'edit'])->name('editacademy');
+Route::put('/academies/{academy}', [AcademyController::class, 'update'])->name('academies.update');
+Route::post('/academies', [AcademyController::class, 'store'])->name('academies.store');
+});
+
 Route::get('/staff/create', [StaffController::class, 'create'])->name('staff.create');
 Route::post('/staff', [StaffController::class, 'store'])->name('staff.store');
 Route::get('/staff/{id}', [StaffController::class, 'show'])->name('staff.show');
 Route::get('/staff/{id}/edit', [StaffController::class, 'edit'])->name('staff.edit');
 Route::put('/staff/{id}', [StaffController::class, 'update'])->name('staff.update');
 Route::delete('/staff/{id}', [StaffController::class, 'destroy'])->name('staff.destroy');
-Route::get('/academies/{academy}/edit', [AcademyController::class, 'edit'])->name('editacademy');
-Route::put('/academies/{academy}', [AcademyController::class, 'update'])->name('academies.update');
-Route::post('/academies', [AcademyController::class, 'store'])->name('academies.store');
-});
