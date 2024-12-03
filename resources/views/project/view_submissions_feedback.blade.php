@@ -64,11 +64,12 @@ View Submissions and Feedback
             <h2>View Submissions and Feedback</h2>
             <h4>{{ $project->project_name }}</h4>
             {{-- Start Evaluation --}}
-            <div class="col-md-4  text-center m-2 p-2 d-flex"> <!-- 30% width for Evaluation -->
+            <div class="  text-center p-2 d-flex"> <!-- 30% width for Evaluation -->
                 @if(Auth::guard('staff')->check() && Auth::guard('staff')->user()->role === 'trainer')
                     <form action="{{ route('update_project_status', ['projectId' => $project->id, 'studentId' => request('student_id')]) }}" method="post">
                         @csrf
-                        <div class="mb-3 ">
+                        <div class="d-flex">
+                        <div class="mt-2 pt-1">
                             <label for="project_status">Project Status:</label>
                             <!-- Select element for project status -->
                             @if($projectStatus == 2)
@@ -82,8 +83,11 @@ View Submissions and Feedback
                                 <option value="1" {{ $projectStatus == 1 ? 'selected' : '' }}>Confirm Skills</option>
                                 <option value="2" {{ $projectStatus == 2 ? 'selected' : '' }}>Corrective Action</option>
                             </select>
-                        </div>
-                       
+                            </div>
+                        <div class="m-2">
+                <button type="submit" class="btn btn-primary  py-1">Save</button>
+            </div>
+            </div>
                     </form>
                 @elseif (Auth::guard('students')->check())
                 <div class="mb-3">
@@ -103,15 +107,13 @@ View Submissions and Feedback
                     @endif
                 </div>
                 @endif
-            <div>
-                <button type="submit" class="btn btn-primary m-2">Save</button>
-            </div>
+            
             </div>
             {{-- End Evaluation --}}
 
 
             {{-- Start Conversation --}}
-            <div class="col-md-8 my-3 "> <!-- 60% width for Conversation -->
+            <div class="col-md-8 mb-3 "> <!-- 60% width for Conversation -->
                 @foreach ($submissionsAndFeedback as $item)
 
                     <!-- Display trainee submission -->
