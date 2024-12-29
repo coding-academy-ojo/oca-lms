@@ -45,7 +45,7 @@ Student Absence Report
                     <td>{{ $absence->absences_date }}</td>
                     <td>{{ $absence->absences_type }}</td>
                     <td>{{ $absence->absences_reason }}</td>
-                    <td>{{ $absence->absences_duration }} Hours</td>
+                    <td>{{ $absence->absences_duration }} Minutes</td>
                     <td>
                         @if ($absence->file_path)
                             <a href="{{ route('absence.download', ['absence_id' => $absence->id]) }}">Download Report</a>

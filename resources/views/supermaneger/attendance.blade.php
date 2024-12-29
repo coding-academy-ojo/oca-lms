@@ -381,7 +381,8 @@
                 const studentId = $row.data('student-id');
                 let status = $row.find('.status-select').val();
                 const reason = $row.find('.reason-input').val();
-                const duration = $row.find('.duration-input').val();
+                const duration = parseInt($row.find('.duration-input').val(), 10);
+                //const duration = durationInMinutes / 60;
                 status = status.toLowerCase();
                 $.ajax({
                     url: "/attendance/store-or-update",
