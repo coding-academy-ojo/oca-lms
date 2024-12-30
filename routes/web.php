@@ -147,12 +147,16 @@ Route::post('/reset-password', [ProfileController::class, 'resetPassword'])->nam
 
 // view all project
 Route::get('/projects', [ProjectController::class, 'showAllProjects'])->name('show_all_projects');
+// Edit Project
+Route::get('/edit_project/{id}', [ProjectController::class, 'editProject'])->name('edit_project');
+Route::put('/update_project/{id}', [ProjectController::class, 'updateProject'])->name('update_project');
+
 // Project Brief
 Route::get('/project_brief/{id}', [ProjectController::class, 'showProjectBrief'])->name('project_brief');
 Route::get('/filter-projects', 'ProjectController@filterProjects')->name('filter_projects');
 Route::get('/assign-students/{projectId}', 'ProjectController@assignStudents')->name('assign_students');
 Route::post('/assign-students/{projectId}', 'ProjectController@assignStudents')->name('assign_students');
-// Route::post('/projects/{id}/assign-students', [ProjectController::class, 'assignStudents']);
+//Route::post('/projects/{id}/assign-students', [ProjectController::class, 'assignStudents']);
 
 // Process form submission
 Route::post('/process_project_submission/{project_id}', 'ProjectController@processProjectSubmission')->name('process_project_submission');
@@ -176,7 +180,7 @@ Route::middleware(['role:student'])->group(function () {
     Route::get('Student/Assignments', [AssignmentSubmissionController::class, 'index'])->name('student.assignments');
     Route::get('Student/assignments/{assignment}', [AssignmentSubmissionController::class ,'show'])->name('Student.assignment.show');
     Route::post('Student/asssignment/store', [AssignmentSubmissionController::class ,'store'])->name('Student.assignment.store');
-    Route::put('/assignment/feedback/{assignment}', [AssignmentSubmissionController::class ,'update'])->name('submission_feedback.update');
+    
 
     
 
@@ -200,11 +204,11 @@ Route::middleware(['role:trainer'])->group(function () {
     Route::delete('/assignment/{assignment}', [AssignmentController::class ,'destroy'])->name('assignment.destroy');
     Route::get('/download/{filename}', [AssignmentController::class, 'downloads'])->name('download');
     Route::delete('assignment/{assignment}/student/{student}',[AssignmentController::class,'removeStudent'] )->name('assignment.removeStudent');
-
+    Route::put('/assignment/feedback/{assignment}', [AssignmentSubmissionController::class ,'update'])->name('submission_feedback.update');
     /////////////////////////////////////////////
     // rawan bilal
 
-   
+
 
     //topic routes 
     Route::get('/Topic/create', [TopicController::class ,'create'])->name('topic.create');
@@ -218,9 +222,7 @@ Route::middleware(['role:trainer'])->group(function () {
     Route::put('/update_project_skills_level/{id}', [ProjectController::class, 'updateProjectSkillsLevel'])->name('update_project_skills_level');
     Route::post('/update-project-status/{projectId}/{studentId}', 'ProjectController@updateProjectStatus')->name('update_project_status');
 
-    // Edit Project
-    Route::get('/edit_project/{id}', [ProjectController::class, 'editProject'])->name('edit_project');
-    Route::put('/update_project/{id}', [ProjectController::class, 'updateProject'])->name('update_project');
+    
 
     // Edit Project Skills Level
     Route::get('/edit_project_skills_level/{id}', [ProjectController::class, 'editProjectSkillsLevel'])->name('edit_project_skills_level');
