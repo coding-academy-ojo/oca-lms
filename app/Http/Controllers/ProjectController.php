@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Skill;
 use App\Level;
-use App\Cohort; // Updated from Classroom to Cohort
+use App\Cohort;
 use App\ProjectSkill;
 use App\SkillLevel;
 use App\ProjectSubmission;
@@ -22,25 +22,15 @@ class ProjectController extends Controller
 
     public function showAllProjects(Request $request)
     {
-        $cohortId = session('cohort_ID');
-        // $cohortId = 1;
         $project_filter = $request->input('project_filter', 'all');
 
         if (Auth::guard('staff')->check() && Auth::guard('staff')->user()->role === 'trainer') {
             $projects = Project::where('cohort_id', $cohortId)->get();
-            // dd($projects);
         } else {
-            // $studentId = Auth::guard('students')->user()->id;
             $studentId = session('student_id');
             $student = Student::find($studentId);
-            // dd( $studentId);
             $cohortId = $student->cohort_id;
-           
-            $projects = Project::where('cohort_id', $cohortId)
-                ->whereHas('students', function ($query) use ($studentId) {
-                    $query->where('student_id', $studentId);
-                })->get();
-                 dd($projects);      
+            $projects = Project::where('cohort_id', $cohortId)->get();         
         }
 
         return view('project.Project', compact('projects','project_filter'));
@@ -50,8 +40,6 @@ public function filterProjects(Request $request)
 {
     $project_filter = $request->input('project_filter');
     $cohortId = session('cohort_ID');
-
-    // $cohortId = 1; // Replace this with the correct cohort ID
 
     if (Auth::guard('staff')->check() && Auth::guard('staff')->user()->role === 'trainer') {
         if ($project_filter == 'all') {
@@ -76,7 +64,6 @@ public function filterProjects(Request $request)
             return redirect()->route('show_all_projects');
         }
     } else {
-        // $studentId = Auth::guard('students')->user()->id;
         $studentId = session('student_id');
         $student = Student::find($studentId);
         $cohortId = $student->cohort_id;
