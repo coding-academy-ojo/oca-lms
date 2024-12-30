@@ -138,7 +138,7 @@ Route::get('/edit-profile', [ProfileController::class, 'edit'])->name('profile.e
 Route::post('/update-profile', [ProfileController::class, 'update'])->name('profile.update');
 Route::get('/reset-password', [ProfileController::class, 'showResetForm'])->name('password.reset');
 Route::post('/reset-password', [ProfileController::class, 'resetPassword'])->name('password.update');
-
+Route::get('/download/{filename}', [AssignmentController::class, 'downloads'])->name('download');
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -202,7 +202,7 @@ Route::middleware(['role:trainer'])->group(function () {
     Route::get('/assignment/{assignment}/edit', [AssignmentController::class ,'edit'])->name('assignment.edit');
     Route::put('/assignment/{assignment}', [AssignmentController::class ,'update'])->name('assignment.update');
     Route::delete('/assignment/{assignment}', [AssignmentController::class ,'destroy'])->name('assignment.destroy');
-    Route::get('/download/{filename}', [AssignmentController::class, 'downloads'])->name('download');
+   
     Route::delete('assignment/{assignment}/student/{student}',[AssignmentController::class,'removeStudent'] )->name('assignment.removeStudent');
     Route::put('/assignment/feedback/{assignment}', [AssignmentSubmissionController::class ,'update'])->name('submission_feedback.update');
     /////////////////////////////////////////////

@@ -37,12 +37,11 @@ class ProjectController extends Controller
             $cohortId = $student->cohort_id;
            
             $projects = Project::where('cohort_id', $cohortId)
-                ->whereHas('students', function ($query) use ($studentId) {
-                    $query->where('student_id', $studentId);
-                })->get();
-                
-
-                
+            ->whereHas('students', function ($query) use ($studentId) {
+                $query->where('student_id', $studentId);
+            });
+        dd($projects->toSql(), $projects->getBindings());
+           
         }
 
         return view('project.Project', compact('projects','project_filter'));
