@@ -88,7 +88,7 @@ Trainees Progress
             
             <!-- Check if passSubmissionsStatus is zero -->
             @if ($lateAssignmentSubmissions['passSubmissionsStatus'] == 0)
-                <small>No submissions yet</small>
+                <small>No pass submissions yet</small>
                 @else
                 <small>{{ $lateAssignmentSubmissions['passSubmissionsCount'] }} Trainees Passed of {{ $lateAssignmentSubmissions['numberOfSubmissions'] }}</small>
             @endif

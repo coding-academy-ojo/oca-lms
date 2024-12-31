@@ -96,7 +96,9 @@ class SuperManagerController extends Controller
     
         // Prepare labels and datasets
         foreach ($academies as $academy) {
-            foreach ($academy->cohorts as $cohort) {
+            $academyCohort = $academy->cohorts->sortBy('cohort_end_date');
+            foreach ($academyCohort as $cohort) {
+               // 
                 $cohortLabel =  $cohort->cohort_name;
                 $labels[] = $cohortLabel;
     
@@ -104,7 +106,7 @@ class SuperManagerController extends Controller
                 $graduatedStudentCount = $cohort->students->filter(function($student) {
                     return $student->certificate_type !== null && $student->certificate_type !== 'None';
                 })->count();
-               // dd($graduatedStudentCount);
+                
     
                 // Initialize dataset arrays if they are not yet populated
                 if (!isset($datasets[0]['data'][$index])) {

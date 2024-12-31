@@ -282,7 +282,6 @@
 
 
 
-<!-- Masterpiece Progress Section -->
 <div class="container my-4">
     <h2 class="mb-4 text-primary">Masterpiece Progress</h2>
     <div class="card">
@@ -294,35 +293,35 @@
                             <th scope="col">Task</th>
                             <th scope="col">Progress</th>
                             <th scope="col">Deadline</th>
-                            <th>Notes</th>
+                            <th scope="col">Notes</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($progressEntries as $progress)
+                        @foreach($tasksWithProgress as $task)
                         <tr>
-                            <td>{{ $progress->task_name }}</td>
+                            <td>{{ $task['task_name'] }}</td>
                             <td>
                                 <div class="progress" style="background: rgba(127, 99, 244, .1)">
                                     @php
                                         $progressColor = 'bg-success'; // Default to green
-                                        if ($progress->progress < 25) {
+                                        if ($task['progress'] < 25) {
                                             $progressColor = 'bg-danger'; // Red
-                                        } elseif ($progress->progress >= 25 && $progress->progress < 75) {
+                                        } elseif ($task['progress'] >= 25 && $task['progress'] < 75) {
                                             $progressColor = 'bg-warning'; // Orange
                                         }
                                     @endphp
                                     <div class="progress-bar {{ $progressColor }}" 
-                                         style="width: {{ $progress->progress }}%;" 
+                                         style="width: {{ $task['progress'] }}%;" 
                                          role="progressbar" 
                                          data-toggle="tooltip" 
                                          data-placement="top" 
-                                         title="{{ $progress->progress }}%">
-                                        {{ $progress->progress }}%<span class="sr-only">{{ $progress->progress }}% Complete</span>
+                                         title="{{ $task['progress'] }}%">
+                                        {{ $task['progress'] }}%<span class="sr-only">{{ $task['progress'] }}% Complete</span>
                                     </div>
                                 </div>
                             </td>
-                            <td>{{ $progress->task_deadline }}</td>
-                            <td>{{ $progress->notes }}</td>
+                            <td>{{ $task['task_deadline'] }}</td>
+                            <td>{{ $task['notes'] }}</td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -331,6 +330,8 @@
         </div>
     </div>
 </div>
+
+
 
 <script>
     $(document).ready(function(){

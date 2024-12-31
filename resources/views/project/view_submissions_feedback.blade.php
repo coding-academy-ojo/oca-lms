@@ -49,7 +49,7 @@ View Submissions and Feedback
 
 
 <div class="innerPage mt-3">
-    <div class="container">
+    <div class="container my-5">
         <div class="row">
             @if ($errors->any())
             <div class="alert alert-danger">
@@ -62,51 +62,14 @@ View Submissions and Feedback
             @endif
 
             <h2>View Submissions and Feedback</h2>
-            <h3>{{ $project->project_name }}</h3>
-
-            {{-- Start Conversation --}}
-            <div class="col-md-8"> <!-- 60% width for Conversation -->
-                @foreach ($submissionsAndFeedback as $item)
-
-                    <!-- Display trainee submission -->
-                    <div class="message mt-3 p-3 bg-light rounded">
-                        <!-- Submission details -->
-                        <div class="d-flex align-items-center">
-                            <img style="height: 50px; width:50px; border-radius:50%;" src="{{ asset('images/' . $item['student_photo']) }}" alt="{{ $item['student_name'] }}" class="avatar me-3">
-                            <div>
-                                <p style="font-weight: bold;">{{ $item['student_name'] }}</p>
-                                <p style="font-size: 12px; color: #444;">Submitted at: {{ $item['submission_created_at'] }}</p>
-                            </div>
-                        </div>
-                        <p class="mt-3">Submission Link : <a href="{{ $item['submission_link'] }}">{{ $item['submission_link'] }}</a></p>
-                        <p class="mt-3">{{ $item['submission_message'] }}</p>
-                    </div>
-
-                    <!-- Display trainer feedback if available -->
-                    @if ($item['staff_name'] && $item['feedback'])
-                        <div class="message mt-3 p-3 bg-primary text-white rounded">
-                            <!-- Feedback details -->
-                            <div class="d-flex align-items-center">
-                                <img style="height: 50px; width:50px; border-radius:50%;" src="{{ asset('images/' . $item['staff_photo']) }}" alt="{{ $item['staff_name'] }}" class="avatar me-3">
-                                <div>
-                                    <p style="font-weight: bold;">{{ $item['staff_name'] }}</p>
-                                    <p style="font-size: 12px;">Feedback at: {{ $item['feedback_created_at'] }}</p>
-                                </div>
-                            </div>
-                            <p class="mt-3">" {{ $item['feedback'] }} "</p>
-                        </div>
-                    @endif
-
-                @endforeach
-            </div>
-            {{-- End Conversation --}}
-
+            <h4>{{ $project->project_name }}</h4>
             {{-- Start Evaluation --}}
-            <div class="col-md-4"> <!-- 30% width for Evaluation -->
+            <div class="  text-center p-2 d-flex"> <!-- 30% width for Evaluation -->
                 @if(Auth::guard('staff')->check() && Auth::guard('staff')->user()->role === 'trainer')
                     <form action="{{ route('update_project_status', ['projectId' => $project->id, 'studentId' => request('student_id')]) }}" method="post">
                         @csrf
-                        <div class="mb-3">
+                        <div class="d-flex">
+                        <div class="mt-2 pt-1">
                             <label for="project_status">Project Status:</label>
                             <!-- Select element for project status -->
                             @if($projectStatus == 2)
@@ -120,8 +83,11 @@ View Submissions and Feedback
                                 <option value="1" {{ $projectStatus == 1 ? 'selected' : '' }}>Confirm Skills</option>
                                 <option value="2" {{ $projectStatus == 2 ? 'selected' : '' }}>Corrective Action</option>
                             </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        <div class="m-2">
+                <button type="submit" class="btn btn-primary  py-1">Save</button>
+            </div>
+            </div>
                     </form>
                 @elseif (Auth::guard('students')->check())
                 <div class="mb-3">
@@ -141,24 +107,70 @@ View Submissions and Feedback
                     @endif
                 </div>
                 @endif
+            
             </div>
             {{-- End Evaluation --}}
 
-        </div>
 
+            {{-- Start Conversation --}}
+            <div class="col-md-8 mb-3 "> <!-- 60% width for Conversation -->
+                @foreach ($submissionsAndFeedback as $item)
+
+                    <!-- Display trainee submission -->
+                    <div class="message mt-3 p-3  card rounded">
+                        <!-- Submission details -->
+                        <div class="d-flex align-items-center">
+                            <img style="height: 50px; width:50px; border-radius:50%;" src="{{ asset('images/' . $item['student_photo']) }}" alt="{{ $item['student_name'] }}" class="avatar me-3">
+                            <div>
+                                <p style="font-weight: bold;">{{ $item['student_name'] }}</p>
+                                <p style="font-size: 12px; color: #444;">Submitted at: {{ $item['submission_created_at'] }}</p>
+                            </div>
+                        </div>
+                        <div class="my-3 p-3 card text-bg-light">
+                        <p class="mt-3">Submission Link : <a href="{{ $item['submission_link'] }}">{{ $item['submission_link'] }}</a></p>
+                        <p class="mt-3">{{ $item['submission_message'] }}</p>
+                    </div>
+                </div>
+
+                    <!-- Display trainer feedback if available -->
+                    @if ($item['staff_name'] && $item['feedback'])
+                        <div class="message mt-3 p-3 card rounded">
+                            <!-- Feedback details -->
+                            <div class="d-flex align-items-center">
+                                <img style="height: 50px; width:50px; border-radius:50%;" src="{{ asset('images/' . $item['staff_photo']) }}" alt="{{ $item['staff_name'] }}" class="avatar me-3">
+                                <div>
+                                    <p style="font-weight: bold;">{{ $item['staff_name'] }}</p>
+                                    <p style="font-size: 12px;">Feedback at: {{ $item['feedback_created_at'] }}</p>
+                                </div>
+                            </div>
+                            <p class="my-3 p-3 card text-bg-light">" {{ $item['feedback'] }} "</p>
+                        </div>
+                    @endif
+
+                @endforeach
+            </div>
+            {{-- End Conversation --}}
+
+           
+
+        </div>
+        <div class="d-flex ">
+<div>
         <!-- Back button -->
         @if(Auth::guard('staff')->check() && Auth::guard('staff')->user()->role === 'trainer')
-            <a href="{{ route('view_project_submissions', ['project_id' => $project->id]) }}" class="btn btn-primary mt-3">
+            <a href="{{ route('view_project_submissions', ['project_id' => $project->id]) }}" class="btn btn-primary m-2">
                 Back to Submissions
             </a>
-            <br> <br>
+            
         @elseif(Auth::guard('students')->check())
-            <a href="{{ route('project_brief', ['id' => $project->id]) }}" class="btn btn-primary mt-3">
+            <a href="{{ route('project_brief', ['id' => $project->id]) }}" class="btn btn-primary m-2">
                 Back to Project Brief
             </a>
-            <br> <br>
+           
         @endif
-
+    </div>
+   
+</div>
     </div>
 </div>
 

@@ -35,6 +35,7 @@ use App\Http\Controllers\SoftSkillsTrainingController;
 use App\Http\Controllers\SingleTraineeProgressController;
 use App\Http\Controllers\MasterpieceController;
 use App\Http\Controllers\ImportDataController;
+use App\Http\Controllers\technologySatisfactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -113,6 +114,13 @@ Route::get('/academies/{academy}', [AcademyController::class, 'show'])->name('ac
 // start cohort
 Route::get('/cohorts/{academyId?}', [CohortController::class, 'index'])->name('academyview');
 
+ //Assignment Feedback
+ Route::get('/Assignments/feedback', [AssignmentFeedbackController::class, 'index'])->name('assignments.feedback');
+ Route::post('/Assignments/feedback/store', [AssignmentFeedbackController::class, 'store'])->name('assignment.feedbacksubmission.store');
+ Route::get('/Assignments/feedback/{assignmnet}', [AssignmentFeedbackController::class, 'show'])->name('assignment.feedbacksubmission.show');
+ Route::get('/Assignments/feedback/{id}/{studentId}', [AssignmentFeedbackController::class, 'submissionfedback'])->name('assignment.feedbacksubmission.feedback');
+
+
 //Progress
 Route::get('/cohort/progress-details/{id}',[ SingleTraineeProgressController::class, 'index'])->name('ProgressDetails.showDetails');
 Route::get('/traineesProgress', [TraineesProgressController::class, 'index'])->name('trainees.progress');
@@ -130,7 +138,7 @@ Route::get('/edit-profile', [ProfileController::class, 'edit'])->name('profile.e
 Route::post('/update-profile', [ProfileController::class, 'update'])->name('profile.update');
 Route::get('/reset-password', [ProfileController::class, 'showResetForm'])->name('password.reset');
 Route::post('/reset-password', [ProfileController::class, 'resetPassword'])->name('password.update');
-
+Route::get('/download/{filename}', [AssignmentController::class, 'downloads'])->name('download');
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -139,9 +147,22 @@ Route::post('/reset-password', [ProfileController::class, 'resetPassword'])->nam
 
 // view all project
 Route::get('/projects', [ProjectController::class, 'showAllProjects'])->name('show_all_projects');
+// Edit Project
+Route::get('/edit_project/{id}', [ProjectController::class, 'editProject'])->name('edit_project');
+Route::put('/update_project/{id}', [ProjectController::class, 'updateProject'])->name('update_project');
+
 // Project Brief
 Route::get('/project_brief/{id}', [ProjectController::class, 'showProjectBrief'])->name('project_brief');
 Route::get('/filter-projects', 'ProjectController@filterProjects')->name('filter_projects');
+Route::get('/assign-students/{projectId}', 'ProjectController@assignStudents')->name('assign_students');
+Route::post('/assign-students/{projectId}', 'ProjectController@assignStudents')->name('assign_students');
+//Route::post('/projects/{id}/assign-students', [ProjectController::class, 'assignStudents']);
+
+// Process form submission
+Route::post('/process_project_submission/{project_id}', 'ProjectController@processProjectSubmission')->name('process_project_submission');
+Route::get('/view_project_submissions/{project_id}', 'ProjectController@viewProjectSubmissions')->name('view_project_submissions');
+Route::post('/process_feedback/{submission_id}', 'ProjectController@processFeedback')->name('process_feedback');
+Route::get('/view_submissions_feedback/{project_id}', 'ProjectController@viewSubmissionsAndFeedback')->name('view_submissions_feedback');
 
 
 
@@ -151,6 +172,7 @@ Route::post('/import-data/{cohortId}', [ImportDataController::class, 'import'])-
 Route::post('/import-data/import-softskills/{cohortId}', [ImportDataController::class, 'importSoftSkillsTrainings'])->name('import-data.import-softskills');
 Route::post('/import-data/import-technologies/{cohortId}', [ImportDataController::class, 'importTechnologies'])->name('import-data.import-technologies');
 Route::post('import-data/{cohortId}/assignments', [ImportDataController::class, 'importAssignments'])->name('import-data.import-assignments');
+Route::put('/assignment/feedbackStatus/{assignment}', [AssignmentSubmissionController::class ,'changeStatus'])->name('changeStatus.update');
 
 //student routes
 Route::middleware(['role:student'])->group(function () {
@@ -158,16 +180,9 @@ Route::middleware(['role:student'])->group(function () {
     Route::get('Student/Assignments', [AssignmentSubmissionController::class, 'index'])->name('student.assignments');
     Route::get('Student/assignments/{assignment}', [AssignmentSubmissionController::class ,'show'])->name('Student.assignment.show');
     Route::post('Student/asssignment/store', [AssignmentSubmissionController::class ,'store'])->name('Student.assignment.store');
-    Route::put('/assignment/feedback/{assignment}', [AssignmentSubmissionController::class ,'update'])->name('submission_feedback.update');
-    Route::put('/assignment/feedbackStatus/{assignment}', [AssignmentSubmissionController::class ,'changeStatus'])->name('changeStatus.update');
+    
 
-    // Process form submission
-    Route::post('/process_project_submission/{project_id}', 'ProjectController@processProjectSubmission')->name('process_project_submission');
-    Route::get('/view_project_submissions/{project_id}', 'ProjectController@viewProjectSubmissions')->name('view_project_submissions');
-    Route::post('/process_feedback/{submission_id}', 'ProjectController@processFeedback')->name('process_feedback');
-    Route::get('/view_submissions_feedback/{project_id}', 'ProjectController@viewSubmissionsAndFeedback')->name('view_submissions_feedback');
-    Route::get('/assign-students/{projectId}', 'ProjectController@assignStudents')->name('assign_students');
-    Route::post('/assign-students/{projectId}', 'ProjectController@assignStudents')->name('assign_students');
+    
 
     // Show modal
     Route::get('/add_project_submission_modal/{project_id}', 'ProjectController@showAddProjectSubmissionModal')->name('show_add_project_submission_modal');
@@ -189,18 +204,8 @@ Route::middleware(['role:trainer'])->group(function () {
     Route::put('/assignment/{assignment}', [AssignmentController::class ,'update'])->name('assignment.update');
     Route::delete('/assignment/{assignment}', [AssignmentController::class ,'destroy'])->name('assignment.destroy');
     Route::delete('assignment/{assignment}/student/{student}',[AssignmentController::class,'removeStudent'] )->name('assignment.removeStudent');
-
+    Route::put('/assignment/feedback/{assignment}', [AssignmentSubmissionController::class ,'update'])->name('submission_feedback.update');
     /////////////////////////////////////////////
-    // rawan bilal
-
-    //Assignment Feedback
-    Route::get('/Assignments/feedback', [AssignmentFeedbackController::class, 'index'])->name('assignments.feedback');
-    Route::post('/Assignments/feedback/store', [AssignmentFeedbackController::class, 'store'])->name('assignment.feedbacksubmission.store');
-    Route::get('/Assignments/feedback/{assignmnet}', [AssignmentFeedbackController::class, 'show'])->name('assignment.feedbacksubmission.show');
-    Route::get('/Assignments/feedback/{id}/{studentId}', [AssignmentFeedbackController::class, 'submissionfedback'])->name('assignment.feedbacksubmission.feedback');
-
-
-
 
     //topic routes 
     Route::get('/Topic/create', [TopicController::class ,'create'])->name('topic.create');
@@ -213,10 +218,6 @@ Route::middleware(['role:trainer'])->group(function () {
     Route::get('/edit_project_skills_level/{id}', [ProjectController::class, 'editProjectSkillsLevel'])->name('edit_project_skills_level');
     Route::put('/update_project_skills_level/{id}', [ProjectController::class, 'updateProjectSkillsLevel'])->name('update_project_skills_level');
     Route::post('/update-project-status/{projectId}/{studentId}', 'ProjectController@updateProjectStatus')->name('update_project_status');
-
-    // Edit Project
-    Route::get('/edit_project/{id}', [ProjectController::class, 'editProject'])->name('edit_project');
-    Route::put('/update_project/{id}', [ProjectController::class, 'updateProject'])->name('update_project');
 
     // Edit Project Skills Level
     Route::get('/edit_project_skills_level/{id}', [ProjectController::class, 'editProjectSkillsLevel'])->name('edit_project_skills_level');
@@ -249,10 +250,13 @@ Route::middleware(['role:trainer'])->group(function () {
 
     // Add skill - Show form
     Route::get('/skills/add', [SkillController::class, 'create'])->name('createskillsFramework');
+
     // Store new skill
     Route::post('/skills/add', [SkillController::class, 'store'])->name('addskillsFramework');
+
     // Edit skill - Show form
     Route::get('/skills/{skill}/edit', [SkillController::class, 'edit'])->name('editSkill');
+
     // Update skill
     Route::put('/skills/{id}/update', [SkillController::class, 'update'])->name('updateSkill');
     Route::get('editSkillsLevel/{skill}/edit', 'SkillLevelController@edit')->name('editSkillLevel');
@@ -278,34 +282,26 @@ Route::middleware(['role:trainer'])->group(function () {
 
 });
 
+Route::get('/technology-satisfaction/{cohort_id}', [technologySatisfactionController::class, 'index'])->name('technology.satisfaction');
+Route::put('/update-satisfaction', [technologySatisfactionController::class, 'updateSatisfaction'])->name('update-satisfaction');
+
 //manger routes
 Route::middleware(['role:manager'])->group(function () {
-
-
 // staff controller
-Route::get('/staff/create', [StaffController::class, 'create'])->name('staff.create');
-Route::post('/staff', [StaffController::class, 'store'])->name('staff.store');
-Route::get('/staff/{id}', [StaffController::class, 'show'])->name('staff.show');
-Route::get('/staff/{id}/edit', [StaffController::class, 'edit'])->name('staff.edit');
-Route::put('/staff/{id}', [StaffController::class, 'update'])->name('staff.update');
-Route::delete('/staff/{id}', [StaffController::class, 'destroy'])->name('staff.destroy');
-
-
 });
 
 Route::middleware(['super_manager'])->group(function () {
 // staff controller
 
+
+Route::get('/academies/{academy}/edit', [AcademyController::class, 'edit'])->name('editacademy');
+Route::put('/academies/{academy}', [AcademyController::class, 'update'])->name('academies.update');
+Route::post('/academies', [AcademyController::class, 'store'])->name('academies.store');
+});
+
 Route::get('/staff/create', [StaffController::class, 'create'])->name('staff.create');
 Route::post('/staff', [StaffController::class, 'store'])->name('staff.store');
 Route::get('/staff/{id}', [StaffController::class, 'show'])->name('staff.show');
 Route::get('/staff/{id}/edit', [StaffController::class, 'edit'])->name('staff.edit');
 Route::put('/staff/{id}', [StaffController::class, 'update'])->name('staff.update');
 Route::delete('/staff/{id}', [StaffController::class, 'destroy'])->name('staff.destroy');
-
-Route::get('/academies/{academy}/edit', [AcademyController::class, 'edit'])->name('editacademy');
-Route::put('/academies/{academy}', [AcademyController::class, 'update'])->name('academies.update');
-Route::post('/academies', [AcademyController::class, 'store'])->name('academies.store');
-
-
-});

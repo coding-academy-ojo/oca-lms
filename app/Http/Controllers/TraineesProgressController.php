@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Skill;
 use App\Assignment;
+use App\Assignment_Student;
 use App\AssignmentSubmission;
 use App\Cohort;
 use App\Level;
@@ -43,11 +44,11 @@ class TraineesProgressController extends Controller
         $runningCohort = $staff->cohorts()->where('cohort_end_date', '>', now())->first();
         $cohortId = session('cohort_ID');
         $cohort = Cohort::find($cohortId);
-        //dd($runningCohort);
-        if (!$cohort) {
+        // dd($runningCohort);
+        if (!$runningCohort) {
             // If no running cohort is found, return a default set of values
             return [
-                'cohort_name' => 'N/A',
+                'cohort_name' => $cohort->cohort_name,
                 'date' => Carbon::now()->format('d-F-Y'),
                 'total_students' => 0,
                 'attended' => 0,
@@ -129,15 +130,17 @@ class TraineesProgressController extends Controller
         }
     
         $today = now()->toDateString();
-        $totalStudents = $cohort->students->count();
-
+       // $totalStudents = $cohort->students->count();
+      
+        
         // Get the latest assignment
-        $latestAssignment = Assignment::latest()->first();
+        $latestAssignment = Assignment::where('cohort_id', $cohort->id)->latest()->first();
         $latestAssignmentId = $latestAssignment->id;
         $todaySubmissions = AssignmentSubmission::whereHas('assignment', function ($query) use ($cohortId) {
             $query->where('cohort_id', $cohortId);
         })->whereDate('created_at', '=', $today)->get();
-
+        $totalAssignedStudents = Assignment_Student::where('assignment_id',$latestAssignmentId )->count();
+        //dd($totalStudents);
         $Submissions= AssignmentSubmission::where('assignment_id', $latestAssignmentId)->get();
         $numberOfSubmissions = AssignmentSubmission::where('assignment_id', $latestAssignmentId)
         ->distinct('student_id')
@@ -148,18 +151,22 @@ class TraineesProgressController extends Controller
         ->where('assignment_id', $latestAssignmentId)
         ->count();
 
-        $notPassSubmissionsCount = $numberOfSubmissions - $passSubmissionsCount;      
+        $notPassSubmissionsCount = $numberOfSubmissions - $passSubmissionsCount;
+             
         $didNotSubmitCount = $totalStudents - ($lateSubmissionsCount + $onTimeCount);
 
         // Calculate percentage of All counts 
         $latePercentage = $numberOfSubmissions > 0 ? intval(($lateSubmissionsCount / $numberOfSubmissions) * 100) : 0;
         $onTimePercentage = $numberOfSubmissions > 0 ? intval(($onTimeCount / $numberOfSubmissions) * 100) : 0;
         $didNotSubmitPercentage = $totalStudents > 0 ? intval(($didNotSubmitCount / $totalStudents) * 100) : 0;
-        $passSubmissionsPercentage = $numberOfSubmissions > 0 ? intval(($passSubmissionsCount / $numberOfSubmissions) * 100) : 0;
-        $notPassSubmissionsPercentage = $numberOfSubmissions > 0 ? 100 - intval(($notPassSubmissionsCount / $numberOfSubmissions) * 100) : 100;
+        $passSubmissionsPercentage = $numberOfSubmissions > 0 
+        ? number_format(($passSubmissionsCount / $numberOfSubmissions) * 100, 1) 
+        : 0;
+    
+        $notPassSubmissionsPercentage = $numberOfSubmissions > 0 ? number_format(($notPassSubmissionsCount / $numberOfSubmissions) * 100 , 1) : 100;
         //$numberOfSubmissions > 0 ? intval(($notPassSubmissionsCount / $numberOfSubmissions) * 100) : 0;
 
-        // dd($notPassSubmissionsPercentage);
+        
         return [
             'totalStudents' => $totalStudents,
             'lateSubmissionsCount' => $lateSubmissionsCount,

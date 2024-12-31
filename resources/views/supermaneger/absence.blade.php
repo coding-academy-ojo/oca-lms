@@ -176,8 +176,8 @@
                     var student = students[i];
                     var row = '<tr>' +
                         '<td>' + student.en_first_name + ' ' + student.en_last_name + '</td>' +
-                        '<td>' + (student.total_absent ? student.total_absent : 'No Absent') + ' Days </td>' +
-                        '<td>' + (student.total_late ? student.total_late : 'No Late') + ' Days </td>' +
+                        '<td>' + (student.total_absent ? student.total_absent : 'No Absent') + ' </td>' +
+                        '<td>' + (student.total_late ? student.total_late : 'No Late') + ' Times </td>' +
                         '<td>' +
                         '<div class="d-flex justify-content-end gap-2">' +
                         '<a href="/students/' + student.id +
