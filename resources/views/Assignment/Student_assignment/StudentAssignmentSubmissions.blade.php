@@ -8,9 +8,7 @@
         <div class="container">
             <ol class="breadcrumb m-3">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href=""> Class</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href=""> Assignment </a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="">Submit Assignment </a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="#"> Assignments </a></li>
             </ol>
         </div>
     </section>
@@ -63,7 +61,7 @@
                 <form method="POST" action="{{ route('Student.assignment.store') }}">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="submit youe assignmnet"
+                        <input type="text" class="form-control" placeholder="Submit your assignment"
                             name="Assignment_submission" aria-label="Recipient's username" aria-describedby="button-addon2">
                         <input type="hidden" name="Assignment_ID" value="{{ $assignment->id }}">
                         <button class="btn btn-primary" type="submit" id="button-addon2">Submit</button>
