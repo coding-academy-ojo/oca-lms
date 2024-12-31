@@ -8,9 +8,7 @@
         <div class="container">
             <ol class="breadcrumb m-3">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href=""> Class</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href=""> Assignment </a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="">Submit Assignment </a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="/Assignments"> Assignment </a></li>
             </ol>
         </div>
     </section>
