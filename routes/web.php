@@ -175,6 +175,7 @@ Route::middleware(['role:student'])->group(function () {
     //Dashboard 
     Route::get('/student-dashboard', [StudentDashboardController::class, 'index'])->name('student.dashboard');
 });
+Route::get('/download/{filename}', [AssignmentController::class, 'downloads'])->name('download');
 
 //trainer routes
 Route::middleware(['role:trainer'])->group(function () {
@@ -187,7 +188,6 @@ Route::middleware(['role:trainer'])->group(function () {
     Route::get('/assignment/{assignment}/edit', [AssignmentController::class ,'edit'])->name('assignment.edit');
     Route::put('/assignment/{assignment}', [AssignmentController::class ,'update'])->name('assignment.update');
     Route::delete('/assignment/{assignment}', [AssignmentController::class ,'destroy'])->name('assignment.destroy');
-    Route::get('/download/{filename}', [AssignmentController::class, 'downloads'])->name('download');
     Route::delete('assignment/{assignment}/student/{student}',[AssignmentController::class,'removeStudent'] )->name('assignment.removeStudent');
 
     /////////////////////////////////////////////
