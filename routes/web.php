@@ -190,6 +190,7 @@ Route::middleware(['role:student'])->group(function () {
     //Dashboard 
     Route::get('/student-dashboard', [StudentDashboardController::class, 'index'])->name('student.dashboard');
 });
+Route::get('/download/{filename}', [AssignmentController::class, 'downloads'])->name('download');
 
 //trainer routes
 Route::middleware(['role:trainer'])->group(function () {

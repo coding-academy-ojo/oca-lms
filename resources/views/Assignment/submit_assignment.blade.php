@@ -19,14 +19,31 @@
             {{-- <div class="col-12 m-auto my-3"><b>Technology:</b> {{ $assignment->topic->roadmap->technologies->technology_name }}</div> --}}
             <div class="col-12 m-auto my-3"><b>Topic:</b> {{ $assignment->topic->topic_name }}</div>
             <div class="col-12 m-auto my-3">{{ $assignment->assignment_description }}</div>
-            @if (!empty($assignment->assignment_attached_file))
-                <div class="my-3"><b>Assignment file:</b> </div>
-                <a class="link-underline link-underline-opacity-0"
-                    href="{{ route('download', ['filename' => $assignment->assignment_attached_file]) }}">{{ $assignment->assignment_attached_file }}</a>
-            @endif
             <div class="mt-3">
                 <b>Deadline: {{ $assignment->assignment_due_date }}</b>
             </div>
+            @if (!empty($assignment->assignment_attached_file))
+            <div class="my-3"><b>Assignment file:</b></div>
+            @php
+                $fileExtension = pathinfo($assignment->assignment_attached_file, PATHINFO_EXTENSION);
+            @endphp
+            @if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif']))
+                <div>
+                    <img style="width: 70%; hight:50vh" src="{{ asset('assignments_files/' . $assignment->assignment_attached_file) }}" alt="Assignment Image" style="max-width: 100%; height: auto;">
+                </div>
+            @elseif ($fileExtension == 'pdf')
+                <div>
+                    <a class="link-underline link-underline-opacity-0"
+                       href="{{ route('download', ['filename' => $assignment->assignment_attached_file]) }}">{{ $assignment->assignment_attached_file }}</a>
+                </div>
+            @else
+                <div>
+                    <a class="link-underline link-underline-opacity-0"
+                       href="{{ asset('assignments_files/' . $assignment->assignment_attached_file) }}" download>{{ $assignment->assignment_attached_file }}</a>
+                </div>
+            @endif
+        @endif
+
         </div>
         <div class="col-10 m-auto">
             <div class="table-responsive mb-3 mt-3">
@@ -40,6 +57,8 @@
                 <table class="table table-hover ">
                     {{-- show all submission for assignmnet with details  --}}
                     <caption class="visually fs-3 text-primary mb-2">View Assignments Submissions</caption>
+                    <span><b>Total Submission: {{ $submissionCount }}</b> </span>
+                
                     <thead>
                         <tr>
                             <th scope="col ">Trainee Name</th>
@@ -55,39 +74,33 @@
                         {{-- show submissions details --}}
                         @foreach ($AssignmentSubmission as $Assignment)
                             <tr>
-                                <td>{{ $Assignment->student->en_first_name }} {{ $Assignment->student->en_last_name }}
-                                </td>
+                                <td>{{ $Assignment->student->en_first_name }} {{ $Assignment->student->en_last_name }}</td>
                                 <td>{{ $Assignment->assignment->assignment_name }}</td>
                                 @if ($Assignment->is_late == 1)
                                     <td>Late</td>
                                 @else
                                     <td> Not late </td>
                                 @endif
-
-                                <td><a class="link-underline link-underline-opacity-0"
-                                        href={{ $Assignment->attached_file }}>{{ $Assignment->attached_file }}</a>
-                                </td>
+                
+                                <td><a class="link-underline link-underline-opacity-0" href={{ $Assignment->attached_file }}>{{ $Assignment->attached_file }}</a></td>
                                 <td>
-                                    <button type="button" class="btn btn-primary  add-feedback-btn ms-3"
-                                        data-bs-toggle="modal" data-bs-target="#addFeedback{{ $Assignment->id }}">
+                                    <button type="button" class="btn btn-primary  add-feedback-btn ms-3" data-bs-toggle="modal" data-bs-target="#addFeedback{{ $Assignment->id }}">
                                         +
                                     </button>
                                 </td>
                                 <td>
                                     @if ($Assignment->status == 'not pass')
-                                    😭❌     
+                                        😭❌     
                                     @else
-                                    😀 ✔
+                                        😀 ✔
                                     @endif
-
                                 </td>
-                                <td><a class="link-underline link-underline-opacity-0"
-                                        href="{{ route('assignment.feedbacksubmission.feedback', [$Assignment->assignment->id, $Assignment->student->id, $Assignment->id]) }}">View</a>
-                                </td>
+                                <td><a class="link-underline link-underline-opacity-0" href="{{ route('assignment.feedbacksubmission.feedback', [$Assignment->assignment->id, $Assignment->student->id, $Assignment->id]) }}">View</a></td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
+                
             </div>
         </div>
 

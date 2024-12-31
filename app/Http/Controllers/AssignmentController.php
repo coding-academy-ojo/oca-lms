@@ -40,7 +40,7 @@ class AssignmentController extends Controller
                     });
                 });
             })
-            ->paginate(5);
+            ->paginate(10);
     
         //retrive all technologies related to current cohort
         $technologies = $cohort->technology;
@@ -133,13 +133,23 @@ class AssignmentController extends Controller
 
     //     return view('Assignment.submit_assignment', compact('assignment','AssignmentSubmission'));
     // }
-
     public function show(Request $request, $id)
     {
         $cohortID = session('cohort_ID');
         $assignment = Assignment::where('cohort_id', $cohortID)->findOrFail($id); 
-        // $query = Assignment::where('cohort_id', $cohortID);
         $search = $request->input('search');
+        
+        $submissionCount = AssignmentSubmission::where('assignment_id', $id)
+            ->when($search, function ($assignment, $search) {
+                return $assignment->whereHas('student', function ($studentQuery) use ($search) {
+                    $studentQuery->where('en_first_name', 'like', '%' . $search . '%')
+                                 ->orWhere('en_last_name', 'like', '%' . $search . '%');
+                });
+            })
+            ->select('student_id') // Select only the student_id to count distinct values
+            ->distinct() // Ensure distinct student_ids
+            ->count();
+    
         $AssignmentSubmission = AssignmentSubmission::where('assignment_id', $id)
             ->when($search, function ($assignment, $search) {
                 return $assignment->whereHas('student', function ($studentQuery) use ($search) {
@@ -147,10 +157,17 @@ class AssignmentController extends Controller
                                  ->orWhere('en_last_name', 'like', '%' . $search . '%');
                 });
             })
-            ->paginate(5);
+            ->join('students', 'assignment_submissions.student_id', '=', 'students.id')
+            ->orderBy('students.en_first_name', 'asc')
+            ->orderBy('students.en_last_name', 'asc')
+            ->select('assignment_submissions.*') // Ensure we select all columns from assignment_submissions
+            ->paginate(10);
     
-        return view('Assignment.submit_assignment', compact('assignment', 'AssignmentSubmission'));
+        return view('Assignment.submit_assignment', compact('assignment', 'AssignmentSubmission','submissionCount'));
     }
+    
+    
+    
     /**
      * Show the form for editing the specified resource.
      *
