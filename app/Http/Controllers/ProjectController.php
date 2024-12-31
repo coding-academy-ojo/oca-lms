@@ -22,10 +22,12 @@ class ProjectController extends Controller
 
     public function showAllProjects(Request $request)
     {
+        $cohortId = session('cohort_ID');
         $project_filter = $request->input('project_filter', 'all');
 
         if (Auth::guard('staff')->check() && Auth::guard('staff')->user()->role === 'trainer') {
             $projects = Project::where('cohort_id', $cohortId)->get();
+
         } else {
             $studentId = session('student_id');
             $student = Student::find($studentId);

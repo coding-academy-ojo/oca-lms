@@ -202,13 +202,9 @@ Route::middleware(['role:trainer'])->group(function () {
     Route::get('/assignment/{assignment}/edit', [AssignmentController::class ,'edit'])->name('assignment.edit');
     Route::put('/assignment/{assignment}', [AssignmentController::class ,'update'])->name('assignment.update');
     Route::delete('/assignment/{assignment}', [AssignmentController::class ,'destroy'])->name('assignment.destroy');
-   
     Route::delete('assignment/{assignment}/student/{student}',[AssignmentController::class,'removeStudent'] )->name('assignment.removeStudent');
     Route::put('/assignment/feedback/{assignment}', [AssignmentSubmissionController::class ,'update'])->name('submission_feedback.update');
     /////////////////////////////////////////////
-    // rawan bilal
-
-
 
     //topic routes 
     Route::get('/Topic/create', [TopicController::class ,'create'])->name('topic.create');
@@ -221,8 +217,6 @@ Route::middleware(['role:trainer'])->group(function () {
     Route::get('/edit_project_skills_level/{id}', [ProjectController::class, 'editProjectSkillsLevel'])->name('edit_project_skills_level');
     Route::put('/update_project_skills_level/{id}', [ProjectController::class, 'updateProjectSkillsLevel'])->name('update_project_skills_level');
     Route::post('/update-project-status/{projectId}/{studentId}', 'ProjectController@updateProjectStatus')->name('update_project_status');
-
-    
 
     // Edit Project Skills Level
     Route::get('/edit_project_skills_level/{id}', [ProjectController::class, 'editProjectSkillsLevel'])->name('edit_project_skills_level');
@@ -255,10 +249,13 @@ Route::middleware(['role:trainer'])->group(function () {
 
     // Add skill - Show form
     Route::get('/skills/add', [SkillController::class, 'create'])->name('createskillsFramework');
+
     // Store new skill
     Route::post('/skills/add', [SkillController::class, 'store'])->name('addskillsFramework');
+
     // Edit skill - Show form
     Route::get('/skills/{skill}/edit', [SkillController::class, 'edit'])->name('editSkill');
+
     // Update skill
     Route::put('/skills/{id}/update', [SkillController::class, 'update'])->name('updateSkill');
     Route::get('editSkillsLevel/{skill}/edit', 'SkillLevelController@edit')->name('editSkillLevel');
@@ -283,6 +280,7 @@ Route::middleware(['role:trainer'])->group(function () {
     Route::post('/update-internship', [MasterpieceController::class, 'updateInternship'])->name('update.internship');
 
 });
+
 Route::get('/technology-satisfaction/{cohort_id}', [technologySatisfactionController::class, 'index'])->name('technology.satisfaction');
 Route::put('/update-satisfaction', [technologySatisfactionController::class, 'updateSatisfaction'])->name('update-satisfaction');
 
