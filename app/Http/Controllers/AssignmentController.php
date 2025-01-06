@@ -263,11 +263,12 @@ class AssignmentController extends Controller
 
     public function downloads($filename = null)
     {
+       
         if ($filename === null) {
             return redirect()->back()->with('error', 'File not specified.');
         }
         $path = public_path('assignments_files/' . $filename);
-
+       
         if (file_exists($path)) {
             return response()->download($path);
         }

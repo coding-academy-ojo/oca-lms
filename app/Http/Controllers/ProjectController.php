@@ -30,8 +30,7 @@ class ProjectController extends Controller
 
         } else {
             $studentId = session('student_id');
-            $student = Student::find($studentId);
-            $cohortId = $student->cohort_id;
+            $cohortId = session('cohort_id');
             $projects = Project::where('cohort_id', $cohortId)->get();         
         }
 
@@ -67,8 +66,7 @@ public function filterProjects(Request $request)
         }
     } else {
         $studentId = session('student_id');
-        $student = Student::find($studentId);
-        $cohortId = $student->cohort_id;
+        $cohortId = session('cohort_id');
 
         if ($project_filter == 'all') {
             $projects = Project::where('cohort_id', $cohortId)

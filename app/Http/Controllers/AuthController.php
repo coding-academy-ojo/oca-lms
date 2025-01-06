@@ -103,7 +103,9 @@ public function studentLogin(Request $request)
     if (Auth::guard('students')->attempt($credentials)) {
         $student = Auth::guard('students')->user();
         $request->session()->put('student_id', $student->id);
-// dd(session('student_id'));
+        $request->session()->put('cohort_id', $student->cohort_id);
+
+// dd(session('cohort_id'));
         return redirect('/student-dashboard'); 
     } else {
         return back()->withErrors(['email' => 'The provided credentials do not match our records.'])->withInput($request->except('password'));
