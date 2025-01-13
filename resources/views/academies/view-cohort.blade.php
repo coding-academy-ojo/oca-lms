@@ -208,12 +208,15 @@
                                         <div class="progress" style="height: 20px; background-color: #f0f0f0; border-radius: 5px;">
                                             <div class="progress-bar" role="progressbar" 
                                                 style="width: {{ $softSkill->satisfaction }}%; 
-                                                       background-color: {{ $softSkill->satisfaction < 80 ? '#FFD700' : '#499557' }}; 
-                                                       color: black; 
-                                                       display: flex; 
-                                                       align-items: center; 
-                                                       justify-content: center;">
-                                                {{ $softSkill->satisfaction }}%
+                                                          background-color: 
+                {{ $softSkill->satisfaction < 79 ? '#FF0000' : 
+                   ($softSkill->satisfaction >= 80 && $softSkill->satisfaction <= 84 ? '#FFA500' : '#008000') }};
+                                                           color: black; 
+                                                           display: flex; 
+                                                           align-items: center; 
+                                                           justify-content: center;"
+                                                            title="{{ $softSkill->satisfaction == 0 || $softSkill->satisfaction === null ? 'No Value' : $softSkill->satisfaction . '%' }}">
+                                                   {{ $softSkill->satisfaction ==0 || null ? "" :  $softSkill->satisfaction }}%
                                             </div>
                                         </div>
                                     </td>
