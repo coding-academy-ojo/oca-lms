@@ -153,12 +153,15 @@
                                             <div class="progress" style="height: 20px; background-color: #f0f0f0; border-radius: 5px;">
                                                 <div class="progress-bar" role="progressbar" 
                                                     style="width: {{ $technology['satisfactionRate'] }}%; 
-                                                           background-color: {{ $technology['satisfactionRate'] < 80 ? '#FFD700' : '#499557' }}; 
+                                                          background-color: 
+                {{ $technology['satisfactionRate'] < 79 ? '#FF0000' : 
+                   ($technology['satisfactionRate'] >= 80 && $technology['satisfactionRate'] <= 84 ? '#FFA500' : '#008000') }};
                                                            color: black; 
                                                            display: flex; 
                                                            align-items: center; 
-                                                           justify-content: center;">
-                                                    {{ $technology['satisfactionRate'] }}%
+                                                           justify-content: center;"
+                                                            title="{{ $technology['satisfactionRate'] == 0 || $technology['satisfactionRate'] === null ? 'No Value' : $technology['satisfactionRate'] . '%' }}">
+                                                   {{ $technology['satisfactionRate'] ==0 || null ? "" :  $technology['satisfactionRate'] }}
                                                 </div>
                                             </div>
                                         </td>

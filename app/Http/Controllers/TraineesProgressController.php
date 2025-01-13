@@ -130,7 +130,7 @@ class TraineesProgressController extends Controller
         }
     
         $today = now()->toDateString();
-       // $totalStudents = $cohort->students->count();
+        $totalStudents = $cohort->students->count();
       
         
         // Get the latest assignment
