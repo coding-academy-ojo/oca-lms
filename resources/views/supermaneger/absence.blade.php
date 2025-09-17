@@ -36,8 +36,10 @@
                 <thead class="table-orange">
                     <tr class="">
                         <th scope="col">Trainee</th>
+                        <th scope="col">Attended Days</th>
                         <th scope="col">Total Absent</th>
                         <th scope="col">Total Late</th>
+                        <th scope="col">Follow Up</th>
                         <th scope="col" style="padding-right: 142px;" class="text-end ">Actions</th>
                     </tr>
                 </thead>
@@ -165,7 +167,7 @@
                 tableBody.empty();
     
                 if (students.length === 0) {
-                    tableBody.append('<tr><td colspan="4">No students found</td></tr>');
+                    tableBody.append('<tr><td colspan="6">No students found</td></tr>');
                     return;
                 }
     
@@ -174,10 +176,25 @@
     
                 for (var i = startIndex; i < endIndex; i++) {
                     var student = students[i];
+                    
+                    // Determine action status styling based on the status
+                    var actionStatusClass = '';
+                    var actionStatusText = student.action_status || 'No Actions';
+                    
+                    if (actionStatusText === 'Action Required') {
+                        actionStatusClass = 'text-danger fw-bold';
+                    } else if (actionStatusText === 'No Actions') {
+                        actionStatusClass = 'text-muted';
+                    } else {
+                        actionStatusClass = 'text-danger';
+                    }
+                    
                     var row = '<tr>' +
                         '<td>' + student.en_first_name + ' ' + student.en_last_name + '</td>' +
+                        '<td>' + (student.attended_days ? student.attended_days : '0') + ' Days</td>' +
                         '<td>' + (student.total_absent ? student.total_absent : 'No Absent') + ' </td>' +
                         '<td>' + (student.total_late ? student.total_late : 'No Late') + ' Times </td>' +
+                        '<td><span class="' + actionStatusClass + '">' + actionStatusText + '</span></td>' +
                         '<td>' +
                         '<div class="d-flex justify-content-end gap-2">' +
                         '<a href="/students/' + student.id +

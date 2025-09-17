@@ -99,6 +99,7 @@ Route::post('/cohorts', [CohortController::class, 'store'])->name('store-cohort'
 Route::get('/attendance', [AbsenceController::class, 'index'])->name('attendance');
 Route::post('/attendance/store-or-update', [AbsenceController::class, 'storeOrUpdate'])->name('attendance.storeOrUpdate');
 
+Route::put('/absence/{absence_id}/action', [AbsenceReportController::class, 'updateAction'])->name('absence.action.update');
 // absence
 Route::get('/absence-report/{cohort_id?}', [AbsenceReportController::class, 'index'])->name('absence');
 Route::post('/absence/upload/{absence_id}', [AbsenceReportController::class,'UploudAbsenceReport'])->name('absence.upload');

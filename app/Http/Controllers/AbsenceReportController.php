@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Crypt;
-
+use Carbon\Carbon;
 
 class AbsenceReportController extends Controller
 {
@@ -37,6 +37,9 @@ class AbsenceReportController extends Controller
             if (!$runningCohort) {
                 return response()->json(['message' => 'Cohort not found'], 404);
             }
+
+            // Calculate total cohort days excluding weekends
+            $totalCohortDays = $this->calculateCohortDays($runningCohort);
     
             $studentsQuery = $runningCohort->students();
     
@@ -57,7 +60,32 @@ class AbsenceReportController extends Controller
                     'absences as total_late' => function ($query) {
                         $query->where('absences_type', 'late');
                     }
-                ])->get();
+                ])->with(['absences' => function ($query) {
+                    $query->whereNotNull('actions')
+                          ->orderBy('absences_date', 'desc');
+                }])->get();
+
+                // Add attended days and action status to each student
+                $students->each(function ($student) use ($totalCohortDays) {
+                    $student->attended_days = $totalCohortDays - $student->total_absent;
+                    
+                    // Calculate total absent and late days
+                    $totalAbsentLateDays = $student->total_absent + $student->total_late;
+                    
+                    // Get the latest action taken
+                    $latestAction = $student->absences->first();
+                    
+                    if ($latestAction && $latestAction->actions) {
+                        // If there's an action taken, display the latest action
+                        $student->action_status = $latestAction->actions;
+                    } elseif ($totalAbsentLateDays > 5) {
+                        // If more than 5 absent/late days with no actions taken
+                        $student->action_status = 'Action Required';
+                    } else {
+                        // If less than 5 days or no absent/late days
+                        $student->action_status = 'No Actions';
+                    }
+                });
     
                 return response()->json([
                     'cohorts' => [$runningCohort], 
@@ -70,19 +98,66 @@ class AbsenceReportController extends Controller
             return view('supermaneger.absence');
         }
     }
+
+    /**
+     * Calculate total cohort days excluding weekends (Friday and Saturday)
+     *
+     * @param Cohort $cohort
+     * @return int
+     */
+    private function calculateCohortDays(Cohort $cohort)
+    {
+        $startDate = Carbon::parse($cohort->cohort_start_date);
+        $endDate = Carbon::parse($cohort->cohort_end_date);
+        $currentDate = Carbon::now();
+        
+        // Use current date if cohort is still running, otherwise use end date
+        $calculationEndDate = $currentDate->lessThan($endDate) ? $currentDate : $endDate;
+        
+        $totalDays = 0;
+        $date = $startDate->copy();
+        
+        while ($date->lessThanOrEqualTo($calculationEndDate)) {
+            // Skip Friday (5) and Saturday (6)
+            if (!in_array($date->dayOfWeek, [Carbon::FRIDAY, Carbon::SATURDAY])) {
+                $totalDays++;
+            }
+            $date->addDay();
+        }
+        
+        return $totalDays;
+    }
+public function updateAction(Request $request, $absence_id)
+{
+    try {
+
+
+        $request->validate([
+            'actions' => 'nullable|in:null,Alert,Warning,Committee Review,Meeting with Manager/Job Coach'
+        ]);
+
+        $absence = Absence::findOrFail($absence_id);
+        
+        // Handle null value explicitly
+        $actionValue = ($request->actions === 'null' || $request->actions === null) ? null : $request->actions;
+        
+        
+        $absence->update([
+            'actions' => $actionValue
+        ]);
+
+        $message = $actionValue ? 'Follow-up action updated successfully.' : 'Follow-up action cleared successfully.';
+        return back()->withSuccess($message);
+
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        return back()->withError('Validation failed: ' . implode(', ', $e->validator->errors()->all()));
+    } catch (ModelNotFoundException $e) {
+        return back()->withError('Absence record not found.');
+    } catch (\Exception $e) {
+        return back()->withError('Error updating action: ' . $e->getMessage());
+    }
+}
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
- 
     public function show($studentId)
     {
         try {
@@ -152,6 +227,4 @@ class AbsenceReportController extends Controller
             return back()->withError('Error downloading report: ' . $e->getMessage());
         }
     }
-    
-
 }
