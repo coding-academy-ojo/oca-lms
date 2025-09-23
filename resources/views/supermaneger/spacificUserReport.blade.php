@@ -20,7 +20,7 @@ Student Absence Report
         <h2 class="text-primary">Student Absence Report - {{ $student->en_first_name }} {{ $student->en_last_name }}</h2>
         <div class="d-flex gap-2">
             <a href="{{ route('absence.export.pdf', ['studentId' => $student->id]) }}" 
-               class="btn btn-danger d-flex align-items-center gap-2">
+               class="btn btn-primary d-flex align-items-center gap-2">
                 <span class="material-symbols-outlined">picture_as_pdf</span>
                 Export PDF
             </a>
