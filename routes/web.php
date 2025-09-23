@@ -101,6 +101,7 @@ Route::post('/attendance/store-or-update', [AbsenceController::class, 'storeOrUp
 
 Route::put('/absence/{absence_id}/action', [AbsenceReportController::class, 'updateAction'])->name('absence.action.update');
 // absence
+Route::get('/absence/export/pdf/{studentId}', [AbsenceReportController::class, 'exportPdf'])->name('absence.export.pdf');
 Route::get('/absence-report/{cohort_id?}', [AbsenceReportController::class, 'index'])->name('absence');
 Route::post('/absence/upload/{absence_id}', [AbsenceReportController::class,'UploudAbsenceReport'])->name('absence.upload');
 Route::get('/absence/{absence_id}/download', [AbsenceReportController::class,'downloadAbsenceReport'])->name('absence.download');

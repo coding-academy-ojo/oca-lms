@@ -40,7 +40,7 @@
                         <th scope="col">Total Absent</th>
                         <th scope="col">Total Late</th>
                         <th scope="col">Follow Up</th>
-                        <th scope="col" style="padding-right: 142px;" class="text-end ">Actions</th>
+                        {{-- <th scope="col" style="padding-right: 142px;" class="text-end ">Actions</th> --}}
                     </tr>
                 </thead>
                 <tbody>

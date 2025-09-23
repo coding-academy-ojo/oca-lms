@@ -16,7 +16,17 @@ Student Absence Report
 </nav>
 
 <div class="container mt-5">
-    <h2 class="mb-4 text-primary">Student Absence Report - {{ $student->en_first_name }} {{ $student->en_last_name }}</h2>
+<div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary">Student Absence Report - {{ $student->en_first_name }} {{ $student->en_last_name }}</h2>
+        <div class="d-flex gap-2">
+            <a href="{{ route('absence.export.pdf', ['studentId' => $student->id]) }}" 
+               class="btn btn-danger d-flex align-items-center gap-2">
+                <span class="material-symbols-outlined">picture_as_pdf</span>
+                Export PDF
+            </a>
+        </div>
+    </div>
+
     @if ($student->absences->isEmpty())
         <div class="alert alert-info" role="alert">
             No absence records found for this student.
@@ -48,8 +58,14 @@ Student Absence Report
             <tbody>
                 @foreach ($student->absences as $index => $absence)
                 <tr>
-                    <td>{{ $absence->absences_date }}</td>
-                    <td>{{ $absence->absences_type }}</td>
+                    <td>{{ \Carbon\Carbon::parse($absence->absences_date)->format('M d, Y') }}</td>
+                    <td>
+                        @if($absence->absences_type == 'absent')
+                            <span class="badge bg-danger">{{ ucfirst($absence->absences_type) }}</span>
+                        @else
+                            <span class="badge bg-warning text-dark">{{ ucfirst($absence->absences_type) }}</span>
+                        @endif
+                    </td>
                     <td>{{ $absence->absences_reason }}</td>
                     <td>
                         @php
@@ -81,9 +97,11 @@ Student Absence Report
                     </td>
                     <td>
                         @if ($absence->file_path)
-                            <a href="{{ route('absence.download', ['absence_id' => $absence->id]) }}">Download Report</a>
+                            <a href="{{ route('absence.download', ['absence_id' => $absence->id]) }}" class="text-success">
+                                <span class="material-symbols-outlined">download</span> Download Report
+                            </a>
                         @else
-                            No report uploaded
+                            <span class="text-muted">No report uploaded</span>
                         @endif
                     </td>
                     <td>
@@ -105,11 +123,11 @@ Student Absence Report
                     <td>
                         <form class="d-flex gap-2" action="{{ route('absence.upload', ['absence_id' => $absence->id]) }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <label for="file-input-{{ $index }}" class="btn btn-secondary">
-                                <span class="material-symbols-outlined">upload_file</span> Upload Report
+                            <label for="file-input-{{ $index }}" class="btn btn-secondary btn-sm">
+                                <span class="material-symbols-outlined">upload_file</span> Upload
                             </label>
                             <input id="file-input-{{ $index }}" type="file" name="report_file" style="display: none;" onchange="showSubmitButton(this, {{ $index }})">
-                            <button type="submit" id="submit-button-{{ $index }}" class="btn btn-secondary" style="display: none;">
+                            <button type="submit" id="submit-button-{{ $index }}" class="btn btn-success btn-sm" style="display: none;">
                                 Save
                             </button>
                         </form>
@@ -120,7 +138,10 @@ Student Absence Report
         </table>
     </div>
     @endif
-    <a href="{{route('absence')}}" class="btn btn-secondary mt-3" style="margin-bottom: 50px">Back to Absence Record</a>
+    <div class="d-flex gap-2 mt-3" style="margin-bottom: 50px">
+        <a href="{{route('absence')}}" class="btn btn-secondary">Back to Absence Record</a>
+       
+    </div>
 </div>
 
 <script>

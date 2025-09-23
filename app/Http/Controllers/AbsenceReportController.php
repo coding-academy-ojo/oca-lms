@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Crypt;
 use Carbon\Carbon;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 class AbsenceReportController extends Controller
 {
     public function index(Request $request, $cohort_id = null)
@@ -162,12 +162,13 @@ public function updateAction(Request $request, $absence_id)
     {
         try {
             $student = Student::findOrFail($studentId);
-    
-            // Load the absence and late records for the student
+
+            // Load the absence and late records for the student, sorted by date descending
             $student->load(['absences' => function ($query) {
-                $query->whereIn('absences_type', ['absent', 'late']);
+                $query->whereIn('absences_type', ['absent', 'late'])
+                    ->orderBy('absences_date', 'desc');
             }]);
-    
+
             return view('supermaneger.spacificUserReport', ['student' => $student]);
         } catch (ModelNotFoundException $e) {
             return back()->withError('Student not found')->withInput();
@@ -175,7 +176,67 @@ public function updateAction(Request $request, $absence_id)
             return back()->withError('Error fetching student records: ' . $e->getMessage())->withInput();
         }
     }
+public function exportPdf($studentId)
+{
+    \Illuminate\Support\Facades\Log::info('PDF Export started for student ID: ' . $studentId);
+    
+    try {
+        $student = Student::findOrFail($studentId);
+        \Illuminate\Support\Facades\Log::info('Student found: ' . $student->en_first_name . ' ' . $student->en_last_name);
 
+        // Load the absence and late records for the student
+        $student->load(['absences' => function ($query) {
+            $query->whereIn('absences_type', ['absent', 'late'])
+                  ->orderBy('absences_date', 'desc');
+        }]);
+        \Illuminate\Support\Facades\Log::info('Absences loaded: ' . $student->absences->count() . ' records');
+
+        // Calculate statistics
+        $totalAbsent = $student->absences->where('absences_type', 'absent')->count();
+        $totalLate = $student->absences->where('absences_type', 'late')->count();
+        $totalRecords = $totalAbsent + $totalLate;
+
+        // Get cohort information
+        $cohort = $student->cohort;
+        \Illuminate\Support\Facades\Log::info('Cohort: ' . ($cohort ? $cohort->cohort_name : 'None'));
+
+        $data = [
+            'student' => $student,
+            'cohort' => $cohort,
+            'totalAbsent' => $totalAbsent,
+            'totalLate' => $totalLate,
+            'totalRecords' => $totalRecords,
+            'generatedDate' => Carbon::now()->format('F d, Y'),
+            'generatedTime' => Carbon::now()->format('h:i A')
+        ];
+
+        \Illuminate\Support\Facades\Log::info('Data prepared, starting PDF generation');
+
+        // Test if view exists and renders
+        $viewContent = view('pdf.student-absence-report', $data)->render();
+        \Illuminate\Support\Facades\Log::info('View rendered successfully, content length: ' . strlen($viewContent));
+
+        $pdf = PDF::loadView('pdf.student-absence-report', $data);
+        \Illuminate\Support\Facades\Log::info('PDF loaded from view');
+        
+        $pdf->setPaper('A4', 'portrait');
+        \Illuminate\Support\Facades\Log::info('Paper size set');
+        
+        $fileName = 'Absence_Report_' . $student->en_first_name . '_' . $student->en_last_name . '_' . Carbon::now()->format('Y-m-d') . '.pdf';
+        \Illuminate\Support\Facades\Log::info('Filename: ' . $fileName);
+        
+        \Illuminate\Support\Facades\Log::info('About to return PDF download');
+        return $pdf->download($fileName);
+
+    } catch (ModelNotFoundException $e) {
+        \Illuminate\Support\Facades\Log::error('Student not found: ' . $e->getMessage());
+        return back()->withError('Student not found');
+    } catch (\Exception $e) {
+        \Illuminate\Support\Facades\Log::error('PDF Generation Error: ' . $e->getMessage());
+        \Illuminate\Support\Facades\Log::error('Stack trace: ' . $e->getTraceAsString());
+        return back()->withError('Error generating PDF: ' . $e->getMessage());
+    }
+}
   
     public function UploudAbsenceReport(Request $request, $absenceId){
         try {

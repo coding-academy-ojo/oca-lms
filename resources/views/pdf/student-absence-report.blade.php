@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Student Absence Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: #333;
+        }
+        
+        .header {
+            background: #ff7900;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .academy-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .academy-subtitle {
+            font-size: 11px;
+            margin-bottom: 10px;
+        }
+        
+        .report-title {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .student-info {
+            background: #f5f5f5;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #ff7900;
+        }
+        
+        .info-row {
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+        
+        .info-label {
+            font-weight: bold;
+            color: #ff7900;
+            display: inline-block;
+            width: 100px;
+        }
+        
+        .statistics {
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+        }
+        
+        .stats-header {
+            background: #ff7900;
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        .stats-body {
+            padding: 10px;
+            text-align: center;
+            font-size: 11px;
+        }
+        
+        .stat-item {
+            display: inline-block;
+            margin: 0 15px;
+        }
+        
+        .stat-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff7900;
+        }
+        
+        .section-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin: 15px 0 10px 0;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #ff7900;
+        }
+        
+        .records-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9px;
+        }
+        
+        .records-table th {
+            background: #ff7900;
+            color: white;
+            padding: 8px 4px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .records-table td {
+            padding: 6px 4px;
+            border-bottom: 1px solid #ddd;
+            vertical-align: top;
+        }
+        
+        .records-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .type-absent {
+            background: #ffebee;
+            color: #c62828;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-size: 8px;
+            font-weight: bold;
+        }
+        
+        .type-late {
+            background: #fff8e1;
+            color: #f57f17;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-size: 8px;
+            font-weight: bold;
+        }
+        
+        .footer {
+            margin-top: 20px;
+            padding: 10px 0;
+            border-top: 2px solid #ff7900;
+            text-align: center;
+            font-size: 9px;
+            color: #666;
+        }
+        
+        .no-records {
+            text-align: center;
+            padding: 20px;
+            background: #f5f5f5;
+            border: 1px dashed #ccc;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="academy-title">ORANGE CODING ACADEMY</div>
+        <div class="academy-subtitle">Empowering Digital Transformation • Building Tomorrow's Tech Leaders</div>
+        <div class="report-title">Student Absence Report</div>
+    </div>
+
+    <div class="student-info">
+        <div class="info-row">
+            <span class="info-label">Student:</span>
+            {{ $student->en_first_name }} {{ $student->en_second_name }} {{ $student->en_last_name }}
+        </div>
+        <div class="info-row">
+            <span class="info-label">ID:</span>
+            #{{ str_pad($student->id, 6, '0', STR_PAD_LEFT) }}
+        </div>
+        <div class="info-row">
+            <span class="info-label">Cohort:</span>
+            {{ $cohort->cohort_name ?? 'N/A' }}
+        </div>
+        <div class="info-row">
+            <span class="info-label">Academy:</span>
+            {{ $student->academy->academy_name ?? 'N/A' }}
+        </div>
+    </div>
+
+    <div class="statistics">
+        <div class="stats-header">Absence Summary</div>
+        <div class="stats-body">
+            <div class="stat-item">
+                <div class="stat-number">{{ $totalAbsent }}</div>
+                <div>Absent Days</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">{{ $totalLate }}</div>
+                <div>Late Arrivals</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">{{ $totalRecords }}</div>
+                <div>Total Records</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title">Detailed Records</div>
+    
+    @if($student->absences->isEmpty())
+        <div class="no-records">
+            <strong>No absence records found</strong><br>
+            This student has perfect attendance.
+        </div>
+    @else
+        <table class="records-table">
+            <thead>
+                <tr>
+                    <th width="15%">Date</th>
+                    <th width="12%">Type</th>
+                    <th width="12%">Duration</th>
+                    <th width="35%">Reason</th>
+                    <th width="15%">Action</th>
+                    <th width="11%">Report</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($student->absences as $absence)
+                <tr>
+                    <td>{{ \Carbon\Carbon::parse($absence->absences_date)->format('M d, Y') }}</td>
+                    <td>
+                        <span class="type-{{ $absence->absences_type }}">
+                            {{ strtoupper($absence->absences_type) }}
+                        </span>
+                    </td>
+                    <td>
+                        @php
+                            $duration = trim($absence->absences_duration);
+                            if (empty($duration)) {
+                                echo 'N/A';
+                            } elseif (is_numeric($duration)) {
+                                $minutes = intval($duration);
+                                echo $minutes >= 60 ? number_format($minutes / 60, 1) . 'h' : $minutes . 'm';
+                            } else {
+                                echo 'N/A';
+                            }
+                        @endphp
+                    </td>
+                    <td>{{ \Illuminate\Support\Str::limit($absence->absences_reason, 40) }}</td>
+                    <td>{{ $absence->actions ?: 'None' }}</td>
+                    <td>{{ $absence->file_path ? 'Yes' : 'No' }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endif
+
+    <div class="footer">
+        <div>Generated: {{ $generatedDate }} at {{ $generatedTime }}</div>
+        <div>By: {{ Auth::guard('staff')->user()->name ?? 'System' }}</div>
+        <div style="margin-top: 5px; font-style: italic;">
+            Orange Coding Academy - Student Management System
+        </div>
+    </div>
+</body>
+</html>
