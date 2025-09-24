@@ -46,6 +46,7 @@ Student Absence Report
         <table class="table">
             <thead class="table-orange">
                 <tr>
+                    <th scope="col">#</th>
                     <th scope="col">Date</th>
                     <th scope="col">Type</th>
                     <th scope="col">Reason</th>
@@ -58,6 +59,7 @@ Student Absence Report
             <tbody>
                 @foreach ($student->absences as $index => $absence)
                 <tr>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ \Carbon\Carbon::parse($absence->absences_date)->format('M d, Y') }}</td>
                     <td>
                         @if($absence->absences_type == 'absent')
