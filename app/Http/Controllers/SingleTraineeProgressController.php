@@ -120,7 +120,8 @@ class SingleTraineeProgressController extends Controller
         ->select(
             'masterpiece_progress.*',
             'masterpiece_tasks.task_name',
-            'masterpiece_tasks.deadline as task_deadline'
+            'masterpiece_tasks.deadline as task_deadline',
+             'masterpiece_tasks.hours_spent'
         )
         ->get();
 
