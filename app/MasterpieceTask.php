@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MasterpieceTask extends Model
 {
-    protected $fillable = ['task_name', 'deadline'];
+    protected $fillable = ['task_name', 'deadline','hours_spent'];
     
     public static function allTaskNames()
     {

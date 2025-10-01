@@ -293,6 +293,7 @@
                             <th scope="col">Task</th>
                             <th scope="col">Progress</th>
                             <th scope="col">Deadline</th>
+                            <th scope="col">Time Spent (hrs)</th>
                             <th scope="col">Notes</th>
                         </tr>
                     </thead>
@@ -321,6 +322,7 @@
                                 </div>
                             </td>
                             <td>{{ $task['task_deadline'] }}</td>
+                            <td>{{ $task['hours_spent'] }}</td>
                             <td>{{ $task['notes'] }}</td>
                         </tr>
                         @endforeach
