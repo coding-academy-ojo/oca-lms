@@ -56,5 +56,10 @@ class Student extends Authenticatable
         return $this->belongsToMany(Project::class, 'project_student', 'student_id', 'project_id');
     }
 
+      public function MasterpieceDetail()
+    {
+        return $this->hasOne(MasterpieceDetail::class);
+    }
+
 
 }

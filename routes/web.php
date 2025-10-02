@@ -128,8 +128,6 @@ Route::get('/cohorts/{academyId?}', [CohortController::class, 'index'])->name('a
 Route::get('/cohort/progress-details/{id}',[ SingleTraineeProgressController::class, 'index'])->name('ProgressDetails.showDetails');
 Route::get('/traineesProgress', [TraineesProgressController::class, 'index'])->name('trainees.progress');
 
-// Show a single student's masterpiece progress
-//Route::get('/trainee/progress', [MasterpieceDetailController::class, 'show'])->name('trainees.progress');
 // View skills
 Route::get('/skills', [SkillController::class, 'index'])->name('skillsFramework');
 

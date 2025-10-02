@@ -17,6 +17,7 @@ use App\Technology_Cohort;
 use App\TraineeSkillsProgress;
 use App\MasterpieceProgress; 
 use App\MasterpieceTask;
+use App\MasterpieceDetail;
 
 class SingleTraineeProgressController extends Controller
 {
@@ -34,6 +35,7 @@ class SingleTraineeProgressController extends Controller
         $assignmentsData = $this->getAssignmentsData($student, $technologyData['technologyIds']);
         $tasksWithProgress = $this->getMasterpieceProgress($id); // Updated here
         $studentProjects = $this->getStudentProjects($id);
+        $masterpieceDetails = $this->getMasterpieceDetails($id);
 
         return view('trainer.trainee-progress-details', [
             'student' => $student,
@@ -160,5 +162,18 @@ class SingleTraineeProgressController extends Controller
                 'submission_date' => $traineeProgress && $traineeProgress->created_at ? $traineeProgress->created_at->format('d/m/Y') : 'N/A',
             ];
         });
+    }
+
+
+
+
+       private function getMasterpieceDetails($studentId)
+    {
+        
+$details = MasterpieceDetail::with('student')->where('student_id', $studentId)->first();
+
+dd($details);
+
+        return $details;
     }
 }
