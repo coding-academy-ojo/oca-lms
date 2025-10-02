@@ -284,7 +284,7 @@
 
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title text-secondary mb-3">Project Information</h5>
+            <h5 class="card-title text-primary mb-3">Project Information</h5>
             <dl class="row">
                 <dt class="col-sm-3">Project Sector:</dt>
                 <dd class="col-sm-9">Education Technology</dd>
@@ -301,7 +301,7 @@
 
     <div class="card my-4">
         <div class="card-body">
-            <h5 class="card-title text-secondary mb-3">Project Resources</h5>
+            <h5 class="card-title text-primary mb-3">Project Resources</h5>
             <div class="table-responsive">
                 <table class="table table-bordered table-hover text-center w-100 mb-0">
                     <thead class="table-light">
