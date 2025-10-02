@@ -279,17 +279,58 @@
     </div>
 </div>
 
-<div class="container">
-    <h1>Masterpiece Details</h1>
+<div class="container my-4">
+    <h1 class="mb-4 text-primary">Masterpiece Details</h1>
 
-    <p><strong>Project Sector:</strong> Education Technology</p>
-    <p><strong>Project Name:</strong> Smart Learning Platform</p>
-    <p><strong>Description:</strong> A platform that helps students learn interactively with AI-powered recommendations.</p>
-    <p><strong>Wireframe & Mockup:</strong> <a href="https://example.com/wireframe" target="_blank">View</a></p>
-    <p><strong>Presentation:</strong> <a href="https://example.com/presentation" target="_blank">View</a></p>
-    <p><strong>Documentation:</strong> <a href="https://example.com/documentation" target="_blank">View</a></p>
-    <p><strong>GitHub:</strong> <a href="https://github.com/example/project" target="_blank">View</a></p>
-</div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title text-secondary mb-3">Project Information</h5>
+            <dl class="row">
+                <dt class="col-sm-3">Project Sector:</dt>
+                <dd class="col-sm-9">Education Technology</dd>
+
+                <dt class="col-sm-3">Project Name:</dt>
+                <dd class="col-sm-9">Smart Learning Platform</dd>
+
+                <dt class="col-sm-3">Description:</dt>
+                <dd class="col-sm-9">A platform that helps students learn interactively with AI-powered recommendations.</dd>
+            </dl>
+        </div>
+    </div>
+
+
+    <div class="card my-4">
+        <div class="card-body">
+            <h5 class="card-title text-secondary mb-3">Project Resources</h5>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover text-center w-100 mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Wireframe & Mockup Link</th>
+                            <th>Presentation Link</th>
+                            <th>Documentation Link</th>
+                            <th>GitHub Link</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="https://example.com/wireframe" target="_blank">View</a></td>
+                            <td><a href="https://example.com/presentation" target="_blank">View</a></td>
+                            <td><a href="https://example.com/documentation" target="_blank">View</a></td>
+                            <td><a href="https://github.com/example/project" target="_blank">View</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
 
 
 
