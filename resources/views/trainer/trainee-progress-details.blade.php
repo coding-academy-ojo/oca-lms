@@ -279,6 +279,17 @@
     </div>
 </div>
 
+<div class="container">
+    <h1>Masterpiece Details</h1>
+
+    <p><strong>Project Sector:</strong> Education Technology</p>
+    <p><strong>Project Name:</strong> Smart Learning Platform</p>
+    <p><strong>Description:</strong> A platform that helps students learn interactively with AI-powered recommendations.</p>
+    <p><strong>Wireframe & Mockup:</strong> <a href="https://example.com/wireframe" target="_blank">View</a></p>
+    <p><strong>Presentation:</strong> <a href="https://example.com/presentation" target="_blank">View</a></p>
+    <p><strong>Documentation:</strong> <a href="https://example.com/documentation" target="_blank">View</a></p>
+    <p><strong>GitHub:</strong> <a href="https://github.com/example/project" target="_blank">View</a></p>
+</div>
 
 
 
@@ -300,8 +311,8 @@
                     <tbody>
                         @foreach($tasksWithProgress as $task)
                         <tr>
-                            <td>{{ $task['task_name'] }}</td>
-                            <td>
+                            <td class="text-wrap" style="max-width: 250px;">{{ $task['task_name'] }}</td>
+                            <td style="width: 35%">
                                 <div class="progress" style="background: rgba(127, 99, 244, .1)">
                                     @php
                                         $progressColor = 'bg-success'; // Default to green
@@ -322,8 +333,8 @@
                                 </div>
                             </td>
                             <td>{{ $task['task_deadline'] }}</td>
-                            <td>{{ $task['hours_spent'] }}</td>
-                            <td>{{ $task['notes'] }}</td>
+                            <td class="text-center">{{ $task['hours_spent'] }}</td>
+                            <td style="width: 20%">{{ $task['notes'] }}</td>
                         </tr>
                         @endforeach
                     </tbody>
