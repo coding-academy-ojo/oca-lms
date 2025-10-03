@@ -10,6 +10,7 @@ use App\AssignmentFeedback;
 use App\Http\Controllers\AcademyController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\AssignmentFeedbackController;
+use App\Http\Controllers\MasterpieceReportController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassroomController;
@@ -308,3 +309,13 @@ Route::get('/staff/{id}', [StaffController::class, 'show'])->name('staff.show');
 Route::get('/staff/{id}/edit', [StaffController::class, 'edit'])->name('staff.edit');
 Route::put('/staff/{id}', [StaffController::class, 'update'])->name('staff.update');
 Route::delete('/staff/{id}', [StaffController::class, 'destroy'])->name('staff.destroy');
+
+
+Route::get('/trainees-progress/export/masterpiece-details-template', [TraineesProgressController::class, 'exportMasterpieceDetailsTemplate'])->name('trainees.progress.export.details-template');
+Route::get('/trainees-progress/export/masterpiece-progress-template', [TraineesProgressController::class, 'exportMasterpieceProgressTemplate'])->name('trainees.progress.export.progress-template');
+
+// Trainees Progress imports (cohort-scoped)
+Route::post('/trainees-progress/import/masterpiece-details', [TraineesProgressController::class, 'importMasterpieceDetails'])->name('trainees.progress.import.details');
+Route::post('/trainees-progress/import/masterpiece-progress', [TraineesProgressController::class, 'importMasterpieceProgress'])->name('trainees.progress.import.progress');
+Route::get('/masterpiece/export/pdf/{studentId}', [MasterpieceReportController::class, 'exportPdf'])
+    ->name('masterpiece.export.pdf');

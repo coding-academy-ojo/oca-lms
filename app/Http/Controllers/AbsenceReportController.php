@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Student;
 use App\Absence;
 use App\Cohort;
@@ -11,6 +12,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Crypt;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Log;
+
 class AbsenceReportController extends Controller
 {
     public function index(Request $request, $cohort_id = null)
@@ -25,26 +28,26 @@ class AbsenceReportController extends Controller
         }
         if ($request->ajax()) {
             $staff = Auth::guard('staff')->user();
-    
+
             $selectedCohortId = $cohort_id ?: session('selected_cohort_id');
-    
+
             if (!$selectedCohortId) {
                 return response()->json(['message' => 'Cohort ID is required'], 400);
             }
-    
+
             $runningCohort = Cohort::where('id', $selectedCohortId)->first();
-    
+
             if (!$runningCohort) {
                 return response()->json(['message' => 'Cohort not found'], 404);
             }
 
             // Calculate total cohort days excluding weekends
             $totalCohortDays = $this->calculateCohortDays($runningCohort);
-    
+
             $studentsQuery = $runningCohort->students();
-    
+
             $query = $request->input('query');
-    
+
             try {
                 if ($query) {
                     $studentsQuery->where(function ($queryBuilder) use ($query) {
@@ -52,7 +55,7 @@ class AbsenceReportController extends Controller
                             ->orWhere('en_last_name', 'LIKE', "%{$query}%");
                     });
                 }
-    
+
                 $students = $studentsQuery->withCount([
                     'absences as total_absent' => function ($query) {
                         $query->where('absences_type', 'absent');
@@ -62,19 +65,19 @@ class AbsenceReportController extends Controller
                     }
                 ])->with(['absences' => function ($query) {
                     $query->whereNotNull('actions')
-                          ->orderBy('absences_date', 'desc');
+                        ->orderBy('absences_date', 'desc');
                 }])->get();
 
                 // Add attended days and action status to each student
                 $students->each(function ($student) use ($totalCohortDays) {
                     $student->attended_days = $totalCohortDays - $student->total_absent;
-                    
+
                     // Calculate total absent and late days
                     $totalAbsentLateDays = $student->total_absent + $student->total_late;
-                    
+
                     // Get the latest action taken
                     $latestAction = $student->absences->first();
-                    
+
                     if ($latestAction && $latestAction->actions) {
                         // If there's an action taken, display the latest action
                         $student->action_status = $latestAction->actions;
@@ -86,9 +89,9 @@ class AbsenceReportController extends Controller
                         $student->action_status = 'No Actions';
                     }
                 });
-    
+
                 return response()->json([
-                    'cohorts' => [$runningCohort], 
+                    'cohorts' => [$runningCohort],
                     'students' => $students,
                 ], 200);
             } catch (\Exception $e) {
@@ -110,13 +113,13 @@ class AbsenceReportController extends Controller
         $startDate = Carbon::parse($cohort->cohort_start_date);
         $endDate = Carbon::parse($cohort->cohort_end_date);
         $currentDate = Carbon::now();
-        
+
         // Use current date if cohort is still running, otherwise use end date
         $calculationEndDate = $currentDate->lessThan($endDate) ? $currentDate : $endDate;
-        
+
         $totalDays = 0;
         $date = $startDate->copy();
-        
+
         while ($date->lessThanOrEqualTo($calculationEndDate)) {
             // Skip Friday (5) and Saturday (6)
             if (!in_array($date->dayOfWeek, [Carbon::FRIDAY, Carbon::SATURDAY])) {
@@ -124,40 +127,39 @@ class AbsenceReportController extends Controller
             }
             $date->addDay();
         }
-        
+
         return $totalDays;
     }
-public function updateAction(Request $request, $absence_id)
-{
-    try {
+    public function updateAction(Request $request, $absence_id)
+    {
+        try {
 
 
-        $request->validate([
-            'actions' => 'nullable|in:null,Alert,Warning,Committee Review,Meeting with Manager/Job Coach'
-        ]);
+            $request->validate([
+                'actions' => 'nullable|in:null,Alert,Warning,Committee Review,Meeting with Manager/Job Coach'
+            ]);
 
-        $absence = Absence::findOrFail($absence_id);
-        
-        // Handle null value explicitly
-        $actionValue = ($request->actions === 'null' || $request->actions === null) ? null : $request->actions;
-        
-        
-        $absence->update([
-            'actions' => $actionValue
-        ]);
+            $absence = Absence::findOrFail($absence_id);
 
-        $message = $actionValue ? 'Follow-up action updated successfully.' : 'Follow-up action cleared successfully.';
-        return back()->withSuccess($message);
+            // Handle null value explicitly
+            $actionValue = ($request->actions === 'null' || $request->actions === null) ? null : $request->actions;
 
-    } catch (\Illuminate\Validation\ValidationException $e) {
-        return back()->withError('Validation failed: ' . implode(', ', $e->validator->errors()->all()));
-    } catch (ModelNotFoundException $e) {
-        return back()->withError('Absence record not found.');
-    } catch (\Exception $e) {
-        return back()->withError('Error updating action: ' . $e->getMessage());
+
+            $absence->update([
+                'actions' => $actionValue
+            ]);
+
+            $message = $actionValue ? 'Follow-up action updated successfully.' : 'Follow-up action cleared successfully.';
+            return back()->withSuccess($message);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return back()->withError('Validation failed: ' . implode(', ', $e->validator->errors()->all()));
+        } catch (ModelNotFoundException $e) {
+            return back()->withError('Absence record not found.');
+        } catch (\Exception $e) {
+            return back()->withError('Error updating action: ' . $e->getMessage());
+        }
     }
-}
-    
+
     public function show($studentId)
     {
         try {
@@ -176,87 +178,85 @@ public function updateAction(Request $request, $absence_id)
             return back()->withError('Error fetching student records: ' . $e->getMessage())->withInput();
         }
     }
-public function exportPdf($studentId)
-{
-    \Illuminate\Support\Facades\Log::info('PDF Export started for student ID: ' . $studentId);
-    
-    try {
-        $student = Student::findOrFail($studentId);
-        \Illuminate\Support\Facades\Log::info('Student found: ' . $student->en_first_name . ' ' . $student->en_last_name);
+    public function exportPdf($studentId)
+    {
 
-        // Load the absence and late records for the student
-        $student->load(['absences' => function ($query) {
-            $query->whereIn('absences_type', ['absent', 'late'])
-                  ->orderBy('absences_date', 'desc');
-        }]);
-        \Illuminate\Support\Facades\Log::info('Absences loaded: ' . $student->absences->count() . ' records');
+        try {
+            $student = Student::findOrFail($studentId);
 
-        // Calculate statistics
-        $totalAbsent = $student->absences->where('absences_type', 'absent')->count();
-        $totalLate = $student->absences->where('absences_type', 'late')->count();
-        $totalRecords = $totalAbsent + $totalLate;
+            // Load absence + late records
+            $student->load(['absences' => function ($query) {
+                $query->whereIn('absences_type', ['absent', 'late'])
+                    ->orderBy('absences_date', 'desc');
+            }]);
 
-        // Get cohort information
-        $cohort = $student->cohort;
-        \Illuminate\Support\Facades\Log::info('Cohort: ' . ($cohort ? $cohort->cohort_name : 'None'));
+            $totalAbsent  = $student->absences->where('absences_type', 'absent')->count();
+            $totalLate    = $student->absences->where('absences_type', 'late')->count();
+            $totalRecords = $totalAbsent + $totalLate;
 
-        $data = [
-            'student' => $student,
-            'cohort' => $cohort,
-            'totalAbsent' => $totalAbsent,
-            'totalLate' => $totalLate,
-            'totalRecords' => $totalRecords,
-            'generatedDate' => Carbon::now()->format('F d, Y'),
-            'generatedTime' => Carbon::now()->format('h:i A')
-        ];
+            // Cohort + total cohort days (reuse your helper that skips Fri/Sat)
+            $cohort = $student->cohort;
+            $totalCohortDays = 0;
+            if ($cohort) {
+                $totalCohortDays = (int) $this->calculateCohortDays($cohort);
+            }
 
-        \Illuminate\Support\Facades\Log::info('Data prepared, starting PDF generation');
+            // ✅ Attendance = (cohort days - absent days)
+            $attendedDays = max(0, $totalCohortDays - $totalAbsent);
 
-        // Test if view exists and renders
-        $viewContent = view('pdf.student-absence-report', $data)->render();
-        \Illuminate\Support\Facades\Log::info('View rendered successfully, content length: ' . strlen($viewContent));
+            // ✅ Attendance % (avoid division by zero, clamp 0..100)
+            $attendancePercentage = 0.0;
+            if ($totalCohortDays > 0) {
+                $attendancePercentage = round(($attendedDays / $totalCohortDays) * 100, 1);
+                if ($attendancePercentage > 100) $attendancePercentage = 100.0;
+                if ($attendancePercentage < 0)   $attendancePercentage = 0.0;
+            }
 
-        $pdf = PDF::loadView('pdf.student-absence-report', $data);
-        \Illuminate\Support\Facades\Log::info('PDF loaded from view');
-        
-        $pdf->setPaper('A4', 'portrait');
-        \Illuminate\Support\Facades\Log::info('Paper size set');
-        
-        $fileName = 'Absence_Report_' . $student->en_first_name . '_' . $student->en_last_name . '_' . Carbon::now()->format('Y-m-d') . '.pdf';
-        \Illuminate\Support\Facades\Log::info('Filename: ' . $fileName);
-        
-        \Illuminate\Support\Facades\Log::info('About to return PDF download');
-        return $pdf->download($fileName);
+            $data = [
+                'student'               => $student,
+                'cohort'                => $cohort,
+                'totalAbsent'           => $totalAbsent,
+                'totalLate'             => $totalLate,
+                'totalRecords'          => $totalRecords,
+                'totalCohortDays'       => $totalCohortDays,   // <-- NEW
+                'attendancePercentage'  => $attendancePercentage, // <-- NEW
+                'generatedDate'         => Carbon::now()->format('F d, Y'),
+                'generatedTime'         => Carbon::now()->format('h:i A'),
+            ];
 
-    } catch (ModelNotFoundException $e) {
-        \Illuminate\Support\Facades\Log::error('Student not found: ' . $e->getMessage());
-        return back()->withError('Student not found');
-    } catch (\Exception $e) {
-        \Illuminate\Support\Facades\Log::error('PDF Generation Error: ' . $e->getMessage());
-        \Illuminate\Support\Facades\Log::error('Stack trace: ' . $e->getTraceAsString());
-        return back()->withError('Error generating PDF: ' . $e->getMessage());
+            $pdf = PDF::loadView('pdf.student-absence-report', $data)->setPaper('A4', 'portrait');
+            $fileName = 'Absence_Report_' . $student->en_first_name . '_' . $student->en_last_name . '_' . \Carbon\Carbon::now()->format('Y-m-d') . '.pdf';
+
+            return $pdf->download($fileName);
+        } catch (ModelNotFoundException $e) {
+            return back()->withError('Student not found');
+        } catch (\Exception $e) {
+            return back()->withError('Error generating PDF: ' . $e->getMessage());
+        }
     }
-}
-  
-    public function UploudAbsenceReport(Request $request, $absenceId){
+
+
+
+    public function UploudAbsenceReport(Request $request, $absenceId)
+    {
         try {
             $absence = Absence::findOrFail($absenceId);
-    
+
             $request->validate([
-                'report_file' => 'required|file|max:102400', 
+                'report_file' => 'required|file|max:102400',
             ]);
-    
+
             $file = $request->file('report_file');
-    
+
             $fileName = time() . '_' . $file->getClientOriginalName();
-    
+
             $publicPath = 'absence_reports/' . $fileName;
             $file->move(public_path('absence_reports'), $fileName);
-    
+
             $absence->update([
                 'file_path' => $publicPath,
             ]);
-    
+
             return back()->withSuccess('Report uploaded successfully.');
         } catch (ModelNotFoundException $e) {
             return back()->withError('Absence not found');
@@ -264,23 +264,23 @@ public function exportPdf($studentId)
             return back()->withError('Error uploading report: ' . $e->getMessage());
         }
     }
-    
+
     public function downloadAbsenceReport($absenceId)
     {
         try {
             $absence = Absence::findOrFail($absenceId);
-           
+
             if (!$absence->file_path) {
                 return back()->withError('Absence report not found');
             }
-            
+
             // Convert the file path to use the correct directory separator
             $filePath = public_path(str_replace('/', DIRECTORY_SEPARATOR, $absence->file_path));
             // dd($filePath);
             if (!file_exists($filePath)) {
                 return back()->withError('File not found');
             }
-            
+
             return response()->download($filePath);
         } catch (ModelNotFoundException $e) {
             return back()->withError('Absence not found');

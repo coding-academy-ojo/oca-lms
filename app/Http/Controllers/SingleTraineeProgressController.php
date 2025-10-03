@@ -15,7 +15,7 @@ use App\Student;
 use App\Project;
 use App\Technology_Cohort;
 use App\TraineeSkillsProgress;
-use App\MasterpieceProgress; 
+use App\MasterpieceProgress;
 use App\MasterpieceTask;
 use App\MasterpieceDetail;
 
@@ -110,40 +110,40 @@ class SingleTraineeProgressController extends Controller
             'countValues' => array_values($assignmentCountsByTechnology),
         ];
     }
-   private function getMasterpieceProgress($studentId)
-{
-    // Retrieve all masterpiece tasks
-    $allTasks = MasterpieceTask::all();
+    private function getMasterpieceProgress($studentId)
+    {
+        // Retrieve all masterpiece tasks
+        $allTasks = MasterpieceTask::all();
 
-    // Retrieve progress entries for the student
-    $progressEntries = MasterpieceProgress::where('student_id', $studentId)
-        ->with(['student', 'staff', 'tasks'])
-        ->join('masterpiece_tasks', 'masterpiece_progress.masterpiece_task_id', '=', 'masterpiece_tasks.id')
-        ->select(
-            'masterpiece_progress.*',
-            'masterpiece_tasks.task_name',
-            'masterpiece_tasks.deadline as task_deadline',
-             'masterpiece_tasks.hours_spent'
-        )
-        ->get();
+        // Retrieve progress entries for the student
+        $progressEntries = MasterpieceProgress::where('student_id', $studentId)
+            ->with(['student', 'staff', 'tasks'])
+            ->join('masterpiece_tasks', 'masterpiece_progress.masterpiece_task_id', '=', 'masterpiece_tasks.id')
+            ->select(
+                'masterpiece_progress.*',
+                'masterpiece_tasks.task_name',
+                'masterpiece_tasks.deadline as task_deadline',
+                'masterpiece_tasks.hours_spent'
+            )
+            ->get();
 
-    // Map all tasks and ensure default values if no entry exists
-    $tasksWithProgress = $allTasks->map(function ($task) use ($progressEntries) {
-        $progressEntry = $progressEntries->firstWhere('masterpiece_task_id', $task->id);
+        // Map all tasks and ensure default values if no entry exists
+        $tasksWithProgress = $allTasks->map(function ($task) use ($progressEntries) {
+            $progressEntry = $progressEntries->firstWhere('masterpiece_task_id', $task->id);
 
-        return [
-            'task_name'     => $task->task_name,
-            'progress'      => $progressEntry ? $progressEntry->progress : 0,
-            'task_deadline' => $task->deadline,
-            'notes'         => $progressEntry ? $progressEntry->notes : '',
-            'hours_spent'   => $progressEntry ? $progressEntry->hours_spent : 0, // ✅ added
-        ];
-    });
+            return [
+                'task_name'     => $task->task_name,
+                'progress'      => $progressEntry ? $progressEntry->progress : 0,
+                'task_deadline' => $task->deadline,
+                'notes'         => $progressEntry ? $progressEntry->notes : '',
+                'hours_spent'   => $progressEntry ? $progressEntry->hours_spent : 0, // ✅ added
+            ];
+        });
 
-    return $tasksWithProgress;
-}
+        return $tasksWithProgress;
+    }
 
-    
+
 
     private function getStudentProjects($studentId)
     {
@@ -167,12 +167,10 @@ class SingleTraineeProgressController extends Controller
 
 
 
-       private function getMasterpieceDetails($studentId)
+    private function getMasterpieceDetails($studentId)
     {
-        
-$details = MasterpieceDetail::with('student')->where('student_id', $studentId)->first();
 
-dd($details);
+        $details = MasterpieceDetail::with('student')->where('student_id', $studentId)->first();
 
         return $details;
     }
