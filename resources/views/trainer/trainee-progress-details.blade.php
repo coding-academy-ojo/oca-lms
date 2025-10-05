@@ -286,14 +286,14 @@
         <div class="card-body">
             <h5 class="card-title text-primary mb-3">Project Information</h5>
             <dl class="row">
-                <dt class="col-sm-3">Project Sector:</dt>
-                <dd class="col-sm-9">Education Technology</dd>
+                <dt class="col-sm-3">Project Sector: </dt>
+                <dd class="col-sm-9">{{ $student->masterpieceDetail->project_sector }}</dd>
 
                 <dt class="col-sm-3">Project Name:</dt>
-                <dd class="col-sm-9">Smart Learning Platform</dd>
+                <dd class="col-sm-9">{{ $student->masterpieceDetail->project_name }}</dd>
 
                 <dt class="col-sm-3">Description:</dt>
-                <dd class="col-sm-9">A platform that helps students learn interactively with AI-powered recommendations.</dd>
+                <dd class="col-sm-9 text-wrap" style="max-width: 450px;">{{ $student->masterpieceDetail->project_description }}</dd>
             </dl>
         </div>
     </div>
@@ -314,10 +314,10 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><a href="https://example.com/wireframe" target="_blank">View</a></td>
-                            <td><a href="https://example.com/presentation" target="_blank">View</a></td>
-                            <td><a href="https://example.com/documentation" target="_blank">View</a></td>
-                            <td><a href="https://github.com/example/project" target="_blank">View</a></td>
+                            <td><a href="{{ $student->masterpieceDetail->wireframe_link }}" target="_blank">View</a></td>
+                            <td><a href="{{ $student->masterpieceDetail->presentation_link }}" target="_blank">View</a></td>
+                            <td><a href="{{ $student->masterpieceDetail->documentation_link }}" target="_blank">View</a></td>
+                            <td><a href="{{ $student->masterpieceDetail->github_link }}" target="_blank">View</a></td>
                         </tr>
                     </tbody>
                 </table>

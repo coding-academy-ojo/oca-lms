@@ -37,6 +37,8 @@ class SingleTraineeProgressController extends Controller
         $studentProjects = $this->getStudentProjects($id);
         $masterpieceDetails = $this->getMasterpieceDetails($id);
 
+        // dd($masterpieceDetails);
+
         return view('trainer.trainee-progress-details', [
             'student' => $student,
             'absencesCount' => $absencesData['absencesCount'],
@@ -172,7 +174,7 @@ class SingleTraineeProgressController extends Controller
         
 $details = MasterpieceDetail::with('student')->where('student_id', $studentId)->first();
 
-dd($details);
+ 
 
         return $details;
     }
