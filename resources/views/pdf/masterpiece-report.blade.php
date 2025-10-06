@@ -92,8 +92,7 @@
         <thead>
         <tr>
             <th>Wireframe &amp; Mockup Link</th>
-            <th>Presentation Link</th>
-            <th>Documentation Link</th>
+         
             <th>GitHub Link</th>
         </tr>
         </thead>

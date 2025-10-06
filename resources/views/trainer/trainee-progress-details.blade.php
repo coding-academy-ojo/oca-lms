@@ -302,10 +302,10 @@
                 <dt class="col-sm-3">Project Sector: </dt>
                 <dd class="col-sm-9">{{ $student->masterpieceDetail->project_sector }}</dd>
 
-                <dt class="col-sm-3">Project Name:</dt>
+                <dt class="col-sm-3 my-2">Project Name:</dt>
                 <dd class="col-sm-9">{{ $student->masterpieceDetail->project_name }}</dd>
 
-                <dt class="col-sm-3">Description:</dt>
+                <dt class="col-sm-3 my-2">Description:</dt>
                 <dd class="col-sm-9 text-wrap" style="max-width: 450px;">{{ $student->masterpieceDetail->project_description }}</dd>
             </dl>
         </div>
@@ -358,8 +358,9 @@
                                 <th scope="col">Task</th>
                                 <th scope="col">Progress</th>
                                 <th scope="col">Deadline</th>
+                                <th scope="col">Actions</th>
                                 <th scope="col">Time Spent (hrs)</th>
-                                <th scope="col">Notes</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -385,14 +386,22 @@
                                         </div>
                                     </td>
                                     <td>{{ $task['task_deadline'] }}</td>
+                                   <!-- Represents Actions  --> 
+                                    <td style="width: 20%">{{ $task['notes'] }}</td> 
+                                    <!-- End  -->
                                     <td class="text-center">{{ $task['hours_spent'] }}</td>
-                                    <td style="width: 20%">{{ $task['notes'] }}</td>
+                                    
                                 </tr>
                             @endforeach
+                            <tr class="fw-bold bg-light">
+    <td colspan="4" class="text-end"><strong>Total Hours:</strong></td>
+    <td class="text-center"><strong>100</strong></td>
+</tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+            
         </div>
     </div>
 
@@ -403,11 +412,6 @@
             $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
-
-
-
-
-
 
     <script>
         // All Assignments Bar Chart Initialization
