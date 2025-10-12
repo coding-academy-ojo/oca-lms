@@ -362,8 +362,8 @@
                                 <th scope="col">Task</th>
                                 <th scope="col">Progress</th>
                                 <th scope="col">Deadline</th>
+                                <th scope="col">Actions</th>
                                 <th scope="col">Duration (hrs)</th>
-                                <th scope="col">Notes</th>
                             </tr>
                         </thead>
                         <tbody>
