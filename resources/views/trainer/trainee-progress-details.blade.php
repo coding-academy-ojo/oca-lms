@@ -299,49 +299,48 @@
 
 
 
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title text-primary mb-3">Project Information</h5>
-                <dl class="row">
-                    <dt class="col-sm-3">Project Sector:</dt>
-                    <dd class="col-sm-9">Education Technology</dd>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title text-primary mb-3">Project Information</h5>
+            <dl class="row">
+                <dt class="col-sm-3">Project Sector: </dt>
+                <dd class="col-sm-9">{{ $student->masterpieceDetail->project_sector }}</dd>
 
-                    <dt class="col-sm-3">Project Name:</dt>
-                    <dd class="col-sm-9">Smart Learning Platform</dd>
+                <dt class="col-sm-3 my-2">Project Name:</dt>
+                <dd class="col-sm-9">{{ $student->masterpieceDetail->project_name }}</dd>
 
-                    <dt class="col-sm-3">Description:</dt>
-                    <dd class="col-sm-9">A platform that helps students learn interactively with AI-powered recommendations.
-                    </dd>
-                </dl>
+                <dt class="col-sm-3 my-2">Description:</dt>
+                <dd class="col-sm-9 text-wrap" style="max-width: 450px;">{{ $student->masterpieceDetail->project_description }}</dd>
+            </dl>
+        </div>
+    </div>
+
+
+    <div class="card my-4">
+        <div class="card-body">
+            <h5 class="card-title text-primary mb-3">Project Resources</h5>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover text-center w-100 mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Wireframe & Mockup Link</th>
+                            <th>Presentation Link</th>
+                            <th>Documentation Link</th>
+                            <th>GitHub Link</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="{{ $student->masterpieceDetail->wireframe_link }}" target="_blank">View</a></td>
+                            <td><a href="{{ $student->masterpieceDetail->presentation_link }}" target="_blank">View</a></td>
+                            <td><a href="{{ $student->masterpieceDetail->documentation_link }}" target="_blank">View</a></td>
+                            <td><a href="{{ $student->masterpieceDetail->github_link }}" target="_blank">View</a></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-
-
-        <div class="card my-4">
-            <div class="card-body">
-                <h5 class="card-title text-primary mb-3">Project Resources</h5>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover text-center w-100 mb-0">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Wireframe & Mockup Link</th>
-                                <th>Presentation Link</th>
-                                <th>Documentation Link</th>
-                                <th>GitHub Link</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><a href="https://example.com/wireframe" target="_blank">View</a></td>
-                                <td><a href="https://example.com/presentation" target="_blank">View</a></td>
-                                <td><a href="https://example.com/documentation" target="_blank">View</a></td>
-                                <td><a href="https://github.com/example/project" target="_blank">View</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+    </div>
 
 
 
@@ -390,14 +389,22 @@
                                         </div>
                                     </td>
                                     <td>{{ $task['task_deadline'] }}</td>
+                                   <!-- Represents Actions  --> 
+                                    <td style="width: 20%">{{ $task['notes'] }}</td> 
+                                    <!-- End  -->
                                     <td class="text-center">{{ $task['hours_spent'] }}</td>
-                                    <td style="width: 20%">{{ $task['notes'] }}</td>
+                                    
                                 </tr>
                             @endforeach
+                            <tr class="fw-bold bg-light">
+    <td colspan="4" class="text-end"><strong>Total Hours:</strong></td>
+    <td class="text-center"><strong>100</strong></td>
+</tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+            
         </div>
     </div>
 

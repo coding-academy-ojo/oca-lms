@@ -16,6 +16,7 @@ class CreateMasterpieceTasks extends Migration
         Schema::create('masterpiece_tasks', function (Blueprint $table) {
             $table->id();
             $table->string('task_name');
+            $table->integer('hours_spent');
             $table->date('deadline');
             $table->timestamps();
         });
