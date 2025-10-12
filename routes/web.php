@@ -319,3 +319,7 @@ Route::post('/trainees-progress/import/masterpiece-details', [TraineesProgressCo
 Route::post('/trainees-progress/import/masterpiece-progress', [TraineesProgressController::class, 'importMasterpieceProgress'])->name('trainees.progress.import.progress');
 Route::post('/masterpiece/export/pdf/{studentId}', [MasterpieceReportController::class, 'exportPdf'])
     ->name('masterpiece.export.pdf');
+
+
+Route::get('/attendance/overall/export', 'AttendanceOverallReportController@exportPdf')
+    ->name('attendance.overall.export.pdf');
