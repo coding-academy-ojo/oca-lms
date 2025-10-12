@@ -29,7 +29,15 @@ class SingleTraineeProgressController extends Controller
         $cohortID = session('cohort_ID');
         $cohort = Cohort::findOrFail($cohortID);
         $student = Student::find($id);
-
+        $blockedEmail = 'gt.ragda.almubaydin@orange.com';
+        $cohortTrainers = $cohort->staff()
+            ->where('role', 'trainer')
+            ->where(function ($q) use ($blockedEmail) {
+                $q->whereNull('staff_email')
+                    ->orWhereRaw('LOWER(staff_email) <> ?', [strtolower($blockedEmail)]);
+            })
+            ->orderBy('staff_name')
+            ->get();
         $absencesData = $this->getAbsencesData($id);
         $technologyData = $this->getTechnologyData($cohort);
         $assignmentsData = $this->getAssignmentsData($student, $technologyData['technologyIds']);
@@ -48,6 +56,7 @@ class SingleTraineeProgressController extends Controller
             'countValues' => $assignmentsData['countValues'],
             'tasksWithProgress' => $tasksWithProgress,
             'studentProjects' => $studentProjects,
+             'cohortTrainers' => $cohortTrainers,
         ]);
     }
 

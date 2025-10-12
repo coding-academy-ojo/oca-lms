@@ -317,5 +317,5 @@ Route::get('/trainees-progress/export/masterpiece-progress-template', [TraineesP
 // Trainees Progress imports (cohort-scoped)
 Route::post('/trainees-progress/import/masterpiece-details', [TraineesProgressController::class, 'importMasterpieceDetails'])->name('trainees.progress.import.details');
 Route::post('/trainees-progress/import/masterpiece-progress', [TraineesProgressController::class, 'importMasterpieceProgress'])->name('trainees.progress.import.progress');
-Route::get('/masterpiece/export/pdf/{studentId}', [MasterpieceReportController::class, 'exportPdf'])
+Route::post('/masterpiece/export/pdf/{studentId}', [MasterpieceReportController::class, 'exportPdf'])
     ->name('masterpiece.export.pdf');

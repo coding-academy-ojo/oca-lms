@@ -286,14 +286,18 @@
     </div>
     <div class="container my-4">
         <div class="d-flex justify-content-between align-items-center mb-2">
-
             <h1 class="mb-4 text-primary">Masterpiece Details</h1>
-            <a href="{{ route('masterpiece.export.pdf', ['studentId' => $student->id]) }}"
-                class="btn btn-primary d-flex align-items-center gap-2">
+
+            {{-- Open modal to pick mentors --}}
+            <button type="button" class="btn btn-primary d-flex align-items-center gap-2" data-bs-toggle="modal"
+                data-bs-target="#exportMentorsModal">
                 <span class="material-symbols-outlined">picture_as_pdf</span>
                 Export PDF
-            </a>
+            </button>
         </div>
+
+
+
 
         <div class="card">
             <div class="card-body">
@@ -359,7 +363,7 @@
                                 <th scope="col">Task</th>
                                 <th scope="col">Progress</th>
                                 <th scope="col">Deadline</th>
-                                <th scope="col">Time Spent (hrs)</th>
+                                <th scope="col">Duration (hrs)</th>
                                 <th scope="col">Notes</th>
                             </tr>
                         </thead>
@@ -397,7 +401,58 @@
         </div>
     </div>
 
+    {{-- Export Mentors Modal --}}
+    <div class="modal fade" id="exportMentorsModal" tabindex="-1" aria-labelledby="exportMentorsModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="exportMentorsModalLabel">Select Project Mentors to include</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
 
+                <form method="POST" action="{{ route('masterpiece.export.pdf', ['studentId' => $student->id]) }}">
+                    @csrf
+                    <div class="modal-body">
+                        @if(isset($cohortTrainers) && $cohortTrainers->count())
+                            <div class=" justify-content-between align-items-center mb-3">
+                                <small class="text-muted">Only checked mentors will be printed in the PDF.</small>
+                            </div>
+
+                            <div class="row">
+                                @foreach($cohortTrainers as $trainer)
+                                    <div class="col-md-12 mb-2">
+                                        <label class="d-flex align-items-center" style="gap:8px;">
+                                            <input type="checkbox" name="selected_staff_ids[]" value="{{ $trainer->id }}">
+                                            <span>
+                                                {{ $trainer->staff_name }}
+                                                @if(!empty($trainer->staff_email))
+                                                    <small class="text-muted">({{ $trainer->staff_email }})</small>
+                                                @endif
+                                            </span>
+                                        </label>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @else
+                            <div class="alert alert-info mb-0">
+                                No trainers available for this cohort.
+                            </div>
+                        @endif
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">
+                            <span class="material-symbols-outlined" style="vertical-align: middle;">download</span>
+                            <span class="ms-1">Export</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <script>
         $(document).ready(function () {
@@ -406,6 +461,26 @@
     </script>
 
 
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const checkAll = document.getElementById('checkAllMentors');
+            const uncheckAll = document.getElementById('uncheckAllMentors');
+            if (checkAll) {
+                checkAll.addEventListener('click', function () {
+                    document.querySelectorAll('#exportMentorsModal input[type="checkbox"][name="selected_staff_ids[]"]')
+                        .forEach(cb => cb.checked = true);
+                });
+            }
+            if (uncheckAll) {
+                uncheckAll.addEventListener('click', function () {
+                    document.querySelectorAll('#exportMentorsModal input[type="checkbox"][name="selected_staff_ids[]"]')
+                        .forEach(cb => cb.checked = false);
+                });
+            }
+        });
+    </script>
 
 
 

@@ -1,41 +1,145 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Masterpiece Report</title>
     <style>
-        @page { margin: 24px 24px 40px 24px; }
-        body { font-family: DejaVu Sans, Arial, sans-serif; color: #333; font-size: 12px; }
-        .header { background: #ff7900; color: #fff; padding: 16px; text-align: center; margin-bottom: 16px; }
-        .title { font-size: 18px; font-weight: bold; }
-        .subtitle { font-size: 11px; opacity: 0.9; }
+        @page {
+            margin: 24px 24px 40px 24px;
+        }
 
-        .info { background: #f7f7f7; border-left: 4px solid #ff7900; padding: 12px; margin-bottom: 14px; }
-        .badge { display:inline-block; background:#ffead6; color:#b65300; padding:2px 6px; border-radius:3px; font-size: 11px; }
+        body {
+            font-family: DejaVu Sans, Arial, sans-serif;
+            color: #333;
+            font-size: 12px;
+        }
 
-        .section-title { font-size: 14px; font-weight: bold; margin: 14px 0 8px; padding-bottom: 4px; border-bottom: 2px solid #ff7900; }
+        .header {
+            background: #ff7900;
+            color: #fff;
+            padding: 16px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
 
-        table { width: 100%; border-collapse: collapse; }
-        th { background: #ff7900; color: #fff; padding: 8px 6px; text-align: left; }
-        td { padding: 7px 6px; border-bottom: 1px solid #eaeaea; vertical-align: top; }
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+        }
 
-        /* details table fixes overlap and wraps long text */
-        .details-table { width:100%; table-layout: fixed; }
+        .subtitle {
+            font-size: 11px;
+            opacity: 0.9;
+        }
+
+        .info {
+            background: #f7f7f7;
+            border-left: 4px solid #ff7900;
+            padding: 12px;
+            margin-bottom: 14px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #ffead6;
+            color: #b65300;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 11px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin: 14px 0 8px;
+            padding-bottom: 4px;
+            border-bottom: 2px solid #ff7900;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #ff7900;
+            color: #fff;
+            padding: 8px 6px;
+            text-align: left;
+        }
+
+        td {
+            padding: 7px 6px;
+            border-bottom: 1px solid #eaeaea;
+            vertical-align: top;
+        }
+
+        .details-table {
+            width: 100%;
+            table-layout: fixed;
+        }
+
         .details-table th,
-        .details-table td { border-bottom: none; }
-        .details-label { width: 30%; font-weight: bold; color:#ff7900; }
-        .wrap { word-break: break-word; white-space: normal; }
+        .details-table td {
+            border-bottom: none;
+        }
 
-        .resources td, .resources th { text-align: center; }
-        .link { color: #0a58ca; text-decoration: none; }
-        .muted { color: #777; }
+        .details-label {
+            width: 30%;
+            font-weight: bold;
+            color: #ff7900;
+        }
 
-        .coordinators { margin-bottom: 12px; }
-        .coordinator-item { display: inline-block; margin-right: 10px; margin-bottom: 4px; }
+        .wrap {
+            word-break: break-word;
+            white-space: normal;
+        }
 
-        .footer { position: fixed; left: 0; right: 0; bottom: -6px; text-align: center; font-size: 10px; color: #666; }
+        .muted {
+            color: #777;
+        }
+
+        .footer {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: -6px;
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+        }
+
+        /* Progress table column widths (Task wider than others) */
+        .col-task {
+            width: 46%;
+        }
+
+        /* widened */
+        .col-progress {
+            width: 14%;
+        }
+
+        .col-deadline {
+            width: 16%;
+        }
+
+        .col-hours {
+            width: 12%;
+        }
+
+        .col-actions {
+            width: 12%;
+        }
+
+        .totals {
+            margin-top: 8px;
+            font-weight: bold;
+            text-align: right;
+        }
     </style>
 </head>
+
 <body>
     <div class="header">
         <div class="title">ORANGE CODING ACADEMY</div>
@@ -53,19 +157,19 @@
         <div><strong>Academy:</strong> {{ optional($student->academy)->academy_name ?? 'N/A' }}</div>
     </div>
 
-    {{-- Project Coordinators (Cohort Trainers) --}}
-    <div class="section-title">Project Coordinators</div>
-    @if(isset($coordinators) && $coordinators->count())
-        <div class="coordinators">
-            @foreach($coordinators as $c)
-                <span class="coordinator-item">
-                    {{ $c->staff_name }}
-                    @if(!empty($c->staff_email)) <span class="muted">({{ $c->staff_email }})</span> @endif
+    {{-- Project Mentors --}}
+    <div class="section-title">Project Mentors</div>
+    @if(isset($mentors) && $mentors->count())
+        <div style="margin-bottom: 12px;">
+            @foreach($mentors as $m)
+                <span style="display:inline-block; margin-right:10px; margin-bottom:4px;">
+                    {{ $m->staff_name }}
+                    @if(!empty($m->staff_email)) <span class="muted">({{ $m->staff_email }})</span> @endif
                 </span>
             @endforeach
         </div>
     @else
-        <div class="muted">No trainers assigned to this cohort.</div>
+        <div class="muted">No mentors selected.</div>
     @endif
 
     {{-- Masterpiece Details --}}
@@ -87,82 +191,55 @@
         </tr>
     </table>
 
-    <div style="font-weight: bold; margin:6px 0;">Project Resources</div>
-    <table class="resources" style="margin-bottom: 16px;">
-        <thead>
-        <tr>
-            <th>Wireframe &amp; Mockup Link</th>
-            <th>Presentation Link</th>
-            <th>Documentation Link</th>
-            <th>GitHub Link</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>
-                @if(!empty($details) && !empty($details->wireframe_mockup_link))
-                    <a class="link" href="{{ $details->wireframe_mockup_link }}">View</a>
-                @else
-                    <span class="muted">—</span>
-                @endif
-            </td>
-            <td>
-                @if(!empty($details) && !empty($details->presentation_link))
-                    <a class="link" href="{{ $details->presentation_link }}">View</a>
-                @else
-                    <span class="muted">—</span>
-                @endif
-            </td>
-            <td>
-                @if(!empty($details) && !empty($details->documentation_link))
-                    <a class="link" href="{{ $details->documentation_link }}">View</a>
-                @else
-                    <span class="muted">—</span>
-                @endif
-            </td>
-            <td>
-                @if(!empty($details) && !empty($details->github_link))
-                    <a class="link" href="{{ $details->github_link }}">View</a>
-                @else
-                    <span class="muted">—</span>
-                @endif
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    {{-- Project Deliverables (ONLY GitHub link kept) --}}
+    <div class="section-title">Project Deliverables</div>
+    <div style="margin: 6px 0 16px;">
+        <strong>GitHub Link:</strong>
+        @if(!empty($details) && !empty($details->github_link))
+            <a href="{{ $details->github_link }}">{{ $details->github_link }}</a>
+        @else
+            <span class="muted">—</span>
+        @endif
+    </div>
 
     {{-- Masterpiece Progress --}}
     <div class="section-title">Masterpiece Progress</div>
     <table>
         <thead>
-        <tr>
-            <th style="width:38%;">Task</th>
-            <th style="width:16%;">Progress</th>
-            <th style="width:18%;">Deadline</th>
-            <th style="width:14%;">Time Spent (hrs)</th>
-            <th style="width:14%;">Notes</th>
-        </tr>
+            <tr>
+                <th class="col-task">Task</th>
+                <th class="col-progress">Progress</th>
+                <th class="col-deadline">Deadline</th>
+                <th class="col-hours">Duration</th>
+                <th class="col-actions">Actions</th>
+            </tr>
         </thead>
         <tbody>
-        @forelse($rows as $r)
-            <tr>
-                <td class="wrap">{{ $r['task_name'] }}</td>
-                <td>{{ $r['progress'] }}% Complete</td>
-                <td>{{ $r['deadline'] }}</td>
-                <td>{{ $r['hours_spent'] }}</td>
-                <td class="wrap">{{ $r['notes'] ?: '—' }}</td>
-            </tr>
-        @empty
-            <tr>
-                <td colspan="5" class="muted" style="text-align:center;">No tasks found.</td>
-            </tr>
-        @endforelse
+            @forelse($rows as $r)
+                <tr>
+                    <td class="wrap">{{ $r['task_name'] }}</td>
+                    <td>{{ $r['progress'] }}%</td>
+                    <td>{{ $r['deadline'] }}</td>
+                    <td>{{ rtrim(rtrim(number_format((float) $r['duration'], 2, '.', ''), '0'), '.') }} hrs</td>
+                    <td class="wrap">{{ $r['actions'] !== '' ? $r['actions'] : '—' }}</td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="5" class="muted" style="text-align:center;">No tasks found.</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
+
+    {{-- Total Hours --}}
+    <div class="totals">
+        Total Hours: {{ rtrim(rtrim(number_format($totalHours ?? 0, 2, '.', ''), '0'), '.') }} hrs
+    </div>
 
     <div class="footer">
         Generated: {{ $generatedDate }} {{ $generatedTime }} &nbsp;|&nbsp;
         By: {{ $staffDisplay }} &nbsp;|&nbsp; Orange Coding Academy — Student Management System
     </div>
 </body>
+
 </html>
