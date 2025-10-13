@@ -6,7 +6,30 @@
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; color: #333; }
 
-        .header { background: #ff7900; color: #fff; padding: 20px; text-align: center; margin-bottom: 20px; }
+        
+        .header {
+            background: #ffffff;
+            color: #fff;
+            padding-top: 50px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+        .header img {
+            position: absolute;
+            top: 10px;
+            right: 16px;
+            width: 170px;
+            height: auto;
+        }
+
+        /* Style for the H1 title */
+        .header h1 {
+            color: #000; /* black color */
+            font-size: 22px;
+            font-weight: bold;
+            margin: 0;
+            text-align: left;
+        }
         .academy-title { font-size: 20px; font-weight: bold; margin-bottom: 5px; }
         .academy-subtitle { font-size: 11px; margin-bottom: 10px; }
         .report-title { font-size: 16px; font-weight: bold; }
@@ -55,10 +78,10 @@
     </style>
 </head>
 <body>
+
     <div class="header">
-        <div class="academy-title">ORANGE CODING ACADEMY</div>
-        <div class="academy-subtitle">Empowering Digital Transformation • Building Tomorrow's Tech Leaders</div>
-        <div class="report-title">Student Absence Report</div>
+        <img src="{{ public_path('images/Coding-Academy-LOGO-CMYK-Black-1024x576.png') }}" alt="Logo">
+        <h1>Student Absence Report</h1>
     </div>
 
     <div class="student-info">

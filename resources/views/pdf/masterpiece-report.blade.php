@@ -15,13 +15,31 @@
             font-size: 12px;
         }
 
+
         .header {
-            background: #ff7900;
+            background: #ffffff;
             color: #fff;
-            padding: 16px;
-            text-align: center;
+            padding-top: 50px;
             margin-bottom: 16px;
+            position: relative;
         }
+        .header img {
+            position: absolute;
+            top: 10px;
+            right: 16px;
+            width: 170px;
+            height: auto;
+        }
+
+        /* Style for the H1 title */
+        .header h1 {
+            color: #000; /* black color */
+            font-size: 22px;
+            font-weight: bold;
+            margin: 0;
+            text-align: left;
+        }
+
 
         .title {
             font-size: 18px;
@@ -142,8 +160,8 @@
 
 <body>
     <div class="header">
-        <div class="title">ORANGE CODING ACADEMY</div>
-        <div class="subtitle">Masterpiece Report</div>
+        <img src="{{ public_path('images/Coding-Academy-LOGO-CMYK-Black-1024x576.png') }}" alt="Logo">
+        <h1>Masterpiece Report</h1>
     </div>
 
     {{-- Student Header --}}

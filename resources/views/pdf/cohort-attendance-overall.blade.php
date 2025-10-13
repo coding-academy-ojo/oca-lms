@@ -6,11 +6,38 @@
     <style>
         @page { margin: 24px 24px 40px 24px; }
         body { font-family: DejaVu Sans, Arial, sans-serif; color: #333; font-size: 12px; }
-        .header { background: #ff7900; color: #fff; padding: 16px; text-align: center; margin-bottom: 16px; }
-        .title { font-size: 18px; font-weight: bold; }
-        .subtitle { font-size: 11px; opacity: 0.9; }
 
-        .section-title { font-size: 14px; font-weight: bold; margin: 14px 0 8px; padding-bottom: 4px; border-bottom: 2px solid #ff7900; }
+        .header {
+            background: #ffffff;
+            color: #fff;
+            padding-top: 50px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+        .header img {
+            position: absolute;
+            top: 10px;
+            right: 16px;
+            width: 170px;
+            height: auto;
+        }
+
+        /* Style for the H1 title */
+        .header h1 {
+            color: #000; /* black color */
+            font-size: 22px;
+            font-weight: bold;
+            margin: 0;
+            text-align: left;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin: 14px 0 8px;
+            padding-bottom: 4px;
+            border-bottom: 2px solid #ff7900;
+        }
         .muted { color: #777; }
         .kv { margin: 6px 0; }
         .kv .k { font-weight: bold; color: #ff7900; }
@@ -21,13 +48,21 @@
         td { padding: 7px 6px; border-bottom: 1px solid #eaeaea; vertical-align: top; }
         .wrap { word-break: break-word; white-space: normal; }
 
-        .footer { position: fixed; left: 0; right: 0; bottom: -6px; text-align: center; font-size: 10px; color: #666; }
+        .footer {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: -6px;
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+        }
     </style>
 </head>
 <body>
     <div class="header">
-        <div class="title">ORANGE CODING ACADEMY</div>
-        <div class="subtitle">Overall Attendance Report</div>
+        <img src="{{ public_path('images/Coding-Academy-LOGO-CMYK-Black-1024x576.png') }}" alt="Logo">
+        <h1>Overall Attendance Report</h1>
     </div>
 
     <div class="section-title">Cohort</div>
@@ -37,7 +72,7 @@
         {{ \Carbon\Carbon::parse($cohort->cohort_start_date)->format('Y-m-d') }}
         →
         {{ \Carbon\Carbon::parse($cohort->cohort_end_date)->format('Y-m-d') }}
-        &nbsp; ({{ $totalCohortDays }} training days, excl. Fri/Sat)
+        &nbsp; ({{ $totalCohortDays }} training days, except Fri/Sat)
     </div>
 
     <div class="section-title">Introduction</div>
