@@ -108,11 +108,17 @@
     </style>
 </head>
 <body>
-    <!-- HEADER -->
-    <div class="header">
-        <img src="{{ asset('img/Coding-Academy-LOGO-CMYK-Black-1024x576.png') }}" alt="Logo">
-        <h1>Cohort Summary Report</h1>
-    </div>
+@php
+$path = public_path('images/Coding-Academy-LOGO-CMYK-Black-1024x576.png');
+$type = pathinfo($path, PATHINFO_EXTENSION);
+$data = file_get_contents($path);
+$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+@endphp
+
+<div class="header">
+    <img src="{{ $base64 }}" alt="Logo">
+    <h1>Cohort Summary Report</h1>
+</div>
 
     <!-- COHORT DETAILS -->
     <div class="section-title">Cohort Information</div>
