@@ -99,11 +99,11 @@
         </div>
         <div class="info-row">
             <span class="info-label">Cohort:</span>
-            {{ $cohort->cohort_name ?? 'N/A' }}
+            {{ $cohort->cohort_name ?? 'No Absent' }}
         </div>
         <div class="info-row">
             <span class="info-label">Academy:</span>
-            {{ $student->academy->academy_name ?? 'N/A' }}
+            {{ $student->academy->academy_name ?? 'No Absent' }}
         </div>
     </div>
 
@@ -163,12 +163,12 @@
                             @php
                                 $duration = trim($absence->absences_duration);
                                 if ($duration === '' || $duration === null) {
-                                    echo 'N/A';
+                                    echo 'No Absent';
                                 } elseif (is_numeric($duration)) {
                                     $minutes = intval($duration);
                                     echo $minutes >= 60 ? number_format($minutes / 60, 1) . 'h' : $minutes . 'm';
                                 } else {
-                                    echo 'N/A';
+                                    echo 'No Absent';
                                 }
                             @endphp
                         </td>

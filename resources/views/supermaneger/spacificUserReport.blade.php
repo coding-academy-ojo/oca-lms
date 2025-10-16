@@ -74,7 +74,7 @@ Student Absence Report
                             $duration = trim($absence->absences_duration);
                             
                             if (empty($duration) || $duration === '') {
-                                echo 'N/A';
+                                echo '8 Hours';
                             } elseif (is_numeric($duration)) {
                                 // Handle numeric values (assume minutes)
                                 $minutes = intval($duration);
@@ -89,11 +89,11 @@ Student Absence Report
                                 if ($hourValue > 0) {
                                     echo number_format($hourValue, 1) . ' Hours';
                                 } else {
-                                    echo 'N/A';
+                                    echo '8 Hours';
                                 }
                             } else {
                                 // Handle other cases or malformed data
-                                echo 'N/A';
+                                echo 'No Record';
                             }
                         @endphp
                     </td>
