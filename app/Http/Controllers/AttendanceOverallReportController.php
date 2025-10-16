@@ -99,7 +99,7 @@ class AttendanceOverallReportController extends Controller
         // Optional intro from request
         $introduction = trim((string) $request->query('introduction', ''));
         if ($introduction === '') {
-            $introduction = 'This report presents an overview of attendance performance for the cohort.';
+            $introduction = 'This report provides a comprehensive summary of the cohort’s overall attendance and participation throughout the training period. It consolidates key data including total working days, attendance records, absence trends. The purpose of this report is to present a clear overview of attendance performance and highlight patterns that can support performance evaluation, and future program planning.';
         }
 
         $data = [

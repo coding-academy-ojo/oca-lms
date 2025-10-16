@@ -94,6 +94,10 @@
             #{{ str_pad($student->id, 6, '0', STR_PAD_LEFT) }}
         </div>
         <div class="info-row">
+            <span class="info-label">National ID:</span>
+            {{ str_pad($student->national_id, 10, '0', STR_PAD_LEFT) }}
+        </div>
+        <div class="info-row">
             <span class="info-label">Cohort:</span>
             {{ $cohort->cohort_name ?? 'N/A' }}
         </div>
