@@ -121,7 +121,6 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
 </div>
     <!-- HEADER -->
     <div class="header">
-        <img src="{{ public_path('images/Coding-Academy-LOGO-CMYK-Black-1024x576.png') }}" alt="Logo">
         <img src="{{ asset('img/Coding-Academy-LOGO-CMYK-Black-1024x576.png') }}" alt="Logo">
         <h1>Cohort Summary Report</h1>
         <h1>images/Coding-Academy-LOGO-CMYK-Black-1024x576.png</h1>
