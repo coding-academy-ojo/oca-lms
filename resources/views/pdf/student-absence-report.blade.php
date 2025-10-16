@@ -80,7 +80,7 @@
 <body>
 
     <div class="header">
-        <img src="{{ public_path('images/Coding-Academy-LOGO-CMYK-Black-1024x576.png') }}" alt="Logo">
+        <img src="{{ public_path('./images/Coding-Academy-LOGO-CMYK-Black-1024x576.png') }}" alt="Logo">
         <h1>Student Absence Report</h1>
     </div>
 
