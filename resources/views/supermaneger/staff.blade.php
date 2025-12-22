@@ -66,7 +66,12 @@
                             <img src="{{ asset('assets/img/usericon.jpg') }}" class="img-fluid rounded-circle" alt="Staff Member" style="width: 50px; height: 50px;">
                         </td>
                         <td>{{ $member->staff_name }}</td>
-                        <td>{{ $member->role }}</td>
+                        <td>
+                            @php
+                                $roleDisplay = ucfirst(str_replace('_', ' ', $member->role));
+                                echo $roleDisplay;
+                            @endphp
+                        </td>
                         <td>
                             @php
                                 $academyNames = $member->academies->pluck('academy_name')->toArray();
@@ -124,6 +129,9 @@
                         @endif
                         @endauth
                         <option value="trainer">Trainer</option>
+                        <option value="coordinator">Coordinator</option>
+                        <option value="job_coach">Job Coach</option>
+                        <option value="auditer">Auditor</option>
                     </select>
                 </div>
                 <div class="mb-3">

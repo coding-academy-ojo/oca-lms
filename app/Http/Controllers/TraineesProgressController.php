@@ -66,7 +66,7 @@ class TraineesProgressController extends Controller
         if (!$runningCohort) {
             // If no running cohort is found, return a default set of values
             return [
-                'cohort_name' => $cohort->cohort_name,
+                'cohort_name' => $cohort->cohort_name ?? 'No Running Cohort',
                 'date' => Carbon::now()->format('d-F-Y'),
                 'total_students' => 0,
                 'attended' => 0,
@@ -350,8 +350,8 @@ class TraineesProgressController extends Controller
         $cohortID = session('cohort_ID'); // Assuming the cohort ID is stored in the session
         $cohort = Cohort::find($cohortID);
         $latestProjectWithSubmission = $this->getLatestProjectWithSubmission($cohortID);
-        $latestProjectWithSubmissionName = $latestProjectWithSubmission->project_name;
-        $latestProjectWithSubmissionId = $latestProjectWithSubmission->id;
+        $latestProjectWithSubmissionName = $latestProjectWithSubmission->project_name ?? 'No Project';
+        $latestProjectWithSubmissionId = $latestProjectWithSubmission->id ?? 0;
 
         //  dd($latestProjectWithSubmission);
         if (!$cohort) {

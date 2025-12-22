@@ -44,7 +44,7 @@ public function exportPdf(Request $request, $studentId)
         // Fully qualify columns to avoid "ambiguous column" errors
         $mentorsQuery = $student->cohort->staff()
             ->select('staff.*')
-            ->where('staff.role', 'trainer')
+            ->whereIn('staff.role', ['trainer', 'coordinator', 'job_coach', 'auditer'])
             ->where(function ($q) use ($blockedEmail) {
                 $q->whereNull('staff.staff_email')
                   ->orWhereRaw('LOWER(staff.staff_email) <> ?', [strtolower($blockedEmail)]);

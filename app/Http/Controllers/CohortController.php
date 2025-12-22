@@ -44,7 +44,7 @@ public function index(Request $request, $academyId = null)
                     $academy->cohorts = $academy->cohorts->sortByDesc('cohort_end_date');
                 });
             $canEditCohort = true;
-        } elseif ($user->role == 'trainer') {
+        } elseif (in_array($user->role, ['trainer', 'coordinator', 'job_coach', 'auditer'])) {
             $academyIds = $user->academies->pluck('id')->toArray();
             $academies = Academy::with(['cohorts' => function($query) use ($user) {
                 $query->whereHas('staff', function ($query) use ($user) {
@@ -152,7 +152,7 @@ public function index(Request $request, $academyId = null)
                 // Retrieve all trainers for the academies the manager is assigned to
                 $trainers = Staff::whereHas('academies', function ($query) use ($academyIds) {
                     $query->whereIn('academies.id', $academyIds);
-                })->where('role', 'trainer')->get();
+                })->whereIn('role', ['trainer', 'coordinator', 'job_coach', 'auditer'])->get();
 
                 return view('academies.edit-cohort', compact('cohort', 'trainers'));
             } else {

@@ -31,7 +31,7 @@ class SingleTraineeProgressController extends Controller
         $student = Student::find($id);
         $blockedEmail = 'gt.ragda.almubaydin@orange.com';
         $cohortTrainers = $cohort->staff()
-            ->where('role', 'trainer')
+            ->whereIn('role', ['trainer', 'coordinator', 'job_coach', 'auditer'])
             ->where(function ($q) use ($blockedEmail) {
                 $q->whereNull('staff_email')
                     ->orWhereRaw('LOWER(staff_email) <> ?', [strtolower($blockedEmail)]);

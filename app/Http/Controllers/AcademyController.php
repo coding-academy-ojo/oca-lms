@@ -41,17 +41,17 @@ class AcademyController extends Controller
                              // Sort cohorts by cohort_end_date ascending (oldest first)
                              $academy->cohorts = $academy->cohorts->sortByDesc('cohort_end_date');
                          });
-                     $academyIds = $user->academies->pluck('id')->toArray();
-                     $trainers = Staff::whereHas('academies', function ($query) use ($academyIds) {
-                         $query->whereIn('academies.id', $academyIds);
-                     })->where('role', 'trainer')->get();
-                 } elseif ($role === 'trainer') {
-                     $academies = $user->academies()->with('staff', 'cohorts')->get()
-                         ->each(function($academy) {
-                             // Sort cohorts by cohort_end_date ascending (oldest first)
-                             $academy->cohorts = $academy->cohorts->sortByDesc('cohort_end_date');
-                         });
-                 }
+                    $academyIds = $user->academies->pluck('id')->toArray();
+                    $trainers = Staff::whereHas('academies', function ($query) use ($academyIds) {
+                        $query->whereIn('academies.id', $academyIds);
+                    })->whereIn('role', ['trainer', 'coordinator', 'job_coach', 'auditer'])->get();
+                } elseif (in_array($role, ['trainer', 'coordinator', 'job_coach', 'auditer'])) {
+                    $academies = $user->academies()->with('staff', 'cohorts')->get()
+                        ->each(function($academy) {
+                            // Sort cohorts by cohort_end_date ascending (oldest first)
+                            $academy->cohorts = $academy->cohorts->sortByDesc('cohort_end_date');
+                        });
+                }
              } elseif ($user instanceof Student) {
                  $academies = $user->academy()->with('students')->get();
              }

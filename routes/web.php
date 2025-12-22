@@ -11,6 +11,7 @@ use App\Http\Controllers\AcademyController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\AssignmentFeedbackController;
 use App\Http\Controllers\MasterpieceReportController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassroomController;
@@ -284,6 +285,27 @@ Route::middleware(['role:trainer'])->group(function () {
     Route::post('/update-certificate', [MasterpieceController::class, 'updateCertificate'])->name('update.certificate');
     Route::post('/update-internship', [MasterpieceController::class, 'updateInternship'])->name('update.internship');
 
+});
+
+//job_coach routes - only soft skills
+Route::middleware(['role:job_coach'])->group(function () {
+    // soft skills
+    Route::get('soft-skills', [SoftSkillsTrainingController::class, 'index'])->name('soft-skills.index');
+    Route::get('soft-skills/create', [SoftSkillsTrainingController::class, 'create'])->name('soft-skills.create');
+    Route::post('soft-skills', [SoftSkillsTrainingController::class, 'store'])->name('soft-skills.store');
+    Route::get('soft-skills/{softSkillsTraining}', [SoftSkillsTrainingController::class, 'show'])->name('soft-skills.show');
+    Route::get('soft-skills/{softSkillsTraining}/edit', [SoftSkillsTrainingController::class, 'edit'])->name('soft-skills.edit');
+    Route::put('soft-skills/{softSkillsTraining}', [SoftSkillsTrainingController::class, 'update'])->name('soft-skills.update');
+    Route::delete('soft-skills/{softSkillsTraining}', [SoftSkillsTrainingController::class, 'destroy'])->name('soft-skills.destroy');
+});
+
+//coordinator student CRUD routes
+Route::middleware(['role:coordinator'])->group(function () {
+    Route::get('coordinator/cohorts/{cohort_id}/students', [StudentController::class, 'index'])->name('coordinator.students.index');
+    Route::get('coordinator/students/{id}', [StudentController::class, 'show'])->name('coordinator.students.show');
+    Route::get('coordinator/students/{id}/edit', [StudentController::class, 'edit'])->name('coordinator.students.edit');
+    Route::put('coordinator/students/{id}', [StudentController::class, 'update'])->name('coordinator.students.update');
+    Route::delete('coordinator/students/{id}', [StudentController::class, 'destroy'])->name('coordinator.students.destroy');
 });
 
 Route::get('/technology-satisfaction/{cohort_id}', [technologySatisfactionController::class, 'index'])->name('technology.satisfaction');

@@ -68,7 +68,19 @@
                         </li>
                         
                     @endif
-                    @if (Auth::guard('staff')->user()->role == 'trainer')
+                    @if (Auth::guard('staff')->user()->role == 'job_coach')
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('attendance') ? 'text-primary' : '' }}"
+                                href="{{ route('attendance') }}">Attendance</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('soft-skills.*') ? 'text-primary' : '' }}"
+                                href="{{ route('soft-skills.index') }}">Soft Skills</a>
+                        </li>
+                    @endif
+                    @if (in_array(Auth::guard('staff')->user()->role, ['trainer']))
+
+                    {{-- @if (Auth::guard('staff')->user()->role == 'trainer') --}}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

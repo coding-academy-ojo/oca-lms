@@ -63,6 +63,15 @@
         </script>
           @else
           <div class="mb-3">
+            <label for="roleSelect" class="form-label">Role</label>
+            <select class="form-select" id="roleSelect" name="role" required>
+                <option value="trainer" @if($editingUserRole == 'trainer') selected @endif>Trainer</option>
+                <option value="coordinator" @if($editingUserRole == 'coordinator') selected @endif>Coordinator</option>
+                <option value="job_coach" @if($editingUserRole == 'job_coach') selected @endif>Job Coach</option>
+                <option value="auditer" @if($editingUserRole == 'auditer') selected @endif>Auditor</option>
+            </select>
+          </div>
+          <div class="mb-3">
           <!-- Single select  for academies for the trainer -->
           <label for="academy" class="form-label">Assign To Academy</label>
           <select class="form-select" id="academy" name="academy">
@@ -78,12 +87,4 @@
         <button type="submit" class="btn btn-primary">Save Changes</button>
     </form>
 </div>
-       {{-- <div class="mb-3">
-            <label for="roleSelect" class="form-label">Role</label>
-            <select class="form-select" id="roleSelect" name="role">
-                <option selected>Choose a role...</option>
-                <option value="manager">Manager</option>
-                <option value="trainer">Trainer</option>
-            </select>
-        </div> --}}
 @endsection

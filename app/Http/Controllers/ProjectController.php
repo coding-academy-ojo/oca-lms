@@ -25,7 +25,7 @@ class ProjectController extends Controller
         $cohortId = session('cohort_ID');
         $project_filter = $request->input('project_filter', 'all');
 
-        if (Auth::guard('staff')->check() && Auth::guard('staff')->user()->role === 'trainer') {
+        if (Auth::guard('staff')->check() && in_array(Auth::guard('staff')->user()->role, ['trainer', 'coordinator', 'job_coach', 'auditer'])) {
             $projects = Project::where('cohort_id', $cohortId)->get();
 
         } else {

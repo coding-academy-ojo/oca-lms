@@ -52,8 +52,10 @@ Student Absence Report
                     <th scope="col">Reason</th>
                     <th scope="col">Duration</th>
                     <th scope="col">Report</th>
-                    <th scope="col">Follow-up Action</th>
-                    <th scope="col">Action</th>
+                    @if(Auth::guard('staff')->user()->role != 'auditer')
+                        <th scope="col">Follow-up Action</th>
+                        <th scope="col">Action</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -106,6 +108,7 @@ Student Absence Report
                             <span class="text-muted">No report uploaded</span>
                         @endif
                     </td>
+                    @if(Auth::guard('staff')->user()->role != 'auditer')
                     <td>
                         <form action="{{ route('absence.action.update', ['absence_id' => $absence->id]) }}" method="POST" class="d-inline">
                             @csrf
@@ -133,7 +136,8 @@ Student Absence Report
                                 Save
                             </button>
                         </form>
-                    </td>
+                        </td>
+                    @endif
                 </tr>
                 @endforeach
             </tbody>

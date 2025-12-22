@@ -41,12 +41,18 @@
     <h3 class="mb-0 text-primary">Cohort Information</h3>
 
     <div class="ms-auto d-flex flex-column gap-2">
-        @if (in_array(Auth::guard('staff')->user()->role, ['trainer', 'manager']))
+        @if (in_array(Auth::guard('staff')->user()->role, ['trainer', 'manager','job_coach','auditer']))
             @php
                 $encryptedCohortId = Crypt::encryptString($cohort->id);
             @endphp
             <a href="{{ route('absence', ['cohort_id' => $encryptedCohortId]) }}" class="btn btn-primary">
                 Cohort Absence
+            </a>
+        @endif
+
+        @if (Auth::guard('staff')->user()->role == 'coordinator')
+            <a href="{{ route('coordinator.students.index', ['cohort_id' => $cohort->id]) }}" class="btn btn-primary">
+                Manage Students
             </a>
         @endif
 
@@ -59,9 +65,11 @@
             </button>
         </form>
 
-        <a href="{{ route('import-data.index', ['id' => $cohort->id]) }}" class="btn btn-info">
-            Import Data
-        </a>
+        @if (Auth::guard('staff')->user()->role != 'auditer')
+            <a href="{{ route('import-data.index', ['id' => $cohort->id]) }}" class="btn btn-info">
+                Import Data
+            </a>
+        @endif
     </div>
 </div>
 

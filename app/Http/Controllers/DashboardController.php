@@ -29,6 +29,9 @@ class DashboardController extends Controller
                 case 'manager':
                     return '/academies';
                 case 'trainer':
+                case 'coordinator':
+                case 'job_coach':
+                case 'auditer':
                     return '/cohorts';
                 default:
                     return '/';

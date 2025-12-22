@@ -41,7 +41,7 @@ class AbsenceController extends Controller
              $studentsQuery->whereHas('academy', function ($query) use ($academyIds) {
                  $query->whereIn('id', $academyIds);
              });
-         } elseif ($staff->role === 'trainer') {
+         } elseif (in_array($staff->role, ['trainer', 'coordinator', 'job_coach', 'auditer'])) {
              $cohortsIds = $staff->cohorts->pluck('id');
              $cohortsQuery->whereIn('id', $cohortsIds);
              $academiesQuery->whereHas('cohorts', function ($query) use ($cohortsIds) {

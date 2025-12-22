@@ -18,7 +18,7 @@ class AnnouncementController extends Controller
     
     public function index()
     {
-        if (auth()->check() && (auth()->user()->role == "trainer" || auth()->user()->role == "manager")) {
+        if (auth()->check() && (in_array(auth()->user()->role, ['trainer', 'coordinator', 'job_coach', 'auditer']) || auth()->user()->role == "manager")) {
             # code... 
             $cohortId = session("cohort_ID");
         } else {

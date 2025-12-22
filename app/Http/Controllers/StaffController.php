@@ -28,7 +28,7 @@ class StaffController extends Controller
             $staff = Staff::whereHas('academies', function ($query) use ($academyIds) {
                 $query->whereIn('academy_id', $academyIds);
             })
-            ->where('role', '=', 'trainer')
+            ->whereIn('role', ['trainer', 'coordinator', 'job_coach', 'auditer'])
             ->where('id', '!=', $user->id) 
             ->paginate(5);
     
@@ -64,7 +64,7 @@ class StaffController extends Controller
             'staff_name' => 'required|string',
             'staff_email' => 'required|email|unique:staff',
             'staff_password' => 'required|string|min:6',
-            'role' => 'required|in:manager,super_manager,trainer',
+            'role' => 'required|in:manager,super_manager,trainer,coordinator,job_coach,auditer',
             'staff_cv' => 'nullable|file',
             'staff_bio' => 'nullable|string',
             'staff_personal_img' => 'nullable|image',
@@ -86,8 +86,8 @@ class StaffController extends Controller
             }
     
             $staff->academies()->attach($validatedData['academy_id']);
-        } elseif (!empty($validatedData['academy_id']) && $validatedData['role'] === 'trainer') {
-            // Trainers can be added to multiple academies
+        } elseif (!empty($validatedData['academy_id']) && in_array($validatedData['role'], ['trainer', 'coordinator', 'job_coach', 'auditer'])) {
+            // Trainers, coordinators, and job coaches can be added to multiple academies
             $staff->academies()->attach($validatedData['academy_id']);
         }
     
@@ -122,7 +122,7 @@ class StaffController extends Controller
         $selectedAcademies = $staff->academies->pluck('id')->toArray();
     
         // For a super manager or a manager looking to edit a staff member
-        if ($user->role == 'super_manager' || ($user->role == 'manager' && in_array($staff->role, ['trainer']))) {
+        if ($user->role == 'super_manager' || ($user->role == 'manager' && in_array($staff->role, ['trainer', 'coordinator', 'job_coach', 'auditer']))) {
             $academies = $user->role == 'super_manager' ? Academy::all() : $user->academies;
     
             // Pass the role of the staff being edited, not the authenticated user's role
@@ -144,8 +144,21 @@ class StaffController extends Controller
     public function update(Request $request, $id)
     {
         $staff = Staff::findOrFail($id);
+        $originalRole = $staff->role;
         
-        if ($staff->role === 'manager' && $request->has('academies')) {
+        // Update role if provided and staff is trainer, coordinator, or job_coach
+        if ($request->has('role') && in_array($originalRole, ['trainer', 'coordinator', 'job_coach', 'auditer'])) {
+            $request->validate([
+                'role' => 'required|in:trainer,coordinator,job_coach,auditer',
+            ]);
+            $staff->role = $request->role;
+            $staff->save();
+        }
+        
+        // Use updated role for academy assignment logic
+        $currentRole = $staff->fresh()->role;
+        
+        if ($currentRole === 'manager' && $request->has('academies')) {
             foreach ($request->academies as $academyId) {
                 $otherManager = Staff::where('role', 'manager')
                                       ->whereExists(function ($query) use ($academyId) {
@@ -162,14 +175,14 @@ class StaffController extends Controller
             }
             $staff->academies()->sync($request->academies);
         } 
-        elseif ($staff->role === 'trainer' && $request->has('academy')) {
+        elseif (in_array($currentRole, ['trainer', 'coordinator', 'job_coach', 'auditer']) && $request->has('academy')) {
             $staff->academies()->sync($request->academy ? [$request->academy] : []);
         } 
         else {
             $staff->academies()->detach();
         }    
         
-        return redirect()->route('staff.index')->with('success', 'Staff academies updated successfully.');
+        return redirect()->route('staff.index')->with('success', 'Staff updated successfully.');
     }
     
     
