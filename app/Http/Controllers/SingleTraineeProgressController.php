@@ -59,6 +59,7 @@ class SingleTraineeProgressController extends Controller
             'tasksWithProgress' => $tasksWithProgress,
             'studentProjects' => $studentProjects,
              'cohortTrainers' => $cohortTrainers,
+            'masterpieceDetails' => $masterpieceDetails,
         ]);
     }
 

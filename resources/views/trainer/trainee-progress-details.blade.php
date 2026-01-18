@@ -299,19 +299,29 @@
 
 
 
+    @php
+        $masterpiece = $masterpieceDetails ?? null;
+    @endphp
+
     <div class="card">
         <div class="card-body">
             <h5 class="card-title text-primary mb-3">Project Information</h5>
-            <dl class="row">
-                <dt class="col-sm-3">Project Sector: </dt>
-                <dd class="col-sm-9">{{ $student->masterpieceDetail->project_sector }}</dd>
+            @if ($masterpiece)
+                <dl class="row">
+                    <dt class="col-sm-3">Project Sector: </dt>
+                    <dd class="col-sm-9">{{ $masterpiece->project_sector }}</dd>
 
-                <dt class="col-sm-3 my-2">Project Name:</dt>
-                <dd class="col-sm-9">{{ $student->masterpieceDetail->project_name }}</dd>
+                    <dt class="col-sm-3 my-2">Project Name:</dt>
+                    <dd class="col-sm-9">{{ $masterpiece->project_name }}</dd>
 
-                <dt class="col-sm-3 my-2">Description:</dt>
-                <dd class="col-sm-9 text-wrap" style="max-width: 450px;">{{ $student->masterpieceDetail->project_description }}</dd>
-            </dl>
+                    <dt class="col-sm-3 my-2">Description:</dt>
+                    <dd class="col-sm-9 text-wrap" style="max-width: 450px;">
+                        {{ $masterpiece->project_description }}
+                    </dd>
+                </dl>
+            @else
+                <p class="text-muted mb-0">No masterpiece details found for this student.</p>
+            @endif
         </div>
     </div>
 
@@ -319,26 +329,30 @@
     <div class="card my-4">
         <div class="card-body">
             <h5 class="card-title text-primary mb-3">Project Resources</h5>
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover text-center w-100 mb-0">
-                    <thead class="table-light">
-                        <tr>
-                            <th>Wireframe & Mockup Link</th>
-                            <th>Presentation Link</th>
-                            <th>Documentation Link</th>
-                            <th>GitHub Link</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><a href="{{ $student->masterpieceDetail->wireframe_link }}" target="_blank">View</a></td>
-                            <td><a href="{{ $student->masterpieceDetail->presentation_link }}" target="_blank">View</a></td>
-                            <td><a href="{{ $student->masterpieceDetail->documentation_link }}" target="_blank">View</a></td>
-                            <td><a href="{{ $student->masterpieceDetail->github_link }}" target="_blank">View</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            @if ($masterpiece)
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover text-center w-100 mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Wireframe & Mockup Link</th>
+                                <th>Presentation Link</th>
+                                <th>Documentation Link</th>
+                                <th>GitHub Link</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="{{ $masterpiece->wireframe_link }}" target="_blank">View</a></td>
+                                <td><a href="{{ $masterpiece->presentation_link }}" target="_blank">View</a></td>
+                                <td><a href="{{ $masterpiece->documentation_link }}" target="_blank">View</a></td>
+                                <td><a href="{{ $masterpiece->github_link }}" target="_blank">View</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            @else
+                <p class="text-muted mb-0">No project resources available.</p>
+            @endif
         </div>
     </div>
 
