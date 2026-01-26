@@ -1,9 +1,3 @@
-
-
-
-
-
-
 <?php
 
 use App\AssignmentFeedback;
@@ -202,6 +196,7 @@ Route::middleware(['role:trainer'])->group(function () {
 
     //assignmnet routes 
     Route::get('/Assignments', [AssignmentController::class, 'index'])->name('assignments');
+    
     Route::get('/Assignment/create', [AssignmentController::class ,'create'])->name('assignment.create');
     Route::post('/asssignment/store', [AssignmentController::class ,'store'])->name('assignment.store');
     Route::get('/assignments/{assignment}', [AssignmentController::class ,'show'])->name('assignment.show');

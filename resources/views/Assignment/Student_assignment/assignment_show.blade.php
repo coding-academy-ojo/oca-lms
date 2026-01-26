@@ -31,9 +31,31 @@
             <button type="button" class="btn-close m-auto my-auto" data-bs-dismiss="alert" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Close"><span class="visually-hidden">Close</span></button>
         </div>
     @endif
+       <div class="row d-flex  ">
+            <div class="col-9">
+            <form action="" method="GET" class="d-flex gap-2">
+                <div class="col-7 d-flex border border-light">
+                    <input type="text" class="form-control border border-white"
+                        placeholder="Search by assignment name or topic" name="search" value="{{ request('search') }}">
+                    <button class="btn rounded-0 btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                </div>
+            
+                {{-- Filter based on technology --}}
+                <select class="form-select" name="technology_id" aria-label="Default select example" onchange="this.form.submit()">
+                    <option value="">All Technologies</option>
+                    @foreach ($technologies as $technology)
+                        <option value="{{ $technology->id }}" {{ request('technology_id') == $technology->id ? 'selected' : '' }}>
+                            {{ $technology->technologies_name }}
+                        </option>
+                    @endforeach
+                </select>
+            </form>
+            </div>
         <div class="m-auto" > 
+                    <h3 class="visually fs-3 text-primary my-3">View Assignments</h3>
+
         <div class="table-responsive card my-3" style="max-height: 400px; overflow-y: auto;">
-        <table class="table table-hover">
+        {{-- <table class="table table-hover">
     <thead>
         <tr class="table-light">
             <th>Assignment Name</th>
@@ -61,10 +83,42 @@
         </tr>
         @endforeach
     </tbody>
-</table>
+</table> --}}
+   <table class="table table-hover ">
+                    {{-- show all assignmnets --}}
+                    
+                    <thead>
+                        <tr>
+                            <th scope="col ">Assignment Name</th>
+                            <th scope="col">Topic Name </th>
+                            <th scope="col">Technology </th>
+                            <th scope="col">Due Date</th>
+                            <th scope="col">Details </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($assignments as $assignment)
+                            <tr>
+                                <td>{{ $assignment->assignment_name }} 
+                             
+                                </td>
+                                <td>{{ optional($assignment->topic)->topic_name }}</td>
+                                <td>
+                                    {{ $assignment->topic->technologyCohort->technology->technologies_name }}
+                                </td>
+                                <td>{{ $assignment->assignment_due_date }}</td>
+                                <td> <a class="mx-2 link-underline link-underline-opacity-0"
+                                        href="{{ route('Student.assignment.show', $assignment->id) }}">view</a>
+                                </td>
+                           
 
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
                 
             </div>
         </div>
+    </div>
     </div>
 @endsection

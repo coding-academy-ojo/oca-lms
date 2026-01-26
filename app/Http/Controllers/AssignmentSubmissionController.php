@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Assignment;
 use App\Student;
+use App\Cohort;
+use App\Technology;
 use Carbon\Carbon;
 
 class AssignmentSubmissionController extends Controller
@@ -16,17 +18,57 @@ class AssignmentSubmissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $studentId = session('student_id');
-        $student = Student::find($studentId);
-        $cohortId = $student->cohort_id;
-        // Retrieve all assignments related to the current student 
-        $assignments = $student->assignment;
-        // dd($assignments);
+    // public function index()
+    // {
+    //     $studentId = session('student_id');
+    //     $student = Student::find($studentId);
+    //     $cohortId = $student->cohort_id;
+    //     // Retrieve all assignments related to the current student 
+    //     $assignments = $student->assignment;
+    //     // dd($assignments);
 
-        return view('Assignment.Student_assignment.assignment_show', compact('assignments'));
-    }
+    //     return view('Assignment.Student_assignment.assignment_show', compact('assignments'));
+    // }
+
+  public function index(Request $request)
+{
+    // Student from session (as you already use)
+    $studentId = session('student_id');
+    $student = Student::findOrFail($studentId);
+
+    // Student's cohort
+    $cohortID = $student->cohort_id;
+    $cohort = Cohort::findOrFail($cohortID);
+
+    // Base query: ONLY assignments in student's cohort
+    $query = Assignment::where('cohort_id', $cohortID);
+
+    $search = $request->input('search');
+
+    $assignments = $query
+        ->when($search, function ($query, $search) {
+            $query->where('assignment_name', 'like', '%' . $search . '%')
+                  ->orWhereHas('topic', function ($topicQuery) use ($search) {
+                      $topicQuery->where('topic_name', 'like', '%' . $search . '%');
+                  });
+        })
+        ->when($request->filled('technology_id'), function ($query) use ($request) {
+            $query->whereHas('topic', function ($topicQuery) use ($request) {
+                $topicQuery->whereHas('technologyCohort', function ($technologyCohortQuery) use ($request) {
+                    $technologyCohortQuery->where('technology_id', $request->technology_id);
+                });
+            });
+        })
+        ->paginate(10);
+
+    // ✅ SAME logic as staff — technologies only from student's cohort
+    $technologies = $cohort->technology;
+
+    return view(
+        'Assignment.Student_assignment.assignment_show',
+        compact('assignments', 'technologies')
+    );
+}
 
     /**
      * Show the form for creating a new resource.
