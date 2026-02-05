@@ -181,10 +181,12 @@ class SingleTraineeProgressController extends Controller
 
     private function getMasterpieceDetails($studentId)
     {
-        
-$details = MasterpieceDetail::with('student')->where('student_id', $studentId)->first();
+        $baseQuery = MasterpieceDetail::with('student')->where('student_id', $studentId);
+        $details = (clone $baseQuery)->whereNull('masterpiece_task_id')->first();
 
- 
+        if (!$details) {
+            $details = (clone $baseQuery)->orderByDesc('created_at')->first();
+        }
 
         return $details;
     }

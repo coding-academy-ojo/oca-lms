@@ -10,14 +10,34 @@ class CreateMasterpieceDetailsTable extends Migration
     {
         Schema::create('masterpiece_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->constrained('students')->onDelete('cascade');
+
+            // Foreign Keys
+            $table->foreignId('student_id')
+                ->constrained('students')
+                ->onDelete('cascade');
+
+            $table->foreignId('masterpiece_task_id')
+                ->nullable()
+                ->constrained('masterpiece_tasks')
+                ->nullOnDelete();
+
+            $table->foreignId('staff_id')
+                ->nullable()
+                ->constrained('staff')
+                ->nullOnDelete();
+
+            // Core fields
             $table->string('project_sector');
-            $table->string('project_name');
-            $table->text('project_description')->nullable();
-            $table->text('wireframe_mockup_link')->nullable();
-            $table->text('presentation_link')->nullable();
-            $table->text('documentation_link')->nullable();
+            $table->string('masterpiece_project_name')->nullable();
+            $table->text('masterpiece_brief')->nullable();
+            $table->string('masterpiece_wireframe_mockup_link')->nullable();
+            $table->string('masterpiece_presentation_link')->nullable();
+            $table->string('masterpiece_documentation_link')->nullable();
             $table->text('github_link')->nullable();
+            $table->string('masterpiece_idea_link')->nullable();
+            $table->string('masterpiece_frontend_link')->nullable();
+            $table->string('masterpiece_full_version_link')->nullable();
+
             $table->timestamps();
         });
     }

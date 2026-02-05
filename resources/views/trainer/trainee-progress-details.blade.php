@@ -312,11 +312,11 @@
                     <dd class="col-sm-9">{{ $masterpiece->project_sector }}</dd>
 
                     <dt class="col-sm-3 my-2">Project Name:</dt>
-                    <dd class="col-sm-9">{{ $masterpiece->project_name }}</dd>
+                    <dd class="col-sm-9">{{ $masterpiece->masterpiece_project_name }}</dd>
 
                     <dt class="col-sm-3 my-2">Description:</dt>
                     <dd class="col-sm-9 text-wrap" style="max-width: 450px;">
-                        {{ $masterpiece->project_description }}
+                        {{ $masterpiece->masterpiece_brief }}
                     </dd>
                 </dl>
             @else
@@ -328,7 +328,7 @@
 
     <div class="card my-4">
         <div class="card-body">
-            <h5 class="card-title text-primary mb-3">Project Resources</h5>
+            <h5 class="card-title text-primary mb-3">Deliverables</h5>
             @if ($masterpiece)
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover text-center w-100 mb-0">
@@ -337,15 +337,63 @@
                                 <th>Wireframe & Mockup Link</th>
                                 <th>Presentation Link</th>
                                 <th>Documentation Link</th>
+                                <th>Idea Link</th>
+                                <th>Frontend Link</th>
+                                <th>Full Version Link</th>
                                 <th>GitHub Link</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><a href="{{ $masterpiece->wireframe_link }}" target="_blank">View</a></td>
-                                <td><a href="{{ $masterpiece->presentation_link }}" target="_blank">View</a></td>
-                                <td><a href="{{ $masterpiece->documentation_link }}" target="_blank">View</a></td>
-                                <td><a href="{{ $masterpiece->github_link }}" target="_blank">View</a></td>
+                                <td>
+                                    @if (!empty($masterpiece->masterpiece_wireframe_mockup_link))
+                                        <a href="{{ $masterpiece->masterpiece_wireframe_mockup_link }}" target="_blank">View</a>
+                                    @else
+                                        -
+                                    @endif
+                                </td>
+                                <td>
+                                    @if (!empty($masterpiece->masterpiece_presentation_link))
+                                        <a href="{{ $masterpiece->masterpiece_presentation_link }}" target="_blank">View</a>
+                                    @else
+                                        -
+                                    @endif
+                                </td>
+                                <td>
+                                    @if (!empty($masterpiece->masterpiece_documentation_link))
+                                        <a href="{{ $masterpiece->masterpiece_documentation_link }}" target="_blank">View</a>
+                                    @else
+                                        -
+                                    @endif
+                                </td>
+                                <td>
+                                    @if (!empty($masterpiece->masterpiece_idea_link))
+                                        <a href="{{ $masterpiece->masterpiece_idea_link }}" target="_blank">View</a>
+                                    @else
+                                        -
+                                    @endif
+                                </td>
+                                <td>
+                                    @if (!empty($masterpiece->masterpiece_frontend_link))
+                                        <a href="{{ $masterpiece->masterpiece_frontend_link }}" target="_blank">View</a>
+                                    @else
+                                        -
+                                    @endif
+                                </td>
+                                <td>
+                                    @if (!empty($masterpiece->masterpiece_full_version_link))
+                                        <a href="{{ $masterpiece->masterpiece_full_version_link }}" target="_blank">View</a>
+                                    @else
+                                        -
+                                    @endif
+                                </td>
+                                <td>
+                                    @if (!empty($masterpiece->github_link))
+                                        <a href="{{ $masterpiece->github_link }}" target="_blank">View</a>
+                                    @else
+                                        -
+                                    @endif
+                                </td>
                             </tr>
                         </tbody>
                     </table>

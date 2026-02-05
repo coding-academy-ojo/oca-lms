@@ -419,12 +419,15 @@ class TraineesProgressController extends Controller
                 return [
                     'student_id' => $s->id,
                     'student_name' => trim(($s->en_first_name ?? '') . ' ' . ($s->en_last_name ?? '')),
-                    'sector' => null,
-                    'description' => null,
-                    'project_name' => null,
-                    'wireframe_mockup_link' => null,
-                    'presentation_link' => null,
-                    'documentation_link' => null,
+                    'project_sector' => null,
+                    'masterpiece_brief' => null,
+                    'masterpiece_project_name' => null,
+                    'masterpiece_wireframe_mockup_link' => null,
+                    'masterpiece_presentation_link' => null,
+                    'masterpiece_documentation_link' => null,
+                    'masterpiece_idea_link' => null,
+                    'masterpiece_frontend_link' => null,
+                    'masterpiece_full_version_link' => null,
                     'github_link' => null,
                 ];
             })->toArray();
@@ -444,12 +447,15 @@ class TraineesProgressController extends Controller
                 return [
                     'student_id',
                     'student_name',
-                    'sector',
-                    'description',
-                    'project_name',
-                    'wireframe_mockup_link',
-                    'presentation_link',
-                    'documentation_link',
+                    'project_sector',
+                    'masterpiece_brief',
+                    'masterpiece_project_name',
+                    'masterpiece_wireframe_mockup_link',
+                    'masterpiece_presentation_link',
+                    'masterpiece_documentation_link',
+                    'masterpiece_idea_link',
+                    'masterpiece_frontend_link',
+                    'masterpiece_full_version_link',
                     'github_link'
                 ];
             }

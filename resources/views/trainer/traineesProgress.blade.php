@@ -298,7 +298,7 @@
             <hr>
             <p class="small text-muted mb-0">
                 <strong>Masterpiece Details columns:</strong>
-                student_id | student_name | sector | description | project_name | wireframe_mockup_link | presentation_link | documentation_link | github_link
+                student_id | student_name | project_sector | masterpiece_brief | masterpiece_project_name | masterpiece_wireframe_mockup_link | masterpiece_presentation_link | masterpiece_documentation_link | masterpiece_idea_link | masterpiece_frontend_link | masterpiece_full_version_link | github_link
             </p>
             <p class="small text-muted">
                 <strong>Masterpiece Progress columns:</strong>

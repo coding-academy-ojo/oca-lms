@@ -28,7 +28,11 @@ public function exportPdf(Request $request, $studentId)
     }
 
     // Masterpiece details
-    $details = MasterpieceDetail::where('student_id', $student->id)->first();
+    $baseQuery = MasterpieceDetail::where('student_id', $student->id);
+    $details = (clone $baseQuery)->whereNull('masterpiece_task_id')->first();
+    if (!$details) {
+        $details = (clone $baseQuery)->orderByDesc('created_at')->first();
+    }
 
     // ---------- Mentors (checkbox selection) ----------
     $selectedMentorIds = collect((array) $request->input('selected_staff_ids', []))

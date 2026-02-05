@@ -12,6 +12,7 @@ use App\TraineeSkillsProgress;
 use App\Project;
 use App\MasterpieceProgress;
 use App\MasterpieceTask;
+use App\MasterpieceDetail;
 
 class StudentDashboardController extends Controller
 {
@@ -25,9 +26,20 @@ class StudentDashboardController extends Controller
         $assignmentsStatus = $this->getAssignmentsStatus($student->id);
         $studentProjects = $this->getStudentProjects($student->id);
         $studentMasterpieceEntries = $this->getStudentasterpieceProgressEntries($student->id);
+        $masterpieceDetails = $this->getMasterpieceDetails($student->id);
        
         
-        return view('student.dashboard', compact('student', 'justifiedAbsencesCount', 'nonJustifiedAbsencesCount', 'justifiedLateCount', 'nonJustifiedLateCount', 'assignmentsStatus', 'studentProjects', 'studentMasterpieceEntries'));
+        return view('student.dashboard', compact(
+            'student',
+            'justifiedAbsencesCount',
+            'nonJustifiedAbsencesCount',
+            'justifiedLateCount',
+            'nonJustifiedLateCount',
+            'assignmentsStatus',
+            'studentProjects',
+            'studentMasterpieceEntries',
+            'masterpieceDetails'
+        ));
     }
 
     private function countJustifiedAbsences($studentId)
@@ -130,4 +142,16 @@ class StudentDashboardController extends Controller
         return $progressEntries;
     
 }
+
+    private function getMasterpieceDetails($studentId)
+    {
+        $baseQuery = MasterpieceDetail::with('student')->where('student_id', $studentId);
+        $details = (clone $baseQuery)->whereNull('masterpiece_task_id')->first();
+
+        if (!$details) {
+            $details = (clone $baseQuery)->orderByDesc('created_at')->first();
+        }
+
+        return $details;
+    }
 }

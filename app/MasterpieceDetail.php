@@ -14,4 +14,14 @@ class MasterpieceDetail extends Model
     {
         return $this->belongsTo(Student::class);
     }
+
+    public function task()
+    {
+        return $this->belongsTo(MasterpieceTask::class, 'masterpiece_task_id');
+    }
+
+    public function staff()
+    {
+        return $this->belongsTo(Staff::class);
+    }
 }

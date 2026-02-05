@@ -208,11 +208,11 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
         </tr>
         <tr>
             <td class="details-label">Project Name:</td>
-            <td class="wrap">{{ !empty($details) ? ($details->project_name ?? 'N/A') : 'N/A' }}</td>
+            <td class="wrap">{{ !empty($details) ? ($details->masterpiece_project_name ?? 'N/A') : 'N/A' }}</td>
         </tr>
         <tr>
             <td class="details-label">Description:</td>
-            <td class="wrap">{{ !empty($details) ? ($details->project_description ?? 'N/A') : 'N/A' }}</td>
+            <td class="wrap">{{ !empty($details) ? ($details->masterpiece_brief ?? 'N/A') : 'N/A' }}</td>
         </tr>
     </table>
 

@@ -30,6 +30,7 @@ use App\Http\Controllers\AbsenceReportController;
 use App\Http\Controllers\SoftSkillsTrainingController;
 use App\Http\Controllers\SingleTraineeProgressController;
 use App\Http\Controllers\MasterpieceController;
+use App\Http\Controllers\MasterpieceDeliverableController;
 use App\Http\Controllers\ImportDataController;
 use App\Http\Controllers\technologySatisfactionController;
 use App\Http\Controllers\MasterpieceDetailController;
@@ -188,6 +189,20 @@ Route::middleware(['role:student'])->group(function () {
    
     //Dashboard 
     Route::get('/student-dashboard', [StudentDashboardController::class, 'index'])->name('student.dashboard');
+
+    // Masterpiece Deliverables (student CRUD)
+    Route::get('/student/masterpiece-deliverables', [MasterpieceDeliverableController::class, 'index'])
+        ->name('student.masterpiece.deliverables.index');
+    Route::get('/student/masterpiece-deliverables/create', [MasterpieceDeliverableController::class, 'create'])
+        ->name('student.masterpiece.deliverables.create');
+    Route::post('/student/masterpiece-deliverables', [MasterpieceDeliverableController::class, 'store'])
+        ->name('student.masterpiece.deliverables.store');
+    Route::get('/student/masterpiece-deliverables/{deliverable}/edit', [MasterpieceDeliverableController::class, 'edit'])
+        ->name('student.masterpiece.deliverables.edit');
+    Route::put('/student/masterpiece-deliverables/{deliverable}', [MasterpieceDeliverableController::class, 'update'])
+        ->name('student.masterpiece.deliverables.update');
+    Route::delete('/student/masterpiece-deliverables/{deliverable}', [MasterpieceDeliverableController::class, 'destroy'])
+        ->name('student.masterpiece.deliverables.destroy');
 });
 Route::get('/download/{filename}', [AssignmentController::class, 'downloads'])->name('download');
 
