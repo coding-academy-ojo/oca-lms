@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Absence;
-use App\Academy;
-use App\Cohort;
-use App\Student;
+use App\Models\Absence;
+use App\Models\Academy;
+use App\Models\Cohort;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -137,7 +137,7 @@ class AbsenceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Absence  $absence
+     * @param  \App\Models\Absence  $absence
      * @return \Illuminate\Http\Response
      */
     public function show(Absence $absence)
@@ -148,7 +148,7 @@ class AbsenceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Absence  $absence
+     * @param  \App\Models\Absence  $absence
      * @return \Illuminate\Http\Response
      */
     public function edit(Absence $absence)
@@ -160,7 +160,7 @@ class AbsenceController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Absence  $absence
+     * @param  \App\Models\Absence  $absence
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Absence $absence)
@@ -171,7 +171,7 @@ class AbsenceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Absence  $absence
+     * @param  \App\Models\Absence  $absence
      * @return \Illuminate\Http\Response
      */
     public function destroy(Absence $absence)
@@ -226,3 +226,5 @@ class AbsenceController extends Controller
     
     
 }
+
+

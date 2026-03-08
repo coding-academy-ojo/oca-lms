@@ -40,3 +40,4 @@ public function up()
         Schema::dropIfExists('assignment_submissions');
     }
 }
+

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\MasterpieceDetail;
-use App\MasterpieceTask;
+use App\Models\MasterpieceDetail;
+use App\Models\MasterpieceTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -213,4 +213,6 @@ class MasterpieceDeliverableController extends Controller
             ->get();
     }
 }
+
+
 

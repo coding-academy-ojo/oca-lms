@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\SoftSkillsTraining;
+use App\Models\SoftSkillsTraining;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -64,7 +64,7 @@ class SoftSkillsTrainingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\SoftSkillsTraining  $softSkillsTraining
+     * @param  \App\Models\SoftSkillsTraining  $softSkillsTraining
      * @return \Illuminate\Http\Response
      */
     public function show(SoftSkillsTraining $softSkillsTraining)
@@ -75,7 +75,7 @@ class SoftSkillsTrainingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\SoftSkillsTraining  $softSkillsTraining
+     * @param  \App\Models\SoftSkillsTraining  $softSkillsTraining
      * @return \Illuminate\Http\Response
      */
     public function edit(SoftSkillsTraining $softSkillsTraining)
@@ -93,7 +93,7 @@ class SoftSkillsTrainingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\SoftSkillsTraining  $softSkillsTraining
+     * @param  \App\Models\SoftSkillsTraining  $softSkillsTraining
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, SoftSkillsTraining $softSkillsTraining)
@@ -114,7 +114,7 @@ class SoftSkillsTrainingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\SoftSkillsTraining  $softSkillsTraining
+     * @param  \App\Models\SoftSkillsTraining  $softSkillsTraining
      * @return \Illuminate\Http\Response
      */
     public function destroy(SoftSkillsTraining $softSkillsTraining)
@@ -123,3 +123,5 @@ class SoftSkillsTrainingController extends Controller
         return redirect()->route('soft-skills.index')->with('success','Soft Skills Training deleted successfully');
     }
 }
+
+

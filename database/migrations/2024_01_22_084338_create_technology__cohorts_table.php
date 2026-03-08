@@ -37,3 +37,4 @@ class CreateTechnologyCohortsTable extends Migration
         Schema::dropIfExists('technology__cohorts');
     }
 }
+

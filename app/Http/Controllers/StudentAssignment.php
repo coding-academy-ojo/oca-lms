@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Assignment;
+use App\Models\Assignment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\AssignmentSubmission;
-use App\Student;
+use App\Models\AssignmentSubmission;
+use App\Models\Student;
 
 class StudentAssignment extends Controller
 {
@@ -56,7 +56,7 @@ class StudentAssignment extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Notification  $notification
+     * @param  \App\Models\Notification  $notification
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -69,7 +69,7 @@ class StudentAssignment extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Notification  $notification
+     * @param  \App\Models\Notification  $notification
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -81,7 +81,7 @@ class StudentAssignment extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Notification  $notification
+     * @param  \App\Models\Notification  $notification
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
@@ -92,7 +92,7 @@ class StudentAssignment extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Notification  $notification
+     * @param  \App\Models\Notification  $notification
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -100,3 +100,4 @@ class StudentAssignment extends Controller
         //
     }
 }
+

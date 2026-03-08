@@ -44,3 +44,4 @@ class CreateAssignmentsTable extends Migration
         Schema::dropIfExists('assignments');
     }
 }
+

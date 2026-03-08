@@ -8,23 +8,23 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use App\Skill;
-use App\Assignment;
-use App\Assignment_Student;
-use App\AssignmentSubmission;
-use App\Cohort;
-use App\Level;
-use App\Student;
-use App\TraineeSkillsProgress;
-use App\Project;
+use App\Models\Skill;
+use App\Models\Assignment;
+use App\Models\Assignment_Student;
+use App\Models\AssignmentSubmission;
+use App\Models\Cohort;
+use App\Models\Level;
+use App\Models\Student;
+use App\Models\TraineeSkillsProgress;
+use App\Models\Project;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithTitle;
-use App\MasterpieceDetail;
-use App\MasterpieceProgress;
-use App\MasterpieceTask;
+use App\Models\MasterpieceDetail;
+use App\Models\MasterpieceProgress;
+use App\Models\MasterpieceTask;
 
 class TraineesProgressController extends Controller
 {
@@ -562,3 +562,4 @@ class TraineesProgressController extends Controller
 
 
 }
+

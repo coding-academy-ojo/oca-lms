@@ -30,3 +30,4 @@ class CreateTechnologyCategoriesTable extends Migration
         Schema::dropIfExists('technology_categories');
     }
 }
+

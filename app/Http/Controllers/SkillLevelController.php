@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\SkillLevel;
-use App\Skill;
+use App\Models\SkillLevel;
+use App\Models\Skill;
 use Illuminate\Http\Request;
 
 class SkillLevelController extends Controller
@@ -67,3 +67,5 @@ class SkillLevelController extends Controller
             ->with('success', 'Skill level added successfully!');
     }
 }
+
+

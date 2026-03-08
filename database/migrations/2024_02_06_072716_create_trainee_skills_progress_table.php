@@ -35,3 +35,4 @@ class CreateTraineeSkillsProgressTable extends Migration
         Schema::dropIfExists('trainee_skills_progress');
     }
 }
+

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Announcement;
+use App\Models\Announcement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Absence;
-use App\Student;
+use App\Models\Absence;
+use App\Models\Student;
 use Illuminate\Support\Facades\DB;
 
 
@@ -99,3 +99,4 @@ class AnnouncementController extends Controller
         return back();
     }
 }
+

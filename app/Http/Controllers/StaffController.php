@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Staff;
-use App\Academy;
+use App\Models\Staff;
+use App\Models\Academy;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Arr;
 
@@ -202,3 +202,5 @@ class StaffController extends Controller
         return redirect()->route('staff.index')->with('success', 'Staff member deleted successfully.');
     }
 }
+
+

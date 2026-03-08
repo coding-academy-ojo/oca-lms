@@ -88,3 +88,4 @@ class CreateStudentTable extends Migration
         Schema::dropIfExists('student');
     }
 }
+

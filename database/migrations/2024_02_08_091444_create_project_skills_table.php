@@ -36,3 +36,4 @@ class CreateProjectSkillsTable extends Migration
         Schema::dropIfExists('project_skills_levels');
     }
 }
+

@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Absence;
-use App\Assignment;
-use App\AssignmentSubmission;
-use App\Cohort;
-use App\Student;
-use App\Technology;
-use App\Technology_Cohort;
-use App\Topic;
+use App\Models\Absence;
+use App\Models\Assignment;
+use App\Models\AssignmentSubmission;
+use App\Models\Cohort;
+use App\Models\Student;
+use App\Models\Technology;
+use App\Models\Technology_Cohort;
+use App\Models\Topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -119,7 +119,7 @@ class AssignmentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Assignment  $assignment
+     * @param  \App\Models\Assignment  $assignment
      * @return \Illuminate\Http\Response
      */
     // public function show($id)
@@ -171,7 +171,7 @@ class AssignmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Assignment  $assignment
+     * @param  \App\Models\Assignment  $assignment
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -198,7 +198,7 @@ class AssignmentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Assignment  $assignment
+     * @param  \App\Models\Assignment  $assignment
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Assignment $assignment)
@@ -249,7 +249,7 @@ class AssignmentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Assignment  $assignment
+     * @param  \App\Models\Assignment  $assignment
      * @return \Illuminate\Http\Response
      */
 
@@ -282,3 +282,5 @@ class AssignmentController extends Controller
     }
     
 }
+
+

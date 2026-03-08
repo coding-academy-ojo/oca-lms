@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Technology_Cohort;
-use App\Technology;
-use App\StaffCohort;
-use App\TechnologyCategory;
+use App\Models\Technology_Cohort;
+use App\Models\Technology;
+use App\Models\StaffCohort;
+use App\Models\TechnologyCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -133,7 +133,7 @@ class TechnologyCohortController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Technology_Cohort  $technology_Cohort
+     * @param  \App\Models\Technology_Cohort  $technology_Cohort
      * @return \Illuminate\Http\Response
      */
     public function show(TechnologyCategory $category)
@@ -156,7 +156,7 @@ class TechnologyCohortController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Technology_Cohort  $technology_Cohort
+     * @param  \App\Models\Technology_Cohort  $technology_Cohort
      * @return \Illuminate\Http\Response
      */
     public function edit(Request $ID)
@@ -172,7 +172,7 @@ class TechnologyCohortController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Technology_Cohort  $technology_Cohort
+     * @param  \App\Models\Technology_Cohort  $technology_Cohort
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
@@ -203,7 +203,7 @@ class TechnologyCohortController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Technology_Cohort  $technology_Cohort
+     * @param  \App\Models\Technology_Cohort  $technology_Cohort
      * @return \Illuminate\Http\Response
      */
     public function destroy(Technology_Cohort $technology_Cohort)
@@ -211,3 +211,5 @@ class TechnologyCohortController extends Controller
         //
     }
 }
+
+

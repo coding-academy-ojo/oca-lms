@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\ProjectSubmission;
+use App\Models\ProjectSubmission;
 use Illuminate\Http\Request;
 
 class ProjectSubmissionController extends Controller
@@ -41,7 +41,7 @@ class ProjectSubmissionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ProjectSubmission  $projectSubmission
+     * @param  \App\Models\ProjectSubmission  $projectSubmission
      * @return \Illuminate\Http\Response
      */
     public function show(ProjectSubmission $projectSubmission)
@@ -52,7 +52,7 @@ class ProjectSubmissionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ProjectSubmission  $projectSubmission
+     * @param  \App\Models\ProjectSubmission  $projectSubmission
      * @return \Illuminate\Http\Response
      */
     public function edit(ProjectSubmission $projectSubmission)
@@ -64,7 +64,7 @@ class ProjectSubmissionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ProjectSubmission  $projectSubmission
+     * @param  \App\Models\ProjectSubmission  $projectSubmission
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, ProjectSubmission $projectSubmission)
@@ -75,7 +75,7 @@ class ProjectSubmissionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ProjectSubmission  $projectSubmission
+     * @param  \App\Models\ProjectSubmission  $projectSubmission
      * @return \Illuminate\Http\Response
      */
     public function destroy(ProjectSubmission $projectSubmission)
@@ -83,3 +83,5 @@ class ProjectSubmissionController extends Controller
         //
     }
 }
+
+

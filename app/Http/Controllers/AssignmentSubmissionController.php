@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\AssignmentSubmission;
+use App\Models\AssignmentSubmission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Assignment;
-use App\Student;
-use App\Cohort;
-use App\Technology;
+use App\Models\Assignment;
+use App\Models\Student;
+use App\Models\Cohort;
+use App\Models\Technology;
 use Carbon\Carbon;
 
 class AssignmentSubmissionController extends Controller
@@ -61,7 +61,7 @@ class AssignmentSubmissionController extends Controller
         })
         ->paginate(10);
 
-    // ✅ SAME logic as staff — technologies only from student's cohort
+    // Ã¢Å“â€¦ SAME logic as staff Ã¢â‚¬â€ technologies only from student's cohort
     $technologies = $cohort->technology;
 
     return view(
@@ -119,7 +119,7 @@ class AssignmentSubmissionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\AssignmentSubmission  $assignmentSubmission
+     * @param  \App\Models\AssignmentSubmission  $assignmentSubmission
      * @return \Illuminate\Http\Response
      */
 
@@ -141,7 +141,7 @@ class AssignmentSubmissionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\AssignmentSubmission  $assignmentSubmission
+     * @param  \App\Models\AssignmentSubmission  $assignmentSubmission
      * @return \Illuminate\Http\Response
      */
     public function edit(AssignmentSubmission $assignmentSubmission)
@@ -153,7 +153,7 @@ class AssignmentSubmissionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\AssignmentSubmission  $assignmentSubmission
+     * @param  \App\Models\AssignmentSubmission  $assignmentSubmission
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $assignment)
@@ -179,7 +179,7 @@ class AssignmentSubmissionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\AssignmentSubmission  $assignmentSubmission
+     * @param  \App\Models\AssignmentSubmission  $assignmentSubmission
      * @return \Illuminate\Http\Response
      */
     public function destroy(AssignmentSubmission $assignmentSubmission)
@@ -187,3 +187,4 @@ class AssignmentSubmissionController extends Controller
         //
     }
 }
+

@@ -36,3 +36,4 @@ class CreateAbsencesTable extends Migration
         Schema::dropIfExists('absences');
     }
 }
+

@@ -30,3 +30,4 @@ class CreateLevelsTable extends Migration
         Schema::dropIfExists('levels');
     }
 }
+

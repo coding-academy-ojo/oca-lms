@@ -43,3 +43,4 @@ class CreateMasterpieceDeliverablesTable extends Migration
         Schema::dropIfExists('masterpiece_deliverables');
     }
 }
+

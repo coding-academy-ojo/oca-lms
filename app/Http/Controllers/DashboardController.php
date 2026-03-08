@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Staff;
-use App\Student;
+use App\Models\Staff;
+use App\Models\Student;
 
 class DashboardController extends Controller
 {
@@ -43,3 +43,5 @@ class DashboardController extends Controller
         }
     }
 }
+
+

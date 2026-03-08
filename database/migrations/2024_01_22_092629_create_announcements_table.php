@@ -36,3 +36,4 @@ class CreateAnnouncementsTable extends Migration
         Schema::dropIfExists('announcements');
     }
 }
+

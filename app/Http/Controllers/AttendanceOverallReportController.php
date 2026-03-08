@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Cohort;
-use App\Student;
-use App\Absence;
+use App\Models\Cohort;
+use App\Models\Student;
+use App\Models\Absence;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -99,7 +99,7 @@ class AttendanceOverallReportController extends Controller
         // Optional intro from request
         $introduction = trim((string) $request->query('introduction', ''));
         if ($introduction === '') {
-            $introduction = 'This report provides a comprehensive summary of the cohort’s overall attendance and participation throughout the training period. It consolidates key data including total working days, attendance records, absence trends. The purpose of this report is to present a clear overview of attendance performance and highlight patterns that can support performance evaluation, and future program planning.';
+            $introduction = 'This report provides a comprehensive summary of the cohortÃ¢â‚¬â„¢s overall attendance and participation throughout the training period. It consolidates key data including total working days, attendance records, absence trends. The purpose of this report is to present a clear overview of attendance performance and highlight patterns that can support performance evaluation, and future program planning.';
         }
 
         $data = [
@@ -149,3 +149,5 @@ class AttendanceOverallReportController extends Controller
         return $total;
     }
 }
+
+

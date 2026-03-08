@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Cohort;
+use App\Models\Cohort;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Student;
-use App\Academy;
-use App\Staff;
+use App\Models\Student;
+use App\Models\Academy;
+use App\Models\Staff;
 use Session;
 
 class CohortController extends Controller
@@ -236,3 +236,5 @@ public function index(Request $request, $academyId = null)
 
 
 }
+
+

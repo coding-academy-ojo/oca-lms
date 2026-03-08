@@ -78,11 +78,11 @@ return [
         ],
         'staff' => [ 
             'driver' => 'eloquent',
-            'model' => App\Staff::class, 
+            'model' => App\Models\Staff::class, 
         ],
         'students' => [ 
             'driver' => 'eloquent',
-            'model' => App\Student::class, 
+            'model' => App\Models\Student::class, 
         ],
     
         // 'users' => [

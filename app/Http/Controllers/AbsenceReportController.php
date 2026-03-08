@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Student;
-use App\Absence;
-use App\Cohort;
+use App\Models\Student;
+use App\Models\Absence;
+use App\Models\Cohort;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -201,10 +201,10 @@ class AbsenceReportController extends Controller
                 $totalCohortDays = (int) $this->calculateCohortDays($cohort);
             }
 
-            // ✅ Attendance = (cohort days - absent days)
+            // Ã¢Å“â€¦ Attendance = (cohort days - absent days)
             $attendedDays = max(0, $totalCohortDays - $totalAbsent);
 
-            // ✅ Attendance % (avoid division by zero, clamp 0..100)
+            // Ã¢Å“â€¦ Attendance % (avoid division by zero, clamp 0..100)
             $attendancePercentage = 0.0;
             if ($totalCohortDays > 0) {
                 $attendancePercentage = round(($attendedDays / $totalCohortDays) * 100, 1);
@@ -289,3 +289,5 @@ class AbsenceReportController extends Controller
         }
     }
 }
+
+

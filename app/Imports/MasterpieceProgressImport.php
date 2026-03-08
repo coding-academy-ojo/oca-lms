@@ -2,9 +2,9 @@
 
 namespace App\Imports;
 
-use App\Student;
-use App\MasterpieceProgress;
-use App\MasterpieceTask;
+use App\Models\Student;
+use App\Models\MasterpieceProgress;
+use App\Models\MasterpieceTask;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -82,3 +82,4 @@ class MasterpieceProgressImport implements ToModel, WithHeadingRow
         return $this->errors;
     }
 }
+

@@ -35,3 +35,4 @@ class CreateMasterpieceProgressTaskTable extends Migration
         Schema::dropIfExists('_masterpiece_progress_task');
     }
 }
+

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Assignment;
-use App\AssignmentFeedback;
-use App\AssignmentSubmission;
+use App\Models\Assignment;
+use App\Models\AssignmentFeedback;
+use App\Models\AssignmentSubmission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -71,7 +71,7 @@ class AssignmentFeedbackController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\AssignmentFeedback  $assignmentFeedback
+     * @param  \App\Models\AssignmentFeedback  $assignmentFeedback
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -95,7 +95,7 @@ class AssignmentFeedbackController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\AssignmentFeedback  $assignmentFeedback
+     * @param  \App\Models\AssignmentFeedback  $assignmentFeedback
      * @return \Illuminate\Http\Response
      */
     public function edit(AssignmentFeedback $assignmentFeedback)
@@ -107,7 +107,7 @@ class AssignmentFeedbackController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\AssignmentFeedback  $assignmentFeedback
+     * @param  \App\Models\AssignmentFeedback  $assignmentFeedback
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, AssignmentFeedback $assignmentFeedback)
@@ -118,7 +118,7 @@ class AssignmentFeedbackController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\AssignmentFeedback  $assignmentFeedback
+     * @param  \App\Models\AssignmentFeedback  $assignmentFeedback
      * @return \Illuminate\Http\Response
      */
     public function destroy(AssignmentFeedback $assignmentFeedback)
@@ -126,3 +126,5 @@ class AssignmentFeedbackController extends Controller
         //
     }
 }
+
+

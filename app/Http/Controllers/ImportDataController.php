@@ -2,13 +2,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Cohort;
-use App\TechnologyCategory;
+use App\Models\Cohort;
+use App\Models\TechnologyCategory;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\StudentsImport;
 use App\Imports\SoftSkillsTrainingsImport;
 use App\Imports\TechnologiesImport;
-use App\Topic;
+use App\Models\Topic;
 use App\Imports\AssignmentsImport;
 
 class ImportDataController extends Controller
@@ -110,3 +110,5 @@ public function importTechnologies(Request $request, $cohortId)
     }
     
 }
+
+

@@ -1,6 +1,6 @@
 <?php
 
-use App\AssignmentFeedback;
+use App\Models\AssignmentFeedback;
 use App\Http\Controllers\AcademyController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\AssignmentFeedbackController;
@@ -34,6 +34,8 @@ use App\Http\Controllers\MasterpieceDeliverableController;
 use App\Http\Controllers\ImportDataController;
 use App\Http\Controllers\technologySatisfactionController;
 use App\Http\Controllers\MasterpieceDetailController;
+use App\Http\Controllers\SkillLevelController;
+use App\Http\Controllers\AttendanceOverallReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,8 +67,8 @@ Route::get('/login',  [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 // students login
-Route::get('/login/student', 'AuthController@showStudentLoginForm')->name('student.login.form');
-Route::post('/login/student', 'AuthController@studentLogin')->name('student.login');
+Route::get('/login/student', [AuthController::class, 'showStudentLoginForm'])->name('student.login.form');
+Route::post('/login/student', [AuthController::class, 'studentLogin'])->name('student.login');
 
 
 // announcements routes
@@ -103,7 +105,7 @@ Route::get('/absence/export/pdf/{studentId}', [AbsenceReportController::class, '
 Route::get('/absence-report/{cohort_id?}', [AbsenceReportController::class, 'index'])->name('absence');
 Route::post('/absence/upload/{absence_id}', [AbsenceReportController::class,'UploudAbsenceReport'])->name('absence.upload');
 Route::get('/absence/{absence_id}/download', [AbsenceReportController::class,'downloadAbsenceReport'])->name('absence.download');
-Route::get('students/{studentId}/absence', 'AbsenceReportController@show')->name('spacificUserReport');
+Route::get('students/{studentId}/absence', [AbsenceReportController::class, 'show'])->name('spacificUserReport');
 
 //START Academeies  gruop routes ///////
 Route::get('/academies', [AcademyController::class, 'index'])->name('academies');
@@ -153,16 +155,16 @@ Route::put('/update_project/{id}', [ProjectController::class, 'updateProject'])-
 
 // Project Brief
 Route::get('/project_brief/{id}', [ProjectController::class, 'showProjectBrief'])->name('project_brief');
-Route::get('/filter-projects', 'ProjectController@filterProjects')->name('filter_projects');
-Route::get('/assign-students/{projectId}', 'ProjectController@assignStudents')->name('assign_students');
-Route::post('/assign-students/{projectId}', 'ProjectController@assignStudents')->name('assign_students');
+Route::get('/filter-projects', [ProjectController::class, 'filterProjects'])->name('filter_projects');
+Route::get('/assign-students/{projectId}', [ProjectController::class, 'assignStudents'])->name('assign_students');
+Route::post('/assign-students/{projectId}', [ProjectController::class, 'assignStudents'])->name('assign_students');
 //Route::post('/projects/{id}/assign-students', [ProjectController::class, 'assignStudents']);
 
 // Process form submission
-Route::post('/process_project_submission/{project_id}', 'ProjectController@processProjectSubmission')->name('process_project_submission');
-Route::get('/view_project_submissions/{project_id}', 'ProjectController@viewProjectSubmissions')->name('view_project_submissions');
-Route::post('/process_feedback/{submission_id}', 'ProjectController@processFeedback')->name('process_feedback');
-Route::get('/view_submissions_feedback/{project_id}', 'ProjectController@viewSubmissionsAndFeedback')->name('view_submissions_feedback');
+Route::post('/process_project_submission/{project_id}', [ProjectController::class, 'processProjectSubmission'])->name('process_project_submission');
+Route::get('/view_project_submissions/{project_id}', [ProjectController::class, 'viewProjectSubmissions'])->name('view_project_submissions');
+Route::post('/process_feedback/{submission_id}', [ProjectController::class, 'processFeedback'])->name('process_feedback');
+Route::get('/view_submissions_feedback/{project_id}', [ProjectController::class, 'viewSubmissionsAndFeedback'])->name('view_submissions_feedback');
 
 
 
@@ -185,7 +187,7 @@ Route::middleware(['role:student'])->group(function () {
     
 
     // Show modal
-    Route::get('/add_project_submission_modal/{project_id}', 'ProjectController@showAddProjectSubmissionModal')->name('show_add_project_submission_modal');
+    Route::get('/add_project_submission_modal/{project_id}', [ProjectController::class, 'showAddProjectSubmissionModal'])->name('show_add_project_submission_modal');
    
     //Dashboard 
     Route::get('/student-dashboard', [StudentDashboardController::class, 'index'])->name('student.dashboard');
@@ -232,7 +234,7 @@ Route::middleware(['role:trainer'])->group(function () {
     // Edit Project Skills Level
     Route::get('/edit_project_skills_level/{id}', [ProjectController::class, 'editProjectSkillsLevel'])->name('edit_project_skills_level');
     Route::put('/update_project_skills_level/{id}', [ProjectController::class, 'updateProjectSkillsLevel'])->name('update_project_skills_level');
-    Route::post('/update-project-status/{projectId}/{studentId}', 'ProjectController@updateProjectStatus')->name('update_project_status');
+    Route::post('/update-project-status/{projectId}/{studentId}', [ProjectController::class, 'updateProjectStatus'])->name('update_project_status');
 
     // Edit Project Skills Level
     Route::get('/edit_project_skills_level/{id}', [ProjectController::class, 'editProjectSkillsLevel'])->name('edit_project_skills_level');
@@ -255,7 +257,7 @@ Route::middleware(['role:trainer'])->group(function () {
     Route::get('/technologies/{technology}/edit', [TechnologyController::class, 'edit'])->name('technology.edit');
     Route::put('/technologies/{technology}/update', [TechnologyController::class, 'update'])->name('technology.update');
     Route::delete('/technologies/technology/{technology}', [TechnologyController::class, 'destroy'])->name('technology.destroy');
-    Route::post('/technology/addToCohort', 'TechnologyCohortController@addToCohort')->name('technology.addToCohort');
+    Route::post('/technology/addToCohort', [TechnologyCohortController::class, 'addToCohort'])->name('technology.addToCohort');
     Route::get('/Roadmap/edit', [TechnologyCohortController::class, 'edit'])->name('Roadmap.edit');
     Route::put('/Roadmap/update', [TechnologyCohortController::class, 'update'])->name('Roadmap.update');
 
@@ -274,9 +276,9 @@ Route::middleware(['role:trainer'])->group(function () {
 
     // Update skill
     Route::put('/skills/{id}/update', [SkillController::class, 'update'])->name('updateSkill');
-    Route::get('editSkillsLevel/{skill}/edit', 'SkillLevelController@edit')->name('editSkillLevel');
-    Route::put('/updateSkillLevel/{level}/update', 'SkillLevelController@update')->name('updateSkillLevel');
-    Route::put('/updateSkillLevel/store', 'SkillLevelController@store')->name('storeSkillLevel');
+    Route::get('editSkillsLevel/{skill}/edit', [SkillLevelController::class, 'edit'])->name('editSkillLevel');
+    Route::put('/updateSkillLevel/{level}/update', [SkillLevelController::class, 'update'])->name('updateSkillLevel');
+    Route::put('/updateSkillLevel/store', [SkillLevelController::class, 'store'])->name('storeSkillLevel');
     
     // soft skills
     Route::get('soft-skills', [SoftSkillsTrainingController::class, 'index'])->name('soft-skills.index');
@@ -353,5 +355,5 @@ Route::post('/masterpiece/export/pdf/{studentId}', [MasterpieceReportController:
     ->name('masterpiece.export.pdf');
 
 
-Route::get('/attendance/overall/export', 'AttendanceOverallReportController@exportPdf')
+Route::get('/attendance/overall/export', [AttendanceOverallReportController::class, 'exportPdf'])
     ->name('attendance.overall.export.pdf');

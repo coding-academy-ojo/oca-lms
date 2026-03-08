@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Staff;
+use App\Models\Staff;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -117,3 +117,5 @@ public function studentLogin(Request $request)
 }
     
 }
+
+

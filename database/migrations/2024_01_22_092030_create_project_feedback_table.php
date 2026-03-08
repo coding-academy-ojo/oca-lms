@@ -36,3 +36,4 @@ class CreateProjectFeedbackTable extends Migration
         Schema::dropIfExists('project_feedback');
     }
 }
+

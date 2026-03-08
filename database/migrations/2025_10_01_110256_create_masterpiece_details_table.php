@@ -47,3 +47,4 @@ class CreateMasterpieceDetailsTable extends Migration
         Schema::dropIfExists('masterpiece_details');
     }
 }
+

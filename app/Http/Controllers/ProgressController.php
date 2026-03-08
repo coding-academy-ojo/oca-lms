@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Absence;
+use App\Models\Absence;
 use Illuminate\Support\Facades\DB;
 
 
@@ -99,3 +99,5 @@ class ProgressController extends Controller
         //
     }
 }
+
+

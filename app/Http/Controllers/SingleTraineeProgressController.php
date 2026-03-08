@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Trainee;
+use App\Models\Trainee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use App\Absence;
-use App\Assignment;
-use App\AssignmentSubmission;
-use App\Cohort;
-use App\Student;
-use App\Project;
-use App\Technology_Cohort;
-use App\TraineeSkillsProgress;
-use App\MasterpieceProgress;
-use App\MasterpieceTask;
-use App\MasterpieceDetail;
+use App\Models\Absence;
+use App\Models\Assignment;
+use App\Models\AssignmentSubmission;
+use App\Models\Cohort;
+use App\Models\Student;
+use App\Models\Project;
+use App\Models\Technology_Cohort;
+use App\Models\TraineeSkillsProgress;
+use App\Models\MasterpieceProgress;
+use App\Models\MasterpieceTask;
+use App\Models\MasterpieceDetail;
 
 class SingleTraineeProgressController extends Controller
 {
@@ -148,7 +148,7 @@ class SingleTraineeProgressController extends Controller
                 'progress'      => $progressEntry ? $progressEntry->progress : 0,
                 'task_deadline' => $task->deadline,
                 'notes'         => $progressEntry ? $progressEntry->notes : '',
-                'hours_spent'   => $progressEntry ? $progressEntry->hours_spent : 0, // ✅ added
+                'hours_spent'   => $progressEntry ? $progressEntry->hours_spent : 0, // Ã¢Å“â€¦ added
             ];
         });
 
@@ -191,3 +191,5 @@ class SingleTraineeProgressController extends Controller
         return $details;
     }
 }
+
+

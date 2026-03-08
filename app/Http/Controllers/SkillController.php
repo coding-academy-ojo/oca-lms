@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Skill;
-use App\SkillLevel;
+use App\Models\Skill;
+use App\Models\SkillLevel;
 use Illuminate\Http\Request;
 
 class SkillController extends Controller
@@ -57,7 +57,7 @@ class SkillController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Skill  $skill
+     * @param  \App\Models\Skill  $skill
      * @return \Illuminate\Http\Response
      */
     public function show(Skill $skill)
@@ -68,7 +68,7 @@ class SkillController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Skill  $skill
+     * @param  \App\Models\Skill  $skill
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -84,7 +84,7 @@ class SkillController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Skill  $skill
+     * @param  \App\Models\Skill  $skill
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -109,7 +109,7 @@ class SkillController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Skill  $skill
+     * @param  \App\Models\Skill  $skill
      * @return \Illuminate\Http\Response
      */
     public function destroy(Skill $skill)
@@ -119,3 +119,5 @@ class SkillController extends Controller
 
     
 }
+
+

@@ -1,7 +1,7 @@
 <?php
 namespace App\Imports;
 
-use App\SoftSkillsTraining;
+use App\Models\SoftSkillsTraining;
 use Exception;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Concerns\ToModel;
@@ -70,3 +70,4 @@ class SoftSkillsTrainingsImport implements ToModel, WithHeadingRow
         return $this->errors;
     }
 }
+

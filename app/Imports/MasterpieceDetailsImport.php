@@ -2,8 +2,8 @@
 
 namespace App\Imports;
 
-use App\Student;
-use App\MasterpieceDetail;
+use App\Models\Student;
+use App\Models\MasterpieceDetail;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -91,3 +91,4 @@ class MasterpieceDetailsImport implements ToModel, WithHeadingRow
         return $this->errors;
     }
 }
+

@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Absence;
-use App\AssignmentSubmission;
-use App\Student; 
+use App\Models\Absence;
+use App\Models\AssignmentSubmission;
+use App\Models\Student; 
 
-use App\TraineeSkillsProgress;
-use App\Project;
-use App\MasterpieceProgress;
-use App\MasterpieceTask;
-use App\MasterpieceDetail;
+use App\Models\TraineeSkillsProgress;
+use App\Models\Project;
+use App\Models\MasterpieceProgress;
+use App\Models\MasterpieceTask;
+use App\Models\MasterpieceDetail;
 
 class StudentDashboardController extends Controller
 {
@@ -155,3 +155,4 @@ class StudentDashboardController extends Controller
         return $details;
     }
 }
+

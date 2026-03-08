@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Technology;
-use App\Topic;
+use App\Models\Technology;
+use App\Models\Topic;
 use Illuminate\Http\Request;
 
 class TopicController extends Controller
@@ -49,7 +49,7 @@ class TopicController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Topic  $topic
+     * @param  \App\Models\Topic  $topic
      * @return \Illuminate\Http\Response
      */
     public function show(Topic $topic)
@@ -60,7 +60,7 @@ class TopicController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Topic  $topic
+     * @param  \App\Models\Topic  $topic
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -76,7 +76,7 @@ class TopicController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Topic  $topic
+     * @param  \App\Models\Topic  $topic
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -92,7 +92,7 @@ class TopicController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Topic  $topic
+     * @param  \App\Models\Topic  $topic
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -103,3 +103,5 @@ class TopicController extends Controller
             ->with('success', 'assignment$topic deleted successfully');
     }
 }
+
+

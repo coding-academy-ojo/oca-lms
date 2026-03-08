@@ -31,3 +31,4 @@ class CreateStaffCohortTable extends Migration
         Schema::dropIfExists('staff_cohort');
     }
 }
+

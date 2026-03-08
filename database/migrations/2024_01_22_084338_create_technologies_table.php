@@ -35,3 +35,4 @@ class CreateTechnologiesTable extends Migration
         Schema::dropIfExists('technologies');
     }
 }
+

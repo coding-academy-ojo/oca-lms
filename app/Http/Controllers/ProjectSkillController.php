@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\ProjectSkill;
+use App\Models\ProjectSkill;
 use Illuminate\Http\Request;
 
 class ProjectSkillController extends Controller
@@ -41,7 +41,7 @@ class ProjectSkillController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ProjectSkill  $projectSkill
+     * @param  \App\Models\ProjectSkill  $projectSkill
      * @return \Illuminate\Http\Response
      */
     public function show(ProjectSkill $projectSkill)
@@ -52,7 +52,7 @@ class ProjectSkillController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ProjectSkill  $projectSkill
+     * @param  \App\Models\ProjectSkill  $projectSkill
      * @return \Illuminate\Http\Response
      */
     public function edit(ProjectSkill $projectSkill)
@@ -64,7 +64,7 @@ class ProjectSkillController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ProjectSkill  $projectSkill
+     * @param  \App\Models\ProjectSkill  $projectSkill
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, ProjectSkill $projectSkill)
@@ -75,7 +75,7 @@ class ProjectSkillController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ProjectSkill  $projectSkill
+     * @param  \App\Models\ProjectSkill  $projectSkill
      * @return \Illuminate\Http\Response
      */
     public function destroy(ProjectSkill $projectSkill)
@@ -83,3 +83,5 @@ class ProjectSkillController extends Controller
         //
     }
 }
+
+

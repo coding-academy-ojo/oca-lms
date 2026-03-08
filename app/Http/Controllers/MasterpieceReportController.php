@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Student;
-use App\MasterpieceDetail;
-use App\MasterpieceTask;
-use App\MasterpieceProgress;
+use App\Models\Student;
+use App\Models\MasterpieceDetail;
+use App\Models\MasterpieceTask;
+use App\Models\MasterpieceProgress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -114,3 +114,5 @@ public function exportPdf(Request $request, $studentId)
 
 
 }
+
+

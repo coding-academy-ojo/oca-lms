@@ -19,7 +19,7 @@ class CreateStaffTable extends Migration
             $table->string('staff_email')->unique();
             $table->string('staff_password');
             $table->string('staff_Phone')->nullable();
-            $table->enum('role', ['manager', 'super_manager', 'trainer']);
+            $table->enum('role', ['manager', 'super_manager', 'trainer','coordinator', 'job_coach','auditer']);
             $table->text('staff_bio')->nullable();
             $table->string('staff_personal_img')->nullable();
             $table->timestamps();
@@ -36,4 +36,5 @@ class CreateStaffTable extends Migration
         Schema::dropIfExists('staff');
     }
 }
+
 

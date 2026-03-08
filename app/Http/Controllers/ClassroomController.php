@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Classroom;
 use Illuminate\Http\Request;
 use App\user;
-use App\Trainee;
+use App\Models\Trainee;
 
 
 class ClassroomController extends Controller
@@ -158,3 +158,5 @@ class ClassroomController extends Controller
     //     //
     // }
 }
+
+

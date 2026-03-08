@@ -30,3 +30,4 @@ class AddSatisfactionRateToTechnologyCohortsTable extends Migration
         });
     }
 }
+

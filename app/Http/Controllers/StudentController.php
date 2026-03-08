@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Student;
-use App\Academy;
-use App\Cohort;
+use App\Models\Student;
+use App\Models\Academy;
+use App\Models\Cohort;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -341,4 +341,6 @@ class StudentController extends Controller
             ->with('success', 'Student deleted successfully.');
     }
 }
+
+
 

@@ -32,3 +32,4 @@ class CreateMasterpieceTasks extends Migration
         Schema::dropIfExists('masterpiece_tasks');
     }
 }
+

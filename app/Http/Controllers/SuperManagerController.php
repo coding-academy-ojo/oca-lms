@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Student;
+use App\Models\Student;
 use Illuminate\Http\Request;
-use App\Academy;
-use App\Cohort;
+use App\Models\Academy;
+use App\Models\Cohort;
 use Carbon\Carbon;
 class SuperManagerController extends Controller
 {
@@ -194,3 +194,4 @@ class SuperManagerController extends Controller
     
     
 }
+

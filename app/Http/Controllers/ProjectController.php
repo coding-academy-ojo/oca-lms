@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Project;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use App\Skill;
-use App\Level;
-use App\Cohort;
-use App\ProjectSkill;
-use App\SkillLevel;
-use App\ProjectSubmission;
-use App\ProjectFeedback;
-use App\Student;
-use App\TraineeSkillsProgress;
-use App\Staff;
+use App\Models\Skill;
+use App\Models\Level;
+use App\Models\Cohort;
+use App\Models\ProjectSkill;
+use App\Models\SkillLevel;
+use App\Models\ProjectSubmission;
+use App\Models\ProjectFeedback;
+use App\Models\Student;
+use App\Models\TraineeSkillsProgress;
+use App\Models\Staff;
 
 class ProjectController extends Controller
 {
@@ -477,3 +477,5 @@ public function filterProjects(Request $request)
     }
 
 }
+
+

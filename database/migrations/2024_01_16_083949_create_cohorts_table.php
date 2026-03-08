@@ -36,3 +36,4 @@ class CreateCohortsTable extends Migration
         Schema::dropIfExists('cohorts');
     }
 }
+

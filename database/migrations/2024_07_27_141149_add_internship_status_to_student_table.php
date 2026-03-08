@@ -31,3 +31,4 @@ class AddInternshipStatusToStudentTable extends Migration
         });
     }
 }
+

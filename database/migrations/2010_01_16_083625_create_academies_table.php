@@ -31,3 +31,4 @@ class CreateAcademiesTable extends Migration
         Schema::dropIfExists('academies');
     }
 }
+

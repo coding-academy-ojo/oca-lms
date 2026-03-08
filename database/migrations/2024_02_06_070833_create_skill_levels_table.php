@@ -35,3 +35,4 @@ class CreateSkillLevelsTable extends Migration
         Schema::dropIfExists('skill_levels');
     }
 }
+

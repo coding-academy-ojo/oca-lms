@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Academy;
-use App\Staff;
-use App\Student;
+use App\Models\Academy;
+use App\Models\Staff;
+use App\Models\Student;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
@@ -108,7 +108,7 @@ class AcademyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Academy  $academy
+     * @param  \App\Models\Academy  $academy
      * @return \Illuminate\Http\Response
      */
     public function show(Academy $academy)
@@ -119,7 +119,7 @@ class AcademyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Academy  $academy
+     * @param  \App\Models\Academy  $academy
      * @return \Illuminate\Http\Response
      */
     public function edit(Academy $academy)
@@ -139,7 +139,7 @@ class AcademyController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Academy  $academy
+     * @param  \App\Models\Academy  $academy
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -168,7 +168,7 @@ class AcademyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Academy  $academy
+     * @param  \App\Models\Academy  $academy
      * @return \Illuminate\Http\Response
      */
     public function destroy(Academy $academy)
@@ -176,3 +176,5 @@ class AcademyController extends Controller
         //
     }
 }
+
+

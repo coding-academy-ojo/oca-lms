@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Student;
+use App\Models\Student;
 use App\Masterpiece;
-use App\MasterpieceTask;
-use App\MasterpieceProgress;
+use App\Models\MasterpieceTask;
+use App\Models\MasterpieceProgress;
 
 
 class MasterpieceController extends Controller
@@ -128,6 +128,8 @@ class MasterpieceController extends Controller
     
 
 }
+
+
 
 
 

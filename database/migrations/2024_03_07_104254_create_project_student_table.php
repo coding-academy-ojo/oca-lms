@@ -31,3 +31,4 @@ class CreateProjectStudentTable extends Migration
         Schema::dropIfExists('project_student');
     }
 }
+

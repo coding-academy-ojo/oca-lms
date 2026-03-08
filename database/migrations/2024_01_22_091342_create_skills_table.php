@@ -30,3 +30,4 @@ class CreateSkillsTable extends Migration
         Schema::dropIfExists('skills');
     }
 }
+

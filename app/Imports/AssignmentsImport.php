@@ -2,8 +2,8 @@
 
 namespace App\Imports;
 
-use App\Assignment;
-use App\Topic;
+use App\Models\Assignment;
+use App\Models\Topic;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -85,3 +85,4 @@ class AssignmentsImport implements ToModel, WithHeadingRow
         return $this->errors;
     }
 }
+

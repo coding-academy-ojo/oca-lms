@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Cohort;
-use App\Technology;
+use App\Models\Cohort;
+use App\Models\Technology;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -118,3 +118,5 @@ class technologySatisfactionController extends Controller
     
 
 }
+
+

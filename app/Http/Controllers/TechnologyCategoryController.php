@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\TechnologyCategory;
+use App\Models\TechnologyCategory;
 use Illuminate\Http\Request;
 
 class TechnologyCategoryController extends Controller
@@ -53,7 +53,7 @@ class TechnologyCategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\TechnologyCategory  $technologyCategory
+     * @param  \App\Models\TechnologyCategory  $technologyCategory
      * @return \Illuminate\Http\Response
      */
     public function show(TechnologyCategory $category)
@@ -68,7 +68,7 @@ class TechnologyCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\TechnologyCategory  $technologyCategory
+     * @param  \App\Models\TechnologyCategory  $technologyCategory
      * @return \Illuminate\Http\Response
      */
     public function edit(TechnologyCategory $technologyCategory)
@@ -80,7 +80,7 @@ class TechnologyCategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\TechnologyCategory  $technologyCategory
+     * @param  \App\Models\TechnologyCategory  $technologyCategory
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, TechnologyCategory $technologyCategory)
@@ -91,7 +91,7 @@ class TechnologyCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\TechnologyCategory  $technologyCategory
+     * @param  \App\Models\TechnologyCategory  $technologyCategory
      * @return \Illuminate\Http\Response
      */
     public function destroy(TechnologyCategory $technologyCategory)
@@ -99,3 +99,5 @@ class TechnologyCategoryController extends Controller
         //
     }
 }
+
+

@@ -36,3 +36,4 @@ class CreateAssignmentFeedbackTable extends Migration
         Schema::dropIfExists('assignment_feedback');
     }
 }
+

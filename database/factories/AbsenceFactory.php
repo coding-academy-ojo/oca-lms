@@ -1,21 +1,33 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Absence;
-use Faker\Generator as Faker;
+use App\Models\Absence;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-// Static counter for student IDs
-$studentIdCounter = 0;
+class AbsenceFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var class-string<\App\Models\Absence>
+     */
+    protected $model = Absence::class;
 
-$factory->define(Absence::class, function (Faker $faker) use (&$studentIdCounter) {
-    $studentIdCounter++;
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition()
+    {
+        return [
+            'absences_type' => $this->faker->randomElement(['late', 'absent', 'leaving']),
+            'absences_date' => $this->faker->date(),
+            'absences_reason' => $this->faker->text(),
+            'absences_duration' => $this->faker->numberBetween(1, 8),
+            'student_id' => $this->faker->numberBetween(1, 20),
+        ];
+    }
+}
 
-    return [
-        'absences_type' => $faker->randomElement(['late', 'absent', 'leaving']),
-        'absences_date' => $faker->date(),
-        'absences_reason' => $faker->text,
-        'absences_duration' => $faker->numberBetween(1, 8), // Assuming duration in hours
-        'student_id' => $studentIdCounter, // Assign the incremented ID as student_id
-    ];
-});

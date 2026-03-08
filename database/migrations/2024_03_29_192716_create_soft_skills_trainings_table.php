@@ -36,3 +36,4 @@ class CreateSoftSkillsTrainingsTable extends Migration
         Schema::dropIfExists('soft_skills_trainings');
     }
 }
+

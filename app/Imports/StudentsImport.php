@@ -1,8 +1,8 @@
 <?php
 namespace App\Imports;
 
-use App\Student;
-use App\Cohort;
+use App\Models\Student;
+use App\Models\Cohort;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -179,3 +179,4 @@ class StudentsImport implements ToModel, WithHeadingRow
         return $this->errors;
     }
 }
+

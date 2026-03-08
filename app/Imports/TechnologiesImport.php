@@ -1,8 +1,8 @@
 <?php
 namespace App\Imports;
 
-use App\Technology;
-use App\Technology_Cohort;
+use App\Models\Technology;
+use App\Models\Technology_Cohort;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -96,3 +96,4 @@ class TechnologiesImport implements ToModel, WithHeadingRow
         return $this->errors;
     }
 }
+

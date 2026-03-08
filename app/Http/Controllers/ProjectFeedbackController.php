@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\ProjectFeedback;
+use App\Models\ProjectFeedback;
 use Illuminate\Http\Request;
 
 class ProjectFeedbackController extends Controller
@@ -41,7 +41,7 @@ class ProjectFeedbackController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ProjectFeedback  $projectFeedback
+     * @param  \App\Models\ProjectFeedback  $projectFeedback
      * @return \Illuminate\Http\Response
      */
     public function show(ProjectFeedback $projectFeedback)
@@ -52,7 +52,7 @@ class ProjectFeedbackController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ProjectFeedback  $projectFeedback
+     * @param  \App\Models\ProjectFeedback  $projectFeedback
      * @return \Illuminate\Http\Response
      */
     public function edit(ProjectFeedback $projectFeedback)
@@ -64,7 +64,7 @@ class ProjectFeedbackController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ProjectFeedback  $projectFeedback
+     * @param  \App\Models\ProjectFeedback  $projectFeedback
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, ProjectFeedback $projectFeedback)
@@ -75,7 +75,7 @@ class ProjectFeedbackController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ProjectFeedback  $projectFeedback
+     * @param  \App\Models\ProjectFeedback  $projectFeedback
      * @return \Illuminate\Http\Response
      */
     public function destroy(ProjectFeedback $projectFeedback)
@@ -83,3 +83,5 @@ class ProjectFeedbackController extends Controller
         //
     }
 }
+
+

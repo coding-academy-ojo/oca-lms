@@ -35,3 +35,4 @@ class CreateAssignmentStudentTable extends Migration
         Schema::dropIfExists('assignment_student');
     }
 }
+

@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Auth;
-use App\Staff;
-use App\Student;
-use App\Assignment;
-use App\Project;
-use App\Technology_Cohort;
-use App\Cohort;
-use App\SoftSkillsTraining;
+use App\Models\Staff;
+use App\Models\Student;
+use App\Models\Assignment;
+use App\Models\Project;
+use App\Models\Technology_Cohort;
+use App\Models\Cohort;
+use App\Models\SoftSkillsTraining;
 use Carbon\Carbon;
 
 class TrainerDashboardController extends Controller
@@ -282,3 +282,5 @@ class TrainerDashboardController extends Controller
     
     
 }
+
+

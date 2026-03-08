@@ -31,3 +31,4 @@ class CreateAcademyStaffTable extends Migration
         Schema::dropIfExists('academy_staff');
     }
 }
+

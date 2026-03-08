@@ -33,3 +33,4 @@ class AddHoursSpentToMasterpieceTasksTable extends Migration
         });
     }
 }
+

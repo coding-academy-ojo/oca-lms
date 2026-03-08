@@ -37,3 +37,4 @@ class CreateProjectSubmissionsTable extends Migration
         Schema::dropIfExists('project_submissions');
     }
 }
+

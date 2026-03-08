@@ -38,3 +38,4 @@ class CreateMasterpieceProgressTable extends Migration
         Schema::dropIfExists('masterpiece_progress');
     }
 }
+
