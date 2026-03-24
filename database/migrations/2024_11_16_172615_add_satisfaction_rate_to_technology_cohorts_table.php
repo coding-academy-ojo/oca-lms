@@ -14,7 +14,7 @@ class AddSatisfactionRateToTechnologyCohortsTable extends Migration
     public function up()
     {
         Schema::table('technology__cohorts', function (Blueprint $table) {
-            $table->unsignedDecimal('satisfaction_rate', 5, 2)->nullable()->after('end_date');
+            $table->decimal('satisfaction_rate', 5, 2)->nullable()->after('end_date');
         });
     }
 

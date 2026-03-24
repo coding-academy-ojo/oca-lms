@@ -57,9 +57,21 @@
                     @if (in_array(Auth::guard('staff')->user()->role, ['super_manager', 'manager']))
 
 
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('academies') ? 'text-primary' : '' }}""
-                                href=" {{ route('academies') }}">Academies</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle {{ request()->routeIs('academies*') ? 'text-primary' : '' }}" href="#" id="academyDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Academies
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="academyDropdown">
+                                <li><a class="dropdown-item" href="{{ route('academies') }}">All Academies</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><h6 class="dropdown-header">GPS Settings</h6></li>
+                                @php
+                                    $academies = \App\Models\Academy::all();
+                                @endphp
+                                @foreach($academies as $academy)
+                                    <li><a class="dropdown-item" href="{{ route('editacademy', $academy->id) }}">📍 {{ $academy->academy_name }}</a></li>
+                                @endforeach
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('staff.index') ? 'text-primary' : '' }}"

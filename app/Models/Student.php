@@ -18,6 +18,11 @@ class Student extends Authenticatable
         return $this->hasMany(Absence::class);
     }
 
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
+    }
+
     // Student belongs to an Academy
     public function academy()
     {

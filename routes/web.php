@@ -96,7 +96,10 @@ Route::post('/cohorts', [CohortController::class, 'store'])->name('store-cohort'
 
 
 //attendance & absense
-Route::get('/attendance', [AbsenceController::class, 'index'])->name('attendance');
+Route::middleware(['auth:staff'])->group(function () {
+    Route::get('/attendance', [AbsenceController::class, 'index'])->name('attendance');
+    Route::post('/attendance/store-or-update', [AbsenceController::class, 'storeOrUpdate'])->name('attendance.storeOrUpdate');
+});
 Route::post('/attendance/store-or-update', [AbsenceController::class, 'storeOrUpdate'])->name('attendance.storeOrUpdate');
 
 Route::put('/absence/{absence_id}/action', [AbsenceReportController::class, 'updateAction'])->name('absence.action.update');
@@ -328,7 +331,7 @@ Route::middleware(['role:manager'])->group(function () {
 // staff controller
 });
 
-Route::middleware(['super_manager'])->group(function () {
+Route::middleware(['auth:staff', 'role:super_manager,manager'])->group(function () {
 // staff controller
 
 
@@ -357,3 +360,19 @@ Route::post('/masterpiece/export/pdf/{studentId}', [MasterpieceReportController:
 
 Route::get('/attendance/overall/export', [AttendanceOverallReportController::class, 'exportPdf'])
     ->name('attendance.overall.export.pdf');
+
+Route::get('/attendance/qr-display', function () {
+    return view('attendance.qr-display');
+})->name('attendance.qr-display');
+
+Route::get('/attendance/checkin', function () {
+    return view('attendance.checkin');
+})->name('attendance.checkin');
+
+Route::get('/attendance/face-enrollment', function () {
+    return view('attendance.face-enrollment');
+})->name('attendance.face-enrollment');
+
+Route::get('/attendance/face-checkin', function () {
+    return view('attendance.face-checkin');
+})->name('attendance.face-checkin');

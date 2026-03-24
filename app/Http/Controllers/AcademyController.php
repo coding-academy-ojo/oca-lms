@@ -151,10 +151,22 @@ class AcademyController extends Controller
             return redirect()->route('academies');
         }
     
-        $academy->update([
+        $updateData = [
             'academy_name' => $request->academy_name,
             'academy_location' => $request->academy_location,
-        ]);
+        ];
+    
+        if ($request->has('latitude') && $request->latitude) {
+            $updateData['latitude'] = $request->latitude;
+        }
+        if ($request->has('longitude') && $request->longitude) {
+            $updateData['longitude'] = $request->longitude;
+        }
+        if ($request->has('radius_meters') && $request->radius_meters) {
+            $updateData['radius_meters'] = $request->radius_meters;
+        }
+    
+        $academy->update($updateData);
     
         if ($request->has('manager_id') && $request->manager_id) {
             $academy->staff()->sync([$request->manager_id]);
