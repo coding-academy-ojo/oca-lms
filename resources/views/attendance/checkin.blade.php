@@ -97,6 +97,13 @@
                     <h4 class="mb-0">Check In - Orange Coding Academy</h4>
                 </div>
                 <div class="card-body">
+                    <!-- Location Status -->
+                    <div class="mb-3">
+                        <span id="locationBadge" class="badge rounded-pill d-inline-flex align-items-center gap-2 px-3 py-2" style="background: #fff3cd; color: #856404; border: 1px solid #ffc107;">
+                            📍 Getting your location...
+                        </span>
+                    </div>
+
                     <ul class="nav nav-tabs mb-4" role="tablist">
                         <li class="nav-item">
                             <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#manual" type="button">
@@ -195,6 +202,7 @@
 <script>
     let faceVideo, faceStream, currentDescriptor = null, modelsLoaded = false;
     let dailyToken = null;
+    let userLatitude = null, userLongitude = null;
 
     window.onload = function() {
         loadFaceModels();
@@ -204,6 +212,35 @@
             .then(res => res.json())
             .then(data => { dailyToken = data.token; })
             .catch(err => console.error('Failed to fetch daily token:', err));
+        
+        // Get GPS location
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                function(pos) {
+                    userLatitude = pos.coords.latitude;
+                    userLongitude = pos.coords.longitude;
+                    const badge = document.getElementById('locationBadge');
+                    badge.style.background = '#d4edda';
+                    badge.style.color = '#155724';
+                    badge.style.borderColor = '#28a745';
+                    badge.innerHTML = '✅ Location acquired';
+                },
+                function() {
+                    const badge = document.getElementById('locationBadge');
+                    badge.style.background = '#f8d7da';
+                    badge.style.color = '#721c24';
+                    badge.style.borderColor = '#dc3545';
+                    badge.innerHTML = '⚠️ Location not available (check-in will proceed without it)';
+                },
+                { timeout: 10000 }
+            );
+        } else {
+            const badge = document.getElementById('locationBadge');
+            badge.style.background = '#f8d7da';
+            badge.style.color = '#721c24';
+            badge.style.borderColor = '#dc3545';
+            badge.innerHTML = '⚠️ Geolocation not supported by this browser';
+        }
     };
     
     function loadFaceAcademies() {
@@ -385,6 +422,12 @@
 
         const body = { student_id: studentId, token: usedToken };
 
+        // Add location data if available
+        if (userLatitude !== null && userLongitude !== null) {
+            body.latitude = userLatitude;
+            body.longitude = userLongitude;
+        }
+
         fetch('/api/attendance/checkin', {
             method: 'POST',
             headers: { 
@@ -401,11 +444,16 @@
                     ? '<span class="badge bg-success">Present</span>' 
                     : '<span class="badge bg-warning">Late</span>';
                 
+                const locationInfo = (userLatitude !== null && userLongitude !== null)
+                    ? `<p><strong>📍 Location:</strong> ${userLatitude.toFixed(5)}, ${userLongitude.toFixed(5)}</p>`
+                    : '<p class="text-muted small">📍 Location not captured</p>';
+                
                 showResult(true, `
                     <h5>✅ Check-in Successful!</h5>
                     <p><strong>Name:</strong> ${data.attendance.student_name}</p>
                     <p><strong>Time:</strong> ${data.attendance.check_in_time}</p>
                     <p><strong>Type:</strong> ${type === 'face' ? 'Face Recognition' : type === 'qr' ? 'QR Code' : 'Manual ID'}</p>
+                    ${locationInfo}
                     ${statusBadge}
                 `);
             } else {

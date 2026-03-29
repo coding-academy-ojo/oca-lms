@@ -49,17 +49,17 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">Staff Login</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('attendance.qr-display') }}">Attendance QR</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('attendance.checkin') }}">Check In</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('attendance.face-checkin') }}">Face Check-in</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('attendance.face-enrollment') }}">Face Enrollment</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="attendanceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Attendance
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="attendanceDropdown">
+                                    <li><a class="dropdown-item" href="{{ route('attendance.qr-display') }}">Attendance QR</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('attendance.checkin') }}">Check In</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('attendance.face-checkin') }}">Face Check-in</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('attendance.face-checkout') }}">Face Check-out</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('attendance.face-enrollment') }}">Face Enrollment</a></li>
+                                </ul>
                             </li>
                         @endif
                     </ul>

@@ -376,3 +376,7 @@ Route::get('/attendance/face-enrollment', function () {
 Route::get('/attendance/face-checkin', function () {
     return view('attendance.face-checkin');
 })->name('attendance.face-checkin');
+
+Route::get('/attendance/face-checkout', function () {
+    return view('attendance.face-checkout');
+})->name('attendance.face-checkout');

@@ -259,58 +259,160 @@ class AbsenceController extends Controller
             'date' => 'required|date_format:Y-m-d',
             'absences_duration' => 'nullable|integer|min:0',
         ]);
-    
+
         $date = Carbon::parse($request->date)->toDateString();
         $status = $request->status;
-        
+        $duration = $request->absences_duration ?? 0;
+        $reason = $request->reason ?? null;
+
         $student = Student::find($request->student_id);
-        
+
+        // For present, completed - remove any absence record and update attendance
         if ($status === 'present' || $status === 'completed') {
             Absence::where('student_id', $request->student_id)
                    ->whereDate('absences_date', $date)
                    ->delete();
-            
+
             if ($student) {
-                $attendance = $student->attendances()->whereDate('date', $date)->first();
+                $attendance = Attendance::firstOrCreate(
+                    [
+                        'student_id' => $request->student_id,
+                        'date' => $date,
+                    ],
+                    [
+                        'check_in_time' => '09:00:00',
+                        'status' => $status,
+                    ]
+                );
+
                 if ($attendance) {
-                    $attendance->update(['status' => $status]);
+                    $attendance->update([
+                        'status' => $status,
+                    ]);
                 }
             }
-    
+
             return response()->json([
                 'message' => 'Attendance record updated successfully.',
             ]);
         }
-        
-        $absenceType = $status;
-        if ($status === 'left_early') {
-            $absenceType = 'leaving';
-        }
-    
-        $absence = Absence::updateOrCreate(
-            [
+
+        // For late status - save duration in absence table and update attendance
+        if ($status === 'late') {
+            // Delete any existing absence for this date
+            Absence::where('student_id', $request->student_id)
+                   ->whereDate('absences_date', $date)
+                   ->delete();
+
+            // Create absence record with duration
+            $absence = Absence::create([
                 'student_id' => $request->student_id,
+                'absences_type' => 'late',
                 'absences_date' => $date,
-            ],
-            [
-                'absences_type' => $absenceType,
-                'absences_reason' => $request->reason ?? null,
-                'absences_duration' => $request->absences_duration ?? 0,
-            ]
-        );
-        
-        if ($student) {
-            $attendance = $student->attendances()->whereDate('date', $date)->first();
-            if ($attendance) {
-                $attendance->update(['status' => $status]);
+                'absences_reason' => $reason,
+                'absences_duration' => $duration,
+            ]);
+
+            // Update or create attendance record
+            if ($student) {
+                $attendance = Attendance::firstOrCreate(
+                    [
+                        'student_id' => $request->student_id,
+                        'date' => $date,
+                    ],
+                    [
+                        'check_in_time' => '09:00:00',
+                        'status' => 'late',
+                    ]
+                );
+
+                if ($attendance) {
+                    $attendance->update([
+                        'status' => 'late',
+                    ]);
+                }
             }
+
+            return response()->json([
+                'message' => 'Late attendance record saved successfully.',
+                'absence' => $absence,
+            ]);
         }
-    
-        // Return a successful response
+
+        // For absent or excused status
+        if ($status === 'absent' || $status === 'excused') {
+            $absenceType = $status;
+
+            $absence = Absence::updateOrCreate(
+                [
+                    'student_id' => $request->student_id,
+                    'absences_date' => $date,
+                ],
+                [
+                    'absences_type' => $absenceType,
+                    'absences_reason' => $reason,
+                    'absences_duration' => $duration,
+                ]
+            );
+
+            if ($student) {
+                Attendance::firstOrCreate(
+                    [
+                        'student_id' => $request->student_id,
+                        'date' => $date,
+                    ],
+                    [
+                        'status' => $status,
+                    ]
+                );
+            }
+
+            return response()->json([
+                'message' => 'Absence record saved successfully.',
+                'absence' => $absence,
+            ]);
+        }
+
+        // For left_early status
+        if ($status === 'left_early') {
+            $absence = Absence::updateOrCreate(
+                [
+                    'student_id' => $request->student_id,
+                    'absences_date' => $date,
+                ],
+                [
+                    'absences_type' => 'leaving',
+                    'absences_reason' => $reason,
+                    'absences_duration' => $duration,
+                ]
+            );
+
+            if ($student) {
+                $attendance = Attendance::firstOrCreate(
+                    [
+                        'student_id' => $request->student_id,
+                        'date' => $date,
+                    ],
+                    [
+                        'check_in_time' => '09:00:00',
+                        'status' => 'left_early',
+                    ]
+                );
+
+                if ($attendance) {
+                    $attendance->update(['status' => 'left_early']);
+                }
+            }
+
+            return response()->json([
+                'message' => 'Left early record saved successfully.',
+                'absence' => $absence,
+            ]);
+        }
+
         return response()->json([
-            'message' => 'Absence record saved successfully.',
-            'absence' => $absence,
-        ]);
+            'message' => 'Invalid status provided.',
+        ], 400);
     }
     
     private function calculateDistance(float $lat1, float $lon1, float $lat2, float $lon2): float

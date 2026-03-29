@@ -343,7 +343,9 @@
                    </span>`
                 : '<span class="text-muted">-</span>';
             
-            const durationText = student.attendanceStatus === 'late' && student.lateMinutes 
+            const durationText = student.absenceDuration
+                ? (Math.floor(student.absenceDuration / 60) + 'h ' + (student.absenceDuration % 60) + 'm')
+                : student.attendanceStatus === 'late' && student.lateMinutes
                 ? (Math.floor(student.lateMinutes / 60) + 'h ' + (student.lateMinutes % 60) + 'm late')
                 : student.attendanceStatus === 'left_early' && student.leaveMinutes
                 ? (Math.floor(student.leaveMinutes / 60) + 'h ' + (student.leaveMinutes % 60) + 'm early')
@@ -404,12 +406,12 @@
         const row = $(btn).closest('tr');
         const studentId = row.data('student-id');
         const date = $('#dateFilter').val();
-        
+
         const status = row.find('.status-cell .edit-mode').val();
-        const reason = row.find('td:eq(9) .edit-mode').val();
         const duration = row.find('td:eq(8) .edit-mode').val();
+        const reason = row.find('td:eq(9) .edit-mode').val();
         const csrfToken = $('meta[name="csrf-token"]').attr('content');
-        
+
         $.ajax({
             url: '/attendance/store-or-update',
             type: 'POST',
@@ -426,7 +428,17 @@
                 alert('Saved successfully!');
             },
             error: function(xhr) {
-                alert('Error saving data');
+                let errorMsg = 'Error saving data';
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    errorMsg = xhr.responseJSON.message;
+                } else if (xhr.status === 422) {
+                    const errors = xhr.responseJSON.errors;
+                    if (errors) {
+                        errorMsg = Object.values(errors).flat().join('\n');
+                    }
+                }
+                alert(errorMsg);
+                console.error('Save error:', xhr);
             }
         });
     }
