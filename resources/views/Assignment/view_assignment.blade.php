@@ -32,17 +32,17 @@
             </div>
         @endif
         {{-- search based on assignmnet name & topic name  --}}
-        <div class="row d-flex  ">
-            <div class="col-9">
-            <form action="" method="GET" class="d-flex gap-2">
-                <div class="col-7 d-flex border border-light">
+        <div class="row d-flex align-items-start g-3">
+            <div class="col-12 col-lg-9">
+            <form action="" method="GET" class="d-flex flex-wrap gap-2">
+                <div class="col-12 col-lg-7 d-flex border border-light">
                     <input type="text" class="form-control border border-white"
                         placeholder="Search by assignment name or topic" name="search" value="{{ request('search') }}">
                     <button class="btn rounded-0 btn-primary" type="submit"><i class="fas fa-search"></i></button>
                 </div>
             
                 {{-- Filter based on technology --}}
-                <select class="form-select" name="technology_id" aria-label="Default select example" onchange="this.form.submit()">
+                <select class="form-select col-12 col-lg" name="technology_id" aria-label="Default select example" onchange="this.form.submit()">
                     <option value="">All Technologies</option>
                     @foreach ($technologies as $technology)
                         <option value="{{ $technology->id }}" {{ request('technology_id') == $technology->id ? 'selected' : '' }}>
@@ -52,7 +52,7 @@
                 </select>
             </form>
             </div>
-            <div class=" col-3">
+            <div class="col-12 col-lg-3 d-flex flex-wrap gap-2 justify-content-lg-end">
                 <a href="{{ route('assignment.create') }}" class="btn btn-primary m-auto">Create</a>
                 <a href="{{ route('assignments.feedback') }}" class="btn btn-primary m-auto">Submission</a>
             </div>
@@ -108,8 +108,13 @@
                 </table>
             </div>
         </div>
-        <div class="d-flex justify-content-center">
-            {{ $assignments->links() }}
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mt-3">
+            <div class="text-muted small">
+                Showing {{ $assignments->count() }} of {{ $assignments->total() }} assignments
+            </div>
+            <div>
+                {{ $assignments->withQueryString()->links('vendor.pagination.attendance-style') }}
+            </div>
         </div>
     </div>
 @endsection

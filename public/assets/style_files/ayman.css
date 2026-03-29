@@ -284,5 +284,51 @@ body {
 
 /* {{-- ========================= Start responsive code ========================== --}} */
 
+img,
+video,
+canvas,
+svg {
+    max-width: 100%;
+    height: auto;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 991.98px) {
+    .actionbtn {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    ul.thm-breadcrumb {
+        flex-wrap: wrap;
+        row-gap: 0.35rem;
+    }
+
+    .innerPage .row > [class*='col-'] {
+        margin-bottom: 0.75rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .container,
+    .container-fluid {
+        padding-left: 0.9rem;
+        padding-right: 0.9rem;
+    }
+
+    .card-body {
+        padding: 0.85rem;
+    }
+
+    .btn,
+    .form-control,
+    .form-select {
+        width: 100%;
+    }
+}
 
 /* {{-- ========================= End responsive code ========================== --}} */

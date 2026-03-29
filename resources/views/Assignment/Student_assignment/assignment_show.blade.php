@@ -31,17 +31,17 @@
             <button type="button" class="btn-close m-auto my-auto" data-bs-dismiss="alert" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Close"><span class="visually-hidden">Close</span></button>
         </div>
     @endif
-       <div class="row d-flex  ">
-            <div class="col-9">
-            <form action="" method="GET" class="d-flex gap-2">
-                <div class="col-7 d-flex border border-light">
+       <div class="row d-flex g-3">
+            <div class="col-12">
+            <form action="" method="GET" class="d-flex flex-wrap gap-2">
+                <div class="col-12 col-lg-7 d-flex border border-light">
                     <input type="text" class="form-control border border-white"
                         placeholder="Search by assignment name or topic" name="search" value="{{ request('search') }}">
                     <button class="btn rounded-0 btn-primary" type="submit"><i class="fas fa-search"></i></button>
                 </div>
             
                 {{-- Filter based on technology --}}
-                <select class="form-select" name="technology_id" aria-label="Default select example" onchange="this.form.submit()">
+                <select class="form-select col-12 col-lg" name="technology_id" aria-label="Default select example" onchange="this.form.submit()">
                     <option value="">All Technologies</option>
                     @foreach ($technologies as $technology)
                         <option value="{{ $technology->id }}" {{ request('technology_id') == $technology->id ? 'selected' : '' }}>
@@ -120,5 +120,8 @@
             </div>
         </div>
     </div>
+    </div>
+    <div class="d-flex justify-content-center mt-3">
+        {{ $assignments->withQueryString()->links() }}
     </div>
 @endsection

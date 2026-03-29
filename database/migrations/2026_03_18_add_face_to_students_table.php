@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::table('students', function (Blueprint $table) {
             $table->text('face_descriptor')->nullable()->after('cohort_id');
-            $table->string('face_photo')->nullable()->after('face_descriptor');
+            $table->longText('face_photo')->nullable()->after('face_descriptor');
         });
     }
 
