@@ -47,8 +47,8 @@
         </div>
         <div class="col-10 m-auto">
             <div class="table-responsive mb-3 mt-3">
-                <form action="" method="GET" class="d-flex gap-2">
-                    <div class="col-7 d-flex border border-light">
+                <form action="" method="GET" class="d-flex flex-wrap gap-2">
+                    <div class="col-12 col-lg-7 d-flex border border-light">
                         <input type="text" class="form-control border border-white"
                             placeholder="search by student name" name="search" value="{{ request('search') }}">
                         <button class="btn rounded-0 bg-primary" type="submit"><i class="fas fa-search"></i></button>
@@ -135,7 +135,7 @@
         </div>
     @endforeach
     <div class="d-flex justify-content-center">
-        {{ $AssignmentSubmission->links() }}
+        {{ $AssignmentSubmission->withQueryString()->links() }}
     </div>
     </div>
 @endsection

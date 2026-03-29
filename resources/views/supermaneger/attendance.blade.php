@@ -7,108 +7,17 @@
 <script src="{{ asset('assets/js_files/attendance.js') }}"></script>
 <link rel="stylesheet" href="{{asset('assets/style_files/absence_attendance.css')}}">
 
+@include('Layouts.innerNav')
+
 <style>
-    .attendance-header {
-        background: linear-gradient(135deg, #ff7900 0%, #ff9a00 100%);
-        color: white;
-        padding: 30px;
-        border-radius: 16px;
-        margin-bottom: 30px;
+    .stats-card {
+        border: 1px solid #e9ecef;
     }
 
-    .stat-card {
-        border: none;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .stat-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-    }
-
-    .stat-icon {
-        width: 50px;
-        height: 50px;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-    }
-
-    .stat-value {
-        font-size: 2rem;
+    .stats-value {
+        font-size: 1.8rem;
         font-weight: 700;
         line-height: 1;
-    }
-
-    .stat-label {
-        font-size: 0.85rem;
-        color: #6c757d;
-        margin-top: 5px;
-    }
-
-    .filter-card {
-        border: none;
-        border-radius: 12px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        padding: 20px;
-    }
-
-    .filter-label {
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        color: #6c757d;
-        margin-bottom: 8px;
-    }
-
-    .attendance-table-wrapper {
-        border: none;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-        overflow-x: auto;
-    }
-
-    .attendance-table-wrapper::-webkit-scrollbar {
-        height: 8px;
-    }
-
-    .attendance-table-wrapper::-webkit-scrollbar-track {
-        background: #f1f1f1;
-        border-radius: 4px;
-    }
-
-    .attendance-table-wrapper::-webkit-scrollbar-thumb {
-        background: #ff7900;
-        border-radius: 4px;
-    }
-
-    .attendance-table thead {
-        background: #343a40;
-        color: white;
-    }
-
-    .attendance-table th {
-        font-weight: 600;
-        font-size: 0.85rem;
-        padding: 15px 12px;
-        border: none;
-        white-space: nowrap;
-    }
-
-    .attendance-table td {
-        padding: 12px;
-        vertical-align: middle;
-        border-bottom: 1px solid #f0f0f0;
-        white-space: nowrap;
-    }
-
-    .attendance-table tbody tr:hover {
-        background: #f8f9fa;
     }
 
     .status-badge-custom {
@@ -139,90 +48,77 @@
         color: #495057;
     }
 
+    .attendance-list-scroll {
+        max-height: 62vh;
+        overflow-y: auto;
+        overflow-x: auto;
+    }
+
     @media (max-width: 768px) {
-        .attendance-header {
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .stat-value {
+        .stats-value {
             font-size: 1.5rem;
         }
-        
-        .filter-card {
-            margin-bottom: 20px;
-        }
-        
-        .attendance-table {
-            font-size: 0.85rem;
+
+        .attendance-list-scroll {
+            max-height: 55vh;
         }
     }
 </style>
 
-<div class="container-fluid px-4">
-    <div class="attendance-header">
-        <div class="row align-items-center">
-            <div class="col-md-8">
-                <h2 class="mb-1">📊 Attendance</h2>
-                <p class="mb-0 opacity-75">Track student attendance and check-in times</p>
-            </div>
-            <div class="col-md-4 text-md-end">
-                <span class="badge bg-white text-dark fs-6 px-3 py-2">
-                    📅 {{ now()->format('l, M d, Y') }}
-                </span>
-            </div>
+<section class="inner-bred my-5">
+    <div class="container">
+        <ul class="thm-breadcrumb">
+            <li><a href="{{ route('academyview') }}">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
+            <li><a href="{{ route('attendance') }}">Attendance</a></li>
+        </ul>
+    </div>
+</section>
+
+<div class="container my-5">
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <h2 class="text-primary">Attendance</h2>
+            <h2>{{ now()->format('l, M d, Y') }}</h2>
         </div>
     </div>
 
     <div class="row g-4 mb-4">
         <div class="col-6 col-md-3">
-            <div class="card stat-card h-100">
-                <div class="card-body d-flex align-items-center">
-                    <div class="stat-icon bg-light text-dark me-3">
-                        👥
-                    </div>
+            <div class="card stats-card h-100">
+                <div class="card-body">
                     <div>
-                        <div class="stat-value" id="AllStudents">0</div>
-                        <div class="stat-label">Total Students</div>
+                        <div class="text-muted small">Total Students</div>
+                        <div class="stats-value" id="AllStudents">0</div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-6 col-md-3">
-            <div class="card stat-card h-100">
-                <div class="card-body d-flex align-items-center">
-                    <div class="stat-icon bg-success text-white me-3">
-                        ✓
-                    </div>
+            <div class="card stats-card h-100">
+                <div class="card-body">
                     <div>
-                        <div class="stat-value text-success" id="AttendedToday">0</div>
-                        <div class="stat-label">Present</div>
+                        <div class="text-muted small">Present</div>
+                        <div class="stats-value text-success" id="AttendedToday">0</div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-6 col-md-3">
-            <div class="card stat-card h-100">
-                <div class="card-body d-flex align-items-center">
-                    <div class="stat-icon bg-danger text-white me-3">
-                        ✗
-                    </div>
+            <div class="card stats-card h-100">
+                <div class="card-body">
                     <div>
-                        <div class="stat-value text-danger" id="AbsentToday">0</div>
-                        <div class="stat-label">Absent</div>
+                        <div class="text-muted small">Absent</div>
+                        <div class="stats-value text-danger" id="AbsentToday">0</div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-6 col-md-3">
-            <div class="card stat-card h-100">
-                <div class="card-body d-flex align-items-center">
-                    <div class="stat-icon bg-warning text-dark me-3">
-                        ⏰
-                    </div>
+            <div class="card stats-card h-100">
+                <div class="card-body">
                     <div>
-                        <div class="stat-value text-warning" id="LateToday">0</div>
-                        <div class="stat-label">Late / Early</div>
+                        <div class="text-muted small">Late / Early</div>
+                        <div class="stats-value text-warning" id="LateToday">0</div>
                     </div>
                 </div>
             </div>
@@ -231,42 +127,45 @@
 
     <div class="row g-4">
         <div class="col-lg-3">
-            <div class="filter-card">
-                <h5 class="mb-3">🔍 Filters</h5>
-                
-                <div class="mb-3">
-                    <label class="filter-label">Academy</label>
-                    <select class="form-select" id="academySelect">
-                        <option value="">All Academies</option>
-                    </select>
-                </div>
-                
-                <div class="mb-3">
-                    <label class="filter-label">Cohort</label>
-                    <select class="form-select" id="cohortSelect">
-                        <option value="">All Cohorts</option>
-                    </select>
-                </div>
-                
-                <div class="mb-3">
-                    <label class="filter-label">Date</label>
-                    <input id="dateFilter" type="date" class="form-control" value="{{ date('Y-m-d') }}">
-                </div>
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-primary mb-3">Filters</h5>
 
-                <div class="d-grid gap-2">
-                    <button class="btn btn-outline-secondary btn-sm" onclick="resetFilters()">
-                        ↻ Reset Filters
-                    </button>
+                    <div class="mb-3">
+                        <label class="form-label">Academy</label>
+                        <select class="form-select" id="academySelect">
+                            <option value="">All Academies</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Cohort</label>
+                        <select class="form-select" id="cohortSelect">
+                            <option value="">All Cohorts</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Date</label>
+                        <input id="dateFilter" type="date" class="form-control" value="{{ date('Y-m-d') }}">
+                    </div>
+
+                    <div class="d-grid">
+                        <button class="btn btn-outline-secondary btn-sm" onclick="resetFilters()">
+                            Reset Filters
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="col-lg-9">
-            <div class="attendance-table-wrapper">
-                <div class="attendance-table">
-                    <table class="table table-hover mb-0">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive attendance-list-scroll">
+                    <table class="table table-hover align-middle mb-0">
                         <thead>
-                            <tr>
+                            <tr class="table-light">
                                 <th>#</th>
                                 <th>Student</th>
                                 <th>Day</th>
@@ -283,6 +182,7 @@
                         <tbody id="attendanceTableBody">
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
 
@@ -291,7 +191,7 @@
                     Showing <span id="showingFrom">0</span> to <span id="showingTo">0</span> of <span id="totalRecords">0</span> entries
                 </div>
                 <div>
-                    <select id="rowsPerPage" class="form-select form-select-sm" style="width: auto;">
+                    <select id="rowsPerPage" class="form-select form-select-sm w-auto">
                         <option value="10">10 per page</option>
                         <option value="25">25 per page</option>
                         <option value="50">50 per page</option>
@@ -319,7 +219,7 @@
         tableBody.empty();
         
         if (students.length === 0) {
-            tableBody.append('<tr><td colspan="10" class="text-center py-4 text-muted">No data available</td></tr>');
+            tableBody.append('<tr><td colspan="11" class="text-center py-4 text-muted">No data available</td></tr>');
             return;
         }
         

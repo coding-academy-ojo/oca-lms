@@ -7,11 +7,11 @@ Skills Framework (Competence)
 
 @section('content')
 @include('Layouts.innerNav')
-<section class="inner-bred">
+<section class="inner-bred my-5">
     <div class="container">
         <ul class="thm-breadcrumb">
-            <li><a href="">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
-            <li><a href="">Skills Framework</a></li>
+            <li><a href="{{ route('academyview') }}">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
+            <li><a href="{{ route('skillsFramework') }}">Skills Framework</a></li>
 
         </ul>
     </div>
@@ -23,6 +23,11 @@ Skills Framework (Competence)
 
 <div class="innerPage mt-3">
     <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <h2 class="text-primary">Skills Framework</h2>
+            </div>
+        </div>
         <!-- Success message section -->
         @if(session('success'))
         <div class="alert alert-success">
@@ -30,7 +35,7 @@ Skills Framework (Competence)
         </div>
         @endif
 
-        <div class="skillsFramework" style="text-align: justify;">
+        <div class="skillsFramework card p-3" style="text-align: justify;">
             <!-- @auth('staff')
             <div class="actionbtn">
                 <a class="btn btn-primary mb-3" href="{{ route('createskillsFramework') }}">Add skills</a>

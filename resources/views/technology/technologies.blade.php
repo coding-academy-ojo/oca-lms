@@ -8,12 +8,12 @@ Technology Categories
 {{-- =========================================================== --}}
 
 @include('Layouts.innerNav')
-<section class="inner-bred">
+<section class="inner-bred my-5">
 
     <div class="container">
         <ul class="thm-breadcrumb">
-            <li><a href="">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
-            <li><a href="">Categories</a></li>
+            <li><a href="{{ route('academyview') }}">Home</a> <span><i class="fa-solid fa-chevron-right"></i></span></li>
+            <li><a href="{{ route('categories.index') }}">Categories</a></li>
         </ul>
     </div>
 </section>
@@ -23,6 +23,11 @@ Technology Categories
 {{-- =========================================================== --}}
 <div class="innerPage   mt-3">
     <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <h2 class="text-primary">Technology Categories</h2>
+            </div>
+        </div>
         @if($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -42,7 +47,7 @@ Technology Categories
             <div class="row">
                 @foreach ($categories as $category)
                 <div class="col-sm-4 mb-3">
-                    <div class="card">
+                    <div class="widget-stat card">
                         <a href="{{ route('categories.show', $category) }}">
                             <img src="{{ asset('assets/img/project.jpg') }}" alt="">
                         </a>
