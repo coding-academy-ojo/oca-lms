@@ -16,6 +16,11 @@ class Topic extends Model
         return $this->hasMany('App\Models\Assignment', 'topic_id');
     }
 
+    public function lessons()
+    {
+        return $this->hasMany(Lesson::class, 'topic_id');
+    }
+
     public function technology()
     {
         return $this->belongsTo(Technology::class);
