@@ -61,5 +61,15 @@ class Student extends Authenticatable
         return $this->hasOne(MasterpieceDetail::class);
     }
 
+    public function lessons()
+    {
+        return $this->belongsToMany(Lesson::class, 'student_lesson_progress', 'student_id', 'lesson_id')
+                    ->withPivot('completed_at')
+                    ->withTimestamps();
+    }
 
+    public function lessonProgress()
+    {
+        return $this->hasMany(Progress::class, 'student_id');
+    }
 }

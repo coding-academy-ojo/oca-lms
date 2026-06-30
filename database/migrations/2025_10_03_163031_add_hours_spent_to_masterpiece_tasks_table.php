@@ -16,9 +16,11 @@ class AddHoursSpentToMasterpieceTasksTable extends Migration
      */
     public function up()
     {
-        Schema::table('masterpiece_tasks', function (Blueprint $table) {
-            $table->integer('hours_spent')->unsigned()->default(0)->after('deadline')->nullable();
-        });
+        if (!Schema::hasColumn('masterpiece_tasks', 'hours_spent')) {
+            Schema::table('masterpiece_tasks', function (Blueprint $table) {
+                $table->integer('hours_spent')->unsigned()->default(0)->after('deadline')->nullable();
+            });
+        }
     }
 
     /**
@@ -28,8 +30,10 @@ class AddHoursSpentToMasterpieceTasksTable extends Migration
      */
     public function down()
     {
-        Schema::table('masterpiece_tasks', function (Blueprint $table) {
-            $table->dropColumn('hours_spent');
-        });
+        if (Schema::hasColumn('masterpiece_tasks', 'hours_spent')) {
+            Schema::table('masterpiece_tasks', function (Blueprint $table) {
+                $table->dropColumn('hours_spent');
+            });
+        }
     }
 }

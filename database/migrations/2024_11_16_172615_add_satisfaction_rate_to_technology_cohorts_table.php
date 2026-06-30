@@ -13,9 +13,11 @@ class AddSatisfactionRateToTechnologyCohortsTable extends Migration
      */
     public function up()
     {
-        Schema::table('technology__cohorts', function (Blueprint $table) {
-            $table->unsignedDecimal('satisfaction_rate', 5, 2)->nullable()->after('end_date');
-        });
+        if (!Schema::hasColumn('technology__cohorts', 'satisfaction_rate')) {
+            Schema::table('technology__cohorts', function (Blueprint $table) {
+                $table->unsignedDecimal('satisfaction_rate', 5, 2)->nullable()->after('end_date');
+            });
+        }
     }
 
     /**
@@ -25,8 +27,10 @@ class AddSatisfactionRateToTechnologyCohortsTable extends Migration
      */
     public function down()
     {
-        Schema::table('technology__cohorts', function (Blueprint $table) {
-            $table->dropColumn('satisfaction_rate');
-        });
+        if (Schema::hasColumn('technology__cohorts', 'satisfaction_rate')) {
+            Schema::table('technology__cohorts', function (Blueprint $table) {
+                $table->dropColumn('satisfaction_rate');
+            });
+        }
     }
 }

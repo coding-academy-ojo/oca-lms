@@ -34,6 +34,7 @@ use App\Http\Controllers\MasterpieceDeliverableController;
 use App\Http\Controllers\ImportDataController;
 use App\Http\Controllers\technologySatisfactionController;
 use App\Http\Controllers\MasterpieceDetailController;
+use App\Http\Controllers\LessonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -180,6 +181,7 @@ Route::middleware(['role:student'])->group(function () {
     Route::get('Student/Assignments', [AssignmentSubmissionController::class, 'index'])->name('student.assignments');
     Route::get('Student/assignments/{assignment}', [AssignmentSubmissionController::class ,'show'])->name('Student.assignment.show');
     Route::post('Student/asssignment/store', [AssignmentSubmissionController::class ,'store'])->name('Student.assignment.store');
+    Route::get('Student/Lessons', [LessonController::class, 'studentIndex'])->name('student.lessons.index');
     
 
     
@@ -228,6 +230,17 @@ Route::middleware(['role:trainer'])->group(function () {
     Route::get('/topic/{topic}/edit', [TopicController::class ,'edit'])->name('topic.edit');
     Route::put('/topic/{topic}', [TopicController::class ,'update'])->name('topic.update');
     Route::delete('/topic/{topic}', [TopicController::class ,'destroy'])->name('topic.destroy');
+
+    //lesson routes
+    Route::get('/lessons', [LessonController::class, 'index'])->name('lessons.index');
+    Route::get('/lessons/create', [LessonController::class, 'create'])->name('lessons.create');
+    Route::post('/lessons', [LessonController::class, 'store'])->name('lessons.store');
+    Route::get('/lessons/{lesson}/edit', [LessonController::class, 'edit'])->name('lessons.edit');
+    Route::put('/lessons/{lesson}', [LessonController::class, 'update'])->name('lessons.update');
+    Route::delete('/lessons/{lesson}', [LessonController::class, 'destroy'])->name('lessons.destroy');
+    Route::patch('/lessons/{lesson}/toggle-publish', [LessonController::class, 'togglePublish'])->name('lessons.toggle-publish');
+    Route::post('/lessons/{lesson}/move-up', [LessonController::class, 'moveUp'])->name('lessons.move-up');
+    Route::post('/lessons/{lesson}/move-down', [LessonController::class, 'moveDown'])->name('lessons.move-down');
 
     // Edit Project Skills Level
     Route::get('/edit_project_skills_level/{id}', [ProjectController::class, 'editProjectSkillsLevel'])->name('edit_project_skills_level');
@@ -355,3 +368,7 @@ Route::post('/masterpiece/export/pdf/{studentId}', [MasterpieceReportController:
 
 Route::get('/attendance/overall/export', 'AttendanceOverallReportController@exportPdf')
     ->name('attendance.overall.export.pdf');
+
+Route::middleware(['role:trainer,student'])->group(function () {
+    Route::get('/lessons/{lesson}/download', [LessonController::class, 'download'])->name('lessons.download');
+});

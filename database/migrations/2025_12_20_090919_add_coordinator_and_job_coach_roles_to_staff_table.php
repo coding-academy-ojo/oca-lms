@@ -14,7 +14,9 @@ class AddCoordinatorAndJobCoachRolesToStaffTable extends Migration
      */
     public function up()
     {
-        DB::statement("ALTER TABLE staff MODIFY COLUMN role ENUM('manager', 'super_manager', 'trainer', 'coordinator', 'job_coach','auditer')");
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement("ALTER TABLE staff MODIFY COLUMN role ENUM('manager', 'super_manager', 'trainer', 'coordinator', 'job_coach','auditer')");
+        }
     }
 
     /**
@@ -24,6 +26,8 @@ class AddCoordinatorAndJobCoachRolesToStaffTable extends Migration
      */
     public function down()
     {
-        DB::statement("ALTER TABLE staff MODIFY COLUMN role ENUM('manager', 'super_manager', 'trainer', 'coordinator', 'job_coach', 'auditer')");
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement("ALTER TABLE staff MODIFY COLUMN role ENUM('manager', 'super_manager', 'trainer', 'coordinator', 'job_coach', 'auditer')");
+        }
     }
 }

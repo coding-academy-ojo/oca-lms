@@ -31,6 +31,10 @@
                         <a class="nav-link "
                             aria-current="page" href="{{ route('categories.indexCohort') }}">Roadmap</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('student.lessons.*') ? 'text-primary' : '' }}"
+                            aria-current="page" href="{{ route('student.lessons.index') }}">Lessons</a>
+                    </li>
                     <!-- <li class="nav-item">
                         <a class="nav-link "
                             aria-current="page" href="{{ route('categories.index') }}">Technology</a>
@@ -111,6 +115,8 @@
                                 <a class="nav-link text-dark " href="{{ route('categories.index') }}">Technologies</a>
                                 <a class="nav-link text-dark  {{ request()->routeIs('categories.indexCohort') ? 'text-primary' : '' }}"
                                     href="{{ route('categories.indexCohort') }}">Roadmap</a>
+                                <a class="nav-link text-dark  {{ request()->routeIs('lessons.*') ? 'text-primary' : '' }}"
+                                    href="{{ route('lessons.index') }}">Lessons</a>
                             </div>
                         </li>
                         {{-- <li class="nav-item">
