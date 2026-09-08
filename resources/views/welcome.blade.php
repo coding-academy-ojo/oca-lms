@@ -118,11 +118,11 @@
                             efficiency of the academy’s teaching methodology, curricula and academic staff.</p>
                         <p class="h3 text-primary mx-2 mt-4">What does the Academy Offer</p>
                         <ul class="text-start">
-                            <li><strong>6 months</strong> of cost-free training course.</li>
+                            <li><strong>5 months</strong> of cost-free training course.</li>
                             <li><strong>1 month internship</strong> in one of the leading IT companies in the Kingdom.
                             </li>
                             <li>Intensive courses offered by a team of qualified trainers in an <strong>active-learning
-                                    experience</strong>, such as: HTML, CSS, JavaScript (React), PHP (Laravel), Python (Flask).
+                                    experience</strong>, such as: HTML, CSS, JavaScript (React), PHP (Laravel).
                             </li>
                             <li>Networking opportunities with the largest companies in the <strong>local and
                                     international markets</strong>.</li>
@@ -152,14 +152,14 @@
                                 <div class="clearfix text-formatted field field--name-bp-text field--type-text-long field--label-hidden field__item">
                                     <p class="align-items-center h1 text-primary d-flex p-5">Our Partners</p>
                                     <div class="row ">
-                                        <div class="col-md-4 d-flex align-items-center justify-content-center">
+                                        <!-- <div class="col-md-4 d-flex align-items-center justify-content-center">
                                             <img class="img-fluid" alt="Coding Academy partner" data-entity-type="file" data-entity-uuid="aa8cb7f6-fe3a-429a-b087-8a430899a6cb" src="{{asset('assets/home-img/economy.png')}}">
                                         </div>
                                         <div class="col-md-4 d-flex align-items-center justify-content-center">
                                             <img class="img-fluid" alt="Coding Academy partner" data-entity-type="file" data-entity-uuid="50b44262-026b-4929-9255-8113c8c38bf5" src="{{asset('assets/home-img/university.png')}}">
-                                        </div>
+                                        </div> -->
                                         <div class="col-md-4 d-flex align-items-center justify-content-center">
-                                            <img class="img-fluid" alt="Simplon" data-entity-type="file" data-entity-uuid="fed83976-6250-4e3f-aa2c-c1562bf42e2d" src="{{asset('assets/home-img/simplon.png')}}">
+                                            <img class="img-fluid" alt="Simplon" data-entity-type="file" data-entity-uuid="fed83976-6250-4e3f-aa2c-c1562bf42e2d" src="{{asset('assets/home-img/simplon.jpeg')}}">
                                         </div>
                                     </div>
                                 </div>
@@ -168,7 +168,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> 
 
     </div>
     <footer class="footer navbar" data-bs-theme="dark">

@@ -58,6 +58,14 @@ Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::get('/help', function () {
+    return view('help');
+})->name('help');
+
+Route::get('/terms', function () {
+    return view('terms');
+})->name('terms');
+
 Route::get('/home', function () {
     return view('home');
 });
