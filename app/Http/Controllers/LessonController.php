@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Lesson;
-use App\Topic;
+use App\Models\Lesson;
+use App\Models\Topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
