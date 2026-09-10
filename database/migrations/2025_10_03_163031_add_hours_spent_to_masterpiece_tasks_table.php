@@ -16,7 +16,7 @@ class AddHoursSpentToMasterpieceTasksTable extends Migration
      */
     public function up()
     {
-        if (! Schema::hasColumn('masterpiece_tasks', 'hours_spent')) {
+        if (!Schema::hasColumn('masterpiece_tasks', 'hours_spent')) {
             Schema::table('masterpiece_tasks', function (Blueprint $table) {
                 $table->integer('hours_spent')->unsigned()->default(0)->after('deadline')->nullable();
             });
