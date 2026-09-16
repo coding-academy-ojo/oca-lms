@@ -254,6 +254,8 @@ class AttendanceController extends Controller
         ]);
     }
 
+
+    
     private function calculateDistance(float $lat1, float $lon1, float $lat2, float $lon2): float
     {
         $earthRadius = 6371000;
@@ -271,4 +273,37 @@ class AttendanceController extends Controller
 
         return $earthRadius * $c;
     }
+
+
+    public function changeAllStatus(Request $request, $cohortId): JsonResponse
+{
+    $request->validate([
+        'status' => 'required|in:present,late,absent,excused',
+        'date' => 'nullable|date',
+    ]);
+
+    $date = $request->input('date', now()->toDateString());
+
+    $students = Student::where('cohort_id', $cohortId)->get();
+
+    foreach ($students as $student) {
+        Attendance::updateOrCreate(
+            [
+                'student_id' => $student->id,
+                'date' => $date,
+            ],
+            [
+                'status' => $request->status,
+            ]
+        );
+    }
+
+    return response()->json([
+        'success' => true,
+        'message' => 'All students status updated successfully.',
+        'status' => $request->status,
+        'total_students' => $students->count(),
+        'date' => $date,
+    ]);
+}
 }

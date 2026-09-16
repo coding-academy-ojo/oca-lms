@@ -82,6 +82,43 @@
         </div>
     </div>
 
+    <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown">
+        Change All Status
+    </button>
+
+    <ul class="dropdown-menu">
+        <li>
+            <button class="dropdown-item"
+                    onclick="changeAllStatus('present')">
+                ✅ Present
+            </button>
+        </li>
+
+        <li>
+            <button class="dropdown-item"
+                    onclick="changeAllStatus('late')">
+                🟡 Late
+            </button>
+        </li>
+
+        <li>
+            <button class="dropdown-item"
+                    onclick="changeAllStatus('absent')">
+                🔴 Absent
+            </button>
+        </li>
+
+        <li>
+            <button class="dropdown-item"
+                    onclick="changeAllStatus('excused')">
+                🔵 Excused
+            </button>
+        </li>
+    </ul>
+</div>
     <div class="row g-4 mb-4">
         <div class="col-6 col-md-3">
             <div class="card stats-card h-100">
@@ -489,6 +526,109 @@
         
         loadAttendanceData(filters, isAcademyChange);
     });
+
+function changeAllStatus(status) {
+
+    const cohortId = $('#cohortSelect').val();
+    const date = $('#dateFilter').val();
+    const csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+    if (!cohortId) {
+        alert('Please select a cohort first.');
+        return;
+    }
+
+    if (!date) {
+        alert('Please select a date.');
+        return;
+    }
+
+    const statusName = status.charAt(0).toUpperCase() + status.slice(1);
+
+    const totalStudents = allStudents.length;
+
+    if (totalStudents === 0) {
+        alert('There are no students in the selected cohort.');
+        return;
+    }
+
+    const confirmed = confirm(
+        `Are you sure you want to change ALL ${totalStudents} students to "${statusName}"?\n\n` +
+        `Date: ${date}`
+    );
+
+    if (!confirmed) {
+        return;
+    }
+
+    // Disable button while processing
+    const dropdownButton = $('.dropdown-toggle');
+    dropdownButton.prop('disabled', true);
+    dropdownButton.text('Updating...');
+
+    $.ajax({
+        url: `/attendance/change-all-status/${cohortId}`,
+        type: 'POST',
+
+        data: {
+            status: status,
+            date: date,
+            _token: csrfToken
+        },
+
+        success: function(response) {
+
+            if (response.success) {
+
+                alert(
+                    `${response.total_students} students have been changed to ${statusName}.`
+                );
+
+                // Reload the attendance table
+                loadAttendanceData({
+                    academy_id: $('#academySelect').val(),
+                    cohort_id: $('#cohortSelect').val(),
+                    date: $('#dateFilter').val()
+                });
+
+            } else {
+
+                alert(response.message || 'Something went wrong.');
+            }
+        },
+
+        error: function(xhr) {
+
+            console.error('Change all status error:', xhr);
+
+            let errorMessage = 'Error updating attendance.';
+
+            if (xhr.responseJSON) {
+
+                if (xhr.responseJSON.message) {
+                    errorMessage = xhr.responseJSON.message;
+                }
+
+                if (xhr.responseJSON.errors) {
+                    errorMessage = Object.values(xhr.responseJSON.errors)
+                        .flat()
+                        .join('\n');
+                }
+            }
+
+            alert(errorMessage);
+        },
+
+        complete: function() {
+
+            dropdownButton.prop('disabled', false);
+            dropdownButton.html(
+                'Change All Status <span class="caret"></span>'
+            );
+        }
+    });
+}
+    
 </script>
 
 @endsection

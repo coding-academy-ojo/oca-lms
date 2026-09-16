@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
+
 class AbsenceController extends Controller
 {
     /**
@@ -432,6 +433,126 @@ class AbsenceController extends Controller
 
         return $earthRadius * $c;
     }
+
+
+    public function changeAllStatus(Request $request, $cohortId)
+{
+    $request->validate([
+        'status' => 'required|in:present,late,absent,excused',
+        'date' => 'required|date_format:Y-m-d',
+        'absences_duration' => 'nullable|integer|min:0',
+        'reason' => 'nullable|string',
+    ]);
+
+    $date = Carbon::parse($request->date)->toDateString();
+    $status = $request->status;
+    $duration = $request->absences_duration ?? 0;
+    $reason = $request->reason ?? null;
+
+    // Get all students in this cohort
+    $students = Student::where('cohort_id', $cohortId)->get();
+
+    if ($students->isEmpty()) {
+        return response()->json([
+            'success' => false,
+            'message' => 'No students found in this cohort.'
+        ], 404);
+    }
+
+    foreach ($students as $student) {
+
+        // ==========================================
+        // PRESENT
+        // ==========================================
+        if ($status === 'present') {
+
+            // Remove absence record
+            Absence::where('student_id', $student->id)
+                ->whereDate('absences_date', $date)
+                ->delete();
+
+            // Create/update attendance
+            Attendance::updateOrCreate(
+                [
+                    'student_id' => $student->id,
+                    'date' => $date,
+                ],
+                [
+                    'check_in_time' => '09:00:00',
+                    'status' => 'present',
+                ]
+            );
+        }
+
+        // ==========================================
+        // LATE
+        // ==========================================
+        elseif ($status === 'late') {
+
+            // Remove previous absence record
+            Absence::where('student_id', $student->id)
+                ->whereDate('absences_date', $date)
+                ->delete();
+
+            // Create late absence record
+            Absence::create([
+                'student_id' => $student->id,
+                'absences_type' => 'late',
+                'absences_date' => $date,
+                'absences_reason' => $reason,
+                'absences_duration' => $duration,
+            ]);
+
+            // Create/update attendance
+            Attendance::updateOrCreate(
+                [
+                    'student_id' => $student->id,
+                    'date' => $date,
+                ],
+                [
+                    'check_in_time' => '09:00:00',
+                    'status' => 'late',
+                ]
+            );
+        }
+
+        // ==========================================
+        // ABSENT / EXCUSED
+        // ==========================================
+        elseif ($status === 'absent' || $status === 'excused') {
+
+            Absence::updateOrCreate(
+                [
+                    'student_id' => $student->id,
+                    'absences_date' => $date,
+                ],
+                [
+                    'absences_type' => $status,
+                    'absences_reason' => $reason,
+                    'absences_duration' => $duration,
+                ]
+            );
+
+            Attendance::updateOrCreate(
+                [
+                    'student_id' => $student->id,
+                    'date' => $date,
+                ],
+                [
+                    'status' => $status,
+                ]
+            );
+        }
+    }
+
+    return response()->json([
+        'success' => true,
+        'message' => 'All students attendance status updated successfully.',
+        'total_students' => $students->count(),
+        'status' => $status,
+        'date' => $date,
+    ]);
+}
     
     
 }

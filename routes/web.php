@@ -107,8 +107,11 @@ Route::post('/cohorts', [CohortController::class, 'store'])->name('store-cohort'
 Route::middleware(['auth:staff'])->group(function () {
     Route::get('/attendance', [AbsenceController::class, 'index'])->name('attendance');
     Route::post('/attendance/store-or-update', [AbsenceController::class, 'storeOrUpdate'])->name('attendance.storeOrUpdate');
+      Route::post('/attendance/change-all-status/{cohortId}', [AbsenceController::class, 'changeAllStatus'])
+        ->name('attendance.changeAllStatus');
+    
 });
-Route::post('/attendance/store-or-update', [AbsenceController::class, 'storeOrUpdate'])->name('attendance.storeOrUpdate');
+// Route::post('/attendance/store-or-update', [AbsenceController::class, 'storeOrUpdate'])->name('attendance.storeOrUpdate');
 
 Route::put('/absence/{absence_id}/action', [AbsenceReportController::class, 'updateAction'])->name('absence.action.update');
 // absence
