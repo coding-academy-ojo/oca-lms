@@ -59,7 +59,7 @@ class AssignmentController extends Controller
     {
         $cohortID=session('cohort_ID');
         $topics = Topic::whereHas('technologyCohort', function ($query) use ($cohortID) {
-            $query->where('cohort_id', $cohortID);
+        $query->where('cohort_id', $cohortID);
         })->get();
         $students = Student::where('cohort_id',$cohortID)->get();
         return view('Assignment.create_assignment', compact('topics', 'students'));
