@@ -433,28 +433,28 @@ public function filterProjects(Request $request)
         return redirect()->route('view_project_submissions', ['project_id' => $submission->project_id])->with('success', 'Feedback saved successfully');
     }
 
-    public function viewSubmissionsAndFeedback($project_id)
+  public function viewSubmissionsAndFeedback($project_id)
     {
-        // Fetch project details
         $project = Project::findOrFail($project_id);
-
-        // Fetch the logged-in student or staff
         $user = Auth::guard('students')->check() ? Auth::guard('students')->user() : Auth::guard('staff')->user();
 
-        // Fetch the project status for the student
-        $projectStatus = null; // Initialize the variable
-        $studentIdForConversation = request('student_id');
-        $projectStatus = TraineeSkillsProgress::where('project_id', $project->id)
-        ->where('student_id', $studentIdForConversation)
-        ->value('project_status');
-
-        // Fetch submissions and feedback for the project and the logged-in user
+        // 1. جلب التسليم من قاعدة البيانات
         $submissionIdForConversation = request('submission_id');
-        $studentIdForConversation = request('student_id');
-        $submissionsAndFeedback = $project->submissionsAndFeedback($project->id, $studentIdForConversation);
-        $conversation = $submissionIdForConversation ? ProjectSubmission::where('project_id', $project->id)->where('student_id', $studentIdForConversation)->first()->conversation : null;
+        $submission = $submissionIdForConversation ? ProjectSubmission::find($submissionIdForConversation) : null;
 
-        return view('project.view_submissions_feedback', compact('project', 'submissionsAndFeedback', 'user', 'conversation','projectStatus'));
+        // 2. جلب رقم الطالب من الرابط، وإذا لم يكن موجوداً نجلبه من التسليم نفسه!
+        $studentIdForConversation = request('student_id') ?? $submission?->student_id;
+
+        // 3. باقي الأكواد تعتمد على المتغير المضمون الآن
+        $projectStatus = TraineeSkillsProgress::where('project_id', $project->id)
+            ->where('student_id', $studentIdForConversation)
+            ->value('project_status');
+
+        $submissionsAndFeedback = $project->submissionsAndFeedback($project->id, $studentIdForConversation);
+        $conversation = $submission?->conversation;
+
+        // 4. نمرر $studentIdForConversation لصفحة الـ Blade
+        return view('project.view_submissions_feedback', compact('project', 'submissionsAndFeedback', 'user', 'conversation', 'projectStatus', 'studentIdForConversation'));
     }
 
 
