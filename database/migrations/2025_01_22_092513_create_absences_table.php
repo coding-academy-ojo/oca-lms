@@ -15,7 +15,7 @@ class CreateAbsencesTable extends Migration
     {
         Schema::create('absences', function (Blueprint $table) {
             $table->id();
-            $table->enum('absences_type', ['late', 'absent', 'leaving']);
+            $table->enum('absences_type', ['late', 'absent', 'leaving','excused'])->default('absent');
             $table->date('absences_date')->useCurrent();
             $table->text('absences_reason')->nullable();
             $table->string('absences_duration')->nullable();

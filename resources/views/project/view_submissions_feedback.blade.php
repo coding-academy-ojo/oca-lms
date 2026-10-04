@@ -66,7 +66,7 @@ View Submissions and Feedback
             {{-- Start Evaluation --}}
             <div class="  text-center p-2 d-flex"> <!-- 30% width for Evaluation -->
                 @if(Auth::guard('staff')->check() && Auth::guard('staff')->user()->role === 'trainer')
-                    <form action="{{ route('update_project_status', ['projectId' => $project->id, 'studentId' => request('student_id')]) }}" method="post">
+                <form action="{{ route('update_project_status', ['projectId' => $project->id, 'studentId' => $studentIdForConversation ?? 0]) }}" method="post">
                         @csrf
                         <div class="d-flex">
                         <div class="mt-2 pt-1">

@@ -80,9 +80,14 @@
                                         href="{{ route('assignment.show', $assignment->id) }}">{{ $assignment->assignment_name }}  </a>
                                 </td>
                                 <td>{{ optional($assignment->topic)->topic_name }}</td>
+
                                 <td>
                                        {{ $assignment->topic?->technologyCohort?->technology?->technologies_name ?? 'N/A' }}
                                 </td>
+                              <td>
+    {{ $assignment->topic?->technologyCohort?->technology?->technologies_name ?? 'N/A' }}
+</td>
+
                                 <td> <a class="mx-2 link-underline link-underline-opacity-0"
                                         href="{{ route('assignment.show', $assignment->id) }}">view</a>
                                 </td>
